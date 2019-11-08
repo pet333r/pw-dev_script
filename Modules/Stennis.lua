@@ -1,4 +1,4 @@
--- 
+-- Stennis
 ExportScript.FoundDCSModule = true
 
 ExportScript.ConfigEveryFrameArguments = 
@@ -7,7 +7,6 @@ ExportScript.ConfigEveryFrameArguments =
 }
 ExportScript.ConfigArguments = 
 {
-	
 }
 
 -- Pointed to by ProcessDCSHighImportance

@@ -9,7 +9,6 @@ ExportScript.ConfigEveryFrameArguments =
 }
 ExportScript.ConfigArguments = 
 {
-	
 }
 
 -- Pointed to by ProcessDCSHighImportance
