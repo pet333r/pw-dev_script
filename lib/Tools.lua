@@ -111,8 +111,8 @@ function ExportScript.Tools.ProcessOutput()
             _coStatus = coroutine.resume( ExportScript.coProcessArguments_EveryFrame, _device, ExportScript.EveryFrameArguments)
 
             --if ExportScript.Config.Export then
-                ExportScript.coProcessIkarusDCSHighImportance = coroutine.create(ExportScript.ProcessIkarusDCSHighImportance)
-                _coStatus = coroutine.resume( ExportScript.coProcessIkarusDCSHighImportance, _device)
+                ExportScript.coProcessDCSHighImportance = coroutine.create(ExportScript.ProcessDCSHighImportance)
+                _coStatus = coroutine.resume( ExportScript.coProcessDCSHighImportance, _device)
             --end
 
             if ExportScript.FirstNewDataSend and ExportScript.FirstNewDataSendCount == 0 then
@@ -130,8 +130,8 @@ function ExportScript.Tools.ProcessOutput()
                 _coStatus = coroutine.resume( ExportScript.coProcessArguments_Arguments, _device, ExportScript.Arguments)
 
             --if ExportScript.Config.Export then
-                ExportScript.coProcessIkarusDCSLowImportance = coroutine.create(ExportScript.ProcessIkarusDCSLowImportance)
-                _coStatus = coroutine.resume( ExportScript.coProcessIkarusDCSLowImportance, _device)
+                ExportScript.coProcessDCSLowImportance = coroutine.create(ExportScript.ProcessDCSLowImportance)
+                _coStatus = coroutine.resume( ExportScript.coProcessDCSLowImportance, _device)
             --end
 			ExportScript.lastExportTimeHI = 0
         end
@@ -293,8 +293,8 @@ function ExportScript.Tools.SelectModule()
                 ExportScript.Arguments = {}
             end
 
-            ExportScript.ProcessIkarusDCSHighImportance = ExportScript.ProcessIkarusDCSConfigHighImportance
-            ExportScript.ProcessIkarusDCSLowImportance  = ExportScript.ProcessIkarusDCSConfigLowImportance
+            ExportScript.ProcessDCSHighImportance = ExportScript.ProcessDCSConfigHighImportance
+            ExportScript.ProcessDCSLowImportance  = ExportScript.ProcessDCSConfigLowImportance
         end
 
         --if ExportScript.Config.Export then

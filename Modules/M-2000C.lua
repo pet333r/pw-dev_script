@@ -636,8 +636,8 @@ ExportScript.ConfigArguments =
 	[638] = "%.1f",	--ECS Defog Switch
 }
 
--- Pointed to by ProcessIkarusDCSHighImportance
-function ExportScript.ProcessIkarusDCSConfigHighImportance(mainPanelDevice)
+-- Pointed to by ProcessDCSHighImportance
+function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
 
 function ExportScript.ProcessDACConfigHighImportance(mainPanelDevice)
@@ -648,8 +648,8 @@ end
 -- done every gExportLowTickInterval export events --
 -----------------------------------------------------
 
--- Pointed to by ExportScript.ProcessIkarusDCSConfigLowImportance
-function ExportScript.ProcessIkarusDCSConfigLowImportance(mainPanelDevice)
+-- Pointed to by ExportScript.ProcessDCSConfigLowImportance
+function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	
 	-- ECM Mode Switch
 	-- [194] = "%.1f",	--ECM Box Mode Switch

@@ -11,42 +11,6 @@ ExportScript.ConfigEveryFrameArguments =
 
 ExportScript.ConfigArguments = 
 {
-	-- Power Plant
-	[375] = "%1d",   -- APU Control Switch, ON/OFF
-	[377] = "%1d",   -- Engine Crank Switch, LEFT/OFF/RIGHT {-1.0,0.0,1.0}
-	[331] = "%1d",   -- Fire and Bleed Air Test Switch, (RMB) TEST A/(LMB) TEST B {-1.0,0.0,1.0}
-	-- Hydraulic system
-	[369] = "%1d",   -- Hydraulic Isolate Override Switch, NORM/ORIDE
-	-- Gear system
-	[226] = "%1d",   -- Landing Gear Control Handle, (RMB)UP/(LMB)DOWN {-1.0,0.0} ???
-	[228] = "%1d",   -- Landing Gear Control Handle, (MW)EMERGENCY DOWN {0.0,1.0} ???
-	[229] = "%1d",   -- Down Lock Override Button - Push to unlock
-	[238] = "%1d",   -- Anti Skid Switch, ON/OFF
-	[240] = "%.3f",   -- Emergency/Parking Brake Handle, (MW)Pull-Stow {0.0,1.0} in 0.001 Steps ???
-	[241] = "%.3f",   -- Emergency/Parking Brake Handle, (LMB)Rotate Left/(RMB)Rotate Right ???
-	[233] = "%1d",   -- Launch Bar Control Switch, EXTEND/RETRACT
-	[293] = "%1d",   -- Arresting Hook Handle, UP/DOWN
-	-- Exterior Lights
-	[338] = "%.2f",   -- POSITION Lights Dimmer Control {0.0,1.0} in 0.15 Steps
-	[337] = "%.2f",   -- FORMATION Lights Dimmer Control {0.0,1.0} in 0.15 Steps
-	[339] = "%1d",   -- STROBE Lights Switch, BRT/OFF/DIM {-1.0,0.0,1.0}
-	[237] = "%1d",   -- LDG/TAXI LIGHT Switch, ON/OFF
-	-- Cockpit Lights
-	[413] = "%.2f",   -- CONSOLES Lights Dimmer Control {0.0,1.0} in 0.15 Steps
-	[414] = "%.2f",   -- INST PNL Dimmer Control {0.0,1.0} in 0.15 Steps
-	[415] = "%.2f",   -- FLOOD Light Dimmer Control {0.0,1.0} in 0.15 Steps
-	[419] = "%1d",   -- MODE Switch, NVG/NITE/DAY {-1.0,0.0,1.0}
-	[418] = "%.2f",   -- CHART Light Dimmer Control {0.0,1.0} in 0.15 Steps
-	[417] = "%.2f",   -- WARN/CAUTION Dimmer Control {0.0,1.0} in 0.15 Steps
-	[416] = "%1d",   -- Lights Test Switch, TEST/OFF
-	[14] = "%1d",   -- MASTER CAUTION Reset Button - Press to reset
-	[239] = "%1d",   -- HOOK BYPASS Switch, FIELD/CARRIER
-	-- HOTAS
-	[494] = "%1d",   -- Exterior Lights Switch, ON/OFF
-	-- Master Arm Panel
-	[458] = "%1d",   -- Master Mode Button, A/A
-	[459] = "%1d",   -- Master Mode Button, A/G
-	[49] = "%1d",   -- Master Arm Switch, ARM/SAFE
 	-- Left MDI
 	[51] = "%1d",   -- Left MDI Brightness Selector Knob, OFF/NIGHT/DAY {0.0,0.1,0.2}
 	[52] = "%.2f",   -- Left MDI Brightness Control Knob {0.0,1.0} in 0.1 Steps
@@ -160,12 +124,12 @@ ExportScript.ConfigArguments =
 	[126] = "%.2f",   -- UFC COMM 2 Channel Selector Knob {0.0,1.0} in 0.2 Steps
 }
 
--- Pointed to by ProcessIkarusDCSHighImportance
-function ExportScript.ProcessIkarusDCSConfigHighImportance(mainPanelDevice)
+-- Pointed to by ProcessDCSHighImportance
+function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
 
--- Pointed to by ExportScript.ProcessIkarusDCSConfigLowImportance
-function ExportScript.ProcessIkarusDCSConfigLowImportance(mainPanelDevice)
+-- Pointed to by ExportScript.ProcessDCSConfigLowImportance
+function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	-- UFC Displays
 	local _ufcDisplay = ExportScript.Tools.getListIndicatorValue(6)
 	
