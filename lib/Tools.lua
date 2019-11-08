@@ -73,25 +73,6 @@ end
 function ExportScript.Tools.ProcessOutput()
     local _coStatus
 
-    -- local _info = LoGetObjectById()
-    -- if _info ~= nil then
-    --     if ExportScript.ModuleName ~= _info.Name then
-    --         ExportScript.NoLuaExportBeforeNextFrame = false
-	-- 		ExportScript.Tools.SelectModule()  -- point globals to Module functions and data.
-	-- 		return
-    --     end
-    --     _info = nil
-    -- end
-
-    -- local o = LoGetWorldObjects()
-	-- for k,v in pairs(o) do
-    --     if v.UnitName=="Stennis" then
-    --         local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() ExportScript.Tools.ResetChangeValues() end)
-	-- 	    --ExportScript.socket.try(conn:sendto(string.format("name=%s UnitName=%s LatLong=(%f,%f)\n", v.Name, v.UnitName, v.LatLongAlt.Lat, v.LatLongAlt.Long), ExportScript.Config.Host , ExportScript.Config.Port))
-    --         try(ExportScript.UDPsender:sendto(string.format("name=%s UnitName=%s LatLong=(%f,%f)\n", v.Name, v.UnitName, v.LatLongAlt.Lat, v.LatLongAlt.Long), ExportScript.Config.Host2, ExportScript.Config.Port2))
-    --     end
-	-- end
-
     local _info = LoGetSelfData()
     if _info ~= nil then
         if ExportScript.ModuleName ~= _info.Name then
@@ -237,11 +218,6 @@ function ExportScript.Tools.SelectModule()
     ExportScript.FoundDCSModule = false
     ExportScript.FoundNoModul   = true
 
-    -- local _info = LoGetObjectById()
-    -- if _info == nil then  -- End SelectModule, if don't selected a aircraft
-    --     return
-    -- end
-
     local _info      = LoGetSelfData()
     if _info == nil then  -- End SelectModule, if don't selected a aircraft
         return
@@ -254,7 +230,7 @@ function ExportScript.Tools.SelectModule()
     ExportScript.FoundNoModul = false
 
     for file in lfs.dir(ExportScript.Config.ExportModulePath) do
-        if lfs.attributes(ExportScript.Config.ExportModulePath .. file,"mode") == "file" then
+        if lfs.attributes(ExportScript.Config.ExportModulePath .. file, "mode") == "file" then
             if file == _moduleName then
                 _moduleFile = ExportScript.Config.ExportModulePath .. file
             end

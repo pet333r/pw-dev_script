@@ -3,13 +3,13 @@ ExportScript.Config = {}
 
 -- send
 ExportScript.Config.Export    = true                -- sending data
-ExportScript.Config.Host      = "127.0.0.1"         -- IP for apps           192.168.1.3
+ExportScript.Config.Host      = "127.0.0.1"         -- IP for 1st app
 ExportScript.Config.Port      = 1625                -- port for sending data
 ExportScript.Config.Separator = ":"
 
 -- send 2
 ExportScript.Config.Export2    = true                -- sending data
-ExportScript.Config.Host2      = "192.168.1.4"       -- IP for 2nd app          192.168.1.3
+ExportScript.Config.Host2      = "192.168.1.3"       -- IP for 2nd app
 ExportScript.Config.Port2      = 1625                -- port for sending data
 
 -- receive

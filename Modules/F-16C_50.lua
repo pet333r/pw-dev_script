@@ -1,4 +1,4 @@
--- F-16C_50 Export
+-- F-16C_50
 ExportScript.FoundDCSModule = true
 
 ExportScript.ConfigEveryFrameArguments = 
