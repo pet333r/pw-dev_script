@@ -70,6 +70,24 @@ function ExportScript.Tools.ProcessInput()
 	end
 end
 
+-- function export data based on registered Lock On internal functions / export in LowTickInterval
+function ExportScript.Tools.ProcessSelfData()
+    local SD = LoGetSelfData
+
+    local Latitude = SD().LatLongAlt.Lat
+    local Longitude = SD().LatLongAlt.Long
+    local Altitude = SD().LatLongAlt.Alt
+
+    local _packet = string.format("File=%s:Lat=%010.6f:Lon=%0010.6f:Alt=%.1f:\n", ExportScript.ModuleName, Latitude, Longitude, Altitude)
+
+    local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() end)
+        try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host, ExportScript.Config.Port))
+
+    -- if ExportScript.Config.Export2 then
+    --     try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host2, ExportScript.Config.Port2))
+    -- end
+end
+
 function ExportScript.Tools.ProcessOutput()
     local _coStatus
 
@@ -114,7 +132,10 @@ function ExportScript.Tools.ProcessOutput()
                 ExportScript.coProcessDCSLowImportance = coroutine.create(ExportScript.ProcessDCSLowImportance)
                 _coStatus = coroutine.resume( ExportScript.coProcessDCSLowImportance, _device)
             --end
-			ExportScript.lastExportTimeHI = 0
+            ExportScript.lastExportTimeHI = 0
+
+            -- process SelfData info
+            ExportScript.Tools.ProcessSelfData()
         end
 
         --if ExportScript.Config.Export then

@@ -769,22 +769,12 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 
 	lUFC_Display = lUFC_Left_Position..string.rep(" ", lRep)..lUFC_Right_Position
 
-	-- if ExportScript.Config.Debug then
-	-- 	ExportScript.Tools.WriteToLog("lUFC_Chnl1: "..string.format("%s", lUFC_Chnl1)) -- string with max 2 charachters
-	-- 	ExportScript.Tools.WriteToLog("lUFC_Chnl2: "..string.format("%s", lUFC_Chnl2)) -- string with max 2 charachters
-	-- 	ExportScript.Tools.WriteToLog("lUFC_Left_Position: "..string.format("%s", lUFC_Left_Position))
-	-- 	ExportScript.Tools.WriteToLog("lUFC_Right_Position: "..string.format("%s", lUFC_Right_Position))
-	-- 	ExportScript.Tools.WriteToLog("lUFC_Display: "..string.format("%s", lUFC_Display)) -- string with max 8 charachters
-	-- end
 	ExportScript.Tools.SendData(2023, string.format("%s", lUFC_Chnl1)) -- string with max 2 charachters
 	ExportScript.Tools.SendData(2024, string.format("%s", lUFC_Chnl2)) -- string with max 2 charachters
 	ExportScript.Tools.SendData(2025, string.format("%s", lUFC_Display)) -- string with max 8 charachters
 
 	-- ODU Display
 	local lODUDisplays = list_indication(6)
-	-- if ExportScript.Config.Debug then
-	-- 	ExportScript.Tools.WriteToLog('lODUDisplays : '..ExportScript.Tools.dump(lODUDisplays))
-	-- end
 
 	local to1, to2, from1, from2 = nil, nil, nil, nil
 	local lODU_Text = {"","","","",""}
@@ -816,14 +806,6 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		end -- for
 	end
 
-	-- string with max 5 characters
-	-- if ExportScript.Config.Debug then
-	-- 	ExportScript.Tools.WriteToLog("lODU_Text1: "..string.format("%s", lODU_Text[1]))
-	-- 	ExportScript.Tools.WriteToLog("lODU_Text2: "..string.format("%s", lODU_Text[2]))
-	-- 	ExportScript.Tools.WriteToLog("lODU_Text3: "..string.format("%s", lODU_Text[3]))
-	-- 	ExportScript.Tools.WriteToLog("lODU_Text4: "..string.format("%s", lODU_Text[4]))
-	-- 	ExportScript.Tools.WriteToLog("lODU_Text5: "..string.format("%s", lODU_Text[5]))
-	-- end
 	ExportScript.Tools.SendData(2026, string.format("%s", lODU_Text[1]))
 	ExportScript.Tools.SendData(2027, string.format("%s", lODU_Text[2]))
 	ExportScript.Tools.SendData(2028, string.format("%s", lODU_Text[3]))
@@ -832,9 +814,6 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 
 	-- UVHF Display
 	local lUVHFDisplay = list_indication(7)
-	-- if ExportScript.Config.Debug then
-	-- 	ExportScript.Tools.WriteToLog('lUVHFDisplay : '..ExportScript.Tools.dump(lUVHFDisplay))
-	-- end
 
 	local to1, to2, from1, from2, lUVHF_Channel, lUHF_Freq_Left, lacnip_1_label_mode, lacnip_1_mode, lacnip_1_label_code, lacnip_1_code, lacnip_2_label_mode, lacnip_2_mode, lacnip_2_label_code, lacnip_2_code = nil, nil, nil, nil, "", "", "", "", "", "", "", "", "", ""
 	local lacnip_line = {"", "", "", ""}
