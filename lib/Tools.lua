@@ -221,6 +221,10 @@ function ExportScript.Tools.FlushData()
                 try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host2, ExportScript.Config.Port2))
             end
 
+            if ExportScript.Config.Export3 then
+                try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host3, ExportScript.Config.Port3))
+            end
+
 			ExportScript.SendStrings = {}
 			ExportScript.PacketSize  = 0
 		else
