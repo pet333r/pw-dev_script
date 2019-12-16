@@ -12,6 +12,7 @@ ExportScript.ConfigEveryFrameArguments =
 	[329] = "%.f",	--MFS
 	[330] = "%.f",	--BINGO
 	[331] = "%.f",	--H2O
+	
 	--MIP RIGHT SIDE
 	[197] = "%.f",	--Master Warning (red)
 	[334] = "%.f",	--FIRE
@@ -303,13 +304,13 @@ ExportScript.ConfigArguments =
 	-- [323] = "%1d",	--Radar Beacon Function Selector
 	-- [297] = "%1d",	--I/P Button
 	-- [309] = "%1d",	--Save Data Button
-	-- [295] = "%1d",	--Display Brightness Control
-	[298] = "%.4f",	--Comm 1 Volume Control
-	[299] = "%.4f",	--Comm 2 Volume Control
-	[300] = "%.4f",	--Comm 1 Channel Selector
-	[301] = "%.4f",	--Comm 2 Channel Selector
-	[178] = "%.4f",	--Comm 1 Channel Show Button
-	[179] = "%.4f",	--Comm 2 Channel Show Button
+	[295] = "%.1f",	--Display Brightness Control
+	[298] = "%.1f",	--Comm 1 Volume Control
+	[299] = "%.1f",	--Comm 2 Volume Control
+	-- [300] = "%.4f",	--Comm 1 Channel Selector
+	-- [301] = "%.4f",	--Comm 2 Channel Selector
+	-- [178] = "%.4f",	--Comm 1 Channel Show Button
+	-- [179] = "%.4f",	--Comm 2 Channel Show Button
 
 	-- ODU Panel
 	-- [250] = "%1d",	--ODU Option1
