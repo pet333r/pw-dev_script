@@ -1,5 +1,9 @@
 ExportScript.Tools = {}
 
+-- const
+local ms2knots  = 1.94384449
+local ms2fpm    = 196.85
+
 function ExportScript.Tools.createUDPSender()
 	ExportScript.socket = require("socket")
 
@@ -77,8 +81,24 @@ function ExportScript.Tools.ProcessSelfData()
     local Latitude = SD().LatLongAlt.Lat
     local Longitude = SD().LatLongAlt.Long
     local Altitude = SD().LatLongAlt.Alt
+    local AltitudeFeets = Altitude * 3.2808399
+    local AltBar = LoGetAltitudeAboveSeaLevel()	-- (args - 0, results - 1 (meters))
+    local AltRad = LoGetAltitudeAboveGroundLevel()	-- (args - 0, results - 1 (meters))
 
-    local _packet = string.format("File=%s:Lat=%010.6f:Lon=%0010.6f:Alt=%.1f:\n", ExportScript.ModuleName, Latitude, Longitude, Altitude)
+    local Velocity = LoGetVectorVelocity()  --{x,y,z}
+    local VX = Velocity.x
+    local VY = Velocity.y
+    local VZ = Velocity.z
+
+    local IAS = LoGetIndicatedAirSpeed() * ms2knots	-- (args - 0, results - 1 (m/s)) => convert to Knots
+    local TAS = LoGetTrueAirSpeed() * ms2knots -- (args - 0, results - 1 (m/s)) => convert to Knots
+    local GS = math.sqrt(math.pow(VX, 2)+ math.pow(VZ, 2)) * ms2knots -- ground speed (m/s) => convert to Knots
+    local VSpeed = LoGetVerticalVelocity() * ms2fpm  -- (args - 0, results - 1(m/s))
+    local Mach = LoGetMachNumber()
+    local AoA = LoGetAngleOfAttack() -- (args - 0, results - 1 (rad))
+    local Accel = LoGetAccelerationUnits()	-- G-Force
+
+    local _packet = string.format("File=%s:Lat=%010.6f:Lon=%0010.6f:Alt=%.1f:AltFt=%d:AltBar=%d:AltRad=%d:IAS=%d:TAS=%d:GS=%d:VSpeed=%d:Mach=%.2f:AoA=%.1f:G=%.1f\n", ExportScript.ModuleName, Latitude, Longitude, Altitude, AltitudeFeets, AltBar, AltRad, IAS, TAS, GS, VSpeed, Mach, AoA, Accel.y)
 
     local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() end)
         try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host, ExportScript.Config.Port))
