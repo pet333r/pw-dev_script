@@ -386,7 +386,7 @@ end
 -----------------------------------------------------------------
 -- functions from DCS-BIOS
 
-local function ExportScript.Tools.mergeString(original_string, new_data, location)
+function ExportScript.Tools.mergeString(original_string, new_data, location)
 	local new_data_length = string.len(new_data)
 	local before = string.sub(original_string,1,location)
 	local after = string.sub(original_string,location+new_data_length+1)
