@@ -29,5 +29,8 @@ ExportScript.Config.FirstNewDataSend       = true
 ExportScript.Config.FirstNewDataSendCount  = 100
 
 -- data export
-ExportScript.Config.ExportSelfData  = false     -- export SelfData (Lat, Lon, Alt etc.) every LowTickInterval
-ExportScript.Config.ExportDed       = true      -- export Data Entry Display data from F-16C Viper
+ExportScript.Config.ExportSelfData          = false     -- export SelfData (Lat, Lon, Alt etc.) every LowTickInterval
+-- export Displays data
+ExportScript.Config.ExportDisplaysAV8BNA    = true      -- AV8BNA (UFC, ODU, UVHF)
+ExportScript.Config.ExportDisplaysF16       = true      -- F-16C Viper (DED, CMDS, UHF)
+ExportScript.Config.ExportDisplaysFA18      = true      -- F/A-18C (UFC)

@@ -545,12 +545,12 @@ local function buildDEDLine(line)
 		local dataLine ="                         "
 	
 		-- Check for present of Objects that indicate Duplicate Key Names that need resolving
-		local guard = DED_fields["Guard Label"]
-		local mode =  DED_fields["Mode label"]
-		local event = DED_fields["Event Occured"]
-		local alow =  DED_fields["ALOW label"]
-		local bingo = DED_fields["CMDS_BINGO_lbl"]
-		local inflt_algn = DED_fields["INS_INFLT_ALGN_lbl"]
+		local guard 		= DED_fields["Guard Label"]
+		local mode 			= DED_fields["Mode label"]
+		local event 		= DED_fields["Event Occured"]
+		local alow 			= DED_fields["ALOW label"]
+		local bingo 		= DED_fields["CMDS_BINGO_lbl"]
+		local inflt_algn 	= DED_fields["INS_INFLT_ALGN_lbl"]
 	
 		--Loop through Exported DED Objects
 		for k,v in pairs(DED_fields) do
@@ -570,13 +570,13 @@ local function buildDEDLine(line)
 			elseif bingo ~= nil and line == 1 then
 				label = bingo.." "..k
 			-- Handle Duplicate Key Names on INS INFL ALGN page Lines 1 & 3 items
-			elseif inflt_algn ~= nil and (line == 1 or line==3) then
+			elseif inflt_algn ~= nil and (line == 1 or line == 3) then
 				label = inflt_algn.." "..k
 			else
 				label = k
 			end
 			--Get layout data associated with current key
-			layout = DEDLayoutLine[label:gsub("_inv","",1):gsub("_lhs","_both",1)]
+			layout = DEDLayoutLine[label:gsub("_inv", "", 1):gsub("_lhs", "_both", 1)]
 			if layout ~= nil then
 				--If layout value 6 is present then use this value to override the value returned from DCS
 				if layout[6] ~= nil then
@@ -594,7 +594,7 @@ local function buildDEDLine(line)
 				end
 			end
 		end
-		return dataLine
+	return dataLine
 end
 
 -- Pointed to by ProcessDCSHighImportance
@@ -603,13 +603,23 @@ end
 
 -- Pointed to by ExportScript.ProcessDCSConfigLowImportance
 function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
+	-- DED Displays
 	local DEDLine1 = ""
 	local DEDLine2 = ""
 	local DEDLine3 = ""
 	local DEDLine4 = ""
 	local DEDLine5 = ""
 
-	if ExportScript.Config.ExportDed == true then
+	-- CMDS Display
+	local CMDS_O1_Amount
+	local CMDS_O2_Amount
+	local CMDS_CH_Amount
+	local CMDS_FL_Amount
+
+	local UHF_Channel
+	local UHF_Frequency
+
+	if ExportScript.Config.ExportDisplaysF16 == true then
 		-- Build DED Display Lines
 		DEDLine1 = buildDEDLine(1);
 		DEDLine2 = buildDEDLine(2);
@@ -622,5 +632,42 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		ExportScript.Tools.SendData(2103, DEDLine3)
 		ExportScript.Tools.SendData(2104, DEDLine4)
 		ExportScript.Tools.SendData(2105, DEDLine5)
+
+		-- CMDS
+		local cmds = ExportScript.Tools.getListIndicatorValue(17)
+		CMDS_O1_Amount = "    "
+		CMDS_O2_Amount = "    "
+		CMDS_CH_Amount = "    "
+		CMDS_FL_Amount = "    "
+
+		CMDS_O1_Amount = coerce_nil_to_string(cmds.CMDS_O1_Amount)
+		CMDS_O2_Amount = coerce_nil_to_string(cmds.CMDS_O2_Amount)
+		CMDS_CH_Amount = coerce_nil_to_string(cmds.CMDS_CH_Amount)
+		CMDS_FL_Amount = coerce_nil_to_string(cmds.CMDS_FL_Amount)
+
+		ExportScript.Tools.SendData(2301, CMDS_O1_Amount)
+		ExportScript.Tools.SendData(2302, CMDS_O2_Amount)
+		ExportScript.Tools.SendData(2303, CMDS_CH_Amount)
+		ExportScript.Tools.SendData(2304, CMDS_FL_Amount)
+
+		-- UHF Channel
+		local UHF = ExportScript.Tools.getListIndicatorValue(11)
+		if UHF and UHF.txtPresetChannel then
+			UHF_Channel = coerce_nil_to_string(UHF.txtPresetChannel)
+		else
+			UHF_Channel = "  "
+		end
+		ExportScript.Tools.SendData(2801, UHF_Channel)
+
+		-- UHF Frequency
+		local UHFFreq = ExportScript.Tools.getListIndicatorValue(12)
+		if UHFFreq and UHFFreq.txtFreqStatus then
+			local UHF_Freq = UHFFreq.txtFreqStatus
+			local UHF_dot =  UHFFreq.txtDot
+			UHF_Frequency = UHF_Freq:sub(1, 3) .. UHF_dot .. UHF_Freq:sub(4, 6)
+		else
+			UHF_Frequency = "       "
+		end
+		ExportScript.Tools.SendData(2802, UHF_Frequency)
 	end
 end

@@ -563,413 +563,415 @@ end
 
 -- Pointed to by ExportScript.ProcessDCSConfigLowImportance
 function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
-	--ENGINE DISPLAY
-	
-	--[253] = "%.4f",	--DUCT 1. DRUM
-	--[254] = "%.4f",	--DUCT 2.
-	--[255] = "%.4f",	--DUCT 3.
-	
-	-- digits = {}
-	-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(253) * 10)
-	-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(254) * 10)
-	-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(255) * 10)
-	
-	-- ExportScript.Tools.SendData(2001, digits[1]..digits[2]..digits[3])
-	
-	--[256] = "%.4f",	--RPM 1. DRUM
-	--[257] = "%.4f",	--RPM 2.
-	--[258] = "%.4f",	--RPM 3.
-	--[259] = "%.4f",	--RPM 4.
-	
-	-- digits = {}
-	-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(256) * 10)
-	-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(257) * 10)
-	-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(258) * 10)
-	-- digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(259) * 10)
-	
-	-- ExportScript.Tools.SendData(2002, digits[1]..digits[2]..digits[3]..digits[4])
-	
-	--[260] = "%.4f",	--FF 1. DRUM
-	--[261] = "%.4f",	--FF 2.
-	--[262] = "%.4f",	--FF 3.
-	
-	-- digits = {}
-	-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(260) * 10)
-	-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(261) * 10)
-	-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(262) * 10)
-	
-	-- ExportScript.Tools.SendData(2003, digits[1]..digits[2]..digits[3])
-	
-	--[263] = "%.4f",	--JPT 1. DRUM
-	--[264] = "%.4f",	--JPT 2.
-	--[265] = "%.4f",	--JPT 3.
-	--[266] = "%.4f",	--STAB(Arrow up/down)
-	
-	-- digits = {}
-	-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(263) * 10)
-	-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(264) * 10)
-	-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(265) * 10)
-	
-	-- ExportScript.Tools.SendData(2004, digits[1]..digits[2]..digits[3])
-	
-	--[267] = "%.4f",	--STAB 1. Number, 2. DRUM
-	--[268] = "%.4f",	--STAB 2. Number, 3. DRUM
+	if ExportScript.Config.ExportDisplaysAV8BNA == true then
+		--ENGINE DISPLAY
+		
+		--[253] = "%.4f",	--DUCT 1. DRUM
+		--[254] = "%.4f",	--DUCT 2.
+		--[255] = "%.4f",	--DUCT 3.
+		
+		-- digits = {}
+		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(253) * 10)
+		-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(254) * 10)
+		-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(255) * 10)
+		
+		-- ExportScript.Tools.SendData(2001, digits[1]..digits[2]..digits[3])
+		
+		--[256] = "%.4f",	--RPM 1. DRUM
+		--[257] = "%.4f",	--RPM 2.
+		--[258] = "%.4f",	--RPM 3.
+		--[259] = "%.4f",	--RPM 4.
+		
+		-- digits = {}
+		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(256) * 10)
+		-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(257) * 10)
+		-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(258) * 10)
+		-- digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(259) * 10)
+		
+		-- ExportScript.Tools.SendData(2002, digits[1]..digits[2]..digits[3]..digits[4])
+		
+		--[260] = "%.4f",	--FF 1. DRUM
+		--[261] = "%.4f",	--FF 2.
+		--[262] = "%.4f",	--FF 3.
+		
+		-- digits = {}
+		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(260) * 10)
+		-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(261) * 10)
+		-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(262) * 10)
+		
+		-- ExportScript.Tools.SendData(2003, digits[1]..digits[2]..digits[3])
+		
+		--[263] = "%.4f",	--JPT 1. DRUM
+		--[264] = "%.4f",	--JPT 2.
+		--[265] = "%.4f",	--JPT 3.
+		--[266] = "%.4f",	--STAB(Arrow up/down)
+		
+		-- digits = {}
+		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(263) * 10)
+		-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(264) * 10)
+		-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(265) * 10)
+		
+		-- ExportScript.Tools.SendData(2004, digits[1]..digits[2]..digits[3])
+		
+		--[267] = "%.4f",	--STAB 1. Number, 2. DRUM
+		--[268] = "%.4f",	--STAB 2. Number, 3. DRUM
 
-	-- digits = {}
-	-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(267) * 10)
-	-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(268) * 10)
-	
-	-- ExportScript.Tools.SendData(2005, digits[1]..digits[2])
+		-- digits = {}
+		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(267) * 10)
+		-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(268) * 10)
+		
+		-- ExportScript.Tools.SendData(2005, digits[1]..digits[2])
 
-	--[269] = "%.4f",	--H2O 1. Number
-	--[270] = "%.4f",	--H2O 2. Number -----3. Number is fix !!----
-	
-	-- digits = {}
-	-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(269) * 10)
-	-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(270) * 10)
-	
-	-- ExportScript.Tools.SendData(2006, digits[1]..digits[2])
+		--[269] = "%.4f",	--H2O 1. Number
+		--[270] = "%.4f",	--H2O 2. Number -----3. Number is fix !!----
+		
+		-- digits = {}
+		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(269) * 10)
+		-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(270) * 10)
+		
+		-- ExportScript.Tools.SendData(2006, digits[1]..digits[2])
 
-	-- Fuel Total
-	-------------------------------------------------
-	-- digits = {}
-	-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(366) * 10)
-	-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(367) * 10)
-	-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(368) * 10)
-	-- digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(369) * 10)
-	-- digits[5] = string.format("%1.0f",mainPanelDevice:get_argument_value(370) * 10)
-	
-	-- ExportScript.Tools.SendData(2010, digits[1]..digits[2]..digits[3]..digits[4]..digits[5])
+		-- Fuel Total
+		-------------------------------------------------
+		-- digits = {}
+		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(366) * 10)
+		-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(367) * 10)
+		-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(368) * 10)
+		-- digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(369) * 10)
+		-- digits[5] = string.format("%1.0f",mainPanelDevice:get_argument_value(370) * 10)
+		
+		-- ExportScript.Tools.SendData(2010, digits[1]..digits[2]..digits[3]..digits[4]..digits[5])
 
-	--[371] = "%.4f",	--LBS L 1. DRUM
-	--[372] = "%.4f",	--LBS L	2.
-	--[373] = "%.4f",	--LBS L 3.
-	--[374] = "%.4f",	--LBS L 4.
+		--[371] = "%.4f",	--LBS L 1. DRUM
+		--[372] = "%.4f",	--LBS L	2.
+		--[373] = "%.4f",	--LBS L 3.
+		--[374] = "%.4f",	--LBS L 4.
 
-	-- Fuel Left
-	-------------------------------------------------
-	-- digits = {}
-	-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(371) * 10)
-	-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(372) * 10)
-	-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(373) * 10)
-	-- digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(374) * 10)
-	
-	-- ExportScript.Tools.SendData(2011, digits[1]..digits[2]..digits[3]..digits[4])
+		-- Fuel Left
+		-------------------------------------------------
+		-- digits = {}
+		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(371) * 10)
+		-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(372) * 10)
+		-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(373) * 10)
+		-- digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(374) * 10)
+		
+		-- ExportScript.Tools.SendData(2011, digits[1]..digits[2]..digits[3]..digits[4])
 
-	--[375] = "%.4f",	--LBS R 1. DRUM 
-	--[376] = "%.4f",	--LBS R	2.
-	--[377] = "%.4f",	--LBS R 3.
-	--[378] = "%.4f",	--LBS R 4.
+		--[375] = "%.4f",	--LBS R 1. DRUM 
+		--[376] = "%.4f",	--LBS R	2.
+		--[377] = "%.4f",	--LBS R 3.
+		--[378] = "%.4f",	--LBS R 4.
 
-	-- Fuel Right
-	-------------------------------------------------
-	-- digits = {}
-	-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(375) * 10)
-	-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(376) * 10)
-	-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(377) * 10)
-	-- digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(378) * 10)
-	
-	-- ExportScript.Tools.SendData(2012, digits[1]..digits[2]..digits[3]..digits[4])
+		-- Fuel Right
+		-------------------------------------------------
+		-- digits = {}
+		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(375) * 10)
+		-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(376) * 10)
+		-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(377) * 10)
+		-- digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(378) * 10)
+		
+		-- ExportScript.Tools.SendData(2012, digits[1]..digits[2]..digits[3]..digits[4])
 
-	--[381] = "%.4f",	--BINGO 1. DRUM 
-	--[382] = "%.4f",	--BINGO 2.
-	--[383] = "%.4f",	--BINGO 3.
-	--[384] = "%.4f",	--BINGO 4.
+		--[381] = "%.4f",	--BINGO 1. DRUM 
+		--[382] = "%.4f",	--BINGO 2.
+		--[383] = "%.4f",	--BINGO 3.
+		--[384] = "%.4f",	--BINGO 4.
 
-	-- Fuel Bingo
-	-------------------------------------------------
-	-- digits = {}
-	-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(381) * 10)
-	-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(382) * 10)
-	-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(383) * 10)
-	-- digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(384) * 10)
-	
-	-- ExportScript.Tools.SendData(2013, digits[1]..digits[2]..digits[3]..digits[4])
-	
-	--FLAP POSITION DISPLAY
-	--[455] = "%.4f",	--FLAP POS 1. DRUM 
-	--[456] = "%.4f",	--FLAP POS 2. DRUM
-	-- digits = {}
-	-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(455) * 10)
-	-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(456) * 10)
-	
-	-- ExportScript.Tools.SendData(2014, digits[1]..digits[2])
+		-- Fuel Bingo
+		-------------------------------------------------
+		-- digits = {}
+		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(381) * 10)
+		-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(382) * 10)
+		-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(383) * 10)
+		-- digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(384) * 10)
+		
+		-- ExportScript.Tools.SendData(2013, digits[1]..digits[2]..digits[3]..digits[4])
+		
+		--FLAP POSITION DISPLAY
+		--[455] = "%.4f",	--FLAP POS 1. DRUM 
+		--[456] = "%.4f",	--FLAP POS 2. DRUM
+		-- digits = {}
+		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(455) * 10)
+		-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(456) * 10)
+		
+		-- ExportScript.Tools.SendData(2014, digits[1]..digits[2])
 
-	--BRAKE/HYD DISPLAY
-	--[550] = "%.4f",	--BRAKE 1. DRUM 
-	--[551] = "%.4f",	--BRAKE	2.
-	--[552] = "%.4f",	--BRAKE 3.
-	-- digits = {}
-	-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(550) * 10)
-	-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(551) * 10)
-	-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(552) * 10)
-	
-	-- ExportScript.Tools.SendData(2015, digits[1]..digits[2]..digits[3])
-	
-	--[553] = "%.4f",	--HYD1 1. DRUM 
-	--[554] = "%.4f",	--HYD1 2.
-	--[555] = "%.4f",	--HYD1 3.
-	-- digits = {}
-	-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(553) * 10)
-	-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(554) * 10)
-	-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(555) * 10)
-	
-	-- ExportScript.Tools.SendData(2016, digits[1]..digits[2]..digits[3])
-	
-	--[556] = "%.4f",	--HYD2 1. DRUM 
-	--[557] = "%.4f",	--HYD2 2.
-	--[558] = "%.4f",	--HYD2 3.
-	-- digits = {}
-	-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(556) * 10)
-	-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(557) * 10)
-	-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(558) * 10)
-	
-	-- ExportScript.Tools.SendData(2017, digits[1]..digits[2]..digits[3])
+		--BRAKE/HYD DISPLAY
+		--[550] = "%.4f",	--BRAKE 1. DRUM 
+		--[551] = "%.4f",	--BRAKE	2.
+		--[552] = "%.4f",	--BRAKE 3.
+		-- digits = {}
+		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(550) * 10)
+		-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(551) * 10)
+		-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(552) * 10)
+		
+		-- ExportScript.Tools.SendData(2015, digits[1]..digits[2]..digits[3])
+		
+		--[553] = "%.4f",	--HYD1 1. DRUM 
+		--[554] = "%.4f",	--HYD1 2.
+		--[555] = "%.4f",	--HYD1 3.
+		-- digits = {}
+		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(553) * 10)
+		-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(554) * 10)
+		-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(555) * 10)
+		
+		-- ExportScript.Tools.SendData(2016, digits[1]..digits[2]..digits[3])
+		
+		--[556] = "%.4f",	--HYD2 1. DRUM 
+		--[557] = "%.4f",	--HYD2 2.
+		--[558] = "%.4f",	--HYD2 3.
+		-- digits = {}
+		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(556) * 10)
+		-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(557) * 10)
+		-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(558) * 10)
+		
+		-- ExportScript.Tools.SendData(2017, digits[1]..digits[2]..digits[3])
 
-	--UPPER AMARMENT PANEL
-	--[385] = "%.4f",	--MODE
-	-- digits = {}
-	-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(385) * 10)
+		--UPPER AMARMENT PANEL
+		--[385] = "%.4f",	--MODE
+		-- digits = {}
+		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(385) * 10)
 
-	-- if digits[1] == "0" then 
-	-- 	ExportScript.Tools.SendData(2018, " - ")
-	-- elseif digits[1] == "2" then 
-	-- 	ExportScript.Tools.SendData(2018, "AUT")
-	-- elseif digits[1] == "4" then 
-	-- 	ExportScript.Tools.SendData(2018, "CP ")
-	-- elseif digits[1] == "6" then 
-	-- 	ExportScript.Tools.SendData(2018, "DSL")
-	-- elseif digits[1] == "8" then 
-	-- 	ExportScript.Tools.SendData(2018, "DR ")
-	-- elseif digits[1] == "10" then 
-	-- 	ExportScript.Tools.SendData(2018, "AGM") 
-	-- end
+		-- if digits[1] == "0" then 
+		-- 	ExportScript.Tools.SendData(2018, " - ")
+		-- elseif digits[1] == "2" then 
+		-- 	ExportScript.Tools.SendData(2018, "AUT")
+		-- elseif digits[1] == "4" then 
+		-- 	ExportScript.Tools.SendData(2018, "CP ")
+		-- elseif digits[1] == "6" then 
+		-- 	ExportScript.Tools.SendData(2018, "DSL")
+		-- elseif digits[1] == "8" then 
+		-- 	ExportScript.Tools.SendData(2018, "DR ")
+		-- elseif digits[1] == "10" then 
+		-- 	ExportScript.Tools.SendData(2018, "AGM") 
+		-- end
 
-	--[386] = "%.4f",	--FUZ 1. DRUM 
-	--[387] = "%.4f",	--FUR 2.
-	-- digits = {}
-	-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(386) * 10)
-	-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(387) * 10)
-	
-	-- ExportScript.Tools.SendData(2019, digits[1]..digits[2])
-	
-	--[392] = "%.4f",	--InVT x 10 1. DRUM 
-	--[393] = "%.4f",	--InVT x 10 2.
-	--[394] = "%.4f",	--InVT x 10 3.
-	-- 	digits = {}
-	-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(392) * 10)
-	-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(393) * 10)
-	-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(394) * 10)
-	
-	-- ExportScript.Tools.SendData(2020, digits[1]..digits[2]..digits[3])
-	
-	--[391] = "%.4f",	--MULT
-	-- digits = {}
-	-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(391) * 10)
-	
-	-- ExportScript.Tools.SendData(2021, digits[1])
-	
-	--[389] = "%.4f",	--QTY 1. Drum 
-	--[390] = "%.4f",	--QTY 2.
-	-- 	digits = {}
-	-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(389) * 10)
-	-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(390) * 10)
-	
-	-- ExportScript.Tools.SendData(2022, digits[1]..digits[2])
-	
-	--> McMicha
-	
-	-- UFC Displays
-	local lUfcDisplays = list_indication(5)
+		--[386] = "%.4f",	--FUZ 1. DRUM 
+		--[387] = "%.4f",	--FUR 2.
+		-- digits = {}
+		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(386) * 10)
+		-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(387) * 10)
+		
+		-- ExportScript.Tools.SendData(2019, digits[1]..digits[2])
+		
+		--[392] = "%.4f",	--InVT x 10 1. DRUM 
+		--[393] = "%.4f",	--InVT x 10 2.
+		--[394] = "%.4f",	--InVT x 10 3.
+		-- 	digits = {}
+		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(392) * 10)
+		-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(393) * 10)
+		-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(394) * 10)
+		
+		-- ExportScript.Tools.SendData(2020, digits[1]..digits[2]..digits[3])
+		
+		--[391] = "%.4f",	--MULT
+		-- digits = {}
+		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(391) * 10)
+		
+		-- ExportScript.Tools.SendData(2021, digits[1])
+		
+		--[389] = "%.4f",	--QTY 1. Drum 
+		--[390] = "%.4f",	--QTY 2.
+		-- 	digits = {}
+		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(389) * 10)
+		-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(390) * 10)
+		
+		-- ExportScript.Tools.SendData(2022, digits[1]..digits[2])
+		
+		--> McMicha
+		
+		-- UFC Displays
+		local lUfcDisplays = list_indication(5)
 
-	local to1, to2, from1, from2, lUFC_Chnl1, lUFC_Chnl2, lUFC_Left_Position, lUFC_Right_Position, lUFC_Display = nil, nil, nil, nil, "", "", "", "", ""
-	to1, to2 = lUfcDisplays:find("UFC_DISPLAY")
-	if (to1 ~= nil) then
-		from1, from2 = lUfcDisplays:find("ufc_chnl_1_.%c")
-		if (from2 ~= nill) then
-			to1, to2 = lUfcDisplays:find("%c", from2+2)
-			if (to1 ~= nil) then
-				lUFC_Chnl1 = lUfcDisplays:sub(from2+1, to1-1)
+		local to1, to2, from1, from2, lUFC_Chnl1, lUFC_Chnl2, lUFC_Left_Position, lUFC_Right_Position, lUFC_Display = nil, nil, nil, nil, "", "", "", "", ""
+		to1, to2 = lUfcDisplays:find("UFC_DISPLAY")
+		if (to1 ~= nil) then
+			from1, from2 = lUfcDisplays:find("ufc_chnl_1_.%c")
+			if (from2 ~= nill) then
+				to1, to2 = lUfcDisplays:find("%c", from2+2)
+				if (to1 ~= nil) then
+					lUFC_Chnl1 = lUfcDisplays:sub(from2+1, to1-1)
+				end
+			end
+
+			from1, from2 = lUfcDisplays:find("ufc_chnl_2_.%c", to2)
+			if (from2 ~= nill) then
+				to1, to2 = lUfcDisplays:find("%c", from2+2)
+				if (to1 ~= nil) then
+					lUFC_Chnl2 = lUfcDisplays:sub(from2+1, to1-1)
+				end
+			end
+
+			from1, from2 = lUfcDisplays:find("ufc_left_position%c", to2)
+			if (from2 ~= nill) then
+				to1, to2 = lUfcDisplays:find("%c", from2+2)
+				if (to1 ~= nil) then
+					lUFC_Left_Position = lUfcDisplays:sub(from2+1, to1-1)
+				end
+			end
+
+			from1, from2 = lUfcDisplays:find("ufc_right_position%c", to2)
+			if (from2 ~= nill) then
+				if (from2 ~= nil) then
+					lUFC_Right_Position = lUfcDisplays:sub(from2+1)
+					lUFC_Right_Position = lUFC_Right_Position:gsub("%c", "")
+				end
 			end
 		end
 
-		from1, from2 = lUfcDisplays:find("ufc_chnl_2_.%c", to2)
-		if (from2 ~= nill) then
-			to1, to2 = lUfcDisplays:find("%c", from2+2)
-			if (to1 ~= nil) then
-				lUFC_Chnl2 = lUfcDisplays:sub(from2+1, to1-1)
-			end
+		local lRep = 8 - lUFC_Left_Position:len() - lUFC_Right_Position:len()
+
+		lUFC_Display = lUFC_Left_Position..string.rep(" ", lRep)..lUFC_Right_Position
+
+		ExportScript.Tools.SendData(2023, string.format("%s", lUFC_Chnl1)) -- string with max 2 charachters
+		ExportScript.Tools.SendData(2024, string.format("%s", lUFC_Chnl2)) -- string with max 2 charachters
+		ExportScript.Tools.SendData(2025, string.format("%s", lUFC_Display)) -- string with max 8 charachters
+
+		-- ODU Display
+		local lODUDisplays = list_indication(6)
+
+		local to1, to2, from1, from2 = nil, nil, nil, nil
+		local lODU_Text = {"","","","",""}
+		local lODU_select = " "
+
+		to1, to2 = lODUDisplays:find("ODU_DISPLAY")
+		if (to1 ~= nil) then
+			for lIndex = 1, 5, 1 do
+				lODU_select = " "
+
+				from1, from2 = lODUDisplays:find("ODU_Option_"..lIndex.."_Slc%c")
+				if (from2 ~= nill) then
+					to1, to2 = lODUDisplays:find("%c", from2+2)
+					if (to1 ~= nil) then
+						lODU_select = lODUDisplays:sub(from2+1, to1-1)
+						lODU_select = lODU_select:gsub(":", "¦")
+					end
+				end
+
+				from1, from2 = lODUDisplays:find("ODU_Option_"..lIndex.."_Text%c")
+				if (from2 ~= nill) then
+					to1, to2 = lODUDisplays:find("%c", from2+2)
+					if (to1 ~= nil) then
+						lODU_Text[lIndex] = lODUDisplays:sub(from2+1, to1-1)
+					end
+				end
+
+				lODU_Text[lIndex] = lODU_select..lODU_Text[lIndex]
+			end -- for
 		end
 
-		from1, from2 = lUfcDisplays:find("ufc_left_position%c", to2)
-		if (from2 ~= nill) then
-			to1, to2 = lUfcDisplays:find("%c", from2+2)
-			if (to1 ~= nil) then
-				lUFC_Left_Position = lUfcDisplays:sub(from2+1, to1-1)
-			end
-		end
+		ExportScript.Tools.SendData(2026, string.format("%s", lODU_Text[1]))
+		ExportScript.Tools.SendData(2027, string.format("%s", lODU_Text[2]))
+		ExportScript.Tools.SendData(2028, string.format("%s", lODU_Text[3]))
+		ExportScript.Tools.SendData(2029, string.format("%s", lODU_Text[4]))
+		ExportScript.Tools.SendData(2030, string.format("%s", lODU_Text[5]))
 
-		from1, from2 = lUfcDisplays:find("ufc_right_position%c", to2)
-		if (from2 ~= nill) then
+		-- UVHF Display
+		local lUVHFDisplay = list_indication(7)
+
+		local to1, to2, from1, from2, lUVHF_Channel, lUHF_Freq_Left, lacnip_1_label_mode, lacnip_1_mode, lacnip_1_label_code, lacnip_1_code, lacnip_2_label_mode, lacnip_2_mode, lacnip_2_label_code, lacnip_2_code = nil, nil, nil, nil, "", "", "", "", "", "", "", "", "", ""
+		local lacnip_line = {"", "", "", ""}
+
+		to1, to2 = lUVHFDisplay:find("UVHF_DISPLAY")
+		if (to1 ~= nil) then
+			from1, from2 = lUVHFDisplay:find("uvhf_channel%c")
 			if (from2 ~= nil) then
-				lUFC_Right_Position = lUfcDisplays:sub(from2+1)
-				lUFC_Right_Position = lUFC_Right_Position:gsub("%c", "")
-			end
-		end
-	end
-
-	local lRep = 8 - lUFC_Left_Position:len() - lUFC_Right_Position:len()
-
-	lUFC_Display = lUFC_Left_Position..string.rep(" ", lRep)..lUFC_Right_Position
-
-	ExportScript.Tools.SendData(2023, string.format("%s", lUFC_Chnl1)) -- string with max 2 charachters
-	ExportScript.Tools.SendData(2024, string.format("%s", lUFC_Chnl2)) -- string with max 2 charachters
-	ExportScript.Tools.SendData(2025, string.format("%s", lUFC_Display)) -- string with max 8 charachters
-
-	-- ODU Display
-	local lODUDisplays = list_indication(6)
-
-	local to1, to2, from1, from2 = nil, nil, nil, nil
-	local lODU_Text = {"","","","",""}
-	local lODU_select = " "
-
-	to1, to2 = lODUDisplays:find("ODU_DISPLAY")
-	if (to1 ~= nil) then
-		for lIndex = 1, 5, 1 do
-			lODU_select = " "
-
-			from1, from2 = lODUDisplays:find("ODU_Option_"..lIndex.."_Slc%c")
-			if (from2 ~= nill) then
-				to1, to2 = lODUDisplays:find("%c", from2+2)
+				to1, to2 = lUVHFDisplay:find("%c", from2+2)
 				if (to1 ~= nil) then
-					lODU_select = lODUDisplays:sub(from2+1, to1-1)
-					lODU_select = lODU_select:gsub(":", "¦")
+					lUVHF_Channel = lUVHFDisplay:sub(from2+1, to1-1)
 				end
 			end
 
-			from1, from2 = lODUDisplays:find("ODU_Option_"..lIndex.."_Text%c")
-			if (from2 ~= nill) then
-				to1, to2 = lODUDisplays:find("%c", from2+2)
+			from1, from2 = lUVHFDisplay:find("uvhf_freq_left%c", to2)
+			if (from2 ~= nil) then
+				to1, to2 = lUVHFDisplay:find("%c", from2+2)
 				if (to1 ~= nil) then
-					lODU_Text[lIndex] = lODUDisplays:sub(from2+1, to1-1)
+					lUHF_Freq_Left = lUVHFDisplay:sub(from2+1, to1-1)
 				end
 			end
 
-			lODU_Text[lIndex] = lODU_select..lODU_Text[lIndex]
-		end -- for
+			from1, from2 = lUVHFDisplay:find("acnip_1_label_mode%c", to2)
+			if (from2 ~= nil) then
+				to1, to2 = lUVHFDisplay:find("%c", from2+2)
+				if (to1 ~= nil) then
+					lacnip_1_label_mode = lUVHFDisplay:sub(from2+1, to1-1)
+				end
+			end
+
+			from1, from2 = lUVHFDisplay:find("acnip_1_mode%c", to2)
+			if (from2 ~= nil) then
+				to1, to2 = lUVHFDisplay:find("%c", from2+2)
+				if (to1 ~= nil) then
+					lacnip_1_mode = lUVHFDisplay:sub(from2+1, to1-1)
+				end
+			end
+
+			from1, from2 = lUVHFDisplay:find("acnip_1_label_code%c", to2)
+			if (from2 ~= nil) then
+				to1, to2 = lUVHFDisplay:find("%c", from2+2)
+				if (to1 ~= nil) then
+					lacnip_1_label_code = lUVHFDisplay:sub(from2+1, to1-1)
+				end
+			end
+
+			from1, from2 = lUVHFDisplay:find("acnip_1_code%c", to2)
+			if (from2 ~= nil) then
+				to1, to2 = lUVHFDisplay:find("%c", from2+2)
+				if (to1 ~= nil) then
+					lacnip_1_code = lUVHFDisplay:sub(from2+1, to1-1)
+				end
+			end
+
+			from1, from2 = lUVHFDisplay:find("acnip_2_label_mode%c", to2)
+			if (from2 ~= nil) then
+				to1, to2 = lUVHFDisplay:find("%c", from2+2)
+				if (to1 ~= nil) then
+					lacnip_2_label_mode = lUVHFDisplay:sub(from2+1, to1-1)
+				end
+			end
+
+			from1, from2 = lUVHFDisplay:find("acnip_2_mode%c", to2)
+			if (from2 ~= nil) then
+				to1, to2 = lUVHFDisplay:find("%c", from2+2)
+				if (to1 ~= nil) then
+					lacnip_2_mode = lUVHFDisplay:sub(from2+1, to1-1)
+				end
+			end
+
+			from1, from2 = lUVHFDisplay:find("acnip_2_label_code%c", to2)
+			if (from2 ~= nil) then
+				to1, to2 = lUVHFDisplay:find("%c", from2+2)
+				if (to1 ~= nil) then
+					lacnip_2_label_code = lUVHFDisplay:sub(from2+1, to1-1)
+				end
+			end
+
+			from1, from2 = lUVHFDisplay:find("acnip_2_code%c", to2)
+			if (from2 ~= nil) then
+				to1, to2 = lUVHFDisplay:find("%c", from2+2)
+				if (to1 ~= nil) then
+					lacnip_2_code = lUVHFDisplay:sub(from2+1, to1-1)
+				end
+			end
+		end
+
+		lacnip_line[1] = lacnip_1_label_mode.."  "..lacnip_2_label_mode
+		local lRep1 = 4 - lacnip_1_mode:len()
+		local lRep2 = 4 - lacnip_2_mode:len()
+		lacnip_line[2] = string.rep(" ", lRep1)..lacnip_1_mode.."  "..lacnip_2_mode..string.rep(" ", lRep2)
+		lacnip_line[3] = lacnip_1_label_code.."  "..lacnip_2_label_code
+		lRep1 = 4 - lacnip_1_code:len()
+		lRep2 = 4 - lacnip_2_code:len()
+		lacnip_line[4] = string.rep(" ", lRep1)..lacnip_1_code.."  "..lacnip_2_code..string.rep(" ", lRep2)
+
+		-- string with max 2 charachters
+		ExportScript.Tools.SendData(2031, string.format("%s", lUVHF_Channel))
+		-- string with max 7 charachters
+		ExportScript.Tools.SendData(2032, string.format("%s", lUHF_Freq_Left))
+		-- string with max 10 charachters
+		ExportScript.Tools.SendData(2033, string.format("%s", lacnip_line[1]))
+		ExportScript.Tools.SendData(2034, string.format("%s", lacnip_line[2]))
+		ExportScript.Tools.SendData(2035, string.format("%s", lacnip_line[3]))
+		ExportScript.Tools.SendData(2036, string.format("%s", lacnip_line[4]))
 	end
-
-	ExportScript.Tools.SendData(2026, string.format("%s", lODU_Text[1]))
-	ExportScript.Tools.SendData(2027, string.format("%s", lODU_Text[2]))
-	ExportScript.Tools.SendData(2028, string.format("%s", lODU_Text[3]))
-	ExportScript.Tools.SendData(2029, string.format("%s", lODU_Text[4]))
-	ExportScript.Tools.SendData(2030, string.format("%s", lODU_Text[5]))
-
-	-- UVHF Display
-	local lUVHFDisplay = list_indication(7)
-
-	local to1, to2, from1, from2, lUVHF_Channel, lUHF_Freq_Left, lacnip_1_label_mode, lacnip_1_mode, lacnip_1_label_code, lacnip_1_code, lacnip_2_label_mode, lacnip_2_mode, lacnip_2_label_code, lacnip_2_code = nil, nil, nil, nil, "", "", "", "", "", "", "", "", "", ""
-	local lacnip_line = {"", "", "", ""}
-
-	to1, to2 = lUVHFDisplay:find("UVHF_DISPLAY")
-	if (to1 ~= nil) then
-		from1, from2 = lUVHFDisplay:find("uvhf_channel%c")
-		if (from2 ~= nil) then
-			to1, to2 = lUVHFDisplay:find("%c", from2+2)
-			if (to1 ~= nil) then
-				lUVHF_Channel = lUVHFDisplay:sub(from2+1, to1-1)
-			end
-		end
-
-		from1, from2 = lUVHFDisplay:find("uvhf_freq_left%c", to2)
-		if (from2 ~= nil) then
-			to1, to2 = lUVHFDisplay:find("%c", from2+2)
-			if (to1 ~= nil) then
-				lUHF_Freq_Left = lUVHFDisplay:sub(from2+1, to1-1)
-			end
-		end
-
-		from1, from2 = lUVHFDisplay:find("acnip_1_label_mode%c", to2)
-		if (from2 ~= nil) then
-			to1, to2 = lUVHFDisplay:find("%c", from2+2)
-			if (to1 ~= nil) then
-				lacnip_1_label_mode = lUVHFDisplay:sub(from2+1, to1-1)
-			end
-		end
-
-		from1, from2 = lUVHFDisplay:find("acnip_1_mode%c", to2)
-		if (from2 ~= nil) then
-			to1, to2 = lUVHFDisplay:find("%c", from2+2)
-			if (to1 ~= nil) then
-				lacnip_1_mode = lUVHFDisplay:sub(from2+1, to1-1)
-			end
-		end
-
-		from1, from2 = lUVHFDisplay:find("acnip_1_label_code%c", to2)
-		if (from2 ~= nil) then
-			to1, to2 = lUVHFDisplay:find("%c", from2+2)
-			if (to1 ~= nil) then
-				lacnip_1_label_code = lUVHFDisplay:sub(from2+1, to1-1)
-			end
-		end
-
-		from1, from2 = lUVHFDisplay:find("acnip_1_code%c", to2)
-		if (from2 ~= nil) then
-			to1, to2 = lUVHFDisplay:find("%c", from2+2)
-			if (to1 ~= nil) then
-				lacnip_1_code = lUVHFDisplay:sub(from2+1, to1-1)
-			end
-		end
-
-		from1, from2 = lUVHFDisplay:find("acnip_2_label_mode%c", to2)
-		if (from2 ~= nil) then
-			to1, to2 = lUVHFDisplay:find("%c", from2+2)
-			if (to1 ~= nil) then
-				lacnip_2_label_mode = lUVHFDisplay:sub(from2+1, to1-1)
-			end
-		end
-
-		from1, from2 = lUVHFDisplay:find("acnip_2_mode%c", to2)
-		if (from2 ~= nil) then
-			to1, to2 = lUVHFDisplay:find("%c", from2+2)
-			if (to1 ~= nil) then
-				lacnip_2_mode = lUVHFDisplay:sub(from2+1, to1-1)
-			end
-		end
-
-		from1, from2 = lUVHFDisplay:find("acnip_2_label_code%c", to2)
-		if (from2 ~= nil) then
-			to1, to2 = lUVHFDisplay:find("%c", from2+2)
-			if (to1 ~= nil) then
-				lacnip_2_label_code = lUVHFDisplay:sub(from2+1, to1-1)
-			end
-		end
-
-		from1, from2 = lUVHFDisplay:find("acnip_2_code%c", to2)
-		if (from2 ~= nil) then
-			to1, to2 = lUVHFDisplay:find("%c", from2+2)
-			if (to1 ~= nil) then
-				lacnip_2_code = lUVHFDisplay:sub(from2+1, to1-1)
-			end
-		end
-	end
-
-	lacnip_line[1] = lacnip_1_label_mode.."  "..lacnip_2_label_mode
-	local lRep1 = 4 - lacnip_1_mode:len()
-	local lRep2 = 4 - lacnip_2_mode:len()
-	lacnip_line[2] = string.rep(" ", lRep1)..lacnip_1_mode.."  "..lacnip_2_mode..string.rep(" ", lRep2)
-	lacnip_line[3] = lacnip_1_label_code.."  "..lacnip_2_label_code
-	lRep1 = 4 - lacnip_1_code:len()
-	lRep2 = 4 - lacnip_2_code:len()
-	lacnip_line[4] = string.rep(" ", lRep1)..lacnip_1_code.."  "..lacnip_2_code..string.rep(" ", lRep2)
-
-	 -- string with max 2 charachters
-	ExportScript.Tools.SendData(2031, string.format("%s", lUVHF_Channel))
-	 -- string with max 7 charachters
-	ExportScript.Tools.SendData(2032, string.format("%s", lUHF_Freq_Left))
-	 -- string with max 10 charachters
-	ExportScript.Tools.SendData(2033, string.format("%s", lacnip_line[1]))
-	ExportScript.Tools.SendData(2034, string.format("%s", lacnip_line[2]))
-	ExportScript.Tools.SendData(2035, string.format("%s", lacnip_line[3]))
-	ExportScript.Tools.SendData(2036, string.format("%s", lacnip_line[4]))
 end

@@ -387,19 +387,19 @@ end
 -- functions from DCS-BIOS
 
 function ExportScript.Tools.mergeString(original_string, new_data, location)
-	local new_data_length = string.len(new_data)
-	local before = string.sub(original_string,1,location)
-	local after = string.sub(original_string,location+new_data_length+1)
-	local base = string.sub(original_string,location+1, location+new_data_length)
-	local merged = {}
+	local new_data_length   = string.len(new_data)
+	local before            = string.sub(original_string, 1, location)
+	local after             = string.sub(original_string, location + new_data_length + 1)
+	local base              = string.sub(original_string, location + 1, location + new_data_length)
+	local merged            = {}
 
 	for i = 1, new_data_length
 	do
-		local curr_base = string.sub(base,i, i)
+		local curr_base = string.sub(base, i, i)
 		if curr_base  ~= " " then
-			merged[i]=curr_base
+			merged[i] = curr_base
 		else
-			merged[i]=string.sub(new_data,i, i)
+			merged[i] = string.sub(new_data, i, i)
 		end
 	end
 	return before..table.concat(merged)..after
