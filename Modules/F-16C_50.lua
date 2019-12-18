@@ -1,6 +1,5 @@
 -- F-16C_50
 ExportScript.FoundDCSModule = true
--- export DED data over network
 
 ExportScript.ConfigEveryFrameArguments = 
 {
@@ -532,51 +531,20 @@ DEDLayout_l5["INTG COUPLE Key"] = {20,3}
 --DEDLayout_l5[""] = {,}
 DEDLayout = {DEDLayout_l1, DEDLayout_l2, DEDLayout_l3, DEDLayout_l4, DEDLayout_l5}
 
--- DED Display Utility Functions -------------------------------------------
-function parse_indication(indicator_id)  -- Thanks to [FSF]Ian code
-	local t = {}
-	local li = list_indication(indicator_id)
-	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
-	while true do
-    	local name, value = m()
-    	if not name then break end
-   			t[name]=value
-	end
-	return t
-end
-
-local function mergeString(original_string, new_data, location)
-	local new_data_length = string.len(new_data)
-	local before = string.sub(original_string,1,location)
-	local after = string.sub(original_string,location+new_data_length+1)
-	local base = string.sub(original_string,location+1, location+new_data_length)
-	local merged = {}
-
-	for i = 1, new_data_length
-	do
-		local curr_base = string.sub(base,i, i)
-		if curr_base  ~= " " then
-			merged[i]=curr_base
-		else
-			merged[i]=string.sub(new_data,i, i)
-		end
-	end
-	return before..table.concat(merged)..after
-end
 -- DED Display Main Function -----------------------------------------------
 local function buildDEDLine(line)
-	-- Get Layout Information for line being built
+		-- Get Layout Information for line being built
 		local DEDLayoutLine = DEDLayout[line]
-	-- Get Exported DED Objects
-		local DED_fields = parse_indication(6)
+		-- Get Exported DED Objects
+		local DED_fields = ExportScript.Tools.getListIndicatorValue(6)
 		local layout
 		local label
 		local value
 	
-	-- Base Output String
+		-- Base Output String
 		local dataLine ="                         "
 	
-	-- Check for present of Objects that indicate Duplicate Key Names that need resolving
+		-- Check for present of Objects that indicate Duplicate Key Names that need resolving
 		local guard = DED_fields["Guard Label"]
 		local mode =  DED_fields["Mode label"]
 		local event = DED_fields["Event Occured"]
@@ -584,45 +552,45 @@ local function buildDEDLine(line)
 		local bingo = DED_fields["CMDS_BINGO_lbl"]
 		local inflt_algn = DED_fields["INS_INFLT_ALGN_lbl"]
 	
-	--Loop through Exported DED Objects
+		--Loop through Exported DED Objects
 		for k,v in pairs(DED_fields) do
-	-- Handle Duplicate Key Names on COM2 Guard page items        
+			-- Handle Duplicate Key Names on COM2 Guard page items        
 			if guard ~= nil then
 				label = guard.." "..k
-	-- Handle Duplicate Key Names on IFF STAT page items
+			-- Handle Duplicate Key Names on IFF STAT page items
 			elseif mode ~= nil then
 				label = mode.." "..k
-	-- Handle Duplicate Key Names on IFF POS & TIM page items
+			-- Handle Duplicate Key Names on IFF POS & TIM page items
 			elseif event ~= nil then
 				label = event.." "..k
-	-- Handle Duplicate Key Names on ALOW page Line 1 items
+			-- Handle Duplicate Key Names on ALOW page Line 1 items
 			elseif alow ~= nil and line == 1 then
 				label = alow.." "..k
-	-- Handle Duplicate Key Names on CMDS Bingo page Line 1 items
+			-- Handle Duplicate Key Names on CMDS Bingo page Line 1 items
 			elseif bingo ~= nil and line == 1 then
 				label = bingo.." "..k
-	-- Handle Duplicate Key Names on INS INFL ALGN page Lines 1 & 3 items
+			-- Handle Duplicate Key Names on INS INFL ALGN page Lines 1 & 3 items
 			elseif inflt_algn ~= nil and (line == 1 or line==3) then
 				label = inflt_algn.." "..k
 			else
 				label = k
 			end
-	--Get layout data associated with current key
+			--Get layout data associated with current key
 			layout = DEDLayoutLine[label:gsub("_inv","",1):gsub("_lhs","_both",1)]
 			if layout ~= nil then
-	--If layout value 6 is present then use this value to override the value returned from DCS
+				--If layout value 6 is present then use this value to override the value returned from DCS
 				if layout[6] ~= nil then
 					value = layout[6]
 				else
 					value = v
 				end
 				
-	-- Add Value to dataLine using mergeString because some values are are supposed to fit within others
-				dataLine = mergeString(dataLine, value, layout[1])
+				-- Add Value to dataLine using ExportScript.Tools.mergeString because some values are are supposed to fit within others
+				dataLine = ExportScript.Tools.mergeString(dataLine, value, layout[1])
 	
-	--If layout value 3 > 0 we need to duplicate this item at position specific in value 3 (this is for "*"s marking enterable fields
+				--If layout value 3 > 0 we need to duplicate this item at position specific in value 3 (this is for "*"s marking enterable fields
 				if layout[3] ~= nil and layout[3] > 0 then
-					dataLine = mergeString(dataLine, value, layout[3])
+					dataLine = ExportScript.Tools.mergeString(dataLine, value, layout[3])
 				end
 			end
 		end
