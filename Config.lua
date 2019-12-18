@@ -22,8 +22,12 @@ ExportScript.Config.Listener         = true         -- listen commands from apps
 ExportScript.Config.ListenerPort     = 25070        -- Listener Port receiving commands
 
 -- Other
-ExportScript.Config.ExportInterval         = 0.05	-- export evry 0.05 secounds
-ExportScript.Config.ExportLowTickInterval  = 0.5	-- export evry 0.5 secounds
+ExportScript.Config.ExportInterval         = 0.05	-- export every 0.05 secounds
+ExportScript.Config.ExportLowTickInterval  = 0.5	-- export every 0.5 secounds
 ExportScript.Config.ExportModulePath       = lfs.writedir()..[[Scripts\pw-dev_script\Modules\]]
 ExportScript.Config.FirstNewDataSend       = true
 ExportScript.Config.FirstNewDataSendCount  = 100
+
+-- data export
+ExportScript.Config.ExportSelfData  = false     -- export SelfData (Lat, Lon, Alt etc.) every LowTickInterval
+ExportScript.Config.ExportDed       = true      -- export Data Entry Display data from F-16C Viper

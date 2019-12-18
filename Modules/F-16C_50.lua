@@ -1,6 +1,6 @@
 -- F-16C_50
 ExportScript.FoundDCSModule = true
-local _exportDed = false
+-- export DED data over network
 
 ExportScript.ConfigEveryFrameArguments = 
 {
@@ -90,7 +90,7 @@ ExportScript.ConfigArguments =
 	-- [345] = "%1d",   -- Righ MFD PB 20
 }
 
-------------------------------------------------------------------DED Layout Information----------------------------------------------------------------------------
+-- DED Layout Information ------------------------------------------------------
 local DEDLayout_l1={}
 local DEDLayout_l2={}
 local DEDLayout_l3={}
@@ -532,7 +532,7 @@ DEDLayout_l5["INTG COUPLE Key"] = {20,3}
 --DEDLayout_l5[""] = {,}
 DEDLayout = {DEDLayout_l1, DEDLayout_l2, DEDLayout_l3, DEDLayout_l4, DEDLayout_l5}
 
-------------------------------------------------------------------DED Display Utility Functions---------------------------------------------------------------------
+-- DED Display Utility Functions -------------------------------------------
 function parse_indication(indicator_id)  -- Thanks to [FSF]Ian code
 	local t = {}
 	local li = list_indication(indicator_id)
@@ -563,7 +563,7 @@ local function mergeString(original_string, new_data, location)
 	end
 	return before..table.concat(merged)..after
 end
-------------------------------------------------------------------DED Display Main Function-------------------------------------------------------------------------
+-- DED Display Main Function -----------------------------------------------
 local function buildDEDLine(line)
 	-- Get Layout Information for line being built
 		local DEDLayoutLine = DEDLayout[line]
@@ -641,19 +641,18 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	local DEDLine4 = ""
 	local DEDLine5 = ""
 
-	if _exportDed == true then
-	-- Build DED Display Lines
-		--moduleBeingDefined.exportHooks[#moduleBeingDefined.exportHooks+1] = function()
+	if ExportScript.Config.ExportDed == true then
+		-- Build DED Display Lines
 		DEDLine1 = buildDEDLine(1);
 		DEDLine2 = buildDEDLine(2);
 		DEDLine3 = buildDEDLine(3);
 		DEDLine4 = buildDEDLine(4);
 		DEDLine5 = buildDEDLine(5);
-	--end
-		ExportScript.Tools.SendData(2022, DEDLine1)
-		ExportScript.Tools.SendData(2022, DEDLine2)
-		ExportScript.Tools.SendData(2022, DEDLine3)
-		ExportScript.Tools.SendData(2022, DEDLine4)
-		ExportScript.Tools.SendData(2022, DEDLine5)
+
+		ExportScript.Tools.SendData(2101, DEDLine1)
+		ExportScript.Tools.SendData(2102, DEDLine2)
+		ExportScript.Tools.SendData(2103, DEDLine3)
+		ExportScript.Tools.SendData(2104, DEDLine4)
+		ExportScript.Tools.SendData(2105, DEDLine5)
 	end
 end

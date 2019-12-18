@@ -135,7 +135,9 @@ function ExportScript.Tools.ProcessOutput()
             ExportScript.lastExportTimeHI = 0
 
             -- process SelfData info
-            ExportScript.Tools.ProcessSelfData()
+            if ExportScript.Config.ExportSelfData == true then
+                ExportScript.Tools.ProcessSelfData()
+            end
         end
 
         --if ExportScript.Config.Export then
@@ -380,3 +382,5 @@ function ExportScript.Tools.DisplayFormat(String, maxChars, LEFTorRight, DAC)
 	
 	return lString
 end
+
+-- functions from DCS-BIOS
