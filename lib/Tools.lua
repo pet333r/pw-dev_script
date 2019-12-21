@@ -81,6 +81,9 @@ function ExportScript.Tools.ProcessSelfData()
     local Latitude = SD().LatLongAlt.Lat
     local Longitude = SD().LatLongAlt.Long
     local Altitude = SD().LatLongAlt.Alt
+    local Heading = SD().Heading*(180/math.pi)
+    local Pitch = SD().Pitch*(180/math.pi)
+    local Bank = SD().Bank*(180/math.pi)
     local AltitudeFeets = Altitude * 3.2808399
     local AltBar = LoGetAltitudeAboveSeaLevel()	-- (args - 0, results - 1 (meters))
     local AltRad = LoGetAltitudeAboveGroundLevel()	-- (args - 0, results - 1 (meters))
@@ -98,14 +101,39 @@ function ExportScript.Tools.ProcessSelfData()
     local AoA = LoGetAngleOfAttack() -- (args - 0, results - 1 (rad))
     local Accel = LoGetAccelerationUnits()	-- G-Force
 
-    local _packet = string.format("File=%s:Lat=%010.6f:Lon=%0010.6f:Alt=%.1f:AltFt=%d:AltBar=%d:AltRad=%d:IAS=%d:TAS=%d:GS=%d:VSpeed=%d:Mach=%.2f:AoA=%.1f:G=%.1f\n", ExportScript.ModuleName, Latitude, Longitude, Altitude, AltitudeFeets, AltBar, AltRad, IAS, TAS, GS, VSpeed, Mach, AoA, Accel.y)
+    local _packet = string.format("File=%s:Lat=%010.6f:Lon=%0010.6f:Alt=%.1f:AltFt=%d:%02d:%02.1f:%02.1f:AltBar=%d:AltRad=%d:IAS=%d:TAS=%d:GS=%d:VSpeed=%d:Mach=%.2f:AoA=%.1f:G=%.1f\n", 
+        ExportScript.ModuleName, Latitude, Longitude, Altitude, AltitudeFeets, Heading, Pitch, Bank, AltBar, AltRad, IAS, TAS, GS, VSpeed, Mach, AoA, Accel.y)
 
     local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() end)
         try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host, ExportScript.Config.Port))
+end
 
-    -- if ExportScript.Config.Export2 then
-    --     try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host2, ExportScript.Config.Port2))
-    -- end
+function ExportScript.Tools.ProcessTWS()
+    -- read from TWS FC3 export
+    local threats = LoGetTWSInfo()
+    local jsonThreats = "{ 'Mode':1.0, 'Emiters':[{ 'ID':'test', 'Power':0.5, 'Azimuth':0.8, 'Priority':150, 'SignalType':'scan', 'Type':'TEST' }] }\n"
+    if threats then		
+        -- add emiters to json
+        local jsonEmiters = "[ "
+        for mode,emit in pairs (threats.Emitters) do
+            local jsonEmit = ""		
+            local threatType = LoGetNameByType(emit.Type.level1, emit.Type.level2, emit.Type.level3, emit.Type.level4)
+            if threatType then
+                jsonEmit = string.format("{ 'ID':'%s', 'Power':%f, 'Azimuth':%f, 'Priority':%f, 'SignalType':'%s', 'Type':'%s' }", emit.ID, emit.Power, emit.Azimuth, emit.Priority, emit.SignalType, threatType)		
+            else
+                jsonEmit = string.format("{ 'ID':'%s', 'Power':%f, 'Azimuth':%f, 'Priority':%f, 'SignalType':'%s', 'Type':'U' }", emit.ID, emit.Power, emit.Azimuth, emit.Priority, emit.SignalType)		
+            end
+            if jsonEmiters ~= "[ " then
+                jsonEmiters = jsonEmiters .. ","
+            end
+            jsonEmiters = jsonEmiters .. jsonEmit
+        end
+        jsonEmiters = jsonEmiters .. "]"
+        jsonThreats = string.format("{ 'Mode':%f, 'Emiters':%s }\n", threats.Mode, jsonEmiters)
+
+        local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() end)
+        try(ExportScript.UDPsender:sendto(jsonThreats, ExportScript.Config.Host, ExportScript.Config.Port))
+    end
 end
 
 function ExportScript.Tools.ProcessOutput()
@@ -158,11 +186,15 @@ function ExportScript.Tools.ProcessOutput()
             if ExportScript.Config.ExportSelfData == true then
                 ExportScript.Tools.ProcessSelfData()
             end
+
+            if ExportScript.Config.ExportTWS == true then
+                ExportScript.Tools.ProcessTWS()
+            end
         end
 
-        --if ExportScript.Config.Export then
+        if ExportScript.Config.Export then
             ExportScript.Tools.FlushData()
-        --end
+        end
 
     else -- No Module found
         if ExportScript.FoundNoModul then
