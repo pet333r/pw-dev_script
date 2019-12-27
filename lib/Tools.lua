@@ -267,7 +267,8 @@ end
 function ExportScript.Tools.FlushData()
 	local _flushData = ExportScript.socket.protect(function()
 		if #ExportScript.SendStrings > 0 then
-			local _packet = "File=" .. ExportScript.ModuleName .. ExportScript.Config.Separator .. table.concat(ExportScript.SendStrings, ExportScript.Config.Separator) .. ":\n"
+            local _packet = "File=" .. ExportScript.ModuleName .. ExportScript.Config.Separator .. "4RG" .. ExportScript.Config.Separator ..
+                table.concat(ExportScript.SendStrings, ExportScript.Config.Separator) .. ":\n"
 			local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() ExportScript.Tools.ResetChangeValues() end)
             try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host, ExportScript.Config.Port))
             
