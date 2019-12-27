@@ -101,7 +101,7 @@ function ExportScript.Tools.ProcessSelfData()
     local AoA = LoGetAngleOfAttack() -- (args - 0, results - 1 (rad))
     local Accel = LoGetAccelerationUnits()	-- G-Force
 
-    local _packet = string.format("File=%s:Lat=%010.6f:Lon=%0010.6f:Alt=%.1f:AltFt=%d:%02d:%02.1f:%02.1f:AltBar=%d:AltRad=%d:IAS=%d:TAS=%d:GS=%d:VSpeed=%d:Mach=%.2f:AoA=%.1f:G=%.1f\n", 
+    local _packet = string.format("File=%s:D4T4:Lat=%010.6f:Lon=%0010.6f:Alt=%.1f:AltFt=%d:Heading=%02d:Pitch=%02.1f:Bank=%02.1f:AltBar=%d:AltRad=%d:IAS=%d:TAS=%d:GS=%d:VSpeed=%d:Mach=%.2f:AoA=%.1f:G=%.1f:\n", 
         ExportScript.ModuleName, Latitude, Longitude, Altitude, AltitudeFeets, Heading, Pitch, Bank, AltBar, AltRad, IAS, TAS, GS, VSpeed, Mach, AoA, Accel.y)
 
     local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() end)
