@@ -106,6 +106,12 @@ function ExportScript.Tools.ProcessSelfData()
 
     local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() end)
         try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host, ExportScript.Config.Port))
+        if ExportScript.Config.Export2 == true then
+            try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host2, ExportScript.Config.Port2))
+        end
+        if ExportScript.Config.Export3 == true then
+            try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host3, ExportScript.Config.Port3))
+        end
 end
 
 function ExportScript.Tools.ProcessTWS()
@@ -132,7 +138,7 @@ function ExportScript.Tools.ProcessTWS()
         jsonThreats = string.format("{ 'Mode':%f, 'Emiters':%s }\n", threats.Mode, jsonEmiters)
 
         local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() end)
-        try(ExportScript.UDPsender:sendto(jsonThreats, ExportScript.Config.Host, ExportScript.Config.Port))
+            try(ExportScript.UDPsender:sendto(jsonThreats, ExportScript.Config.Host, ExportScript.Config.Port))
     end
 end
 

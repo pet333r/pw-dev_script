@@ -14,7 +14,7 @@ ExportScript.Config.Port2      = 5160                -- port for sending data
 
 -- send 3 (phone)
 ExportScript.Config.Export3    = true                -- sending data
-ExportScript.Config.Host3      = "192.168.1.5"       -- IP for 3rd app
+ExportScript.Config.Host3      = "192.168.1.3"       -- IP for 3rd app
 ExportScript.Config.Port3      = 5160                -- port for sending data
 
 -- receive commands from external apps
@@ -22,8 +22,8 @@ ExportScript.Config.Listener         = true         -- listen commands from apps
 ExportScript.Config.ListenerPort     = 25070        -- Listener Port receiving commands
 
 -- Other
-ExportScript.Config.ExportInterval         = 0.05	-- export every 0.05 secounds
-ExportScript.Config.ExportLowTickInterval  = 0.5	-- export every 0.5 secounds
+ExportScript.Config.ExportInterval         = 0.05	-- export every 0.05 seconds
+ExportScript.Config.ExportLowTickInterval  = 0.1	-- export every 0.x seconds
 ExportScript.Config.ExportModulePath       = lfs.writedir()..[[Scripts\pw-dev_script\Modules\]]
 ExportScript.Config.FirstNewDataSend       = true
 ExportScript.Config.FirstNewDataSendCount  = 100
