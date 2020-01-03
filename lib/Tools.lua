@@ -22,7 +22,7 @@ function ExportScript.Tools.createUDPListner()
 		local _createUDPListner = ExportScript.socket.protect(function()
 			ExportScript.UDPListener = ExportScript.socket.udp()
 			ExportScript.socket.try(ExportScript.UDPListener:setsockname("*", ExportScript.Config.ListenerPort))
-			ExportScript.socket.try(ExportScript.UDPListener:settimeout(.001)) -- set the timeout for reading the socket; 250 fps
+			ExportScript.socket.try(ExportScript.UDPListener:settimeout(.001)) -- set the timeout for reading the socket; 200 fps
 		end)
         _createUDPListner()
 	end
@@ -157,35 +157,56 @@ function ExportScript.Tools.ProcessOutput()
 
     local _device = GetDevice(0)
     if type(_device) == "table" and ExportScript.FoundDCSModule then
-
         _device:update_arguments()
 
-            ExportScript.coProcessArguments_EveryFrame = coroutine.create(ExportScript.Tools.ProcessArguments)
-            _coStatus = coroutine.resume( ExportScript.coProcessArguments_EveryFrame, _device, ExportScript.EveryFrameArguments)
+        ExportScript.coProcessArguments_EveryFrame = coroutine.create(ExportScript.Tools.ProcessArguments)
+        _coStatus = coroutine.resume( ExportScript.coProcessArguments_EveryFrame, _device, ExportScript.EveryFrameArguments)
 
-            --if ExportScript.Config.Export then
-                ExportScript.coProcessDCSHighImportance = coroutine.create(ExportScript.ProcessDCSHighImportance)
-                _coStatus = coroutine.resume( ExportScript.coProcessDCSHighImportance, _device)
-            --end
+        ExportScript.coProcessDCSHighImportance = coroutine.create(ExportScript.ProcessDCSHighImportance)
+        _coStatus = coroutine.resume( ExportScript.coProcessDCSHighImportance, _device)
 
-            if ExportScript.FirstNewDataSend and ExportScript.FirstNewDataSendCount == 0 then
-                --if ExportScript.Config.Export then
-                    ExportScript.Tools.ResetChangeValues()
-                --end
-                ExportScript.FirstNewDataSend = false
-            else
-                ExportScript.FirstNewDataSendCount = ExportScript.FirstNewDataSendCount - 1
-            end
-			ExportScript.lastExportTimeHI = ExportScript.lastExportTimeHI + ExportScript.Config.ExportInterval
+        if ExportScript.FirstNewDataSend and ExportScript.FirstNewDataSendCount == 0 then
+            ExportScript.Tools.ResetChangeValues()
+            ExportScript.FirstNewDataSend = false
+        else
+            ExportScript.FirstNewDataSendCount = ExportScript.FirstNewDataSendCount - 1
+        end
+        ExportScript.lastExportTimeHI = ExportScript.lastExportTimeHI + ExportScript.Config.ExportInterval
 
 		if ExportScript.lastExportTimeHI > ExportScript.Config.ExportLowTickInterval then
-                ExportScript.coProcessArguments_Arguments = coroutine.create(ExportScript.Tools.ProcessArguments)
-                _coStatus = coroutine.resume( ExportScript.coProcessArguments_Arguments, _device, ExportScript.Arguments)
+            ExportScript.coProcessArguments_Arguments = coroutine.create(ExportScript.Tools.ProcessArguments)
+            _coStatus = coroutine.resume( ExportScript.coProcessArguments_Arguments, _device, ExportScript.Arguments)
 
-            --if ExportScript.Config.Export then
-                ExportScript.coProcessDCSLowImportance = coroutine.create(ExportScript.ProcessDCSLowImportance)
-                _coStatus = coroutine.resume( ExportScript.coProcessDCSLowImportance, _device)
-            --end
+            ExportScript.coProcessDCSLowImportance = coroutine.create(ExportScript.ProcessDCSLowImportance)
+            _coStatus = coroutine.resume( ExportScript.coProcessDCSLowImportance, _device)
+
+            ExportScript.lastExportTimeHI = 0
+
+            --process SelfData info
+            if ExportScript.Config.ExportSelfData == true then
+                ExportScript.Tools.ProcessSelfData()
+            end
+        end
+    if ExportScript.Config.Export then
+        ExportScript.Tools.FlushData()
+    end
+
+    elseif ExportScript.FoundFCModule then -- Assume FC Aircraft
+        ExportScript.coProcessGlassCockpitFCHighImportance = coroutine.create(ExportScript.ProcessFCHighImportance)
+        _coStatus = coroutine.resume( ExportScript.coProcessGlassCockpitFCHighImportance)
+
+        if ExportScript.FirstNewDataSend and ExportScript.FirstNewDataSendCount == 0 then
+            ExportScript.Tools.ResetChangeValues()
+            ExportScript.FirstNewDataSend = false
+        else
+            ExportScript.FirstNewDataSendCount = ExportScript.FirstNewDataSendCount - 1
+        end
+        ExportScript.lastExportTimeHI = ExportScript.lastExportTimeHI + ExportScript.Config.ExportInterval
+		if ExportScript.lastExportTimeHI > ExportScript.Config.ExportLowTickInterval then
+            if ExportScript.Config.Export then
+                ExportScript.coProcessFCLowImportance = coroutine.create(ExportScript.ProcessFCLowImportance)
+                _coStatus = coroutine.resume( ExportScript.coProcessFCLowImportance)
+            end
             ExportScript.lastExportTimeHI = 0
 
             -- process SelfData info
@@ -197,10 +218,9 @@ function ExportScript.Tools.ProcessOutput()
                 ExportScript.Tools.ProcessTWS()
             end
         end
-
-        if ExportScript.Config.Export then
-            ExportScript.Tools.FlushData()
-        end
+    if ExportScript.Config.Export then
+        ExportScript.Tools.FlushData()
+    end
 
     else -- No Module found
         if ExportScript.FoundNoModul then
@@ -302,6 +322,7 @@ end
 function ExportScript.Tools.SelectModule()
    -- Select Module...
     ExportScript.FoundDCSModule = false
+    ExportScript.FoundFCModule  = false
     ExportScript.FoundNoModul   = true
 
     local _info      = LoGetSelfData()
@@ -357,6 +378,10 @@ function ExportScript.Tools.SelectModule()
 
             ExportScript.ProcessDCSHighImportance = ExportScript.ProcessDCSConfigHighImportance
             ExportScript.ProcessDCSLowImportance  = ExportScript.ProcessDCSConfigLowImportance
+
+        elseif ExportScript.FoundFCModule then
+            ExportScript.ProcessFCHighImportance  = ExportScript.ProcessFCHighImportanceConfig
+            ExportScript.ProcessFCLowImportance   = ExportScript.ProcessFCLowImportanceConfig
         end
 
         --if ExportScript.Config.Export then
