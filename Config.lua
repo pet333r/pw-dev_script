@@ -5,7 +5,7 @@ ExportScript.Config = {}
 ExportScript.Config.Export    = true                -- sending data
 ExportScript.Config.Host      = "127.0.0.1"         -- IP for 1st app
 ExportScript.Config.Port      = 5160                -- port for sending data
-ExportScript.Config.Separator = ":"
+ExportScript.Config.Separator = ";"
 
 -- send 2 (tablet)
 ExportScript.Config.Export2    = true                -- sending data

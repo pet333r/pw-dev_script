@@ -128,8 +128,8 @@ DEDLayout_l1["TIM IFF Power Status"] = {5,3}
 DEDLayout_l1["TIM Event Occured"] = {18,3,0,"","I"}
 DEDLayout_l1["TIM Code Group State"] = {22,1}
 DEDLayout_l1["TIM IncDec Symbol"] = {23,1}
-DEDLayout_l1["IFF label_backup"] = {8,3}
-DEDLayout_l1["STATus"] = {12,4}
+DEDLayout_l1["IFF label"] = {8,3}
+DEDLayout_l1["IFF Status"] = {12,4}
 --List
 DEDLayout_l1["LIST Label"] = {10,4}
 --T-ILS
@@ -179,6 +179,13 @@ DEDLayout_l1["CMDS_OTHER2_label"] = {2,10}
 DEDLayout_l1["Master_mode_label"] = {4,4}
 DEDLayout_l1["Master_mode"] = {10,3,0,"_inv","I"}
 DEDLayout_l1["Master_mode_ast_both"] = {9, 1, 13,"","I"}
+-- DLNK
+DEDLayout_l1["LINK16 lbl"] = {7,6}
+DEDLayout_l1["LINK16 STN lbl"] = {5,11}
+DEDLayout_l1["NET STATUS lbl"] = {5,10}
+DEDLayout_l1["AG DL lbl"] = {7,6}
+DEDLayout_l1["NET STATUS lbl"] = {5,10}
+DEDLayout_l1["INTRAFLIGHT INTRAFLIGHT lbl"] = {7,11}
 --Misc
 DEDLayout_l1["MISC Label"] = {10,4}
 --MAGV
@@ -230,6 +237,36 @@ DEDLayout_l2["CMDS_BQ_Asterisks_both"] = {9,1,12,"","I"}
 DEDLayout_l2["CMDS_CH_lbl"] = {1,2}
 DEDLayout_l2["CMDS_CH_Scratchpad"] = {7,2,0,"_inv","I"}
 DEDLayout_l2["CMDS_CH_Asterisks_both"] = {6,1,9,"","I"}
+-- DLNK
+DEDLayout_l2["FC lbl"] = {3,2}
+DEDLayout_l2["FC value"] = {6,3,0,"_inv","I"}
+DEDLayout_l2["Asterisks on FC_both"] = {15,1,20,"","I"}
+DEDLayout_l2["CallSign Name char1"] = {11,1,0,"_inv","I"}
+DEDLayout_l2["CallSign Name char2"] = {12,1,0,"_inv","I"}
+DEDLayout_l2["Asterisks on CS Name_both"] = {10,1,13,"","I"}
+DEDLayout_l2["VCS IncDecSymbol"] = {14,1}
+DEDLayout_l2["CallSign Number"] = {16,2,0,"_inv","I"}
+DEDLayout_l2["Asterisks on CS Number_both"] = {15,1,18,"","I"}
+DEDLayout_l2["STN id lbl1"] = {0,2}
+DEDLayout_l2["STN value1"] = {3,5}
+DEDLayout_l2["STN id lbl5"] = {9,2}
+DEDLayout_l2["STN value5"] = {12,5}
+DEDLayout_l2["OWN lbl"] = {18,3}
+DEDLayout_l2["GPS TIME lbl"] = {0,8}
+DEDLayout_l2["GPS TIME status"] = {9,3,0,"_inv","I"}
+DEDLayout_l2["Asterisks on ETR_both"] = {8,1,12,"","I"}
+DEDLayout_l2["IPF Reset lbl"] = {14,9,0,"_inv","I"}
+DEDLayout_l2["Asterisks on IPF_both"] = {13,1,23,"","I"}
+DEDLayout_l2["A-G DL XMT lbl"] = {3,3}
+DEDLayout_l2["A-G DL XMT value"] = {7,2}
+DEDLayout_l2["A-G DL COMM lbl"] = {12,4}
+DEDLayout_l2["A-G DL COMM status"] = {17,3}
+DEDLayout_l2["INTRAFLIGHT STN id lbl1"] = {1,2}
+DEDLayout_l2["INTRAFLIGHT STN value1"] = {4,5}
+DEDLayout_l2["INTRAFLIGHT STN id lbl5"] = {7,2}
+DEDLayout_l2["INTRAFLIGHT STN value5"] = {10,5}
+DEDLayout_l2["INTRAFLIGHT COMM lbl"] = {13,4}
+DEDLayout_l2["INTRAFLIGHT COMM status"] = {18,3}
 --Misc
 DEDLayout_l2["Misc Item 1 Number"]={0,1,0,"","I"}
 DEDLayout_l2["Misc Item 1 Name"]={1,4}
@@ -328,6 +365,32 @@ DEDLayout_l3["CMDS_FL_Asterisks_both"] = {6,1,9,"","I"}
 DEDLayout_l3["CMDS_FDBK_lbl"] = {11,4}
 DEDLayout_l3["CMDS_FDBK_value"] = {19,3,0,"_inv","I"}
 DEDLayout_l3["CMDS_FDBK_Asterisks_both"] = {18,1,22,"","I"}
+-- DLNK
+DEDLayout_l3["MC lbl"] = {3,2}
+DEDLayout_l3["MC value"] = {6,3,0,"_inv","I"}
+DEDLayout_l3["Asterisks on MC_both"] = {5,1,9,"","I"}
+DEDLayout_l3["FL lbl"] = {12,2}
+DEDLayout_l3["FL status"] = {16,3,0,"_inv","I"}
+DEDLayout_l3["Asterisks on FL_both"] = {15,1,19,"","I"}
+DEDLayout_l3["NUM lbl"] = {18,1}
+DEDLayout_l3["Own num value"] = {20,1}
+DEDLayout_l3["TIME lbl"] = {4,4}
+DEDLayout_l3["TIME value"] = {9,8,0,"_inv","I"}
+DEDLayout_l3["Asterisks on TIME_both"] = {8,1,17,"","I"}
+DEDLayout_l3["STN id lbl2"] = {0,2}
+DEDLayout_l3["STN value2"] = {3,5}
+DEDLayout_l3["STN id lbl6"] = {9,2}
+DEDLayout_l3["STN value6"] = {12,5}
+DEDLayout_l3["OWN lbl"] = {3,3}
+DEDLayout_l3["OWN value"] = {7,2}
+DEDLayout_l3["DATA lbl"] = {12,4}
+DEDLayout_l3["DATA value"] = {7,3}
+DEDLayout_l3["INTRAFLIGHT STN id lbl2"] = {1,2}
+DEDLayout_l3["INTRAFLIGHT STN value2"] = {4,5}
+DEDLayout_l3["INTRAFLIGHT STN id lbl6"] = {7,2}
+DEDLayout_l3["INTRAFLIGHT STN value6"] = {10,5}
+DEDLayout_l3["INTRAFLIGHT DATA lbl"] = {13,4}
+DEDLayout_l3["INTRAFLIGHT DATA value"] = {18,3}
 --Misc
 DEDLayout_l3["Misc Item 4 Number"]={0,1,0,"","I"}
 DEDLayout_l3["Misc Item 4 Name"]={1,4}
@@ -366,6 +429,12 @@ DEDLayout_l4["Preset Number"]={7,2,0,"_inv","I"}
 DEDLayout_l4["Asterisks on PresetChannel_both"]={6,1,9,"","I"}
 DEDLayout_l4["TOD Label"]={17,3}
 --IFF
+DEDLayout_l4["STAT M2 Mode"]={0,2,0,"_inv","I"}
+DEDLayout_l4["STAT M2 Lockout Status"]={3,1}
+DEDLayout_l4["STAT M2 Code"]={4,4}
+DEDLayout_l4["STAT MC Mode"]={9,2,0,"_inv","I"}
+DEDLayout_l4["STAT MC Code"]={12,1}
+DEDLayout_l4["STAT MC Key"]={14,3}
 DEDLayout_l4["STAT M2 Mode"]={0,2,0,"_inv","I"}
 DEDLayout_l4["STAT M2 Lockout Status"]={3,1}
 DEDLayout_l4["STAT M2 Code"]={4,4}
@@ -433,6 +502,30 @@ DEDLayout_l4["CMDS_O1_Asterisks_both"] = {6,1,9,"","I"}
 DEDLayout_l4["CMDS_REQCTR_lbl"] = {11,6}
 DEDLayout_l4["CMDS_REQCTR_value"] = {19,3,0,"_inv","I"}
 DEDLayout_l4["CMDS_REQCTR_Asterisks_both"] = {18,1,22,"","I"}
+-- DLNK
+DEDLayout_l4["SC lbl"] = {3,2}
+DEDLayout_l4["SC value"] = {6,3,0,"_inv","I"}
+DEDLayout_l4["Asterisks on SC_both"] = {5,1,9,"","I"}
+DEDLayout_l4["XMT lbl"] = {11,3}
+DEDLayout_l4["XMT status"] = {16,2,0,"_inv","I"}
+DEDLayout_l4["Asterisks on XMT_both"] = {15,1,18,"","I"}
+DEDLayout_l4["NTR lbl"] = {5,3}
+DEDLayout_l4["NTR status"] = {9,3,0,"_inv","I"}
+DEDLayout_l4["Asterisks on NTR_both"] = {8,1,12,"","I"}
+DEDLayout_l4["STN id lbl3"] = {0,2}
+DEDLayout_l4["STN value3"] = {3,5}
+DEDLayout_l4["STN id lbl7"] = {9,2}
+DEDLayout_l4["STN value7"] = {12,5}
+DEDLayout_l4["FILL lbl"] = {2,4}
+DEDLayout_l4["FILL status"] = {7,3}
+DEDLayout_l4["PRTL lbl"] = {12,4}
+DEDLayout_l4["PRTL status"] = {17,5}
+DEDLayout_l4["INTRAFLIGHT STN id lbl3"] = {1,2}
+DEDLayout_l4["INTRAFLIGHT STN value3"] = {4,5}
+DEDLayout_l4["INTRAFLIGHT STN id lbl7"] = {7,2}
+DEDLayout_l4["INTRAFLIGHT STN value7"] = {10,5}
+DEDLayout_l4["INTRAFLIGHT OWN lbl"] = {14,4}
+DEDLayout_l4["INTRAFLIGHT Own value"] = {18,2}
 --Misc
 DEDLayout_l4["Misc Item 7 Number"]={0,1,0,"","I"}
 DEDLayout_l4["Misc Item 7 Name"]={1,4}
@@ -503,7 +596,8 @@ DEDLayout_l5["STEERPOINT TOS Value"] = {8,8,0,"_inv","I"}
 DEDLayout_l5["STEERPOINT TOS Asteriscs_both"] = {7,1,16,"","I"}
 --INS
 DEDLayout_l5["INS_THDG_lbl"] = {1,4}
-DEDLayout_l5["INS_THDG_value"] = {7,6}
+DEDLayout_l5["INS_THDG_Scratchpad"] = {7,6,0,"_inv","I"}
+DEDLayout_l5["Asterisks_on_THDG_Scratchpad"] = {6,1,13,"","I"}
 DEDLayout_l5["INS_GS_lbl"] = {16,3}
 DEDLayout_l5["INS_GS_value"] = {20,3}
 --CMDS
@@ -516,6 +610,25 @@ DEDLayout_l5["CMDS_O2_Asterisks_both"] = {6,1,9,"","I"}
 DEDLayout_l5["CMDS_BINGO_lbl"] = {11,5}
 DEDLayout_l5["CMDS_BINGO_value"] = {19,3,0,"_inv","I"}
 DEDLayout_l5["CMDS_BINGO_Asterisks_both"] = {18,1,22,"","I"}
+-- DLNK
+DEDLayout_l5["P2 lbl"] = {21,3}
+DEDLayout_l5["P3 lbl"] = {21,3}
+DEDLayout_l5["SYNC lbl"] = {4,4}
+DEDLayout_l5["SYNC status"] = {9,4,0,"_inv","I"}
+DEDLayout_l5["Asterisks on SYNC_both"] = {8,1,13,"","I"}
+DEDLayout_l5["P1 lbl"] = {21,3}
+DEDLayout_l5["STN id lbl4"] = {0,2}
+DEDLayout_l5["STN value4"] = {3,5}
+DEDLayout_l5["STN id lbl8"] = {9,2}
+DEDLayout_l5["STN value8"] = {12,5}
+DEDLayout_l5["P5 lbl"] = {21,3}
+DEDLayout_l5["INTRAFLIGHT STN id lbl4"] = {1,2}
+DEDLayout_l5["INTRAFLIGHT STN value4"] = {4,5}
+DEDLayout_l5["INTRAFLIGHT STN id lbl8"] = {7,2}
+DEDLayout_l5["INTRAFLIGHT STN value8"] = {10,5}
+DEDLayout_l5["INTRAFLIGHT LAST lbl"] = {13,4}
+DEDLayout_l5["INTRAFLIGHT LAST value"] = {18,2}
+DEDLayout_l5["INTRAFLIGHT P6 lbl"] = {21,3}
 --LASER
 DEDLayout_l5["Laser ST Time LABEL"] = {1,13}
 DEDLayout_l5["Laser ST Time VALUE"] = {17,2,0,"_inv","I"}
@@ -551,6 +664,8 @@ local function buildDEDLine(line)
 		local alow 			= DED_fields["ALOW label"]
 		local bingo 		= DED_fields["CMDS_BINGO_lbl"]
 		local inflt_algn 	= DED_fields["INS_INFLT_ALGN_lbl"]
+		local intraflight 	= DED_fields["INTRAFLIGHT lbl"]
+		local dlnk_A_G		= DED_fields["A-G DL lbl"]
 	
 		--Loop through Exported DED Objects
 		for k,v in pairs(DED_fields) do
@@ -572,6 +687,12 @@ local function buildDEDLine(line)
 			-- Handle Duplicate Key Names on INS INFL ALGN page Lines 1 & 3 items
 			elseif inflt_algn ~= nil and (line == 1 or line == 3) then
 				label = inflt_algn.." "..k
+			-- Handle Duplicate Key Names on DLNK INTRAFLIGHT page
+			elseif intraflight ~= nil then
+				label = intraflight.." "..k
+			-- Handle Duplicate Key Names on DLNK A-G page Line 2 items
+			elseif dlnk_A_G ~= nil and line == 2 then
+				label = dlnk_A_G.." "..k
 			else
 				label = k
 			end

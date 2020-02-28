@@ -1,8 +1,10 @@
 ExportScript.Tools = {}
 
 -- const
-local ms2knots  = 1.94384449
-local ms2fpm    = 196.85
+local ms2knots  = 1.94384449 -- m/s to knots
+local ms2fpm    = 196.85 -- m/s to feets/minute
+local m2feets   = 3.2808399 -- meters to feets
+local rad2deg   = 57.3 -- radians to degrees
 
 function ExportScript.Tools.createUDPSender()
 	ExportScript.socket = require("socket")
@@ -78,31 +80,65 @@ end
 function ExportScript.Tools.ProcessSelfData()
     local SD = LoGetSelfData
 
+    -- geo data
     local Latitude = SD().LatLongAlt.Lat
     local Longitude = SD().LatLongAlt.Long
     local Altitude = SD().LatLongAlt.Alt
-    local Heading = SD().Heading*(180/math.pi)
-    local Pitch = SD().Pitch*(180/math.pi)
-    local Bank = SD().Bank*(180/math.pi)
-    local AltitudeFeets = Altitude * 3.2808399
+    local AltitudeFeets = Altitude * m2feets
     local AltBar = LoGetAltitudeAboveSeaLevel()	-- (args - 0, results - 1 (meters))
     local AltRad = LoGetAltitudeAboveGroundLevel()	-- (args - 0, results - 1 (meters))
+    
+    -- course data
+    local Heading = SD().Heading*(180/math.pi)
 
+    -- plane data
+    local pitch, bank, yaw = LoGetADIPitchBankYaw()
+    local AoA = LoGetAngleOfAttack() -- (args - 0, results - 1 (rad))
+    local Accel = LoGetAccelerationUnits()	-- G-Force
+    pitch = pitch * rad2deg
+    bank = bank * rad2deg
+    yaw = yaw * rad2deg
+    -- 
     local Velocity = LoGetVectorVelocity()  --{x,y,z}
     local VX = Velocity.x
     local VY = Velocity.y
     local VZ = Velocity.z
 
+    -- speed data
     local IAS = LoGetIndicatedAirSpeed() * ms2knots	-- (args - 0, results - 1 (m/s)) => convert to Knots
     local TAS = LoGetTrueAirSpeed() * ms2knots -- (args - 0, results - 1 (m/s)) => convert to Knots
     local GS = math.sqrt(math.pow(VX, 2)+ math.pow(VZ, 2)) * ms2knots -- ground speed (m/s) => convert to Knots
     local VSpeed = LoGetVerticalVelocity() * ms2fpm  -- (args - 0, results - 1(m/s))
     local Mach = LoGetMachNumber()
-    local AoA = LoGetAngleOfAttack() -- (args - 0, results - 1 (rad))
-    local Accel = LoGetAccelerationUnits()	-- G-Force
 
-    local _packet = string.format("File=%s:D4T4:Lat=%010.6f:Lon=%0010.6f:Alt=%.1f:AltFt=%d:Heading=%02d:Pitch=%02.1f:Bank=%02.1f:AltBar=%d:AltRad=%d:IAS=%d:TAS=%d:GS=%d:VSpeed=%d:Mach=%.2f:AoA=%.1f:G=%.1f:\n", 
-        ExportScript.ModuleName, Latitude, Longitude, Altitude, AltitudeFeets, Heading, Pitch, Bank, AltBar, AltRad, IAS, TAS, GS, VSpeed, Mach, AoA, Accel.y)
+    -- mechanical data
+    local mech = LoGetMechInfo()
+
+    -- engine data
+    local engine = LoGetEngineInfo()
+
+    local wind = LoGetVectorWindVelocity()
+    local windSpeed = math.abs(math.sqrt(math.pow(wind.x, 2) + math.pow(wind.y, 2) + math.pow(wind.z, 2)))
+    local windAngle = math.atan2(wind.y, wind.x) * 180/math.pi
+
+    --local failures = LoGetMCPState()
+    
+    -- countermeasures data
+    local Countermeasures = LoGetSnares()
+    
+    -- create exporting data
+    local sModule = string.format( "File=%s;D4T4", ExportScript.ModuleName)
+    local sGeo = string.format("Lat=%010.6f;Lon=%0010.6f;Alt=%.1f;AltFt=%d;AltBar=%d;AltRad=%d", Latitude, Longitude, Altitude, AltitudeFeets, AltBar, AltRad)
+    local sCourse = string.format( "Heading=%02d", Heading)
+    local sSpeed = string.format("IAS=%d;TAS=%d;GS=%d;VSpeed=%d;Mach=%.2f", IAS, TAS, GS, VSpeed, Mach)
+    local sPlane = string.format("Pitch=%.1f;Bank=%.1f;Yaw=%.1f;AoA=%.1f;G=%.1f", pitch, bank, yaw, AoA, Accel.y)
+    local sMechanics = string.format("Gear=%.2f;Flaps=%.2f;Speedbrakes=%.2f;Boom=%.2f;Wheelbrakes=%.2f", mech.gear.value, mech.flaps.value, mech.speedbrakes.value, mech.refuelingboom.value, mech.wheelbrakes.value)
+    --local sEngine = string.format("FuelExt=%d;FuelInt%d", engine.fuel_external, engine.fuel_internal)
+    local sCountermeasures = string.format("Chaff=%d;Flare=%d", Countermeasures.chaff, Countermeasures.flare)
+    local sWind = string.format("WindSpd=%d;angle=%.1f", windSpeed, windAngle)
+    
+    -- join exporting strings into one packet
+    local _packet = string.format("%s;%s;%s;%s;%s;%s;%s;%s;\r\n", sModule, sGeo, sCourse, sSpeed, sPlane, sMechanics, sCountermeasures, sWind)
 
     local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() end)
         try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host, ExportScript.Config.Port))
@@ -294,7 +330,8 @@ function ExportScript.Tools.FlushData()
 	local _flushData = ExportScript.socket.protect(function()
 		if #ExportScript.SendStrings > 0 then
             local _packet = "File=" .. ExportScript.ModuleName .. ExportScript.Config.Separator .. "4RG" .. ExportScript.Config.Separator ..
-                table.concat(ExportScript.SendStrings, ExportScript.Config.Separator) .. ":\n"
+            -- dodanie na końcu linii separatora + znak nowej linii
+                table.concat(ExportScript.SendStrings, ExportScript.Config.Separator) .. ExportScript.Config.Separator .. "\n"
 			local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() ExportScript.Tools.ResetChangeValues() end)
             try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host, ExportScript.Config.Port))
             
