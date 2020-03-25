@@ -8,12 +8,16 @@ go to: (depending on the version you use)
 * `c:\Users\{Your username}\Saved Games\DCS.openbeta\Scripts\`
 * `c:\Users\{Your username}\Saved Games\DCS\Scripts\`
 
-and create folder `pw-dev_script`, next put all files into this folder,
-then go to file `Export.lua` in `Scripts` folder and add:
+and create folder `pw-dev_script`, next put all files into this folder,  
+then go to file: `\Scripts\Export.lua` and add:
 
-`dofile(lfs.writedir()..[[Scripts\pw-dev_script\Export.lua]])`
+```
+local lfs=require('lfs');
+dofile(lfs.writedir()..[[Scripts\pw-dev_script\Export.lua]])
+```
 
-next edit file `\pw-dev_script\Config.lua` and change ***IP/port*** for Your ***PC/phone/tablet*** (where You want to send data from DCS World)
+next edit file `\pw-dev_script\Config.lua` and change ***IP/port*** for Your ***PC/phone/tablet*** (where You want to send data from DCS World)  
+example you will find below
 
 # supported software
 
