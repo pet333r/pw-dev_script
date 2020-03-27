@@ -45,3 +45,9 @@ Enter the computer's IP address to connect the application with the computer, pr
 
 # example connection
 ![](.gfx/dcs_script_connection.png)
+
+# license
+
+The script is available free of charge under the LGPLv3 license.  
+Part of the script was based on `DCS-ExportScripts` [https://github.com/s-d-a/DCS-ExportScripts](https://github.com/s-d-a/DCS-ExportScripts)  
+Additional functionality was added and modified to increase performance and separate sending of individual data to reduce the load on the application.
