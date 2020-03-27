@@ -3,7 +3,7 @@ ExportScript.FoundDCSModule = true
 
 ExportScript.ConfigEveryFrameArguments = 
 {
-	[403] = "%.1f",	   -- PNT-BTN-UFC-MASTWARN (Master Caution Light)
+	[403] = "%1d",	-- PNT-BTN-UFC-MASTWARN (Master Caution Light)
 	[540] = "%1d",	-- AOA Indexer High
 	[541] = "%1d",	-- AOA Indexer Normal
 	[542] = "%1d",	-- AOA Indexer Low
