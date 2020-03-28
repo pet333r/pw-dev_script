@@ -81,6 +81,8 @@ If you noticed that something is not working and you are also using other script
 
 tested and works with :
  * DCS-BIOS
+ * Tacview
+ * VAICOM PRO (not tested but it works differently and there should be no conflicts)
 
 may not work with (not tested) : 
  * SRS
