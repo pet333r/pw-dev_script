@@ -8,7 +8,15 @@ go to: (depending on the version you use)
 * `c:\Users\{Your username}\Saved Games\DCS.openbeta\Scripts\`
 * `c:\Users\{Your username}\Saved Games\DCS\Scripts\`
 
-and create folder `pw-dev_script`, next put all files into this folder,  
+and create folder `pw-dev_script`, next put all files into this folder, the scheme of the folder with files should look like this  
+```
+\Scripts
+  - \pw-dev_script
+    - \lib
+    - \Modules
+    -  Config.lua
+    -  Export.lua
+  ``` 
 then go to file: `\Scripts\Export.lua` and add:
 
 ```
@@ -16,8 +24,20 @@ local lfs=require('lfs');
 dofile(lfs.writedir()..[[Scripts\pw-dev_script\Export.lua]])
 ```
 
-next edit file `\pw-dev_script\Config.lua` and change ***IP/port*** for Your ***PC/phone/tablet*** (where You want to send data from DCS World)  
-example you will find below
+next:  
+open folder `pw-dev_script` and edit (open in some simple text editor, I recommend Notepad++) file `Config.lua` inside it,  
+there are several "groups" in the file: 
+* send (PC)
+* send 2 (tablet)
+* send 3 (phone)  
+
+choose one of them and edit `Host` and `Port` (you can leave port the same)  
+it is <span style="color:red">**IMPORTANT**</span> that the device's IP address matches and `PC / phone / tablet` must be on the same network  
+
+example: to find Android tablet IP > go to `Settings > WiFi` > check the properties of your network   
+example you will find below  
+
+to find the IP address of the computer with DCS World installed: [https://www.digitalcitizen.life/find-ip-address-windows](https://www.digitalcitizen.life/find-ip-address-windows)
 
 # supported software
 
@@ -34,16 +54,18 @@ example you will find below
   - \pw-dev_script
     - \lib
     - \Modules
-    - Config.lua (edit IP / port)
-    - Export.lua
-  - Export.lua (add: dofile(lfs.writedir()..[[Scripts\pw-dev_script\Export.lua]]))
+    -  Config.lua (edit IP / port connected devices)
+    -  Export.lua
+
+  - Export.lua (add:  local lfs=require('lfs');
+                      dofile(lfs.writedir()..[[Scripts\pw-dev_script\Export.lua]]))
   ```
 
-# apps config
-
-Enter the computer's IP address to connect the application with the computer, preferably check via `cmd.exe`, run command line and type: `ipconfig`, also set the same port used for data exchange.
-
 # example connection
+Example configuration:  
+PC IP: 192.168.1.2  
+phone IP: 192.168.1.3  
+
 ![](.gfx/dcs_script_connection.png)
 
 # license
