@@ -17,7 +17,7 @@ and create folder `pw-dev_script`, next put all files into this folder, the sche
     -  Config.lua
     -  Export.lua
   ``` 
-then go to file: `\Scripts\Export.lua` and add:
+then go to file: `\Scripts\Export.lua` (open in some simple text editor, I recommend Notepad++) and add: 
 
 ```
 local lfs=require('lfs');
@@ -25,7 +25,7 @@ dofile(lfs.writedir()..[[Scripts\pw-dev_script\Export.lua]])
 ```
 
 next:  
-open folder `pw-dev_script` and edit (open in some simple text editor, I recommend Notepad++) file `Config.lua` inside it,  
+open folder `pw-dev_script` and edit file `Config.lua` inside it,  
 there are several "groups" in the file: 
 * send (PC)
 * send 2 (tablet)
