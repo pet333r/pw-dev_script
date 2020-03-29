@@ -6,9 +6,17 @@ Script for exporting data from DCS World
 
 go to: (depending on the version you use)
 * `c:\Users\{Your username}\Saved Games\DCS.openbeta\Scripts\`
-* `c:\Users\{Your username}\Saved Games\DCS\Scripts\`
+* `c:\Users\{Your username}\Saved Games\DCS\Scripts\`  
 
-and create folder `pw-dev_script`, next put all files into this folder, the scheme of the folder with files should look like this  
+if You don't have folder `Scripts`, simply create it and inside create file `Export.lua`
+open and edit file: `\Scripts\Export.lua` (open in some simple text editor, I recommend Notepad++) and add: 
+
+```
+local lfs=require('lfs');
+dofile(lfs.writedir()..[[Scripts\pw-dev_script\Export.lua]])
+```
+
+in `Scripts` folder create folder `pw-dev_script`, next put all files into this folder, the scheme of the folder with files should look like this  
 ```
 \Scripts
   - \pw-dev_script
@@ -17,12 +25,7 @@ and create folder `pw-dev_script`, next put all files into this folder, the sche
     -  Config.lua
     -  Export.lua
   ``` 
-then go to file: `\Scripts\Export.lua` (open in some simple text editor, I recommend Notepad++) and add: 
 
-```
-local lfs=require('lfs');
-dofile(lfs.writedir()..[[Scripts\pw-dev_script\Export.lua]])
-```
 
 next:  
 open folder `pw-dev_script` and edit file `Config.lua` inside it,  
@@ -31,7 +34,7 @@ there are several "groups" in the file:
 * send 2 (tablet)
 * send 3 (phone)  
 
-choose one of them and edit `Host` and `Port` (you can leave port the same)  
+choose one of them and edit `Host` and `Port` (you can leave port the same, in most cases you don't even need to change)  
 it is <span style="color:red">**IMPORTANT**</span> that the device's IP address matches and `PC / phone / tablet` must be on the same network  
 
 example: to find Android tablet IP > go to `Settings > WiFi` > check the properties of your network   
