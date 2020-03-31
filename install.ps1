@@ -79,7 +79,7 @@ If (!(Test-Path $dcsPathExport -PathType Leaf))
 }
 
 # checking folder exist
-$scriptPathPwDev = -join($dcsPathScript, "pw-dev_script")
+$scriptPathPwDev = -join($dcsPathScript, "pw-dev_script\")
 If(!(test-path $scriptPathPwDev))
 {
 	New-Item -ItemType Directory -Force -Path $scriptPathPwDev
@@ -90,7 +90,7 @@ else { Write-Host "'pw-dev_script' folder found" }
 $urlMain = "https://raw.githubusercontent.com/pet333r/pw-dev_script/master/"
 # files
 $filesList = @(
-      'update_pw-de_script.bat'
+      'update_pw-dev_script.bat'
       'update.ps1'
 )
 
@@ -101,5 +101,9 @@ foreach ($file in $filesList) {
       Write-Host "Downloading:" $file
       Invoke-WebRequest -Uri $url -OutFile $output
 }
+Write-Host $scriptPathPwDev
 
-$ .\$scriptPathPwDev "update_pw-dev_script.bat"
+# $RunCMD = @'
+# cmd.exe /C "$scriptPathPwDev\update_pw-dev_script.bat"
+# '@
+# Invoke-Expression -Command:$RunCMD
