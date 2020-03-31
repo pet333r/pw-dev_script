@@ -89,10 +89,23 @@ foreach ($file in $libList) {
 }
 Write-Host "`nTry to download configuration files: $dirMain"
 foreach ($file in $listFilesMain) {
-      $url = $urlMain + $file
-      $output = $dirMain + $file
-      Write-Host "Downloading:" $file
-      Invoke-WebRequest -Uri $url -OutFile $output
+      If($file -eq  "Config.lua")
+      {
+            If (!(Test-Path "Config.lua" -PathType Leaf))
+            {
+                  $url = $urlMain + $file
+                  $output = $dirMain + $file
+                  Write-Host "Downloading:" $file
+                  Invoke-WebRequest -Uri $url -OutFile $output
+            }
+      }
+      else
+      {
+            $url = $urlMain + $file
+            $output = $dirMain + $file
+            Write-Host "Downloading:" $file
+            Invoke-WebRequest -Uri $url -OutFile $output
+      }
 }
 
 Write-Host "`nTry to download modules to: $dirModules"

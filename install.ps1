@@ -101,7 +101,9 @@ foreach ($file in $filesList) {
       Write-Host "Downloading:" $file
       Invoke-WebRequest -Uri $url -OutFile $output
 }
-Write-Host $scriptPathPwDev
+
+# open directory in Windows Explorer
+ii $scriptPathPwDev
 
 # $RunCMD = @'
 # cmd.exe /C "$scriptPathPwDev\update_pw-dev_script.bat"
