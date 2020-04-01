@@ -20665,7 +20665,7 @@ function ExportScript.replaceSymbols(s)
 	s = s:gsub(string.char(0xB6), "█") --Cursor		"█"
 	s = s:gsub(string.char(0xA1), "࢐") --DATA_ENTRY	"⌷"
 	s = s:gsub(string.char(0xAE), "↕") --UpDown Arrow	"↕"
-	s = s:gsub("*"              , "*") -- Asterisk 	"*"
+	--s = s:gsub("*"              , "*") -- Asterisk 	"*"
 	return s
 end
 
@@ -20768,7 +20768,6 @@ function ExportScript.exportCDU()
 		end
 	end
 	
-	-- uncomment for sending data with HEX
 	cdu_lines[1] = ExportScript.replaceSymbols(cdu_lines[1])
 	cdu_lines[2] = ExportScript.replaceSymbols(cdu_lines[2])
 	cdu_lines[3] = ExportScript.replaceSymbols(cdu_lines[3])

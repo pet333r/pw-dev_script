@@ -2,7 +2,7 @@ Set-ExecutionPolicy RemoteSigned
 
 # get user-name
 $separator = "*******************************************************"
-Write-Host "$separator`n******** Updating pw-dev_script ********`n$separator`n          Install script version: 2020.04.01"
+Write-Host "$separator`n**************** Updating pw-dev_script ***************`n$separator`n          Install script version: 2020.04.01`n"
 
 $start_time = Get-Date
 
@@ -44,7 +44,7 @@ $libList = @(
 # modules
 # $modulesList = Get-Content Invoke-WebRequest -Uri $urlMain + "update_modules"
 $urlModFile =  -Join($urlMain, "update_modules")
-$modulesList = (Invoke-webrequest -URI $urlModFile).Content
+$modulesList = (Invoke-webrequest -URI $urlModFile).Content -split "`n"
 
 # download main files
 Write-Host "Try to download configuration files: $dirMain"
@@ -85,7 +85,6 @@ foreach ($module in $modulesList) {
       $output = $dirModules + $module
       Write-Host "Downloading:" $module
       Invoke-WebRequest -Uri $url -OutFile $output
-      Write-Host "$url`n$output"
 }
 
 Write-Output "`nTime taken: $((Get-Date).Subtract($start_time).Seconds):$((Get-Date).Subtract($start_time).Milliseconds) s"
