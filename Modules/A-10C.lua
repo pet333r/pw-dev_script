@@ -3,10 +3,14 @@ ExportScript.FoundDCSModule = true
 
 ExportScript.ConfigEveryFrameArguments = 
 {
-	[403] = "%1d",	-- PNT-BTN-UFC-MASTWARN (Master Caution Light)
+	[404] = "%1d",	-- Master Caution Light
 	[540] = "%1d",	-- AOA Indexer High
 	[541] = "%1d",	-- AOA Indexer Normal
-	[542] = "%1d",	-- AOA Indexer Low
+    [542] = "%1d",	-- AOA Indexer Low
+    
+    [102] = "%1d",  -- Fire Eng 1
+    [103] = "%1d",  -- Fire APU
+    [104] = "%1d",  -- Fire Eng 2
 }
 ExportScript.ConfigArguments = 
 {
