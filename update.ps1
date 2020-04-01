@@ -64,8 +64,8 @@ foreach ($file in $listFilesMain) {
       {
             $url = $urlMain + $file
             $output = $dirMain + $file
-            Write-Host "Downloading:" $file
             Invoke-WebRequest -Uri $url -OutFile $output
+            Write-Host "Downloading:" $file
       }
 }
 
@@ -74,8 +74,8 @@ Write-Host "`nTry to download files to folder: $dirLib"
 foreach ($file in $libList) {
       $url = $urlLib + $file
       $output = $dirLib + $file
-      Write-Host "Downloading:" $file
       Invoke-WebRequest -Uri $url -OutFile $output
+      Write-Host "Downloading:" $file
 }
 
 # download folder 'Modules'
@@ -83,8 +83,9 @@ Write-Host "`nTry to download modules to: $dirModules"
 foreach ($module in $modulesList) {
       $url = $urlMod + $module
       $output = $dirModules + $module
-      Write-Host "Downloading:" $module
+      #Write-Host "Downloading:" $module
       Invoke-WebRequest -Uri $url -OutFile $output
+      Write-Host "$url"
 }
 
 Write-Output "`nTime taken: $((Get-Date).Subtract($start_time).Seconds):$((Get-Date).Subtract($start_time).Milliseconds) s"
