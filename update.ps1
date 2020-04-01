@@ -1,5 +1,9 @@
 Set-ExecutionPolicy RemoteSigned
 
+# get user-name
+$separator = "*******************************************************"
+Write-Host "$separator`n******** Updating pw-dev_script ********`n$separator`n          Install script version: 2020.04.01"
+
 $start_time = Get-Date
 
 # checking Modules directory
@@ -38,6 +42,7 @@ $libList = @(
 )
 
 # modules
+$DB = Get-Content Invoke-WebRequest -Uri $urlMain + "update_modules"
 $modulesList = @(
       'A-4E-C.lua'
       'A-10A.lua'
@@ -80,17 +85,12 @@ $modulesList = @(
       'Yak-52.lua'
 )
 
-Write-Host "Try to download files to folder: $dirLib"
-foreach ($file in $libList) {
-      $url = $urlLib + $file
-      $output = $dirLib + $file
-      Write-Host "Downloading:" $file
-      Invoke-WebRequest -Uri $url -OutFile $output
-}
-Write-Host "`nTry to download configuration files: $dirMain"
+# download main files
+Write-Host "Try to download configuration files: $dirMain"
 foreach ($file in $listFilesMain) {
       If($file -eq  "Config.lua")
       {
+            # if file doesn't exist > download, else ignore
             If (!(Test-Path "Config.lua" -PathType Leaf))
             {
                   $url = $urlMain + $file
@@ -99,7 +99,7 @@ foreach ($file in $listFilesMain) {
                   Invoke-WebRequest -Uri $url -OutFile $output
             }
       }
-      else
+      else # download rest of files
       {
             $url = $urlMain + $file
             $output = $dirMain + $file
@@ -108,6 +108,16 @@ foreach ($file in $listFilesMain) {
       }
 }
 
+# download folder 'lib'
+Write-Host "`nTry to download files to folder: $dirLib"
+foreach ($file in $libList) {
+      $url = $urlLib + $file
+      $output = $dirLib + $file
+      Write-Host "Downloading:" $file
+      Invoke-WebRequest -Uri $url -OutFile $output
+}
+
+# download folder 'Modules'
 Write-Host "`nTry to download modules to: $dirModules"
 foreach ($module in $modulesList) {
       $url = $urlMod + $module
