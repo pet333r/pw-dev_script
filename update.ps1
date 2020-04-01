@@ -43,11 +43,8 @@ $libList = @(
 
 # modules
 # $modulesList = Get-Content Invoke-WebRequest -Uri $urlMain + "update_modules"
-$urlMod =  -Join($urlMain, "update_modules")
-Write-Host $urlMod
-$modulesList = (Invoke-webrequest -URI $urlMod).Content
-
-Write-Host $modulesList
+$urlModFile =  -Join($urlMain, "update_modules")
+$modulesList = (Invoke-webrequest -URI $urlModFile).Content
 
 # download main files
 Write-Host "Try to download configuration files: $dirMain"
@@ -88,6 +85,7 @@ foreach ($module in $modulesList) {
       $output = $dirModules + $module
       Write-Host "Downloading:" $module
       Invoke-WebRequest -Uri $url -OutFile $output
+      Write-Host "$url`n$output"
 }
 
 Write-Output "`nTime taken: $((Get-Date).Subtract($start_time).Seconds):$((Get-Date).Subtract($start_time).Milliseconds) s"
