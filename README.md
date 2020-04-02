@@ -8,6 +8,7 @@ installation can be done in 2 ways: automatic & manual
 
 ## automatic install
 
+may not work on some versions of the Windows system
 for automatic install script simply download 2 files from this repository:
 * install.bat
 * install.ps1  
