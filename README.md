@@ -90,6 +90,12 @@ this is how the file scheme with folders should look
                       dofile(lfs.writedir()..[[Scripts\pw-dev_script\Export.lua]]))
   ```
 
+should look like this (depending on the DCS version)  
+folder `Scripts`
+![](.gfx/folders1.png)
+folder `pw-dev_script` inside `Scripts`
+![](.gfx/folders2.png)
+
 # example connection
 Example configuration:  
 PC IP: 192.168.1.2  
