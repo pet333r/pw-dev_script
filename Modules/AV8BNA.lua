@@ -844,7 +844,7 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 					to1, to2 = lODUDisplays:find("%c", from2+2)
 					if (to1 ~= nil) then
 						lODU_select = lODUDisplays:sub(from2+1, to1-1)
-						lODU_select = lODU_select:gsub(":", "¦")
+						--lODU_select = lODU_select:gsub(":", "¦")
 					end
 				end
 
