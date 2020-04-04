@@ -92,9 +92,9 @@ this is how the file scheme with folders should look
   ```
 
 should look like this (depending on the DCS version)  
-folder `Scripts`
-![](.gfx/folders1.png)
-folder `pw-dev_script` inside `Scripts`
+folder `Scripts`  
+![](.gfx/folders1.png)  
+folder `pw-dev_script` inside `Scripts`  
 ![](.gfx/folders2.png)
 
 # example connection
