@@ -525,3 +525,15 @@ function ExportScript.Tools.mergeString(original_string, new_data, location)
 	end
 	return before..table.concat(merged)..after
 end
+
+-- split function for string libraray
+-- stringvalue: value
+-- delimiter  : delimiter for split
+-- for example, see http://www.lua.org/manual/5.1/manual.html#5.4.1
+function ExportScript.Tools.split(stringvalue, delimiter)
+    result = {};
+    for match in (stringvalue..delimiter):gmatch("(.-)"..delimiter) do
+        table.insert(result, match);
+    end
+    return result;
+end

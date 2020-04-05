@@ -7,6 +7,35 @@ ExportScript.ConfigEveryFrameArguments =
 	[4] = "%1d",   -- CPT_LTS_AOA_HIGH
 	[5] = "%1d",   -- CPT_LTS_AOA_CENTER
 	[6] = "%1d",   -- CPT_LTS_AOA_LOW
+
+	-- LH Advisory and Threat Warning Indicator Panel
+	[10] = "%1d",   -- CPT_LTS_FIRE_LEFT
+	[13] = "%1d",   -- CPT_LTS_MASTER_CAUTION
+	[15] = "%1d",   -- CPT_LTS_GO
+	[16] = "%1d",   -- CPT_LTS_NO_GO
+	[17] = "%1d",   -- CPT_LTS_L_BLEED
+	[18] = "%1d",   -- CPT_LTS_R_BLEED
+	[19] = "%1d",   -- CPT_LTS_SPD_BRK
+	[20] = "%1d",   -- CPT_LTS_STBY
+	[21] = "%1d",   -- CPT_LTS_L_BAR_RED
+	[22] = "%1d",   -- CPT_LTS_REC
+	[23] = "%1d",   -- CPT_LTS_L_BAR_GREEN
+	[24] = "%1d",   -- CPT_LTS_XMIT
+	[25] = "%1d",   -- CPT_LTS_ASPJ_OH
+	-- RH Advisory and Threat Warning Indicator Panel
+	[26] = "%1d",   -- CPT_LTS_FIRE_RIGHT
+	[29] = "%1d",   -- CPT_LTS_FIRE_APU
+	[31] = "%1d",   -- CPT_LTS_RCDR_ONzxzx=ss
+	[32] = "%1d",   -- CPT_LTS_DISP
+	[33] = "%1d",   -- CPT_LTS_SPARE_RH1
+	[34] = "%1d",   -- CPT_LTS_SPARE_RH2
+	[35] = "%1d",   -- CPT_LTS_SPARE_RH3
+	[36] = "%1d",   -- CPT_LTS_SPARE_RH4
+	[37] = "%1d",   -- CPT_LTS_SPARE_RH5
+	[38] = "%1d",   -- CPT_LTS_SAM.u/8i
+	[39] = "%1d",   -- CPT_LTS_AI
+	[40] = "%1d",   -- CPT_LTS_AAA
+	[41] = "%1d",   -- CPT_LTS_CW
 }
 
 ExportScript.ConfigArguments = 

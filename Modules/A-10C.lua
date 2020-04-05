@@ -11,6 +11,56 @@ ExportScript.ConfigEveryFrameArguments =
     [102] = "%1d",  -- Fire Eng 1
     [103] = "%1d",  -- Fire APU
     [104] = "%1d",  -- Fire Eng 2
+
+    -- Caution Panel LAMPS
+	[480] = "%.f",		-- ENG_START_CYCLE
+	[481] = "%.f",		-- L_HYD_PRESS
+	[482] = "%.f",		-- R_HYD_PRESS
+	[483] = "%.f",		-- GUN_UNSAFE
+	[484] = "%.f",		-- ANTISKID
+	[485] = "%.f",		-- L_HYD_RES
+	[486] = "%.f",		-- R_HYD_RES
+	[487] = "%.f",		-- OXY_LOW
+	[488] = "%.f",		-- ELEV_DISENG
+	[489] = "%.f",		-- VOID1
+	[490] = "%.f",		-- SEAT_NOT_ARMED
+	[491] = "%.f",		-- BLEED_AIR_LEAK
+	[492] = "%.f",		-- AIL_DISENG
+	[493] = "%.f",		-- L_AIL_TAB
+	[494] = "%.f",		-- R_AIL_TAB
+	[495] = "%.f",		-- SERVICE_AIR_HOT
+	[496] = "%.f",		-- PITCH_SAS
+	[497] = "%.f",		-- L_ENG_HOT
+	[498] = "%.f",		-- R_ENG_HOT
+	[499] = "%.f",		-- WINDSHIELD_HOT
+	[500] = "%.f",		-- YAW_SAS
+	[501] = "%.f",		-- L_ENG_OIL_PRESS
+	[502] = "%.f",		-- R_ENG_OIL_PRESS
+	[503] = "%.f",		-- CICU
+	[504] = "%.f",		-- GCAS
+	[505] = "%.f",		-- L_MAIN_PUMP
+	[506] = "%.f",		-- R_MAIN_PUMP
+	[507] = "%.f",		-- VOID2
+	[508] = "%.f",		-- LASTE
+	[509] = "%.f",		-- L_WING_PUMP
+	[510] = "%.f",		-- R_WING_PUMP
+	[511] = "%.f",		-- HARS
+	[512] = "%.f",		-- IFF_MODE_4
+	[513] = "%.f",		-- L_MAIN_FUEL_LOW
+	[514] = "%.f",		-- R_MAIN_FUEL_LOW
+	[515] = "%.f",		-- L_R_TKS_UNEQUAL
+	[516] = "%.f",		-- EAC
+	[517] = "%.f",		-- L_FUEL_PRESS
+	[518] = "%.f",		-- R_FUEL_PRESS
+	[519] = "%.f",		-- NAV
+	[520] = "%.f",		-- STALL_SYS
+	[521] = "%.f",		-- L_CONV
+	[522] = "%.f",		-- R_CONV
+	[523] = "%.f",		-- CADC
+	[524] = "%.f",		-- APU_GEN
+	[525] = "%.f",		-- L_GEN
+	[526] = "%.f",		-- R_GEN
+	[527] = "%.f",		-- INST_INV
 }
 ExportScript.ConfigArguments = 
 {
@@ -23,6 +73,57 @@ end
 
 -- Pointed to by ExportScript.ProcessDCSConfigLowImportance
 function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
+	-- CMSC 2020 (Text only)
+	-------------------------------------------------
+	if mainPanelDevice:get_argument_value(364) > 0 then
+		local lCMSCTable = ExportScript.Tools.getListIndicatorValue(8)
+
+		if lCMSCTable ~= nil and lCMSCTable.txt_JMR ~= nil then
+			ExportScript.Tools.SendData(2011, string.format("%s", lCMSCTable.txt_CHAFF_FLARE))	-- txt_CHAFF_FLARE
+			ExportScript.Tools.SendData(2012, string.format("%s", lCMSCTable.txt_JMR))	-- txt_JMR
+			ExportScript.Tools.SendData(2013, string.format("%s", lCMSCTable.txt_MWS))	-- txt_MWS
+		end
+	else
+		ExportScript.Tools.SendData(2011, " ")	-- txt_CHAFF_FLARE
+		ExportScript.Tools.SendData(2012, " ")	-- txt_JMR
+		ExportScript.Tools.SendData(2013, " ")	-- txt_MWS
+	end
+	
+	-- CMSP
+	-------------------------------------------------
+	if mainPanelDevice:get_argument_value(364) > 0 then
+		local lCMSP = ExportScript.Tools.getListIndicatorValue(7)
+		
+		local lCMSPTable = {"","","",""}
+		
+		if lCMSP ~= nil and lCMSP.txt_UP ~= nil then
+			lCMSP.txt_UP = lCMSP.txt_UP:gsub("  ", " ")
+			lCMSP.txt_UP = lCMSP.txt_UP.." "
+			lCMSPTable  = ExportScript.Tools.split(lCMSP.txt_UP, "%s")
+		end
+		
+		--ExportScript.Tools.WriteToLog('lCMSP: '..ExportScript.Tools.dump(lCMSP))
+		--ExportScript.Tools.WriteToLog('lCMSPTable: '..ExportScript.Tools.dump(lCMSPTable))
+		
+		ExportScript.Tools.SendData(2014,  string.format("%s", lCMSPTable[1]))
+		ExportScript.Tools.SendData(2015,  string.format("%s", lCMSPTable[2]))
+		ExportScript.Tools.SendData(2016,  string.format("%s", lCMSPTable[3]))
+		ExportScript.Tools.SendData(2017,  string.format("%s", lCMSPTable[4]))
+		ExportScript.Tools.SendData(2018,  string.format("%s", lCMSP.txt_DOWN1))
+		ExportScript.Tools.SendData(2019,  string.format("%s", lCMSP.txt_DOWN2))
+		ExportScript.Tools.SendData(2020,  string.format("%s", lCMSP.txt_DOWN3))
+		ExportScript.Tools.SendData(2021,  string.format("%s", lCMSP.txt_DOWN4))
+	else
+		ExportScript.Tools.SendData(2014,  " ")
+		ExportScript.Tools.SendData(2015,  " ")
+		ExportScript.Tools.SendData(2016,  " ")
+		ExportScript.Tools.SendData(2017,  " ")
+		ExportScript.Tools.SendData(2018,  " ")
+		ExportScript.Tools.SendData(2019,  " ")
+		ExportScript.Tools.SendData(2020,  " ")
+		ExportScript.Tools.SendData(2021,  " ")
+	end	
+
 	-- CDU Data
 	ExportScript.exportCDU()
 end
