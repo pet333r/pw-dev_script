@@ -8,7 +8,7 @@ installation can be done in 2 ways: automatic & manual
 
 ## automatic install
 
-may not work on some versions of the Windows system  
+may not work on some versions of the Windows system  or if You have special characters in Your user name
 for automatic install script simply download 2 files from this repository:
 * install.bat
 * install.ps1  
@@ -16,6 +16,8 @@ for automatic install script simply download 2 files from this repository:
 save it wherevere You want and run `install.bat` file, script automaticly found Your DCS World versions or if You have both standalone and openbeta installed script will tell You which version to install, after that a window will open in which to run the file `update_pw-dev_script.bat` script download latest files from github
 
 now You need only edit `Config.lua` file in `pw-dev_script`
+
+## automatic update script
 
 in the future, just run the file `update_pw-dev_script.bat` to download the latest version of the script (the `Config.lua` file will be kept, the others will be replaced with the latest version)  
 just run it from time to time or add a shortcut in the Windows Startup folder to have the script updated during system startup

@@ -11,8 +11,42 @@ ExportScript.ConfigEveryFrameArguments =
 	[114] = "%1d",	-- AR NWS Light (green)
 	[115] = "%1d",	-- DISC Light (red)
 
-	[189] = "%1d"	-- ICP FLIR GAIN/LEVEL Switch, GAIN/LVL/AUTO	-1 / 0 / 1
---	[183] = "%1d"
+	[189] = "%1d",	-- ICP FLIR GAIN/LEVEL Switch, GAIN/LVL/AUTO	-1 / 0 / 1
+	--	[183] = "%1d"
+
+	--Caution Light Panel
+	[630] = "%1d", -- FLCS FAULT Light (yellow)
+	[631] = "%1d", -- ENGINE FAULT Light (yellow)
+	[632] = "%1d", -- AVIONICS FAULT Light (yellow)
+	[633] = "%1d", -- SEAT NOT ARMED Light (yellow)
+	[634] = "%1d", -- ELEC SYS Light (yellow)
+	[635] = "%1d", -- SEC Light (yellow)
+	[636] = "%1d", -- EQUIP HOT Light (yellow)
+	[637] = "%1d", -- NWS FAIL Light (yellow)
+	[638] = "%1d", -- PROBE HEAT Light (yellow)
+	[639] = "%1d", -- FUEL OIL HOT Light (yellow)
+	[640] = "%1d", -- RADAR ALT Light (yellow)
+	[641] = "%1d", -- ANTI SKID Light (yellow)
+	[642] = "%1d", -- CADC Light (yellow)
+	[643] = "%1d", -- INLET ICING Light (yellow)
+	[644] = "%1d", -- IFF Light (yellow)
+	[645] = "%1d", -- HOOK Light (yellow)
+	[646] = "%1d", -- STORES CONFIG Light (yellow)
+	[647] = "%1d", -- OVERHEAT Light (yellow)
+	[648] = "%1d", -- NUCLEAR Light (yellow)
+	[649] = "%1d", -- OBOGS Light (yellow)
+	[650] = "%1d", -- ATF NOT ENGAGED Light (yellow)
+	[651] = "%1d", -- EEC Light (yellow)
+	[652] = "%1d", -- 1. Caution - Light (yellow)
+	[653] = "%1d", -- CABIN PRESS Light (yellow)
+	[654] = "%1d", -- FWD FUEL LOW Light (yellow)
+	[655] = "%1d", -- BUC Light (yellow)
+	[656] = "%1d", -- 2. Caution - Light (yellow)
+	[657] = "%1d", -- 3. Caution - Light (yellow)
+	[658] = "%1d", -- AFT FUEL LOW Light (yellow)
+	[659] = "%1d", -- 4. Caution - Light (yellow)
+	[660] = "%1d", -- 5. Caution - Light (yellow)
+	[661] = "%1d", -- 6. Caution - Light  (yellow)
 }
 ExportScript.ConfigArguments = 
 {
@@ -43,50 +77,6 @@ ExportScript.ConfigArguments =
 	-- [187] = "%1d",   -- ICP FLIR Polarity Button, Wx"
 	-- [167] = "%1d",   -- ICP IFF Override Button, IFF"
 	-- [167] = "%1d",   -- ICP IFF Override Button, IFF"
-	
-	-- Left MFD
-	-- [300] = "%1d",   -- Left MFD PB 1
-	-- [301] = "%1d",   -- Left MFD PB 2
-	-- [302] = "%1d",   -- Left MFD PB 3
-	-- [303] = "%1d",   -- Left MFD PB 4
-	-- [304] = "%1d",   -- Left MFD PB 5
-	-- [305] = "%1d",   -- Left MFD PB 6
-	-- [306] = "%1d",   -- Left MFD PB 7
-	-- [307] = "%1d",   -- Left MFD PB 8
-	-- [308] = "%1d",   -- Left MFD PB 9
-	-- [309] = "%1d",   -- Left MFD PB 10
-	-- [310] = "%1d",   -- Left MFD PB 11
-	-- [311] = "%1d",   -- Left MFD PB 12
-	-- [312] = "%1d",   -- Left MFD PB 13
-	-- [313] = "%1d",   -- Left MFD PB 14
-	-- [314] = "%1d",   -- Left MFD PB 15
-	-- [315] = "%1d",   -- Left MFD PB 16
-	-- [316] = "%1d",   -- Left MFD PB 17
-	-- [317] = "%1d",   -- Left MFD PB 18
-	-- [318] = "%1d",   -- Left MFD PB 19
-	-- [319] = "%1d",   -- Left MFD PB 20
-	
-	-- Right MFD
-	-- [326] = "%1d",   -- Righ MFD PB 1
-	-- [327] = "%1d",   -- Righ MFD PB 2
-	-- [328] = "%1d",   -- Righ MFD PB 3
-	-- [329] = "%1d",   -- Righ MFD PB 4
-	-- [330] = "%1d",   -- Righ MFD PB 5
-	-- [331] = "%1d",   -- Righ MFD PB 6
-	-- [332] = "%1d",   -- Righ MFD PB 7
-	-- [333] = "%1d",   -- Righ MFD PB 8
-	-- [334] = "%1d",   -- Righ MFD PB 9
-	-- [335] = "%1d",   -- Righ MFD PB 10
-	-- [336] = "%1d",   -- Righ MFD PB 11
-	-- [337] = "%1d",   -- Righ MFD PB 12
-	-- [338] = "%1d",   -- Righ MFD PB 13
-	-- [339] = "%1d",   -- Righ MFD PB 14
-	-- [340] = "%1d",   -- Righ MFD PB 15
-	-- [341] = "%1d",   -- Righ MFD PB 16
-	-- [342] = "%1d",   -- Righ MFD PB 17
-	-- [343] = "%1d",   -- Righ MFD PB 18
-	-- [344] = "%1d",   -- Righ MFD PB 19
-	-- [345] = "%1d",   -- Righ MFD PB 20
 }
 
 -- DED Layout Information ------------------------------------------------------
