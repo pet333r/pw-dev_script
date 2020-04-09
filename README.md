@@ -117,12 +117,13 @@ Additional functionality was added and modified to increase performance and sepa
 '1' Script may not work with some other scripts if they use similar solutions to connect to external applications. This is a known problem in DCS.  
 If you noticed that something is not working and you are also using other scripts, put other scripts in the comment to check which ones do not want to work with each other.
 
+'2' If You can interact with DCS but not receiving data You probably set wrong Your device IP in `Config.lua` file
+
+# compability
 tested and works with :
  * DCS-BIOS
  * Tacview
  * VAICOM PRO (not tested but it works differently and there should be no conflicts)
 
-may not work with (not tested) : 
- * SRS
-
-'2' If You can interact with DCS but not receiving data You probably set wrong Your device IP in `Config.lua` file
+not tested :
+ * SRS (works when the script entry is "higher" in the file, above the SRS entry)

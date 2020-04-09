@@ -36,6 +36,20 @@ ExportScript.ConfigEveryFrameArguments =
 	[39] = "%1d",   -- CPT_LTS_AI
 	[40] = "%1d",   -- CPT_LTS_AAA
 	[41] = "%1d",   -- CPT_LTS_CW
+
+	-- Caution Lights Panel
+	[298] = "%1d", -- CK SEAT
+	[299] = "%1d", -- APU ACC
+	[300] = "%1d", -- BATT SW
+	[301] = "%1d", -- FCS HOT
+	[302] = "%1d", -- GEN TIE
+	[303] = "%1d", -- SPARE CTN1
+	[304] = "%1d", -- FUEL LO`
+	[305] = "%1d", -- FCES
+	[306] = "%1d", -- SPARE CTN2
+	[307] = "%1d", -- L GEN
+	[308] = "%1d", -- R GEN
+	[309] = "%1d", -- SPARE CTN3
 }
 
 ExportScript.ConfigArguments = 
