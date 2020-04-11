@@ -61,6 +61,13 @@ there are several "groups" in the file:
 choose one of them and edit `Host` and `Port` (you can leave port the same, in most cases you don't even need to change)  
 it is <span style="color:red">**IMPORTANT**</span> that the device's IP address matches and `PC / phone / tablet` must be on the same network  
 
+### apps
+- if You only use `DCS UFC` [https://play.google.com/store/apps/details?id=com.dcsufc](https://play.google.com/store/apps/details?id=com.dcsufc) set `ExportSelfData` to `false` (less data to be sent and processed by the application, longer battery life)
+```
+ExportScript.Config.ExportSelfData          = false
+```
+- other applications must have this value set to `true` for proper working
+
 example you will find below in the screenshot
 
 To find Android device IP: go to `Settings > WiFi` > check the properties of your network   
