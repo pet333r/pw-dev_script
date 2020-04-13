@@ -28,7 +28,7 @@ ExportScript.Config.ExportModulePath       = lfs.writedir()..[[Scripts\pw-dev_sc
 ExportScript.Config.FirstNewDataSend       = true
 ExportScript.Config.FirstNewDataSendCount  = 100
 
--- data export
+-- data export ( change to true if You are using DCS AoA Indexer )
 ExportScript.Config.ExportSelfData          = false     -- export SelfData (Lat, Lon, Alt etc.) every LowTickInterval
 -- export Displays data
 ExportScript.Config.ExportDisplaysAV8BNA    = true      -- AV8BNA (UFC, ODU, UVHF)
