@@ -8,6 +8,14 @@ ExportScript.ConfigEveryFrameArguments =
 	[5] = "%1d",   -- CPT_LTS_AOA_CENTER
 	[6] = "%1d",   -- CPT_LTS_AOA_LOW
 
+	-- Fire Systems
+	[46] = "%1d",   -- Fire Extinguisher Pushbutton
+	[30] = "%1d",   -- APU Fire Warning/Extinguisher Light
+	[11] = "%1d",   -- Left Engine/AMAD Fire Warning/Extinguisher Light - (LMB) depress
+	[12] = "%1d",   -- Left Engine/AMAD Fire Warning/Extinguisher Light - (RMB) cover control
+	[27] = "%1d",   -- Right Engine/AMAD Fire Warning/Extinguisher Light - (LMB) depress
+	[28] = "%1d",   -- Right Engine/AMAD Fire Warning/Extinguisher Light - (RMB) cover control
+
 	-- LH Advisory and Threat Warning Indicator Panel
 	[10] = "%1d",   -- CPT_LTS_FIRE_LEFT
 	[13] = "%1d",   -- CPT_LTS_MASTER_CAUTION

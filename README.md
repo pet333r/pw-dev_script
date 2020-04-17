@@ -129,8 +129,8 @@ If you noticed that something is not working and you are also using other script
 # compability
 tested and works with :
  * DCS-BIOS
- * Tacview
- * VAICOM PRO (not tested but it works differently and there should be no conflicts)
+ * Tacview  
+ * VAICOM PRO
+ * SRS
 
-not tested :
- * SRS (works when the script entry is "higher" in the file, above the SRS entry)
+ for users using SRS and VaicomPro (works when the script entry is "higher" in the file, above the SRS / VaicomPro entry)
