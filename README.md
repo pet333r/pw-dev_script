@@ -133,4 +133,15 @@ tested and works with :
  * VAICOM PRO
  * SRS
 
- for users using SRS and VaicomPro (works when the script entry is "higher" in the file, above the SRS / VaicomPro entry)
+ for users using SRS and VaicomPro (works when the script entry is "higher" in the file, above the SRS / VaicomPro entry)  
+ example of the main `Export.lua` file (thanks to one user: `Arsenio`)
+ ```d
+ local lfs=require('lfs');
+dofile(lfs.writedir()..[[Scripts\pw-dev_script\Export.lua]]);
+
+local vaicomlfs = require('lfs'); dofile(vaicomlfs.writedir()..[[Scripts\VAICOMPRO\VAICOMPRO.export.lua]]);
+
+pcall(function() local dcsSr=require('lfs');dofile(dcsSr.writedir()..[[Mods\Tech\DCS-SRS\Scripts\DCS-SimpleRadioStandalone.lua]]); end,nil);
+
+local Tacviewlfs=require('lfs');dofile(Tacviewlfs.writedir()..'Scripts/TacviewGameExport.lua');
+ ```
