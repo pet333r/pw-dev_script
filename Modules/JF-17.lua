@@ -3,6 +3,11 @@ ExportScript.FoundDCSModule = true
 
 ExportScript.ConfigEveryFrameArguments = 
 {
+    -- warning/caution indicator lights (left side)
+    [130] = "%1d", -- MASTER WARNING (red)
+    [131] = "%1d", -- FIRE (red)
+    [132] = "%1d", -- FCS (red)
+
     -- UFC buttons lights
     [150] = "%1d", -- UFCP Button Light OAP (green)
     [151] = "%1d", -- UFCP Button Light MRK (green)
@@ -12,6 +17,26 @@ ExportScript.ConfigEveryFrameArguments =
     [155] = "%1d", -- UFCP Button Light FPM (green)
     [156] = "%1d", -- UFCP Button Light NULL1 (green)
     [157] = "%1d", -- UFCP Button Light NULL2 (green)
+
+    -- warning/caution indicator lights (right side)
+    [160] = "%1d", -- PITCH TRIM (green)
+    [161] = "%1d", -- ROLL TRIM (green)
+    [162] = "%1d", -- YAW TRIM (green)    
+    [163] = "%1d", -- AA (green)
+    [164] = "%1d", -- AG1 (green)
+    [165] = "%1d", -- AG2 (green)
+    [166] = "%1d", -- EFCS (green) 
+    [167] = "%1d", -- No.3 TANK (green)    
+    [166] = "%1d", -- No.1 TANK (green)
+    [169] = "%1d", -- WING DT (green)
+    [170] = "%1d", -- CTR DT (green)
+    [171] = "%1d", -- ----- (green)  
+    [172] = "%1d", -- START (green) 
+    [173] = "%1d", -- AB (green)    
+    [174] = "%1d", -- COMBAT (green)
+    [175] = "%1d", -- EMG HYD (green)
+    [176] = "%1d", -- NWS (green)
+    [177] = "%1d", -- ADVISORY (green)
 
     -- warning panel
     [200] = "%1d", -- ----- (red)
