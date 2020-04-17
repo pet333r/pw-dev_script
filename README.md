@@ -36,7 +36,7 @@ open it for edit, I recommend Notepad++ for this and add:
 
 ```
 local lfs=require('lfs');
-dofile(lfs.writedir()..[[Scripts\pw-dev_script\Export.lua]]);
+dofile(lfs.writedir()..[[Scripts\pw-dev_script\Export.lua]])
 ```
 save & close
 
