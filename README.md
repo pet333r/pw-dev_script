@@ -121,10 +121,12 @@ Additional functionality was added and modified to increase performance and sepa
 
 # known issues
 
-'1' Script may not work with some other scripts if they use similar solutions to connect to external applications. This is a known problem in DCS.  
+***`1`*** Script may not work with some other scripts if they use similar solutions to connect to external applications. This is a known problem in DCS.  
 If you noticed that something is not working and you are also using other scripts, put other scripts in the comment to check which ones do not want to work with each other.
 
-'2' If You can interact with DCS but not receiving data You probably set wrong Your device IP in `Config.lua` file
+***`2`*** If You can interact with DCS but not receiving data You probably set wrong Your device IP in `Config.lua` file
+
+***`3`*** If you receive data from DCS but no button works -> check firewall, probably blocking incoming connections
 
 # compability
 tested and works with :
