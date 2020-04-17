@@ -4,9 +4,9 @@ Script for exporting data from DCS World
 
 # installation
 
-installation can be done in 2 ways: automatic & manual
+installation can be done in 2 ways: <del>automatic</del> & manual
 
-## automatic install
+## <del>automatic install
 
 may not work on some versions of the Windows system  or if You have special characters in Your user name
 for automatic install script simply download 2 files from this repository:
