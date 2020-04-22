@@ -2,6 +2,12 @@
 
 Script for exporting data from DCS World
 
+# example script folder
+if you have any problem understanding how the DCS World script should be installed, download the zip file, it contains a schematic of the entire "Scripts" folder along with the main "Export.lua" file and the entire script
+
+you'll find it on the "Releases" page
+[https://github.com/pet333r/pw-dev_script/releases](https://github.com/pet333r/pw-dev_script/releases)
+
 ## manual installation
 
 click that green button `Clone or download` and download ZIP file, save it wherevere You want on disk and unpack
