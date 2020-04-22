@@ -108,6 +108,8 @@ Additional functionality was added and modified to increase performance and sepa
 
 ***`2`*** if your network structure is more complicated than a PC - router - Android device, devices may not be able to "see" each other because each belongs to a different subnet of the router, this must be changed in the router settings
 
+***`3`*** it's best to assign a static IP address to your Android device's router
+
 # known issues
 
 ***`1`*** Script may not work with some other scripts if they use similar solutions to connect to external applications. This is a known problem in DCS.  
