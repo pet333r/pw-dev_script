@@ -9,7 +9,7 @@ ExportScript.Config.Separator = ";"
 
 -- send 2 (tablet)
 ExportScript.Config.Export2    = true                -- sending data
-ExportScript.Config.Host2      = "192.168.1.5"       -- IP for 2nd app
+ExportScript.Config.Host2      = "192.168.1.4"       -- IP for 2nd app
 ExportScript.Config.Port2      = 5160                -- port for sending data
 
 -- send 3 (phone)

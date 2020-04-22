@@ -2,31 +2,11 @@
 
 Script for exporting data from DCS World
 
-# installation
-
-installation can be done in 2 ways: <del>automatic</del> & manual
-
-## <del>automatic install
-
-may not work on some versions of the Windows system  or if You have special characters in Your user name
-for automatic install script simply download 2 files from this repository:
-* install.bat
-* install.ps1  
-
-save it wherevere You want and run `install.bat` file, script automaticly found Your DCS World versions or if You have both standalone and openbeta installed script will tell You which version to install, after that a window will open in which to run the file `update_pw-dev_script.bat` script download latest files from github
-
-now You need only edit `Config.lua` file in `pw-dev_script`
-
-## automatic update script
-
-in the future, just run the file `update_pw-dev_script.bat` to download the latest version of the script (the `Config.lua` file will be kept, the others will be replaced with the latest version)  
-just run it from time to time or add a shortcut in the Windows Startup folder to have the script updated during system startup
-
 ## manual installation
 
 click that green button `Clone or download` and download ZIP file, save it wherevere You want on disk and unpack
 
-next go to and open folder: (depending on the version you have installed..)
+next go to and open folder: (depending on the DCS World version you have installed..)
 * `c:\Users\{Your username}\Saved Games\DCS.openbeta\Scripts\`
 * `c:\Users\{Your username}\Saved Games\DCS\Scripts\`  
 or if you have both, choose one or both DCS versions to install script;-)
@@ -50,6 +30,10 @@ in `Scripts` folder create folder `pw-dev_script`, next put all files from extra
     -  Export.lua
   ``` 
 
+## automatic update script
+
+in the future, just run the file `update_pw-dev_script.bat` to download the latest version of the script (the `Config.lua` file will be kept, the others will be replaced with the latest version)  
+just run it from time to time or add a shortcut in the Windows Startup folder to have the script updated during system startup
 
 ## edit Config.lua 
 in folder `pw-dev_script` open `Config.lua` for edit,  
@@ -119,6 +103,11 @@ The script is available free of charge under the LGPLv3 license.
 Part of the script was based on `DCS-ExportScripts` [https://github.com/s-d-a/DCS-ExportScripts](https://github.com/s-d-a/DCS-ExportScripts)  
 Additional functionality was added and modified to increase performance and separate sending of individual data to reduce the load on the application.
 
+# connection
+***`1`*** if you have a connection problem, probably your firewall is blocking incoming connections to the PC, turn off the firewall and check if it works
+
+***`2`*** if your network structure is more complicated than a PC - router - Android device, devices may not be able to "see" each other because each belongs to a different subnet of the router, this must be changed in the router settings
+
 # known issues
 
 ***`1`*** Script may not work with some other scripts if they use similar solutions to connect to external applications. This is a known problem in DCS.  
@@ -126,7 +115,7 @@ If you noticed that something is not working and you are also using other script
 
 ***`2`*** If You can interact with DCS but not receiving data You probably set wrong Your device IP in `Config.lua` file
 
-***`3`*** If you receive data from DCS but no button works -> check firewall, probably blocking incoming connections
+***`3`*** If you receive data from DCS but no button works -> check firewall (Windows / router), probably blocking incoming connections or You entered wrong PC IP in DCS UFC
 
 # compability
 tested and works with :
