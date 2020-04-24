@@ -56,7 +56,7 @@ it is <span style="color:red">**IMPORTANT**</span> that the device's IP address 
 ```
 ExportScript.Config.ExportSelfData          = false
 ```
-- other applications must have this value set to `true` for proper working
+- other applications `DCS AoA Indexer` [https://play.google.com/store/apps/details?id=com.dcsaoaindexer](https://play.google.com/store/apps/details?id=com.dcsaoaindexer) must have this value set to `true` for proper working
 
 example you will find below in the screenshot
 
@@ -103,29 +103,26 @@ phone IP: 192.168.1.3
 
 ![](.gfx/dcs_script_connection.png)
 
-# license
-
-The script is available free of charge under the LGPLv3 license.  
-Part of the script was based on `DCS-ExportScripts` [https://github.com/s-d-a/DCS-ExportScripts](https://github.com/s-d-a/DCS-ExportScripts)  
-Additional functionality was added and modified to increase performance and separate sending of individual data to reduce the load on the application.
-
 # connection
-***`1`*** if you have a connection problem, probably your firewall is blocking incoming connections to the PC, turn off the firewall and check if it works
 
-***`2`*** if your network structure is more complicated than a PC - router - Android device, devices may not be able to "see" each other because each belongs to a different subnet of the router, this must be changed in the router settings
+***`1`*** if your network structure is more complicated than a (PC -> router <- Android device), devices may not be able to "see" each other because each belongs to a different subnet of the router, this must be changed in the router settings
 
-***`3`*** it's best to assign a static IP address to your Android device's router
+***`2`*** it's best to assign a static IP address to your Android device's router (the router will always assign the same IP address to a device on your network)
 
 # known issues
 
-***`1`*** Script may not work with some other scripts if they use similar solutions to connect to external applications. This is a known problem in DCS.  
-If you noticed that something is not working and you are also using other scripts, put other scripts in the comment to check which ones do not want to work with each other.
+***`1`*** If You can interact with DCS but not receiving data  
+  - You probably set wrong Your Android device IP in `Config.lua` file
 
-***`2`*** If You can interact with DCS but not receiving data You probably set wrong Your device IP in `Config.lua` file
-
-***`3`*** If you receive data from DCS but no button works -> check firewall (Windows / router), probably blocking incoming connections or You entered wrong PC IP in DCS UFC
+***`2`*** If you receive data from DCS but no button works  
+  - check if you have the correct PC address given in the DCS UFC settings  
+  - your firewall probably blocking incomming connections, turn off the firewall for a few minutes and check if everything works (to unblock the default ListenerPort: 25070 / UDP)  
+  [https://www.windowscentral.com/how-open-port-windows-firewall](https://www.windowscentral.com/how-open-port-windows-firewall)
 
 # compability
+Script may not work with some other scripts if they use similar solutions to connect to external applications. This is a known problem in DCS.  
+If you noticed that something is not working and you are also using other scripts, put other scripts in the comment (add -- at the beginning of the entry) to check which ones do not want to work with each other.  
+
 tested and works with :
  * DCS-BIOS
  * Tacview  
@@ -144,3 +141,9 @@ pcall(function() local dcsSr=require('lfs');dofile(dcsSr.writedir()..[[Mods\Tech
 
 local Tacviewlfs=require('lfs');dofile(Tacviewlfs.writedir()..'Scripts/TacviewGameExport.lua');
  ```
+
+# license
+
+The script is available free of charge under the LGPLv3 license.  
+Part of the script was based on `DCS-ExportScripts` [https://github.com/s-d-a/DCS-ExportScripts](https://github.com/s-d-a/DCS-ExportScripts)  
+Additional functionality was added and modified to increase performance and separate sending of individual data to reduce the load on the application.
