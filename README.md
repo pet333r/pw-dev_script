@@ -44,9 +44,10 @@ just run it from time to time or add a shortcut in the Windows Startup folder to
 ## edit Config.lua 
 in folder `pw-dev_script` open `Config.lua` for edit,  
 there are several "groups" in the file: 
-* send (PC)
-* send 2 (tablet)
-* send 3 (phone)  
+* device 1
+* device 2
+* device 3
+* device 4
 
 choose one of them and edit `Host` and `Port` (you can leave port the same, in most cases you don't even need to change)  
 it is <span style="color:red">**IMPORTANT**</span> that the device's IP address matches and `PC / phone / tablet` must be on the same network  

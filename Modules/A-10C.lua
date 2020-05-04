@@ -3,14 +3,30 @@ ExportScript.FoundDCSModule = true
 
 ExportScript.ConfigEveryFrameArguments = 
 {
-	[404] = "%1d",	-- Master Caution Light
-	[540] = "%1d",	-- AOA Indexer High
-	[541] = "%1d",	-- AOA Indexer Normal
-    [542] = "%1d",	-- AOA Indexer Low
+    -- Engine Gauges
+	[70] = "%.2f",		-- Left Engine Temperature
+	[71] = "%.2f",		-- Left Engine TemperatureUnits
+	[73] = "%.2f",		-- Right Engine Temperature
+	[74] = "%.2f",		-- Right Engine TemperatureUnits
+	[76] = "%.2f",		-- EngineLeftFanSpeed
+	[77] = "%.2f",		-- EngineRightFanSpeed
+	[78] = "%.2f",		-- EngineLeftCoreSpeedTenth
+	[79] = "%.2f",		-- EngineLeftCoreSpeedUnits
+	[80] = "%.2f",		-- EngineRightCoreSpeedTenth
+	[81] = "%.2f",		-- EngineRightCoreSpeedUnits
+	[82] = "%.2f",		-- Left Engine Oil Pressure
+	[83] = "%.2f",		-- Right Engine Oil Pressure
+	[84] = "%.2f",		-- EngineLeftFuelFlow
+    [85] = "%.2f",		-- EngineRightFuelFlow
     
-    [102] = "%1d",  -- Fire Eng 1
-    [103] = "%1d",  -- Fire APU
-    [104] = "%1d",  -- Fire Eng 2
+	[404] = "%1d",	    -- Master Caution Light
+	[540] = "%1d",	    -- AOA Indexer High
+	[541] = "%1d",	    -- AOA Indexer Normal
+    [542] = "%1d",	    -- AOA Indexer Low
+        
+    [102] = "%1d",      -- Fire Eng 1
+    [103] = "%1d",      -- Fire APU
+    [104] = "%1d",      -- Fire Eng 2
 
     -- Caution Panel LAMPS
 	[480] = "%1d",		-- ENG_START_CYCLE

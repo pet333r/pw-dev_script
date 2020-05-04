@@ -148,6 +148,9 @@ function ExportScript.Tools.ProcessSelfData()
         if ExportScript.Config.Export3 == true then
             try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host3, ExportScript.Config.Port3))
         end
+        if ExportScript.Config.Export4 == true then
+            try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host4, ExportScript.Config.Port4))
+        end
 end
 
 function ExportScript.Tools.ProcessTWS()
@@ -341,6 +344,10 @@ function ExportScript.Tools.FlushData()
 
             if ExportScript.Config.Export3 then
                 try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host3, ExportScript.Config.Port3))
+            end
+
+            if ExportScript.Config.Export4 then
+                try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host4, ExportScript.Config.Port4))
             end
 
 			ExportScript.SendStrings = {}

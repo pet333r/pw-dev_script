@@ -1,25 +1,32 @@
 -- properties
 ExportScript.Config = {}
 
--- send (PC)
-ExportScript.Config.Export    = true                -- sending data
-ExportScript.Config.Host      = "127.0.0.1"         -- IP for 1st app
-ExportScript.Config.Port      = 5160                -- port for sending data
-ExportScript.Config.Separator = ";"
+-- device 1
+ExportScript.Config.Export      = true              -- sending data
+ExportScript.Config.Host        = "192.168.1.3"     -- IP for 1st app
+ExportScript.Config.Port        = 5160              -- port for sending data
 
--- send 2 (tablet)
-ExportScript.Config.Export2    = true                -- sending data
-ExportScript.Config.Host2      = "192.168.1.4"       -- IP for 2nd app
-ExportScript.Config.Port2      = 5160                -- port for sending data
+-- device 2
+ExportScript.Config.Export2     = true              -- sending data
+ExportScript.Config.Host2       = "192.168.1.4"     -- IP for 2nd app
+ExportScript.Config.Port2       = 5160              -- port for sending data
 
--- send 3 (phone)
-ExportScript.Config.Export3    = true                -- sending data
-ExportScript.Config.Host3      = "192.168.1.3"       -- IP for 3rd app
-ExportScript.Config.Port3      = 5160                -- port for sending data
+-- device 3
+ExportScript.Config.Export3     = true              -- sending data
+ExportScript.Config.Host3       = "192.168.1.5"     -- IP for 3rd app
+ExportScript.Config.Port3       = 5160              -- port for sending data
+
+-- device 4
+ExportScript.Config.Export4     = true              -- sending data
+ExportScript.Config.Host4       = "127.0.0.1"       -- IP for 3rd app
+ExportScript.Config.Port4       = 5160              -- port for sending data
 
 -- receive commands from external apps
 ExportScript.Config.Listener         = true         -- listen commands from apps
 ExportScript.Config.ListenerPort     = 25070        -- Listener Port receiving commands
+
+-- data separator (do not change)
+ExportScript.Config.Separator = ";"
 
 -- Other
 ExportScript.Config.ExportInterval         = 0.05	-- export every 0.05 seconds
