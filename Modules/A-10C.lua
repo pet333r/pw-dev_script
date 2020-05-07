@@ -4,20 +4,20 @@ ExportScript.FoundDCSModule = true
 ExportScript.ConfigEveryFrameArguments = 
 {
     -- Engine Gauges
-	[70] = "%.2f",		-- Left Engine Temperature
-	[71] = "%.2f",		-- Left Engine TemperatureUnits
-	[73] = "%.2f",		-- Right Engine Temperature
-	[74] = "%.2f",		-- Right Engine TemperatureUnits
-	[76] = "%.2f",		-- EngineLeftFanSpeed
-	[77] = "%.2f",		-- EngineRightFanSpeed
-	[78] = "%.2f",		-- EngineLeftCoreSpeedTenth
-	[79] = "%.2f",		-- EngineLeftCoreSpeedUnits
-	[80] = "%.2f",		-- EngineRightCoreSpeedTenth
-	[81] = "%.2f",		-- EngineRightCoreSpeedUnits
-	[82] = "%.2f",		-- Left Engine Oil Pressure
-	[83] = "%.2f",		-- Right Engine Oil Pressure
-	[84] = "%.2f",		-- EngineLeftFuelFlow
-    [85] = "%.2f",		-- EngineRightFuelFlow
+	-- [70] = "%.2f",		-- Left Engine Temperature
+	-- [71] = "%.2f",		-- Left Engine TemperatureUnits
+	-- [73] = "%.2f",		-- Right Engine Temperature
+	-- [74] = "%.2f",		-- Right Engine TemperatureUnits
+	-- [76] = "%.2f",		-- EngineLeftFanSpeed
+	-- [77] = "%.2f",		-- EngineRightFanSpeed
+	-- [78] = "%.2f",		-- EngineLeftCoreSpeedTenth
+	-- [79] = "%.2f",		-- EngineLeftCoreSpeedUnits
+	-- [80] = "%.2f",		-- EngineRightCoreSpeedTenth
+	-- [81] = "%.2f",		-- EngineRightCoreSpeedUnits
+	-- [82] = "%.2f",		-- Left Engine Oil Pressure
+	-- [83] = "%.2f",		-- Right Engine Oil Pressure
+	-- [84] = "%.2f",		-- EngineLeftFuelFlow
+    -- [85] = "%.2f",		-- EngineRightFuelFlow
     
 	[404] = "%1d",	    -- Master Caution Light
 	[540] = "%1d",	    -- AOA Indexer High
