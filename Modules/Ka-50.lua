@@ -28,16 +28,17 @@ function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
 
 function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
-    -- PVI-800 Navigation Control Panel 
-    local indPVI = ExportScript.Tools.getListIndicatorValue(5)
+    if ExportScript.Config.ExportDisplaysKA50 == true then
+        -- PVI-800 Navigation Control Panel 
+        local indPVI = ExportScript.Tools.getListIndicatorValue(5)
 
-    local pviLine1 = coerce_nil_to_string(indPVI.txt_VIT)
-    local pviLine2 = coerce_nil_to_string(indPVI.txt_NIT)
-    local pviLine1Point = coerce_nil_to_string(indPVI.txt_OIT_PPM)
-    local pviLine2Point = coerce_nil_to_string(indPVI.txt_OIT_NOT)
-	ExportScript.Tools.SendData(2008, pviLine1)
-    ExportScript.Tools.SendData(2009, pviLine2)
-    ExportScript.Tools.SendData(2010, pviLine1Point)
-    ExportScript.Tools.SendData(2011, pviLine2Point)
-
+        local pviLine1 = coerce_nil_to_string(indPVI.txt_VIT)
+        local pviLine2 = coerce_nil_to_string(indPVI.txt_NIT)
+        local pviLine1Point = coerce_nil_to_string(indPVI.txt_OIT_PPM)
+        local pviLine2Point = coerce_nil_to_string(indPVI.txt_OIT_NOT)
+        ExportScript.Tools.SendData(2008, pviLine1)
+        ExportScript.Tools.SendData(2009, pviLine2)
+        ExportScript.Tools.SendData(2010, pviLine1Point)
+        ExportScript.Tools.SendData(2011, pviLine2Point)
+    end
 end

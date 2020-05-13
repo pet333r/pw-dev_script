@@ -18,6 +18,13 @@ ExportScript.ConfigEveryFrameArguments =
 	-- [83] = "%.2f",		-- Right Engine Oil Pressure
 	-- [84] = "%.2f",		-- EngineLeftFuelFlow
     -- [85] = "%.2f",		-- EngineRightFuelFlow
+
+    	-- AAP
+    [473] = "%0.1f",    -- PNT-LVR-STEER-PT-SEL-SWITCH (Use Steerpoint From Active Flight Plan)
+    [474] = "%1d",      -- PNT-TMB-STEER-SPRING-LD-SWITCH (Toggle Steerpoint)
+    [475] = "%0.1f",    -- PNT-LEV-PAGE-SEL-SWITCH (CDU Page Select)
+    [476] = "%1d",      -- CDU Power On/Off
+    [477] = "%1d",      -- EGI Power On/Off
     
 	[404] = "%1d",	    -- Master Caution Light
 	[540] = "%1d",	    -- AOA Indexer High
@@ -78,6 +85,7 @@ ExportScript.ConfigEveryFrameArguments =
 	[526] = "%1d",		-- R_GEN
 	[527] = "%1d",		-- INST_INV
 }
+
 ExportScript.ConfigArguments = 
 {
 }
@@ -118,9 +126,6 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 			lCMSPTable  = ExportScript.Tools.split(lCMSP.txt_UP, "%s")
 		end
 		
-		--ExportScript.Tools.WriteToLog('lCMSP: '..ExportScript.Tools.dump(lCMSP))
-		--ExportScript.Tools.WriteToLog('lCMSPTable: '..ExportScript.Tools.dump(lCMSPTable))
-		
 		ExportScript.Tools.SendData(2014,  string.format("%s", lCMSPTable[1]))
 		ExportScript.Tools.SendData(2015,  string.format("%s", lCMSPTable[2]))
 		ExportScript.Tools.SendData(2016,  string.format("%s", lCMSPTable[3]))
@@ -140,8 +145,11 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		ExportScript.Tools.SendData(2021,  " ")
 	end	
 
-	-- CDU Data
-	ExportScript.exportCDU()
+    if ExportScript.Config.ExportA10C_CDU == true then
+        -- CDU Data
+	    ExportScript.exportCDU()
+    end
+
 end
 
 

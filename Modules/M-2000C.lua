@@ -3,6 +3,23 @@ ExportScript.FoundDCSModule = true
 
 ExportScript.ConfigEveryFrameArguments = 
 {
+	-- PCA
+	[236] = "%1d", 	-- Button 1 S Light
+	[238] = "%1d", 	-- Button 2 S Light
+	[240] = "%1d", 	-- Button 3 S Light
+	[242] = "%1d", 	-- Button 4 S Light
+	[244] = "%1d", 	-- Button 5 S Light
+	[251] = "%1d",	-- Weapons Button 1 S Light
+	[252] = "%1d",	-- Weapons Button 1 R Light
+	[254] = "%1d",	-- Weapons Button 2 S Light
+	[255] = "%1d",	-- Weapons Button 2 R Light
+	[257] = "%1d",	-- Weapons Button 3 S Light
+	[258] = "%1d",	-- Weapons Button 3 R Light
+	[260] = "%1d",	-- Weapons Button 4 S Light
+	[261] = "%1d",	-- Weapons Button 4 R Light
+	[263] = "%1d",	-- Weapons Button 5 S Light
+	[264] = "%1d",	-- Weapons Button 5 R Light
+
     -- WARNING PANEL
 	[525] = "%1d",	--  BATT	
 	[526] = "%1d",	--  TR	
@@ -49,8 +66,379 @@ ExportScript.ConfigArguments =
 {
 }
 
+local function getPCAUR1Disp()
+	local li = list_indication(4)
+	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+	while true do
+        local name, value = m()
+        if not name then break end
+		if name == "text_PCA_UR1"
+        then
+        value = "   "..value
+        return value:sub(-3)
+      end
+    end
+return "   "
+end
+
+local function getPCAUR2Disp()
+	local li = list_indication(4)
+	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+	while true do
+        local name, value = m()
+        if not name then break end
+		if name == "text_PCA_UR2"
+        then
+        value = "   "..value
+        return value:sub(-3)
+      end
+    end
+return "   "
+end
+
+local function getPCAUR3Disp()
+	local li = list_indication(4)
+	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+	while true do
+        local name, value = m()
+        if not name then break end
+		if name == "text_PCA_UR3"
+        then
+        value = "   "..value
+        return value:sub(-3)
+      end
+    end
+return "   "
+end
+
+local function getPCAUR4Disp()
+	local li = list_indication(4)
+	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+	while true do
+        local name, value = m()
+        if not name then break end
+		if name == "text_PCA_UR4"
+        then
+        value = "   "..value
+        return value:sub(-3)
+      end
+    end
+return "   "
+end
+
+local function getPCAUR5Disp()
+	local li = list_indication(4)
+	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+	while true do
+        local name, value = m()
+        if not name then break end
+		if name == "text_PCA_UR5"
+        then
+        value = "   "..value
+        return value:sub(-3)
+      end
+    end
+return "   "
+end
+
+
+local function getPCABR1Disp()
+	local li = list_indication(5)
+	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+	while true do
+        local name, value = m()
+        if not name then break end
+		if name == "text_PCA_BR1"
+        then
+        value = "   "..value
+        return value:sub(-3)
+      end
+    end
+return "   "
+end
+
+local function getPCABR2Disp()
+	local li = list_indication(5)
+	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+	while true do
+        local name, value = m()
+        if not name then break end
+		if name == "text_PCA_BR2"
+        then
+        value = "   "..value
+        return value:sub(-3)
+      end
+    end
+return "   "
+end
+
+local function getPCABR3Disp()
+	local li = list_indication(5)
+	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+	while true do
+        local name, value = m()
+        if not name then break end
+		if name == "text_PCA_BR3"
+        then
+        value = "   "..value
+        return value:sub(-3)
+      end
+    end
+return "   "
+end
+
+local function getPCABR4Disp()
+	local li = list_indication(5)
+	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+	while true do
+        local name, value = m()
+        if not name then break end
+		if name == "text_PCA_BR4"
+        then
+        value = "   "..value
+        return value:sub(-3)
+      end
+    end
+return "   "
+end
+
+local function getPCABR5Disp()
+	local li = list_indication(5)
+	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+	while true do
+        local name, value = m()
+        if not name then break end
+		if name == "text_PCA_BR5"
+        then
+        value = "   "..value
+        return value:sub(-3)
+      end
+    end
+return "   "
+end
+
+local function getPCNDispL()
+	local li = list_indication(9)
+	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+	while true do
+		 local name, value = m()
+		 if not name then break end
+	   if name:sub(0,10) == "text_PCN_L"
+		 then
+		 value = "        "..value
+		 return value:sub(-8)
+	   end
+	 end
+ return "   "
+ end
+ 
+ local function getPCNDispR()
+	local li = list_indication(9)
+	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+	while true do
+		 local name, value = m()
+		 if not name then break end
+	   if name:sub(0,10) == "text_PCN_R"
+		 then
+		 value = "        "..value
+		 return value:sub(-9)
+	   end
+	 end
+ return "   "
+ end
+ 
+ local function getPCNDigitR()
+	local li = list_indication(9)
+	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+	local count = 0
+	local ret = " "
+	while true do
+		 local name, value = m()
+		 if not name then break end
+	   if name == "text_PCN_EST"
+		 then
+		 count = count + 1
+		 ret="E"
+	   end
+	   if name == "text_PCN_OUEST"
+		 then
+		 count = count + 1
+		 ret="W"
+	   end
+	   if name == "text_PCN_PLUS_R"
+		 then
+		 count = count + 1
+		 ret="+"
+	   end
+	   if name == "text_PCN_MOINS_R"
+		 then
+		 count = count + 1
+		 ret="-"
+	   end
+	 end
+	 if count > 1 then ret = "*" end
+ return ret
+ end
+ 
+ local function getPCNDigitL()
+	local li = list_indication(9)
+	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+	local count = 0
+	local ret = " "
+	while true do
+		 local name, value = m()
+		 if not name then break end
+	   if name == "text_PCN_NORD"
+		 then
+		 count = count + 1
+		 ret="N"
+	   end
+	   if name == "text_PCN_SUD"
+		 then
+		 count = count + 1
+		 ret="S"
+	   end
+	   if name == "text_PCN_PLUS_L"
+		 then
+		 count = count + 1
+		 ret="+"
+	   end
+	   if name == "text_PCN_MOINS_L"
+		 then
+		 count = count + 1
+		 ret="-"
+	   end
+	 end
+	 if count > 1 then ret = "*" end
+ return ret
+ end
+ 
+ local function getPCN2DigitR()
+	local li = list_indication(9)
+	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+	local east = ""
+	local west = ""
+	local plus = ""
+	local minus = ""
+	while true do
+		 local name, value = m()
+		 if not name then break end
+	   if name == "text_PCN_EST"
+		 then
+		 east="E"
+	   end
+	   if name == "text_PCN_OUEST"
+		 then
+		 west="W"
+	   end
+	   if name == "text_PCN_PLUS_R"
+		 then
+		 plus="+"
+	   end
+	   if name == "text_PCN_MOINS_R"
+		 then
+		 minus="-"
+	   end
+	 end
+	 return string.format("%-2s", string.sub(east..west..plus..minus,1,2))
+ end
+ 
+ local function getPCN2DigitL()
+	local li = list_indication(9)
+	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+	local north = ""
+	local south = ""
+	local plus = ""
+	local minus = ""
+	while true do
+		 local name, value = m()
+		 if not name then break end
+	   if name == "text_PCN_NORD"
+		 then
+		 north="N"
+	   end
+	   if name == "text_PCN_SUD"
+		 then
+		 south="S"
+	   end
+	   if name == "text_PCN_PLUS_L"
+		 then
+		 plus="+"
+	   end
+	   if name == "text_PCN_MOINS_L"
+		 then
+		 minus="-"
+	   end
+	 end
+	 return string.format("%-2s", string.sub(north..south..plus..minus,1,2))
+ end
+ 
+ local function getPCNDispDest()
+	local li = list_indication(10)
+	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+	while true do
+		 local name, value = m()
+		 if not name then break end
+	   if name == "text_PCN_BR2"
+		 then
+		 value = "  "..value
+		 return value:sub(-2)
+	   end
+ 
+	   if name == "text_PCN_eBR2"
+		 then
+		 value = "  "..value
+		 return value:sub(-2)
+	   end
+	 end
+ return "         "
+ end
+ 
+ local function getPCNDispPrep()
+	local li = list_indication(10)
+	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+	while true do
+		 local name, value = m()
+		 if not name then break end
+	   if name == "text_PCN_BR1"
+		 then
+		 value = "  "..value
+		 return value:sub(-2)
+	   end
+ 
+	   if name == "text_PCN_eBR1"
+		 then
+		 value = "  "..value
+		 return value:sub(-2)
+	   end
+	 end
+ return "         "
+ end
+
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
 
 function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
+	if ExportScript.Config.ExportDisplaysM2000 == true then
+		ExportScript.Tools.SendData(2011, getPCAUR1Disp())
+		ExportScript.Tools.SendData(2012, getPCAUR2Disp())
+		ExportScript.Tools.SendData(2013, getPCAUR3Disp())
+		ExportScript.Tools.SendData(2014, getPCAUR4Disp())
+		ExportScript.Tools.SendData(2015, getPCAUR5Disp())
+
+		ExportScript.Tools.SendData(2021, getPCABR1Disp())
+		ExportScript.Tools.SendData(2022, getPCABR2Disp())
+		ExportScript.Tools.SendData(2023, getPCABR3Disp())
+		ExportScript.Tools.SendData(2024, getPCABR4Disp())
+		ExportScript.Tools.SendData(2025, getPCABR5Disp())
+
+		ExportScript.Tools.SendData(2031, getPCNDispDest())
+		ExportScript.Tools.SendData(2032, getPCNDispL())
+		ExportScript.Tools.SendData(2033, getPCNDispPrep())
+		ExportScript.Tools.SendData(2034, getPCNDispR())
+		ExportScript.Tools.SendData(2035, getPCNDigitL())
+		ExportScript.Tools.SendData(2036, getPCNDigitR())
+		ExportScript.Tools.SendData(2037, getPCN2DigitL())
+		ExportScript.Tools.SendData(2038, getPCN2DigitR())
+	end
 end

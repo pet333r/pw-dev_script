@@ -81,7 +81,7 @@ ExportScript.ConfigEveryFrameArguments =
     [239] = "%1d", -- DEEC (yellow)
     [240] = "%1d", -- EFCS (yellow) 
     [241] = "%1d", -- SEAT (yellow)     
-    [242] = "%1d", -- OXY BLINK (green)
+    --[242] = "%1d", -- OXY BLINK (green)
 
     -- AAP button lights
     [260] = "%1d", -- ACMI (green)
@@ -116,4 +116,19 @@ function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
 
 function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
+    if ExportScript.Config.ExportDisplaysJF17 == true then
+        local indLcd1 = ExportScript.Tools.getListIndicatorValue(3)
+        local indLcd2 = ExportScript.Tools.getListIndicatorValue(4)
+        local indLcd3 = ExportScript.Tools.getListIndicatorValue(5)
+        local indLcd4 = ExportScript.Tools.getListIndicatorValue(6)
+        local ufcLcdLine1 = coerce_nil_to_string(indLcd1.txt_win1)
+        local ufcLcdLine2 = coerce_nil_to_string(indLcd2.txt_win2)
+        local ufcLcdLine3 = coerce_nil_to_string(indLcd3.txt_win3)
+        local ufcLcdLine4 = coerce_nil_to_string(indLcd4.txt_win4)
+        
+        ExportScript.Tools.SendData(2001, ufcLcdLine1)
+        ExportScript.Tools.SendData(2002, ufcLcdLine2)
+        ExportScript.Tools.SendData(2003, ufcLcdLine3)
+        ExportScript.Tools.SendData(2004, ufcLcdLine4)
+    end
 end

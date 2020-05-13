@@ -37,8 +37,18 @@ ExportScript.Config.FirstNewDataSendCount  = 100
 
 -- data export ( change to true if You are using DCS AoA Indexer )
 ExportScript.Config.ExportSelfData          = false     -- export SelfData (Lat, Lon, Alt etc.) every LowTickInterval
+
 -- export Displays data
+ExportScript.Config.ExportDisplaysA10C      = true      -- A-10C
 ExportScript.Config.ExportDisplaysAV8BNA    = true      -- AV8BNA (UFC, ODU, UVHF)
+ExportScript.Config.ExportDisplaysF14B      = true      -- F-14B
 ExportScript.Config.ExportDisplaysF16       = true      -- F-16C Viper (DED, CMDS, UHF)
 ExportScript.Config.ExportDisplaysFA18      = true      -- F/A-18C (UFC)
+ExportScript.Config.ExportDisplaysJF17      = true      -- JF-17 (UFC)
+ExportScript.Config.ExportDisplaysM2000     = true      -- Mirage 2000C
+ExportScript.Config.ExportDisplaysKA50      = true      -- Ka-50
+
 ExportScript.Config.ExportTWS               = true      -- Threats from FC3
+
+-- if you don't use CDU in A-10C and you want better performance on older devices, change to false
+ExportScript.Config.ExportA10C_CDU          = true
