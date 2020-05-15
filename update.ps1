@@ -2,7 +2,7 @@ Set-ExecutionPolicy RemoteSigned
 
 # get user-name
 $separator = "*******************************************************"
-Write-Host "$separator`n**************** Updating pw-dev_script ***************`n$separator`n          Install script version: 2020.04.01`n"
+Write-Host "$separator`n**************** Updating pw-dev_script ***************`n"
 
 $start_time = Get-Date
 

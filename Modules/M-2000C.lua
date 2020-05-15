@@ -60,162 +60,25 @@ ExportScript.ConfigEveryFrameArguments =
 	[561] = "%1d",	--  RPM	
 	[562] = "%1d",	--  DECOL	
 	[563] = "%1d",	--  PARK.
+
+	-- PCN
+	[571] = "%1d",	-- PREP Button Light
+	[573] = "%1d",	-- DEST Button Light
+	[577] = "%1d",	-- BAD Button Light
+	[579] = "%1d",	-- REC Button Light
+	[595] = "%1d",	-- EFF Button Light
+	[597] = "%1d",	-- INS Button Light
+	[581] = "%1d",	-- VAL Button Light
+	[583] = "%1d",	-- MRQ Button Light
+	[668] = "%1d",	-- ENC Button Light
+	[669] = "%1d",	-- M91 Indicator Light
+	[670] = "%1d",	-- M92 Indicator Light
+	[671] = "%1d",	-- M93 Indicator Light
 }
 
 ExportScript.ConfigArguments = 
 {
 }
-
-local function getPCAUR1Disp()
-	local li = list_indication(4)
-	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
-	while true do
-        local name, value = m()
-        if not name then break end
-		if name == "text_PCA_UR1"
-        then
-        value = "   "..value
-        return value:sub(-3)
-      end
-    end
-return "   "
-end
-
-local function getPCAUR2Disp()
-	local li = list_indication(4)
-	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
-	while true do
-        local name, value = m()
-        if not name then break end
-		if name == "text_PCA_UR2"
-        then
-        value = "   "..value
-        return value:sub(-3)
-      end
-    end
-return "   "
-end
-
-local function getPCAUR3Disp()
-	local li = list_indication(4)
-	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
-	while true do
-        local name, value = m()
-        if not name then break end
-		if name == "text_PCA_UR3"
-        then
-        value = "   "..value
-        return value:sub(-3)
-      end
-    end
-return "   "
-end
-
-local function getPCAUR4Disp()
-	local li = list_indication(4)
-	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
-	while true do
-        local name, value = m()
-        if not name then break end
-		if name == "text_PCA_UR4"
-        then
-        value = "   "..value
-        return value:sub(-3)
-      end
-    end
-return "   "
-end
-
-local function getPCAUR5Disp()
-	local li = list_indication(4)
-	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
-	while true do
-        local name, value = m()
-        if not name then break end
-		if name == "text_PCA_UR5"
-        then
-        value = "   "..value
-        return value:sub(-3)
-      end
-    end
-return "   "
-end
-
-
-local function getPCABR1Disp()
-	local li = list_indication(5)
-	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
-	while true do
-        local name, value = m()
-        if not name then break end
-		if name == "text_PCA_BR1"
-        then
-        value = "   "..value
-        return value:sub(-3)
-      end
-    end
-return "   "
-end
-
-local function getPCABR2Disp()
-	local li = list_indication(5)
-	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
-	while true do
-        local name, value = m()
-        if not name then break end
-		if name == "text_PCA_BR2"
-        then
-        value = "   "..value
-        return value:sub(-3)
-      end
-    end
-return "   "
-end
-
-local function getPCABR3Disp()
-	local li = list_indication(5)
-	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
-	while true do
-        local name, value = m()
-        if not name then break end
-		if name == "text_PCA_BR3"
-        then
-        value = "   "..value
-        return value:sub(-3)
-      end
-    end
-return "   "
-end
-
-local function getPCABR4Disp()
-	local li = list_indication(5)
-	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
-	while true do
-        local name, value = m()
-        if not name then break end
-		if name == "text_PCA_BR4"
-        then
-        value = "   "..value
-        return value:sub(-3)
-      end
-    end
-return "   "
-end
-
-local function getPCABR5Disp()
-	local li = list_indication(5)
-	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
-	while true do
-        local name, value = m()
-        if not name then break end
-		if name == "text_PCA_BR5"
-        then
-        value = "   "..value
-        return value:sub(-3)
-      end
-    end
-return "   "
-end
 
 local function getPCNDispL()
 	local li = list_indication(9)
@@ -229,7 +92,7 @@ local function getPCNDispL()
 		 return value:sub(-8)
 	   end
 	 end
- return "   "
+ return "        "
  end
  
  local function getPCNDispR()
@@ -244,7 +107,7 @@ local function getPCNDispL()
 		 return value:sub(-9)
 	   end
 	 end
- return "   "
+ return "        "
  end
  
  local function getPCNDigitR()
@@ -420,17 +283,18 @@ end
 
 function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	if ExportScript.Config.ExportDisplaysM2000 == true then
-		ExportScript.Tools.SendData(2011, getPCAUR1Disp())
-		ExportScript.Tools.SendData(2012, getPCAUR2Disp())
-		ExportScript.Tools.SendData(2013, getPCAUR3Disp())
-		ExportScript.Tools.SendData(2014, getPCAUR4Disp())
-		ExportScript.Tools.SendData(2015, getPCAUR5Disp())
+		ExportScript.Tools.SendData(2011, ExportScript.Tools.getListIndicatorValueByName(4, "text_PCA_UR1", 3))
 
-		ExportScript.Tools.SendData(2021, getPCABR1Disp())
-		ExportScript.Tools.SendData(2022, getPCABR2Disp())
-		ExportScript.Tools.SendData(2023, getPCABR3Disp())
-		ExportScript.Tools.SendData(2024, getPCABR4Disp())
-		ExportScript.Tools.SendData(2025, getPCABR5Disp())
+		ExportScript.Tools.SendData(2012, ExportScript.Tools.getListIndicatorValueByName(4, "text_PCA_UR2", 3))
+		ExportScript.Tools.SendData(2013, ExportScript.Tools.getListIndicatorValueByName(4, "text_PCA_UR3", 3))
+		ExportScript.Tools.SendData(2014, ExportScript.Tools.getListIndicatorValueByName(4, "text_PCA_UR4", 3))
+		ExportScript.Tools.SendData(2015, ExportScript.Tools.getListIndicatorValueByName(4, "text_PCA_UR5", 3))
+
+		ExportScript.Tools.SendData(2021, ExportScript.Tools.getListIndicatorValueByName(5, "text_PCA_BR1", 3))
+		ExportScript.Tools.SendData(2022, ExportScript.Tools.getListIndicatorValueByName(5, "text_PCA_BR2", 3))
+		ExportScript.Tools.SendData(2023, ExportScript.Tools.getListIndicatorValueByName(5, "text_PCA_BR3", 3))
+		ExportScript.Tools.SendData(2024, ExportScript.Tools.getListIndicatorValueByName(5, "text_PCA_BR4", 3))
+		ExportScript.Tools.SendData(2025, ExportScript.Tools.getListIndicatorValueByName(5, "text_PCA_BR5", 3))
 
 		ExportScript.Tools.SendData(2031, getPCNDispDest())
 		ExportScript.Tools.SendData(2032, getPCNDispL())

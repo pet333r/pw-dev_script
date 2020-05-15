@@ -488,6 +488,33 @@ function ExportScript.Tools.getListIndicatorValue(IndicatorID)
 	return TmpReturn
 end
 
+-- funkcja zwraca konkretna wartosc dla danego klucza w tabeli argumentow
+-- pobiera: nr argumentu / nazwa klucza / dlugosc zwracanego ciagu
+function ExportScript.Tools.getListIndicatorValueByName(IndicatorID, NameID, Length)
+	local ListIindicator = list_indication(IndicatorID)
+	
+	if ListIindicator == "" then
+		return nil
+    end
+    
+    local data = ""
+    -- tworzy pusty string o danej dlugosci
+    while data:len() < Length do data = data .. " " end
+
+	local ListindicatorMatch = ListIindicator:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+	while true do
+		local Key, Value = ListindicatorMatch()
+		if not Key then
+			break
+        end
+        if Key == NameID then
+            Value = data .. Value
+            return Value:sub(-Length)
+        end
+	end
+	return data
+end
+
 -- The function format a given string for a display
 -- String: value for show in display, maxChars: Display size (default 5), LEFTorRIGHT: flush with left "l" or right "r" site (default "r")
 function ExportScript.Tools.DisplayFormat(String, maxChars, LEFTorRight, DAC)
