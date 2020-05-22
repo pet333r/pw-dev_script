@@ -7,6 +7,38 @@ ExportScript.ConfigEveryFrameArguments =
 	[3761] = "%1d",	-- PILOT AOA Optimum (yellow)
 	[3762] = "%1d",	-- PILOT AOA Fast (red)
 
+	-- DISPLAY Panel: Mode
+	[1015] = "%1d", -- Take-Off Mode
+	[1014] = "%1d", -- Cruise Mode
+	[1013] = "%1d", -- Air-to-Air Mode
+	[1012] = "%1d", -- Air-to-Ground Mode
+	[1011] = "%1d", -- Landing Mode
+
+	-- DISPLAY Panel: Steer CMD
+	[1002] = "%1d", -- TACAN
+	[1003] = "%1d", -- Destination
+	[1004] = "%1d", -- AWL PCD
+	[1005] = "%1d", -- Vector
+	[1006] = "%1d", -- Manual
+
+	-- DISPLAY Panel: HUD
+	[1021] = "%1d", -- HUD De-clutter On/Off
+	[1020] = "%1d", -- HUD AWL Mode
+
+	-- DISPLAY Panel: VDI
+	[1019] = "%1d", -- VDI Display Mode
+	[1018] = "%1d", -- VDI Landing Mode
+
+	-- DISPLAY Panel: HSD
+	[1016] = "%1d", -- HSD Display Mode
+	[1017] = "%1d", -- HSD ECM Override
+
+	-- DISPLAY Panel: Power
+	[1010] = "%1d", -- VDI Power On/Off
+	[1009] = "%1d", -- HUD Power On/Off
+	[1008] = "%1d", -- HSD/ECMD Power On/Off
+
+	-- Caution panel
 	[15016] = "%1d", -- 	PLT_WARN_LGEN 		 Left Generator (yellow)
 	[15017] = "%1d", -- 	PLT_WARN_LOILHOT 	 Left Oil Hot (yellow)
 	[15018] = "%1d", -- 	PLT_WARN_LFUELPRESS  Left Fuel Pressure (yellow)

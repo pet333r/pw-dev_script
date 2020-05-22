@@ -74,6 +74,14 @@ ExportScript.ConfigEveryFrameArguments =
 	[669] = "%1d",	-- M91 Indicator Light
 	[670] = "%1d",	-- M92 Indicator Light
 	[671] = "%1d",	-- M93 Indicator Light
+
+	[574] = "%.1f", -- INS Parameter Selector
+	[570] = "%1d",  -- PREP Switch
+	[572] = "%1d",  -- DEST Switch
+	[576] = "%1d",  -- Offset Waypoint/Target (BAD)
+	[578] = "%1d",  -- INS Update (REC)
+	[580] = "%1d",  -- Validate Data Entry (VAL)
+	[582] = "%1d",  -- Mark Position (MRC)
 }
 
 ExportScript.ConfigArguments = 
@@ -107,7 +115,7 @@ local function getPCNDispL()
 		 return value:sub(-9)
 	   end
 	 end
- return "        "
+ return "         "
  end
  
  local function getPCNDigitR()
@@ -296,13 +304,16 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		ExportScript.Tools.SendData(2024, ExportScript.Tools.getListIndicatorValueByName(5, "text_PCA_BR4", 3))
 		ExportScript.Tools.SendData(2025, ExportScript.Tools.getListIndicatorValueByName(5, "text_PCA_BR5", 3))
 
-		ExportScript.Tools.SendData(2031, getPCNDispDest())
-		ExportScript.Tools.SendData(2032, getPCNDispL())
-		ExportScript.Tools.SendData(2033, getPCNDispPrep())
-		ExportScript.Tools.SendData(2034, getPCNDispR())
-		ExportScript.Tools.SendData(2035, getPCNDigitL())
-		ExportScript.Tools.SendData(2036, getPCNDigitR())
-		ExportScript.Tools.SendData(2037, getPCN2DigitL())
-		ExportScript.Tools.SendData(2038, getPCN2DigitR())
+		-- up
+		ExportScript.Tools.SendData(2031, getPCN2DigitL())		-- up/left 2-digit vertical
+		ExportScript.Tools.SendData(2032, getPCNDispL())		-- up/left 8-digit
+		ExportScript.Tools.SendData(2033, getPCN2DigitR())		-- up/middle 2-digit vertical
+		ExportScript.Tools.SendData(2034, getPCNDispR())		-- up/right 9-digit
+
+		-- dn
+		ExportScript.Tools.SendData(2041, getPCNDispPrep())		-- dn/left 2-digit
+		ExportScript.Tools.SendData(2042, getPCNDispDest())		-- dn/mid 2-digit
+		--ExportScript.Tools.SendData(2035, getPCNDigitL())
+		--ExportScript.Tools.SendData(2036, getPCNDigitR())
 	end
 end
