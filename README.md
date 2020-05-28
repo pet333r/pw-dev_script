@@ -4,7 +4,7 @@ Script for exporting data from DCS World
 
 # HOW TO INSTALL SCRIPT > Video
 Step by step how to install DCS World script  
-## Click on the link or graphic to play the video on YouTube: [https://youtu.be/qGfzUdCVLwc](https://youtu.be/qGfzUdCVLwc)
+### Click on the link or graphic to play the video on YouTube: [https://youtu.be/qGfzUdCVLwc](https://youtu.be/qGfzUdCVLwc)
 
 [![IMAGE ALT TEXT HERE](https://i9.ytimg.com/vi/qGfzUdCVLwc/mqdefault.jpg?time=1590659620001&sqp=CMiSvvYF&rs=AOn4CLB61i5uBikeuXCUyC2qnznosBU4fA)](https://youtu.be/qGfzUdCVLwc)
 
