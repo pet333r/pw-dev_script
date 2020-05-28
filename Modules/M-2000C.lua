@@ -4,11 +4,14 @@ ExportScript.FoundDCSModule = true
 ExportScript.ConfigEveryFrameArguments = 
 {
 	-- PCA
+	[234] = "%1d", 	-- Master Arm Switch
 	[236] = "%1d", 	-- Button 1 S Light
 	[238] = "%1d", 	-- Button 2 S Light
 	[240] = "%1d", 	-- Button 3 S Light
 	[242] = "%1d", 	-- Button 4 S Light
 	[244] = "%1d", 	-- Button 5 S Light
+	[246] = "%1d", 	-- Gun Mode Button KL1 Light
+	[247] = "%1d", 	-- Gun Mode Button KL1 Light
 	[251] = "%1d",	-- Weapons Button 1 S Light
 	[252] = "%1d",	-- Weapons Button 1 R Light
 	[254] = "%1d",	-- Weapons Button 2 S Light
@@ -62,6 +65,7 @@ ExportScript.ConfigEveryFrameArguments =
 	[563] = "%1d",	--  PARK.
 
 	-- PCN
+	-- [569] = "%1d",	-- UNI Light
 	[571] = "%1d",	-- PREP Button Light
 	[573] = "%1d",	-- DEST Button Light
 	[577] = "%1d",	-- BAD Button Light

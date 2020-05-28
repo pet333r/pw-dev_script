@@ -190,7 +190,17 @@ DEDLayout_l1["INTG INTG Mode"] = {8,4}
 DEDLayout_l1["INTG TIM Event"] = {20,3}
 --DEDLayout_l1[""] = {,}
 
---TODO
+--NAV
+DEDLayout_l1["NAV Status lbl"] = {6,12}
+DEDLayout_l1["INS_SelectedSteerpoint"] = {20,1}
+DEDLayout_l1["INS_STPT_IncDecSymbol"] = {23,1}
+DEDLayout_l1["INS_STPT_IncDecSymbol"] = {23,1}
+--MAN
+DEDLayout_l1["MAN Label"] = {10,3}
+DEDLayout_l1["MAN STPT Num"] = {20,2}
+DEDLayout_l1["MAN IncDecSymbol"] = {23,1}
+
+--TODO LINE 2
 DEDLayout_l2["TODO remove lbl"]={4,20}
 --CNI
 DEDLayout_l2["UHF Status"]={1,1}
@@ -273,6 +283,14 @@ DEDLayout_l2["TGP CODE Asteriscs_both"] = {12,1,17,"","I"}
 
 --DEDLayout_l2[""] = {,}
 
+--NAV
+DEDLayout_l2["SYS ACCURACY label"] = {3,9}
+DEDLayout_l2["SYS ACCURACY value"] = {14,4}
+--MAN
+DEDLayout_l2["WSPAN Label"] = {6,5}
+DEDLayout_l2["WSPAN DATA"] = {13,1}
+
+--TODO LINE 3
 --CNI
 DEDLayout_l3["VHF Label"]={1,3}
 DEDLayout_l3["VHF IncDecSymbol"]={5,1}
@@ -407,8 +425,15 @@ DEDLayout_l3["INTG M4 Code"] = {20,1,0,"_inv","I"}
 DEDLayout_l3["INTG M4 Key"] = {21,3}
 --DEDLayout_l3[""] = {,}
 
+--NAV
+DEDLayout_l3["FILTER MODE label"] = {3,11}
+DEDLayout_l3["FILTER MODE value"] = {16,4}
+DEDLayout_l3["GPS ACCURACY label"] = {3,9}
+DEDLayout_l3["GPS ACCURACY value"] = {14,4}
+--MAN
+DEDLayout_l3["MBAL Label"] = {10,4}
 
---TODO
+--TODO LINE 4
 DEDLayout_l4["TODO remove label"] = {4,20}
 --CNI
 DEDLayout_l4["VHF Status"]={1,1}
@@ -533,6 +558,18 @@ DEDLayout_l4["INTG IJAM Mode"] = {15,4}
 DEDLayout_l4["INTG IJAM Key"] = {20,3}
 --DEDLayout_l4[""] = {,}
 
+--NAV
+DEDLayout_l4["RESET GPS label"] = {6,11}
+DEDLayout_l4["MSN DUR label"] = {3,17}
+DEDLayout_l4["DAYS label"] = {16,4}
+DEDLayout_l4["Scratchpad"] = {12,2}
+--MAN
+DEDLayout_l4["RNG Label"] = {8,3}
+DEDLayout_l4["RNG Data"] = {11,1}
+DEDLayout_l4["RNG FT"] = {18,2}
+
+
+--TODO LINE 5
 --CNI
 DEDLayout_l5["IFF Modes Label"]={1,1}
 DEDLayout_l5["IFF Modes Enabled"]={2,6}
@@ -632,6 +669,15 @@ DEDLayout_l5["INTG Scratchpad"] = {10,5,0,"_inv","I"}
 DEDLayout_l5["INTG COUPLE Mode"] = {16,4,0,"_inv","I"}
 DEDLayout_l5["INTG COUPLE Key"] = {20,3}
 --DEDLayout_l5[""] = {,}
+
+--NAV
+DEDLayout_l5["Keys Msg"] = {3,13}
+DEDLayout_l5["ZEROIZE GPS label"] = {6,11}
+--MAN
+DEDLayout_l5["TOF Label"] = {8,3}
+DEDLayout_l5["TOF Data"] = {11,1}
+DEDLayout_l5["TOF SEC"] = {17,3}
+
 DEDLayout = {DEDLayout_l1, DEDLayout_l2, DEDLayout_l3, DEDLayout_l4, DEDLayout_l5}
 
 -- DED Display Main Function -----------------------------------------------
@@ -708,6 +754,13 @@ local function buildDEDLine(line)
 	return dataLine
 end
 
+-- Unicode UTF-16
+function ExportScript.replaceSymbols(s)
+	s = s:gsub("a", "↕") --DEGREE		"°"
+	s = s:gsub("o", "°") --INC_DEC		"±"
+	return s
+end
+
 -- Pointed to by ProcessDCSHighImportance
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
@@ -732,11 +785,13 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 
 	if ExportScript.Config.ExportDisplaysF16 == true then
 		-- Build DED Display Lines
-		DEDLine1 = buildDEDLine(1);
-		DEDLine2 = buildDEDLine(2);
-		DEDLine3 = buildDEDLine(3);
-		DEDLine4 = buildDEDLine(4);
-		DEDLine5 = buildDEDLine(5);
+		DEDLine1 = ExportScript.replaceSymbols(buildDEDLine(1)) --buildDEDLine(1);
+		DEDLine2 = ExportScript.replaceSymbols(buildDEDLine(2)) --buildDEDLine(2);
+		DEDLine3 = ExportScript.replaceSymbols(buildDEDLine(3)) --buildDEDLine(3);
+		DEDLine4 = ExportScript.replaceSymbols(buildDEDLine(4)) --buildDEDLine(4);
+		DEDLine5 = ExportScript.replaceSymbols(buildDEDLine(5)) --buildDEDLine(5);
+
+		
 
 		ExportScript.Tools.SendData(2101, DEDLine1)
 		ExportScript.Tools.SendData(2102, DEDLine2)

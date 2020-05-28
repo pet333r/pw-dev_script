@@ -19,7 +19,7 @@ ExportScript.ConfigEveryFrameArguments =
 	-- [84] = "%.2f",		-- EngineLeftFuelFlow
     -- [85] = "%.2f",		-- EngineRightFuelFlow
 
-    	-- AAP
+    -- AAP
     [473] = "%0.1f",    -- PNT-LVR-STEER-PT-SEL-SWITCH (Use Steerpoint From Active Flight Plan)
     [474] = "%1d",      -- PNT-TMB-STEER-SPRING-LD-SWITCH (Toggle Steerpoint)
     [475] = "%0.1f",    -- PNT-LEV-PAGE-SEL-SWITCH (CDU Page Select)
@@ -34,6 +34,15 @@ ExportScript.ConfigEveryFrameArguments =
     [102] = "%1d",      -- Fire Eng 1
     [103] = "%1d",      -- Fire APU
     [104] = "%1d",      -- Fire Eng 2
+
+    [360] = "%.1f",      -- Missile Warning System OFF - ON - (MENU)
+    [361] = "%.1f",      -- Jammer OFF - ON - (MENU)
+    [362] = "%.1f",      -- Radar Warning Receiver OFF - ON - (MENU)
+    [363] = "%.1f",      -- Countermeasure Dispenser OFF - ON - (MENU)
+
+    [372] = "%1d",      -- ML Light
+    [373] = "%1d",      -- PRI Light
+    [374] = "%1d",      -- UNK Light
 
     -- Caution Panel LAMPS
 	[480] = "%1d",		-- ENG_START_CYCLE
@@ -20792,7 +20801,7 @@ function ExportScript.replaceSymbols(s)
 	s = s:gsub(string.char(0xBB), "→") --Right Arrow 	"→"
 	s = s:gsub(string.char(0xAB), "←") --Left Arrow 	"←"
 	s = s:gsub(string.char(0xB6), "█") --Cursor		"█"
-	s = s:gsub(string.char(0xA1), "࢐") --DATA_ENTRY	"⌷"
+	s = s:gsub(string.char(0xA1), "࢐") --DATA_ENTRY	"⌷" "࢐"
 	s = s:gsub(string.char(0xAE), "↕") --UpDown Arrow	"↕"
 	--s = s:gsub("*"              , "*") -- Asterisk 	"*"
 	return s
