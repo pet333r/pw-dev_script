@@ -115,36 +115,6 @@ ExportScript.ConfigArguments =
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
 
-function processUFCLine(ufcLine, lineNum)
-	local txt_win 		= ufcLine["txt_win"..lineNum]
-	local txt_win_fill 	= ufcLine["txt_win"..lineNum.."_fill"]
-	local cur_win		= ufcLine["cur_win"..lineNum]
-    local txt_winr		= ufcLine["txt_win"..lineNum.."r"]
-    local cur_winr		= ufcLine["cur_win"..lineNum.."r"]
-	local UFCLineLength = 8
-	if txt_win_fill ~= null then
-		local full_txt_win_fill  = txt_win_fill..string.rep(" ",UFCLineLength - string.len(txt_win_fill))
-		if txt_win ~= null then
-			if cur_win ~= null then
-				processedUFCLine = string.sub(txt_win,1,string.len(txt_win) - string.len(cur_win))..cur_win..string.sub(full_txt_win_fill,string.len(txt_win) + 1)
-			else
-				processedUFCLine = txt_win..string.sub(full_txt_win_fill,string.len(txt_win) + 1)
-			end
-    	else
-			if cur_winr ~= null then
-				processedUFCLine = string.sub(full_txt_win_fill,1,UFCLineLength - string.len(txt_winr))..string.sub(txt_winr,1,string.len(txt_winr) - string.len(cur_winr))..cur_winr
-      		else
-				processedUFCLine = string.sub(full_txt_win_fill,1,UFCLineLength - string.len(txt_winr))..txt_winr
-			end
-    	end
-	elseif txt_win ~= null then
-		processedUFCLine = txt_win
-	else
-		processedUFCLine = txt_winr
-	end
-	return processedUFCLine		
-end
-
 function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
     --if ExportScript.Config.ExportDisplaysJF17 == true then
     local radio = ExportScript.Tools.getListIndicatorValue(7)
@@ -167,14 +137,10 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
     local indLcd2 = ExportScript.Tools.getListIndicatorValue(4)
     local indLcd3 = ExportScript.Tools.getListIndicatorValue(5)
     local indLcd4 = ExportScript.Tools.getListIndicatorValue(6)
---    local ufcLcdLine1 = coerce_nil_to_string(indLcd1.txt_win1)
---    local ufcLcdLine2 = coerce_nil_to_string(indLcd2.txt_win2)
---    local ufcLcdLine3 = coerce_nil_to_string(indLcd3.txt_win3)
---    local ufcLcdLine4 = coerce_nil_to_string(indLcd4.txt_win4)
-    local ufcLcdLine1 = coerce_nil_to_string(processUFCLine(indLcd1,1))
-    local ufcLcdLine2 = coerce_nil_to_string(processUFCLine(indLcd2,2))
-    local ufcLcdLine3 = coerce_nil_to_string(processUFCLine(indLcd3,3))
-    local ufcLcdLine4 = coerce_nil_to_string(processUFCLine(indLcd4,4))
+    local ufcLcdLine1 = coerce_nil_to_string(indLcd1.txt_win1)
+    local ufcLcdLine2 = coerce_nil_to_string(indLcd2.txt_win2)
+    local ufcLcdLine3 = coerce_nil_to_string(indLcd3.txt_win3)
+    local ufcLcdLine4 = coerce_nil_to_string(indLcd4.txt_win4)
     
     ExportScript.Tools.SendData(2001, ufcLcdLine1)
     ExportScript.Tools.SendData(2002, ufcLcdLine2)

@@ -6,7 +6,7 @@ Script for exporting data from DCS World
 Step by step how to install DCS World script  
 ### Click on the link or graphic to play the video on YouTube: [https://youtu.be/01tmF0n3mjQ](https://youtu.be/01tmF0n3mjQ)
 
-[![How to install script](https://i9.ytimg.com/vi/01tmF0n3mjQ/mq1.jpg?sqp=COuXvvYF&rs=AOn4CLA7K8ool-vKjk4Qi5SeJVfXjpFBZQ)](https://youtu.be/01tmF0n3mjQ)
+[![How to install script](.gfx/yt_script.jpg)](https://youtu.be/01tmF0n3mjQ)
 
 # latest script version in zip file
 if you have any problem understanding how the DCS World script should be installed, download the zip file, it contains a schematic of the entire "Scripts" folder along with the main "Export.lua" file and the entire script
@@ -18,14 +18,14 @@ you'll find it on the "Releases" page
 
 ![](.gfx/icon_dcsufc.png) ![](.gfx/icon_aoa.png) ![](.gfx/icon_mfdexporter.png)
 
-* DCS AoA Indexer > [https://play.google.com/store/apps/details?id=com.dcsaoaindexer](https://play.google.com/store/apps/details?id=com.dcsaoaindexer)
 * DCS UFC [https://play.google.com/store/apps/details?id=com.dcsufc](https://play.google.com/store/apps/details?id=com.dcsufc)
+* DCS AoA Indexer > [https://play.google.com/store/apps/details?id=com.dcsaoaindexer](https://play.google.com/store/apps/details?id=com.dcsaoaindexer)
 * DCS World MFD Exporter [http://pw-developer.com/soft_dcs_mfd.html](http://pw-developer.com/soft_dcs_mfd.html)
 * SimFDR [http://pw-developer.com/soft_simfdr.html](http://pw-developer.com/soft_simfdr.html)
 * DCS Script Tester [http://pw-developer.com/soft_udp.html](http://pw-developer.com/soft_udp.html)
 
-[![DCS UFC](https://i9.ytimg.com/vi/qGfzUdCVLwc/mqdefault.jpg?time=1590659626854&sqp=CMiSvvYF&rs=AOn4CLB61i5uBikeuXCUyC2qnznosBU4fA)](https://youtu.be/qGfzUdCVLwc)  
-[![DCS AoA Indexer](https://i9.ytimg.com/vi/OU6KO8tjmGo/mq1.jpg?sqp=CPObvvYF&rs=AOn4CLDm57daXCZ1JgJAvkLxekGQOVkonw)](https://youtu.be/OU6KO8tjmGo)
+[![DCS UFC](.gfx/yt_dcsufc.jpg)](https://youtu.be/qGfzUdCVLwc)  
+[![DCS AoA Indexer](.gfx/yt_aoa.jpg)](https://youtu.be/OU6KO8tjmGo)
 
 # manual installation
 
