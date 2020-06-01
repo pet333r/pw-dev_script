@@ -16,7 +16,9 @@ you'll find it on the "Releases" page
 
 # supported software
 
-![https://play.google.com/store/apps/details?id=com.dcsufc](.gfx/icon_dcsufc.png) ![https://play.google.com/store/apps/details?id=com.dcsaoaindexer](.gfx/icon_aoa.png) ![http://pw-developer.com/soft_dcs_mfd.html](.gfx/icon_mfdexporter.png)
+[![](.gfx/icon_dcsufc.png)](https://play.google.com/store/apps/details?id=com.dcsufc) 
+[![](.gfx/icon_aoa.png)](https://play.google.com/store/apps/details?id=com.dcsaoaindexer) 
+[![](.gfx/icon_mfdexporter.png)](http://pw-developer.com/soft_dcs_mfd.html)
 
 * DCS UFC [https://play.google.com/store/apps/details?id=com.dcsufc](https://play.google.com/store/apps/details?id=com.dcsufc)
 * DCS AoA Indexer > [https://play.google.com/store/apps/details?id=com.dcsaoaindexer](https://play.google.com/store/apps/details?id=com.dcsaoaindexer)
