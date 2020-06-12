@@ -19,6 +19,13 @@ ExportScript.ConfigEveryFrameArguments =
 	-- [84] = "%.2f",		-- EngineLeftFuelFlow
     -- [85] = "%.2f",		-- EngineRightFuelFlow
 
+    [358] = "%1d", -- JTSN / OFF
+    [360] = "%1d", -- Missile Warning System OFF - ON - (MENU)
+    [361] = "%1d", -- Jammer OFF - ON - (MENU)
+    [362] = "%1d", -- Radar Warning Receiver OFF - ON - (MENU)
+    [363] = "%1d", -- Countermeasure Dispenser OFF - ON - (MENU)
+    [364] = "%0.1f", -- CMSP Mode Select
+
     -- AAP
     [473] = "%0.1f",    -- PNT-LVR-STEER-PT-SEL-SWITCH (Use Steerpoint From Active Flight Plan)
     [474] = "%1d",      -- PNT-TMB-STEER-SPRING-LD-SWITCH (Toggle Steerpoint)
