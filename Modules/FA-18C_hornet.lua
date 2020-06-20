@@ -4,9 +4,9 @@ ExportScript.FoundDCSModule = true
 ExportScript.ConfigEveryFrameArguments = 
 {
 	-- AoA Indexer Lights
-	[4] = "%1d",   -- CPT_LTS_AOA_HIGH
-	[5] = "%1d",   -- CPT_LTS_AOA_CENTER
-	[6] = "%1d",   -- CPT_LTS_AOA_LOW
+	[4] = "%.1f",   -- CPT_LTS_AOA_HIGH
+	[5] = "%.1f",   -- CPT_LTS_AOA_CENTER
+	[6] = "%.1f",   -- CPT_LTS_AOA_LOW
 
 	-- Fire Systems
 	[46] = "%1d",   -- Fire Extinguisher Pushbutton

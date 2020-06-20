@@ -3,6 +3,9 @@ ExportScript.FoundDCSModule = true
 
 ExportScript.ConfigEveryFrameArguments = 
 {
+	-- RIO CAP
+	[98] = "%0.1f",	-- RIO CAP Category
+
 	[3760] = "%1d",	-- PILOT AOA Slow (green)
 	[3761] = "%1d",	-- PILOT AOA Optimum (yellow)
 	[3762] = "%1d",	-- PILOT AOA Fast (red)
