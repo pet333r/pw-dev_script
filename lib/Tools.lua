@@ -141,14 +141,16 @@ function ExportScript.Tools.ProcessSelfData()
     local _packet = string.format("%s;%s;%s;%s;%s;%s;%s;%s;\r\n", sModule, sGeo, sCourse, sSpeed, sPlane, sMechanics, sCountermeasures, sWind)
 
     local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() end)
-        try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host, ExportScript.Config.Port))
-        if ExportScript.Config.Export2 == true then
+        if ExportScript.Config.Export1SD == true then
+            try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host, ExportScript.Config.Port))
+        end
+        if ExportScript.Config.Export2SD == true then
             try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host2, ExportScript.Config.Port2))
         end
-        if ExportScript.Config.Export3 == true then
+        if ExportScript.Config.Export3SD == true then
             try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host3, ExportScript.Config.Port3))
         end
-        if ExportScript.Config.Export4 == true then
+        if ExportScript.Config.Export4SD == true then
             try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host4, ExportScript.Config.Port4))
         end
 end
