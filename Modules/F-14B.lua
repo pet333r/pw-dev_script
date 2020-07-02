@@ -53,6 +53,10 @@ ExportScript.ConfigEveryFrameArguments =
 	[1009] = "%1d", -- HUD Power On/Off
 	[1008] = "%1d", -- HSD/ECMD Power On/Off
 
+	[9357] = "%1d",		-- Pilot SAM
+	[9358] = "%1d",		-- Pilot AAA
+	[9359] = "%1d",		-- Pilot AI
+
 	-- Caution panel
 	[15016] = "%1d", -- 	PLT_WARN_LGEN 		 Left Generator (yellow)
 	[15017] = "%1d", -- 	PLT_WARN_LOILHOT 	 Left Oil Hot (yellow)

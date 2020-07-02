@@ -180,8 +180,9 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		local txt_TEMP_R 		= coerce_nil_to_string(ifei.txt_TEMP_R)
 		local txt_Codes 		= coerce_nil_to_string(ifei.txt_Codes)
 		local txt_SP 			= coerce_nil_to_string(ifei.txt_SP)
+		local txt_T 			= coerce_nil_to_string(ifei.txt_T)
 		local txt_TimeSetMode 	= coerce_nil_to_string(ifei.txt_TimeSetMode)
-
+		
 		ExportScript.Tools.SendData(2101, txt_BINGO)
 		ExportScript.Tools.SendData(2102, txt_CLOCK_H .. ":" .. txt_CLOCK_M .. ":" .. txt_CLOCK_S)
 		ExportScript.Tools.SendData(2103, txt_TIMER_H .. ":" .. txt_TIMER_M .. ":" .. txt_TIMER_S)
@@ -199,8 +200,9 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		ExportScript.Tools.SendData(2115, txt_RPM_R)
 		ExportScript.Tools.SendData(2116, txt_TEMP_L)
 		ExportScript.Tools.SendData(2117, txt_TEMP_R)
-		ExportScript.Tools.SendData(2118, txt_Codes)
-		ExportScript.Tools.SendData(2119, txt_SP)
-		ExportScript.Tools.SendData(2120, txt_TimeSetMode)
+		ExportScript.Tools.SendData(2118, txt_SP)
+		ExportScript.Tools.SendData(2119, txt_Codes)
+		ExportScript.Tools.SendData(2120, txt_T)
+		ExportScript.Tools.SendData(2121, txt_TimeSetMode)
 	end
 end

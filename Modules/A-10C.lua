@@ -99,7 +99,11 @@ ExportScript.ConfigEveryFrameArguments =
 	[524] = "%1d",		-- APU_GEN
 	[525] = "%1d",		-- L_GEN
 	[526] = "%1d",		-- R_GEN
-	[527] = "%1d",		-- INST_INV
+    [527] = "%1d",		-- INST_INV
+    
+    [730] = "%1d",		-- Air Refuel READY
+    [731] = "%1d",		-- Air Refuel LATCHED
+    [732] = "%1d",		-- Air Refuel DISCONNECT
 }
 
 ExportScript.ConfigArguments = 
