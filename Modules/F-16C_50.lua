@@ -774,8 +774,8 @@ end
 
 -- Unicode UTF-16
 function ExportScript.replaceSymbols(s)
-	s = s:gsub("a", "↕") --DEGREE		"°"
-	s = s:gsub("o", "°") --INC_DEC		"±"
+	s = s:gsub("a", "¦") -- INC_DEC		"±"
+	s = s:gsub("o", "°") -- DEGREE		"°"
 	return s
 end
 

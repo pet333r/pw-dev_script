@@ -19,12 +19,31 @@ ExportScript.ConfigEveryFrameArguments =
 	-- [84] = "%.2f",		-- EngineLeftFuelFlow
     -- [85] = "%.2f",		-- EngineRightFuelFlow
 
+
+
+    [662] = "%1d", -- GUN READY Indicator
+    [663] = "%1d", -- Nosewheel Steering Indicator
+    [664] = "%1d", -- MARKER BEACON Indicator
+    [665] = "%1d", -- CANOPY UNLOCKED Indicator
+
     [358] = "%1d", -- JTSN / OFF
     [360] = "%1d", -- Missile Warning System OFF - ON - (MENU)
     [361] = "%1d", -- Jammer OFF - ON - (MENU)
     [362] = "%1d", -- Radar Warning Receiver OFF - ON - (MENU)
     [363] = "%1d", -- Countermeasure Dispenser OFF - ON - (MENU)
     [364] = "%0.1f", -- CMSP Mode Select
+
+    -- AHCP
+    [375] = "%.1f", -- Master Arm TRAIN - SAFE - ARM
+    [376] = "%.1f", -- GUN/PAC GUNARM - SAFE - ARM
+    [377] = "%.1f", -- Laser Arm TRAIN - SAFE - ARM
+    [378] = "%1d", -- TGP OFF - ON
+    [379] = "%.1f", -- Altimeter Source RADAR - DELTA - BARO
+    [380] = "%1d", -- Hud Mode NIGHT - DAY
+    [381] = "%1d", -- Hud Mode STBY - NORM
+    [382] = "%1d", -- CICU OFF - ON
+    [383] = "%1d", -- JTRS OFF - ON
+    [384] = "%.1f", -- IFFCC OFF - TEST - ON
 
     -- AAP
     [473] = "%0.1f",    -- PNT-LVR-STEER-PT-SEL-SWITCH (Use Steerpoint From Active Flight Plan)

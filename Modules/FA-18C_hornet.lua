@@ -30,6 +30,7 @@ ExportScript.ConfigEveryFrameArguments =
 	[23] = "%1d",   -- CPT_LTS_L_BAR_GREEN
 	[24] = "%1d",   -- CPT_LTS_XMIT
 	[25] = "%1d",   -- CPT_LTS_ASPJ_OH
+
 	-- RH Advisory and Threat Warning Indicator Panel
 	[26] = "%1d",   -- CPT_LTS_FIRE_RIGHT
 	[29] = "%1d",   -- CPT_LTS_FIRE_APU
@@ -44,6 +45,19 @@ ExportScript.ConfigEveryFrameArguments =
 	[39] = "%1d",   -- CPT_LTS_AI
 	[40] = "%1d",   -- CPT_LTS_AAA
 	[41] = "%1d",   -- CPT_LTS_CW
+
+	-- Jettison / Landing gear
+	[152] = "%1d",   -- CTR Light
+	[154] = "%1d",   -- LI Light
+	[156] = "%1d",   -- LO Light
+	[158] = "%1d",   -- RI Light
+	[160] = "%1d",   -- RO Light
+	[166] = "%1d",   -- NOSE GEAR
+	[165] = "%1d",   -- LEFT GEAR
+	[167] = "%1d",   -- RIGHT GEAR
+	[163] = "%1d",   -- HALF FLAPS
+	[164] = "%1d",   -- FULL FLAPS
+	[162] = "%1d",   -- FLAPS
 
 	-- Caution Lights Panel
 	[298] = "%1d", -- CK SEAT

@@ -29,64 +29,31 @@ you'll find it on the "Releases" page
 [![DCS UFC](.gfx/yt_dcsufc.jpg)](https://youtu.be/qGfzUdCVLwc)  
 [![DCS AoA Indexer](.gfx/yt_aoa.jpg)](https://youtu.be/OU6KO8tjmGo)
 
-# manual installation
+# installation
 
-click that green button `Clone or download` and download ZIP file, save it wherevere You want on disk and unpack
+download latest script version in ZIP file from this link: [https://github.com/pet333r/pw-dev_script/releases/download/script/Scripts.zip](https://github.com/pet333r/pw-dev_script/releases/download/script/Scripts.zip), save it wherevere You want on disk and unpack
 
 next go to and open folder: (depending on the DCS World version you have installed..)
 * `c:\Users\{Your username}\Saved Games\DCS.openbeta\Scripts\`
 * `c:\Users\{Your username}\Saved Games\DCS\Scripts\`  
 or if you have both, choose one or both DCS versions to install script;-)
 
-if You don't have folder `Scripts`, simply create it and inside create file `Export.lua`
-open it for edit, I recommend Notepad++ for this and add: 
+## if you don't have a folder "Scripts"
+
+if You don't have folder `Scripts`, simply copy folder `Scripts` from unpacked ZIP file to one of the locations and go to [Edit Config.lua](##edit-Config.lua)
+
+## if you have "Scripts" folder and have installed other scripts
+
+- copy `pw-dev_script` folder from unpacked ZIP file into `Scripts` folder 
+- open main `Export.lua` file in `Scripts` folder (recommend Notepad++ for this) and add this code to the beginning of the file (above the entries for other scripts, example here: [compability](#compability)) 
 
 ```
-local lfs=require('lfs');
-dofile(lfs.writedir()..[[Scripts\pw-dev_script\Export.lua]])
+local lfs=require('lfs'); dofile(lfs.writedir()..[[Scripts\pw-dev_script\Export.lua]])
 ```
-save & close
+- save & close
+- now go to [Edit Config.lua](##edit-Config.lua)
 
-in `Scripts` folder create folder `pw-dev_script`, next put all files from extracted ZIP into this folder, the scheme of the folder with files should look like this  
-```
-\Scripts
-  - \pw-dev_script
-    - \lib
-    - \Modules
-    -  Config.lua
-    -  Export.lua
-  ``` 
-
-## automatic update script
-
-in the future, just run the file `update_pw-dev_script.bat` to download the latest version of the script (the `Config.lua` file will be kept, the others will be replaced with the latest version)  
-just run it from time to time or add a shortcut in the Windows Startup folder to have the script updated during system startup
-
-## edit Config.lua 
-in folder `pw-dev_script` open `Config.lua` for edit,  
-there are several "groups" in the file: 
-* device 1
-* device 2
-* device 3
-* device 4
-
-choose one of them and edit `Host` and `Port` (you can leave port the same, in most cases you don't even need to change)  
-it is <span style="color:red">**IMPORTANT**</span> that the device's IP address matches and `PC / phone / tablet` must be on the same network  
-
-### apps
-- if You only use `DCS UFC` [https://play.google.com/store/apps/details?id=com.dcsufc](https://play.google.com/store/apps/details?id=com.dcsufc) set `ExportSelfData` to `false` (less data to be sent and processed by the application, longer battery life)
-```
-ExportScript.Config.ExportSelfData          = false
-```
-- other applications `DCS AoA Indexer` [https://play.google.com/store/apps/details?id=com.dcsaoaindexer](https://play.google.com/store/apps/details?id=com.dcsaoaindexer) must have this value set to `true` for proper working
-
-example you will find below in the screenshot
-
-To find Android device IP: go to `Settings > WiFi` > check the properties of your network   
-
-to find the IP address of the computer with DCS World installed: [https://www.digitalcitizen.life/find-ip-address-windows](https://www.digitalcitizen.life/find-ip-address-windows)
-
-# files scheme
+## files scheme
 
 this is how the file scheme with folders should look
 
@@ -98,8 +65,7 @@ this is how the file scheme with folders should look
     -  Config.lua (edit IP / port connected devices)
     -  Export.lua
 
-  - Export.lua (add:  local lfs=require('lfs');
-                      dofile(lfs.writedir()..[[Scripts\pw-dev_script\Export.lua]]))
+  - Export.lua add:  local lfs=require('lfs'); dofile(lfs.writedir()..[[Scripts\pw-dev_script\Export.lua]])
   ```
 
 should look like this (depending on the DCS version)  
@@ -108,10 +74,61 @@ folder `Scripts`
 folder `pw-dev_script` inside `Scripts`  
 ![](.gfx/folders2.png)
 
+<!--
+in `Scripts` folder create folder `pw-dev_script`, next put all files from extracted ZIP into this folder, the scheme of the folder with files should look like this  
+```
+\Scripts
+  - \pw-dev_script
+    - \lib
+    - \Modules
+    -  Config.lua
+    -  Export.lua
+  ``` 
+-->
+
+
+
+## edit Config.lua 
+in folder `pw-dev_script` open `Config.lua` for edit, there are several "groups" in the file: 
+* device 1
+* device 2
+* device 3
+* device 4
+
+choose one of them and edit `Host` and `Port` (you can leave port the same, in 99% cases you don't even need to change)  
+it is <span style="color:red">**IMPORTANT**</span> that the device's IP address matches and `PC / phone / tablet` must be on the same network  
+
+### configuration for apps
+- if You only use `DCS UFC` [https://play.google.com/store/apps/details?id=com.dcsufc](https://play.google.com/store/apps/details?id=com.dcsufc) set `ExportSelfData` to `false` (less data to be sent and processed by the application, longer battery life)
+```
+ExportScript.Config.ExportSelfData          = false
+```
+- `DCS AoA Indexer` [https://play.google.com/store/apps/details?id=com.dcsaoaindexer](https://play.google.com/store/apps/details?id=com.dcsaoaindexer) must have `ExportSelfData` and `ExportXSD` set to `true` for proper working
+```
+ExportScript.Config.ExportXSD               = true (where X is Your device group to which the IP of the device from the DCS AoA Indexer is assigned)
+...
+ExportScript.Config.ExportSelfData          = true
+```
+
+example you will find below in the [example connection](#example-connection)
+
+# automatic update script
+
+in the future, just run the file `update_pw-dev_script.bat` to download the latest version of the script (the `Config.lua` file will be kept, the others will be replaced with the latest version)  
+just run it from time to time or add a shortcut in the Windows Startup folder to have the script updated during system startup
+
+# how to find IP's of PC and Android device
+
+To find Android device IP: go to `Settings > WiFi` > check the properties of your network   
+
+to find the IP address of the computer with DCS World installed: [https://www.digitalcitizen.life/find-ip-address-windows](https://www.digitalcitizen.life/find-ip-address-windows)
+
+
+
 # example connection
 Example configuration:  
 PC IP: 192.168.1.2  
-phone IP: 192.168.1.3  
+Android device IP: 192.168.1.3  
 
 ![](.gfx/dcs_script_connection.png)
 
@@ -126,7 +143,10 @@ phone IP: 192.168.1.3
 ***`1`*** If You can interact with DCS but not receiving data  
   - You probably set wrong Your Android device IP in `Config.lua` file
 
-***`2`*** If you receive data from DCS but no button works  
+***`2`*** If Your device stopped receiving data
+  - Your router has likely assigned a different IP address to your Android device
+
+***`3`*** If you receive data from DCS but no button works  
   - check if you have the correct PC address given in the DCS UFC settings  
   - your firewall probably blocking incomming connections, turn off the firewall for a few minutes and check if everything works (to unblock the default ListenerPort: 25070 / UDP)  
   [https://www.windowscentral.com/how-open-port-windows-firewall](https://www.windowscentral.com/how-open-port-windows-firewall)
@@ -144,8 +164,7 @@ tested and works with :
  for users using SRS and VaicomPro (works when the script entry is "higher" in the file, above the SRS / VaicomPro entry)  
  example of the main `Export.lua` file (thanks to one user: `Arsenio`)
  ```
- local lfs=require('lfs');
-dofile(lfs.writedir()..[[Scripts\pw-dev_script\Export.lua]]);
+local lfs=require('lfs'); dofile(lfs.writedir()..[[Scripts\pw-dev_script\Export.lua]]);
 
 local vaicomlfs = require('lfs'); dofile(vaicomlfs.writedir()..[[Scripts\VAICOMPRO\VAICOMPRO.export.lua]]);
 

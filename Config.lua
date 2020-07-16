@@ -3,13 +3,13 @@ ExportScript.Config = {}
 
 -- device 1
 ExportScript.Config.Export      = true              -- sending data
-ExportScript.Config.Export1SD   = false              -- sendind data from SD
+ExportScript.Config.Export1SD   = false             -- sendind data from SD
 ExportScript.Config.Host        = "192.168.1.3"     -- IP for 1st app
 ExportScript.Config.Port        = 5160              -- port for sending data
 
 -- device 2
 ExportScript.Config.Export2     = true              -- sending data
-ExportScript.Config.Export2SD   = false              -- sendind data from SD
+ExportScript.Config.Export2SD   = false             -- sendind data from SD
 ExportScript.Config.Host2       = "192.168.1.4"     -- IP for 2nd app
 ExportScript.Config.Port2       = 5160              -- port for sending data
 
@@ -40,7 +40,7 @@ ExportScript.Config.FirstNewDataSend       = true
 ExportScript.Config.FirstNewDataSendCount  = 100
 
 -- data export ( change to true if You are using DCS AoA Indexer )
-ExportScript.Config.ExportSelfData          = true     -- export SelfData (Lat, Lon, Alt etc.) every LowTickInterval
+ExportScript.Config.ExportSelfData          = false     -- export SelfData (Lat, Lon, Alt etc.) every LowTickInterval
 
 -- export Displays data
 ExportScript.Config.ExportDisplaysA10C      = true      -- A-10C
