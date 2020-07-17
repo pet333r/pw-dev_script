@@ -44,16 +44,9 @@ ExportScript.ConfigEveryFrameArguments =
 	[15008] = "%.1f",	-- PILOT Console Light Intensity"
 	[15009] = "%.1f",	-- PILOT Formation Light Intensity"
 
-	-- Master Arm
-	[1046] = "%1d", 	-- PILOT Master Arm Cover
-	[1047] = "%.1f", 	-- Master Arm Switch
-	[1049] = "%1d", 	-- PILOT ACM Jettison Cover
-
 	[2001] = "%.1f", 	-- PILOT Wing Sweep Commanded
 	[2002] = "%.1f", 	-- PILOT Wing Sweep Position
 	[2047] = "%.1f", 	-- PILOT Wing Sweep Minimum Index
-
-
 
 	-- RIO CAP
 	[98] = "%.1f",		-- RIO CAP Category
@@ -67,8 +60,6 @@ ExportScript.ConfigEveryFrameArguments =
 	[5570] = "%.1f", 	-- BTN 3 Light (green)
 	[5571] = "%.1f", 	-- BTN 4 Light (green)
 	[5572] = "%.1f", 	-- BTN 5 Light (green)
-	-- [5573] = "%.1f", -- CAP TNG NBR Light
-	-- [5574] = "%.1f", -- CAP PGM Restart Light
 
 	[3760] = "%1d",		-- PILOT AOA Slow (green)
 	[3761] = "%1d",		-- PILOT AOA Optimum (yellow)
