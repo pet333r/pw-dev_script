@@ -148,33 +148,34 @@ end
 function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
     if ExportScript.Config.ExportDisplaysJF17 == true then
 
-        local comm1 = "        "
-        local comm2 = "        "
-        local radio = ExportScript.Tools.getListIndicatorValue(7)
-        if not comm1 then
-            return
-        end
-        comm1 = coerce_nil_to_string(radio.radio_disp_l1)
-        ExportScript.Tools.SendData(2011, comm1)
+        -- local comm1 = "        "
+        -- local comm2 = "        "
 
-        if not comm2 then
-            return
-        end
-        comm2 = coerce_nil_to_string(radio.radio_disp_l2)
-        ExportScript.Tools.SendData(2012, comm2)
+        -- local radio = ExportScript.Tools.getListIndicatorValue(7)
+        -- if not radio then
+        --     return
+        -- end
+        -- comm1 = coerce_nil_to_string(radio.radio_disp_l1)
+        -- ExportScript.Tools.SendData(2011, comm1)
+        -- comm2 = coerce_nil_to_string(radio.radio_disp_l2)
+        -- ExportScript.Tools.SendData(2012, comm2)
 
-        local clk1 = "        "
-        local clk2 = "        "
-        local clock1 = ExportScript.Tools.getListIndicatorValue(11)
-        if not comm2 then
-            return
-        end
-        clk1 = coerce_nil_to_string(clock1.txt_win1)
-        ExportScript.Tools.SendData(2021, clk1)
+        -- local clk1 = "        "
+        -- local clk2 = "        "
 
-        local clock2 = ExportScript.Tools.getListIndicatorValue(12)
-        clk2 = coerce_nil_to_string(clock2.txt_win2)
-        ExportScript.Tools.SendData(2022, clk2)
+        -- local clock1 = ExportScript.Tools.getListIndicatorValue(11)
+        -- if not clock1 then
+        --     return
+        -- end
+        -- clk1 = coerce_nil_to_string(clock1.txt_win1)
+        -- ExportScript.Tools.SendData(2021, clk1)
+
+        -- local clock2 = ExportScript.Tools.getListIndicatorValue(12)
+        -- if not clock2 then
+        --     return
+        -- end
+        -- clk2 = coerce_nil_to_string(clock2.txt_win2)
+        -- ExportScript.Tools.SendData(2022, clk2)
 
         local ufcLcdLine1 = "        "
         local ufcLcdLine2 = "        "
