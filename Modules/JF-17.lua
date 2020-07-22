@@ -146,39 +146,68 @@ function processUFCLine(ufcLine, lineNum)
 end
 
 function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
-    --if ExportScript.Config.ExportDisplaysJF17 == true then
-    local radio = ExportScript.Tools.getListIndicatorValue(7)
-    local comm1 = coerce_nil_to_string(radio.radio_disp_l1)
-    local comm2 = coerce_nil_to_string(radio.radio_disp_l2)
+    if ExportScript.Config.ExportDisplaysJF17 == true then
 
-    ExportScript.Tools.SendData(2011, comm1)
-    ExportScript.Tools.SendData(2012, comm2)
+        local comm1 = "        "
+        local comm2 = "        "
+        local radio = ExportScript.Tools.getListIndicatorValue(7)
+        if not comm1 then
+            return
+        end
+        comm1 = coerce_nil_to_string(radio.radio_disp_l1)
+        ExportScript.Tools.SendData(2011, comm1)
 
-    local clock1 = ExportScript.Tools.getListIndicatorValue(11)
-    local clock2 = ExportScript.Tools.getListIndicatorValue(12)
-    local clk1 = coerce_nil_to_string(clock1.txt_win1)
-    local clk2 = coerce_nil_to_string(clock2.txt_win2)
+        if not comm2 then
+            return
+        end
+        comm2 = coerce_nil_to_string(radio.radio_disp_l2)
+        ExportScript.Tools.SendData(2012, comm2)
 
-    ExportScript.Tools.SendData(2021, clk1)
-    ExportScript.Tools.SendData(2022, clk2)
+        local clk1 = "        "
+        local clk2 = "        "
+        local clock1 = ExportScript.Tools.getListIndicatorValue(11)
+        if not comm2 then
+            return
+        end
+        clk1 = coerce_nil_to_string(clock1.txt_win1)
+        ExportScript.Tools.SendData(2021, clk1)
 
-    -- 3 / 4 / 5 / 6
-    local indLcd1 = ExportScript.Tools.getListIndicatorValue(3)
-    local indLcd2 = ExportScript.Tools.getListIndicatorValue(4)
-    local indLcd3 = ExportScript.Tools.getListIndicatorValue(5)
-    local indLcd4 = ExportScript.Tools.getListIndicatorValue(6)
---    local ufcLcdLine1 = coerce_nil_to_string(indLcd1.txt_win1)
---    local ufcLcdLine2 = coerce_nil_to_string(indLcd2.txt_win2)
---    local ufcLcdLine3 = coerce_nil_to_string(indLcd3.txt_win3)
---    local ufcLcdLine4 = coerce_nil_to_string(indLcd4.txt_win4)
-    local ufcLcdLine1 = coerce_nil_to_string(processUFCLine(indLcd1,1))
-    local ufcLcdLine2 = coerce_nil_to_string(processUFCLine(indLcd2,2))
-    local ufcLcdLine3 = coerce_nil_to_string(processUFCLine(indLcd3,3))
-    local ufcLcdLine4 = coerce_nil_to_string(processUFCLine(indLcd4,4))
-    
-    ExportScript.Tools.SendData(2001, ufcLcdLine1)
-    ExportScript.Tools.SendData(2002, ufcLcdLine2)
-    ExportScript.Tools.SendData(2003, ufcLcdLine3)
-    ExportScript.Tools.SendData(2004, ufcLcdLine4)
-    --end
+        local clock2 = ExportScript.Tools.getListIndicatorValue(12)
+        clk2 = coerce_nil_to_string(clock2.txt_win2)
+        ExportScript.Tools.SendData(2022, clk2)
+
+        local ufcLcdLine1 = "        "
+        local ufcLcdLine2 = "        "
+        local ufcLcdLine3 = "        "
+        local ufcLcdLine4 = "        "
+
+        -- 3 / 4 / 5 / 6
+        local indLcd1 = ExportScript.Tools.getListIndicatorValue(3)
+        if not indLcd1 then
+            return
+        end
+        ufcLcdLine1 = coerce_nil_to_string(processUFCLine(indLcd1,1))
+        ExportScript.Tools.SendData(2001, ufcLcdLine1)
+
+        local indLcd2 = ExportScript.Tools.getListIndicatorValue(4)
+        if not indLcd2 then
+            return
+        end
+        ufcLcdLine2 = coerce_nil_to_string(processUFCLine(indLcd2,2))
+        ExportScript.Tools.SendData(2002, ufcLcdLine2)
+
+        local indLcd3 = ExportScript.Tools.getListIndicatorValue(5)
+        if not indLcd3 then
+            return
+        end
+        ufcLcdLine3 = coerce_nil_to_string(processUFCLine(indLcd3,3))
+        ExportScript.Tools.SendData(2003, ufcLcdLine3)
+
+        local indLcd4 = ExportScript.Tools.getListIndicatorValue(6)
+        if not indLcd4 then
+            return
+        end
+        ufcLcdLine4 = coerce_nil_to_string(processUFCLine(indLcd4,4))
+        ExportScript.Tools.SendData(2004, ufcLcdLine4)
+    end
 end
