@@ -56,10 +56,22 @@ ExportScript.ConfigEveryFrameArguments =
 	[540] = "%1d",	    -- AOA Indexer High
 	[541] = "%1d",	    -- AOA Indexer Normal
     [542] = "%1d",	    -- AOA Indexer Low
-        
+
+    -- Indicators
+    [662] = "%1d",	    -- GUN READY Indicator
+    [663] = "%1d",	    -- Nosewheel Steering Indicator
+    [664] = "%1d",	    -- MARKER BEACON Indicator
+    [665] = "%1d",	    -- CANOPY UNLOCKED Indicator
+    
+    -- Fire handlers
     [102] = "%1d",      -- Fire Eng 1
     [103] = "%1d",      -- Fire APU
     [104] = "%1d",      -- Fire Eng 2
+    -- Fire Indicator Lights
+    [215] = "%1d",      -- Left Engine Fire Indicator
+    [216] = "%1d",      -- APU Fire Indicator
+    [217] = "%1d",      -- Right Engine Fire Indicator
+
 
     [360] = "%.1f",      -- Missile Warning System OFF - ON - (MENU)
     [361] = "%.1f",      -- Jammer OFF - ON - (MENU)

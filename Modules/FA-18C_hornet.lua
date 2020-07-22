@@ -46,6 +46,22 @@ ExportScript.ConfigEveryFrameArguments =
 	[40] = "%1d",   -- CPT_LTS_AAA
 	[41] = "%1d",   -- CPT_LTS_CW
 
+	-- Master Arm Panel
+	[47] = "%1d",   -- AA Light
+	[48] = "%1d",   -- AG Light
+
+	-- HUD Control Panel
+	[140] = "%1d",   -- HUD Symbology Reject Switch, NORM/REJ 1/REJ 2
+	[141] = "%.1f",   -- HUD Symbology Brightness Control Knob
+	[142] = "%1d",   -- HUD Symbology Brightness Selector Knob, DAY/NIGHT
+	[143] = "%.1f",   -- Black Level Control Knob
+	[144] = "%.1f",   -- HUD Video Control Switch, W/B /VID/OFF
+	[145] = "%.1f",   -- Balance Control Knob
+	[146] = "%.1f",   -- AOA Indexer Control Knob
+	[147] = "%1d",   -- Altitude Switch, BARO/RDR
+	[148] = "%1d",   -- Attitude Selector Switch, INS/AUTO/STBY -1/0/1
+
+
 	-- Jettison / Landing gear
 	[152] = "%1d",   -- CTR Light
 	[154] = "%1d",   -- LI Light
@@ -58,6 +74,17 @@ ExportScript.ConfigEveryFrameArguments =
 	[163] = "%1d",   -- HALF FLAPS
 	[164] = "%1d",   -- FULL FLAPS
 	[162] = "%1d",   -- FLAPS
+
+	-- RWR
+	[264] = "%1d", -- ALR-67 FAIL Light (red)
+	[265] = "%1d", -- ALR-67 BIT Light (green)
+	[267] = "%1d", -- ALR-67 ENABLE Light (green)
+	[268] = "%1d", -- ALR-67 OFFSET Light (green)
+	[270] = "%1d", -- ALR-67 SPECIAL ENABLE Light (green)
+	[271] = "%1d", -- ALR-67 SPECIAL Light (green)
+	[273] = "%1d", -- ALR-67 LIMIT Light (green)
+	[274] = "%1d", -- ALR-67 DISPLAY Light (green)
+	[276] = "%1d", -- ALR-67 LOWER Light (green)
 
 	-- Caution Lights Panel
 	[298] = "%1d", -- CK SEAT
@@ -170,32 +197,83 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		ExportScript.Tools.SendData(2031, ExportScript.Tools.DisplayFormat(ExportScript.Tools.RoundFreqeuncy((_UHF2Radio:get_frequency()/1000000), "7.3", false, 0.005)), 7)
 
 		-- IFEI
+		local txt_BINGO = ""
+		local txt_CLOCK_H = ""
+		local txt_CLOCK_M = ""
+		local txt_CLOCK_S = ""
+		local txt_TIMER_H = ""
+		local txt_TIMER_M = ""
+		local txt_TIMER_S = ""
+		local txt_DD_1 = ""
+		local txt_DD_2 = ""
+		local txt_DD_3 = ""
+		local txt_DD_4 = ""
+		local txt_FF_L = ""
+		local txt_FF_R = ""
+		local txt_FUEL_DOWN = ""
+		local txt_FUEL_UP = ""
+		local txt_OilPress_L = ""
+		local txt_OilPress_R = ""
+		local txt_RPM_L = ""
+		local txt_RPM_R = ""
+		local txt_TEMP_L = ""
+		local txt_TEMP_R = ""
+		local txt_Codes = ""
+		local txt_SP = ""
+		local txt_TimeSetMode = ""
 		local ifei = ExportScript.Tools.getListIndicatorValue(5)
-		local txt_BINGO 		= coerce_nil_to_string(ifei.txt_BINGO)
-		local txt_CLOCK_H 		= coerce_nil_to_string(ifei.txt_CLOCK_H)
-		local txt_CLOCK_M 		= coerce_nil_to_string(ifei.txt_CLOCK_M)
-		local txt_CLOCK_S 		= coerce_nil_to_string(ifei.txt_CLOCK_S)
-		local txt_TIMER_H 		= coerce_nil_to_string(ifei.txt_TIMER_H)
-		local txt_TIMER_M 		= coerce_nil_to_string(ifei.txt_TIMER_M)
-		local txt_TIMER_S 		= coerce_nil_to_string(ifei.txt_TIMER_S)
-		local txt_DD_1 			= coerce_nil_to_string(ifei.txt_DD_1)
-		local txt_DD_2 			= coerce_nil_to_string(ifei.txt_DD_2)
-		local txt_DD_3 			= coerce_nil_to_string(ifei.txt_DD_3)
-		local txt_DD_4 			= coerce_nil_to_string(ifei.txt_DD_4)
-		local txt_FF_L 			= coerce_nil_to_string(ifei.txt_FF_L)
-		local txt_FF_R 			= coerce_nil_to_string(ifei.txt_FF_R)
-		local txt_FUEL_DOWN 	= coerce_nil_to_string(ifei.txt_FUEL_DOWN)
-		local txt_FUEL_UP 		= coerce_nil_to_string(ifei.txt_FUEL_UP)
-		local txt_OilPress_L 	= coerce_nil_to_string(ifei.txt_OilPress_L)
-		local txt_OilPress_R 	= coerce_nil_to_string(ifei.txt_OilPress_R)
-		local txt_RPM_L 		= coerce_nil_to_string(ifei.txt_RPM_L)
-		local txt_RPM_R 		= coerce_nil_to_string(ifei.txt_RPM_R)
-		local txt_TEMP_L 		= coerce_nil_to_string(ifei.txt_TEMP_L)
-		local txt_TEMP_R 		= coerce_nil_to_string(ifei.txt_TEMP_R)
-		local txt_Codes 		= coerce_nil_to_string(ifei.txt_Codes)
-		local txt_SP 			= coerce_nil_to_string(ifei.txt_SP)
-		local txt_T 			= coerce_nil_to_string(ifei.txt_T)
-		local txt_TimeSetMode 	= coerce_nil_to_string(ifei.txt_TimeSetMode)
+		txt_BINGO 		= "     "
+		txt_CLOCK_H 	= "  "
+		txt_CLOCK_M 	= "  "
+		txt_CLOCK_S 	= "  "
+		txt_TIMER_H 	= "  "
+		txt_TIMER_M 	= "  "
+		txt_TIMER_S 	= "  "
+		txt_DD_1 		= " "
+		txt_DD_2		= " "
+		txt_DD_3		= " "
+		txt_DD_4		= " "
+		txt_FF_L		= "   "
+		txt_FF_R		= "   "
+		txt_FUEL_DOWN	= "      "
+		txt_FUEL_UP	 	= "      "
+		txt_OilPress_L 	= "  "
+		txt_OilPress_R 	= "  "
+		txt_RPM_L		= "  "
+		txt_RPM_R		= "  "
+		txt_TEMP_L	 	= "   "
+		txt_TEMP_R	 	= "   "
+		txt_Codes	 	= "   "
+		txt_SP	 		= "   "
+		txt_TimeSetMode = "      "
+		if not ifei then
+			return
+		end
+		txt_BINGO 		= coerce_nil_to_string(ifei.txt_BINGO)
+		txt_CLOCK_H		= coerce_nil_to_string(ifei.txt_CLOCK_H)
+		txt_CLOCK_M		= coerce_nil_to_string(ifei.txt_CLOCK_M)
+		txt_CLOCK_S		= coerce_nil_to_string(ifei.txt_CLOCK_S)
+		txt_TIMER_H		= coerce_nil_to_string(ifei.txt_TIMER_H)
+		txt_TIMER_M		= coerce_nil_to_string(ifei.txt_TIMER_M)
+		txt_TIMER_S		= coerce_nil_to_string(ifei.txt_TIMER_S)
+		txt_DD_1		= coerce_nil_to_string(ifei.txt_DD_1)
+		txt_DD_2		= coerce_nil_to_string(ifei.txt_DD_2)
+		txt_DD_3		= coerce_nil_to_string(ifei.txt_DD_3)
+		txt_DD_4		= coerce_nil_to_string(ifei.txt_DD_4)
+		txt_FF_L		= coerce_nil_to_string(ifei.txt_FF_L)
+		txt_FF_R		= coerce_nil_to_string(ifei.txt_FF_R)
+		txt_FUEL_DOWN	= coerce_nil_to_string(ifei.txt_FUEL_DOWN)
+		txt_FUEL_UP		= coerce_nil_to_string(ifei.txt_FUEL_UP)
+		txt_OilPress_L	= coerce_nil_to_string(ifei.txt_OilPress_L)
+		txt_OilPress_R	= coerce_nil_to_string(ifei.txt_OilPress_R)
+		txt_RPM_L		= coerce_nil_to_string(ifei.txt_RPM_L)
+		txt_RPM_R		= coerce_nil_to_string(ifei.txt_RPM_R)
+		txt_TEMP_L		= coerce_nil_to_string(ifei.txt_TEMP_L)
+		txt_TEMP_R		= coerce_nil_to_string(ifei.txt_TEMP_R)
+		txt_Codes		= coerce_nil_to_string(ifei.txt_Codes)
+		txt_SP			= coerce_nil_to_string(ifei.txt_SP)
+		txt_T			= coerce_nil_to_string(ifei.txt_T)
+		txt_TimeSetMode	= coerce_nil_to_string(ifei.txt_TimeSetMode)
 		
 		ExportScript.Tools.SendData(2101, txt_BINGO)
 		ExportScript.Tools.SendData(2102, txt_CLOCK_H .. ":" .. txt_CLOCK_M .. ":" .. txt_CLOCK_S)
