@@ -20838,14 +20838,14 @@ function ExportScript.replaceSymbols(s)
 	s = s:gsub(string.char(0xB0), "°") --DEGREE		"°"
 	s = s:gsub(string.char(0xB1), "±") --INC_DEC		"±"
 	s = s:gsub(string.char(0xA9), "ʘ") --INC_DEC		(Circle with Dot)
-	s = s:gsub(string.char(0x3A), ":") --Colon			":"
-	--s = s:gsub(":"              , "0x003A") --Colon			":"
+	-- s = s:gsub(string.char(0x3A), ":") --Colon			":"
+	-- --s = s:gsub(":"              , "0x003A") --Colon			":"
 	s = s:gsub(string.char(0xBB), "→") --Right Arrow 	"→"
 	s = s:gsub(string.char(0xAB), "←") --Left Arrow 	"←"
 	s = s:gsub(string.char(0xB6), "█") --Cursor		"█"
 	s = s:gsub(string.char(0xA1), "࢐") --DATA_ENTRY	"⌷" "࢐"
 	s = s:gsub(string.char(0xAE), "↕") --UpDown Arrow	"↕"
-	--s = s:gsub("*"              , "*") -- Asterisk 	"*"
+	-- --s = s:gsub("*"              , "*") -- Asterisk 	"*"
 	return s
 end
 

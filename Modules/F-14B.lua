@@ -44,9 +44,16 @@ ExportScript.ConfigEveryFrameArguments =
 	[15008] = "%.1f",	-- PILOT Console Light Intensity"
 	[15009] = "%.1f",	-- PILOT Formation Light Intensity"
 
-	[2001] = "%.1f", 	-- PILOT Wing Sweep Commanded
-	[2002] = "%.1f", 	-- PILOT Wing Sweep Position
-	[2047] = "%.1f", 	-- PILOT Wing Sweep Minimum Index
+	[2001] = "%.2f", 	-- PILOT Wing Sweep Commanded
+	[2002] = "%.2f", 	-- PILOT Wing Sweep Position
+	[2047] = "%.2f", 	-- PILOT Wing Sweep Minimum Index
+
+	-- Wing sweep flags
+	[15091] = "%1d",		-- PILOT Wing Sweep OFF Flag
+	[15092] = "%1d",		-- PILOT Wing Sweep AUTO Flag
+	[15093] = "%1d",		-- PILOT Wing Sweep MAN Flag
+	[15094] = "%1d",		-- PILOT Wing Sweep EMER Flag
+	[15095] = "%1d",		-- PILOT Wing Sweep OVER Flag
 
 	-- RIO CAP
 	[98] = "%.1f",		-- RIO CAP Category
@@ -96,9 +103,24 @@ ExportScript.ConfigEveryFrameArguments =
 	[1009] = "%1d", 	-- HUD Power On/Off
 	[1008] = "%1d", 	-- HSD/ECMD Power On/Off
 
+	-- FUEL
+	[1054] = "%.2f", 	-- PILOT Fuel AFT & L
+	[1055] = "%.2f", 	-- PILOT Fuel FWD & R
+	-- RMP / TIT / FF
+	[1057] = "%.2f", 	-- PILOT Engine RPM Left
+	[1058] = "%.2f", 	-- PILOT Engine RPM Right
+	[1059] = "%.2f", 	-- PILOT Engine TIT Left
+	[1060] = "%.2f", 	-- PILOT Engine TIT Right
+	[1061] = "%.2f", 	-- PILOT Engine FF Left
+	[1062] = "%.2f", 	-- PILOT Engine FF Right
+
 	[9357] = "%1d",		-- Pilot SAM
 	[9358] = "%1d",		-- Pilot AAA
 	[9359] = "%1d",		-- Pilot AI
+
+	-- LR ENG FIRE
+	[15014] = "%1d", 	-- PILOT Right Engine Fire Light (red)
+	[15015] = "%1d", 	-- PILOT Left Engine Fire Light (red)
 
 	-- Caution panel
 	[15016] = "%1d", 	-- PLT_WARN_LGEN 		 Left Generator (yellow)

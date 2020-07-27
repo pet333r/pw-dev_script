@@ -65,5 +65,8 @@ end
 
 function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
     local nav = ExportScript.Tools.getListIndicatorValue(2)
+    if not nav then
+        return
+    end
     ExportScript.Tools.SendData(2001, nav.data1 .. nav.data2 .. nav.data3 .. nav.data4 .. nav.data5 .. nav.data6)
 end
