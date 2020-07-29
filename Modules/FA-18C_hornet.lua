@@ -238,10 +238,10 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		txt_FF_R		= "   "
 		txt_FUEL_DOWN	= "      "
 		txt_FUEL_UP	 	= "      "
-		txt_OilPress_L 	= "  "
-		txt_OilPress_R 	= "  "
-		txt_RPM_L		= "  "
-		txt_RPM_R		= "  "
+		txt_OilPress_L 	= "   "
+		txt_OilPress_R 	= "   "
+		txt_RPM_L		= "   "
+		txt_RPM_R		= "   "
 		txt_TEMP_L	 	= "   "
 		txt_TEMP_R	 	= "   "
 		txt_Codes	 	= "   "
@@ -272,7 +272,7 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 			txt_TEMP_R		= coerce_nil_to_string(ifei.txt_TEMP_R)
 			txt_Codes		= coerce_nil_to_string(ifei.txt_Codes)
 			txt_SP			= coerce_nil_to_string(ifei.txt_SP)
-			txt_T			= coerce_nil_to_string(ifei.txt_T)
+			-- txt_T			= coerce_nil_to_string(ifei.txt_T)
 			txt_TimeSetMode	= coerce_nil_to_string(ifei.txt_TimeSetMode)
 			
 			ExportScript.Tools.SendData(2101, txt_BINGO)
@@ -294,7 +294,7 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 			ExportScript.Tools.SendData(2117, txt_TEMP_R)
 			ExportScript.Tools.SendData(2118, txt_SP)
 			ExportScript.Tools.SendData(2119, txt_Codes)
-			ExportScript.Tools.SendData(2120, txt_T)
+			-- ExportScript.Tools.SendData(2120, txt_T)
 			ExportScript.Tools.SendData(2121, txt_TimeSetMode)
 		else
 			ExportScript.Tools.SendData(2101, " ")
@@ -316,7 +316,7 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 			ExportScript.Tools.SendData(2117, " ")
 			ExportScript.Tools.SendData(2118, " ")
 			ExportScript.Tools.SendData(2119, " ")
-			ExportScript.Tools.SendData(2120, " ")
+			-- ExportScript.Tools.SendData(2120, " ")
 			ExportScript.Tools.SendData(2121, " ")
 		end
 
