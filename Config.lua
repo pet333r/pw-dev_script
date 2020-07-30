@@ -48,6 +48,7 @@ ExportScript.Config.ExportDisplaysAV8BNA    = true      -- AV8BNA (UFC, ODU, UVH
 ExportScript.Config.ExportDisplaysF14B      = true      -- F-14B
 ExportScript.Config.ExportDisplaysF16       = true      -- F-16C Viper (DED, CMDS, UHF)
 ExportScript.Config.ExportDisplaysFA18      = true      -- F/A-18C (UFC)
+ExportScript.Config.ExportDisplaysFA18Ifei  = true      -- F/A-18C (IFEI)
 ExportScript.Config.ExportDisplaysJF17      = true      -- JF-17 (UFC)
 ExportScript.Config.ExportDisplaysM2000     = true      -- Mirage 2000C
 ExportScript.Config.ExportDisplaysKA50      = true      -- Ka-50

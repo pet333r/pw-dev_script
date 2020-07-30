@@ -32,8 +32,11 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
         -- PVI-800 Navigation Control Panel 
         local indPVI = ExportScript.Tools.getListIndicatorValue(5)
 
-        local pviLine1 = coerce_nil_to_string(indPVI.txt_VIT)
-        local pviLine2 = coerce_nil_to_string(indPVI.txt_NIT)
+        if not indPVI then
+            return
+        end
+        local pviLine1      = coerce_nil_to_string(indPVI.txt_VIT)
+        local pviLine2      = coerce_nil_to_string(indPVI.txt_NIT)
         local pviLine1Point = coerce_nil_to_string(indPVI.txt_OIT_PPM)
         local pviLine2Point = coerce_nil_to_string(indPVI.txt_OIT_NOT)
         ExportScript.Tools.SendData(2008, pviLine1)
