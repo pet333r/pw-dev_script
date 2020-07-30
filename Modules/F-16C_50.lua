@@ -859,7 +859,7 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	-- if not val then
 	-- 	return
 	-- end
-	-- local val1txt = val["CompaseRose Label "]
+	-- local val1txt = val["CourseDeviation _plaseholder"]
 	-- local val1 = val1txt
 	-- ExportScript.Tools.SendData(2501, val1)
 end
