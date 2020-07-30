@@ -854,4 +854,12 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		end
 		ExportScript.Tools.SendData(2802, UHF_Frequency)
 	end
+
+	-- local val = ExportScript.Tools.getListIndicatorValue(14)
+	-- if not val then
+	-- 	return
+	-- end
+	-- local val1txt = val["CompaseRose Label "]
+	-- local val1 = val1txt
+	-- ExportScript.Tools.SendData(2501, val1)
 end

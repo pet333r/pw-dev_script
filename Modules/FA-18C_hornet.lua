@@ -51,7 +51,7 @@ ExportScript.ConfigEveryFrameArguments =
 	[48] = "%1d",   -- AG Light
 
 	-- HUD Control Panel
-	[140] = "%1d",   -- HUD Symbology Reject Switch, NORM/REJ 1/REJ 2
+	[140] = "%.1f",   -- HUD Symbology Reject Switch, NORM/REJ 1/REJ 2
 	[141] = "%.1f",   -- HUD Symbology Brightness Control Knob
 	[142] = "%1d",   -- HUD Symbology Brightness Selector Knob, DAY/NIGHT
 	[143] = "%.1f",   -- Black Level Control Knob
