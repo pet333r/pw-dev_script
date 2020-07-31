@@ -130,8 +130,17 @@ ExportScript.ConfigArguments =
 	[126] = "%.2f",   -- UFC COMM 2 Channel Selector Knob {0.0,1.0} in 0.2 Steps
 }
 
+function coerce_nil_to_string(value)
+	if value == nil then
+		return ""
+	else
+		return value
+	end
+end
+
 -- Pointed to by ProcessDCSHighImportance
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
+	if ExportScript.Config.ExportDisplaysFA18Ifei == true then
 		-- IFEI
 		local txt_BINGO = ""
 		local txt_CLOCK_H = ""
@@ -256,7 +265,7 @@ function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
 		ExportScript.Tools.SendData(2119, txt_Codes)
 		ExportScript.Tools.SendData(2120, txt_T)
 		ExportScript.Tools.SendData(2121, txt_TimeSetMode)
-
+	end
 end
 
 -- Pointed to by ExportScript.ProcessDCSConfigLowImportance

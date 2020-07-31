@@ -112,6 +112,14 @@ ExportScript.ConfigArguments =
 {
 }
 
+function coerce_nil_to_string(value)
+	if value == nil then
+		return ""
+	else
+		return value
+	end
+end
+
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
 
