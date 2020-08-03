@@ -140,132 +140,6 @@ end
 
 -- Pointed to by ProcessDCSHighImportance
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
-	if ExportScript.Config.ExportDisplaysFA18Ifei == true then
-		-- IFEI
-		local txt_BINGO = ""
-		local txt_CLOCK_H = ""
-		local txt_CLOCK_M = ""
-		local txt_CLOCK_S = ""
-		local txt_TIMER_H = ""
-		local txt_TIMER_M = ""
-		local txt_TIMER_S = ""
-		local txt_DD_1 = ""
-		local txt_DD_2 = ""
-		local txt_DD_3 = ""
-		local txt_DD_4 = ""
-		local txt_FF_L = ""
-		local txt_FF_R = ""
-		local txt_FUEL_DOWN = ""
-		local txt_FUEL_UP = ""
-		local txt_OilPress_L = ""
-		local txt_OilPress_R = ""
-		local txt_RPM_L = ""
-		local txt_RPM_R = ""
-		local txt_TEMP_L = ""
-		local txt_TEMP_R = ""
-		local txt_Codes = ""
-		local txt_SP = ""
-		local txt_T = ""
-		local txt_TimeSetMode = ""
-
-		local ifei = ExportScript.Tools.getListIndicatorValue(5)
-		txt_BINGO 		= "     "
-		txt_CLOCK_H 	= "  "
-		txt_CLOCK_M 	= "  "
-		txt_CLOCK_S 	= "  "
-		txt_TIMER_H 	= "  "
-		txt_TIMER_M 	= "  "
-		txt_TIMER_S 	= "  "
-		txt_DD_1 		= " "
-		txt_DD_2		= " "
-		txt_DD_3		= " "
-		txt_DD_4		= " "
-		txt_FF_L		= "   "
-		txt_FF_R		= "   "
-		txt_FUEL_DOWN	= "      "
-		txt_FUEL_UP	 	= "      "
-		txt_OilPress_L 	= "   "
-		txt_OilPress_R 	= "   "
-		txt_RPM_L		= "   "
-		txt_RPM_R		= "   "
-		txt_TEMP_L	 	= "   "
-		txt_TEMP_R	 	= "   "
-		txt_Codes	 	= "   "
-		txt_SP	 		= "   "
-		txt_TimeSetMode = "      "
-		if not ifei then
-			return
-		-- else
-		-- 	ExportScript.Tools.SendData(2101, " ")
-		-- 	ExportScript.Tools.SendData(2102, " ")
-		-- 	ExportScript.Tools.SendData(2103, " ")
-		-- 	ExportScript.Tools.SendData(2104, " ")
-		-- 	ExportScript.Tools.SendData(2105, " ")
-		-- 	ExportScript.Tools.SendData(2106, " ")
-		-- 	ExportScript.Tools.SendData(2107, " ")
-		-- 	ExportScript.Tools.SendData(2108, " ")
-		-- 	ExportScript.Tools.SendData(2109, " ")
-		-- 	ExportScript.Tools.SendData(2110, " ")
-		-- 	ExportScript.Tools.SendData(2111, " ")
-		-- 	ExportScript.Tools.SendData(2112, " ")
-		-- 	ExportScript.Tools.SendData(2113, " ")
-		-- 	ExportScript.Tools.SendData(2114, " ")
-		-- 	ExportScript.Tools.SendData(2115, " ")
-		-- 	ExportScript.Tools.SendData(2116, " ")
-		-- 	ExportScript.Tools.SendData(2117, " ")
-			-- ExportScript.Tools.SendData(2118, " ")
-			-- ExportScript.Tools.SendData(2119, " ")
-			-- ExportScript.Tools.SendData(2120, " ")
-			-- ExportScript.Tools.SendData(2121, " ")
-		end
-		txt_RPM_L		= coerce_nil_to_string(ifei.txt_RPM_L)
-		txt_RPM_R		= coerce_nil_to_string(ifei.txt_RPM_R)
-		txt_TEMP_L		= coerce_nil_to_string(ifei.txt_TEMP_L)
-		txt_TEMP_R		= coerce_nil_to_string(ifei.txt_TEMP_R)
-		txt_FF_L		= coerce_nil_to_string(ifei.txt_FF_L)
-		txt_FF_R		= coerce_nil_to_string(ifei.txt_FF_R)
-		txt_OilPress_L	= coerce_nil_to_string(ifei.txt_OilPress_L)
-		txt_OilPress_R	= coerce_nil_to_string(ifei.txt_OilPress_R)
-		txt_BINGO 		= coerce_nil_to_string(ifei.txt_BINGO)
-		txt_FUEL_UP		= coerce_nil_to_string(ifei.txt_FUEL_UP)
-		txt_FUEL_DOWN	= coerce_nil_to_string(ifei.txt_FUEL_DOWN)
-		txt_CLOCK_S		= coerce_nil_to_string(ifei.txt_CLOCK_S)
-		txt_CLOCK_M		= coerce_nil_to_string(ifei.txt_CLOCK_M)
-		txt_CLOCK_H		= coerce_nil_to_string(ifei.txt_CLOCK_H)
-		-- txt_DD_1		= ifei.txt_DD_1
-		-- txt_DD_2		= ifei.txt_DD_2
-		-- txt_DD_3		= ifei.txt_DD_3
-		-- txt_DD_4		= ifei.txt_DD_4
-		-- txt_TIMER_H		= ifei.txt_TIMER_H
-		-- txt_TIMER_M		= ifei.txt_TIMER_M
-		-- txt_TIMER_S		= ifei.txt_TIMER_S
-		txt_Codes		= coerce_nil_to_string(ifei.txt_Codes)
-		txt_SP			= coerce_nil_to_string(ifei.txt_SP)
-		txt_T			= coerce_nil_to_string(ifei.txt_T)
-		txt_TimeSetMode	= coerce_nil_to_string(ifei.txt_TimeSetMode)
-		
-		ExportScript.Tools.SendData(2101, txt_BINGO)
-		ExportScript.Tools.SendData(2102, txt_CLOCK_H .. ":" .. txt_CLOCK_M .. ":" .. txt_CLOCK_S)
-		-- ExportScript.Tools.SendData(2103, txt_TIMER_H .. ":" .. txt_TIMER_M .. ":" .. txt_TIMER_S)
-		ExportScript.Tools.SendData(2104, txt_DD_1)
-		ExportScript.Tools.SendData(2105, txt_DD_2)
-		ExportScript.Tools.SendData(2106, txt_DD_3)
-		ExportScript.Tools.SendData(2107, txt_DD_4)
-		ExportScript.Tools.SendData(2108, txt_FF_L)
-		ExportScript.Tools.SendData(2109, txt_FF_R)
-		ExportScript.Tools.SendData(2110, txt_FUEL_DOWN)
-		ExportScript.Tools.SendData(2111, txt_FUEL_UP)
-		ExportScript.Tools.SendData(2112, txt_OilPress_L)
-		ExportScript.Tools.SendData(2113, txt_OilPress_R)
-		ExportScript.Tools.SendData(2114, txt_RPM_L)
-		ExportScript.Tools.SendData(2115, txt_RPM_R)
-		ExportScript.Tools.SendData(2116, txt_TEMP_L)
-		ExportScript.Tools.SendData(2117, txt_TEMP_R)
-		ExportScript.Tools.SendData(2118, txt_SP)
-		ExportScript.Tools.SendData(2119, txt_Codes)
-		ExportScript.Tools.SendData(2120, txt_T)
-		ExportScript.Tools.SendData(2121, txt_TimeSetMode)
-	end
 end
 
 -- Pointed to by ExportScript.ProcessDCSConfigLowImportance
@@ -331,5 +205,137 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		ExportScript.Tools.SendData(2031, ExportScript.Tools.DisplayFormat(ExportScript.Tools.RoundFreqeuncy((_UHF2Radio:get_frequency()/1000000), "7.3", false, 0.005)), 7)
 
 	
+	end
+
+	if ExportScript.Config.ExportDisplaysFA18Ifei == true then
+		-- IFEI
+		local txt_BINGO = ""
+		local txt_CLOCK_H = ""
+		local txt_CLOCK_M = ""
+		local txt_CLOCK_S = ""
+		local txt_TIMER_H = ""
+		local txt_TIMER_M = ""
+		local txt_TIMER_S = ""
+		local txt_FF_L = ""
+		local txt_FF_R = ""
+		local txt_FUEL_DOWN = ""
+		local txt_FUEL_UP = ""
+		local txt_OilPress_L = ""
+		local txt_OilPress_R = ""
+		local txt_RPM_L = ""
+		local txt_RPM_R = ""
+		local txt_TEMP_L = ""
+		local txt_TEMP_R = ""
+		local txt_Codes = ""
+		local txt_SP = ""
+		local txt_T = ""
+		local txt_TimeSetMode = ""
+		-- local LTexture = ""
+		-- local RTexture = ""
+		-- local ZTexture = ""
+
+		local ifei = ExportScript.Tools.getListIndicatorValue(5)
+		txt_BINGO 		= "     "
+		txt_CLOCK_H 	= "  "
+		txt_CLOCK_M 	= "  "
+		txt_CLOCK_S 	= "  "
+		txt_TIMER_H 	= "  "
+		txt_TIMER_M 	= "  "
+		txt_TIMER_S 	= "  "
+		txt_FF_L		= "   "
+		txt_FF_R		= "   "
+		txt_FUEL_DOWN	= "      "
+		txt_FUEL_UP	 	= "      "
+		txt_OilPress_L 	= "   "
+		txt_OilPress_R 	= "   "
+		txt_RPM_L		= "   "
+		txt_RPM_R		= "   "
+		txt_TEMP_L	 	= "   "
+		txt_TEMP_R	 	= "   "
+		txt_Codes	 	= "   "
+		txt_SP	 		= "   "
+		txt_T			= " "
+		txt_TimeSetMode = "      "
+		local LTexture = "0"
+		local RTexture = "0"
+		local ZTexture = "0"
+		if not ifei then
+			return
+		-- else
+		-- 	ExportScript.Tools.SendData(2101, " ")
+		-- 	ExportScript.Tools.SendData(2102, " ")
+		-- 	ExportScript.Tools.SendData(2103, " ")
+		-- 	ExportScript.Tools.SendData(2104, " ")
+		-- 	ExportScript.Tools.SendData(2105, " ")
+		-- 	ExportScript.Tools.SendData(2106, " ")
+		-- 	ExportScript.Tools.SendData(2107, " ")
+		-- 	ExportScript.Tools.SendData(2108, " ")
+		-- 	ExportScript.Tools.SendData(2109, " ")
+		-- 	ExportScript.Tools.SendData(2110, " ")
+		-- 	ExportScript.Tools.SendData(2111, " ")
+		-- 	ExportScript.Tools.SendData(2112, " ")
+		-- 	ExportScript.Tools.SendData(2113, " ")
+		-- 	ExportScript.Tools.SendData(2114, " ")
+		-- 	ExportScript.Tools.SendData(2115, " ")
+		-- 	ExportScript.Tools.SendData(2116, " ")
+		-- 	ExportScript.Tools.SendData(2117, " ")
+			-- ExportScript.Tools.SendData(2118, " ")
+			-- ExportScript.Tools.SendData(2119, " ")
+			-- ExportScript.Tools.SendData(2120, " ")
+			-- ExportScript.Tools.SendData(2121, " ")
+		end
+		txt_RPM_L		= coerce_nil_to_string(ifei.txt_RPM_L)
+		txt_RPM_R		= coerce_nil_to_string(ifei.txt_RPM_R)
+		txt_TEMP_L		= coerce_nil_to_string(ifei.txt_TEMP_L)
+		txt_TEMP_R		= coerce_nil_to_string(ifei.txt_TEMP_R)
+		txt_FF_L		= coerce_nil_to_string(ifei.txt_FF_L)
+		txt_FF_R		= coerce_nil_to_string(ifei.txt_FF_R)
+		txt_OilPress_L	= coerce_nil_to_string(ifei.txt_OilPress_L)
+		txt_OilPress_R	= coerce_nil_to_string(ifei.txt_OilPress_R)
+		txt_BINGO 		= coerce_nil_to_string(ifei.txt_BINGO)
+		txt_FUEL_UP		= coerce_nil_to_string(ifei.txt_FUEL_UP)
+		txt_FUEL_DOWN	= coerce_nil_to_string(ifei.txt_FUEL_DOWN)
+		txt_CLOCK_S		= coerce_nil_to_string(ifei.txt_CLOCK_S)
+		txt_CLOCK_M		= coerce_nil_to_string(ifei.txt_CLOCK_M)
+		txt_CLOCK_H		= coerce_nil_to_string(ifei.txt_CLOCK_H)
+		txt_TIMER_H		= coerce_nil_to_string(ifei.txt_TIMER_H)
+		txt_TIMER_M		= coerce_nil_to_string(ifei.txt_TIMER_M)
+		txt_TIMER_S		= coerce_nil_to_string(ifei.txt_TIMER_S)
+		txt_Codes		= coerce_nil_to_string(ifei.txt_Codes)
+		txt_SP			= coerce_nil_to_string(ifei.txt_SP)
+		txt_T			= coerce_nil_to_string(ifei.txt_T)
+		txt_TimeSetMode	= coerce_nil_to_string(ifei.txt_TimeSetMode)
+		if ifei.LTexture == nil then LTexture = "0" else LTexture = "1" end
+		if ifei.RTexture == nil then RTexture = "0" else RTexture = "1" end
+		if ifei.ZTexture == nil then ZTexture = "0" else ZTexture = "1" end
+
+		if (txt_CLOCK_S == "") then txt_CLOCK_S = "__" end
+		if (txt_CLOCK_M == "") then txt_CLOCK_M = "__" end
+		if (txt_CLOCK_H == "") then txt_CLOCK_H = "__" end
+		-- if (txt_TIMER_S == "") then txt_TIMER_S = "__" end
+		-- if (txt_TIMER_M == "") then txt_TIMER_M = "__" end
+		-- if (txt_TIMER_H == "") then txt_TIMER_H = "__" end
+		
+		ExportScript.Tools.SendData(2101, ExportScript.Tools.DisplayFormat(txt_BINGO, 5))
+		ExportScript.Tools.SendData(2102, ExportScript.Tools.DisplayFormat(txt_CLOCK_H .. ":" .. txt_CLOCK_M .. ":" .. txt_CLOCK_S, 8))
+		ExportScript.Tools.SendData(2103, ExportScript.Tools.DisplayFormat(txt_TIMER_H .. ":" .. txt_TIMER_M .. ":" .. txt_TIMER_S, 8))
+		ExportScript.Tools.SendData(2108, ExportScript.Tools.DisplayFormat(txt_FF_L, 3))
+		ExportScript.Tools.SendData(2109, ExportScript.Tools.DisplayFormat(txt_FF_R, 3, "l"))
+		ExportScript.Tools.SendData(2110, ExportScript.Tools.DisplayFormat(txt_FUEL_DOWN, 6))
+		ExportScript.Tools.SendData(2111, ExportScript.Tools.DisplayFormat(txt_FUEL_UP, 6))
+		ExportScript.Tools.SendData(2112, ExportScript.Tools.DisplayFormat(txt_OilPress_L, 3))
+		ExportScript.Tools.SendData(2113, ExportScript.Tools.DisplayFormat(txt_OilPress_R, 3, "l"))
+		ExportScript.Tools.SendData(2114, ExportScript.Tools.DisplayFormat(txt_RPM_L, 3))
+		ExportScript.Tools.SendData(2115, ExportScript.Tools.DisplayFormat(txt_RPM_R, 3, "l"))
+		ExportScript.Tools.SendData(2116, ExportScript.Tools.DisplayFormat(txt_TEMP_L, 3))
+		ExportScript.Tools.SendData(2117, ExportScript.Tools.DisplayFormat(txt_TEMP_R, 3, "l"))
+		ExportScript.Tools.SendData(2118, ExportScript.Tools.DisplayFormat(txt_SP, 3))
+		ExportScript.Tools.SendData(2119, ExportScript.Tools.DisplayFormat(txt_Codes, 3, "l"))
+		ExportScript.Tools.SendData(2120, ExportScript.Tools.DisplayFormat(txt_T, 6))
+		ExportScript.Tools.SendData(2121, ExportScript.Tools.DisplayFormat(txt_TimeSetMode, 6))
+		-- texture values
+		ExportScript.Tools.SendData(2201, LTexture)
+		ExportScript.Tools.SendData(2202, RTexture)
+		ExportScript.Tools.SendData(2203, ZTexture)
 	end
 end
