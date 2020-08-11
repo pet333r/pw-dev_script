@@ -230,9 +230,6 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		local txt_SP = ""
 		local txt_T = ""
 		local txt_TimeSetMode = ""
-		-- local LTexture = ""
-		-- local RTexture = ""
-		-- local ZTexture = ""
 
 		local ifei = ExportScript.Tools.getListIndicatorValue(5)
 		txt_BINGO 		= "     "
@@ -312,9 +309,9 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		if (txt_CLOCK_S == "") then txt_CLOCK_S = "__" end
 		if (txt_CLOCK_M == "") then txt_CLOCK_M = "__" end
 		if (txt_CLOCK_H == "") then txt_CLOCK_H = "__" end
-		-- if (txt_TIMER_S == "") then txt_TIMER_S = "__" end
-		-- if (txt_TIMER_M == "") then txt_TIMER_M = "__" end
-		-- if (txt_TIMER_H == "") then txt_TIMER_H = "__" end
+		if (txt_TIMER_S == "") then txt_TIMER_S = "  " end
+		if (txt_TIMER_M == "") then txt_TIMER_M = "  " end
+		if (txt_TIMER_H == "") then txt_TIMER_H = "  " end
 		
 		ExportScript.Tools.SendData(2101, ExportScript.Tools.DisplayFormat(txt_BINGO, 5))
 		ExportScript.Tools.SendData(2102, ExportScript.Tools.DisplayFormat(txt_CLOCK_H .. ":" .. txt_CLOCK_M .. ":" .. txt_CLOCK_S, 8))
@@ -338,4 +335,24 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		ExportScript.Tools.SendData(2202, RTexture)
 		ExportScript.Tools.SendData(2203, ZTexture)
 	end
+
+	-- if ExportScript.Config.ExportDisplaysFA18Fuel == true then
+	-- 	local TK1 = ""
+	-- 	local LFD = ""
+	-- 	local RFD = ""
+	-- 	local TK4 = ""
+	-- 	local LWG = ""
+	-- 	local RWG = ""
+	-- 	local Bingo = ""
+	-- 	local Total = ""
+	-- 	local Internal = ""
+	-- 	local fuel = ExportScript.Tools.getListIndicatorValue(3)
+	-- 	if not fuel then
+	-- 		return
+	-- 	end
+
+	-- 	TK1 = coerce_nil_to_string(fuel.TK1)
+
+	-- 	ExportScript.Tools.SendData(2301, TK1)
+	-- end
 end

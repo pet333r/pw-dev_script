@@ -68,5 +68,5 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
     if not nav then
         return
     end
-    ExportScript.Tools.SendData(2001, nav.data1 .. nav.data2 .. nav.data3 .. nav.data4 .. nav.data5 .. nav.data6)
+    ExportScript.Tools.SendData(2001, ExportScript.Tools.DisplayFormat(nav.data1 .. nav.data2 .. nav.data3 .. nav.data4 .. nav.data5 .. nav.data6, 6))
 end
