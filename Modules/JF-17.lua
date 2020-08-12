@@ -110,6 +110,11 @@ ExportScript.ConfigEveryFrameArguments =
 
 ExportScript.ConfigArguments = 
 {
+    -- HUD panel
+    [728] = "%.1f", -- HUD Contrast Knob
+    [729] = "%.1f", -- HUD Brightness Knob
+    [731] = "%.1f", -- HUD Backup Reticle Knob
+    [732] = "%.1f", -- UFCP Brightness Knob
 }
 
 function coerce_nil_to_string(value)
