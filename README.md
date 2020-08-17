@@ -74,19 +74,6 @@ folder `Scripts`
 folder `pw-dev_script` inside `Scripts`  
 ![](.gfx/folders2.png)
 
-<!--
-in `Scripts` folder create folder `pw-dev_script`, next put all files from extracted ZIP into this folder, the scheme of the folder with files should look like this  
-```
-\Scripts
-  - \pw-dev_script
-    - \lib
-    - \Modules
-    -  Config.lua
-    -  Export.lua
-  ``` 
--->
-
-
 
 ## edit Config.lua 
 in folder `pw-dev_script` open `Config.lua` for edit, there are several "groups" in the file: 
@@ -137,6 +124,10 @@ Android device IP: 192.168.1.3
 ***`1`*** if your network structure is more complicated than a (PC -> router <- Android device), devices may not be able to "see" each other because each belongs to a different subnet of the router, this must be changed in the router settings
 
 ***`2`*** it's best to assign a static IP address to your Android device's router (the router will always assign the same IP address to a device on your network)
+
+***`3`*** the application works on these ports by default:
+  - 5160 UDP : output port from PC (this port is used to send data from DCS to Android or applicastion in the network)
+  - 25070 UDP : input port on PC (listening for information received from Android or an application in the network)
 
 # known issues
 
