@@ -334,7 +334,7 @@ end
 function ExportScript.Tools.FlushData()
 	local _flushData = ExportScript.socket.protect(function()
 		if #ExportScript.SendStrings > 0 then
-            local _packet = "File=" .. ExportScript.ModuleName .. ExportScript.Config.Separator .. "4RG" .. ExportScript.Config.Separator ..
+            local _packet = "File=" .. ExportScript.ModuleName .. ExportScript.Config.Separator .. "R4G" .. ExportScript.Config.Separator ..
             -- dodanie na końcu linii separatora + znak nowej linii
                 table.concat(ExportScript.SendStrings, ExportScript.Config.Separator) .. ExportScript.Config.Separator .. "\n"
 			local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() ExportScript.Tools.ResetChangeValues() end)

@@ -11,6 +11,18 @@ ExportScript.ConfigEveryFrameArguments =
 	[114] = "%1d",	-- AR NWS Light (green)
 	[115] = "%1d",	-- DISC Light (red)
 
+	[117] = "%1d", -- MASTER CAUTION Light (yellow)
+	[119] = "%1d", -- Edge - Light (red)
+	[121] = "%1d", -- TF FAIL Light (red)
+	[126] = "%1d", -- ENG FIRE Light (red)
+	[127] = "%1d", -- ENGINE Light (red)
+	[129] = "%1d", -- HYD_OIL_PRESS Light (red)
+	[130] = "%1d", -- FLCS Light (red)
+	[131] = "%1d", -- DBU ON Light (red)
+	[133] = "%1d", -- TO LDG CONFIG Light (red)
+	[134] = "%1d", -- CANOPY Light (red)
+	[135] = "%1d", -- OXY LOW Light (red)
+
 	[189] = "%1d",	-- ICP FLIR GAIN/LEVEL Switch, GAIN/LVL/AUTO	-1 / 0 / 1
 	--	[183] = "%1d"
 
@@ -50,33 +62,6 @@ ExportScript.ConfigEveryFrameArguments =
 }
 ExportScript.ConfigArguments = 
 {
-	-- Integrated Control Panel (ICP) of Upfront Controls (UFC)
-	-- [190] = "%.2f"	-- ICP HUD Symbology Intensity Knob
-	-- [191] = "%.2f"	-- ICP Raster Intensity Knob
-	-- [192] = "%.2f"	-- ICP Reticle Depression Control Knob
-	-- [193] = "%.2f"	-- ICP Raster Contrast Knob
-
-	-- [171] = "%1d",   -- ICP Priority Function Button, 1(T-ILS)
-	-- [172] = "%1d",   -- ICP Priority Function Button, 2/N(ALOW)
-	-- [173] = "%1d",   -- ICP Priority Function Button, 3
-	-- [175] = "%1d",   -- ICP Priority Function Button, 4/W(STPT)
-	-- [176] = "%1d",   -- ICP Priority Function Button, 5(CRUS)
-	-- [177] = "%1d",   -- ICP Priority Function Button, 6/E(TIME)
-	-- [179] = "%1d",   -- ICP Priority Function Button, 7(MARK)
-	-- [180] = "%1d",   -- ICP Priority Function Button, 8/S(FIX)
-	-- [181] = "%1d",   -- ICP Priority Function Button, 9(A-CAL)
-	-- [182] = "%1d",   -- ICP Priority Function Button, 0(M-SEL)
-	-- [165] = "%1d",   -- ICP COM Override Button, COM1(UHF)
-	-- [166] = "%1d",   -- ICP COM Override Button, COM2(UHF)
-	-- [167] = "%1d",   -- ICP IFF Override Button, IFF"
-	-- [168] = "%1d",   -- ICP LIST Override Button, LIST"
-	-- [169] = "%1d",   -- ICP Master Mode Button, A-A"
-	-- [170] = "%1d",   -- ICP Master Mode Button, A-G"
-	-- [174] = "%1d",   -- ICP Recall Button, RCL"
-	-- [178] = "%1d",   -- ICP Enter Button, ENTR"
-	-- [187] = "%1d",   -- ICP FLIR Polarity Button, Wx"
-	-- [167] = "%1d",   -- ICP IFF Override Button, IFF"
-	-- [167] = "%1d",   -- ICP IFF Override Button, IFF"
 }
 
 -- DED Layout Information ------------------------------------------------------

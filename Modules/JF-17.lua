@@ -128,35 +128,47 @@ end
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
 
-function processUFCLine(ufcLine, lineNum)
-	local txt_win 		= ufcLine["txt_win"..lineNum]
-	local txt_win_fill 	= ufcLine["txt_win"..lineNum.."_fill"]
-	local cur_win		= ufcLine["cur_win"..lineNum]
-    local txt_winr		= ufcLine["txt_win"..lineNum.."r"]
-    local cur_winr		= ufcLine["cur_win"..lineNum.."r"]
-	local UFCLineLength = 8
+function processUFCPLine(ufcpLine, lineNum)
+	local temp_txt_win      = ufcpLine["txt_win"..lineNum]
+	local txt_win_fill      = ufcpLine["txt_win"..lineNum.."_fill"]
+	local cur_win           = ufcpLine["cur_win"..lineNum]
+	local txt_winr          = ufcpLine["txt_win"..lineNum.."r"]
+	local cur_winr          = ufcpLine["cur_win"..lineNum.."r"]
+	local UFCPLineLength    = 8
+	local txt_win
+		 
+	if temp_txt_win ~= null then
+			txt_win = temp_txt_win:gsub(string.char(127),"^")
+	 else
+		 txt_win = ""
+	 end
+	
 	if txt_win_fill ~= null then
-		local full_txt_win_fill  = txt_win_fill..string.rep(" ",UFCLineLength - string.len(txt_win_fill))
-		if txt_win ~= null then
-			if cur_win ~= null then
-				processedUFCLine = string.sub(txt_win,1,string.len(txt_win) - string.len(cur_win))..cur_win..string.sub(full_txt_win_fill,string.len(txt_win) + 1)
-			else
-				processedUFCLine = txt_win..string.sub(full_txt_win_fill,string.len(txt_win) + 1)
-			end
-    	else
-			if cur_winr ~= null then
-				processedUFCLine = string.sub(full_txt_win_fill,1,UFCLineLength - string.len(txt_winr))..string.sub(txt_winr,1,string.len(txt_winr) - string.len(cur_winr))..cur_winr
-      		else
-				processedUFCLine = string.sub(full_txt_win_fill,1,UFCLineLength - string.len(txt_winr))..txt_winr
-			end
-    	end
+	   local full_txt_win_fill  = txt_win_fill .. string.rep(" ",UFCPLineLength - string.len(txt_win_fill))
+	   if temp_txt_win ~= null then
+		  if cur_win ~= null then
+			 if txt_win:find("-") then
+				processedUFCPLine = txt_win:sub(1,txt_win:find("-") - cur_win:len()) .. cur_win .. txt_win:sub(txt_win:find("-") + cur_win:len()) .. full_txt_win_fill:sub(txt_win:len() + 1)
+			 else
+				processedUFCPLine = txt_win:sub(1,txt_win:len() - cur_win:len()) .. cur_win .. full_txt_win_fill:sub(txt_win:len() + 1)
+			 end
+		  else
+			 processedUFCPLine = txt_win .. full_txt_win_fill:sub(txt_win:len() + 1)
+		  end
+		else
+		  if cur_winr ~= null then
+			 processedUFCPLine = full_txt_win_fill:sub(1,UFCPLineLength - txt_winr:len()) .. txt_winr:sub(1,txt_winr:len() - cur_winr:len()) .. cur_winr
+		  else
+			 processedUFCPLine = full_txt_win_fill:sub(1,UFCPLineLength - txt_winr:len() .. txt_winr
+		  end
+		end
 	elseif txt_win ~= null then
-		processedUFCLine = txt_win
+	   processedUFCPLine = txt_win
 	else
-		processedUFCLine = txt_winr
+	   processedUFCPLine = txt_winr
 	end
-	return processedUFCLine		
-end
+	return processedUFCPLine      
+ end
 
 function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
     if ExportScript.Config.ExportDisplaysJF17 == true then
@@ -200,28 +212,28 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
         if not indLcd1 then
             return
         end
-        ufcLcdLine1 = coerce_nil_to_string(processUFCLine(indLcd1,1))
+        ufcLcdLine1 = coerce_nil_to_string(processUFCPLine(indLcd1,1))
         ExportScript.Tools.SendData(2001, ufcLcdLine1)
 
         local indLcd2 = ExportScript.Tools.getListIndicatorValue(4)
         if not indLcd2 then
             return
         end
-        ufcLcdLine2 = coerce_nil_to_string(processUFCLine(indLcd2,2))
+        ufcLcdLine2 = coerce_nil_to_string(processUFCPLine(indLcd2,2))
         ExportScript.Tools.SendData(2002, ufcLcdLine2)
 
         local indLcd3 = ExportScript.Tools.getListIndicatorValue(5)
         if not indLcd3 then
             return
         end
-        ufcLcdLine3 = coerce_nil_to_string(processUFCLine(indLcd3,3))
+        ufcLcdLine3 = coerce_nil_to_string(processUFCPLine(indLcd3,3))
         ExportScript.Tools.SendData(2003, ufcLcdLine3)
 
         local indLcd4 = ExportScript.Tools.getListIndicatorValue(6)
         if not indLcd4 then
             return
         end
-        ufcLcdLine4 = coerce_nil_to_string(processUFCLine(indLcd4,4))
+        ufcLcdLine4 = coerce_nil_to_string(processUFCPLine(indLcd4,4))
         ExportScript.Tools.SendData(2004, ufcLcdLine4)
     end
 end
