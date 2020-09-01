@@ -38,11 +38,11 @@ ExportScript.ConfigEveryFrameArguments =
 	[918] = "%1d",		-- PILOT Taxi Light
 	[921] = "%1d",		-- PILOT White Flood Light
 	[924] = "%1d",		-- PILOT Red Flood Light
-	[15005] = "%.1f",	-- PILOT ACM Panel Light Intensity
-	[15006] = "%.1f",	-- PILOT AoA Indexer Light Intensity
-	[15007] = "%.1f",	-- PILOT Instrument Light Intensity"
-	[15008] = "%.1f",	-- PILOT Console Light Intensity"
-	[15009] = "%.1f",	-- PILOT Formation Light Intensity"
+	[15005] = "%.3f",	-- PILOT ACM Panel Light Intensity
+	[15006] = "%.3f",	-- PILOT AoA Indexer Light Intensity
+	[15007] = "%.3f",	-- PILOT Instrument Light Intensity"
+	[15008] = "%.3f",	-- PILOT Console Light Intensity"
+	[15009] = "%.3f",	-- PILOT Formation Light Intensity"
 
 	[2001] = "%.2f", 	-- PILOT Wing Sweep Commanded
 	[2002] = "%.2f", 	-- PILOT Wing Sweep Position

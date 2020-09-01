@@ -304,9 +304,7 @@ function ExportScript.Tools.ProcessArguments(device, arguments)
     for _argument, _format in pairs(arguments) do
         _argumentValue = string.format(_format,device:get_argument_value(_argument))
 
-        --if ExportScript.Config.Export then
-            ExportScript.Tools.SendData(_argument, _argumentValue)
-        --end
+        ExportScript.Tools.SendData(_argument, _argumentValue)
     end
 end
 
@@ -572,4 +570,12 @@ function ExportScript.Tools.split(stringvalue, delimiter)
         table.insert(result, match);
     end
     return result;
+end
+
+function ExportScript.Tools.coerce_nil_to_string(value)
+	if value == nil then
+		return ""
+	else
+		return value
+	end
 end
