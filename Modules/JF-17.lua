@@ -117,6 +117,48 @@ ExportScript.ConfigArguments =
     [732] = "%.1f", -- UFCP Brightness Knob
 }
 
+function processUFCPLine(ufcpLine, lineNum)
+	local temp_txt_win    = ufcpLine["txt_win"..lineNum]
+	local txt_win_fill    = ufcpLine["txt_win"..lineNum.."_fill"]
+	local cur_win      = ufcpLine["cur_win"..lineNum]
+	local txt_winr      = ufcpLine["txt_win"..lineNum.."r"]
+	local cur_winr      = ufcpLine["cur_win"..lineNum.."r"]
+	local UFCPLineLength = 8
+	local txt_win
+		 
+	if temp_txt_win ~= null then
+			txt_win = temp_txt_win:gsub(string.char(127),"^")
+	 else
+		 txt_win = ""
+	 end
+	
+	if txt_win_fill ~= null then
+	   local full_txt_win_fill  = txt_win_fill..string.rep(" ",UFCPLineLength - string.len(txt_win_fill))
+	   if temp_txt_win ~= null then
+		  if cur_win ~= null then
+			 if txt_win:find("-") then
+				processedUFCPLine = txt_win:sub(1,txt_win:find("-") - cur_win:len()) .. cur_win .. txt_win:sub(txt_win:find("-") + cur_win:len()) .. full_txt_win_fill:sub(txt_win:len()+1)
+			 else
+				processedUFCPLine = txt_win:sub(1,txt_win:len() - cur_win:len()) .. cur_win .. full_txt_win_fill:sub(txt_win:len()+1)
+			 end
+		  else
+			 processedUFCPLine = txt_win .. full_txt_win_fill:sub(txt_win:len() + 1)
+		  end
+		else
+		  if cur_winr ~= null then
+			 processedUFCPLine = full_txt_win_fill:sub(1,UFCPLineLength - txt_winr:len()) .. txt_winr:sub(1,txt_winr:len() - cur_winr:len())..cur_winr
+		  else
+			 processedUFCPLine = full_txt_win_fill:sub(1,UFCPLineLength - txt_winr:len())..txt_winr
+		  end
+		end
+	elseif txt_win ~= null then
+	   processedUFCPLine = txt_win
+	else
+	   processedUFCPLine = txt_winr
+	end
+	return processedUFCPLine      
+end
+
 function coerce_nil_to_string(value)
 	if value == nil then
 		return ""
@@ -127,48 +169,6 @@ end
 
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
-
-function processUFCPLine(ufcpLine, lineNum)
-	local temp_txt_win      = ufcpLine["txt_win"..lineNum]
-	local txt_win_fill      = ufcpLine["txt_win"..lineNum.."_fill"]
-	local cur_win           = ufcpLine["cur_win"..lineNum]
-	local txt_winr          = ufcpLine["txt_win"..lineNum.."r"]
-	local cur_winr          = ufcpLine["cur_win"..lineNum.."r"]
-	local UFCPLineLength    = 8
-	local txt_win
-		 
-	if temp_txt_win ~= null then
-			txt_win = temp_txt_win:gsub(string.char(127),"^")
-	 else
-		 txt_win = ""
-	 end
-	
-	if txt_win_fill ~= null then
-	   local full_txt_win_fill  = txt_win_fill .. string.rep(" ",UFCPLineLength - string.len(txt_win_fill))
-	   if temp_txt_win ~= null then
-		  if cur_win ~= null then
-			 if txt_win:find("-") then
-				processedUFCPLine = txt_win:sub(1,txt_win:find("-") - cur_win:len()) .. cur_win .. txt_win:sub(txt_win:find("-") + cur_win:len()) .. full_txt_win_fill:sub(txt_win:len() + 1)
-			 else
-				processedUFCPLine = txt_win:sub(1,txt_win:len() - cur_win:len()) .. cur_win .. full_txt_win_fill:sub(txt_win:len() + 1)
-			 end
-		  else
-			 processedUFCPLine = txt_win .. full_txt_win_fill:sub(txt_win:len() + 1)
-		  end
-		else
-		  if cur_winr ~= null then
-			 processedUFCPLine = full_txt_win_fill:sub(1,UFCPLineLength - txt_winr:len()) .. txt_winr:sub(1,txt_winr:len() - cur_winr:len()) .. cur_winr
-		  else
-			 processedUFCPLine = full_txt_win_fill:sub(1,UFCPLineLength - txt_winr:len() .. txt_winr
-		  end
-		end
-	elseif txt_win ~= null then
-	   processedUFCPLine = txt_win
-	else
-	   processedUFCPLine = txt_winr
-	end
-	return processedUFCPLine      
- end
 
 function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
     if ExportScript.Config.ExportDisplaysJF17 == true then
