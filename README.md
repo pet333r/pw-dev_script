@@ -129,6 +129,9 @@ Android device IP: 192.168.1.3
   - 5160 UDP : output port from PC (this port is used to send data from DCS to Android or applicastion in the network)
   - 25070 UDP : input port on PC (listening for information received from Android or an application in the network)
 
+***`4`*** where to enter the IP address of the device to which I want to send the data from the script?  
+In one of the "groups" in the Config.lua file which is located in the folder with the script. Never enter the same IP address in several groups with the same port number, it may block data transfer on this port.
+
 # known issues
 
 ***`1`*** If You can interact with DCS but not receiving data  

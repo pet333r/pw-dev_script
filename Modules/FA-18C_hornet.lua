@@ -61,7 +61,6 @@ ExportScript.ConfigEveryFrameArguments =
 	[147] = "%1d",   -- Altitude Switch, BARO/RDR
 	[148] = "%1d",   -- Attitude Selector Switch, INS/AUTO/STBY -1/0/1
 
-
 	-- Jettison / Landing gear
 	[152] = "%1d",   -- CTR Light
 	[154] = "%1d",   -- LI Light
