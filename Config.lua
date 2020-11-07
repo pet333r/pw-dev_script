@@ -16,7 +16,7 @@ ExportScript.Config.Port2       = 5160              -- port for sending data
 -- device 3
 ExportScript.Config.Export3     = true              -- sending data
 ExportScript.Config.Export3SD   = true              -- sendind data from SD
-ExportScript.Config.Host3       = "192.168.1.12"     -- IP for 3rd app
+ExportScript.Config.Host3       = "192.168.1.5"     -- IP for 3rd app
 ExportScript.Config.Port3       = 5160              -- port for sending data
 
 -- device 4

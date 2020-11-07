@@ -71,7 +71,7 @@ function ExportScript.Tools.ProcessInput()
 						_device:performClickableAction(_commandArgs[2],_commandArgs[3])
 					end
 				end
-			end
+            end
 		end
 	end
 end

@@ -99,10 +99,12 @@ ExportScript.Config.ExportSelfData          = true
 
 example you will find below in the [example connection](#example-connection)
 
+<!---
 # automatic update script
 
 in the future, just run the file `update_pw-dev_script.bat` to download the latest version of the script (the `Config.lua` file will be kept, the others will be replaced with the latest version)  
 just run it from time to time or add a shortcut in the Windows Startup folder to have the script updated during system startup
+-->
 
 # how to find IP's of PC and Android device
 
@@ -144,6 +146,16 @@ In one of the "groups" in the Config.lua file which is located in the folder wit
   - check if you have the correct PC address given in the DCS UFC settings  
   - your firewall probably blocking incomming connections, turn off the firewall for a few minutes and check if everything works (to unblock the default ListenerPort: 25070 / UDP)  
   [https://www.windowscentral.com/how-open-port-windows-firewall](https://www.windowscentral.com/how-open-port-windows-firewall)
+
+# faq
+***`1`*** what is the minimum android version for the DCS UFC and DCS AoA Indexer applications?
+  - the minimum system version is 4.1
+
+***`2`*** do the applications and script work in multiplayer?
+  - YES, on the server the property must be set: `Allow player export: true`, about 95% of servers have this option turned on;-)
+
+***`3`*** does integrity check pass?
+  - YES (more precisely, it doesn't even have any effect on it :-) )
 
 # compability
 Script may not work with some other scripts if they use similar solutions to connect to external applications. This is a known problem in DCS.  

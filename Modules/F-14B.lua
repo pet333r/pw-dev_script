@@ -152,9 +152,6 @@ ExportScript.ConfigEveryFrameArguments =
 	[1009] = "%1d", 	-- HUD Power On/Off
 	[1008] = "%1d", 	-- HSD/ECMD Power On/Off
 
-	-- FUEL
-	[1054] = "%.2f", 	-- PILOT Fuel AFT & L
-	[1055] = "%.2f", 	-- PILOT Fuel FWD & R
 	-- RMP / TIT / FF
 	[1057] = "%.2f", 	-- PILOT Engine RPM Left
 	[1058] = "%.2f", 	-- PILOT Engine RPM Right
@@ -221,10 +218,145 @@ ExportScript.ConfigEveryFrameArguments =
 	[15062] = "%1d", 	-- PLT_WARN_RATS 		 RATS (green)
 	[15063] = "%1d", 	-- PLT_WARN_STARTVALVE  Start Valve (yellow)
 	[15064] = "%1d", 	-- PLT_WARN_RENGSEC 	 Right Engine Secondary (yellow)
+
+	-- RIO Warnings
+	[2201] = "%1d", -- RIO IFF Light (green)	
+	[2202] = "%1d", -- RIO RCV Light (green)	
+	[2203] = "%1d", -- RIO XMIT Light (green)	
+	[2204] = "%1d", -- RIO SAM Light (red)	
+	[2205] = "%1d", -- RIO AAA Light (red)	
+	[2206] = "%1d", -- RIO CW Light (red)	
+	[2208] = "%1d", -- RIO AI Light (red)
+
+	[2209] = "%1d", -- C D HOT Light (green)
+	[2210] = "%1d", -- CABIN PRESS Light (green)
+	[2211] = "%1d", -- FUEL LOW Light (green)
+	[2212] = "%1d", -- CANOPY Light (green)
+	[2213] = "%1d", -- FUZE HV Light (green)
+	[2214] = "%1d", -- RDR ENABLED Light (green)
+	[2215] = "%1d", -- COOLING AIR Light (yellow)
+	[2216] = "%1d", -- MSL COND Light (yellow)
+	[2217] = "%1d", -- C D HOT Light (yellow)
+	[2218] = "%1d", -- NAV COMP Light (yellow)
+	[2219] = "%1d", -- FILM LOW Light (yellow)
+	[2220] = "%1d", -- IMU Light (yellow)
+	[2221] = "%1d", -- AHRS Light (yellow)
+
+	[2222] = "%1d", -- WAVE OFF Light
+	[2223] = "%1d", -- LAND CHK Light
+	[2224] = "%1d", -- ACL BEAC Light
+	[2225] = "%1d", -- ACL RDY Light
+	[2226] = "%1d", -- A PC PLR Light
+	[2227] = "%1d", -- 10 SEC Light
+	[2228] = "%1d", -- ADJ A C Light
+	[2229] = "%1d", -- VOICE Light
+	[2230] = "%1d", -- TILT Light
+	[2231] = "%1d", -- CMD CHG Light
+	[2232] = "%1d", -- ALT CHG Light
+	[2233] = "%1d", -- MON ALT Light
+	[2234] = "%1d", -- MANUAL Light
+	[2235] = "%1d", -- SPD CHG Light
+	[2236] = "%1d", -- MON SPD Light
+	[2237] = "%1d", -- CMD CTRL Light
+	[2238] = "%1d", -- CHG CHN Light
+	[2239] = "%1d", -- HDG CHN Light
+	[2240] = "%1d", -- CANC RPY Light
+	[2241] = "%1d", -- FWD VEC Light
+	[2242] = "%1d", -- AFT VEC Light
+	[2243] = "%1d", -- COI VEC Light
+	[2244] = "%1d", -- NO MSG Light
+	[2245] = "%1d", -- 10 WAYPT Light
+	[2246] = "%1d", -- HANDOVER Light
+	[2247] = "%1d", -- ORBIT Light
+	[2248] = "%1d", -- CHALNGE Light
+	[2249] = "%1d", -- ARM 1 Light
+	[2250] = "%1d", -- ARM 2 Light
+	[2251] = "%1d", -- ARM 3 Light
+	[2252] = "%1d", -- NOT CMD Light
+	[2253] = "%1d", -- FRE LAN Light
+	[2254] = "%1d", -- DISGAGE Light
+	[2255] = "%1d", -- ABORT Light
+	[2256] = "%1d", -- BEAC ON Light
+	[2257] = "%1d", -- SEAC DUB Light
+	[2258] = "%1d", -- DROP Light
+	[2259] = "%1d", -- BEAC OFF Light
+	[2260] = "%1d", -- RET BASE Light
 }
 ExportScript.ConfigArguments = 
 {
+	-- FUEL
+	[1054] = "%.2f", 	-- PILOT Fuel AFT & L
+	[1055] = "%.2f", 	-- PILOT Fuel FWD & R
 }
+
+local function getAmmo()
+    local function a(n) return GetDevice(0):get_argument_value(n) end
+    local digit1 = string.format("%.0f", GetDevice(0):get_argument_value(4060)*10)
+	if digit1 == nil then digit1 = "0" end
+    local digit2 = string.format("%.0f", GetDevice(0):get_argument_value(4061)*10)
+	if digit2 == nil then digit2 = "0" end
+	local digit3 = string.format("%.0f", GetDevice(0):get_argument_value(4062)*10)
+	if digit3 == nil then digit3 = "0" end
+    return tonumber(digit1 .. digit2 .. digit3)
+end
+-- local function getGunLead()
+--     local function a(n) return GetDevice(0):get_argument_value(n) end
+--     local digit1 = string.format("%.0f", GetDevice(0):get_argument_value(2270)*10)
+-- 	if digit1 == nil then digit1 = "0" end
+--     local digit2 = string.format("%.0f", GetDevice(0):get_argument_value(2271)*10)
+-- 	if digit2 == nil then digit2 = "0" end
+-- 	local digit3 = string.format("%.0f", GetDevice(0):get_argument_value(2272)*10)
+-- 	if digit3 == nil then digit3 = "0" end
+--     return tonumber(digit1 .. digit2 .. digit3)
+-- end
+
+local function getPLTFuelLeft()
+    local function a(n) return GetDevice(0):get_argument_value(n) end
+    local digit1 = string.format("%.0f", GetDevice(0):get_argument_value(6000)*10)
+	if digit1 == nil then digit1 = "0" end
+    local digit2 = string.format("%.0f", GetDevice(0):get_argument_value(6001)*10)
+	if digit2 == nil then digit2 = "0" end
+	local digit3 = 0
+    local digit4 = 0
+    return tonumber(digit1 .. digit2 .. digit3 .. digit4)
+end
+
+local function getPLTFuelRight()
+    local function a(n) return GetDevice(0):get_argument_value(n) end
+    local digit1 = string.format("%.0f", GetDevice(0):get_argument_value(6004)*10)
+	if digit1 == nil then digit1 = "0" end
+    local digit2 = string.format("%.0f", GetDevice(0):get_argument_value(6005)*10)
+	if digit2 == nil then digit2 = "0" end
+	local digit3 = 0
+    local digit4 = 0
+    return tonumber(digit1 .. digit2 .. digit3 .. digit4)
+end
+
+local function getPLTFuelTotal()
+    local function a(n) return GetDevice(0):get_argument_value(n) end
+    local digit1 = string.format("%.0f", GetDevice(0):get_argument_value(6010)*10)
+	if digit1 == nil then digit1 = "0" end
+    local digit2 = string.format("%.0f", GetDevice(0):get_argument_value(6011)*10)
+	if digit2 == nil then digit2 = "0" end
+	local digit3 = string.format("%.0f", GetDevice(0):get_argument_value(6012)*10)
+	if digit3 == nil then digit3 = "0" end
+    local digit4 = 0
+	local digit5 = 0
+    return tonumber(digit1 .. digit2 .. digit3 .. digit4 .. digit5)
+end
+
+local function getPLTFuelBingo()
+    local function a(n) return GetDevice(0):get_argument_value(n) end
+    local digit1 = string.format("%.0f", GetDevice(0):get_argument_value(6020)*10)
+	if digit1 == nil then digit1 = "0" end
+    local digit2 = string.format("%.0f", GetDevice(0):get_argument_value(6021)*10)
+	if digit2 == nil then digit2 = "0" end
+	local digit3 = string.format("%.0f", GetDevice(0):get_argument_value(6022)*10)
+	if digit3 == nil then digit3 = "0" end
+    local digit4 = 0
+	local digit5 = 0
+    return tonumber(digit1 .. digit2 .. digit3 .. digit4 .. digit5)
+end
 
 -- Pointed to by ProcessDCSHighImportance
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
@@ -232,4 +364,9 @@ end
 
 -- Pointed to by ExportScript.ProcessDCSConfigLowImportance
 function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
+	ExportScript.Tools.SendData(20001, getAmmo())
+	ExportScript.Tools.SendData(20002, getPLTFuelLeft())
+	ExportScript.Tools.SendData(20003, getPLTFuelRight())
+	ExportScript.Tools.SendData(20004, getPLTFuelTotal())
+	ExportScript.Tools.SendData(20005, getPLTFuelBingo())
 end
