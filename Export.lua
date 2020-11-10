@@ -12,10 +12,10 @@ ExportScript.lastExportTimeLI       = 0
 ExportScript.NoLuaExportBeforeNextFrame = false
 
 local PrevExport                    = {}
-PrevExport.LuaExportStart           = LuaExportStart
-PrevExport.LuaExportStop            = LuaExportStop
-PrevExport.LuaExportBeforeNextFrame = LuaExportBeforeNextFrame
-PrevExport.LuaExportAfterNextFrame  = LuaExportAfterNextFrame
+PrevExport.pwLuaExportStart           = LuaExportStart
+PrevExport.pwLuaExportStop            = LuaExportStop
+PrevExport.pwLuaExportBeforeNextFrame = LuaExportBeforeNextFrame
+PrevExport.pwLuaExportAfterNextFrame  = LuaExportAfterNextFrame
 
 dofile(lfs.writedir()..[[Scripts\pw-dev_script\Config.lua]])
 ExportScript.utf8 = dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\utf8.lua]])
@@ -26,9 +26,37 @@ ExportScript.FoundDCSModule = false
 ExportScript.FoundFCModule  = false
 ExportScript.FoundNoModul   = true
 
+-- pwscript = 
+-- {
+-- 	pwscriptStart = function(self)
+-- 		package.path  = package.path..";.\\LuaSocket\\?.lua"
+-- 		package.cpath = package.cpath..";.\\LuaSocket\\?.dll"
+	
+-- 		ExportScript.Tools.createUDPSender()
+-- 		ExportScript.Tools.createUDPListner()
+	
+-- 		ExportScript.NoLuaExportBeforeNextFrame = false
+-- 		ExportScript.Tools.SelectModule()   -- point globals to Module functions and data.
+		
+-- 		-- Chain previously-included export as necessary
+-- 		PrevExport.pwLuaExportStart()
+-- 	end,
+
+-- 	pwscriptUpdateHi = function(self)
+-- 	end,
+
+-- 	pwscriptUpdateLo = function(self)
+-- 	end,
+
+-- 	pwscriptStop = function(self)
+-- 	end
+-- }
+
 ---------------------------------------------
 -- DCS Export API Function Implementations --
 ---------------------------------------------
+
+
 
 function LuaExportStart()
 -- Works once just before mission start.
@@ -43,15 +71,13 @@ function LuaExportStart()
 	ExportScript.Tools.SelectModule()   -- point globals to Module functions and data.
 	
 	-- Chain previously-included export as necessary
-	--if PrevExport.LuaExportStart then
-		PrevExport.LuaExportStart()
-	--end
+	PrevExport.pwLuaExportStart()
 end
 
 function LuaExportBeforeNextFrame()
 	-- Chain previously-included export as necessary
-	if PrevExport.LuaExportBeforeNextFrame then
-		PrevExport.LuaExportBeforeNextFrame()
+	if PrevExport.pwLuaExportBeforeNextFrame then
+		PrevExport.pwLuaExportBeforeNextFrame()
 	end
 end
 
@@ -61,8 +87,8 @@ function LuaExportAfterNextFrame()
 	end
 	
 	-- Chain previously-included export as necessary
-	if PrevExport.LuaExportAfterNextFrame then
-		PrevExport.LuaExportAfterNextFrame()
+	if PrevExport.pwLuaExportAfterNextFrame then
+		PrevExport.pwLuaExportAfterNextFrame()
 	end
 end
 
@@ -83,10 +109,8 @@ end
 
 function LuaExportStop()
 -- Works once just after mission stop.
-	--if ExportScript.Config.Export then
-		ExportScript.Tools.SendData("exporting", "stop")
-		ExportScript.Tools.FlushData()
-	--end
+	ExportScript.Tools.SendData("exporting", "stop")
+	ExportScript.Tools.FlushData()
 
 	ExportScript.UDPsender:close()
 	if ExportScript.Config.Listener then
@@ -97,7 +121,17 @@ function LuaExportStop()
 	ExportScript.FoundNoModul = false
 	
 	-- Chain previously-included export as necessary
-	if PrevExport.LuaExportStop then
-		PrevExport.LuaExportStop()
+	if PrevExport.pwLuaExportStop then
+		PrevExport.pwLuaExportStop()
 	end
 end
+
+-- do
+-- 	local PrevLuaExportStart=LuaExportStart
+-- 	LuaExportStart=function()
+-- 		pwscript:pwscriptStart()
+-- 		if PrevLuaExportStart then
+-- 			PrevLuaExportStart()
+-- 		end
+-- 	end
+-- end
