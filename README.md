@@ -99,12 +99,12 @@ ExportScript.Config.ExportSelfData          = true
 
 example you will find below in the [example connection](#example-connection)
 
-<!---
+
 # automatic update script
 
 in the future, just run the file `update_pw-dev_script.bat` to download the latest version of the script (the `Config.lua` file will be kept, the others will be replaced with the latest version)  
 just run it from time to time or add a shortcut in the Windows Startup folder to have the script updated during system startup
--->
+
 
 # how to find IP's of PC and Android device
 
