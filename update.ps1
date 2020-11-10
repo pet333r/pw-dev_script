@@ -44,7 +44,7 @@ $libList = @(
 # modules
 # $modulesList = Get-Content Invoke-WebRequest -Uri $urlMain + "update_modules"
 $urlModFile =  -Join($urlMain, "update_modules")
-$modulesList = (Invoke-webrequest -URI $urlModFile ).Content -split "`r`n"
+$modulesList = (Invoke-webrequest -URI $urlModFile ).Content -split "`n"
 
 # download main files
 Write-Host "Try to download configuration files: $dirMain"
