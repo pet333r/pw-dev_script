@@ -11,11 +11,11 @@ ExportScript.lastExportTimeLI       = 0
 
 ExportScript.NoLuaExportBeforeNextFrame = false
 
-local PrevExport                    = {}
-PrevExport.pwLuaExportStart           = LuaExportStart
-PrevExport.pwLuaExportStop            = LuaExportStop
-PrevExport.pwLuaExportBeforeNextFrame = LuaExportBeforeNextFrame
-PrevExport.pwLuaExportAfterNextFrame  = LuaExportAfterNextFrame
+local PrevExportScript                    = {}
+PrevExportScript.LuaExportStart           = LuaExportStart
+PrevExportScript.LuaExportStop            = LuaExportStop
+PrevExportScript.LuaExportBeforeNextFrame = LuaExportBeforeNextFrame
+PrevExportScript.LuaExportAfterNextFrame  = LuaExportAfterNextFrame
 
 dofile(lfs.writedir()..[[Scripts\pw-dev_script\Config.lua]])
 ExportScript.utf8 = dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\utf8.lua]])
@@ -37,18 +37,42 @@ ExportScript.FoundNoModul   = true
 	
 -- 		ExportScript.NoLuaExportBeforeNextFrame = false
 -- 		ExportScript.Tools.SelectModule()   -- point globals to Module functions and data.
+-- 	end,
+
+-- 	-- pwscriptBeforeNextFrame = function(self)
+-- 	-- end,
+
+-- 	pwscriptAfterNextFrame = function(self)
+-- 		ExportScript.Tools.ProcessOutput()
+-- 	end,
+
+-- 	pwscriptActivityNextEvent = function(self,t)
+-- 		local tNext = t
+
+-- 		ExportScript.coProcessArguments_BeforeNextFrame = coroutine.create(ExportScript.Tools.ProcessInput)
+-- 		coStatus = coroutine.resume(ExportScript.coProcessArguments_BeforeNextFrame)
 		
--- 		-- Chain previously-included export as necessary
--- 		PrevExport.pwLuaExportStart()
--- 	end,
-
--- 	pwscriptUpdateHi = function(self)
--- 	end,
-
--- 	pwscriptUpdateLo = function(self)
+-- 		if ExportScript.NoLuaExportBeforeNextFrame == false then
+-- 			ExportScript.Tools.ProcessOutput()
+-- 		end
+	
+-- 		tNext = tNext + ExportScript.Config.ExportInterval
+	
+-- 		return tNext
 -- 	end,
 
 -- 	pwscriptStop = function(self)
+-- 		-- Works once just after mission stop.
+-- 		ExportScript.Tools.SendData("exporting", "stop")
+-- 		ExportScript.Tools.FlushData()
+
+-- 		ExportScript.UDPsender:close()
+-- 		if ExportScript.Config.Listener then
+-- 			ExportScript.UDPListener:close()
+-- 		end
+		
+-- 		ExportScript.ModuleName   = nil
+-- 		ExportScript.FoundNoModul = false
 -- 	end
 -- }
 
@@ -71,13 +95,13 @@ function LuaExportStart()
 	ExportScript.Tools.SelectModule()   -- point globals to Module functions and data.
 	
 	-- Chain previously-included export as necessary
-	PrevExport.pwLuaExportStart()
+	PrevExportScript.LuaExportStart()
 end
 
 function LuaExportBeforeNextFrame()
 	-- Chain previously-included export as necessary
-	if PrevExport.pwLuaExportBeforeNextFrame then
-		PrevExport.pwLuaExportBeforeNextFrame()
+	if PrevExportScript.LuaExportBeforeNextFrame then
+		PrevExportScript.LuaExportBeforeNextFrame()
 	end
 end
 
@@ -87,8 +111,8 @@ function LuaExportAfterNextFrame()
 	end
 	
 	-- Chain previously-included export as necessary
-	if PrevExport.pwLuaExportAfterNextFrame then
-		PrevExport.pwLuaExportAfterNextFrame()
+	if PrevExportScript.LuaExportAfterNextFrame then
+		PrevExportScript.LuaExportAfterNextFrame()
 	end
 end
 
@@ -121,17 +145,50 @@ function LuaExportStop()
 	ExportScript.FoundNoModul = false
 	
 	-- Chain previously-included export as necessary
-	if PrevExport.pwLuaExportStop then
-		PrevExport.pwLuaExportStop()
+	if PrevExportScript.LuaExportStop then
+		PrevExportScript.LuaExportStop()
 	end
 end
 
 -- do
--- 	local PrevLuaExportStart=LuaExportStart
+-- 	local InitLuaExportStart = LuaExportStart
 -- 	LuaExportStart=function()
 -- 		pwscript:pwscriptStart()
--- 		if PrevLuaExportStart then
--- 			PrevLuaExportStart()
+-- 		if InitLuaExportStart then
+-- 			InitLuaExportStart()
+-- 		end
+-- 	end
+-- end
+
+-- do
+-- 	local ScriptLuaExportAfterNextFrame = LuaExportAfterNextFrame
+-- 	LuaExportAfterNextFrame = function(t)
+-- 		pwscript.pwscriptAfterNextFrame(t)
+-- 		if ScriptLuaExportAfterNextFrame then
+-- 			ScriptLuaExportAfterNextFrame()
+-- 		end
+-- 		return tNext
+-- 	end
+-- end
+
+-- do
+-- 	local ScriptLuaExportActivityNextEvent = LuaExportActivityNextEvent
+-- 	LuaExportActivityNextEvent = function(t)
+-- 		local tNext = t
+-- 		tNext = pwscript.pwscriptActivityNextEvent(t)
+-- 		if ScriptLuaExportActivityNextEvent then
+-- 			ScriptLuaExportActivityNextEvent()
+-- 		end
+-- 		return tNext
+-- 	end
+-- end
+
+-- do
+-- 	local ScriptLuaExportStop = LuaExportStop
+-- 	LuaExportStop = function()
+-- 		pwscript:pwscriptStop()
+-- 		if InitLuaExportStart then
+-- 			ScriptLuaExportStop()
 -- 		end
 -- 	end
 -- end

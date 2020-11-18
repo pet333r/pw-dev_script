@@ -1,4 +1,4 @@
--- F-14B
+-- F-14A
 ExportScript.FoundDCSModule = true
 
 ExportScript.ConfigEveryFrameArguments = 

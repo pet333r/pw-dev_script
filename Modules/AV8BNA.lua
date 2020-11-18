@@ -41,14 +41,6 @@ ExportScript.ConfigEveryFrameArguments =
 	-- [452] = "%.f",	--CMBT
 	-- [453] = "%.f",	--STO
 
-	--CANOPY FRAME
-	-- [750] = "%.f",	--LEFT
-	-- [751] = "%.f",	--READY
-	-- [752] = "%.f",	--RIGHT
-
-	--GEAR LEVER
-	-- [446] = "%.f",	--(red warning light)
-
 	--CAUTION PANEL (from upper left to lower right)
 	[560] = "%1d",	--OXY
 	[561] = "%1d",	--WSLD
@@ -151,15 +143,6 @@ ExportScript.ConfigEveryFrameArguments =
 	-- [389] = "%.4f",	--QTY 1. Drum 
 	-- [390] = "%.4f",	--QTY 2.
 
-	--LOWER AMARMENT PANEL
-	-- [406] = "%.4f",	--SET FLAG 1
-	-- [408] = "%.4f",	--SET FLAG 2
-	-- [410] = "%.4f",	--SET FLAG 3
-	-- [412] = "%.4f",	--SET FLAG 4
-	-- [414] = "%.4f",	--SET FLAG 5
-	-- [416] = "%.4f",	--SET FLAG 6
-	-- [418] = "%.4f",	--SET FLAG 7
-
 	--GEAR PANEL DISPLAY --STATUS LIGHTS--
 	-- [462] = "%.f",	--NOSE GEAR (YELLOW)
 	-- [463] = "%.f",	--NOSE GEAR (GREEN)
@@ -184,9 +167,6 @@ ExportScript.ConfigEveryFrameArguments =
 	--FLAP POSITION DISPLAY
 	-- [455] = "%.4f",	--FLAP POS 1. DRUM 
 	-- [456] = "%.4f",	--FLAP POS 2. DRUM
-
-	-- INSTRUMENTS ------------------------------------------------
-	---STBY MIP
 
 	--ADI
 	-- [349] = "%.4f",	--ADI DRUM UO/DWN  CLIMB/DESCEND
@@ -214,51 +194,17 @@ ExportScript.ConfigEveryFrameArguments =
 	--VVI
 	-- [362] = "%.4f",	--VVI POINTER
 
-	--SLIP INDICATOR
-	-- [363] = "%.4f",	--BALL
-
 	---SIDE PANELS LEFT
 	--AILERON METER
 	-- [473] = "%.4f",	--AILERON NEEDLE
 
-	--RUDDER
-	-- [474] = "%.4f",	--RUDDER NEEDLE
-
 	---SIDE PANELS RIGHT
 	--ACCU METER
 	-- [559] = "%.4f",	--ACCU POINTER 
-
-	--CABIN PRESSURE
-	-- [607] = "%.4f",	--CABIN PRESS POINTER
-
-	--BATTERY (VOLT METER)
-	-- [608] = "%.4f", --VOLT METER POINTER
-
-	---Compass
-	-- [753] = "%.4f",	--Compassrose N-> S (rotate)
-	-- [754] = "%.4f",	--Compassrose Up / Down
-	-- [755] = "%.4f",	--Compassrose bank
-
-	---CLOCK
-	-- [759] = "%.4f",	--POINTER HOUR
-	-- [760] = "%.4f",	--POINTER MINUTE
-	-- [761] = "%.4f",	--POINTER SECOND
-
-	---STOPWATCH
-	--NOTHING FOUND YET
-	--CABIN LIGHTNING
-	-- [180] = "%.f",	--FLOOD
-	-- [182] = "%.f",	--MIP BACKLIGHTING
-	-- [183] = "%.f",	--LEFT AND RIGHT SIDEPANEL LIGHTING
-	-- [184] = "%.f",	--WHISKEY COMPASS BACKLIGHT (LEFT CANOPY FRAME)
 }
 
 ExportScript.ConfigArguments = 
 {
-	--[[
-	arguments for export in low tick interval
-	based on "clickabledata.lua"
-	]]
 	-- Master Modes Panel
 	[282] = "%.1f",	--Nav Master Mode selector
 	[284] = "%.1f",	--VSTOL Master Mode Selector
@@ -269,41 +215,14 @@ ExportScript.ConfigArguments =
 	[655] = "%1d",	--EDP BIT Button
 
 	-- HUD Control Panel
-	[288] = "%.4f",	--HUD
-	[289] = "%.4f",	--HUD Off/Brightness Control
+	[288] = "%.1f",	--HUD
+	[289] = "%.1f",	--HUD Off/Brightness Control
 	[290] = "%.1f",	--HUD Display Mode Switch
-	[291] = "%.4f",	--HUD Video Brightness Control
-	[292] = "%.4f",	--HUD Video Contrast Control
+	[291] = "%.1f",	--HUD Video Brightness Control
+	[292] = "%.1f",	--HUD Video Contrast Control
 	[293] = "%1d",	--HUD Altitude Selector Switch
 
 	-- UFC Panel
-	-- [302] = "%1d",	--UFC Button 1
-	-- [303] = "%1d",	--UFC Button 2/N
-	-- [304] = "%1d",	--UFC Button 3
-	-- [306] = "%1d",	--UFC Button 4/W
-	-- [307] = "%1d",	--UFC Button 5
-	-- [308] = "%1d",	--UFC Button 6/E
-	-- [310] = "%1d",	--UFC Button 7
-	-- [311] = "%1d",	--UFC Button 8/S
-	-- [312] = "%1d",	--UFC Button 9
-	-- [315] = "%1d",	--UFC Button 0
-	-- [316] = "%1d",	--UFC Button .
-	-- [313] = "%1d",	--UFC Button -
-	-- [314] = "%1d",	--ENTER Data Button
-	-- [305] = "%1d",	--Clear Entry Button
-	-- [294] = "%1d",	--Timer Function Selector
-	-- [324] = "%1d",	--Altitude Function Selector
-	-- [318] = "%1d",	--IFF Function Selector
-	-- [319] = "%1d",	--TACAN Function Selector
-	-- [320] = "%1d",	--All Weather Landing Function Selector
-	-- [317] = "%1d",	--Radalt/TACAN/AWL/IFF ON/OFF Toggle
-	-- [325] = "%1d",	--EMCON ON/OFF Toggle
-	-- [296] = "%1d",	--Target-Of-Opportunity Selector
-	-- [322] = "%1d",	--Waypoint Overfly INS Update Selector
-	-- [321] = "%1d",	--Weapons Function Selector
-	-- [323] = "%1d",	--Radar Beacon Function Selector
-	-- [297] = "%1d",	--I/P Button
-	-- [309] = "%1d",	--Save Data Button
 	[295] = "%.1f",	--Display Brightness Control
 	[298] = "%.1f",	--Comm 1 Volume Control
 	[299] = "%.1f",	--Comm 2 Volume Control
@@ -312,42 +231,11 @@ ExportScript.ConfigArguments =
 	-- [178] = "%.4f",	--Comm 1 Channel Show Button
 	-- [179] = "%.4f",	--Comm 2 Channel Show Button
 
-	-- ODU Panel
-	-- [250] = "%1d",	--ODU Option1
-	-- [251] = "%1d",	--ODU Option2
-	-- [252] = "%1d",	--ODU Option3
-	-- [248] = "%1d",	--ODU Option4
-	-- [249] = "%1d",	--ODU Option5
-
-	-- Master Caution/Warning Panel
-	-- [198] = "%1d",	--Master Caution
-	-- [199] = "%1d",	--Master Warning
-
 	-- Fuel Quantity Indicator
 	-- [379] = "%.1f",	--Fuel Totalizer Selector
 	-- [380] = "%.4f",	--Bingo Fuel Set Knob
 
 	-- MPCD left
-	-- [200] = "%1d",	--MPCD Left Button 1
-	-- [201] = "%1d",	--MPCD Left Button 2
-	-- [202] = "%1d",	--MPCD Left Button 3
-	-- [203] = "%1d",	--MPCD Left Button 4
-	-- [204] = "%1d",	--MPCD Left Button 5
-	-- [205] = "%1d",	--MPCD Left Button 6
-	-- [206] = "%1d",	--MPCD Left Button 7
-	-- [207] = "%1d",	--MPCD Left Button 8
-	-- [208] = "%1d",	--MPCD Left Button 9
-	-- [209] = "%1d",	--MPCD Left Button 10
-	-- [210] = "%1d",	--MPCD Left Button 11
-	-- [211] = "%1d",	--MPCD Left Button 12
-	-- [212] = "%1d",	--MPCD Left Button 13
-	-- [213] = "%1d",	--MPCD Left Button 14
-	-- [214] = "%1d",	--MPCD Left Button 15
-	-- [215] = "%1d",	--MPCD Left Button 16
-	-- [216] = "%1d",	--MPCD Left Button 17
-	-- [217] = "%1d",	--MPCD Left Button 18
-	-- [218] = "%1d",	--MPCD Left Button 19
-	-- [219] = "%1d",	--MPCD Left Button 20
 	-- [220] = "%1d",	--MPCD Left Display DAY/NIGHT Mode
 	-- [221] = "%1d",	--MPCD Left Display Symbology
 	-- [222] = "%1d",	--MPCD Left Display Gain
@@ -355,26 +243,6 @@ ExportScript.ConfigArguments =
 	-- [194] = "%.4f",	--MPCD Left Off/Brightness Control
 
 	-- MPCD Right
-	-- [224] = "%1d",	--MPCD Right Button 1
-	-- [225] = "%1d",	--MPCD Right Button 2
-	-- [226] = "%1d",	--MPCD Right Button 3
-	-- [227] = "%1d",	--MPCD Right Button 4
-	-- [228] = "%1d",	--MPCD Right Button 5
-	-- [229] = "%1d",	--MPCD Right Button 6
-	-- [230] = "%1d",	--MPCD Right Button 7
-	-- [231] = "%1d",	--MPCD Right Button 8
-	-- [232] = "%1d",	--MPCD Right Button 9
-	-- [233] = "%1d",	--MPCD Right Button 10
-	-- [234] = "%1d",	--MPCD Right Button 11
-	-- [235] = "%1d",	--MPCD Right Button 12
-	-- [236] = "%1d",	--MPCD Right Button 13
-	-- [237] = "%1d",	--MPCD Right Button 14
-	-- [238] = "%1d",	--MPCD Right Button 15
-	-- [239] = "%1d",	--MPCD Right Button 16
-	-- [240] = "%1d",	--MPCD Right Button 17
-	-- [241] = "%1d",	--MPCD Right Button 18
-	-- [242] = "%1d",	--MPCD Right Button 19
-	-- [243] = "%1d",	--MPCD Right Button 20
 	-- [244] = "%1d",	--MPCD Right Display DAY/NIGHT Mode
 	-- [245] = "%1d",	--MPCD Right Display Symbology
 	-- [246] = "%1d",	--MPCD Right Display Gain
@@ -382,25 +250,19 @@ ExportScript.ConfigArguments =
 	-- [195] = "%.4f",	--MPCD Right Off/Brightness Control
 
 	-- Armament Control Panel ACP
-	-- [395] = "%.1f",	--Manual Release Control Knob
-	-- [396] = "%1d",	--Armament Mode Control
-	-- [397] = "%1d",	--Fuzing Control
-	-- [398] = "%1d",	--Quantity Selector (Tens)
-	-- [399] = "%1d",	--Quantity Selector (Units)
-	-- [400] = "%1d",	--Multiple Release Control
-	-- [401] = "%1d",	--Release Interval Control (Hundreds)
-	-- [402] = "%1d",	--Release Interval Control (Tens)
-	-- [403] = "%1d",	--Release Interval Control (Units)
-	-- [404] = "%1d",	--Jettison Mode Selector
+	[395] = "%.1f",	--Manual Release Control Knob 0/.3/.7/1
+	[404] = "%.1f",	--Jettison Mode Selector
 	-- [405] = "%1d",	--Jettison Stores
-	-- [407] = "%1d",	--Select Station 1 Toggle
-	-- [409] = "%1d",	--Select Station 2 Toggle
-	-- [411] = "%1d",	--Select Station 3 Toggle
-	-- [413] = "%1d",	--Select Station 4 Toggle
-	-- [415] = "%1d",	--Select Station 5 Toggle
-	-- [417] = "%1d",	--Select Station 6 Toggle
-	-- [419] = "%1d",	--Select Station 7 Toggle
-	-- [420] = "%1d",	--Ground IR Cool Switch
+	[420] = "%1d",	--Ground IR Cool Switch
+
+	--LOWER AMARMENT PANEL
+	[406] = "%1d",	--SET FLAG 1
+	[408] = "%1d",	--SET FLAG 2
+	[410] = "%1d",	--SET FLAG 3
+	[412] = "%1d",	--SET FLAG 4
+	[414] = "%1d",	--SET FLAG 5
+	[416] = "%1d",	--SET FLAG 6
+	[418] = "%1d",	--SET FLAG 7
 
 	-- Master Armament Panel
 	[286] = "%1d",	--Launch Flare Salvo
@@ -426,24 +288,7 @@ ExportScript.ConfigArguments =
 	-- [449] = "%.1f",	--H2O Mode Switch
 	-- [450] = "%1d",	--CMBT Thrust Button
 
-	-- Bulkhead Switches
-	-- [501] = "%1d",	--MFS Emergency Lever
-	-- [1121] = "%1d",	--Stopwatch Start/Stop
-	-- [1122] = "%1d",	--Stopwatch Lap/Reset
-
-	-- Seat
-	-- [800] = "%1d",	--Seat Ground Safety Lever
-
-	-------------------------------------------------------------------
-	-- CENTER CONSOLE:
-	-------------------------------------------------------------------
--- Flights Instruments Panel
-	-- [364] = "%.4f",	--NAV Course Setting
-	-- [653] = "%.4f",	--Barometric Pressure Calibration
-	-- [350] = "%1d",	--Backup ADI Cage
-	-- [351] = "%.4f",	--Backup ADI Pitch Adjust Knob
-
--- Miscelaneous Switch Panel
+	-- Miscelaneous Switch Panel
 	-- [422] = "%1d",	--Video Recorder System Mode Switch
 	-- [423] = "%1d",	--Video Recorder System Display Selector Switch
 	-- [424] = "%1d",	--DMT Toggle On/Off
@@ -454,14 +299,8 @@ ExportScript.ConfigArguments =
 
 	-- INS Panel
 	-- [421] = "%.1f",	--INS Mode Knob
-	-------------------------------------------------------------------
--- LEFT CONSOLE:
--------------------------------------------------------------------
--- Trim Panel
-	-- [471] = "%.1f",	--RPS/YAW Trim Switch
-	-- [472] = "%.1f",	--Trim Mode Switch
 
--- SAAHS Panel
+	-- SAAHS Panel
 	-- [476] = "%1d",	--Alt Hold Switch
 	-- [475] = "%1d",	--Q Feel Switch
 	-- [477] = "%.1f",	--AFC Switch
@@ -469,20 +308,7 @@ ExportScript.ConfigArguments =
 	-- [479] = "%1d",	--SAS Roll Switch
 	-- [480] = "%1d",	--SAS Pitch Switch
 
--- Throttle Quadrant
-	-- [481] = "%1d",	--JPTL Switch
-	-- [483] = "%1d",	--Rudder Trim Switch
-	-- [482] = "%1d",	--EMS Button
-	-- [484] = "%1d",	--Manual Fuel Switch
-	-- [485] = "%.4f",	--Throttle Lever Friction Knob
-	-- [486] = "%.4f",	--Nozzle Lever Friction Knob
-	-- [490] = "%1d",	--Throttle Cutoff Lever
-	-- [489] = "%1d",	--Parking Brake Lever
-	-- [487] = "%.4f",	--Nozzle Control Lever
-	-- [488] = "%.4f",	--STO Stop Lever
-	--[491] = "%1d",	--Air Brake Switch
-
--- Fuel Panel
+	-- Fuel Panel
 	-- [504] = "%1d",	--Fuel Proportioner
 	-- [505] = "%.1f",	--Fuel Pump L Switch
 	-- [506] = "%.1f",	--Fuel Pump R Switch
@@ -490,7 +316,7 @@ ExportScript.ConfigArguments =
 	-- [508] = "%1d",	--Fuel Dump L Switch
 	-- [509] = "%1d",	--Fuel Dump R Switch"
 
--- External Lights Panel
+	-- External Lights Panel
 	-- [472] = "%.1f",	--Landing/Taxi Lights Switch
 	-- [503] = "%.1f",	--External Lights Mode Switch"
 	-- [510] = "%.4f",	--Formation Lights Knob
@@ -498,28 +324,26 @@ ExportScript.ConfigArguments =
 	-- [512] = "%1d",	--Anti-Collision Lights Switch
 	-- [513] = "%1d",	--External Auxiliary Lights Switch
 
--- Pilot Service Panel
+	-- Pilot Service Panel
 	-- [514] = "%1d",	--"Oxygen Switch
 	-- [515] = "%1d",	--H2O Dump Switch
 	-- [516] = "%1d",	--LIDS Switch
 	-- [517] = "%1d",	--ENG RPM Switch
 	-- [518] = "%1d",	--EFC Switch
 
--- Bulkhead Switches
+	-- Bulkhead Switches
 	-- [502] = "%1d",	--Seat Adjustment Switch
 	-- [519] = "%1d",	--Fuel Shutoff Lever
 	-- [520] = "%1d",	--DECS Switch
--------------------------------------------------------------------
--- RIGHT CONSOLE:
--------------------------------------------------------------------
--- Electrical Panel
+
+	-- Electrical Panel
 	-- [609] = "%.1f",	--DC Test Switch
 	-- [610] = "%.1f",	--APU Generator Switch
 	-- [611] = "%1d",	--Engine Start Switch
 	-- [612] = "%.1f",	--Generator Switch
 	-- [613] = "%.1f",	--Battery Switch
 
--- V/UHF Radio Panel
+	-- V/UHF Radio Panel
 	-- [614] = "%.4f",	--V/UHF RSC Volume Knob
 	-- [615] = "%.3f",	--V/UHF RSC Chan/Freq Knob
 	-- [616] = "%.1f",	--V/UHF RSC Operational Mode Switch
@@ -528,7 +352,7 @@ ExportScript.ConfigArguments =
 	-- [619] = "%.1f",	--V/UHF RSC Frequency Mode Switch
 	-- [620] = "%1d",	--V/UHF RSC LOAD/OFST Switch
 
--- ACNIP
+	-- ACNIP
 	-- [621] = "%1d",	--ACNIP Mode Switch
 	-- [622] = "%1d",	--KY-1 Cipher Type Selector Switch
 	-- [623] = "%1d",	--KY-2 Cipher Type Selector Switch
@@ -538,21 +362,36 @@ ExportScript.ConfigArguments =
 	-- [627] = "%1d",	--KY-58 Codes Clear Switch
 	-- [628] = "%1d",	--KY-58 Remote Codes Load Switch
 
--- ICS
+	-- ICS
 	-- [629] = "%.4f",	--ICS Aux Volume Knob
 	-- [630] = "%.4f",	--ICS Ground Volume Knob
 	-- [631] = "%.1f",	--ICS Mic Operational Mode Switch
 
--- IFF
+	-- IFF
 	-- [632] = "%1d",	--IFF Operational Mode Switch
 	-- [633] = "%1d",	--IFF Crypto Mode Switch
 
--- Interior Lights Panel
+	-- Interior Lights Panel
 	-- [634] = "%1d",	--Compass Light/Test Lights
 	-- [635] = "%.4f",	--Instruments Lights
 	-- [636] = "%.4f",	--Console Lights
 	-- [637] = "%.4f",	--Flood Lights
 	-- [638] = "%.4f",	--Annunciator Lights
+
+	--UPPER AMARMENT PANEL
+	[385] = "%.1f",	--MODE	-/AUT/CIP/DSL/DIR/AGM
+
+	[386] = "%.1f",	--FUZ 1. DRUM   -/N/T/NT/PR/OP/SA
+	[387] = "%.1f",	--FUR 2.		-/IN/D1/D2/V/V1/V2/FE/
+	
+	-- [389] = "%.1f",	--QTY 1. Drum 
+	-- [390] = "%.1f",	--QTY 2.
+	
+	-- [391] = "%.1f",	--MULT
+
+	-- [392] = "%.1f",	--InVT x 10 1 DRUM 
+	-- [393] = "%.1f",	--InVT x 10 2
+	-- [394] = "%.1f",	--InVT x 10 3
 }
 
 
@@ -727,11 +566,9 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		
 		-- ExportScript.Tools.SendData(2017, digits[1]..digits[2]..digits[3])
 
-		--UPPER AMARMENT PANEL
-		--[385] = "%.4f",	--MODE
+	
 		-- digits = {}
 		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(385) * 10)
-
 		-- if digits[1] == "0" then 
 		-- 	ExportScript.Tools.SendData(2018, " - ")
 		-- elseif digits[1] == "2" then 
@@ -745,40 +582,66 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		-- elseif digits[1] == "10" then 
 		-- 	ExportScript.Tools.SendData(2018, "AGM") 
 		-- end
+		-- ExportScript.Tools.SendData(2018, digits[1])
 
-		--[386] = "%.4f",	--FUZ 1. DRUM 
-		--[387] = "%.4f",	--FUR 2.
 		-- digits = {}
+		-- -/N/T/NT/PR/OP/SA
 		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(386) * 10)
+		-- if digits[1] == "1" then 
+		-- 	ExportScript.Tools.SendData(2019, "-")
+		-- elseif digits[1] == "2" then 
+		-- 	ExportScript.Tools.SendData(2019, "N ")
+		-- elseif digits[1] == "3" then 
+		-- 	ExportScript.Tools.SendData(2019, "T ")
+		-- elseif digits[1] == "4" then 
+		-- 	ExportScript.Tools.SendData(2019, "NT")
+		-- elseif digits[1] == "5" then 
+		-- 	ExportScript.Tools.SendData(2019, "PR")
+		-- elseif digits[1] == "6" then 
+		-- 	ExportScript.Tools.SendData(2019, "OP") 
+		-- elseif digits[1] == "7" then 
+		-- 	ExportScript.Tools.SendData(2019, "SA") 
+		-- end
+
+		-- -/IN/D1/D2/V/V1/V2/FE/
 		-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(387) * 10)
-		
+		-- if digits[2] == "0" then 
+		-- 	ExportScript.Tools.SendData(2019, "-")
+		-- if digits[2] == "1" then 
+		-- 	ExportScript.Tools.SendData(2019, "-")
+		-- elseif digits[2] == "2" then 
+		-- 	ExportScript.Tools.SendData(2019, "IN")
+		-- elseif digits[2] == "3" then 
+		-- 	ExportScript.Tools.SendData(2019, "D1")
+		-- elseif digits[2] == "4" then 
+		-- 	ExportScript.Tools.SendData(2019, "D2")
+		-- elseif digits[2] == "5" then 
+		-- 	ExportScript.Tools.SendData(2019, "V ") 
+		-- elseif digits[2] == "6" then 
+		-- 	ExportScript.Tools.SendData(2019, "V1") 
+		-- elseif digits[1] == "7" then 
+		-- 	ExportScript.Tools.SendData(2019, "V2") 
+		-- elseif digits[1] == "8" then 
+		-- 	ExportScript.Tools.SendData(2019, "FE") 
+		-- end
 		-- ExportScript.Tools.SendData(2019, digits[1]..digits[2])
 		
-		--[392] = "%.4f",	--InVT x 10 1. DRUM 
-		--[393] = "%.4f",	--InVT x 10 2.
-		--[394] = "%.4f",	--InVT x 10 3.
-		-- 	digits = {}
-		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(392) * 10)
-		-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(393) * 10)
-		-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(394) * 10)
+		digits = {}
+		digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(389) * 10)
+		digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(390) * 10)
+		ExportScript.Tools.SendData(2020, digits[1]..digits[2])
 		
-		-- ExportScript.Tools.SendData(2020, digits[1]..digits[2]..digits[3])
+		digits = {}
+		digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(391) * 10)
+		ExportScript.Tools.SendData(2021, digits[1])
 		
-		--[391] = "%.4f",	--MULT
-		-- digits = {}
-		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(391) * 10)
+		digits = {}
+		digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(392) * 10)
+		digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(393) * 10)
+		digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(394) * 10)
+		ExportScript.Tools.SendData(2022, digits[1]..digits[2]..digits[3])
+
 		
-		-- ExportScript.Tools.SendData(2021, digits[1])
-		
-		--[389] = "%.4f",	--QTY 1. Drum 
-		--[390] = "%.4f",	--QTY 2.
-		-- 	digits = {}
-		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(389) * 10)
-		-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(390) * 10)
-		
-		-- ExportScript.Tools.SendData(2022, digits[1]..digits[2])
-		
-		--> McMicha
 		
 		-- UFC Displays
 		local lUfcDisplays = list_indication(5)

@@ -4,19 +4,19 @@ ExportScript.Config = {}
 -- device 1
 ExportScript.Config.Export      = true              -- sending data
 ExportScript.Config.Export1SD   = false             -- sendind data from SD
-ExportScript.Config.Host        = "192.168.1.10"     -- IP for 1st app
+ExportScript.Config.Host        = "192.168.0.12"     -- IP for 1st app
 ExportScript.Config.Port        = 5160              -- port for sending data
 
 -- device 2
 ExportScript.Config.Export2     = true              -- sending data
 ExportScript.Config.Export2SD   = false             -- sendind data from SD
-ExportScript.Config.Host2       = "192.168.1.4"     -- IP for 2nd app
+ExportScript.Config.Host2       = "192.168.0.14"     -- IP for 2nd app
 ExportScript.Config.Port2       = 5160              -- port for sending data
 
 -- device 3
 ExportScript.Config.Export3     = true              -- sending data
 ExportScript.Config.Export3SD   = true              -- sendind data from SD
-ExportScript.Config.Host3       = "192.168.1.5"     -- IP for 3rd app
+ExportScript.Config.Host3       = "192.168.0.16"     -- IP for 3rd app
 ExportScript.Config.Port3       = 5160              -- port for sending data
 
 -- device 4
