@@ -62,6 +62,29 @@ ExportScript.ConfigEveryFrameArguments =
 }
 ExportScript.ConfigArguments = 
 {
+	-- SNSR
+	[670] = "%1d", 	-- LEFT HDPT Switch
+	[671] = "%1d", 	-- RIGHT HDPT Switch
+	[672] = "%1d", 	-- FCR Switch
+	[673] = "%1d", -- RDR ALT Switch
+
+	--HUD Remote Control Panel
+	[675] = "%1d", -- Scales Switch, VV/VAH / VAH / OFF
+	[676] = "%1d", -- Flightpath Marker Switch, ATT/FPM / FPM / OFF
+	[677] = "%1d", -- DED/PFLD Data Switch, DED / PFL / OFF
+	[678] = "%1d", -- Depressible Reticle Switch, STBY / PRI / OFF
+	[679] = "%1d", -- Velocity Switch, CAS / TAS / GND SPD
+	[680] = "%1d", -- Altitude Switch, RADAR / BARO / AUTO
+	[681] = "%1d", -- Brightness Control Switch, DAY / AUTO BRT / NIGHT
+	[682] = "%1d", -- TEST Switch, STEP / ON / OFF
+
+	-- LIGHTING
+	[685] = "%.1f", -- PRIMARY CONSOLES BRT Knob
+	[686] = "%.1f", -- PRIMARY INST PNL BRT Knob
+	[687] = "%.1f", -- PRIMARY DATA ENTRY DISPLAY BRT Knob
+	[688] = "%.1f", -- FLOOD CONSOLES BRT Knob
+	[690] = "%.1f", -- FLOOD INST PNL BRT Knob
+	--[691] = "%.1f", -- MAL & IND LTS Switch, BRT/Center/DIM
 }
 
 -- DED Layout Information ------------------------------------------------------

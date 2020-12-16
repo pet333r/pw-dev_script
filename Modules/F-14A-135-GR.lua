@@ -219,6 +219,22 @@ ExportScript.ConfigEveryFrameArguments =
 	[15063] = "%1d", 	-- PLT_WARN_STARTVALVE  Start Valve (yellow)
 	[15064] = "%1d", 	-- PLT_WARN_RENGSEC 	 Right Engine Secondary (yellow)
 
+	-- VDI lights
+	[9360] = "%1d", -- ADJ A/C Light (red)
+	[9361] = "%1d", -- LANDING CHK Light (red)
+	[9362] = "%1d", -- ACL READY Light (red)
+	[9363] = "%1d", -- A/P CPLR Light (red)
+	[9364] = "%1d", -- CMD CONTROL Light (red)
+	[9365] = "%1d", -- 10 SECONDS Light (red)
+	[9366] = "%1d", -- TILT Light (red)
+	[9367] = "%1d", -- VOICE Light (red)
+	[9368] = "%1d", -- AUTO THRO Light (red)
+	[9369] = "%1d", -- A/P REF Light (red)
+	[15070] = "%1d", -- WAVE OFF Light (red)
+	[15071] = "%1d", -- WING SWEEP Light (red)
+	[15072] = "%1d", -- REDUCE SPD Light (red)
+	[15073] = "%1d", -- ALT LOW Light (red)
+
 	-- RIO Warnings
 	[2201] = "%1d", -- RIO IFF Light (green)	
 	[2202] = "%1d", -- RIO RCV Light (green)	
@@ -228,19 +244,19 @@ ExportScript.ConfigEveryFrameArguments =
 	[2206] = "%1d", -- RIO CW Light (red)	
 	[2208] = "%1d", -- RIO AI Light (red)
 
-	[2209] = "%1d", -- C D HOT Light (green)
-	[2210] = "%1d", -- CABIN PRESS Light (green)
-	[2211] = "%1d", -- FUEL LOW Light (green)
-	[2212] = "%1d", -- CANOPY Light (green)
-	[2213] = "%1d", -- FUZE HV Light (green)
-	[2214] = "%1d", -- RDR ENABLED Light (green)
-	[2215] = "%1d", -- COOLING AIR Light (yellow)
-	[2216] = "%1d", -- MSL COND Light (yellow)
-	[2217] = "%1d", -- C D HOT Light (yellow)
-	[2218] = "%1d", -- NAV COMP Light (yellow)
-	[2219] = "%1d", -- FILM LOW Light (yellow)
-	[2220] = "%1d", -- IMU Light (yellow)
-	[2221] = "%1d", -- AHRS Light (yellow)
+	[2209] = "%1d", -- C D HOT Light
+	[2210] = "%1d", -- CABIN PRESS Light
+	[2211] = "%1d", -- FUEL LOW Light
+	[2212] = "%1d", -- CANOPY Light
+	[2213] = "%1d", -- FUZE HV Light
+	[2214] = "%1d", -- RDR ENABLED Light
+	[2215] = "%1d", -- COOLING AIR Light
+	[2216] = "%1d", -- MSL COND Light
+	[2217] = "%1d", -- AWG 9 COND
+	[2218] = "%1d", -- NAV COMP Light
+	[2219] = "%1d", -- FILM LOW Light
+	[2220] = "%1d", -- IMU Light
+	[2221] = "%1d", -- AHRS Light
 
 	[2222] = "%1d", -- WAVE OFF Light
 	[2223] = "%1d", -- LAND CHK Light
