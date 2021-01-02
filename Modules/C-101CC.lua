@@ -4,9 +4,9 @@ ExportScript.FoundDCSModule = true
 ExportScript.ConfigEveryFrameArguments = 
 {
     	-- Angle of attack indicator
-	[291] = "%0.1f",	-- AOA_INDEXER_HIGH
-	[292] = "%0.1f",	-- AOA_INDEXER_NORM
-	[293] = "%0.1f",	-- AOA_INDEXER_LOW
+	[291] = "%1d",	-- AOA_INDEXER_HIGH
+	[292] = "%1d",	-- AOA_INDEXER_NORM
+	[293] = "%1d",	-- AOA_INDEXER_LOW
 }
 
 ExportScript.ConfigArguments = 

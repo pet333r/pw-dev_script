@@ -1,16 +1,13 @@
 -- Su-25T
-ExportScript.FoundDCSModule = true
+ExportScript.FoundFCModule = true
 
-ExportScript.ConfigEveryFrameArguments = 
-{
-}
+-- auxiliary function
+dofile(ExportScript.Config.ExportModulePath.."FC_Functions.lua")
 
-ExportScript.ConfigArguments = 
-{
-}
-
-function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
+function ExportScript.ProcessFCHighImportanceConfig()
 end
 
-function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
+function ExportScript.ProcessFCLowImportanceConfig()
+    -- SPO15 Radar Warning Reciver
+    ExportScript.AF.FC_SPO15RWR()
 end

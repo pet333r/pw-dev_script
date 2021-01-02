@@ -233,6 +233,8 @@ function ExportScript.Tools.ProcessOutput()
     end
 
     elseif ExportScript.FoundFCModule then -- Assume FC Aircraft
+        ExportScript.AF.EventNumber = os.clock() --tonumber(tostring(os.clock()):gsub(".", ""))
+
         ExportScript.coProcessGlassCockpitFCHighImportance = coroutine.create(ExportScript.ProcessFCHighImportance)
         _coStatus = coroutine.resume( ExportScript.coProcessGlassCockpitFCHighImportance)
 
@@ -578,4 +580,25 @@ function ExportScript.Tools.coerce_nil_to_string(value)
 	else
 		return value
 	end
+end
+
+-- round function for math libraray
+-- number  : value
+-- decimals: number of decimal
+-- method  :  ceil: Returns the smallest integer larger than or equal to number
+--           floor: Returns the smallest integer smaller than or equal to number
+function ExportScript.Tools.round(number, decimals, method)
+    if string.find(number, "%p" ) ~= nil then
+        decimals = decimals or 0
+        local lFactor = 10 ^ decimals
+        if (method == "ceil" or method == "floor") then
+            -- ceil: Returns the smallest integer larger than or equal to number
+            -- floor: Returns the smallest integer smaller than or equal to number
+            return math[method](number * lFactor) / lFactor
+        else
+            return tonumber(("%."..decimals.."f"):format(number))
+        end
+    else
+        return number
+    end
 end

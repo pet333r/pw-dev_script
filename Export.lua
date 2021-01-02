@@ -91,6 +91,8 @@ function LuaExportStart()
 	ExportScript.Tools.createUDPSender()
 	ExportScript.Tools.createUDPListner()
 
+	ExportScript.AF = {} -- Table for Auxiliary functions
+
 	ExportScript.NoLuaExportBeforeNextFrame = false
 	ExportScript.Tools.SelectModule()   -- point globals to Module functions and data.
 	
