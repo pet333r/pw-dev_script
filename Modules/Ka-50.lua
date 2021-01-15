@@ -3,21 +3,37 @@ ExportScript.FoundDCSModule = true
 
 ExportScript.ConfigEveryFrameArguments = 
 {
-    [315] = "%0.1f", -- Waypoints LED
-    [519] = "%0.1f", -- Inflight INU Realignment LED
-    [316] = "%0.1f", -- Fixpoints LED
-    [520] = "%0.1f", -- Precise INU Alignment LED
-    [317] = "%0.1f", -- Airfields LED
-    [521] = "%0.1f", -- Normal INU Alignment LED
-    [318] = "%0.1f", -- Targets LED
-    [313] = "%0.1f", -- Enter LED
-    [314] = "%0.1f", -- Cancel LED
-    [522] = "%0.1f", -- Initial Nav Pos LED
-    [319] = "%0.1f", -- Self coordinates LED
-    [320] = "%0.1f", -- Course:Course Deviation/Time/Range to WPT LED
-    [321] = "%0.1f", -- Wind Heading/Speed LED
-    [322] = "%0.1f", -- True Heading/Time/Range to final WPT LED
-    [323] = "%0.1f", -- Bearing/Range to target LED
+    -- Datalink
+    [159] = "%.1f", -- Send/Memory LED
+    [150] = "%.1f", -- Ingress to targetLED
+    [161] = "%.1f", -- Erase  LED
+    [15] = "%.1f", -- N/A LED
+    [16] = "%.1f", -- To all LED
+    [17] = "%.1f", -- Wingman 1 LED
+    [18] = "%.1f", -- Wingman 2 LED
+    [19] = "%.1f", -- Wingman 3 LED
+    [20] = "%.1f", -- Wingman 4 LED
+    [21] = "%.1f", -- Target #1/Vehicle LED
+    [22] = "%.1f", -- Target #2/SAM LED
+    [23] = "%.1f", -- Target #3/Other type LED
+    [50] = "%.1f", -- Ingress point LED
+
+    -- PVI-800
+    [315] = "%.1f", -- Waypoints LED
+    [519] = "%.1f", -- Inflight INU Realignment LED
+    [316] = "%.1f", -- Fixpoints LED
+    [520] = "%.1f", -- Precise INU Alignment LED
+    [317] = "%.1f", -- Airfields LED
+    [521] = "%.1f", -- Normal INU Alignment LED
+    [318] = "%.1f", -- Targets LED
+    [313] = "%.1f", -- Enter LED
+    [314] = "%.1f", -- Cancel LED
+    [522] = "%.1f", -- Initial Nav Pos LED
+    [319] = "%.1f", -- Self coordinates LED
+    [320] = "%.1f", -- Course:Course Deviation/Time/Range to WPT LED
+    [321] = "%.1f", -- Wind Heading/Speed LED
+    [322] = "%.1f", -- True Heading/Time/Range to final WPT LED
+    [323] = "%.1f", -- Bearing/Range to target LED
 }
 
 ExportScript.ConfigArguments = 

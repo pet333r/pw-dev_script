@@ -31,6 +31,19 @@ ExportScript.ConfigEveryFrameArguments =
 }
 ExportScript.ConfigArguments = 
 {
+	[340] = "%1d",	-- Interval Switch [sec], .06/.10/.14 {-1.0, 0.0, 1.0}
+	[341] = "%.1f",	-- Bombs Arm Switch, SAFE/TAIL/NOSE & TAIL/NOSE {0.0, 0.1, 0.2, 0.3}
+	[342] = "%1d",	-- GUNS MSL Cover 0/1
+	[343] = "%1d",	-- GUNS MSL CAMR / OFF / CAMR ONLY 1/0/-1
+	[344] = "%.1f",	-- External Stores Selector, RIPL/BOMB/SAFE/RKT DISP {0.0,0.1,0.2,0.3}
+	[345] = "%.2f",	-- Missile Volume Knob - Rotate to adjust volume (Axis) {0.0, 1.0} in 0.15 Steps
+	[346] = "%1d",	-- Armament Position Selector Switch - LEFT WINGTIP, ON/OFF
+	[347] = "%1d",	-- Armament Position Selector Switch - LEFT OUTBD, ON/OFF
+	[348] = "%1d",	-- Armament Position Selector Switch - LEFT INBD, ON/OFF
+	[349] = "%1d",	-- Armament Position Selector Switch - CENTERLINE, ON/OFF
+	[350] = "%1d",	-- Armament Position Selector Switch - RIGHT INBD, ON/OFF
+	[351] = "%1d",	-- Armament Position Selector Switch - RIGHT OUTBD, ON/OFF
+	[352] = "%1d",	-- Armament Position Selector Switch - RIGHT WINGTIP, ON/OFF
 }
 
 -- Pointed to by ProcessDCSHighImportance
