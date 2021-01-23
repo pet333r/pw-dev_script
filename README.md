@@ -140,7 +140,7 @@ In one of the "groups" in the Config.lua file which is located in the folder wit
   - You probably set wrong Your Android device IP in `Config.lua` file
 
 ***`2`*** If Your device stopped receiving data
-  - Your router has likely assigned a different IP address to your Android device
+  - Your router has likely assigned a different IP address to your Android device. Check the device's IP address and enter a new one in the Config.lua file.
 
 ***`3`*** If you receive data from DCS but no button works  
   - check if you have the correct PC address given in the DCS UFC settings  
@@ -148,8 +148,8 @@ In one of the "groups" in the Config.lua file which is located in the folder wit
   [https://www.windowscentral.com/how-open-port-windows-firewall](https://www.windowscentral.com/how-open-port-windows-firewall)
 
 # faq
-***`1`*** what is the minimum android version for the DCS UFC and DCS AoA Indexer applications?
-  - the minimum system version is 4.1
+***`1`*** What version of the system do Android applications work with? [ DCS UFC / DCS AoA Indexer]
+  - applications run on systems version 4.1 and above [ about 99% of devices available on the market ]
 
 ***`2`*** do the applications and script work in multiplayer?
   - YES, on the server the property must be set: `Allow player export: true`, about 95% of servers have this option turned on;-)
