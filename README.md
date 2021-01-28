@@ -32,17 +32,17 @@ you'll find it on the "Releases" page
 # automatic script installation
 - download Script Configurator from this link: [https://github.com/pet333r/pw-dev_script/releases/download/configurator/Script.Configurator.zip](https://github.com/pet333r/pw-dev_script/releases/download/configurator/Script.Configurator.zip)
 - extract to disk somewhere and run  
-- click the "..." button to select the path to install the script (the path should look like this:)  
+- click the "**...**" button to select the path to install the script (the path should look like this:)  
   * `c:\Users\{Your username}\Saved Games\DCS.openbeta\`
   * `c:\Users\{Your username}\Saved Games\DCS\`  
 
   [![](.gfx/sc1.png)](https://github.com/pet333r/pw-dev_script/blob/master/.gfx/sc1.png) [![](.gfx/sc2.png)](https://github.com/pet333r/pw-dev_script/blob/master/.gfx/sc2.png)
-- after selecting the correct path, click the "Download & install script" button, the zip file with the script will be downloaded and installed in the appropriate place, additionally an entry will be automatically added to the main Export.lua file
-- you can check if the script entry is added in the file Export.lua (button "Open main Export.lua")
-- then enter the correct IP addresses of your Android devices ("Edit Config.lua" button) example you will find below in the [example connection](#example-connection)
-- in the future, you can check the script update by clicking the "Check for update" button
+- after selecting the correct path, click the "**Download & install script**" button, the zip file with the script will be downloaded and installed in the appropriate place, additionally an entry will be automatically added to the main Export.lua file
+- you can check if the script entry is added in the file Export.lua (button "**Open main Export.lua**")
+- then enter the correct IP addresses of your Android devices ("**Edit Config.lua**" button) example you will find below in the [example connection](#example-connection)
+- in the future, you can check the script update by clicking the "**Check for update**" button
 
-- the last thing is to enter your computer's IP address in the Android application settings (DCS UFC / DCS AoA Indexer)
+- the last thing is to enter your computer's IP address in the Android application settings (**DCS UFC** / **DCS AoA Indexer**)
 
 # manual installation
 
