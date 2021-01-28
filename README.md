@@ -36,7 +36,7 @@ you'll find it on the "Releases" page
   * `c:\Users\{Your username}\Saved Games\DCS.openbeta\`
   * `c:\Users\{Your username}\Saved Games\DCS\`  
 
-  [![](.gfx/sc1.png)](https://github.com/pet333r/pw-dev_script/blob/master/.gfx/sc1.png) [![](.gfx/sc2.png)](https://github.com/pet333r/pw-dev_script/blob/master/.gfx/sc2.png)
+  [![](.gfx/sc1.png =234x320)](https://github.com/pet333r/pw-dev_script/blob/master/.gfx/sc1.png) [![](.gfx/sc2.png =234x320)](https://github.com/pet333r/pw-dev_script/blob/master/.gfx/sc2.png)
 - after selecting the correct path, click the "**Download & install script**" button, the zip file with the script will be downloaded and installed in the appropriate place, additionally an entry will be automatically added to the main Export.lua file
 - you can check if the script entry is added in the file Export.lua (button "**Open main Export.lua**")
 - then enter the correct IP addresses of your Android devices ("**Edit Config.lua**" button) example you will find below in the [example connection](#example-connection)
