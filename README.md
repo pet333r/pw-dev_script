@@ -29,7 +29,22 @@ you'll find it on the "Releases" page
 [![DCS UFC](.gfx/yt_dcsufc.jpg)](https://youtu.be/qGfzUdCVLwc)  
 [![DCS AoA Indexer](.gfx/yt_aoa.jpg)](https://youtu.be/OU6KO8tjmGo)
 
-# installation
+# automatic script installation
+- download Script Configurator from this link: [https://github.com/pet333r/pw-dev_script/releases/download/configurator/Script.Configurator.zip](https://github.com/pet333r/pw-dev_script/releases/download/configurator/Script.Configurator.zip)
+- extract to disk somewhere and run  
+- click the "..." button to select the path to install the script (the path should look like this:)  
+  * `c:\Users\{Your username}\Saved Games\DCS.openbeta\`
+  * `c:\Users\{Your username}\Saved Games\DCS\`  
+
+  [![](.gfx/sc1.png)]() [![](.gfx/sc2.png)]()
+- after selecting the correct path, click the "Download & install script" button, the zip file with the script will be downloaded and installed in the appropriate place, additionally an entry will be automatically added to the main Export.lua file
+- you can check if the script entry is added in the file Export.lua (button "Open main Export.lua")
+- then enter the correct IP addresses of your Android devices ("Edit Config.lua" button) example you will find below in the [example connection](#example-connection)
+- in the future, you can check the script update by clicking the "Check for update" button
+
+- the last thing is to enter your computer's IP address in the Android application settings (DCS UFC / DCS AoA Indexer)
+
+# manual installation
 
 download latest script version in ZIP file from this link: [https://github.com/pet333r/pw-dev_script/releases/download/script/Scripts.zip](https://github.com/pet333r/pw-dev_script/releases/download/script/Scripts.zip), save it wherevere You want on disk and unpack
 
@@ -48,7 +63,7 @@ if You don't have folder `Scripts`, simply copy folder `Scripts` from unpacked Z
 - open main `Export.lua` file in `Scripts` folder (recommend Notepad++ for this) and add this code to the beginning of the file (above the entries for other scripts, example here: [compability](#compability)) 
 
 ```
-local lfs=require('lfs'); dofile(lfs.writedir()..[[Scripts\pw-dev_script\Export.lua]])
+local pw=require('lfs'); dofile(pw.writedir()..[[Scripts\pw-dev_script\Export.lua]])
 ```
 - save & close
 - now go to [Edit Config.lua](##edit-Config.lua)
@@ -65,7 +80,7 @@ this is how the file scheme with folders should look
     -  Config.lua (edit IP / port connected devices)
     -  Export.lua
 
-  - Export.lua add:  local lfs=require('lfs'); dofile(lfs.writedir()..[[Scripts\pw-dev_script\Export.lua]])
+  - Export.lua add:  local pw=require('lfs'); dofile(pw.writedir()..[[Scripts\pw-dev_script\Export.lua]])
   ```
 
 should look like this (depending on the DCS version)  
@@ -170,7 +185,7 @@ tested and works with :
  for users using SRS and VaicomPro (works when the script entry is "higher" in the file, above the SRS / VaicomPro entry)  
  example of the main `Export.lua` file (thanks to one user: `Arsenio`)
  ```
-local lfs=require('lfs'); dofile(lfs.writedir()..[[Scripts\pw-dev_script\Export.lua]]);
+local pw=require('lfs'); dofile(pw.writedir()..[[Scripts\pw-dev_script\Export.lua]]);
 
 local vaicomlfs = require('lfs'); dofile(vaicomlfs.writedir()..[[Scripts\VAICOMPRO\VAICOMPRO.export.lua]]);
 
