@@ -787,6 +787,23 @@ function ExportScript.replaceSymbols(s)
 	return s
 end
 
+local function get_UHF_CHAN()
+    local ind = ExportScript.Tools.getListIndicatorValue(10)
+    if ind == nil then return " " end
+    return ind["txtPresetChannel"]
+end
+
+local function get_UHF_FREQUENCY()
+    local UHF = ExportScript.Tools.getListIndicatorValue(11)
+    if UHF and UHF.txtFreqStatus then
+        local UHF_Freq = UHF.txtFreqStatus
+        local UHF_dot =  UHF.txtDot
+        return UHF_Freq:sub(1,3)..UHF_dot..UHF_Freq:sub(4,6)
+    else
+        return "       "
+    end
+end
+
 -- Pointed to by ProcessDCSHighImportance
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
@@ -806,9 +823,6 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	local CMDS_CH_Amount
 	local CMDS_FL_Amount
 
-	local UHF_Channel
-	local UHF_Frequency
-
 	if ExportScript.Config.ExportDisplaysF16 == true then
 		-- Build DED Display Lines
 		DEDLine1 = ExportScript.replaceSymbols(buildDEDLine(1)) --buildDEDLine(1);
@@ -817,8 +831,6 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		DEDLine4 = ExportScript.replaceSymbols(buildDEDLine(4)) --buildDEDLine(4);
 		DEDLine5 = ExportScript.replaceSymbols(buildDEDLine(5)) --buildDEDLine(5);
 
-		
-
 		ExportScript.Tools.SendData(2101, DEDLine1)
 		ExportScript.Tools.SendData(2102, DEDLine2)
 		ExportScript.Tools.SendData(2103, DEDLine3)
@@ -826,7 +838,7 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		ExportScript.Tools.SendData(2105, DEDLine5)
 
 		-- CMDS
-		local cmds = ExportScript.Tools.getListIndicatorValue(17)
+		local cmds = ExportScript.Tools.getListIndicatorValue(16)
 		CMDS_O1_Amount = "    "
 		CMDS_O2_Amount = "    "
 		CMDS_CH_Amount = "    "
@@ -842,25 +854,9 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		ExportScript.Tools.SendData(2303, CMDS_CH_Amount)
 		ExportScript.Tools.SendData(2304, CMDS_FL_Amount)
 
-		-- UHF Channel
-		local UHF = ExportScript.Tools.getListIndicatorValue(11)
-		if UHF and UHF.txtPresetChannel then
-			UHF_Channel = coerce_nil_to_string(UHF.txtPresetChannel)
-		else
-			UHF_Channel = "  "
-		end
-		ExportScript.Tools.SendData(2801, UHF_Channel)
-
-		-- UHF Frequency
-		local UHFFreq = ExportScript.Tools.getListIndicatorValue(12)
-		if UHFFreq and UHFFreq.txtFreqStatus then
-			local UHF_Freq = UHFFreq.txtFreqStatus
-			local UHF_dot =  UHFFreq.txtDot
-			UHF_Frequency = UHF_Freq:sub(1, 3) .. UHF_dot .. UHF_Freq:sub(4, 6)
-		else
-			UHF_Frequency = "       "
-		end
-		ExportScript.Tools.SendData(2802, UHF_Frequency)
+		-- UHF
+		ExportScript.Tools.SendData(2305, get_UHF_CHAN())
+		ExportScript.Tools.SendData(2306, get_UHF_FREQUENCY())
 	end
 
 	-- local val = ExportScript.Tools.getListIndicatorValue(14)

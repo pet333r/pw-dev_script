@@ -146,7 +146,7 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	if ExportScript.Config.ExportDisplaysFA18 == true then
 		-- UFC Displays
 		local _ufcDisplay = ExportScript.Tools.getListIndicatorValue(6)
-		
+
 		if _ufcDisplay ~= nil and _ufcDisplay.UFC_MainDummy ~= nil then
 			-- ScratchPadString Displays
 			_ufcDisplay.UFC_ScratchPadString1Display = string.gsub(_ufcDisplay.UFC_ScratchPadString1Display, "_", "-") -- fix
@@ -199,11 +199,9 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		
 		local _UHF1Radio = GetDevice(38)
 		ExportScript.Tools.SendData(2030, ExportScript.Tools.DisplayFormat(ExportScript.Tools.RoundFreqeuncy((_UHF1Radio:get_frequency()/1000000))), 7)
-		
+
 		local _UHF2Radio = GetDevice(39)
 		ExportScript.Tools.SendData(2031, ExportScript.Tools.DisplayFormat(ExportScript.Tools.RoundFreqeuncy((_UHF2Radio:get_frequency()/1000000), "7.3", false, 0.005)), 7)
-
-	
 	end
 
 	if ExportScript.Config.ExportDisplaysFA18Ifei == true then

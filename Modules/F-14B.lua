@@ -315,7 +315,6 @@ ExportScript.ConfigArguments =
 }
 
 local function getAmmo()
-    local function a(n) return GetDevice(0):get_argument_value(n) end
     local digit1 = string.format("%.0f", GetDevice(0):get_argument_value(4060)*10)
 	if digit1 == nil then digit1 = "0" end
     local digit2 = string.format("%.0f", GetDevice(0):get_argument_value(4061)*10)
@@ -325,7 +324,6 @@ local function getAmmo()
     return tonumber(digit1 .. digit2 .. digit3)
 end
 -- local function getGunLead()
---     local function a(n) return GetDevice(0):get_argument_value(n) end
 --     local digit1 = string.format("%.0f", GetDevice(0):get_argument_value(2270)*10)
 -- 	if digit1 == nil then digit1 = "0" end
 --     local digit2 = string.format("%.0f", GetDevice(0):get_argument_value(2271)*10)
@@ -336,7 +334,6 @@ end
 -- end
 
 local function getPLTFuelLeft()
-    local function a(n) return GetDevice(0):get_argument_value(n) end
     local digit1 = string.format("%.0f", GetDevice(0):get_argument_value(6000)*10)
 	if digit1 == nil then digit1 = "0" end
     local digit2 = string.format("%.0f", GetDevice(0):get_argument_value(6001)*10)
@@ -347,7 +344,6 @@ local function getPLTFuelLeft()
 end
 
 local function getPLTFuelRight()
-    local function a(n) return GetDevice(0):get_argument_value(n) end
     local digit1 = string.format("%.0f", GetDevice(0):get_argument_value(6004)*10)
 	if digit1 == nil then digit1 = "0" end
     local digit2 = string.format("%.0f", GetDevice(0):get_argument_value(6005)*10)
@@ -358,7 +354,6 @@ local function getPLTFuelRight()
 end
 
 local function getPLTFuelTotal()
-    local function a(n) return GetDevice(0):get_argument_value(n) end
     local digit1 = string.format("%.0f", GetDevice(0):get_argument_value(6010)*10)
 	if digit1 == nil then digit1 = "0" end
     local digit2 = string.format("%.0f", GetDevice(0):get_argument_value(6011)*10)
@@ -371,7 +366,6 @@ local function getPLTFuelTotal()
 end
 
 local function getPLTFuelBingo()
-    local function a(n) return GetDevice(0):get_argument_value(n) end
     local digit1 = string.format("%.0f", GetDevice(0):get_argument_value(6020)*10)
 	if digit1 == nil then digit1 = "0" end
     local digit2 = string.format("%.0f", GetDevice(0):get_argument_value(6021)*10)

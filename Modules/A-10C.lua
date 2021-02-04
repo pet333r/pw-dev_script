@@ -19,19 +19,36 @@ ExportScript.ConfigEveryFrameArguments =
 	-- [84] = "%.2f",		-- EngineLeftFuelFlow
     -- [85] = "%.2f",		-- EngineRightFuelFlow
 
+    -- UHF
+    [161] = "%.2f", -- UHF Preset Channel Selector
+    [162] = "%.1f", -- UHF 100MHz Selector
+    [163] = "%.1f", -- UHF 10MHz Selector
+    [164] = "%.1f", -- UHF 1MHz Selector
+    [165] = "%.1f", -- UHF 0.1MHz Selector
+    [166] = "%.1f", -- UHF 0.25MHz Selector
+    [167] = "%.1f",   -- Frequency Mode Dial MNL/PRESET/GRD
+    [168] = "%.1f", -- UHF Function Dial OFF/MAIN/BOTH/ADF
+    --[169] = "%1d",   -- T-Tone Button
+    [170] = "%1d",   -- Squelch Switch
+    [171] = "%.1f", -- UHF Volume Control
 
+    -- ILS
+    [248] = "%.1f", -- ILS Frequency MHz
+    [249] = "%.1f", -- ILS Frequency KHz
 
-    [662] = "%1d", -- GUN READY Indicator
-    [663] = "%1d", -- Nosewheel Steering Indicator
-    [664] = "%1d", -- MARKER BEACON Indicator
-    [665] = "%1d", -- CANOPY UNLOCKED Indicator
+    -- TACAN
+    [256] = "%.1f", -- Left Channel Selector
+    [257] = "%.1f", -- Right Channel Selector
+    [258] = "%.1f", -- TACAN Channel X/Y Toggle
+    [261] = "%.1f", -- TACAN Signal Volume
+    [262] = "%.1f", -- TACAN Mode Dial
 
     [358] = "%1d", -- JTSN / OFF
-    [360] = "%1d", -- Missile Warning System OFF - ON - (MENU)
-    [361] = "%1d", -- Jammer OFF - ON - (MENU)
-    [362] = "%1d", -- Radar Warning Receiver OFF - ON - (MENU)
-    [363] = "%1d", -- Countermeasure Dispenser OFF - ON - (MENU)
-    [364] = "%0.1f", -- CMSP Mode Select
+    [360] = "%.1f", -- Missile Warning System OFF - ON - (MENU)
+    [361] = "%.1f", -- Jammer OFF - ON - (MENU)
+    [362] = "%.1f", -- Radar Warning Receiver OFF - ON - (MENU)
+    [363] = "%.1f", -- Countermeasure Dispenser OFF - ON - (MENU)
+    [364] = "%.1f", -- CMSP Mode Select
 
     -- AHCP
     [375] = "%.1f", -- Master Arm TRAIN - SAFE - ARM
@@ -46,12 +63,12 @@ ExportScript.ConfigEveryFrameArguments =
     [384] = "%.1f", -- IFFCC OFF - TEST - ON
 
     -- AAP
-    [473] = "%0.1f",    -- PNT-LVR-STEER-PT-SEL-SWITCH (Use Steerpoint From Active Flight Plan)
+    [473] = "%.1f",    -- PNT-LVR-STEER-PT-SEL-SWITCH (Use Steerpoint From Active Flight Plan)
     [474] = "%1d",      -- PNT-TMB-STEER-SPRING-LD-SWITCH (Toggle Steerpoint)
-    [475] = "%0.1f",    -- PNT-LEV-PAGE-SEL-SWITCH (CDU Page Select)
+    [475] = "%.1f",    -- PNT-LEV-PAGE-SEL-SWITCH (CDU Page Select)
     [476] = "%1d",      -- CDU Power On/Off
     [477] = "%1d",      -- EGI Power On/Off
-    
+
 	[404] = "%1d",	    -- Master Caution Light
 	[540] = "%1d",	    -- AOA Indexer High
 	[541] = "%1d",	    -- AOA Indexer Normal
@@ -62,7 +79,7 @@ ExportScript.ConfigEveryFrameArguments =
     [663] = "%1d",	    -- Nosewheel Steering Indicator
     [664] = "%1d",	    -- MARKER BEACON Indicator
     [665] = "%1d",	    -- CANOPY UNLOCKED Indicator
-    
+
     -- Fire handlers
     [102] = "%1d",      -- Fire Eng 1
     [103] = "%1d",      -- Fire APU
@@ -71,12 +88,6 @@ ExportScript.ConfigEveryFrameArguments =
     [215] = "%1d",      -- Left Engine Fire Indicator
     [216] = "%1d",      -- APU Fire Indicator
     [217] = "%1d",      -- Right Engine Fire Indicator
-
-
-    [360] = "%.1f",      -- Missile Warning System OFF - ON - (MENU)
-    [361] = "%.1f",      -- Jammer OFF - ON - (MENU)
-    [362] = "%.1f",      -- Radar Warning Receiver OFF - ON - (MENU)
-    [363] = "%.1f",      -- Countermeasure Dispenser OFF - ON - (MENU)
 
     [372] = "%1d",      -- ML Light
     [373] = "%1d",      -- PRI Light
@@ -131,7 +142,7 @@ ExportScript.ConfigEveryFrameArguments =
 	[525] = "%1d",		-- L_GEN
 	[526] = "%1d",		-- R_GEN
     [527] = "%1d",		-- INST_INV
-    
+
     [730] = "%1d",		-- Air Refuel READY
     [731] = "%1d",		-- Air Refuel LATCHED
     [732] = "%1d",		-- Air Refuel DISCONNECT
@@ -141,9 +152,68 @@ ExportScript.ConfigArguments =
 {
 }
 
+local function getTacanChannel()
+    local tcn_2 = ""
+    if GetDevice(0):get_argument_value(263) == 0 then
+        tcn_2 = "0"
+    else
+    	tcn_2 = "1"    
+    end
+    local tcn_1 = string.format("%.1f", GetDevice(0):get_argument_value(264)):sub(3)
+    local tcn_0 = string.format("%.1f", GetDevice(0):get_argument_value(265)):sub(3)
+
+	local tcn_xy = ""
+	if GetDevice(0):get_argument_value(266) == 0 then
+		tcn_xy = "X"
+	else
+		tcn_xy = "Y"
+	end
+
+    return tcn_2 .. tcn_1 .. tcn_0 .. tcn_xy
+end
+
+local function getILSFrequency()
+    local ils_mhz_lut = {
+        ["0.0"] = "108",
+        ["0.1"] = "109",
+        ["0.2"] = "110",
+        ["0.3"] = "111"
+    }
+    local ils_khz_lut = {
+		["0.0"] = "10",
+        ["0.1"] = "15",
+        ["0.2"] = "30",
+        ["0.3"] = "35",
+        ["0.4"] = "50",
+        ["0.5"] = "55",
+        ["0.6"] = "70",
+        ["0.7"] = "75",
+        ["0.8"] = "90",
+        ["0.9"] = "95"
+    }
+    local mhz = ils_mhz_lut[string.format("%.1f", GetDevice(0):get_argument_value(251))]
+	if mhz == nil then mhz = "108" end
+    local khz = ils_khz_lut[string.format("%.01f", GetDevice(0):get_argument_value(252))]
+	if khz == nil then khz = "10" end
+    return mhz .. "." .. khz
+end
+
+local function getUHFPreset()
+    local ind = ExportScript.Tools.getListIndicatorValue(10)
+    if ind == nil then return " " end
+    return ind["txtPresetChannel"]
+end
+
+local function getUHFFrequency()
+    local ind = ExportScript.Tools.getListIndicatorValue(11)
+    if ind == nil then return "       " end
+    local freqStatus = ind["txtFreqStatus"] -- e.g. "251000"
+    return freqStatus:sub(0,3) .. "." .. freqStatus:sub(4,6)
+end
+
 -- Pointed to by ProcessDCSHighImportance
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
-	
+
 end
 
 -- Pointed to by ExportScript.ProcessDCSConfigLowImportance
@@ -163,20 +233,20 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		ExportScript.Tools.SendData(2012, " ")	-- txt_JMR
 		ExportScript.Tools.SendData(2013, " ")	-- txt_MWS
 	end
-	
+
 	-- CMSP
 	-------------------------------------------------
 	if mainPanelDevice:get_argument_value(364) > 0 then
 		local lCMSP = ExportScript.Tools.getListIndicatorValue(7)
-		
+
 		local lCMSPTable = {"","","",""}
-		
+
 		if lCMSP ~= nil and lCMSP.txt_UP ~= nil then
 			lCMSP.txt_UP = lCMSP.txt_UP:gsub("  ", " ")
 			lCMSP.txt_UP = lCMSP.txt_UP.." "
 			lCMSPTable  = ExportScript.Tools.split(lCMSP.txt_UP, "%s")
 		end
-		
+
 		ExportScript.Tools.SendData(2014,  string.format("%s", lCMSPTable[1]))
 		ExportScript.Tools.SendData(2015,  string.format("%s", lCMSPTable[2]))
 		ExportScript.Tools.SendData(2016,  string.format("%s", lCMSPTable[3]))
@@ -194,13 +264,20 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		ExportScript.Tools.SendData(2019,  " ")
 		ExportScript.Tools.SendData(2020,  " ")
 		ExportScript.Tools.SendData(2021,  " ")
-	end	
+	end
 
     if ExportScript.Config.ExportA10C_CDU == true then
         -- CDU Data
 	    ExportScript.exportCDU()
     end
 
+    -- UHF
+    ExportScript.Tools.SendData(2022,  getUHFPreset())
+    ExportScript.Tools.SendData(2023,  getUHFFrequency())
+    -- TACAN_KNB
+    ExportScript.Tools.SendData(2024,  getTacanChannel())
+    -- ILS
+    ExportScript.Tools.SendData(2025,  getILSFrequency())
 end
 
 

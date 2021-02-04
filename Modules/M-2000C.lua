@@ -38,18 +38,16 @@ ExportScript.ConfigEveryFrameArguments =
 	[264] = "%1d",	-- Weapons Button 5 R Light
 
 	-- PPA
+	[265] = "%1d", -- Missile Selector Switch
 	[267] = "%1d", -- S530 P Light
 	[268] = "%1d", -- S530 MIS Light
 	[270] = "%1d", -- AUT Light
 	[271] = "%1d", -- MAN Light
 	[273] = "%1d", -- MAGIC P Light
 	[274] = "%1d", -- MAGIC MAN Light
-	[275] = "%1d", -- Test/Pres Switch
 	[280] = "%1d", -- TOT Light
 	[281] = "%1d", -- PAR Light
 	[276] = "%.1f", -- Bomb Fuze Selector Switch
-	[277] = "%1d", -- Bomb Release Quantity Selector Switch
-	[278] = "%1d", -- Bomb Release Interval Selector Switch
 
     -- WARNING PANEL
 	[520] = "%1d",	--  Main Battery Switch
@@ -120,11 +118,55 @@ ExportScript.ConfigEveryFrameArguments =
 	[578] = "%1d",  -- INS Update (REC)
 	[580] = "%1d",  -- Validate Data Entry (VAL)
 	[582] = "%1d",  -- Mark Position (MRC)
+
+	-- VHF Radio
+	[950] = "%.1f", -- Mode knob
+	[951] = "%.2f", -- Channel Selector (20, 0.05)
+	[965] = "%.1f", -- CLR
+	[966] = "%.1f", -- MEM
+	[967] = "%.1f", -- VLD
+	[968] = "%.1f", -- XFR
+	[969] = "%.1f", -- 1
+	[970] = "%.1f", -- READ
+	[971] = "%.1f", -- 2
+	[972] = "%.1f", -- .
+	[973] = "%.1f", -- SQL
+	[974] = "%.1f", -- 3
+	[975] = "%.1f", -- .
+	[976] = "%.1f", -- GR
+	[977] = "%.1f", -- 4
+	[978] = "%.1f", -- 5
+	[979] = "%.1f", -- 20
+	[980] = "%.1f", -- LOW
+	[981] = "%.1f", -- 6
+	[982] = "%.1f", -- TONE
+	[983] = "%.1f", -- 7
+	[984] = "%.1f", -- 8
+	[985] = "%.1f", -- TOD
+	[986] = "%.1f", -- 9
+	[987] = "%.1f", -- ZERO
+	[988] = "%.1f", -- 0
+	[989] = "%.1f", -- CONF
 }
 
 ExportScript.ConfigArguments = 
 {
 }
+
+local function getVHF()
+	local li = list_indication(8)
+	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+	while true do
+		local name, value = m()
+        if not name then break end
+		if name == "text_COM_VHF"
+			then
+			value = "      "..value
+			return value:sub(-9)
+		end
+    end
+	return "         "
+end
 
 local function getPCNDispL()
 	local li = list_indication(9)
@@ -155,72 +197,6 @@ local function getPCNDispR()
 	 end
  return "         "
 end
- 
--- local function getPCNDigitR()
--- 	local li = list_indication(9)
--- 	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
--- 	local count = 0
--- 	local ret = " "
--- 	while true do
--- 		 local name, value = m()
--- 		 if not name then break end
--- 	   if name == "text_PCN_EST"
--- 		 then
--- 		 count = count + 1
--- 		 ret="E"
--- 	   end
--- 	   if name == "text_PCN_OUEST"
--- 		 then
--- 		 count = count + 1
--- 		 ret="W"
--- 	   end
--- 	   if name == "text_PCN_PLUS_R"
--- 		 then
--- 		 count = count + 1
--- 		 ret="+"
--- 	   end
--- 	   if name == "text_PCN_MOINS_R"
--- 		 then
--- 		 count = count + 1
--- 		 ret="-"
--- 	   end
--- 	 end
--- 	 if count > 1 then ret = "*" end
---  return ret
--- end
- 
--- local function getPCNDigitL()
--- 	local li = list_indication(9)
--- 	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
--- 	local count = 0
--- 	local ret = " "
--- 	while true do
--- 		 local name, value = m()
--- 		 if not name then break end
--- 	   if name == "text_PCN_NORD"
--- 		 then
--- 		 count = count + 1
--- 		 ret="N"
--- 	   end
--- 	   if name == "text_PCN_SUD"
--- 		 then
--- 		 count = count + 1
--- 		 ret="S"
--- 	   end
--- 	   if name == "text_PCN_PLUS_L"
--- 		 then
--- 		 count = count + 1
--- 		 ret="+"
--- 	   end
--- 	   if name == "text_PCN_MOINS_L"
--- 		 then
--- 		 count = count + 1
--- 		 ret="-"
--- 	   end
--- 	 end
--- 	 if count > 1 then ret = "*" end
---  return ret
--- end
  
 local function getPCN2DigitR()
 	local li = list_indication(9)
@@ -361,7 +337,6 @@ end
 function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	if ExportScript.Config.ExportDisplaysM2000 == true then
 		ExportScript.Tools.SendData(2011, ExportScript.Tools.getListIndicatorValueByName(4, "text_PCA_UR1", 3))
-
 		ExportScript.Tools.SendData(2012, ExportScript.Tools.getListIndicatorValueByName(4, "text_PCA_UR2", 3))
 		ExportScript.Tools.SendData(2013, ExportScript.Tools.getListIndicatorValueByName(4, "text_PCA_UR3", 3))
 		ExportScript.Tools.SendData(2014, ExportScript.Tools.getListIndicatorValueByName(4, "text_PCA_UR4", 3))
@@ -373,21 +348,28 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		ExportScript.Tools.SendData(2024, ExportScript.Tools.getListIndicatorValueByName(5, "text_PCA_BR4", 3))
 		ExportScript.Tools.SendData(2025, ExportScript.Tools.getListIndicatorValueByName(5, "text_PCA_BR5", 3))
 
-		-- up
+		-- PCN up
 		ExportScript.Tools.SendData(2031, getPCN2DigitL())		-- up/left 2-digit vertical
 		ExportScript.Tools.SendData(2032, getPCNDispL())		-- up/left 8-digit
 		ExportScript.Tools.SendData(2033, getPCN2DigitR())		-- up/middle 2-digit vertical
 		ExportScript.Tools.SendData(2034, getPCNDispR())		-- up/right 9-digit
 
-		-- dn
+		-- PCN dn
 		ExportScript.Tools.SendData(2041, getPCNDispPrep())		-- dn/left 2-digit
 		ExportScript.Tools.SendData(2042, getPCNDispDest())		-- dn/mid 2-digit
-		--ExportScript.Tools.SendData(2035, getPCNDigitL())
-		--ExportScript.Tools.SendData(2036, getPCNDigitR())
 
 		-- PPA
 		ExportScript.Tools.SendData(2051, getPPAQtyDisp())
 		ExportScript.Tools.SendData(2052, getPPAIntDisp())
+
+		-- VHF
+		-- ExportScript.Tools.SendData(2055, getVHF())
+		local nav = ExportScript.Tools.getListIndicatorValue(8)
+		if not nav then
+			return
+		end
+		ExportScript.Tools.SendData(2060, nav.text_COM_VHF)
+	
 
 		-- Fuel
 		digits = {}
@@ -401,5 +383,7 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(353) * 10)
 		digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(354) * 10)
 		ExportScript.Tools.SendData(2054, digits[1] .. digits[2] .. digits[3] .. "0")
+
+
 	end
 end

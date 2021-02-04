@@ -1,7 +1,7 @@
 -- JF-17
 ExportScript.FoundDCSModule = true
 
-ExportScript.ConfigEveryFrameArguments = 
+ExportScript.ConfigEveryFrameArguments =
 {
     -- warning/caution indicator lights (left side)
     [130] = "%1d", -- MASTER WARNING (red)
@@ -21,18 +21,18 @@ ExportScript.ConfigEveryFrameArguments =
     -- warning/caution indicator lights (right side)
     [160] = "%1d", -- PITCH TRIM (green)
     [161] = "%1d", -- ROLL TRIM (green)
-    [162] = "%1d", -- YAW TRIM (green)    
+    [162] = "%1d", -- YAW TRIM (green)
     [163] = "%1d", -- AA (green)
     [164] = "%1d", -- AG1 (green)
     [165] = "%1d", -- AG2 (green)
-    [166] = "%1d", -- EFCS (green) 
-    [167] = "%1d", -- No.3 TANK (green)    
+    [166] = "%1d", -- EFCS (green)
+    [167] = "%1d", -- No.3 TANK (green)
     [168] = "%1d", -- No.1 TANK (green)
     [169] = "%1d", -- WING DT (green)
     [170] = "%1d", -- CTR DT (green)
-    [171] = "%1d", -- ----- (green)  
-    [172] = "%1d", -- START (green) 
-    [173] = "%1d", -- AB (green)    
+    [171] = "%1d", -- ----- (green)
+    [172] = "%1d", -- START (green)
+    [173] = "%1d", -- AB (green)
     [174] = "%1d", -- COMBAT (green)
     [175] = "%1d", -- EMG HYD (green)
     [176] = "%1d", -- NWS (green)
@@ -50,38 +50,42 @@ ExportScript.ConfigEveryFrameArguments =
     [208] = "%1d", -- CONFIG (red)
     [209] = "%1d", -- FUEL PUMP (red)
     [210] = "%1d", -- AC SYS (red)
-    [211] = "%1d", -- OIL (red)   
+    [211] = "%1d", -- OIL (red)
     [212] = "%1d", -- DL (red)
     [213] = "%1d", -- START PUMP (red)
     [214] = "%1d", -- DC GEN (red)
-    [215] = "%1d", -- STARTER (red)    
+    [215] = "%1d", -- STARTER (red)
     [216] = "%1d", -- FCS 3 (red)
     [217] = "%1d", -- BRAKE (red)
     [218] = "%1d", -- BATT (red)
-    [219] = "%1d", -- ENG TEMP (red)     
+    [219] = "%1d", -- ENG TEMP (red)
     [220] = "%1d", -- FCS 2 (yellow)
     [221] = "%1d", -- ANTI SKID (yellow)
-    [222] = "%1d", -- TRU (yellow) 
-    [223] = "%1d", -- ANTI SURGE (yellow)      
+    [222] = "%1d", -- TRU (yellow)
+    [223] = "%1d", -- ANTI SURGE (yellow)
     [224] = "%1d", -- FCS 1 (yellow)
     [225] = "%1d", -- NWS (yellow)
-    [226] = "%1d", -- STATIC_INV (yellow) 
-    [227] = "%1d", -- ANTI ICING (yellow)    
+    [226] = "%1d", -- STATIC_INV (yellow)
+    [227] = "%1d", -- ANTI ICING (yellow)
     [228] = "%1d", -- ROLL CAS (yellow)
     [229] = "%1d", -- ECS (yellow)
-    [230] = "%1d", -- EMMC (yellow) 
+    [230] = "%1d", -- EMMC (yellow)
     [231] = "%1d", -- SEC (yellow)
     [232] = "%1d", -- YAW CAS (yellow)
     [233] = "%1d", -- EQUIP HOT (yellow)
-    [234] = "%1d", -- LWC (yellow) 
-    [235] = "%1d", -- EDU (yellow)    
-    [236] = "%1d", -- AUTOPILOT (yellow) 
+    [234] = "%1d", -- LWC (yellow)
+    [235] = "%1d", -- EDU (yellow)
+    [236] = "%1d", -- AUTOPILOT (yellow)
     [237] = "%1d", -- PITOT HEAT (yellow)
     [238] = "%1d", -- AVIONS (yellow)
     [239] = "%1d", -- DEEC (yellow)
-    [240] = "%1d", -- EFCS (yellow) 
-    [241] = "%1d", -- SEAT (yellow)     
+    [240] = "%1d", -- EFCS (yellow)
+    [241] = "%1d", -- SEAT (yellow)
     --[242] = "%1d", -- OXY BLINK (green)
+    [900] = "%1d", -- Warning Panel Day/Night Switch
+    [901] = "%.1f", -- Warning Panel Brightness Knob
+    [902] = "%1d", -- Warning Panel Test Button
+    [903] = "%.1f", -- Oxygen Indicator Brightness Knob
 
     -- AAP button lights
     [260] = "%1d", -- ACMI (green)
@@ -103,9 +107,26 @@ ExportScript.ConfigEveryFrameArguments =
     [276] = "%1d", -- INS (green)
     [277] = "%1d", -- VMMC1 (green)
     [278] = "%1d", -- VMMC2 (green)
-    [279] = "%1d", -- SAIU (green)       
+    [279] = "%1d", -- SAIU (green)
     [280] = "%1d", -- CMBT (green)
-    [281] = "%1d", -- TRAIN (green)    
+    [281] = "%1d", -- TRAIN (green)
+
+    -- Radio
+    [545] = "%.1f", -- Radio Volume Knob
+    [546] = "%1d", -- Squelch OFF/SQL/ACKN
+    [547] = "%.1f", -- Radio Mode Selector
+
+
+    -- ELEC
+    [904] = "%1d", -- Battery Switch
+    [905] = "%1d", -- Main AC Gen Switch
+    [906] = "%1d", -- DC Gen Switch
+
+    -- AAP
+    [907] = "%1d", -- HUD/MFCD Day/Night Switch
+    [908] = "%.1f", -- INS Mode Knob Selector
+    [909] = "%.1f", -- AAP Brightness Knob
+    [910] = "%1d", -- HUD Symbology Reject Switch
 }
 
 ExportScript.ConfigArguments = 
@@ -167,24 +188,79 @@ function coerce_nil_to_string(value)
 	end
 end
 
+-- local radio_line_1
+-- local radio_line_2
+-- local radio_sql_light
+-- local radio_to_light
+-- local radio_go_light
+
+-- function radio_parse_indication(indicator_id)
+-- 	local ret = {}
+-- 	local li = list_indication(indicator_id)
+-- 	if li == "        " then return nil end
+-- 	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+-- 	while true do
+-- 		local name, value = m()
+-- 		if not name then break end
+-- 			-- there's # characters in one of the radio indicator names which break parsing if it isn't replaced
+-- 			ret[name:gsub("\#","hash")] = value
+-- 		end
+-- 	return ret
+-- end
+
+-- function gh()
+-- 	local radioDisplay = radio_parse_indication(7)
+-- 	radio_line_1 = "        "
+-- 	radio_line_2 = "        "
+-- 	radio_sql_light = 0
+-- 	radio_to_light = 0
+-- 	radio_go_light= 0
+-- 	if not radioDisplay then
+-- 		return
+-- 	end
+-- 	if radioDisplay.radio_sql then
+-- 		radio_sql_light = 1;
+-- 	end
+-- 	if radioDisplay.radio_take then
+-- 		radio_to_light = 1;
+-- 	end 
+-- 	if radioDisplay.radio_go then
+-- 		radio_go_light = 1;
+-- 	end
+	
+-- 	-- Radio Display Line 2 uses unprintable characters to display the power symbol - replace these with something printable
+-- 	if radioDisplay.radio_disp_l2 then
+-- 		local charReplacements = {
+-- 			[string.char(29)] = "_",
+-- 			[string.char(30)] = "|",
+-- 			[string.char(31)] = "^"
+-- 		}
+-- 		radio_line_2 = radioDisplay.radio_disp_l2:gsub(".",charReplacements)	
+-- 	end
+	
+-- 	-- original name for field is "#3#"" but this is modified in radio_parse_indication to "hash3hash"
+-- 	if radioDisplay.hash3hash then
+-- 		local tempString
+-- 		if radioDisplay.radio_cursor and radioDisplay.radio_cursor:len() > 0 then
+-- 			if radioDisplay.radio_disp_l1 and radioDisplay.radio_disp_l1:len() > 1 then
+-- 			   tempString = radioDisplay.radio_disp_l1:sub(1,radioDisplay.radio_disp_l1:len() - 1)..radioDisplay.radio_cursor
+-- 			else
+-- 			   tempString = radioDisplay.radio_cursor
+-- 			end 
+-- 		else
+-- 			tempString = radioDisplay.radio_disp_l1
+-- 		end
+-- 		radio_line_1 = radioDisplay.hash3hash:sub(1,radioDisplay.hash3hash:len() - tempString:len())..tempString
+-- 	else
+-- 		radio_line_1 = radioDisplay.radio_disp_l1
+-- 	end
+-- end
+
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
 
 function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
     if ExportScript.Config.ExportDisplaysJF17 == true then
-
-        -- local comm1 = "        "
-        -- local comm2 = "        "
-
-        -- local radio = ExportScript.Tools.getListIndicatorValue(7)
-        -- if not radio then
-        --     return
-        -- end
-        -- comm1 = coerce_nil_to_string(radio.radio_disp_l1)
-        -- ExportScript.Tools.SendData(2011, comm1)
-        -- comm2 = coerce_nil_to_string(radio.radio_disp_l2)
-        -- ExportScript.Tools.SendData(2012, comm2)
-
         -- local clk1 = "        "
         -- local clk2 = "        "
 
@@ -235,5 +311,70 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
         end
         ufcLcdLine4 = coerce_nil_to_string(processUFCPLine(indLcd4,4))
         ExportScript.Tools.SendData(2004, ufcLcdLine4)
+
+        -- Radio
+        local radio_line_1 = "        "
+        local radio_line_2 = "        "
+        local radio_sql_light = 0
+        local radio_to_light = 0
+        local radio_go_light = 0
+        local radio_tx_light = 0
+
+        local radioDisplay = radio_parse_indication(7)
+        if not radioDisplay then
+            return
+        end
+        -- radio_line_1 = "        "
+	    -- radio_line_2 = "        "
+        -- radio_sql_light = 0
+        -- radio_to_light = 0
+        -- radio_go_light= 0
+        if radioDisplay.radio_sql then
+            radio_sql_light = 1;
+        end
+        if radioDisplay.radio_take then
+            radio_to_light = 1;
+        end 
+        if radioDisplay.radio_go then
+            radio_go_light = 1;
+        end
+        if radioDisplay.radio_tx then
+            radio_tx_light = 1;
+        end
+
+        -- Radio Display Line 2 uses unprintable characters to display the power symbol - replace these with something printable
+        if radioDisplay.radio_disp_l2 then
+            local charReplacements = {
+                [string.char(29)] = "_",
+                [string.char(30)] = "|",
+                [string.char(31)] = "^"
+            }
+            radio_line_2 = radioDisplay.radio_disp_l2:gsub(".",charReplacements)	
+        end
+
+        -- original name for field is "#3#"" but this is modified in radio_parse_indication to "hash3hash"
+        if radioDisplay.hash3hash then
+            local tempString
+            if radioDisplay.radio_cursor and radioDisplay.radio_cursor:len() > 0 then
+                if radioDisplay.radio_disp_l1 and radioDisplay.radio_disp_l1:len() > 1 then
+                tempString = radioDisplay.radio_disp_l1:sub(1,radioDisplay.radio_disp_l1:len() - 1)..radioDisplay.radio_cursor
+                else
+                tempString = radioDisplay.radio_cursor
+                end
+            else
+                tempString = radioDisplay.radio_disp_l1
+            end
+            radio_line_1 = radioDisplay.hash3hash:sub(1,radioDisplay.hash3hash:len() - tempString:len())..tempString
+        else
+            radio_line_1 = radioDisplay.radio_disp_l1
+        end
+
+        ExportScript.Tools.SendData(2005, radio_line_1)
+        ExportScript.Tools.SendData(2006, radio_line_2)
+        ExportScript.Tools.SendData(2007, radio_sql_light)
+        ExportScript.Tools.SendData(2008, radio_to_light)
+        ExportScript.Tools.SendData(2009, radio_go_light)
+        -- ExportScript.Tools.SendData(2010, radioDisplay.radio_go)
+        ExportScript.Tools.SendData(2011, radio_tx_light)
     end
 end
