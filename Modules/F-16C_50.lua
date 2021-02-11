@@ -26,6 +26,18 @@ ExportScript.ConfigEveryFrameArguments =
 	[189] = "%1d",	-- ICP FLIR GAIN/LEVEL Switch, GAIN/LVL/AUTO	-1 / 0 / 1
 	--	[183] = "%1d"
 
+	-- UHF
+	[410] = "%.2f", -- UHF Preset Channel Selector
+	[411] = "%.1f", -- UHF 100MHz Selector
+	[412] = "%.1f", -- UHF 10MHz Selector
+	[413] = "%.1f", -- UHF 1MHz Selector
+	[414] = "%.1f", -- UHF 0.1MHz Selector
+	[415] = "%.1f", -- UHF 0.25MHz Selector
+	[416] = "%.1f",   -- Frequency Mode Dial MNL/PRESET/GRD
+	[417] = "%.1f", -- UHF Function Dial OFF/MAIN/BOTH/ADF
+	[419] = "%1d",   -- Squelch Switch
+	[420] = "%.1f", -- UHF Volume Control
+
 	--Caution Light Panel
 	[630] = "%1d", -- FLCS FAULT Light (yellow)
 	[631] = "%1d", -- ENGINE FAULT Light (yellow)

@@ -49,6 +49,7 @@ ExportScript.ConfigEveryFrameArguments =
 	-- Master Arm Panel
 	[47] = "%1d",   -- AA Light
 	[48] = "%1d",   -- AG Light
+	[49] = "%1d",   -- Master Arm Switch, ARM/SAFE
 
 	-- HUD Control Panel
 	[140] = "%.1f",   -- HUD Symbology Reject Switch, NORM/REJ 1/REJ 2
@@ -98,6 +99,65 @@ ExportScript.ConfigEveryFrameArguments =
 	[307] = "%1d", -- L GEN
 	[308] = "%1d", -- R GEN
 	[309] = "%1d", -- SPARE CTN3
+
+	[107] = "%1d",  -- UFC ADF Function Select Switch, 1/OFF/2 {-1.0,0.0,1.0}
+	[108] = "%.1f",	-- UFC COMM 1 Volume Control Knob {0.0,1.0} in 0.1 Steps
+	[123] = "%.1f", -- UFC COMM 2 Volume Control Knob {0.0,1.0} in 0.1 Steps
+	[109] = "%.1f", -- UFC Brightness Control Knob {0.0,1.0} in 0.1 Steps
+	[125] = "%1d",  -- UFC COMM 1 Channel Selector Knob
+	[127] = "%1d",  -- UFC COMM 2 Channel Selector Knob
+
+	-- Exterior Lights Panel
+	[337] = "%.1f", -- Formation Lights Dimmer
+	[338] = "%.1f", -- Position Lights Dimmer
+	[339] = "%1d", 	-- Strobe Lights Switch
+
+	-- Communication panel
+	[350] = "%1d", 	-- Comm Relay Switch, CIPHER/OFF/PLAIN
+	[351] = "%1d", 	-- COMM G XMT Switch, COMM 1/OFF/COMM 2
+	[352] = "%.2f", -- ILS Channel Selector
+	[353] = "%1d", 	-- ILS UFC/MAN Switch, UFC/MAN
+	[354] = "%1d", 	-- CRYPTO Switch, HOLD/NORM/ZERO
+	[355] = "%1d", 	-- IFF Mode 4 Switch, DIS/AUD /DIS/OFF
+	[356] = "%1d", 	-- IFF Master Switch, EMER/NORM
+
+	[357] = "%.1f",	-- VOX Volume Control Knob
+	[358] = "%.1f",	-- ICS Volume Control Knob
+	[359] = "%.1f",	-- RWR Volume Control Knob
+	[360] = "%.1f",	-- WPN Volume Control Knob
+	[361] = "%.1f",	-- MIDS B Volume Control Knob
+	[362] = "%.1f",	-- MIDS A Volume Control Knob
+	[363] = "%.1f",	-- TACAN Volume Control Knob
+	[364] = "%.1f",	-- AUX Volume Control Knob
+
+	-- ELEC
+	[402] = "%1d", 	-- Left Generator Control Switch
+	[404] = "%1d", 	-- Battery Switch, ON/OFF/ORIDE
+	[403] = "%1d", 	-- Right Generator Control Switch
+
+	-- ECS
+	[405] = "%1d", 	-- Mode Switch, AUTO/MAN/OFF/RAM
+	[407] = "%.1f", -- Cabin Temperature Knob
+	[408] = "%1d", 	-- Cabin Pressure Switch, NORM/DUMP/RAM/DUMP
+	[409] = "%1d", 	-- Pitot Heater Switch, ON/AUTO
+	[410] = "%1d", 	-- Engine Anti-Ice Switch, ON/OFF/TEST
+	[411] = "%.1f", -- Bleed Air Knob, R OFF/NORM/L OFF/OFF
+
+	-- Interior lights
+	[413] = "%.1f", -- CONSOLES Lights Dimmer Knob
+	[414] = "%.1f", -- Instrument Panel Dimmer Knob
+	[415] = "%.1f", -- Flood Light Dimmer Knob
+	-- [416] = "%1d", 	-- Lights Test Switch, TEST/OFF
+	[417] = "%.1f", -- WARN/CAUTION Light Dimmer Knob
+	[418] = "%.1f", -- CHART Light Dimmer Knob
+	[419] = "%1d", 	-- MODE Switch, NVG/NITE/DAY
+
+	-- Sensor panel
+	[439] = "%1d", 	-- FLIR Switch, ON/STBY/OFF
+	[441] = "%1d", 	-- LTD/R Switch, SAFE/AFT
+	[442] = "%1d", 	-- LST/NFLR Switch, ON/OFF
+	[440] = "%.1f", -- RADAR Switch Change ,OFF/STBY/OPR/EMERG(PULL)
+	[443] = "%.1f", -- INS Switch, OFF/CV/GND/NAV/IFA/GYRO/GB/TEST
 }
 
 ExportScript.ConfigArguments = 
@@ -118,15 +178,6 @@ ExportScript.ConfigArguments =
 	[179] = "%1d",   -- AMPCD Symbology Control Switch, UP/DOWN {1.0,0.0,-1.0}
 	[182] = "%1d",   -- AMPCD Contrast Control Switch, UP/DOWN {1.0,0.0,-1.0}
 	[180] = "%1d",   -- AMPCD Gain Control Switch, UP/DOWN {1.0,0.0,-1.0}
-
-	[107] = "%1d",   -- UFC ADF Function Select Switch, 1/OFF/2 {-1.0,0.0,1.0}
-	[108] = "%.1f",   -- UFC COMM 1 Volume Control Knob {0.0,1.0} in 0.1 Steps
-	[123] = "%.1f",   -- UFC COMM 2 Volume Control Knob {0.0,1.0} in 0.1 Steps
-	[109] = "%.1f",   -- UFC Brightness Control Knob {0.0,1.0} in 0.1 Steps
-	[125] = "%1d",   -- UFC COMM 1 Channel Selector Knob
-	[124] = "%.2f",   -- UFC COMM 1 Channel Selector Knob {0.0,1.0} in 0.2 Steps
-	[127] = "%1d",   -- UFC COMM 2 Channel Selector Knob
-	[126] = "%.2f",   -- UFC COMM 2 Channel Selector Knob {0.0,1.0} in 0.2 Steps
 }
 
 function coerce_nil_to_string(value)
@@ -155,7 +206,7 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 			_ufcDisplay.UFC_ScratchPadString2Display = string.gsub(_ufcDisplay.UFC_ScratchPadString2Display, "~", "2") -- need to be 2
 			_ufcDisplay.UFC_ScratchPadString1Display = string.gsub(_ufcDisplay.UFC_ScratchPadString1Display, "`", "1") -- need to be 1
 			_ufcDisplay.UFC_ScratchPadString2Display = string.gsub(_ufcDisplay.UFC_ScratchPadString2Display, "`", "1") -- need to be 1
-			ExportScript.Tools.SendData(2020, ExportScript.Tools.DisplayFormat(_ufcDisplay.UFC_ScratchPadString1Display, 2)) -- ScratchPadString1Display 2 character
+			ExportScript.Tools.SendData(2020, string.gsub(_ufcDisplay.UFC_ScratchPadString1Display, " ", "")) -- ExportScript.Tools.DisplayFormat(_ufcDisplay.UFC_ScratchPadString1Display, 1)) -- ScratchPadString1Display 2 character
 			ExportScript.Tools.SendData(2021, ExportScript.Tools.DisplayFormat(_ufcDisplay.UFC_ScratchPadString2Display, 2)) -- ScratchPadString2Display 2 character
 			ExportScript.Tools.SendData(2022, ExportScript.Tools.DisplayFormat(_ufcDisplay.UFC_ScratchPadNumberDisplay, 7)) -- ScratchPadNumberDisplay 7 character
 
@@ -181,7 +232,7 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 			ExportScript.Tools.SendData(2029, ExportScript.Tools.DisplayFormat(_ufcDisplay.UFC_Comm2Display, 2)) -- Comm2Display 2 character
 		else
 			-- ScratchPadString Displays
-			ExportScript.Tools.SendData(2020, " ") -- ScratchPadString1Display 2 character
+			ExportScript.Tools.SendData(2020, "") -- ScratchPadString1Display 2 character
 			ExportScript.Tools.SendData(2021, " ") -- ScratchPadString2Display 2 character
 			ExportScript.Tools.SendData(2022, " ") -- ScratchPadNumberDisplay 7 character
 

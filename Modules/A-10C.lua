@@ -28,7 +28,6 @@ ExportScript.ConfigEveryFrameArguments =
     [166] = "%.1f", -- UHF 0.25MHz Selector
     [167] = "%.1f",   -- Frequency Mode Dial MNL/PRESET/GRD
     [168] = "%.1f", -- UHF Function Dial OFF/MAIN/BOTH/ADF
-    --[169] = "%1d",   -- T-Tone Button
     [170] = "%1d",   -- Squelch Switch
     [171] = "%.1f", -- UHF Volume Control
 
