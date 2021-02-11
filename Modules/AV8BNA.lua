@@ -91,46 +91,46 @@ ExportScript.ConfigEveryFrameArguments =
 	[606] = "%1d",	--REPLY
 
 	--ENGINE DISPLAY
-	-- [253] = "%.4f",	--DUCT 1. DRUM
-	-- [254] = "%.4f",	--DUCT 2.
-	-- [255] = "%.4f",	--DUCT 3.
-	-- [256] = "%.4f",	--RPM 1. DRUM
-	-- [257] = "%.4f",	--RPM 2.
-	-- [258] = "%.4f",	--RPM 3.
-	-- [259] = "%.4f",	--RPM 4.
-	-- [260] = "%.4f",	--FF 1. DRUM
-	-- [261] = "%.4f",	--FF 2.
-	-- [262] = "%.4f",	--FF 3.
-	-- [263] = "%.4f",	--JPT 1. DRUM
-	-- [264] = "%.4f",	--JPT 2.
-	-- [265] = "%.4f",	--JPT 3.
-	-- [266] = "%.4f",	--STAB(Arrow up/down)
-	-- [267] = "%.4f",	--STAB 1. Number, 2.DRUM
-	-- [268] = "%.4f",	--STAB 2. Number, 3. DRUM
-	-- [269] = "%.4f",	--H2O 1. Number
-	-- [270] = "%.4f",	--H2O 2. Number -----3. Number is fix !!----
-	-- [177] = "%.f",	--FLOW W LAMP
-	-- [271] = "%.4f",	--NOZZLE POINTER
+	-- [253] = "%.1f",	--DUCT 1. DRUM
+	-- [254] = "%.1f",	--DUCT 2.
+	-- [255] = "%.1f",	--DUCT 3.
+	-- [256] = "%.1f",	--RPM 1. DRUM
+	-- [257] = "%.1f",	--RPM 2.
+	-- [258] = "%.1f",	--RPM 3.
+	-- [259] = "%.1f",	--RPM 4.
+	-- [260] = "%.1f",	--FF 1. DRUM
+	-- [261] = "%.1f",	--FF 2.
+	-- [262] = "%.1f",	--FF 3.
+	-- [263] = "%.1f",	--JPT 1. DRUM
+	-- [264] = "%.1f",	--JPT 2.
+	-- [265] = "%.1f",	--JPT 3.
+	-- [266] = "%.1f",	--STAB(Arrow up/down)
+	-- [267] = "%.1f",	--STAB 1. Number, 2.DRUM
+	-- [268] = "%.1f",	--STAB 2. Number, 3. DRUM
+	-- [269] = "%.1f",	--H2O 1. Number
+	-- [270] = "%.1f",	--H2O 2. Number -----3. Number is fix !!----
+	-- [177] = "%.1",	--FLOW W LAMP
+	-- [271] = "%.1f",	--NOZZLE POINTER
 
 	--FUEL PANEL DISPLAY
-	-- [365] = "%.4f",	--ON/OFF FLAG
-	-- [366] = "%.4f",	--TOT FUEL 1. DRUM
-	-- [367] = "%.4f",	--TOT FUEL 2.
-	-- [368] = "%.4f",	--TOT FUEL 3.
-	-- [369] = "%.4f",	--TOT FUEL 4.
-	-- [370] = "%.4f",	--TOT FUEL 5.
-	-- [371] = "%.4f",	--LBS L 1. DRUM
-	-- [372] = "%.4f",	--LBS L	2.
-	-- [373] = "%.4f",	--LBS L 3.
-	-- [374] = "%.4f",	--LBS L 4.
-	-- [375] = "%.4f",	--LBS R 1. DRUM 
-	-- [376] = "%.4f",	--LBS R	2.
-	-- [377] = "%.4f",	--LBS R 3.
-	-- [378] = "%.4f",	--LBS R 4.
-	-- [381] = "%.4f",	--BINGO 1. DRUM 
-	-- [382] = "%.4f",	--BINGO 2.
-	-- [383] = "%.4f",	--BINGO 3.
-	-- [384] = "%.4f",	--BINGO 4.
+	-- [365] = "%.1f",	--ON/OFF FLAG
+	-- [366] = "%.1f",	--TOT FUEL 1. DRUM
+	-- [367] = "%.1f",	--TOT FUEL 2.
+	-- [368] = "%.1f",	--TOT FUEL 3.
+	-- [369] = "%.1f",	--TOT FUEL 4.
+	-- [370] = "%.1f",	--TOT FUEL 5.
+	-- [371] = "%.1f",	--LBS L 1. DRUM
+	-- [372] = "%.1f",	--LBS L	2.
+	-- [373] = "%.1f",	--LBS L 3.
+	-- [374] = "%.1f",	--LBS L 4.
+	-- [375] = "%.1f",	--LBS R 1. DRUM 
+	-- [376] = "%.1f",	--LBS R	2.
+	-- [377] = "%.1f",	--LBS R 3.
+	-- [378] = "%.1f",	--LBS R 4.
+	-- [381] = "%.1f",	--BINGO 1. DRUM 
+	-- [382] = "%.1f",	--BINGO 2.
+	-- [383] = "%.1f",	--BINGO 3.
+	-- [384] = "%.1f",	--BINGO 4.
 
 	--UPPER AMARMENT PANEL
 	-- [385] = "%.4f",	--MODE
@@ -383,15 +383,6 @@ ExportScript.ConfigArguments =
 
 	[386] = "%.1f",	--FUZ 1. DRUM   -/N/T/NT/PR/OP/SA
 	[387] = "%.1f",	--FUR 2.		-/IN/D1/D2/V/V1/V2/FE/
-	
-	-- [389] = "%.1f",	--QTY 1. Drum 
-	-- [390] = "%.1f",	--QTY 2.
-	
-	-- [391] = "%.1f",	--MULT
-
-	-- [392] = "%.1f",	--InVT x 10 1 DRUM 
-	-- [393] = "%.1f",	--InVT x 10 2
-	-- [394] = "%.1f",	--InVT x 10 3
 }
 
 
@@ -404,127 +395,79 @@ end
 function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	if ExportScript.Config.ExportDisplaysAV8BNA == true then
 		--ENGINE DISPLAY
-		
-		--[253] = "%.4f",	--DUCT 1. DRUM
-		--[254] = "%.4f",	--DUCT 2.
-		--[255] = "%.4f",	--DUCT 3.
-		
-		-- digits = {}
-		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(253) * 10)
-		-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(254) * 10)
-		-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(255) * 10)
-		
-		-- ExportScript.Tools.SendData(2001, digits[1]..digits[2]..digits[3])
-		
-		--[256] = "%.4f",	--RPM 1. DRUM
-		--[257] = "%.4f",	--RPM 2.
-		--[258] = "%.4f",	--RPM 3.
-		--[259] = "%.4f",	--RPM 4.
-		
-		-- digits = {}
-		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(256) * 10)
-		-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(257) * 10)
-		-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(258) * 10)
-		-- digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(259) * 10)
-		
-		-- ExportScript.Tools.SendData(2002, digits[1]..digits[2]..digits[3]..digits[4])
-		
-		--[260] = "%.4f",	--FF 1. DRUM
-		--[261] = "%.4f",	--FF 2.
-		--[262] = "%.4f",	--FF 3.
-		
-		-- digits = {}
-		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(260) * 10)
-		-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(261) * 10)
-		-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(262) * 10)
-		
-		-- ExportScript.Tools.SendData(2003, digits[1]..digits[2]..digits[3])
-		
-		--[263] = "%.4f",	--JPT 1. DRUM
-		--[264] = "%.4f",	--JPT 2.
-		--[265] = "%.4f",	--JPT 3.
-		--[266] = "%.4f",	--STAB(Arrow up/down)
-		
-		-- digits = {}
-		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(263) * 10)
-		-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(264) * 10)
-		-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(265) * 10)
-		
-		-- ExportScript.Tools.SendData(2004, digits[1]..digits[2]..digits[3])
-		
-		--[267] = "%.4f",	--STAB 1. Number, 2. DRUM
-		--[268] = "%.4f",	--STAB 2. Number, 3. DRUM
+		-- DUCT
+		digits = {}
+		digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(253) * 10)
+		digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(254) * 10)
+		digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(255) * 10)
+		ExportScript.Tools.SendData(2001, digits[1]..digits[2]..digits[3])
 
-		-- digits = {}
-		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(267) * 10)
-		-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(268) * 10)
-		
-		-- ExportScript.Tools.SendData(2005, digits[1]..digits[2])
+		-- RPM
+		digits = {}
+		digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(256) * 10)
+		digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(257) * 10)
+		digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(258) * 10)
+		digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(259) * 10)
+		ExportScript.Tools.SendData(2002, digits[1]..digits[2]..digits[3]..digits[4])
 
-		--[269] = "%.4f",	--H2O 1. Number
-		--[270] = "%.4f",	--H2O 2. Number -----3. Number is fix !!----
-		
-		-- digits = {}
-		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(269) * 10)
-		-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(270) * 10)
-		
-		-- ExportScript.Tools.SendData(2006, digits[1]..digits[2])
+		-- FF
+		digits = {}
+		digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(260) * 10)
+		digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(261) * 10)
+		digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(262) * 10)
+		ExportScript.Tools.SendData(2003, digits[1]..digits[2]..digits[3])
+
+		-- JPT
+		digits = {}
+		digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(263) * 10)
+		digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(264) * 10)
+		digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(265) * 10)
+		ExportScript.Tools.SendData(2004, digits[1]..digits[2]..digits[3])
+
+		-- STAB
+		digits = {}
+		digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(267) * 10)
+		digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(268) * 10)
+		ExportScript.Tools.SendData(2005, digits[1]..digits[2])
+
+		-- H2O
+		digits = {}
+		digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(269) * 10)
+		digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(270) * 10)
+		ExportScript.Tools.SendData(2006, digits[1]..digits[2])
 
 		-- Fuel Total
-		-------------------------------------------------
-		-- digits = {}
-		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(366) * 10)
-		-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(367) * 10)
-		-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(368) * 10)
-		-- digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(369) * 10)
-		-- digits[5] = string.format("%1.0f",mainPanelDevice:get_argument_value(370) * 10)
-		
-		-- ExportScript.Tools.SendData(2010, digits[1]..digits[2]..digits[3]..digits[4]..digits[5])
-
-		--[371] = "%.4f",	--LBS L 1. DRUM
-		--[372] = "%.4f",	--LBS L	2.
-		--[373] = "%.4f",	--LBS L 3.
-		--[374] = "%.4f",	--LBS L 4.
+		digits = {}
+		digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(366) * 10)
+		digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(367) * 10)
+		digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(368) * 10)
+		digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(369) * 10)
+		digits[5] = string.format("%1.0f",mainPanelDevice:get_argument_value(370) * 10)
+		ExportScript.Tools.SendData(2010, digits[1]..digits[2]..digits[3]..digits[4]..digits[5])
 
 		-- Fuel Left
-		-------------------------------------------------
-		-- digits = {}
-		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(371) * 10)
-		-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(372) * 10)
-		-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(373) * 10)
-		-- digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(374) * 10)
-		
-		-- ExportScript.Tools.SendData(2011, digits[1]..digits[2]..digits[3]..digits[4])
-
-		--[375] = "%.4f",	--LBS R 1. DRUM 
-		--[376] = "%.4f",	--LBS R	2.
-		--[377] = "%.4f",	--LBS R 3.
-		--[378] = "%.4f",	--LBS R 4.
+		digits = {}
+		digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(371) * 10)
+		digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(372) * 10)
+		digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(373) * 10)
+		digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(374) * 10)
+		ExportScript.Tools.SendData(2011, digits[1]..digits[2]..digits[3]..digits[4])
 
 		-- Fuel Right
-		-------------------------------------------------
-		-- digits = {}
-		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(375) * 10)
-		-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(376) * 10)
-		-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(377) * 10)
-		-- digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(378) * 10)
-		
-		-- ExportScript.Tools.SendData(2012, digits[1]..digits[2]..digits[3]..digits[4])
-
-		--[381] = "%.4f",	--BINGO 1. DRUM 
-		--[382] = "%.4f",	--BINGO 2.
-		--[383] = "%.4f",	--BINGO 3.
-		--[384] = "%.4f",	--BINGO 4.
+		digits = {}
+		digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(375) * 10)
+		digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(376) * 10)
+		digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(377) * 10)
+		digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(378) * 10)
+		ExportScript.Tools.SendData(2012, digits[1]..digits[2]..digits[3]..digits[4])
 
 		-- Fuel Bingo
-		-------------------------------------------------
-		-- digits = {}
-		-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(381) * 10)
-		-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(382) * 10)
-		-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(383) * 10)
-		-- digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(384) * 10)
-		
-		-- ExportScript.Tools.SendData(2013, digits[1]..digits[2]..digits[3]..digits[4])
+		digits = {}
+		digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(381) * 10)
+		digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(382) * 10)
+		digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(383) * 10)
+		digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(384) * 10)
+		ExportScript.Tools.SendData(2013, digits[1]..digits[2]..digits[3]..digits[4])
 		
 		--FLAP POSITION DISPLAY
 		--[455] = "%.4f",	--FLAP POS 1. DRUM 
