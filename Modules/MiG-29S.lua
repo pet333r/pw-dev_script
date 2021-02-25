@@ -5,6 +5,8 @@ ExportScript.FoundFCModule = true
 dofile(ExportScript.Config.ExportModulePath.."FC_Functions.lua")
 
 function ExportScript.ProcessFCHighImportanceConfig()
+	-- Cautions
+    ExportScript.AF.StatusLamp()
 end
 
 function ExportScript.ProcessFCLowImportanceConfig()
@@ -12,10 +14,10 @@ function ExportScript.ProcessFCLowImportanceConfig()
     ExportScript.AF.FC_SPO15RWR()
 
 
-    local lMCPState = LoGetMCPState() -- Warning Lights
-	if lMCPState == nil then
-		return
-    end
+    -- local lMCPState = LoGetMCPState() -- Warning Lights
+	-- if lMCPState == nil then
+	-- 	return
+    -- end
     
 	--ExportScript.Tools.WriteToLog('lMCPState: '..ExportScript.Tools.dump(lMCPState))
 	--[[
@@ -49,7 +51,7 @@ function ExportScript.ProcessFCLowImportanceConfig()
     [LeftTailPlaneFailure] = boolean: "false"
 	]]
 
-	ExportScript.Tools.SendData(700, lMCPState.LeftTailPlaneFailure == true and 1 or 0 )
+	-- ExportScript.Tools.SendData(700, lMCPState.LeftTailPlaneFailure == true and 1 or 0 )
 	-- ExportScript.Tools.SendData(701, lMCPState.RightTailPlaneFailure == true and 1 or 0 )
 	-- ExportScript.Tools.SendData(702, lMCPState.MasterWarning == true and 1 or 0 )
 	-- ExportScript.Tools.SendData(703, lMCPState.LeftEngineFailure == true and 1 or 0 )

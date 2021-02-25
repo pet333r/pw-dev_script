@@ -5,6 +5,8 @@ ExportScript.FoundFCModule = true
 dofile(ExportScript.Config.ExportModulePath.."FC_Functions.lua")
 
 function ExportScript.ProcessFCHighImportanceConfig()
+    -- Cautions
+    ExportScript.AF.StatusLamp()
 end
 
 function ExportScript.ProcessFCLowImportanceConfig()

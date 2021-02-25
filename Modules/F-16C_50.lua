@@ -74,6 +74,18 @@ ExportScript.ConfigEveryFrameArguments =
 }
 ExportScript.ConfigArguments = 
 {
+	-- CMDS
+	[365] = "%1d", 	-- O1 Expendable Category Switch, ON/OFF
+	[366] = "%1d", 	-- O2 Expendable Category Switch, ON/OFF
+	[367] = "%1d", 	-- O1 Expendable Category Switch, ON/OFF
+	[368] = "%1d", 	-- O1 Expendable Category Switch, ON/OFF
+	[375] = "%1d", 	-- RWR Source Switch, ON/OFF
+	[374] = "%1d", 	-- JMR Source Switch, ON/OFF
+	[373] = "%1d", 	-- MWS Source Switch, ON/OFF
+	[371] = "%1d", 	-- Jettison Switch, JETT/OFF
+	[377] = "%.1f", -- PROGRAM Knob, BIT/1/2/3/4
+	[378] = "%.1f", -- MODE Knob, OFF/STBY/MAN/SEMI/AUTO/BYP
+
 	-- SNSR
 	[670] = "%1d", 	-- LEFT HDPT Switch
 	[671] = "%1d", 	-- RIGHT HDPT Switch
@@ -727,10 +739,10 @@ local function buildDEDLine(line)
 		local layout
 		local label
 		local value
-	
+
 		-- Base Output String
 		local dataLine ="                         "
-	
+
 		-- Check for present of Objects that indicate Duplicate Key Names that need resolving
 		local guard 		= DED_fields["Guard Label"]
 		local mode 			= DED_fields["Mode label"]
@@ -740,7 +752,7 @@ local function buildDEDLine(line)
 		local inflt_algn 	= DED_fields["INS_INFLT_ALGN_lbl"]
 		local intraflight 	= DED_fields["INTRAFLIGHT lbl"]
 		local dlnk_A_G		= DED_fields["A-G DL lbl"]
-	
+
 		--Loop through Exported DED Objects
 		for k,v in pairs(DED_fields) do
 			-- Handle Duplicate Key Names on COM2 Guard page items        

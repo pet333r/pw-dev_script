@@ -157,6 +157,9 @@ end
 
 function ExportScript.ProcessFCHighImportanceConfig()
     ExportScript.AF.FC_AoA_Su33()
+
+	-- Cautions
+    ExportScript.AF.StatusLamp()
 end
 
 function ExportScript.ProcessFCLowImportanceConfig()

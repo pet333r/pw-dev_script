@@ -153,21 +153,6 @@ ExportScript.ConfigArguments =
 {
 }
 
-local function getVHF()
-	local li = list_indication(8)
-	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
-	while true do
-		local name, value = m()
-        if not name then break end
-		if name == "text_COM_VHF"
-			then
-			value = "      "..value
-			return value:sub(-9)
-		end
-    end
-	return "         "
-end
-
 local function getPCNDispL()
 	local li = list_indication(9)
 	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
@@ -362,14 +347,8 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		ExportScript.Tools.SendData(2051, getPPAQtyDisp())
 		ExportScript.Tools.SendData(2052, getPPAIntDisp())
 
-		-- VHF
-		-- ExportScript.Tools.SendData(2055, getVHF())
-		local nav = ExportScript.Tools.getListIndicatorValue(8)
-		if not nav then
-			return
-		end
-		ExportScript.Tools.SendData(2060, nav.text_COM_VHF)
-	
+		-- U/VHF
+		ExportScript.Tools.SendData(2055, ExportScript.Tools.getListIndicatorValueByName(8, "text_COM_VHF", 8))
 
 		-- Fuel
 		digits = {}

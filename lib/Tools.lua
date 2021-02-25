@@ -70,7 +70,22 @@ function ExportScript.Tools.ProcessInput()
 					if ExportScript.FoundDCSModule and type(_device) == "table" then
 						_device:performClickableAction(_commandArgs[2],_commandArgs[3])
 					end
-				end
+				-- end
+                elseif _deviceID == 2000 then
+                    -- Flaming Cliffs Module (Buttons)
+                    if ExportScript.FoundFCModule then
+                        local lComandID = (tonumber(_commandArgs[2]))
+                        if tonumber(_commandArgs[3]) == 1.0 then
+                            LoSetCommand(lComandID)
+                        end
+                    end
+                elseif _deviceID == 2001 then
+                    -- Flaming Cliffs Module (analog axies)
+                    if ExportScript.FoundFCModule then
+                        local lComandID = (tonumber(_commandArgs[2]))
+                        LoSetCommand(lComandID, _commandArgs[3])
+                    end
+                end
             end
 		end
 	end

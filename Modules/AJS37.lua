@@ -1,7 +1,7 @@
 -- AJS37 Viggen
 ExportScript.FoundDCSModule = true
 
-ExportScript.ConfigEveryFrameArguments = 
+ExportScript.ConfigEveryFrameArguments =
 {
     -- Navigation Panel
     [200] = "%.1f",	-- Datapanel Selector
@@ -56,7 +56,7 @@ ExportScript.ConfigEveryFrameArguments =
     [1206] = "%1d", -- DME Selector
 }
 
-ExportScript.ConfigArguments = 
+ExportScript.ConfigArguments =
 {
 }
 

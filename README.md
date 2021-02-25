@@ -167,7 +167,7 @@ In one of the "groups" in the Config.lua file which is located in the folder wit
   - applications run on systems version 4.1 and above [ about 99% of devices available on the market ]
 
 ***`2`*** do the applications and script work in multiplayer?
-  - YES, on the server the property must be set: `Allow player export: true`, about 95% of servers have this option turned on;-)
+  - YES, on the server the property must be set: `Allow player export: yes`, about 95% of servers have this option turned on;-)
 
 ***`3`*** does integrity check pass?
   - YES (more precisely, it doesn't even have any effect on it :-) )
