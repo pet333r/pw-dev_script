@@ -4,6 +4,8 @@ ExportScript = {}
 -- State data for export
 ExportScript.PacketSize     = 0
 ExportScript.SendStrings    = {}
+ExportScript.PacketNavSize  = 0
+ExportScript.SendNavStrings	= {}
 ExportScript.LastData       = {}
 
 ExportScript.lastExportTimeHI       = 0

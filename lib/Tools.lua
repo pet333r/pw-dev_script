@@ -5,6 +5,9 @@ local ms2knots  = 1.94384449 -- m/s to knots
 local ms2fpm    = 196.85 -- m/s to feets/minute
 local m2feets   = 3.2808399 -- meters to feets
 local rad2deg   = 57.3 -- radians to degrees
+-- tmp
+local exportNavLowTmp       = ExportScript.Config.ExportNavLow
+local exportNavAllLowTmp    = ExportScript.Config.ExportNavAllLow
 
 function ExportScript.Tools.createUDPSender()
 	ExportScript.socket = require("socket")
@@ -89,6 +92,95 @@ function ExportScript.Tools.ProcessInput()
             end
 		end
 	end
+end
+
+-- funkcja do przesylania danych nawigacyjnych konkretnych obiektow na mapie
+function ExportScript.Tools.ProcessNavData()
+	local SD = LoGetSelfData()
+
+	if SD == nil then
+		return
+    end
+
+	-- geo data
+	local lLat = SD.LatLongAlt.Lat
+	local lLon = SD.LatLongAlt.Long
+	local lAlt = SD.LatLongAlt.Alt
+    local lMagvar = LoGetMagneticYaw()
+	-- local lRAlt = LoGetAltitudeAboveGroundLevel()
+	local lHdg = SD.Heading
+
+	local lIas = LoGetIndicatedAirSpeed()
+	-- local lVspd = LoGetVerticalVelocity()
+	local lMach = LoGetMachNumber()
+
+	-- local lAoa = LoGetAngleOfAttack() -- (args - 0, results - 1 (rad))
+	local lAcc = LoGetAccelerationUnits()	-- G-Force
+	local lPitch, lBank, lYaw = LoGetADIPitchBankYaw()
+	lPitch = lPitch * rad2deg
+	lBank = lBank * rad2deg
+	lYaw = lYaw * rad2deg
+
+    -- local lDistanceToWay			= 999
+    -- local route					= LoGetRoute()
+    -- local val = 0
+
+    -- if route == nil then
+	-- 	return
+    -- end
+
+	if ExportScript.Tools.NavData == nil then
+		ExportScript.Tools.NavData = {}
+	end
+
+	ExportScript.Tools.NavData["Lat"] = string.format("%010.6f", lLat)
+	ExportScript.Tools.NavData["Lon"] = string.format("%010.6f", lLon)
+    ExportScript.Tools.NavData["Magvar"] = string.format("%.1f", lMagvar * rad2deg)
+	ExportScript.Tools.NavData["AltFt"] = string.format("%d", lAlt * m2feets)
+	-- ExportScript.Tools.NavData["ALTR"] = string.format("%d", lRAlt)
+	ExportScript.Tools.NavData["Heading"] = string.format("%d", lHdg * (180/math.pi))
+	ExportScript.Tools.NavData["IAS"] = string.format("%d", lIas * ms2knots)
+	-- ExportScript.Tools.NavData["VSpd"] = string.format("%d", lVspd * ms2fpm)
+	ExportScript.Tools.NavData["Mach"] = string.format("%.2f", lMach)
+	-- ExportScript.Tools.NavData["Aoa"] = string.format("%.1f", lAoa)
+	ExportScript.Tools.NavData["G"] = string.format("%.1f", lAcc.y)
+	-- ExportScript.Tools.NavData[4411] = string.format("%.1f", lPitch)
+	-- ExportScript.Tools.NavData[4412] = string.format("%.1f", lBank)
+	-- ExportScript.Tools.NavData[4413] = string.format("%.1f", lYaw)
+
+    -- if (SD and lRoute) then -- if neither are nil
+    --     local myLoc					= LoGeoCoordinatesToLoCoordinates(lLon, lLat)
+    --     --lDistanceToWay				= math.sqrt((myLoc.x - lRoute.goto_point.world_point.x)^2 + (myLoc.y -  lRoute.goto_point.world_point.y)^2)
+    --     -- lDistanceToWay              = math.sqrt((myLoc.x - lRoute.goto_point.world_point.x)^2 + (myLoc.z -  lRoute.goto_point.world_point.z)^2)
+    --     val = lRoute.goto_point.world_point.x
+    -- end
+
+    -- ExportScript.Tools.NavData[4413] = string.format("%.f", val)
+
+    -- if (route) then
+    --     for num,wpt in pairs(route.route) do
+    --         val = wpt.world_point.x
+        
+    --         -- _packet = (string.format("point_num = %d ,wpt_pos = (%f, %f ,%f) ,next %d\n",wpt.this_point_num,wpt.world_point.x,wpt.world_point.y,wpt.world_point.z,wpt.next_point_num))
+    --     end
+    -- end
+
+	if ExportScript.Tools.NavData ~= nil then
+
+        -- ExportScript.Tools.SendNavData("dsf", val)
+
+		for key, value in pairs(ExportScript.Tools.NavData) do
+				ExportScript.Tools.SendNavData(key, value)
+		end
+	end
+end
+
+function ExportScript.Tools.ProcessNavAllData()
+    local obj = LoGetWorldObjects()
+    for key,val in pairs(obj) do
+        if val.GroupName ~= nil then
+        end
+    end
 end
 
 -- function export data based on registered Lock On internal functions / export in LowTickInterval
@@ -194,7 +286,7 @@ function ExportScript.Tools.ProcessTWS()
         jsonThreats = string.format("{ 'Mode':%f, 'Emiters':%s }\n", threats.Mode, jsonEmiters)
 
         local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() end)
-            try(ExportScript.UDPsender:sendto(jsonThreats, ExportScript.Config.Host, ExportScript.Config.Port))
+            try(ExportScript.UDPsender:sendto(jsonThreats, ExportScript.Config4.Host, ExportScript.Config4.Port))
     end
 end
 
@@ -236,6 +328,20 @@ function ExportScript.Tools.ProcessOutput()
             ExportScript.coProcessDCSLowImportance = coroutine.create(ExportScript.ProcessDCSLowImportance)
             _coStatus = coroutine.resume( ExportScript.coProcessDCSLowImportance, _device)
 
+            if (ExportScript.Config.ExportNavData == true) then
+                if (exportNavLowTmp < 1) then
+                    ExportScript.Tools.ProcessNavData()
+                    exportNavLowTmp = ExportScript.Config.ExportNavLow
+                end
+                exportNavLowTmp = exportNavLowTmp - 1
+
+                if (exportNavAllLowTmp < 1) then
+                    ExportScript.Tools.ProcessNavAllData()
+                    exportNavAllLowTmp = ExportScript.Config.ExportNavAllLow
+                end
+                exportNavAllLowTmp = exportNavAllLowTmp - 1
+            end
+
             ExportScript.lastExportTimeHI = 0
 
             --process SelfData info
@@ -245,6 +351,9 @@ function ExportScript.Tools.ProcessOutput()
         end
     if ExportScript.Config.Export then
         ExportScript.Tools.FlushData()
+    end
+    if (ExportScript.Config.ExportNavData == true) then
+        ExportScript.Tools.FlushNavData()
     end
 
     elseif ExportScript.FoundFCModule then -- Assume FC Aircraft
@@ -278,6 +387,9 @@ function ExportScript.Tools.ProcessOutput()
         end
     if ExportScript.Config.Export then
         ExportScript.Tools.FlushData()
+    end
+    if (ExportScript.Config.ExportNavData == true) then
+        ExportScript.Tools.FlushNavData()
     end
 
     else -- No Module found
@@ -352,9 +464,13 @@ function ExportScript.Tools.FlushData()
             local _packet = "File=" .. ExportScript.ModuleName .. ExportScript.Config.Separator .. "R4G" .. ExportScript.Config.Separator ..
             -- dodanie na końcu linii separatora + znak nowej linii
                 table.concat(ExportScript.SendStrings, ExportScript.Config.Separator) .. ExportScript.Config.Separator .. "\n"
-			local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() ExportScript.Tools.ResetChangeValues() end)
-            try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host, ExportScript.Config.Port))
-            
+
+            local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() ExportScript.Tools.ResetChangeValues() end)
+
+            if ExportScript.Config.Export then
+                try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host, ExportScript.Config.Port))
+            end
+
             if ExportScript.Config.Export2 then
                 try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host2, ExportScript.Config.Port2))
             end
@@ -369,6 +485,61 @@ function ExportScript.Tools.FlushData()
 
 			ExportScript.SendStrings = {}
 			ExportScript.PacketSize  = 0
+		else
+
+		end
+	end)
+    _flushData()
+end
+
+-- NavData
+function ExportScript.Tools.SendNavData(id, value)
+
+    if string.len(value) > 3 and value == string.sub("-0.00000000",1, string.len(value)) then
+        value = value:sub(2)
+    end
+
+    if ExportScript.LastData[id] == nil or ExportScript.LastData[id] ~= value then
+        local _data    =  id .. "=" .. value
+        local _dataLen = string.len(_data)
+
+        if _dataLen + ExportScript.PacketNavSize > 576 then
+            ExportScript.Tools.FlushNavData()
+        end
+
+        table.insert(ExportScript.SendNavStrings, _data)
+        ExportScript.LastData[id] = value
+        ExportScript.PacketNavSize   = ExportScript.PacketNavSize + _dataLen + 1
+    end
+end
+
+function ExportScript.Tools.FlushNavData()
+	local _flushData = ExportScript.socket.protect(function()
+		if #ExportScript.SendNavStrings > 0 then
+            local _packet = "File=" .. ExportScript.ModuleName .. ExportScript.Config.Separator .. "N4D" .. ExportScript.Config.Separator ..
+            -- dodanie na końcu linii separatora + znak nowej linii
+                table.concat(ExportScript.SendNavStrings, ExportScript.Config.Separator) .. ExportScript.Config.Separator .. "\n"
+
+            local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() ExportScript.Tools.ResetChangeValues() end)
+
+            if ExportScript.Config.Export1Nav then
+                try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host, ExportScript.Config.Port))
+            end
+
+            if ExportScript.Config.Export2Nav then
+                try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host2, ExportScript.Config.Port2))
+            end
+
+            if ExportScript.Config.Export3Nav then
+                try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host3, ExportScript.Config.Port3))
+            end
+
+            if ExportScript.Config.Export4Nav then
+                try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host4, ExportScript.Config.Port4))
+            end
+
+			ExportScript.SendNavStrings = {}
+			ExportScript.PacketNavSize  = 0
 		else
 
 		end

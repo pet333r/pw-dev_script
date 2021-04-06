@@ -1,4 +1,4 @@
--- F-16C_50
+ -- F-16C_50
 ExportScript.FoundDCSModule = true
 
 ExportScript.ConfigEveryFrameArguments = 
@@ -26,6 +26,26 @@ ExportScript.ConfigEveryFrameArguments =
 	[189] = "%1d",	-- ICP FLIR GAIN/LEVEL Switch, GAIN/LVL/AUTO	-1 / 0 / 1
 	--	[183] = "%1d"
 
+	-- HMCS
+	[392] = "%.1f", -- HMCS SYMBOLOGY INT Knob
+
+	--RWR button lights
+	[396] = "%1d", -- RWR SEARCH Light (green)
+	[398] = "%1d", -- RWR ACTIVITY Light (yellow)
+	[423] = "%1d", -- RWR ACT POWER Light (green)
+	[400] = "%1d", -- RWR ALT LOW Light (yellow)
+	[424] = "%1d", -- RWR ALT Light (green)
+	[402] = "%1d", -- RWR POWER Light (green)
+	[142] = "%1d", -- RWR HANDOFF UP Light (green)
+	[136] = "%1d", -- RWR HANDOFF H Light (green)
+	[144] = "%1d", -- RWR MSL_LAUNCH Light (red)
+	[146] = "%1d", -- RWR MODE PRI Light (green)
+	[137] = "%1d", -- RWR MODE OPEN Light (green)
+	[148] = "%1d", -- RWR SHIP UNKNOWN Light (green)
+	[150] = "%1d", -- RWR SYSTEST Light (green)
+	[152] = "%1d", -- RWR TGTSEP UP Light (green)
+	[138] = "%1d", -- RWR TGTSEP DOWN Light (green)
+
 	-- UHF
 	[410] = "%.2f", -- UHF Preset Channel Selector
 	[411] = "%.1f", -- UHF 100MHz Selector
@@ -37,6 +57,52 @@ ExportScript.ConfigEveryFrameArguments =
 	[417] = "%.1f", -- UHF Function Dial OFF/MAIN/BOTH/ADF
 	[419] = "%1d",   -- Squelch Switch
 	[420] = "%.1f", -- UHF Volume Control
+
+	-- ECM
+	[455] = "%1d", -- switch OPR/STBY/OFF
+	[457] = "%1d", -- switch 123/XMIT
+	[461] = "%1d", -- Button 1 S Light (yellow)
+	[462] = "%1d", -- Button 1 A Light (green)
+	[463] = "%1d", -- Button 1 F Light (red)
+	[464] = "%1d", -- Button 1 T Light (blue)
+	[466] = "%1d", -- Button 2 S Light (yellow)
+	[467] = "%1d", -- Button 2 A Light (green)
+	[468] = "%1d", -- Button 2 F Light (red)
+	[469] = "%1d", -- Button 2 T Light (blue)
+	[471] = "%1d", -- Button 3 S Light (yellow)
+	[472] = "%1d", -- Button 3 A Light (green)
+	[473] = "%1d", -- Button 3 F Light (red)
+	[474] = "%1d", -- Button 3 T Light (blue)
+	[476] = "%1d", -- Button 4 S Light (yellow)
+	[477] = "%1d", -- Button 4 A Light (green)
+	[478] = "%1d", -- Button 4 F Light (red)
+	[479] = "%1d", -- Button 4 T Light (blue)
+	[481] = "%1d", -- Button 5 S Light (yellow)
+	[482] = "%1d", -- Button 5 A Light (green)
+	[483] = "%1d", -- Button 5 F Light (red)
+	[484] = "%1d", -- Button 5 T Light (blue)
+	[486] = "%1d", -- Button S Light (yellow)
+	[487] = "%1d", -- Button A Light (green)
+	[488] = "%1d", -- Button F Light (red)
+	[489] = "%1d", -- Button T Light (blue)
+	[491] = "%1d", -- Button FRM S Light (yellow)
+	[492] = "%1d", -- Button FRM A Light (green)
+	[493] = "%1d", -- Button FRM F Light (red)
+	[494] = "%1d", -- Button FRM T Light (blue)
+	[496] = "%1d", -- Button SPL S Light (yellow)
+	[497] = "%1d", -- Button SPL A Light (green)
+	[498] = "%1d", -- Button SPL F Light (red)
+	[499] = "%1d", -- Button SPL T Light (blue)
+
+	-- EXT LIGHTING
+	[531] = "%.1f", -- ANTI-COLL Knob, OFF/1/2/3/4/A/B/C
+	[532] = "%1d", -- FLASH STEADY Light Switch, FLASH/STEADY
+	[533] = "%1d", -- WING/TAIL Light Switch, BRT/OFF/DIM
+	[534] = "%1d", -- FUSELAGE Light Switch, BRT/OFF/DIM
+	[535] = "%.1f", -- FORM Light Knob
+	[536] = "%.1f", -- FORM Light Knob
+	[537] = "%.1f", -- AERIAL REFUELING Light Knob
+
 
 	--Caution Light Panel
 	[630] = "%1d", -- FLCS FAULT Light (yellow)
@@ -71,6 +137,17 @@ ExportScript.ConfigEveryFrameArguments =
 	[659] = "%1d", -- 4. Caution - Light (yellow)
 	[660] = "%1d", -- 5. Caution - Light (yellow)
 	[661] = "%1d", -- 6. Caution - Light  (yellow)
+
+	-- AVIONICS POWER
+	[715] = "%1d", -- MMC Switch, MMC/OFF
+	[716] = "%1d", -- ST STA Switch, ST STA/OFF
+	[717] = "%1d", -- MFD Switch, MFD/OFF
+	[718] = "%1d", -- UFC Switch, UFC/OFF
+	[722] = "%1d", -- MAP Switch, MAP/OFF
+	[719] = "%.1f", -- INS Knob, OFF/STOR HDG/NORM/NAV/CAL/INFLT ALIGN/ATT
+	[720] = "%1d", -- GPS Switch, GPS/OFF
+	[721] = "%1d", -- DL Switch, DL/OFF
+	[723] = "%.1f", -- MIDS LVT Knob, ZERO/OFF/ON
 }
 ExportScript.ConfigArguments = 
 {
@@ -85,6 +162,10 @@ ExportScript.ConfigArguments =
 	[371] = "%1d", 	-- Jettison Switch, JETT/OFF
 	[377] = "%.1f", -- PROGRAM Knob, BIT/1/2/3/4
 	[378] = "%.1f", -- MODE Knob, OFF/STBY/MAN/SEMI/AUTO/BYP
+	[370] = "%1d", 	-- NO GO Light (green)
+	[372] = "%1d", 	-- GO Light (green)
+	[376] = "%1d", 	-- DISPENSE Light (green)
+	[379] = "%1d", 	-- RDY Light (green)
 
 	-- SNSR
 	[670] = "%1d", 	-- LEFT HDPT Switch
@@ -830,10 +911,6 @@ end
 
 -- Pointed to by ProcessDCSHighImportance
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
-end
-
--- Pointed to by ExportScript.ProcessDCSConfigLowImportance
-function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	-- DED Displays
 	local DEDLine1 = ""
 	local DEDLine2 = ""
@@ -890,4 +967,10 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	-- local val1txt = val["CourseDeviation _plaseholder"]
 	-- local val1 = val1txt
 	-- ExportScript.Tools.SendData(2501, val1)
+
+end
+
+-- Pointed to by ExportScript.ProcessDCSConfigLowImportance
+function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
+
 end

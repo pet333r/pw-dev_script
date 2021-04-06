@@ -75,6 +75,8 @@ ExportScript.ConfigEveryFrameArguments =
 	[164] = "%1d",   -- FULL FLAPS
 	[162] = "%1d",   -- FLAPS
 
+	[237] = "%1d",   -- LDG/TAXI LIGHT Switch
+
 	-- RWR
 	[264] = "%.1f", -- ALR-67 FAIL Light (red)
 	[265] = "%.1f", -- ALR-67 BIT Light (green)
@@ -121,6 +123,7 @@ ExportScript.ConfigEveryFrameArguments =
 	[355] = "%1d", 	-- IFF Mode 4 Switch, DIS/AUD /DIS/OFF
 	[356] = "%1d", 	-- IFF Master Switch, EMER/NORM
 
+	-- VOL
 	[357] = "%.1f",	-- VOX Volume Control Knob
 	[358] = "%.1f",	-- ICS Volume Control Knob
 	[359] = "%.1f",	-- RWR Volume Control Knob
@@ -152,7 +155,7 @@ ExportScript.ConfigEveryFrameArguments =
 	[418] = "%.1f", -- CHART Light Dimmer Knob
 	[419] = "%1d", 	-- MODE Switch, NVG/NITE/DAY
 
-	-- Sensor panel
+	-- SNSR Sensor panel
 	[439] = "%1d", 	-- FLIR Switch, ON/STBY/OFF
 	[441] = "%1d", 	-- LTD/R Switch, SAFE/AFT
 	[442] = "%1d", 	-- LST/NFLR Switch, ON/OFF
@@ -247,7 +250,7 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 			ExportScript.Tools.SendData(2028, " ") -- Comm1Display 2 character
 			ExportScript.Tools.SendData(2029, " ") -- Comm2Display 2 character
 		end
-		
+
 		local _UHF1Radio = GetDevice(38)
 		ExportScript.Tools.SendData(2030, ExportScript.Tools.DisplayFormat(ExportScript.Tools.RoundFreqeuncy((_UHF1Radio:get_frequency()/1000000))), 7)
 

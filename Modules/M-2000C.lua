@@ -98,6 +98,12 @@ ExportScript.ConfigEveryFrameArguments =
 
 	-- PCN
 	-- [569] = "%1d",	-- UNI Light
+	[564] = "%1d",	-- PRET Indicator Light
+	[565] = "%1d",	-- ALN Indicator Light
+	[566] = "%1d",	-- MIP Indicator Light
+	[567] = "%1d",	-- N.DEG Indicator Light
+	[568] = "%1d",	-- SEC Indicator Light
+	[569] = "%1d",	-- UNI Indicator Light
 	[571] = "%1d",	-- PREP Button Light
 	[573] = "%1d",	-- DEST Button Light
 	[577] = "%1d",	-- BAD Button Light

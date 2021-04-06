@@ -163,7 +163,8 @@ function ExportScript.ProcessFCHighImportanceConfig()
 end
 
 function ExportScript.ProcessFCLowImportanceConfig()
-    -- SPO15 Radar Warning Reciver
-    ExportScript.AF.FC_SPO15RWR()
+	-- SPO15 Radar Warning Reciver
+	ExportScript.AF.FC_SPO15RWR()
+
     -- ExportScript.AF.FC_WeaponPanel_SU33()
 end

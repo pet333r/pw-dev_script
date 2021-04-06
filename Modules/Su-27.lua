@@ -5,11 +5,11 @@ ExportScript.FoundFCModule = true
 dofile(ExportScript.Config.ExportModulePath.."FC_Functions.lua")
 
 function ExportScript.ProcessFCHighImportanceConfig()
-    -- Cautions
+	-- Cautions
     ExportScript.AF.StatusLamp()
 end
 
 function ExportScript.ProcessFCLowImportanceConfig()
     -- SPO15 Radar Warning Reciver
-    ExportScript.AF.FC_SPO15RWR()
+	ExportScript.AF.FC_SPO15RWR()
 end
