@@ -1003,10 +1003,10 @@ function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
 		CMDS_CH_Amount = "    "
 		CMDS_FL_Amount = "    "
 
-		CMDS_O1_Amount = coerce_nil_to_string(cmds.CMDS_O1_Amount)
-		CMDS_O2_Amount = coerce_nil_to_string(cmds.CMDS_O2_Amount)
-		CMDS_CH_Amount = coerce_nil_to_string(cmds.CMDS_CH_Amount)
-		CMDS_FL_Amount = coerce_nil_to_string(cmds.CMDS_FL_Amount)
+		CMDS_O1_Amount = ExportScript.Tools.coerce_nil_to_string(cmds.CMDS_O1_Amount)
+		CMDS_O2_Amount = ExportScript.Tools.coerce_nil_to_string(cmds.CMDS_O2_Amount)
+		CMDS_CH_Amount = ExportScript.Tools.coerce_nil_to_string(cmds.CMDS_CH_Amount)
+		CMDS_FL_Amount = ExportScript.Tools.coerce_nil_to_string(cmds.CMDS_FL_Amount)
 
 		ExportScript.Tools.SendData(2301, CMDS_O1_Amount)
 		ExportScript.Tools.SendData(2302, CMDS_O2_Amount)

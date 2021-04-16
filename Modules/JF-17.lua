@@ -288,28 +288,28 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
         if not indLcd1 then
             return
         end
-        ufcLcdLine1 = coerce_nil_to_string(processUFCPLine(indLcd1,1))
+        ufcLcdLine1 = ExportScript.Tools.coerce_nil_to_string(processUFCPLine(indLcd1,1))
         ExportScript.Tools.SendData(2001, ufcLcdLine1)
 
         local indLcd2 = ExportScript.Tools.getListIndicatorValue(4)
         if not indLcd2 then
             return
         end
-        ufcLcdLine2 = coerce_nil_to_string(processUFCPLine(indLcd2,2))
+        ufcLcdLine2 = ExportScript.Tools.coerce_nil_to_string(processUFCPLine(indLcd2,2))
         ExportScript.Tools.SendData(2002, ufcLcdLine2)
 
         local indLcd3 = ExportScript.Tools.getListIndicatorValue(5)
         if not indLcd3 then
             return
         end
-        ufcLcdLine3 = coerce_nil_to_string(processUFCPLine(indLcd3,3))
+        ufcLcdLine3 = ExportScript.Tools.coerce_nil_to_string(processUFCPLine(indLcd3,3))
         ExportScript.Tools.SendData(2003, ufcLcdLine3)
 
         local indLcd4 = ExportScript.Tools.getListIndicatorValue(6)
         if not indLcd4 then
             return
         end
-        ufcLcdLine4 = coerce_nil_to_string(processUFCPLine(indLcd4,4))
+        ufcLcdLine4 = ExportScript.Tools.coerce_nil_to_string(processUFCPLine(indLcd4,4))
         ExportScript.Tools.SendData(2004, ufcLcdLine4)
 
         -- Radio

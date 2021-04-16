@@ -36,17 +36,17 @@ ExportScript.ConfigEveryFrameArguments =
     [323] = "%.1f", -- Bearing/Range to target LED
 }
 
-ExportScript.ConfigArguments = 
+ExportScript.ConfigArguments =
 {
 }
 
-function coerce_nil_to_string(value)
-	if value == nil then
-		return ""
-	else
-		return value
-	end
-end
+-- function coerce_nil_to_string(value)
+-- 	if value == nil then
+-- 		return ""
+-- 	else
+-- 		return value
+-- 	end
+-- end
 
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
@@ -59,10 +59,10 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
         if not indPVI then
             return
         end
-        local pviLine1      = coerce_nil_to_string(indPVI.txt_VIT)
-        local pviLine2      = coerce_nil_to_string(indPVI.txt_NIT)
-        local pviLine1Point = coerce_nil_to_string(indPVI.txt_OIT_PPM)
-        local pviLine2Point = coerce_nil_to_string(indPVI.txt_OIT_NOT)
+        local pviLine1      = ExportScript.Tools.coerce_nil_to_string(indPVI.txt_VIT)
+        local pviLine2      = ExportScript.Tools.coerce_nil_to_string(indPVI.txt_NIT)
+        local pviLine1Point = ExportScript.Tools.coerce_nil_to_string(indPVI.txt_OIT_PPM)
+        local pviLine2Point = ExportScript.Tools.coerce_nil_to_string(indPVI.txt_OIT_NOT)
         ExportScript.Tools.SendData(2008, pviLine1)
         ExportScript.Tools.SendData(2009, pviLine2)
         ExportScript.Tools.SendData(2010, pviLine1Point)
