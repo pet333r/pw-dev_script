@@ -891,6 +891,7 @@ local function buildDEDLine(line)
 		local inflt_algn 	= DED_fields["INS_INFLT_ALGN_lbl"]
 		local intraflight 	= DED_fields["INTRAFLIGHT lbl"]
 		local dlnk_A_G		= DED_fields["A-G DL lbl"]
+		local nav_status 	= DED_fields["NAV Status lbl"]
 
 		--Loop through Exported DED Objects
 		for k,v in pairs(DED_fields) do
@@ -918,6 +919,9 @@ local function buildDEDLine(line)
 			-- Handle Duplicate Key Names on DLNK A-G page Line 2 items
 			elseif dlnk_A_G ~= nil and line == 2 then
 				label = dlnk_A_G.." "..k
+			-- Handle Duplicate Key Names on NAV page		
+			elseif nav_status ~= nil then
+				label = nav_status.." "..k
 			else
 				label = k
 			end

@@ -167,11 +167,11 @@ local function getPCNDispL()
 		if not name then break end
 	   	if name:sub(0,5) == "PCN_UL_DIGITS"
 		 	then
-		 	value = "     "..value
-		 	return value:sub(-4)
+		 	value = "      "..value
+		 	return value:sub(-5)
 	   	end
 	end
- 	return "     "
+ 	return "      "
  end
  
 local function getPCNDispR()
@@ -182,11 +182,11 @@ local function getPCNDispR()
 		if not name then break end
 	   	if name:sub(0,5) == "PCN_UR_DIGITS"
 		 	then
-		 	value = "     "..value
-		 	return value:sub(-4)
+		 	value = "       "..value
+		 	return value:sub(-6)
 	   	end
 	end
- 	return "     "
+ 	return "       "
 end
  
 local function getPCN2DigitR()
@@ -267,7 +267,7 @@ local function getPCNDispDest()
 	-- 	 return value:sub(-2)
 	--    end
 	 end
- return "         "
+ return "       "
 end
  
 local function getPCNDispPrep()
@@ -288,7 +288,7 @@ local function getPCNDispPrep()
 	-- 	 return value:sub(-2)
 	--    end
 	 end
- return "         "
+ return "       "
 end
 
 --PPA

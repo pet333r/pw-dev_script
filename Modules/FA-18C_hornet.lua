@@ -63,6 +63,11 @@ ExportScript.ConfigEveryFrameArguments =
 	[148] = "%1d",   -- Attitude Selector Switch, INS/AUTO/STBY -1/0/1
 
 	-- Jettison / Landing gear
+	[153] = "%1d",   -- CTR Button
+	[155] = "%1d",   -- LI Button
+	[157] = "%1d",   -- LO Button
+	[159] = "%1d",   -- RI Button
+	[161] = "%1d",   -- RO Button
 	[152] = "%1d",   -- CTR Light
 	[154] = "%1d",   -- LI Light
 	[156] = "%1d",   -- LO Light
