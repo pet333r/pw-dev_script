@@ -163,31 +163,30 @@ local function getPCNDispL()
 	local li = list_indication(9)
 	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
 	while true do
-		 local name, value = m()
-		 if not name then break end
-	   if name:sub(0,10) == "text_PCN_L"
-		 then
-		 value = "        "..value
-		 return value:sub(-8)
-	   end
-	 end
- return "        "
- end
+		local name, value = m()
+		if not name then break end
+	   	if name:sub(0,10) == "text_PCN_L" then
+			value = "        " .. value
+			return value:sub(-8)
+	   	end
+	end
+ 	return "        "
+end
  
 local function getPCNDispR()
 	local li = list_indication(9)
 	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
 	while true do
-		 local name, value = m()
-		 if not name then break end
-	   if name:sub(0,10) == "text_PCN_R"
-		 then
-		 value = "        "..value
-		 return value:sub(-9)
-	   end
-	 end
- return "         "
+		local name, value = m()
+		if not name then break end
+	   	if name:sub(0,10) == "text_PCN_R" then
+			value = "        "..value
+			return value:sub(-9)
+	   	end
+	end
+ 	return "         "
 end
+
  
 local function getPCN2DigitR()
 	local li = list_indication(9)
@@ -197,26 +196,36 @@ local function getPCN2DigitR()
 	local plus = ""
 	local minus = ""
 	while true do
-		 local name, value = m()
-		 if not name then break end
-	   if name == "text_PCN_EST"
-		 then
-		 east="E"
-	   end
-	   if name == "text_PCN_OUEST"
-		 then
-		 west="W"
-	   end
-	   if name == "text_PCN_PLUS_R"
-		 then
-		 plus="+"
-	   end
-	   if name == "text_PCN_MOINS_R"
-		 then
-		 minus="-"
-	   end
-	 end
-	 return string.format("%-2s", string.sub(east..west..plus..minus,1,2))
+		local name, value = m()
+		if not name then break end
+	   	if name == "text_PCN_EST" then
+			east="E"
+	   	end
+	   	if name == "text_PCN_OUEST" then
+			west="W"
+	   	end
+	   	if name == "text_PCN_PLUS_R" then
+			plus="+"
+		end
+		if name == "text_PCN_MOINS_R" then
+			minus="-"
+		end
+
+		-- new
+		if name == "PCN_UR_E" then
+			east="E"
+		end
+		if name == "PCN_UR_W" then
+			west="W"
+		end
+		if name == "PCN_UR_P" then
+			plus="+"
+		end
+		if name == "PCN_UR_M" then
+			minus="-"
+		end
+	end
+	return string.format("%-2s", string.sub(east..west..plus..minus,1,2))
 end
  
 local function getPCN2DigitL()
@@ -227,68 +236,84 @@ local function getPCN2DigitL()
 	local plus = ""
 	local minus = ""
 	while true do
-		 local name, value = m()
-		 if not name then break end
-	   if name == "text_PCN_NORD"
-		 then
-		 north="N"
-	   end
-	   if name == "text_PCN_SUD"
-		 then
-		 south="S"
-	   end
-	   if name == "text_PCN_PLUS_L"
-		 then
-		 plus="+"
-	   end
-	   if name == "text_PCN_MOINS_L"
-		 then
-		 minus="-"
-	   end
-	 end
-	 return string.format("%-2s", string.sub(north..south..plus..minus,1,2))
+		local name, value = m()
+		if not name then break end
+		if name == "text_PCN_NORD" then
+			north="N"
+		end
+		if name == "text_PCN_SUD" then
+			south="S"
+		end
+		if name == "text_PCN_PLUS_L" then
+			plus="+"
+		end
+		if name == "text_PCN_MOINS_L" then
+			minus="-"
+		end
+
+		-- new
+		if name == "PCN_UL_N" then
+			north="N"
+		end
+		if name == "PCN_UL_S" then
+			south="S"
+		end
+		if name == "PCN_UL_P" then
+			plus="+"
+		end
+		if name == "PCN_UL_M" then
+			minus="-"
+		end
+	end
+	return string.format("%-2s", string.sub(north..south..plus..minus,1,2))
 end
  
 local function getPCNDispDest()
 	local li = list_indication(10)
 	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
 	while true do
-		 local name, value = m()
-		 if not name then break end
-	   if name == "text_PCN_BR2"
-		 then
-		 value = "  "..value
-		 return value:sub(-2)
-	   end
- 
-	   if name == "text_PCN_eBR2"
-		 then
-		 value = "  "..value
-		 return value:sub(-2)
-	   end
-	 end
- return "         "
+		local name, value = m()
+		if not name then break end
+		if name == "text_PCN_BR2" then
+			value = "  " .. value
+			return value:sub(-2)
+		end
+
+		if name == "text_PCN_eBR2" then
+			value = "  " .. value
+			return value:sub(-2)
+		end
+		-- new
+		if name == "PCN_BR_DIGITS" then
+			value = "  " .. value
+			return value:sub(-2)
+	  	end
+	end
+ 	return "  "
 end
  
 local function getPCNDispPrep()
 	local li = list_indication(10)
 	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
 	while true do
-		 local name, value = m()
-		 if not name then break end
-	   if name == "text_PCN_BR1"
-		 then
-		 value = "  "..value
-		 return value:sub(-2)
-	   end
- 
-	   if name == "text_PCN_eBR1"
-		 then
-		 value = "  "..value
-		 return value:sub(-2)
-	   end
-	 end
- return "         "
+		local name, value = m()
+		if not name then break end
+		if name == "text_PCN_BR1" then
+			value = "  " .. value
+			return value:sub(-2)
+		end
+
+		if name == "text_PCN_eBR1" then
+			value = "  " .. value
+			return value:sub(-2)
+		end
+		-- new
+		if name == "PCN_BL_DIGITS" then
+			value = "  " .. value
+			return value:sub(-2)
+	  	end
+	end
+ 	return "  "
 end
 
 --PPA
@@ -298,13 +323,12 @@ local function getPPAQtyDisp()
 	while true do
         local name, value = m()
         if not name then break end
-		if name == "text_PPA_QTY"
-        then
-        value = "  "..value
-        return value:sub(-2)
-      end
+		if name == "text_PPA_QTY" then
+        	value = "  "..value
+        	return value:sub(-2)
+      	end
     end
-return "         "	
+	return "         "
 end
 
 local function getPPAIntDisp()
@@ -313,13 +337,12 @@ local function getPPAIntDisp()
 	while true do
         local name, value = m()
         if not name then break end
-		if name == "text_PPA_INT"
-        then
-        value = "  "..value
-        return value:sub(-2)
-      end
+		if name == "text_PPA_INT" then
+        	value = "  "..value
+        	return value:sub(-2)
+      	end
     end
-return "         "	
+	return "         "
 end
 
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
@@ -342,8 +365,14 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		-- PCN up
 		ExportScript.Tools.SendData(2031, getPCN2DigitL())		-- up/left 2-digit vertical
 		ExportScript.Tools.SendData(2032, getPCNDispL())		-- up/left 8-digit
+		ExportScript.Tools.SendData(2035, ExportScript.Tools.getListIndicatorValueByName(9, "PCN_UL_DIGITS", 6)) -- up/left 5-digit
+		ExportScript.Tools.SendData(2036, ExportScript.Tools.getListIndicatorValueByName(9, "PCN_UL_POINTS", 5)) -- dots
+
 		ExportScript.Tools.SendData(2033, getPCN2DigitR())		-- up/middle 2-digit vertical
 		ExportScript.Tools.SendData(2034, getPCNDispR())		-- up/right 9-digit
+		ExportScript.Tools.SendData(2037, ExportScript.Tools.getListIndicatorValueByName(9, "PCN_UR_DIGITS", 7)) -- up/right 6-digit
+		ExportScript.Tools.SendData(2038, ExportScript.Tools.getListIndicatorValueByName(9, "PCN_UR_POINTS", 6)) -- dots
+
 
 		-- PCN dn
 		ExportScript.Tools.SendData(2041, getPCNDispPrep())		-- dn/left 2-digit
@@ -355,6 +384,11 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 
 		-- U/VHF
 		ExportScript.Tools.SendData(2055, ExportScript.Tools.getListIndicatorValueByName(8, "text_COM_VHF", 8))
+		-- UHF
+		ExportScript.Tools.SendData(2061, ExportScript.Tools.getListIndicatorValueByName(7, "text_COM_UHF1", 6))
+		ExportScript.Tools.SendData(2062, ExportScript.Tools.getListIndicatorValueByName(7, "text_COM_UHF2", 6))
+		-- FUEL
+		ExportScript.Tools.SendData(2071, ExportScript.Tools.getListIndicatorValueByName(3, "txt_fuel_g", 3))
 
 		-- Fuel
 		digits = {}
@@ -368,7 +402,5 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(353) * 10)
 		digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(354) * 10)
 		ExportScript.Tools.SendData(2054, digits[1] .. digits[2] .. digits[3] .. "0")
-
-
 	end
 end
