@@ -10,6 +10,10 @@ ExportScript.ConfigEveryFrameArguments =
     [283] = "%1d",	-- RHM Till - Radar Altimeter Power
     [300] = "%1d",	-- Rensa Button Cover
 
+    [209] = "%.1f",	-- Master Mode Selector
+    [264] = "%.1f",	-- Weapon Selector Knob
+    [265] = "%.1f",	-- Weapon Interval Selector Mode Knob
+
     -- left warnings
     [406] = "%1d", -- Engine Fire 1
     [407] = "%1d", -- Engine Fire 2

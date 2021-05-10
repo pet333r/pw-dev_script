@@ -26,7 +26,7 @@ you'll find it on the "Releases" page
 * SimFDR [http://pw-developer.com/soft_simfdr.html](http://pw-developer.com/soft_simfdr.html)
 * DCS Script Tester [http://pw-developer.com/soft_udp.html](http://pw-developer.com/soft_udp.html)
 
-[![DCS UFC](.gfx/yt_dcsufc.jpg)](https://youtu.be/qGfzUdCVLwc)  
+[![DCS UFC](.gfx/yt_dcsufc.png)](https://youtu.be/qGfzUdCVLwc)  
 [![DCS AoA Indexer](.gfx/yt_aoa.jpg)](https://youtu.be/OU6KO8tjmGo)
 
 # automatic script installation
@@ -125,7 +125,11 @@ just run it from time to time or add a shortcut in the Windows Startup folder to
 
 To find Android device IP: go to `Settings > WiFi` > check the properties of your network   
 
-to find the IP address of the computer with DCS World installed: [https://www.digitalcitizen.life/find-ip-address-windows](https://www.digitalcitizen.life/find-ip-address-windows)
+to find the IP address of the computer with DCS World installed: [https://www.digitalcitizen.life/find-ip-address-windows](https://www.digitalcitizen.life/find-ip-address-windows)  
+or run `my_local_PC_IP.cmd` file in script folder, a console window will open  
+
+example:  
+[![](.gfx/ipconfig_small.png)](.gfx/ipconfig.png)  
 
 
 
