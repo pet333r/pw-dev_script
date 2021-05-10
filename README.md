@@ -135,8 +135,8 @@ example:
 
 # example connection
 Example configuration:  
-PC IP: 192.168.1.2  
-Android device IP: 192.168.1.3  
+PC IP: 192.168.0.10  
+Android device IP: 192.168.0.12  
 
 ![](.gfx/dcs_script_connection.png)
 
