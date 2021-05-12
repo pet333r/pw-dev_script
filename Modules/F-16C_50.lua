@@ -29,6 +29,8 @@ ExportScript.ConfigEveryFrameArguments =
 	-- HMCS
 	[392] = "%.1f", -- HMCS SYMBOLOGY INT Knob
 
+	[401] = "%.1f", -- RWR POWER Button
+
 	--RWR button lights
 	[396] = "%1d", -- RWR SEARCH Light (green)
 	[398] = "%1d", -- RWR ACTIVITY Light (yellow)
@@ -154,8 +156,8 @@ ExportScript.ConfigArguments =
 	-- CMDS
 	[365] = "%1d", 	-- O1 Expendable Category Switch, ON/OFF
 	[366] = "%1d", 	-- O2 Expendable Category Switch, ON/OFF
-	[367] = "%1d", 	-- O1 Expendable Category Switch, ON/OFF
-	[368] = "%1d", 	-- O1 Expendable Category Switch, ON/OFF
+	[367] = "%1d", 	-- CH Expendable Category Switch, ON/OFF
+	[368] = "%1d", 	-- FL Expendable Category Switch, ON/OFF
 	[375] = "%1d", 	-- RWR Source Switch, ON/OFF
 	[374] = "%1d", 	-- JMR Source Switch, ON/OFF
 	[373] = "%1d", 	-- MWS Source Switch, ON/OFF
