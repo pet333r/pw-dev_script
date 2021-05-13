@@ -383,7 +383,7 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		ExportScript.Tools.SendData(2052, getPPAIntDisp())
 
 		-- U/VHF
-		ExportScript.Tools.SendData(2055, ExportScript.Tools.getListIndicatorValueByName(8, "text_COM_VHF", 8))
+		ExportScript.Tools.SendData(2055, ExportScript.Tools.getListIndicatorValueByName(8, "text_COM_VHF", 9))
 		-- UHF
 		ExportScript.Tools.SendData(2061, ExportScript.Tools.getListIndicatorValueByName(7, "text_COM_UHF1", 6))
 		ExportScript.Tools.SendData(2062, ExportScript.Tools.getListIndicatorValueByName(7, "text_COM_UHF2", 6))

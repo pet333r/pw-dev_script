@@ -127,9 +127,24 @@ ExportScript.ConfigEveryFrameArguments =
     [908] = "%.1f", -- INS Mode Knob Selector
     [909] = "%.1f", -- AAP Brightness Knob
     [910] = "%1d", -- HUD Symbology Reject Switch
+
+    -- INT LTS
+    [944] = "%.2f", -- Instrument Light Knob
+    [945] = "%.2f", -- Console Light Knob
+    [946] = "%.2f", -- Flood Light Knob
+    
+    -- EXT LIG
+    [947] = "%1d", -- Exterior Light Master Switch 1/0/-1
+    [948] = "%.1f", -- Formation Light Knob Selector 0/3/5/8/1.0
+    [949] = "%.1f", -- Anti-Collision Light Knob Selector 0/3/5/8/1.0
+    [950] = "%.1f", -- Navigation Light Switch - Bright/Off/Dim 1/0/-1
+    [951] = "%1d", -- Navigation Light Switch - Flash/Steady 1/-1
+    [952] = "%1d", -- Light Switch - Tow/Off/Anti-Collision 1/0/-1
+    [963] = "%1d", -- AAR Light Switch 1/-1
+    [964] = "%.2f", -- AAR Light Brightness Knob
 }
 
-ExportScript.ConfigArguments = 
+ExportScript.ConfigArguments =
 {
     -- HUD panel
     [728] = "%.1f", -- HUD Contrast Knob
@@ -146,13 +161,13 @@ function processUFCPLine(ufcpLine, lineNum)
 	local cur_winr      = ufcpLine["cur_win"..lineNum.."r"]
 	local UFCPLineLength = 8
 	local txt_win
-		 
+ 
 	if temp_txt_win ~= null then
 			txt_win = temp_txt_win:gsub(string.char(127),"^")
 	 else
 		 txt_win = ""
 	 end
-	
+
 	if txt_win_fill ~= null then
 	   local full_txt_win_fill  = txt_win_fill..string.rep(" ",UFCPLineLength - string.len(txt_win_fill))
 	   if temp_txt_win ~= null then
@@ -180,104 +195,33 @@ function processUFCPLine(ufcpLine, lineNum)
 	return processedUFCPLine      
 end
 
-function coerce_nil_to_string(value)
-	if value == nil then
-		return ""
-	else
-		return value
-	end
-end
-
--- local radio_line_1
--- local radio_line_2
--- local radio_sql_light
--- local radio_to_light
--- local radio_go_light
-
--- function radio_parse_indication(indicator_id)
--- 	local ret = {}
--- 	local li = list_indication(indicator_id)
--- 	if li == "        " then return nil end
--- 	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
--- 	while true do
--- 		local name, value = m()
--- 		if not name then break end
--- 			-- there's # characters in one of the radio indicator names which break parsing if it isn't replaced
--- 			ret[name:gsub("\#","hash")] = value
--- 		end
--- 	return ret
--- end
-
--- function gh()
--- 	local radioDisplay = radio_parse_indication(7)
--- 	radio_line_1 = "        "
--- 	radio_line_2 = "        "
--- 	radio_sql_light = 0
--- 	radio_to_light = 0
--- 	radio_go_light= 0
--- 	if not radioDisplay then
--- 		return
--- 	end
--- 	if radioDisplay.radio_sql then
--- 		radio_sql_light = 1;
--- 	end
--- 	if radioDisplay.radio_take then
--- 		radio_to_light = 1;
--- 	end 
--- 	if radioDisplay.radio_go then
--- 		radio_go_light = 1;
--- 	end
-	
--- 	-- Radio Display Line 2 uses unprintable characters to display the power symbol - replace these with something printable
--- 	if radioDisplay.radio_disp_l2 then
--- 		local charReplacements = {
--- 			[string.char(29)] = "_",
--- 			[string.char(30)] = "|",
--- 			[string.char(31)] = "^"
--- 		}
--- 		radio_line_2 = radioDisplay.radio_disp_l2:gsub(".",charReplacements)	
--- 	end
-	
--- 	-- original name for field is "#3#"" but this is modified in radio_parse_indication to "hash3hash"
--- 	if radioDisplay.hash3hash then
--- 		local tempString
--- 		if radioDisplay.radio_cursor and radioDisplay.radio_cursor:len() > 0 then
--- 			if radioDisplay.radio_disp_l1 and radioDisplay.radio_disp_l1:len() > 1 then
--- 			   tempString = radioDisplay.radio_disp_l1:sub(1,radioDisplay.radio_disp_l1:len() - 1)..radioDisplay.radio_cursor
--- 			else
--- 			   tempString = radioDisplay.radio_cursor
--- 			end 
--- 		else
--- 			tempString = radioDisplay.radio_disp_l1
--- 		end
--- 		radio_line_1 = radioDisplay.hash3hash:sub(1,radioDisplay.hash3hash:len() - tempString:len())..tempString
+-- function coerce_nil_to_string(value)
+-- 	if value == nil then
+-- 		return ""
 -- 	else
--- 		radio_line_1 = radioDisplay.radio_disp_l1
+-- 		return value
 -- 	end
 -- end
+
+function radio_parse_indication(indicator_id)  -- Thanks to [FSF]Ian code
+	local ret = {}
+	local li = list_indication(indicator_id)
+	if li == "" then return nil end
+	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+	while true do
+		local name, value = m()
+		if not name then break end
+			-- there's # characters in one of the radio indicator names which break parsing if it isn't replaced
+			ret[name:gsub("\#","hash")] = value
+		end
+	return ret
+end
 
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
 
 function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
     if ExportScript.Config.ExportDisplaysJF17 == true then
-        -- local clk1 = "        "
-        -- local clk2 = "        "
-
-        -- local clock1 = ExportScript.Tools.getListIndicatorValue(11)
-        -- if not clock1 then
-        --     return
-        -- end
-        -- clk1 = coerce_nil_to_string(clock1.txt_win1)
-        -- ExportScript.Tools.SendData(2021, clk1)
-
-        -- local clock2 = ExportScript.Tools.getListIndicatorValue(12)
-        -- if not clock2 then
-        --     return
-        -- end
-        -- clk2 = coerce_nil_to_string(clock2.txt_win2)
-        -- ExportScript.Tools.SendData(2022, clk2)
-
         local ufcLcdLine1 = "        "
         local ufcLcdLine2 = "        "
         local ufcLcdLine3 = "        "
@@ -312,36 +256,42 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
         ufcLcdLine4 = ExportScript.Tools.coerce_nil_to_string(processUFCPLine(indLcd4,4))
         ExportScript.Tools.SendData(2004, ufcLcdLine4)
 
-        -- Radio
-        local radio_line_1 = "        "
-        local radio_line_2 = "        "
-        local radio_sql_light = 0
-        local radio_to_light = 0
-        local radio_go_light = 0
-        local radio_tx_light = 0
+
+        local radio_line_1
+        local radio_line_2
+        local radio_sql_light
+        local radio_or_light
+        local radio_take_light
+        local radio_go_light
+        local radio_tx_light
 
         local radioDisplay = radio_parse_indication(7)
+        radio_line_1 = "        "
+        radio_line_2 = "        "
+        radio_sql_light = 0
+        radio_or_light = 0
+        radio_take_light = 0
+        radio_go_light= 0
+        radio_tx_light = 0
         if not radioDisplay then
             return
         end
-        -- radio_line_1 = "        "
-	    -- radio_line_2 = "        "
-        -- radio_sql_light = 0
-        -- radio_to_light = 0
-        -- radio_go_light= 0
         if radioDisplay.radio_sql then
             radio_sql_light = 1;
         end
+        if radioDisplay.radio_or then
+            radio_or_light = 1;
+        end 
         if radioDisplay.radio_take then
-            radio_to_light = 1;
+            radio_take_light = 1;
         end 
         if radioDisplay.radio_go then
             radio_go_light = 1;
         end
         if radioDisplay.radio_tx then
             radio_tx_light = 1;
-        end
-
+        end 
+        
         -- Radio Display Line 2 uses unprintable characters to display the power symbol - replace these with something printable
         if radioDisplay.radio_disp_l2 then
             local charReplacements = {
@@ -351,16 +301,16 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
             }
             radio_line_2 = radioDisplay.radio_disp_l2:gsub(".",charReplacements)	
         end
-
+        
         -- original name for field is "#3#"" but this is modified in radio_parse_indication to "hash3hash"
         if radioDisplay.hash3hash then
             local tempString
             if radioDisplay.radio_cursor and radioDisplay.radio_cursor:len() > 0 then
                 if radioDisplay.radio_disp_l1 and radioDisplay.radio_disp_l1:len() > 1 then
-                tempString = radioDisplay.radio_disp_l1:sub(1,radioDisplay.radio_disp_l1:len() - 1)..radioDisplay.radio_cursor
+                   tempString = radioDisplay.radio_disp_l1:sub(1,radioDisplay.radio_disp_l1:len() - 1)..radioDisplay.radio_cursor
                 else
-                tempString = radioDisplay.radio_cursor
-                end
+                   tempString = radioDisplay.radio_cursor
+                end 
             else
                 tempString = radioDisplay.radio_disp_l1
             end
@@ -369,12 +319,29 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
             radio_line_1 = radioDisplay.radio_disp_l1
         end
 
-        ExportScript.Tools.SendData(2005, radio_line_1)
-        ExportScript.Tools.SendData(2006, radio_line_2)
-        ExportScript.Tools.SendData(2007, radio_sql_light)
-        ExportScript.Tools.SendData(2008, radio_to_light)
-        ExportScript.Tools.SendData(2009, radio_go_light)
-        -- ExportScript.Tools.SendData(2010, radioDisplay.radio_go)
-        ExportScript.Tools.SendData(2011, radio_tx_light)
+        ExportScript.Tools.SendData(2010, radio_line_1)
+        ExportScript.Tools.SendData(2011, radio_line_2)
+        ExportScript.Tools.SendData(2012, radio_sql_light)
+        ExportScript.Tools.SendData(2013, radio_or_light)
+        ExportScript.Tools.SendData(2014, radio_take_light)
+        ExportScript.Tools.SendData(2015, radio_go_light)
+        ExportScript.Tools.SendData(2016, radio_tx_light)
+
+        -- local clk1 = "        "
+        -- local clk2 = "        "
+
+        -- local clock1 = ExportScript.Tools.getListIndicatorValue(11)
+        -- if not clock1 then
+        --     return
+        -- end
+        -- clk1 = coerce_nil_to_string(clock1.txt_win1)
+        -- ExportScript.Tools.SendData(2021, clk1)
+
+        -- local clock2 = ExportScript.Tools.getListIndicatorValue(12)
+        -- if not clock2 then
+        --     return
+        -- end
+        -- clk2 = coerce_nil_to_string(clock2.txt_win2)
+        -- ExportScript.Tools.SendData(2022, clk2)
     end
 end
