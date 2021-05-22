@@ -1,4 +1,7 @@
 -- SA342M
+
+-- init arg 398
+
 ExportScript.FoundDCSModule = true
 
 ExportScript.ConfigEveryFrameArguments = 
@@ -25,6 +28,15 @@ ExportScript.ConfigEveryFrameArguments =
     [233] = "%.1f", -- Engine Instrument
     [234] = "%.1f", -- Copilot Instrument
     [235] = "%.1f", -- Pilot Instrument
+
+    -- NADIR
+    [330] = "%.1f", -- Brightness
+    [331] = "%.1f", -- Doppler Mode
+    [332] = "%.1f", -- Parameter
+
+    -- UHF
+    [383] = "%.1f", -- Radio Mode Select
+    [386] = "%.1f", -- Radio Page Knob
 }
 
 ExportScript.ConfigArguments =
@@ -37,6 +49,18 @@ function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
     if not nadir then
         return
     end
+
+    local nadirS = "0"
+    local nadirW = "0"
+    local nadirE = "0"
+    local nadirX = "0"
+    local nadirY = "0"
+
+    if nadir.S == nil then nadirS = "0" else nadirS = "1" end
+    if nadir.W == nil then nadirW = "0" else nadirW = "1" end
+    if nadir.E == nil then nadirE = "0" else nadirE = "1" end
+    if nadir.X == nil then nadirX = "0" else nadirX = "1" end
+    if nadir.Y == nil then nadirY = "0" else nadirY = "1" end
 
     -- ExportScript.Tools.SendData(700, ExportScript.Tools.coerce_nil_to_string(nadir.N.element_params))
     -- ExportScript.Tools.SendData(701, nadir.S)
@@ -69,6 +93,12 @@ function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
     ExportScript.Tools.SendData(2001, ExportScript.Tools.DisplayFormat(nadir.CentMille..nadir.DixMille..nadir.Mille..nadir.Cent..nadir.Dix..nadir.Unit, 6))
     ExportScript.Tools.SendData(2002, ExportScript.Tools.DisplayFormat(nadir.CentMilleI..nadir.DixMilleI..nadir.MilleI..nadir.CentI..nadir.DixI..nadir.UnitI, 6))
     ExportScript.Tools.SendData(2003, nadir.F_unit)
+
+    ExportScript.Tools.SendData(2101, nadirS)
+    ExportScript.Tools.SendData(2102, nadirW)
+    ExportScript.Tools.SendData(2103, nadirE)
+    ExportScript.Tools.SendData(2104, nadirX)
+    ExportScript.Tools.SendData(2105, nadirY)
 
 end
 

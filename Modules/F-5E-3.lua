@@ -1,4 +1,6 @@
 -- F-5E-3
+
+-- init arg 815
 ExportScript.FoundDCSModule = true
 
 ExportScript.ConfigEveryFrameArguments = 
@@ -28,6 +30,25 @@ ExportScript.ConfigEveryFrameArguments =
 	[548] = "%1d", -- Spare 2
 	[549] = "%1d", -- DC Overload
 	[550] = "%1d", -- Spare 3
+
+	-- RWS
+	[552] = "%1d", -- Priority
+	[553] = "%1d", -- Open
+	[555] = "%1d", -- S
+	[557] = "%1d", -- <>
+	[558] = "%1d", -- H
+	[560] = "%1d", -- Missile Launch (red)
+	[562] = "%1d", -- Low
+	[563] = "%1d", -- Alt
+	[565] = "%1d", -- Tgt Sep
+	[566] = "%1d", -- Tgt Sep
+	[568] = "%1d", -- On
+	[569] = "%1d", -- Sys Test
+	[571] = "%1d", -- U
+	[572] = "%1d", -- Unknown
+	[574] = "%1d", -- Activity Power
+	[575] = "%1d", -- System Power Button
+	[576] = "%1d", -- System Power
 }
 ExportScript.ConfigArguments = 
 {
