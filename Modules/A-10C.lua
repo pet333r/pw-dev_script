@@ -32,15 +32,30 @@ ExportScript.ConfigEveryFrameArguments =
     [171] = "%.1f", -- UHF Volume Control
 
     -- ILS
-    [248] = "%.1f", -- ILS Frequency MHz
+    [247] = "%1d",  -- ILS Power
+    [248] = "%.1f", -- ILS Frequency MHz 0/1/2/3
     [249] = "%.1f", -- ILS Frequency KHz
+    [250] = "%.1f", -- ILS Volume
 
     -- TACAN
     [256] = "%.1f", -- Left Channel Selector
-    [257] = "%.1f", -- Right Channel Selector
+    [257] = "%.1f", -- Right Channel Selector 0-9
     [258] = "%.1f", -- TACAN Channel X/Y Toggle
+    [260] = "1d",   -- Test Indicator Light
     [261] = "%.1f", -- TACAN Signal Volume
-    [262] = "%.1f", -- TACAN Mode Dial
+    [262] = "%.1f", -- TACAN Mode Dial 0/1/2/3/4
+
+    [287] = "%1d",  -- Position Lights FLASH/OFF/STEADY
+    [288] = "%.1f", -- Formation Lights
+    [289] = "%1d",  -- Anticollision Lights
+    [290] = "%.1f", -- Engine Instrument Lights
+    [291] = "%1d",  -- Nose Illumination
+    [292] = "%.1f", -- Flight Instrument Lights
+    [293] = "%.1f", -- Aux Instrument Lights
+    [294] = "%1d",  -- Signal Lights
+    [295] = "%1d",  -- Accelerometer and Compass Lights
+    [296] = "%.1f", -- Flood Lights
+    [297] = "%.1f", -- Console Lights
 
     [358] = "%1d", -- JTSN / OFF
     [360] = "%.1f", -- Missile Warning System OFF - ON - (MENU)
@@ -141,6 +156,14 @@ ExportScript.ConfigEveryFrameArguments =
 	[525] = "%1d",		-- L_GEN
 	[526] = "%1d",		-- R_GEN
     [527] = "%1d",		-- INST_INV
+    
+    [606] = "%1d",		-- HARS
+    [608] = "%1d",		-- EGI
+    [610] = "%1d",		-- TISL
+    [612] = "%1d",		-- STEERPT
+    [614] = "%1d",		-- ANCHR
+    [616] = "%1d",		-- TCN
+    [618] = "%1d",		-- ILS
 
     [730] = "%1d",		-- Air Refuel READY
     [731] = "%1d",		-- Air Refuel LATCHED
@@ -156,7 +179,7 @@ local function getTacanChannel()
     if GetDevice(0):get_argument_value(263) == 0 then
         tcn_2 = "0"
     else
-    	tcn_2 = "1"    
+    	tcn_2 = "1"
     end
     local tcn_1 = string.format("%.1f", GetDevice(0):get_argument_value(264)):sub(3)
     local tcn_0 = string.format("%.1f", GetDevice(0):get_argument_value(265)):sub(3)

@@ -116,7 +116,6 @@ ExportScript.ConfigEveryFrameArguments =
     [546] = "%1d", -- Squelch OFF/SQL/ACKN
     [547] = "%.1f", -- Radio Mode Selector
 
-
     -- ELEC
     [904] = "%1d", -- Battery Switch
     [905] = "%1d", -- Main AC Gen Switch
@@ -137,7 +136,7 @@ ExportScript.ConfigEveryFrameArguments =
     [947] = "%1d", -- Exterior Light Master Switch 1/0/-1
     [948] = "%.1f", -- Formation Light Knob Selector 0/3/5/8/1.0
     [949] = "%.1f", -- Anti-Collision Light Knob Selector 0/3/5/8/1.0
-    [950] = "%.1f", -- Navigation Light Switch - Bright/Off/Dim 1/0/-1
+    [950] = "%1d", -- Navigation Light Switch - Bright/Off/Dim 1/0/-1
     [951] = "%1d", -- Navigation Light Switch - Flash/Steady 1/-1
     [952] = "%1d", -- Light Switch - Tow/Off/Anti-Collision 1/0/-1
     [963] = "%1d", -- AAR Light Switch 1/-1
