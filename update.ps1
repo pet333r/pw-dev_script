@@ -31,8 +31,11 @@ $dirModules = "$PSScriptRoot\Modules\"
 
 # files main
 $listFilesMain = @(
+      'add_firewall_rules.bat'
       'Config.lua'
       'ExportInit.lua'
+      'my_local_PC_IP.cmd'
+      'version'
 )
 
 # libs
