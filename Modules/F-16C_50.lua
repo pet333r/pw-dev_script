@@ -23,6 +23,7 @@ ExportScript.ConfigEveryFrameArguments =
 	[134] = "%1d", -- CANOPY Light (red)
 	[135] = "%1d", -- OXY LOW Light (red)
 
+	[186] = "%1d",	-- ICP Drift CO Switch
 	[189] = "%1d",	-- ICP FLIR GAIN/LEVEL Switch, GAIN/LVL/AUTO	-1 / 0 / 1
 	--	[183] = "%1d"
 
@@ -758,6 +759,7 @@ DEDLayout_l5["IFF Switching"]={14,1}
 DEDLayout_l5["TACAN Label"]={19,1}
 DEDLayout_l5["TACAN Channel"]={20,3}
 DEDLayout_l5["TACAN Band"]={23,1}
+DEDLayout_l5["TACAN A-A Distance"]={19,5}
 --COM
 DEDLayout_l5["Preset Frequency"]={5,6,0,"_inv","I"}
 DEDLayout_l5["Asterisks on PresetFrequency_both"]={4,11,11,"","I"}
@@ -766,6 +768,7 @@ DEDLayout_l5["Asterisks on Band_both"]={17,1,20,"","I"}
 DEDLayout_l5["Preset Channel Number"]={20,2}
 DEDLayout_l5["Guard or Backup Frequency"]={10,6}
 --IFF
+DEDLayout_l5["STAT M3 Mode"] = {0,2,0,"_inv","I"}
 DEDLayout_l5["STAT M3 Lockout Status"] = {3,1}
 DEDLayout_l5["STAT M3 Code"] = {4,4}
 DEDLayout_l5["STAT M4 Monitoring"] = {9,3}

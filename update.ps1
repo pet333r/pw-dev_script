@@ -32,7 +32,7 @@ $dirModules = "$PSScriptRoot\Modules\"
 # files main
 $listFilesMain = @(
       'Config.lua'
-      'Export.lua'
+      'ExportInit.lua'
 )
 
 # libs
