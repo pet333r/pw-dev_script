@@ -240,6 +240,10 @@ end
 
 -- Pointed to by ExportScript.ProcessDCSConfigLowImportance
 function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
+    -- ScratchPad
+    local lScratchPad = ExportScript.Tools.getListIndicatorValue(5)
+    ExportScript.Tools.SendData(2010, ExportScript.Tools.coerce_nil_to_string(lScratchPad.Scratch_PAD))
+
 	-- CMSC 2020 (Text only)
 	-------------------------------------------------
 	if mainPanelDevice:get_argument_value(364) > 0 then
