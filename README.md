@@ -4,9 +4,9 @@ Script for exporting data from DCS World
 
 # HOW TO INSTALL SCRIPT > Video
 Step by step how to install DCS World script  
-### Click on the link or graphic to play the video on YouTube: [https://youtu.be/01tmF0n3mjQ](https://youtu.be/01tmF0n3mjQ)
+### Click on the link or graphic to play the video on YouTube: [https://youtu.be/saFq3Png-ds](https://youtu.be/saFq3Png-ds)
 
-[![How to install script](.gfx/yt_script.jpg)](https://youtu.be/01tmF0n3mjQ)
+[![How to install script](.gfx/yt_script.png)](https://youtu.be/01tmF0n3mjQ)
 
 # latest script version in zip file
 if you have any problem understanding how the DCS World script should be installed, download the zip file, it contains a schematic of the entire "Scripts" folder along with the main "Export.lua" file and the entire script
