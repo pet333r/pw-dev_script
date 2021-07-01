@@ -350,17 +350,17 @@ end
 
 function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	if ExportScript.Config.ExportDisplaysM2000 == true then
-		ExportScript.Tools.SendData(2011, ExportScript.Tools.getListIndicatorValueByName(4, "text_PCA_UR1", 3))
-		ExportScript.Tools.SendData(2012, ExportScript.Tools.getListIndicatorValueByName(4, "text_PCA_UR2", 3))
-		ExportScript.Tools.SendData(2013, ExportScript.Tools.getListIndicatorValueByName(4, "text_PCA_UR3", 3))
-		ExportScript.Tools.SendData(2014, ExportScript.Tools.getListIndicatorValueByName(4, "text_PCA_UR4", 3))
-		ExportScript.Tools.SendData(2015, ExportScript.Tools.getListIndicatorValueByName(4, "text_PCA_UR5", 3))
+		ExportScript.Tools.SendData(2011, ExportScript.Tools.getListIndicatorValueByName(4, "PCA_LCD_1_0", 3))
+		ExportScript.Tools.SendData(2012, ExportScript.Tools.getListIndicatorValueByName(4, "PCA_LCD_1_1", 3))
+		ExportScript.Tools.SendData(2013, ExportScript.Tools.getListIndicatorValueByName(4, "PCA_LCD_1_2", 3))
+		ExportScript.Tools.SendData(2014, ExportScript.Tools.getListIndicatorValueByName(4, "PCA_LCD_1_3", 3))
+		ExportScript.Tools.SendData(2015, ExportScript.Tools.getListIndicatorValueByName(4, "PCA_LCD_1_4", 3))
 
-		ExportScript.Tools.SendData(2021, ExportScript.Tools.getListIndicatorValueByName(5, "text_PCA_BR1", 3))
-		ExportScript.Tools.SendData(2022, ExportScript.Tools.getListIndicatorValueByName(5, "text_PCA_BR2", 3))
-		ExportScript.Tools.SendData(2023, ExportScript.Tools.getListIndicatorValueByName(5, "text_PCA_BR3", 3))
-		ExportScript.Tools.SendData(2024, ExportScript.Tools.getListIndicatorValueByName(5, "text_PCA_BR4", 3))
-		ExportScript.Tools.SendData(2025, ExportScript.Tools.getListIndicatorValueByName(5, "text_PCA_BR5", 3))
+		ExportScript.Tools.SendData(2021, ExportScript.Tools.getListIndicatorValueByName(5, "PCA_LCD_2_0", 3))
+		ExportScript.Tools.SendData(2022, ExportScript.Tools.getListIndicatorValueByName(5, "PCA_LCD_2_1", 3))
+		ExportScript.Tools.SendData(2023, ExportScript.Tools.getListIndicatorValueByName(5, "PCA_LCD_2_2", 3))
+		ExportScript.Tools.SendData(2024, ExportScript.Tools.getListIndicatorValueByName(5, "PCA_LCD_2_3", 3))
+		ExportScript.Tools.SendData(2025, ExportScript.Tools.getListIndicatorValueByName(5, "PCA_LCD_2_4", 3))
 
 		-- PCN up
 		ExportScript.Tools.SendData(2031, getPCN2DigitL())		-- up/left 2-digit vertical

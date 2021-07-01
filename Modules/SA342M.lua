@@ -21,6 +21,21 @@ ExportScript.ConfigEveryFrameArguments =
     [12] = "%1d", -- Chips In Oil Warning
     [13] = "%1d", -- Sand Filter Warning
 
+    [180] = "%.1f", -- HOT3 Panel Test/Off/On
+    [181] = "%.1f", -- HOT3 Station Select
+    [182] = "%.1f", -- HOT3 Brightness
+    [183] = "%1d", -- BON (green)
+    [184] = "%1d", -- MAUVAIS (red)
+    [185] = "%1d", -- ALIMENTATION (green)
+    [186] = "%1d", -- MISSILE PRET (blue)
+    [187] = "%1d", -- TIR AUTOR (green)
+    [188] = "%1d", -- DEFAULT (red)
+    [189] = "%1d", -- TEST (blue)
+    [190] = "%1d", -- JOUR (green)
+    [191] = "%1d", -- (yellow)
+    [192] = "%1d", -- TEST II (blue)
+    [193] = "%1d", -- NUIT (green)
+    
     -- INST LTG
     [230] = "%.1f", -- Overhead Console Panel
     [231] = "%.1f", -- Pedestal
@@ -28,6 +43,10 @@ ExportScript.ConfigEveryFrameArguments =
     [233] = "%.1f", -- Engine Instrument
     [234] = "%.1f", -- Copilot Instrument
     [235] = "%.1f", -- Pilot Instrument
+
+    -- FM
+    [272] = "%.1f", -- FM Radio Mode Select
+    [273] = "%.1f", -- FM Radio Channel Select
 
     -- NADIR
     [330] = "%.1f", -- Brightness
