@@ -3,31 +3,24 @@ ExportScript.Config = {}
 
 -- device 1
 ExportScript.Config.Export      = true              -- sending data
-ExportScript.Config.Export1SD   = false             -- sendind data from SD
 ExportScript.Config.Export1Nav  = true              -- true if you want to show position on map on this device
 ExportScript.Config.Host        = "192.168.0.12"    -- IP for 1st app
-ExportScript.Config.Port        = 5160              -- port for sending data
+ExportScript.Config.Port        = 5160              -- port for sending data for all connected devices
 
 -- device 2
 ExportScript.Config.Export2     = true              -- sending data
-ExportScript.Config.Export2SD   = false             -- sendind data from SD
 ExportScript.Config.Export2Nav  = true              -- true if you want to show position on map on this device
 ExportScript.Config.Host2       = "192.168.0.14"    -- IP for 2nd app
-ExportScript.Config.Port2       = 5160              -- port for sending data
 
 -- device 3
 ExportScript.Config.Export3     = true              -- sending data
-ExportScript.Config.Export3SD   = false             -- sendind data from SD
 ExportScript.Config.Export3Nav  = true              -- true if you want to show position on map on this device
 ExportScript.Config.Host3       = "192.168.0.16"    -- IP for 3rd app
-ExportScript.Config.Port3       = 5160              -- port for sending data
 
 -- device 4
 ExportScript.Config.Export4     = true              -- sending data
-ExportScript.Config.Export4SD   = false             -- sendind data from SD
 ExportScript.Config.Export4Nav  = true              -- true if you want to show position on map on this device
-ExportScript.Config.Host4       = "127.0.0.1"       -- IP for 4rd app
-ExportScript.Config.Port4       = 5160              -- port for sending data
+ExportScript.Config.Host4       = "192.168.0.18"    -- IP for 4rd app
 
 -- receive commands from external apps
 ExportScript.Config.Listener         = true         -- listen commands from apps
@@ -45,14 +38,11 @@ ExportScript.Config.FirstNewDataSendCount   = 100
 
 -- Navigation data
 ExportScript.Config.ExportNavData           = true      -- true if you want to export navigation data to show position on map
+ExportScript.Config.ExportNavAllData        = true      -- true if you want to show other objects on map
 -- default: 5 (ex. 0 = 10fps / 5 = 2fps / 10 = 1fps)
 -- if your device is fast enough, you can lower this value to get smoother map performance
 ExportScript.Config.ExportNavLow            = 5         -- ExportLowTickInterval multiplier
-ExportScript.Config.ExportNavAllLow         = 10        -- don't change this (10)
-
--- data export ( change to true if You are using DCS AoA Indexer )
-ExportScript.Config.ExportSelfData          = false     -- export SelfData (Lat, Lon, Alt etc.) every LowTickInterval
-ExportScript.Config.ExportTWS               = false     -- Threats from FC3
+ExportScript.Config.ExportNavAllLow         = 20        -- don't change this (10)
 
 -- export Displays data
 ExportScript.Config.ExportDisplaysA10C      = true      -- A-10C

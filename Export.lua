@@ -92,6 +92,13 @@ function LuaExportStart()
 	package.path  = package.path..";.\\LuaSocket\\?.lua"
 	package.cpath = package.cpath..";.\\LuaSocket\\?.dll"
 
+	if (ExportScript.Tools.DebugScript == true) then
+		ExportScript.logFile = io.open(ExportScript.Tools.LogPath, "wa") -- "W+"
+		if ExportScript.logFile then
+			ExportScript.logFile:write('\239\187\191') -- create a UTF-8 BOM
+		end
+	end
+
 	ExportScript.Tools.createUDPSender()
 	ExportScript.Tools.createUDPListner()
 
@@ -99,7 +106,32 @@ function LuaExportStart()
 
 	ExportScript.NoLuaExportBeforeNextFrame = false
 	ExportScript.Tools.SelectModule()   -- point globals to Module functions and data.
-	
+
+	if (ExportScript.Tools.DebugScript == true) then
+		--request current version info (as it showed by Windows Explorer fo DCS.exe properties)
+		local version = LoGetVersionInfo()
+		if version and ExportScript.logFile then
+			ExportScript.logFile:write("ProductName: "..version.ProductName..'\n')
+			ExportScript.logFile:write(string.format("FileVersion: %d.%d.%d.%d\n",
+													version.FileVersion[1],
+													version.FileVersion[2],
+													version.FileVersion[3],
+													version.FileVersion[4]))
+			ExportScript.logFile:write(string.format("ProductVersion: %d.%d.%d.%d\n",
+													version.ProductVersion[1],
+													version.ProductVersion[2],
+													version.ProductVersion[3],  -- head  revision (Continuously growth)
+													version.ProductVersion[4])) -- build number   (Continuously growth)
+		end
+	end
+
+	-- ExportScript.Tools.CheckObjectExport()
+	-- ExportScript.Tools.CheckSensorExport()
+	-- ExportScript.Tools.CheckOwnshipExport()
+
+	-- dodanie info o inicjalizacji przesylania nowych danych
+	ExportScript.Tools.SendData("exporting", "start")
+
 	-- Chain previously-included export as necessary
 	PrevExportScript.LuaExportStart()
 end
@@ -149,7 +181,16 @@ function LuaExportStop()
 	
 	ExportScript.ModuleName   = nil
 	ExportScript.FoundNoModul = false
-	
+
+	if (ExportScript.Tools.DebugScript == true) then
+		if ExportScript.logFile then
+			ExportScript.Tools.WriteToLog("====== EOF ======")
+			ExportScript.logFile:flush()
+			ExportScript.logFile:close()
+			ExportScript.logFile = nil
+		end
+	end
+
 	-- Chain previously-included export as necessary
 	if PrevExportScript.LuaExportStop then
 		PrevExportScript.LuaExportStop()
