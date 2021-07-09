@@ -61,21 +61,6 @@ function ExportScript.Tools.ExportTwsn(value)
     exportTws = value
 end
 
--- function ExportScript.Tools.ShowSelfOnMap()
---     lShowOnMapSelf = true
--- end
--- function ExportScript.Tools.HideSelfOnMap()
---     lShowOnMapSelf = false
--- end
-
--- function ExportScript.Tools.ShowObjectsOnMap()
---     lShowOnMapAll = true
--- end
--- function ExportScript.Tools.HideObjectsOnMap()
---     lShowOnMapAll = false
--- end
-
-
 
 function ExportScript.Tools.createUDPSender()
 	ExportScript.socket = require("socket")
