@@ -24,7 +24,6 @@ you'll find it on the "Releases" page
 * DCS AoA Indexer > [https://play.google.com/store/apps/details?id=com.dcsaoaindexer](https://play.google.com/store/apps/details?id=com.dcsaoaindexer)
 * DCS World MFD Exporter [http://pw-developer.com/soft_dcs_mfd.html](http://pw-developer.com/soft_dcs_mfd.html)
 * SimFDR [http://pw-developer.com/soft_simfdr.html](http://pw-developer.com/soft_simfdr.html)
-* DCS Script Tester [http://pw-developer.com/soft_udp.html](http://pw-developer.com/soft_udp.html)
 
 [![DCS UFC](.gfx/yt_dcsufc.png)](https://youtu.be/qGfzUdCVLwc)  
 [![DCS AoA Indexer](.gfx/yt_aoa.jpg)](https://youtu.be/OU6KO8tjmGo)
