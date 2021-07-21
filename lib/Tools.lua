@@ -5,8 +5,9 @@ local isSensors = true
 local isOwnship = true
 
 
-local lShowOnMapSelf = true
-local lShowOnMapAll = false
+local lShowOnMapPlayer = true
+local lShowOnMapObj = false
+local lShowOnMapWea = false
 
 local lDeviceIpSelf = ""
 local lDeviceIpTws = ""
@@ -20,9 +21,15 @@ local rad2deg   = 57.3 -- radians to degrees
 
 local exportSelf = false
 local exportTws = false
--- tmp
-local exportNavLowTmp       = ExportScript.Config.ExportNavLow
-local exportNavAllLowTmp    = ExportScript.Config.ExportNavAllLow
+
+local timestamp = 0
+local timestampNav = 0
+local timestampNavObj = 0
+local timestampNavWea = 0
+
+local timeSecNav = 1
+local timeSecObj = 4
+local timeSecWea = 2
 
 ExportScript.Tools.LogPath = lfs.writedir()..[[Logs\pw-dev.log]]
 ExportScript.Tools.DebugScript = false
@@ -48,17 +55,30 @@ function ExportScript.Tools.CheckOwnshipExport()
     ExportScript.Tools.WriteToLog("export ownship: " .. tostring(isOwnship))
 end
 
-function ExportScript.Tools.ExportSelfOnMap(value)
-    lShowOnMapSelf = value
+function ExportScript.Tools.ExportMapPlayer(value)
+    lShowOnMapPlayer = value
 end
-function ExportScript.Tools.ExportAllOnMap(value)
-    lShowOnMapAll = value
+function ExportScript.Tools.ExportMapObj(value)
+    lShowOnMapObj = value
+end
+function ExportScript.Tools.ExportMapWea(value)
+    lShowOnMapWea = value
 end
 function ExportScript.Tools.ExportSelfData(value)
     exportSelf = value
 end
 function ExportScript.Tools.ExportTwsn(value)
     exportTws = value
+end
+
+function ExportScript.Tools.SetSecNav(value)
+    timeSecNav = value
+end
+function ExportScript.Tools.SetSecObj(value)
+    timeSecObj = value
+end
+function ExportScript.Tools.SetSecWea(value)
+    timeSecWea = value
 end
 
 
@@ -118,20 +138,32 @@ function ExportScript.Tools.ProcessInput()
 
             if _command == "E" then
                 lDeviceIpMap = from
-                local _commandStr = string.sub(_input,3,-1)
-				local _commandId = tonumber(_commandStr)
+				local _commandId = tonumber(string.sub(_input,3,-3)) -- -4 (0x)
                 if _commandId == 0 then
-                    ExportScript.Tools.ExportSelfOnMap(false)
+                    ExportScript.Tools.ExportMapPlayer(false)
                 end
                 if _commandId == 1 then
-                    ExportScript.Tools.ExportSelfOnMap(true)
+                    ExportScript.Tools.ExportMapPlayer(true)
+                    local _cmdSec = string.sub(_input,5,-1)
+                    ExportScript.Tools.SetSecNav(tonumber(_cmdSec))
                 end
 
                 if _commandId == 2 then
-                    ExportScript.Tools.ExportAllOnMap(false)
+                    ExportScript.Tools.ExportMapObj(false)
                 end
                 if _commandId == 3 then
-                    ExportScript.Tools.ExportAllOnMap(true)
+                    ExportScript.Tools.ExportMapObj(true)
+                    local _cmdSec = string.sub(_input,5,-1)
+                    ExportScript.Tools.SetSecObj(tonumber(_cmdSec))
+                end
+
+                if _commandId == 4 then
+                    ExportScript.Tools.ExportMapWea(false)
+                end
+                if _commandId == 5 then
+                    ExportScript.Tools.ExportMapWea(true)
+                    local _cmdSec = string.sub(_input,5,-1)
+                    ExportScript.Tools.SetSecWea(tonumber(_cmdSec))
                 end
             end
 
@@ -242,7 +274,7 @@ end
 
 function ExportScript.Tools.ProcessNavAllData()
     local obj = LoGetWorldObjects()
-    ExportScript.Tools.SendPacket("N4A" .. ExportScript.Config.Separator .. "start" .. ExportScript.Config.Separator .. "\n")
+    ExportScript.Tools.SendPacket("N4A" .. ExportScript.Config.Separator .. "start" .. ExportScript.Config.Separator .. timestamp .."\n")
     for key, val in pairs(obj) do
         if val.GroupName ~= nil then
             local navAll_packet =
@@ -265,7 +297,7 @@ function ExportScript.Tools.ProcessNavAllData()
                 val.LatLongAlt.Lat, 		-- Lat
                 val.LatLongAlt.Long,		-- Lng
                 -- val.LatLongAlt.Alt * m2feets, 		-- ALT
-                val.Heading  * (180/math.pi),				-- HDG
+                val.Heading * (180/math.pi),				-- HDG
                 val.Type.level2			-- type
                 -- val.GroupName,			-- Group Name
                 -- val.UnitName,				-- Unit Name
@@ -273,11 +305,128 @@ function ExportScript.Tools.ProcessNavAllData()
             ) .. "\n"
 
             ExportScript.Tools.SendPacket(navAll_packet)
+        end
 
-            -- ExportScript.Tools.SendNavAllData(key, val)
+        if (val.Type.level1 == 4 and val.Type.level2 == 4) then
+            local navAll_packet =
+            string.format(
+                "N4AM"  .. ExportScript.Config.Separator ..
+                "%d" .. ExportScript.Config.Separator ..    -- Unit ID (unique)
+                "%d" .. ExportScript.Config.Separator ..    -- CoalitionID (1 or 2)
+                "%.6f" .. ExportScript.Config.Separator ..  -- Lat
+                "%.6f" .. ExportScript.Config.Separator ..  -- Lng
+                "%s" .. ExportScript.Config.Separator       -- Name
+                ,
+
+                key,					-- Unit ID (unique)
+                val.CoalitionID,		-- CoalitionID (1 or 2)
+                val.LatLongAlt.Lat,     -- Lat
+                val.LatLongAlt.Long,	-- Lng
+                val.UnitName            -- Name
+            ) .. "\n"
+            ExportScript.Tools.SendPacket(navAll_packet)
         end
     end
     ExportScript.Tools.SendPacket("N4A" .. ExportScript.Config.Separator .. "stop" .. ExportScript.Config.Separator .. "\n")
+end
+
+function ExportScript.Tools.ProcessNavObjects()
+    local obj = LoGetWorldObjects()
+    if obj == nil then
+        return
+    end
+
+    local objects = false
+    local id
+
+    ExportScript.Tools.NavDataAll = {}
+
+    for key, val in pairs(obj) do
+        id = key
+        if val.GroupName ~= nil then
+            local packetObjects =
+            string.format(
+                "%d" .. ExportScript.Config.Separator .. -- Coalition ID
+                "%.6f" .. ExportScript.Config.Separator .. -- Lat
+                "%.6f" .. ExportScript.Config.Separator .. -- Lng
+                -- "%d," .. ExportScript.Config.Separator .. -- alt
+                "%d" .. ExportScript.Config.Separator .. -- Hdg
+                "%d" .. ExportScript.Config.Separator  -- type
+                -- "%s," .. ExportScript.Config.Separator .. -- Group Name
+                -- "%s" .. ExportScript.Config.Separator .. -- Unit Name
+                -- "%s" .. ExportScript.Config.Separator -- Name
+                ,
+                
+                val.CoalitionID,			-- CoalitionID (1 or 2)
+                val.LatLongAlt.Lat, 		-- Lat
+                val.LatLongAlt.Long,		-- Lng
+                -- val.LatLongAlt.Alt * m2feets, 		-- ALT
+                val.Heading * (180/math.pi),				-- HDG
+                val.Type.level2			-- type
+                -- val.GroupName,			-- Group Name
+                -- val.UnitName,				-- Unit Name
+                -- val.Name					-- Name
+            )
+            ExportScript.Tools.NavDataAll[id] = packetObjects
+            objects = true
+        end
+    end
+
+    if objects then
+        ExportScript.Tools.SendPacket("N4A" .. ExportScript.Config.Separator .. "start" .. ExportScript.Config.Separator .. "\n")
+
+        for key, value in pairs(ExportScript.Tools.NavDataAll) do
+            ExportScript.Tools.SendNavAllData("N4A" .. ExportScript.Config.Separator .. key, value)
+        end
+
+        ExportScript.Tools.SendPacket("N4A" .. ExportScript.Config.Separator .. "stop" .. ExportScript.Config.Separator .. "\n")
+    end
+end
+
+function ExportScript.Tools.ProcessNavWeapon()
+    local obj = LoGetWorldObjects()
+    if obj == nil then
+        return
+    end
+
+    local weapons = false
+    local id
+
+    ExportScript.Tools.NavDataWeapons = {}
+
+    for key, val in pairs(obj) do
+        id = key
+
+        if (val.Type.level1 == 4 and (val.Type.level2 == 4 or val.Type.level2 == 5)) then
+            local packetWeapons =
+            string.format(
+                "%d" .. ExportScript.Config.Separator ..    -- CoalitionID (1 or 2)
+                "%d" .. ExportScript.Config.Separator ..    -- Type
+                "%.6f" .. ExportScript.Config.Separator ..  -- Lat
+                "%.6f" .. ExportScript.Config.Separator ..  -- Lng
+                "%s" .. ExportScript.Config.Separator       -- Name
+                ,
+
+                val.CoalitionID,		-- CoalitionID (1 or 2)
+                val.Type.level2,        -- type
+                val.LatLongAlt.Lat,     -- Lat
+                val.LatLongAlt.Long,	-- Lng
+                val.Name                -- Name
+            )
+            ExportScript.Tools.NavDataWeapons[id] = packetWeapons
+            weapons = true
+        end
+    end
+
+    if weapons then
+        ExportScript.Tools.SendPacket("N4W" .. ExportScript.Config.Separator .. "start" .. ExportScript.Config.Separator .. "\n")
+
+        for key, value in pairs(ExportScript.Tools.NavDataWeapons) do
+            ExportScript.Tools.SendNavAllData("N4W" .. ExportScript.Config.Separator .. key, value)
+        end
+
+        ExportScript.Tools.SendPacket("N4W" .. ExportScript.Config.Separator .. "stop" .. ExportScript.Config.Separator .. "\n")
+    end
 end
 
 -- function export data based on registered Lock On internal functions / export in LowTickInterval
@@ -356,9 +505,7 @@ function ExportScript.Tools.ProcessSelfData()
         --     try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host4, ExportScript.Config.Port))
         -- end
 
-        if (ExportScript.Tools.DebugScript == true) then
-            try(ExportScript.UDPsender:sendto(_packet, debugIp, debugPort))
-        end
+        ExportScript.Tools.DebugProcess(try, _packet)
 end
 
 function ExportScript.Tools.ProcessTWS()
@@ -385,9 +532,8 @@ function ExportScript.Tools.ProcessTWS()
         jsonThreats = string.format("{ 'Mode':%f, 'Emiters':%s }\n", threats.Mode, jsonEmiters)
 
         local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() end)
-        if (ExportScript.Tools.DebugScript == true) then
-            try(ExportScript.UDPsender:sendto(jsonThreats, debugIp, debugPort))
-        end
+
+        ExportScript.Tools.DebugProcess(try, jsonThreats)
     end
 end
 
@@ -429,40 +575,46 @@ function ExportScript.Tools.ProcessOutput()
             ExportScript.coProcessDCSLowImportance = coroutine.create(ExportScript.ProcessDCSLowImportance)
             _coStatus = coroutine.resume( ExportScript.coProcessDCSLowImportance, _device)
 
-            if (ExportScript.Config.ExportNavData == true and lShowOnMapSelf == true) then
-                if (exportNavLowTmp < 1) then
-                    ExportScript.Tools.ProcessNavData()
-                    exportNavLowTmp = ExportScript.Config.ExportNavLow
-                end
-                exportNavLowTmp = exportNavLowTmp - 1
-            end
-
-            if (ExportScript.Config.ExportNavAllData == true and lShowOnMapAll == true) then
-                if (exportNavAllLowTmp < 1) then
-                    ExportScript.Tools.ProcessNavAllData()
-                    exportNavAllLowTmp = ExportScript.Config.ExportNavAllLow
-                end
-                exportNavAllLowTmp = exportNavAllLowTmp - 1
-            end
-
             ExportScript.lastExportTimeHI = 0
-
-            --process SelfData info
-            if exportSelf == true then
-                ExportScript.Tools.ProcessSelfData()
-            end
-
         end
+
+        timestamp = LoGetModelTime()
+
+        if (ExportScript.Config.ExportNavData == true and lShowOnMapPlayer == true) then
+            if (timestamp > timestampNav + timeSecNav) then
+                ExportScript.Tools.ProcessNavData()
+                timestampNav = timestamp
+            end
+        end
+
+        if (ExportScript.Config.ExportNavData == true and lShowOnMapWea == true) then
+            if (timestamp > timestampNavWea + timeSecWea) then
+                ExportScript.Tools.ProcessNavWeapon()
+                timestampNavWea = timestamp
+            end
+        end
+
+        if (ExportScript.Config.ExportNavAllData == true and lShowOnMapObj == true) then
+            if (timestamp > timestampNavObj + timeSecObj) then
+                ExportScript.Tools.ProcessNavObjects()
+                timestampNavObj = timestamp
+            end
+        end
+
+        ----process SelfData info
+        -- if exportSelf == true then
+        --     ExportScript.Tools.ProcessSelfData()
+        -- end
+
     if ExportScript.Config.Export then
         ExportScript.Tools.FlushData()
     end
     if (ExportScript.Config.ExportNavData == true) then
         ExportScript.Tools.FlushNavData()
-        -- ExportScript.Tools.FlushNavAllData()
     end
 
     elseif ExportScript.FoundFCModule then -- Assume FC Aircraft
-        ExportScript.AF.EventNumber = os.clock() --tonumber(tostring(os.clock()):gsub(".", ""))
+        ExportScript.AF.EventNumber = os.clock()
 
         ExportScript.coProcessGlassCockpitFCHighImportance = coroutine.create(ExportScript.ProcessFCHighImportance)
         _coStatus = coroutine.resume( ExportScript.coProcessGlassCockpitFCHighImportance)
@@ -480,16 +632,40 @@ function ExportScript.Tools.ProcessOutput()
                 _coStatus = coroutine.resume( ExportScript.coProcessFCLowImportance)
             end
             ExportScript.lastExportTimeHI = 0
+        end
 
-            -- process SelfData info
-            if exportSelf == true then
-                ExportScript.Tools.ProcessSelfData()
-            end
+        timestamp = LoGetModelTime()
 
-            if exportTws == true then
-                ExportScript.Tools.ProcessTWS()
+        if (ExportScript.Config.ExportNavData == true and lShowOnMapPlayer == true) then
+            if (timestamp > timestampNav + timeSecNav) then
+                ExportScript.Tools.ProcessNavData()
+                timestampNav = timestamp
             end
         end
+
+        if (ExportScript.Config.ExportNavData == true and lShowOnMapWea == true) then
+            if (timestamp > timestampNavWea + timeSecWea) then
+                ExportScript.Tools.ProcessNavWeapon()
+                timestampNavWea = timestamp
+            end
+        end
+
+        if (ExportScript.Config.ExportNavAllData == true and lShowOnMapObj == true) then
+            if (timestamp > timestampNavObj + timeSecObj) then
+                ExportScript.Tools.ProcessNavObjects()
+                timestampNavObj = timestamp
+            end
+        end
+
+        -- -- process SelfData info
+        -- if exportSelf == true then
+        --     ExportScript.Tools.ProcessSelfData()
+        -- end
+
+        -- if exportTws == true then
+        --     ExportScript.Tools.ProcessTWS()
+        -- end
+
     if ExportScript.Config.Export then
         ExportScript.Tools.FlushData()
     end
@@ -544,17 +720,13 @@ end
 
 function ExportScript.Tools.SendPacket(packet)
     local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() end)
-        -- try(ExportScript.UDPsender:sendto(packet, lDeviceIpMap, ExportScript.Config.Port))
+        try(ExportScript.UDPsender:sendto(packet, lDeviceIpMap, ExportScript.Config.Port))
 
-    if (ExportScript.Tools.DebugScript == true) then
-        try(ExportScript.UDPsender:sendto(packet, debugIp, debugPort))
-        ExportScript.Tools.WriteToLog(packet)
-    end
+    ExportScript.Tools.DebugProcess(try, packet)
 end
 
 -- Network Functions for GlassCockpit
 function ExportScript.Tools.SendData(id, value)
-
     if string.len(value) > 3 and value == string.sub("-0.00000000",1, string.len(value)) then
         value = value:sub(2)
     end
@@ -577,7 +749,6 @@ function ExportScript.Tools.FlushData()
 	local _flushData = ExportScript.socket.protect(function()
 		if #ExportScript.SendStrings > 0 then
             local _packet = "File=" .. ExportScript.ModuleName .. ExportScript.Config.Separator .. "R4G" .. ExportScript.Config.Separator ..
-            -- dodanie na końcu linii separatora + znak nowej linii
                 table.concat(ExportScript.SendStrings, ExportScript.Config.Separator) .. ExportScript.Config.Separator .. "\n"
 
             local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() ExportScript.Tools.ResetChangeValues() end)
@@ -601,11 +772,7 @@ function ExportScript.Tools.FlushData()
 			ExportScript.SendStrings = {}
 			ExportScript.PacketSize  = 0
 
-            if (ExportScript.Tools.DebugScript == true) then
-                try(ExportScript.UDPsender:sendto(_packet, debugIp, debugPort))
-                ExportScript.Tools.WriteToLog(_packet)
-            end
-
+            ExportScript.Tools.DebugProcess(try, _packet)
 		end
 	end)
     _flushData()
@@ -660,10 +827,7 @@ function ExportScript.Tools.FlushNavData()
 			ExportScript.SendNavStrings = {}
 			ExportScript.PacketNavSize  = 0
 
-            if (ExportScript.Tools.DebugScript == true) then
-                try(ExportScript.UDPsender:sendto(_packet, debugIp, debugPort))
-                ExportScript.Tools.WriteToLog(_packet)
-            end
+            ExportScript.Tools.DebugProcess(try, _packet)
 		else
 
 		end
@@ -672,41 +836,20 @@ function ExportScript.Tools.FlushNavData()
 end
 
 function ExportScript.Tools.SendNavAllData(id, value)
+    local _data = id .. ExportScript.Config.Separator .. value
 
-    if string.len(value) > 3 and value == string.sub("-0.00000000",1, string.len(value)) then
-        value = value:sub(2)
-    end
-
-    if ExportScript.LastData[id] == nil or ExportScript.LastData[id] ~= value then
-        local _data    =  id .. "=" .. value
-        local _dataLen = string.len(_data)
-
-        if _dataLen + ExportScript.PacketNavAllSize > 576 then
-            ExportScript.Tools.FlushNavAllData()
-        end
-
-        table.insert(ExportScript.SendNavAllStrings, _data)
-        ExportScript.LastData[id] = value
-        ExportScript.PacketNavAllSize   = ExportScript.PacketNavAllSize + _dataLen + 1
-    end
+    table.insert(ExportScript.SendNavAllStrings, _data)
+    ExportScript.Tools.FlushNavAllData()
 end
 
 function ExportScript.Tools.FlushNavAllData()
 	local _flushData = ExportScript.socket.protect(function()
-		if #ExportScript.SendNavAllStrings > 0 then
-            local _packet = "File=" .. ExportScript.ModuleName .. ExportScript.Config.Separator .. "N4A" .. ExportScript.Config.Separator ..
-                table.concat(ExportScript.SendNavAllStrings, ExportScript.Config.Separator) .. ExportScript.Config.Separator .. "\n"
+        local _packet = table.concat(ExportScript.SendNavAllStrings, ExportScript.Config.Separator) .. "\n"
+        local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() end)
+            try(ExportScript.UDPsender:sendto(_packet, lDeviceIpMap, ExportScript.Config.Port))
 
-            local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() ExportScript.Tools.ResetChangeValues() end)
-
-			ExportScript.SendNavAllStrings = {}
-			ExportScript.PacketNavAllSize  = 0
-
-            if (ExportScript.Tools.DebugScript == true) then
-                try(ExportScript.UDPsender:sendto(_packet, debugIp, debugPort))
-            end
-
-		end
+        ExportScript.SendNavAllStrings = {}
+        ExportScript.Tools.DebugProcess(try, _packet)
 	end)
     _flushData()
 end
@@ -944,6 +1087,13 @@ function ExportScript.Tools.round(number, decimals, method)
         end
     else
         return number
+    end
+end
+
+function ExportScript.Tools.DebugProcess(try, packet)
+    if (ExportScript.Tools.DebugScript == true) then
+        try(ExportScript.UDPsender:sendto(packet, debugIp, debugPort))
+        ExportScript.Tools.WriteToLog(packet)
     end
 end
 

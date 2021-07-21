@@ -53,19 +53,35 @@ ExportScript.ConfigArguments =
 {
 }
 
+local function getFlare()
+    local function a(n) return GetDevice(0):get_argument_value(n) end
+    return string.format("%.0f%.0f", a(460)*10, a(461)*10)
+end
+local function getChaff()
+    local function a(n) return GetDevice(0):get_argument_value(n) end
+    return string.format("%.0f%.0f", a(462)*10, a(463)*10)
+end
+local function getUhfFreq()
+	local function a(n) return GetDevice(0):get_argument_value(n) end
+	return string.format("%.0f%.0f%.0f.%.0f%.0f", 2+a(10), a(11)*10, a(12)*10, a(13)*10, a(14)*10)
+end
+local function getVhfCommFreq()
+	local function a(n) return GetDevice(0):get_argument_value(n) end
+	return string.format("1%.0f%.0f", a(1)*10, a(2)*10) .. "." .. string.format("%.0f%02.0f", a(3)*10, a(4)*100)
+end
+local function getVhfNavFreq()
+	local function a(n) return GetDevice(0):get_argument_value(n) end
+	return string.format("%.0f%.0f%.0f", a(46)*10, a(47)*10, a(48)*10) .. "." .. string.format("%.0f%.0f", a(49)*10, a(50)*10)
+end
+
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
 
 function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
-    -- local function getFlareCountAsNumber()
-    --     local digit1 = string.format("%.0f", GetDevice(0):get_argument_value(460)*10)
-    --     local digit2 = string.format("%.0f", GetDevice(0):get_argument_value(461)*10)
-    --     return tonumber(digit1 .. digit2)
-    -- end
+    ExportScript.Tools.SendData(2001, getUhfFreq())
+    ExportScript.Tools.SendData(2002, getVhfCommFreq())
+    ExportScript.Tools.SendData(2003, getVhfNavFreq())
 
-    -- local function getChaffCountAsNumber()
-    --     local digit1 = string.format("%.0f", GetDevice(0):get_argument_value(462)*10)
-    --     local digit2 = string.format("%.0f", GetDevice(0):get_argument_value(463)*10)
-    --     return tonumber(digit1 .. digit2)
-    -- end
+    ExportScript.Tools.SendData(2011, getChaff())
+    ExportScript.Tools.SendData(2012, getFlare())
 end
