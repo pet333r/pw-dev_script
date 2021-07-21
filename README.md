@@ -62,7 +62,7 @@ if You don't have folder `Scripts`, simply copy folder `Scripts` from unpacked Z
 - open main `Export.lua` file in `Scripts` folder (recommend Notepad++ for this) and add this code to the beginning of the file (above the entries for other scripts, example here: [compability](#compability)) 
 
 ```
-local pw=require('lfs'); dofile(pw.writedir()..[[Scripts\pw-dev_script\ExportInit.lua]])
+pcall(function() local pw=require('lfs');dofile(pw.writedir()..[[Scripts\pw-dev_script\ExportInit.lua]]); end,nil);
 ```
 - save & close
 - now go to [Edit Config.lua](##edit-Config.lua)
@@ -79,7 +79,7 @@ this is how the file scheme with folders should look
     -  Config.lua (edit IP / port connected devices)
     -  ExportInit.lua
 
-  - Export.lua add:  local pw=require('lfs'); dofile(pw.writedir()..[[Scripts\pw-dev_script\ExportInit.lua]])
+  - Export.lua add:  pcall(function() local pw=require('lfs');dofile(pw.writedir()..[[Scripts\pw-dev_script\ExportInit.lua]]); end,nil);
   ```
 
 should look like this (depending on the DCS version)  
@@ -188,7 +188,7 @@ tested and works with :
  for users using SRS and VaicomPro (works when the script entry is "higher" in the file, above the SRS / VaicomPro entry)  
  example of the main `Export.lua` file (thanks to one user: `Arsenio`)
  ```
-local pw=require('lfs'); dofile(pw.writedir()..[[Scripts\pw-dev_script\ExportInit.lua]]);
+pcall(function() local pw=require('lfs');dofile(pw.writedir()..[[Scripts\pw-dev_script\ExportInit.lua]]); end,nil);
 
 local vaicomlfs = require('lfs'); dofile(vaicomlfs.writedir()..[[Scripts\VAICOMPRO\VAICOMPRO.export.lua]]);
 
