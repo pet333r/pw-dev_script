@@ -1,6 +1,5 @@
 Set-ExecutionPolicy RemoteSigned
 
-# get user-name
 $separator = "*******************************************************"
 Write-Host "$separator`n**************** Updating pw-dev_script ***************`n"
 
