@@ -28,6 +28,7 @@ If(!(test-path $path))
 }
 
 $urlMain = "https://raw.githubusercontent.com/pet333r/pw-dev_script/master/"
+$urlUpdate = "https://raw.githubusercontent.com/pet333r/pw-dev_script/master/.update/"
 $urlLib = $urlMain + "lib/"
 $urlMod = $urlMain + "Modules/"
 $urlUti = $urlMain + "Utilities/"
@@ -47,22 +48,15 @@ $listFilesMain = @(
       'version'
 )
 
-# libs
-$libList = @(
-      'Tools.lua'
-      'utf8.lua'
-)
-
-# utilities
-$libUtil = @(
-      'config.cfg'
-      'DCSUtil.exe'
-)
-
 # modules
-# $modulesList = Get-Content Invoke-WebRequest -Uri $urlMain + "update_modules"
-$urlModFile =  -Join($urlMain, "update_modules")
+$urlModFile =  -Join($urlUpdate, "update_modules")
 $modulesList = (Invoke-webrequest -URI $urlModFile ).Content -split "`n"
+
+$urlLibFile =  -Join($urlUpdate, "update_lib")
+$libList = (Invoke-webrequest -URI $urlLibFile ).Content -split "`n"
+
+$urlUtilFile =  -Join($urlUpdate, "update_utils")
+$utilList = (Invoke-webrequest -URI $urlUtilFile ).Content -split "`n"
 
 # download main files
 Write-Host "Try to download configuration files: $dirMain"
@@ -108,7 +102,7 @@ foreach ($module in $modulesList) {
 
 # download folder 'Utilities'
 Write-Host "`nTry to download files to folder: $dirUtilities"
-foreach ($file in $libUtil) {
+foreach ($file in $utilList) {
       $url = $urlUti + $file
       $output = $dirUtilities + $file
       Invoke-WebRequest -Uri $url -OutFile $output
