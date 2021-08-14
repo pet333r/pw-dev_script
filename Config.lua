@@ -26,6 +26,8 @@ ExportScript.Config.Host4       = "192.168.0.18"    -- IP for 4rd app
 ExportScript.Config.Listener         = true         -- listen commands from apps
 ExportScript.Config.ListenerPort     = 25070        -- Listener Port receiving commands
 
+ExportScript.Config.WriteNavFile     = false
+
 -- data separator (do not change)
 ExportScript.Config.Separator = ";"
 
