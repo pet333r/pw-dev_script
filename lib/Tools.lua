@@ -1110,143 +1110,143 @@ function ExportScript.Tools.WriteToLog(message)
 end
 
 
---------------------------------------------------------------------------------------------
-ExportScript.Fdr = {}
+-- --------------------------------------------------------------------------------------------
+-- ExportScript.Fdr = {}
 
-ExportScript.Fdr.WriteFdrFile = true
-ExportScript.Fdr.WriteNavFile = true
+-- ExportScript.Fdr.WriteFdrFile = true
+-- ExportScript.Fdr.WriteNavFile = true
 
-function ExportScript.Fdr.GetDateTime()
-    local date_table = os.date("*t")
-	local hour, minute, second = date_table.hour, date_table.min, date_table.sec
-	local year, month, day = date_table.year, date_table.month, date_table.day
-	local dateResult = string.format("%d-%02d-%02d %02d.%02d.%02d", year, month, day, hour, minute, second)
-    return dateResult
-end
+-- function ExportScript.Fdr.GetDateTime()
+--     local date_table = os.date("*t")
+-- 	local hour, minute, second = date_table.hour, date_table.min, date_table.sec
+-- 	local year, month, day = date_table.year, date_table.month, date_table.day
+-- 	local dateResult = string.format("%d-%02d-%02d %02d.%02d.%02d", year, month, day, hour, minute, second)
+--     return dateResult
+-- end
 
-function ExportScript.Fdr.CsvFileInit()
-    local datetime = ExportScript.Fdr.GetDateTime()
-    ExportScript.csvFile = io.open(lfs.writedir()..[[Logs\]] .. datetime .. ".csv", "wa")
-    if ExportScript.csvFile then
-        ExportScript.csvFile:write('\239\187\191') -- create a UTF-8 BOM
-    end
-end
+-- function ExportScript.Fdr.CsvFileInit()
+--     local datetime = ExportScript.Fdr.GetDateTime()
+--     ExportScript.csvFile = io.open(lfs.writedir()..[[Logs\]] .. datetime .. ".csv", "wa")
+--     if ExportScript.csvFile then
+--         ExportScript.csvFile:write('\239\187\191') -- create a UTF-8 BOM
+--     end
+-- end
 
-function ExportScript.Fdr.CsvFileWrite(packet)
-    if ExportScript.csvFile then
-        ExportScript.csvFile:write(packet)
-    end
-end
+-- function ExportScript.Fdr.CsvFileWrite(packet)
+--     if ExportScript.csvFile then
+--         ExportScript.csvFile:write(packet)
+--     end
+-- end
 
-function ExportScript.Fdr.CsvFileEnd()
-    if ExportScript.csvFile then
-        ExportScript.csvFile:flush()
-        ExportScript.csvFile:close()
-        ExportScript.csvFile = nil
-    end
-end
+-- function ExportScript.Fdr.CsvFileEnd()
+--     if ExportScript.csvFile then
+--         ExportScript.csvFile:flush()
+--         ExportScript.csvFile:close()
+--         ExportScript.csvFile = nil
+--     end
+-- end
 
-function ExportScript.Fdr.NavFileInit(version)
-    local datetime = ExportScript.Fdr.GetDateTime()
+-- function ExportScript.Fdr.NavFileInit(version)
+--     local datetime = ExportScript.Fdr.GetDateTime()
 
-    ExportScript.kmlFile = io.open(lfs.writedir()..[[Logs\]] .. datetime .. ".kml", "wa") -- "W+"
-    if ExportScript.kmlFile then
-        ExportScript.kmlFile:write('\239\187\191') -- create a UTF-8 BOM
-        ExportScript.kmlFile:write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
-        ExportScript.kmlFile:write("<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n")
-        ExportScript.kmlFile:write("  <Document>\n")
-        ExportScript.kmlFile:write("    <Style id=\"StyleLineKML\">\n")
-        ExportScript.kmlFile:write("      <LineStyle id=\"lineStyle\">\n")
-        ExportScript.kmlFile:write("        <color>a032cfcb</color>\n")
-        ExportScript.kmlFile:write("        <width>2</width>\n")
-        ExportScript.kmlFile:write("      </LineStyle>\n")
-        ExportScript.kmlFile:write("      <PolyStyle>\n")
-        ExportScript.kmlFile:write("        <color>5046d774</color>\n")
-        ExportScript.kmlFile:write("      </PolyStyle>\n")
-        ExportScript.kmlFile:write("    </Style>\n")
-        ExportScript.kmlFile:write("    <Placemark>\n")
-        ExportScript.kmlFile:write("      <description>Flight recorded in DCS World " ..
-            string.format("%d.%d.%d.%d",version.ProductVersion[1], version.ProductVersion[2],
-            version.ProductVersion[3], version.ProductVersion[4]) .. 
-            " @ " .. datetime .. "</description>\n")
-        ExportScript.kmlFile:write("      <styleUrl>#StyleLineKML</styleUrl>\n")
-        ExportScript.kmlFile:write("      <LineString>\n")
-        ExportScript.kmlFile:write("        <extrude>true</extrude>\n")
-        ExportScript.kmlFile:write("        <tessellate>true</tessellate>\n")
-        ExportScript.kmlFile:write("        <altitudeMode>absolute</altitudeMode>\n")
-        ExportScript.kmlFile:write("        <coordinates>")
-    end
-end
+--     ExportScript.kmlFile = io.open(lfs.writedir()..[[Logs\]] .. datetime .. ".kml", "wa") -- "W+"
+--     if ExportScript.kmlFile then
+--         ExportScript.kmlFile:write('\239\187\191') -- create a UTF-8 BOM
+--         ExportScript.kmlFile:write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
+--         ExportScript.kmlFile:write("<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n")
+--         ExportScript.kmlFile:write("  <Document>\n")
+--         ExportScript.kmlFile:write("    <Style id=\"StyleLineKML\">\n")
+--         ExportScript.kmlFile:write("      <LineStyle id=\"lineStyle\">\n")
+--         ExportScript.kmlFile:write("        <color>a032cfcb</color>\n")
+--         ExportScript.kmlFile:write("        <width>2</width>\n")
+--         ExportScript.kmlFile:write("      </LineStyle>\n")
+--         ExportScript.kmlFile:write("      <PolyStyle>\n")
+--         ExportScript.kmlFile:write("        <color>5046d774</color>\n")
+--         ExportScript.kmlFile:write("      </PolyStyle>\n")
+--         ExportScript.kmlFile:write("    </Style>\n")
+--         ExportScript.kmlFile:write("    <Placemark>\n")
+--         ExportScript.kmlFile:write("      <description>Flight recorded in DCS World " ..
+--             string.format("%d.%d.%d.%d",version.ProductVersion[1], version.ProductVersion[2],
+--             version.ProductVersion[3], version.ProductVersion[4]) .. 
+--             " @ " .. datetime .. "</description>\n")
+--         ExportScript.kmlFile:write("      <styleUrl>#StyleLineKML</styleUrl>\n")
+--         ExportScript.kmlFile:write("      <LineString>\n")
+--         ExportScript.kmlFile:write("        <extrude>true</extrude>\n")
+--         ExportScript.kmlFile:write("        <tessellate>true</tessellate>\n")
+--         ExportScript.kmlFile:write("        <altitudeMode>absolute</altitudeMode>\n")
+--         ExportScript.kmlFile:write("        <coordinates>")
+--     end
+-- end
 
-function ExportScript.Fdr.NavFileWrite(packet)
-    if ExportScript.kmlFile then
-        ExportScript.kmlFile:write(packet)
-    end
-end
+-- function ExportScript.Fdr.NavFileWrite(packet)
+--     if ExportScript.kmlFile then
+--         ExportScript.kmlFile:write(packet)
+--     end
+-- end
 
-function ExportScript.Fdr.NavFileEnd()
-    if ExportScript.kmlFile then
-        ExportScript.kmlFile:write("        </coordinates>\n")
-        ExportScript.kmlFile:write("      </LineString>\n")
-        ExportScript.kmlFile:write("    </Placemark>\n")
-        ExportScript.kmlFile:write("  </Document>\n")
-        ExportScript.kmlFile:write("</kml>\n")
-        ExportScript.kmlFile:flush()
-        ExportScript.kmlFile:close()
-        ExportScript.kmlFile = nil
-    end
-end
+-- function ExportScript.Fdr.NavFileEnd()
+--     if ExportScript.kmlFile then
+--         ExportScript.kmlFile:write("        </coordinates>\n")
+--         ExportScript.kmlFile:write("      </LineString>\n")
+--         ExportScript.kmlFile:write("    </Placemark>\n")
+--         ExportScript.kmlFile:write("  </Document>\n")
+--         ExportScript.kmlFile:write("</kml>\n")
+--         ExportScript.kmlFile:flush()
+--         ExportScript.kmlFile:close()
+--         ExportScript.kmlFile = nil
+--     end
+-- end
 
 
---------------------------------------------------------------------------------------------
--- Load the corresponding map and read the latitude and longitude values and write specify the decimal degree format (convert from degrees, decimal to decimal degrees).
--- Lat1 and Long1 contain the coordinates of the upper left corner.
--- Lat2 and Long2 contain the coordinates of the lower right corner.
+-- --------------------------------------------------------------------------------------------
+-- -- Load the corresponding map and read the latitude and longitude values and write specify the decimal degree format (convert from degrees, decimal to decimal degrees).
+-- -- Lat1 and Long1 contain the coordinates of the upper left corner.
+-- -- Lat2 and Long2 contain the coordinates of the lower right corner.
 
--- https://www.fcc.gov/media/radio/dms-decimal
--- lalt+y change coordinate system
+-- -- https://www.fcc.gov/media/radio/dms-decimal
+-- -- lalt+y change coordinate system
 
--- Maps
-ExportScript.Maps = {}
--- Caucasus Map
-ExportScript.Maps.CaucasusBase          = {}
-ExportScript.Maps.CaucasusBase.Lat1     = 48.391667  -- 48°23'30" N
-ExportScript.Maps.CaucasusBase.Long1    = 26.868056  -- 26°52'5" E
-ExportScript.Maps.CaucasusBase.Lat2     = 38.881667  -- 38°52'54" N
-ExportScript.Maps.CaucasusBase.Long2    = 47.142222   -- 47°8'32" E
--- Nevada (NTTR) Map
-ExportScript.Maps.Nevada                = {}
-ExportScript.Maps.Nevada.Lat1           = 39.801667   -- 39°48'6" N
-ExportScript.Maps.Nevada.Long1          = -119.99 --  -119°59'24" W
-ExportScript.Maps.Nevada.Lat2           = 34.346667   -- 34°20'48" N
-ExportScript.Maps.Nevada.Long2          = -112.445833 -- -112°26'45" W
--- Normandy Map
-ExportScript.Maps.Normandy              = {}
-ExportScript.Maps.Normandy.Lat1         = 53.85556   -- 
-ExportScript.Maps.Normandy.Long1        = -15.02667 -- 
-ExportScript.Maps.Normandy.Lat2         = 45.07167   -- 
-ExportScript.Maps.Normandy.Long2        = 8.437222 -- 
--- Persian Gulf Map
-ExportScript.Maps.PersianGulf           = {}
-ExportScript.Maps.PersianGulf.Lat1      = 32.955278  -- 32°57'19" N
-ExportScript.Maps.PersianGulf.Long1     = 46.583333  -- 46°35'0" E
-ExportScript.Maps.PersianGulf.Lat2      = 21.897222  -- 21°53'50" N
-ExportScript.Maps.PersianGulf.Long2     = 63.683611   -- 63°41'1" E
--- Syria Map
-ExportScript.Maps.Syria                 = {}
-ExportScript.Maps.Syria.Lat1            = 37.362778   -- 37°21'46" N
-ExportScript.Maps.Syria.Long1           = 29.268889   -- 29°16'8" E
-ExportScript.Maps.Syria.Lat2            = 32.136111    -- 32°8'10" N
-ExportScript.Maps.Syria.Long2           = 42.150278    -- 42°9'1" E
--- Mariana Islands Map
-ExportScript.Maps.MarianaIslands        = {}
-ExportScript.Maps.MarianaIslands.Lat1   = 22.09   -- 22°5'24" N
-ExportScript.Maps.MarianaIslands.Long1  = 135.0575   -- 135°3'27" E
-ExportScript.Maps.MarianaIslands.Lat2   = 10.772222    -- 10°46'20" N
-ExportScript.Maps.MarianaIslands.Long2  = 149.391667    -- 149°23'30" E
--- The Channel
-ExportScript.Maps.TheChannel            = {}
-ExportScript.Maps.TheChannel.Lat1       = 51.517295
-ExportScript.Maps.TheChannel.Long1      = -0.089791
-ExportScript.Maps.TheChannel.Lat2       = 49.713717
-ExportScript.Maps.TheChannel.Long2      = 3.424733
+-- -- Maps
+-- ExportScript.Maps = {}
+-- -- Caucasus Map
+-- ExportScript.Maps.CaucasusBase          = {}
+-- ExportScript.Maps.CaucasusBase.Lat1     = 48.391667  -- 48°23'30" N
+-- ExportScript.Maps.CaucasusBase.Long1    = 26.868056  -- 26°52'5" E
+-- ExportScript.Maps.CaucasusBase.Lat2     = 38.881667  -- 38°52'54" N
+-- ExportScript.Maps.CaucasusBase.Long2    = 47.142222   -- 47°8'32" E
+-- -- Nevada (NTTR) Map
+-- ExportScript.Maps.Nevada                = {}
+-- ExportScript.Maps.Nevada.Lat1           = 39.801667   -- 39°48'6" N
+-- ExportScript.Maps.Nevada.Long1          = -119.99 --  -119°59'24" W
+-- ExportScript.Maps.Nevada.Lat2           = 34.346667   -- 34°20'48" N
+-- ExportScript.Maps.Nevada.Long2          = -112.445833 -- -112°26'45" W
+-- -- Normandy Map
+-- ExportScript.Maps.Normandy              = {}
+-- ExportScript.Maps.Normandy.Lat1         = 53.85556   -- 
+-- ExportScript.Maps.Normandy.Long1        = -15.02667 -- 
+-- ExportScript.Maps.Normandy.Lat2         = 45.07167   -- 
+-- ExportScript.Maps.Normandy.Long2        = 8.437222 -- 
+-- -- Persian Gulf Map
+-- ExportScript.Maps.PersianGulf           = {}
+-- ExportScript.Maps.PersianGulf.Lat1      = 32.955278  -- 32°57'19" N
+-- ExportScript.Maps.PersianGulf.Long1     = 46.583333  -- 46°35'0" E
+-- ExportScript.Maps.PersianGulf.Lat2      = 21.897222  -- 21°53'50" N
+-- ExportScript.Maps.PersianGulf.Long2     = 63.683611   -- 63°41'1" E
+-- -- Syria Map
+-- ExportScript.Maps.Syria                 = {}
+-- ExportScript.Maps.Syria.Lat1            = 37.362778   -- 37°21'46" N
+-- ExportScript.Maps.Syria.Long1           = 29.268889   -- 29°16'8" E
+-- ExportScript.Maps.Syria.Lat2            = 32.136111    -- 32°8'10" N
+-- ExportScript.Maps.Syria.Long2           = 42.150278    -- 42°9'1" E
+-- -- Mariana Islands Map
+-- ExportScript.Maps.MarianaIslands        = {}
+-- ExportScript.Maps.MarianaIslands.Lat1   = 22.09   -- 22°5'24" N
+-- ExportScript.Maps.MarianaIslands.Long1  = 135.0575   -- 135°3'27" E
+-- ExportScript.Maps.MarianaIslands.Lat2   = 10.772222    -- 10°46'20" N
+-- ExportScript.Maps.MarianaIslands.Long2  = 149.391667    -- 149°23'30" E
+-- -- The Channel
+-- ExportScript.Maps.TheChannel            = {}
+-- ExportScript.Maps.TheChannel.Lat1       = 51.517295
+-- ExportScript.Maps.TheChannel.Long1      = -0.089791
+-- ExportScript.Maps.TheChannel.Lat2       = 49.713717
+-- ExportScript.Maps.TheChannel.Long2      = 3.424733
