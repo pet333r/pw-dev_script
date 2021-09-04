@@ -1,6 +1,11 @@
 -- Main Table
 ExportScript = {}
 
+---------------------------------------------------
+-- File DEPRECATED
+-- will be removed from script folder in future
+---------------------------------------------------
+
 -- State data for export
 ExportScript.PacketSize     = 0
 ExportScript.SendStrings    = {}
@@ -10,6 +15,7 @@ ExportScript.SendNavStrings	= {}
 ExportScript.SendNavAllStrings	= {}
 ExportScript.LastData       = {}
 ExportScript.LastDataAll       = {}
+-- ExportScript.LastDataNav       = {}
 
 ExportScript.lastExportTimeHI       = 0
 ExportScript.lastExportTimeLI       = 0
@@ -26,6 +32,8 @@ PrevExportScript.LuaExportActivityNextEvent = LuaExportActivityNextEvent
 dofile(lfs.writedir()..[[Scripts\pw-dev_script\Config.lua]])
 ExportScript.utf8 = dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\utf8.lua]])
 dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Tools.lua]])
+dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Fdr.lua]])
+dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Maps.lua]])
 
 -- Found DCS or FC Module
 ExportScript.FoundDCSModule = false
@@ -104,6 +112,19 @@ function ExportScript.Start()
 		end
 	end
 
+		--request current version info (as it showed by Windows Explorer fo DCS.exe properties)
+		local version = LoGetVersionInfo()
+
+		if (ExportScript.Fdr ~= nil) then
+			if (ExportScript.Config.WriteNavFile ~= nil and ExportScript.Config.WriteNavFile == true) then
+				ExportScript.Fdr.CsvFileInit()
+			end
+	
+			if (ExportScript.Config.WriteNavFile ~= nil and ExportScript.Config.WriteNavFile == true) then
+				ExportScript.Fdr.NavFileInit(version)
+			end
+		end
+	
 	ExportScript.Tools.createUDPSender()
 	ExportScript.Tools.createUDPListner()
 
@@ -113,8 +134,6 @@ function ExportScript.Start()
 	ExportScript.Tools.SelectModule()   -- point globals to Module functions and data.
 
 	if (ExportScript.Tools.DebugScript == true) then
-		--request current version info (as it showed by Windows Explorer fo DCS.exe properties)
-		local version = LoGetVersionInfo()
 		if version and ExportScript.logFile then
 			ExportScript.logFile:write("ProductName: "..version.ProductName..'\n')
 			ExportScript.logFile:write(string.format("FileVersion: %d.%d.%d.%d\n",
@@ -134,8 +153,7 @@ function ExportScript.Start()
 	-- ExportScript.Tools.CheckSensorExport()
 	-- ExportScript.Tools.CheckOwnshipExport()
 
-	-- dodanie info o inicjalizacji przesylania nowych danych
-	ExportScript.Tools.SendData("exporting", "start")
+	ExportScript.Tools.playerId = ExportScript.Tools.GetPlayerId()
 
 	PrevExportScript.LuaExportStart()
 end
@@ -173,8 +191,9 @@ end
 
 function ExportScript.Stop()
 	-- Works once just after mission stop.
-	ExportScript.Tools.SendData("exporting", "stop")
-	ExportScript.Tools.FlushData()
+	ExportScript.Tools.SendShortData("EX=OF")
+	-- ExportScript.Tools.SendData("exporting", "stop")
+	-- ExportScript.Tools.FlushData()
 
 	ExportScript.UDPsender:close()
 	if ExportScript.Config.Listener then
@@ -190,6 +209,15 @@ function ExportScript.Stop()
 			ExportScript.logFile:flush()
 			ExportScript.logFile:close()
 			ExportScript.logFile = nil
+		end
+	end
+
+	if (ExportScript.Fdr ~= nil) then
+		if (ExportScript.Config.WriteNavFile ~= nil and ExportScript.Config.WriteNavFile == true) then
+			ExportScript.Fdr.CsvFileEnd()
+		end
+		if (ExportScript.Config.WriteNavFile ~= nil and ExportScript.Config.WriteNavFile == true) then
+			ExportScript.Fdr.NavFileEnd()
 		end
 	end
 

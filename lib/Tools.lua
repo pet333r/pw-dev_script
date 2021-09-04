@@ -4,10 +4,17 @@ local isObjects = true
 local isSensors = true
 local isOwnship = true
 
+local initiated = false
 
 local lShowOnMapPlayer = true
 local lShowOnMapObj = false
 local lShowOnMapWea = false
+local lShowOnMapAir = false
+local lShowOnMapGnd = false
+
+local actualMap
+local lSelfNavData = true
+local playerId
 
 local lDeviceIpSelf = ""
 local lDeviceIpTws = ""
@@ -26,10 +33,15 @@ local timestamp = 0
 local timestampNav = 0
 local timestampNavObj = 0
 local timestampNavWea = 0
+local timestampNavAir = 0
+local timestampNavGnd = 0
 
+local timeSecPlayer = 1
 local timeSecNav = 1
 local timeSecObj = 4
 local timeSecWea = 2
+local timeSecAir = 4
+local timeSecGnd = 10
 
 ExportScript.Tools.LogPath = lfs.writedir()..[[Logs\pw-dev.log]]
 ExportScript.Tools.DebugScript = false
@@ -55,15 +67,7 @@ function ExportScript.Tools.CheckOwnshipExport()
     ExportScript.Tools.WriteToLog("export ownship: " .. tostring(isOwnship))
 end
 
-function ExportScript.Tools.ExportMapPlayer(value)
-    lShowOnMapPlayer = value
-end
-function ExportScript.Tools.ExportMapObj(value)
-    lShowOnMapObj = value
-end
-function ExportScript.Tools.ExportMapWea(value)
-    lShowOnMapWea = value
-end
+-- deprecated
 function ExportScript.Tools.ExportSelfData(value)
     exportSelf = value
 end
@@ -71,14 +75,31 @@ function ExportScript.Tools.ExportTwsn(value)
     exportTws = value
 end
 
-function ExportScript.Tools.SetSecNav(value)
-    timeSecNav = value
+function ExportScript.Tools.ExportMapPlayer(value)
+    lShowOnMapPlayer = value
 end
-function ExportScript.Tools.SetSecObj(value)
-    timeSecObj = value
+function ExportScript.Tools.ExportMapWea(value)
+    lShowOnMapWea = value
+end
+function ExportScript.Tools.ExportMapAir(value)
+    lShowOnMapAir = value
+end
+function ExportScript.Tools.ExportMapGnd(value)
+    lShowOnMapGnd = value
+end
+
+
+function ExportScript.Tools.SetSecNav(value)
+    timeSecPlayer = value
 end
 function ExportScript.Tools.SetSecWea(value)
     timeSecWea = value
+end
+function ExportScript.Tools.SetSecAir(value)
+    timeSecAir = value
+end
+function ExportScript.Tools.SetSecGnd(value)
+    timeSecGnd = value
 end
 
 
@@ -104,6 +125,14 @@ function ExportScript.Tools.createUDPListner()
 		end)
         _createUDPListner()
 	end
+end
+
+function ExportScript.Tools.ExportInit()
+    playerId = ExportScript.Tools.GetPlayerId()
+    -- ExportScript.Tools.SendShortData(playerId)
+    ExportScript.Tools.SendShortData("EX=ON")
+    ExportScript.Tools.SendShortData("Map=" .. actualMap .. ExportScript.Config.Separator)
+    ExportScript.Tools.SendShortData("File=" .. ExportScript.ModuleName .. ExportScript.Config.Separator)
 end
 
 function ExportScript.Tools.ProcessInput()
@@ -134,36 +163,46 @@ function ExportScript.Tools.ProcessInput()
             -- R == Reset
             if _command == "R" then
                 ExportScript.Tools.ResetChangeValues()
+                initiated = false
+                -- ExportScript.Tools.ExportInit()
             end
 
             if _command == "E" then
                 lDeviceIpMap = from
-				local _commandId = tonumber(string.sub(_input,3,-3)) -- -4 (0x)
-                if _commandId == 0 then
-                    ExportScript.Tools.ExportMapPlayer(false)
+                local opt = tonumber(string.sub(_input,2,-3))
+                local vis = tonumber(string.sub(_input,3,-2))
+                local val = tonumber(string.sub(_input,4,-1))
+                if opt == 0 then
+                    if (vis == 0) then
+                        ExportScript.Tools.ExportMapPlayer(false)
+                    else
+                        ExportScript.Tools.ExportMapPlayer(true)
+                        ExportScript.Tools.SetSecNav(val)
+                    end
                 end
-                if _commandId == 1 then
-                    ExportScript.Tools.ExportMapPlayer(true)
-                    local _cmdSec = string.sub(_input,5,-1)
-                    ExportScript.Tools.SetSecNav(tonumber(_cmdSec))
+                if opt == 1 then
+                    if (vis == 0) then
+                        ExportScript.Tools.ExportMapWea(false)
+                    else
+                        ExportScript.Tools.ExportMapWea(true)
+                        ExportScript.Tools.SetSecWea(val)
+                    end
                 end
-
-                if _commandId == 2 then
-                    ExportScript.Tools.ExportMapObj(false)
+                if opt == 2 then
+                    if (vis == 0) then
+                        ExportScript.Tools.ExportMapAir(false)
+                    else
+                        ExportScript.Tools.ExportMapAir(true)
+                        ExportScript.Tools.SetSecAir(val)
+                    end
                 end
-                if _commandId == 3 then
-                    ExportScript.Tools.ExportMapObj(true)
-                    local _cmdSec = string.sub(_input,5,-1)
-                    ExportScript.Tools.SetSecObj(tonumber(_cmdSec))
-                end
-
-                if _commandId == 4 then
-                    ExportScript.Tools.ExportMapWea(false)
-                end
-                if _commandId == 5 then
-                    ExportScript.Tools.ExportMapWea(true)
-                    local _cmdSec = string.sub(_input,5,-1)
-                    ExportScript.Tools.SetSecWea(tonumber(_cmdSec))
+                if opt == 3 then
+                    if (vis == 0) then
+                        ExportScript.Tools.ExportMapGnd(false)
+                    else
+                        ExportScript.Tools.ExportMapGnd(true)
+                        ExportScript.Tools.SetSecGnd(val)
+                    end
                 end
             end
 
@@ -205,12 +244,10 @@ function ExportScript.Tools.ProcessNavData()
 		return
     end
 
-	-- geo data
 	local lLat = SD.LatLongAlt.Lat
 	local lLon = SD.LatLongAlt.Long
 	local lAlt = SD.LatLongAlt.Alt
     local lMagvar = LoGetMagneticYaw()
-	-- local lRAlt = LoGetAltitudeAboveGroundLevel()
 	local lHdg = SD.Heading
 
 	local lIas = LoGetIndicatedAirSpeed()
@@ -219,33 +256,18 @@ function ExportScript.Tools.ProcessNavData()
 
 	-- local lAoa = LoGetAngleOfAttack() -- (args - 0, results - 1 (rad))
 	local lAcc = LoGetAccelerationUnits()	-- G-Force
-	local lPitch, lBank, lYaw = LoGetADIPitchBankYaw()
-	lPitch = lPitch * rad2deg
-	lBank = lBank * rad2deg
-	lYaw = lYaw * rad2deg
 
-    -- local lDistanceToWay			= 999
-    -- local route					= LoGetRoute()
-    -- local val = 0
-
-	if ExportScript.Tools.NavData == nil then
 		ExportScript.Tools.NavData = {}
-	end
-
     ExportScript.Tools.NavData["Lat"] = string.format("%010.6f", lLat)
 	ExportScript.Tools.NavData["Lon"] = string.format("%010.6f", lLon)
     ExportScript.Tools.NavData["Magvar"] = string.format("%.1f", lMagvar * rad2deg)
 	ExportScript.Tools.NavData["AltFt"] = string.format("%d", lAlt * m2feets)
-	-- ExportScript.Tools.NavData["ALTR"] = string.format("%d", lRAlt)
-	ExportScript.Tools.NavData["Heading"] = string.format("%d", lHdg * (180/math.pi))
+    ExportScript.Tools.NavData["Heading"] = string.format("%d", lHdg * (180/math.pi))
 	ExportScript.Tools.NavData["IAS"] = string.format("%d", lIas * ms2knots)
 	-- ExportScript.Tools.NavData["VSpd"] = string.format("%d", lVspd * ms2fpm)
 	ExportScript.Tools.NavData["Mach"] = string.format("%.2f", lMach)
 	-- ExportScript.Tools.NavData["Aoa"] = string.format("%.1f", lAoa)
 	ExportScript.Tools.NavData["G"] = string.format("%.1f", lAcc.y)
-	-- ExportScript.Tools.NavData[4411] = string.format("%.1f", lPitch)
-	-- ExportScript.Tools.NavData[4412] = string.format("%.1f", lBank)
-	-- ExportScript.Tools.NavData[4413] = string.format("%.1f", lYaw)
 
     -- if (SD and lRoute) then -- if neither are nil
     --     local myLoc					= LoGeoCoordinatesToLoCoordinates(lLon, lLat)
@@ -272,65 +294,162 @@ function ExportScript.Tools.ProcessNavData()
 	end
 end
 
-function ExportScript.Tools.ProcessNavAllData()
+function ExportScript.Tools.GetPlayerId()
+	local id = LoGetPlayerPlaneId()
+	if id == nil then
+		return 0
+    else
+        return id
+    end
+end
+
+function ExportScript.Tools.ProcessNavDataD()
+	local SD = LoGetSelfData()
+	if SD == nil then
+		return
+    end
+
+	local lLat = SD.LatLongAlt.Lat
+	local lLon = SD.LatLongAlt.Long
+	local lAlt = SD.LatLongAlt.Alt * m2feets
+    local lAltM = SD.LatLongAlt.Alt
+    local lMagvar = LoGetMagneticYaw() * rad2deg
+    local lBalt = LoGetAltitudeAboveSeaLevel() * m2feets
+	local lRAlt = LoGetAltitudeAboveGroundLevel() * m2feets
+	local lHdg = SD.Heading * (180/math.pi)
+
+	local lIas = LoGetIndicatedAirSpeed() * ms2knots
+    local lTas = LoGetTrueAirSpeed() * ms2knots
+	local lVspd = LoGetVerticalVelocity() * ms2fpm
+	local lMach = LoGetMachNumber()
+
+	local lAoa = LoGetAngleOfAttack() * rad2deg
+	local lAcc = LoGetAccelerationUnits().y	-- G-Force
+	local lPitch, lBank, lYaw = LoGetADIPitchBankYaw()
+	lPitch = lPitch * rad2deg
+	lBank = lBank * rad2deg
+	lYaw = lYaw * rad2deg
+
+    local Velocity = LoGetVectorVelocity()
+    local VX = Velocity.x
+    local VZ = Velocity.z
+    local lGspd = math.sqrt(math.pow(VX, 2)+ math.pow(VZ, 2)) * ms2knots
+    
+    -- local oilPres
+    -- if (ExportScript.ModuleName == "F-16C_50") then
+    --     oilPres = ExportScript.Tools.GetArgumentsValue(93, "%f")
+    -- end
+
+    local cam = LoGetCameraPosition()
+
+    local wind = LoGetVectorWindVelocity()
+    local windSpd = math.abs(math.sqrt(math.pow(wind.x, 2) + math.pow(wind.y, 2) + math.pow(wind.z, 2)))
+    local windAng = math.atan2(wind.y, wind.x) * 180/math.pi
+
+    if (ExportScript.Fdr ~= nil) then
+        if (ExportScript.Config.WriteNavFile ~= nil and ExportScript.Config.WriteNavFile == true) then
+            -- 0-5
+            local data1 = string.format("%d;%.6f;%.6f;%d;%d;%d;", timestamp, lLon, lLat, lAlt, lBalt, lRAlt)
+            -- 6-10
+            local data2 = string.format("%d;%d;%d;%d;%.2f;", lIas, lTas, lGspd, lVspd, lMach)
+            -- 11-12
+            local data3 = string.format("%.1f;%.1f;", lAoa, lAcc)
+            -- 13-14
+            local data4 = string.format("%d;%d;", lHdg, lMagvar)
+            -- 15-17
+            local data5 = string.format("%.1f;%.1f;%d;", lPitch, lBank, lYaw)
+            -- 18-19
+            local data6 = string.format("%d;%d;", windSpd, windAng)
+            -- 20-31
+            local data7 = string.format("%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;",
+                cam.x.x, cam.x.y, cam.x.z, cam.y.x, cam.y.y, cam.y.z, cam.z.x, cam.z.y, cam.z.z, cam.p.x, cam.p.y, cam.p.z)
+            local csvPacket = string.format("%s%s%s%s%s%s%s\n", data1, data2, data3, data4, data5, data6, data7)
+            ExportScript.Fdr.CsvFileWrite(csvPacket)
+
+            local navPacket = string.format("%.6f,%.6f,%d\n", lLon, lLat, lAltM)
+            ExportScript.Fdr.NavFileWrite(navPacket)
+        end
+    end
+
+	ExportScript.Tools.NavDataD = {}
+    ExportScript.Tools.NavDataD[70] = string.format("%010.6f", lLat)
+	ExportScript.Tools.NavDataD[71] = string.format("%010.6f", lLon)
+    ExportScript.Tools.NavDataD[72] = string.format("%.1f", lHdg)
+    ExportScript.Tools.NavDataD[73] = string.format("%.1f", lMagvar)
+	ExportScript.Tools.NavDataD[74] = string.format("%d", lAlt)
+	ExportScript.Tools.NavDataD[75] = string.format("%d", lRAlt)
+	ExportScript.Tools.NavDataD[76] = string.format("%d", lIas)
+	ExportScript.Tools.NavDataD[77] = string.format("%d", lVspd)
+	ExportScript.Tools.NavDataD[78] = string.format("%.2f", lMach)
+	-- ExportScript.Tools.NavDataD[79] = string.format("%.1f", lAoa)
+	ExportScript.Tools.NavDataD[79] = string.format("%.1f", lAcc)
+	-- ExportScript.Tools.NavDataD[80] = string.format("%.1f", lPitch)
+	-- ExportScript.Tools.NavDataD[81] = string.format("%.1f", lBank)
+	-- ExportScript.Tools.NavDataD[82] = string.format("%.1f", lYaw)
+
+
+	if ExportScript.Tools.NavDataD ~= nil then
+		for key, value in pairs(ExportScript.Tools.NavDataD) do
+				ExportScript.Tools.SendNavData(key, value)
+		end
+	end
+end
+
+function ExportScript.Tools.ProcessNavGround()
     local obj = LoGetWorldObjects()
-    ExportScript.Tools.SendPacket("N4A" .. ExportScript.Config.Separator .. "start" .. ExportScript.Config.Separator .. timestamp .."\n")
+    if obj == nil then
+        return
+    end
+    -- local threats = LoGetTWSInfo()
+
+    local gndObjects = false
+    local id
+
+    ExportScript.Tools.NavDataGnd = {}
+
     for key, val in pairs(obj) do
-        if val.GroupName ~= nil then
-            local navAll_packet =
+        id = key
+        -- local emitPower = 0
+
+        -- if (val.Type.level2 == 8 or val.Type.level2 == 9 or val.Type.level2 == 16 or val.Type.level2 == 17) then
+        if (val.Type.level2 == 16) then
+            -- if threats then	
+            --     for mode,emit in pairs (threats.Emitters) do
+            --         if emit.ID == key then
+            --             emitPower = emit.Power
+            --         end
+            --     end
+            -- end
+            local packetObjects =
             string.format(
-                "N4A" .. ExportScript.Config.Separator ..
-                "%d" .. ExportScript.Config.Separator .. -- ID
                 "%d" .. ExportScript.Config.Separator .. -- Coalition ID
                 "%.6f" .. ExportScript.Config.Separator .. -- Lat
                 "%.6f" .. ExportScript.Config.Separator .. -- Lng
-                -- "%d," .. ExportScript.Config.Separator .. -- alt
-                "%d" .. ExportScript.Config.Separator .. -- Hdg
                 "%d" .. ExportScript.Config.Separator -- type
-                -- "%s," .. ExportScript.Config.Separator .. -- Group Name
-                -- "%s" .. ExportScript.Config.Separator .. -- Unit Name
-                -- "%s" .. ExportScript.Config.Separator -- Name
+                -- "%f" .. ExportScript.Config.Separator
                 ,
 
-                key,						-- Unit ID (unique)
                 val.CoalitionID,			-- CoalitionID (1 or 2)
                 val.LatLongAlt.Lat, 		-- Lat
                 val.LatLongAlt.Long,		-- Lng
-                -- val.LatLongAlt.Alt * m2feets, 		-- ALT
-                val.Heading * (180/math.pi),				-- HDG
                 val.Type.level2			-- type
-                -- val.GroupName,			-- Group Name
-                -- val.UnitName,				-- Unit Name
-                -- val.Name					-- Name
-            ) .. "\n"
-
-            ExportScript.Tools.SendPacket(navAll_packet)
-        end
-
-        if (val.Type.level1 == 4 and val.Type.level2 == 4) then
-            local navAll_packet =
-            string.format(
-                "N4AM"  .. ExportScript.Config.Separator ..
-                "%d" .. ExportScript.Config.Separator ..    -- Unit ID (unique)
-                "%d" .. ExportScript.Config.Separator ..    -- CoalitionID (1 or 2)
-                "%.6f" .. ExportScript.Config.Separator ..  -- Lat
-                "%.6f" .. ExportScript.Config.Separator ..  -- Lng
-                "%s" .. ExportScript.Config.Separator       -- Name
-                ,
-
-                key,					-- Unit ID (unique)
-                val.CoalitionID,		-- CoalitionID (1 or 2)
-                val.LatLongAlt.Lat,     -- Lat
-                val.LatLongAlt.Long,	-- Lng
-                val.UnitName            -- Name
-            ) .. "\n"
-            ExportScript.Tools.SendPacket(navAll_packet)
+                -- emitPower
+            )
+            ExportScript.Tools.NavDataGnd[id] = packetObjects
+            gndObjects = true
         end
     end
-    ExportScript.Tools.SendPacket("N4A" .. ExportScript.Config.Separator .. "stop" .. ExportScript.Config.Separator .. "\n")
+
+    if gndObjects then
+        -- ExportScript.Tools.SendPacket("N4G" .. ExportScript.Config.Separator .. "start" .. ExportScript.Config.Separator .. "\n")
+        for key, value in pairs(ExportScript.Tools.NavDataGnd) do
+            ExportScript.Tools.SendNavAllData("N4G" .. ExportScript.Config.Separator .. key, value)
+        end
+        ExportScript.Tools.SendPacket("N4G" .. ExportScript.Config.Separator .. "stop" .. ExportScript.Config.Separator .. "\n")
+    end
 end
 
-function ExportScript.Tools.ProcessNavObjects()
+function ExportScript.Tools.ProcessNavAir()
     local obj = LoGetWorldObjects()
     if obj == nil then
         return
@@ -343,42 +462,40 @@ function ExportScript.Tools.ProcessNavObjects()
 
     for key, val in pairs(obj) do
         id = key
-        if val.GroupName ~= nil then
-            local packetObjects =
-            string.format(
-                "%d" .. ExportScript.Config.Separator .. -- Coalition ID
-                "%.6f" .. ExportScript.Config.Separator .. -- Lat
-                "%.6f" .. ExportScript.Config.Separator .. -- Lng
-                -- "%d," .. ExportScript.Config.Separator .. -- alt
-                "%d" .. ExportScript.Config.Separator .. -- Hdg
-                "%d" .. ExportScript.Config.Separator  -- type
-                -- "%s," .. ExportScript.Config.Separator .. -- Group Name
-                -- "%s" .. ExportScript.Config.Separator .. -- Unit Name
-                -- "%s" .. ExportScript.Config.Separator -- Name
-                ,
-                
-                val.CoalitionID,			-- CoalitionID (1 or 2)
-                val.LatLongAlt.Lat, 		-- Lat
-                val.LatLongAlt.Long,		-- Lng
-                -- val.LatLongAlt.Alt * m2feets, 		-- ALT
-                val.Heading * (180/math.pi),				-- HDG
-                val.Type.level2			-- type
-                -- val.GroupName,			-- Group Name
-                -- val.UnitName,				-- Unit Name
-                -- val.Name					-- Name
-            )
-            ExportScript.Tools.NavDataAll[id] = packetObjects
-            objects = true
+        if ((val.Type.level1 == 1 or val.Type.level1 == 3) and val.Type.level2 ~= 3) then
+        -- if (val.GroupName ~= nil) then
+            if val.CoalitionID == 0 then
+            elseif (key ~= playerId) then
+                local packetObjects =
+                string.format(
+                    "%d" .. ExportScript.Config.Separator .. -- Coalition ID
+                    "%.6f" .. ExportScript.Config.Separator .. -- Lat
+                    "%.6f" .. ExportScript.Config.Separator .. -- Lng
+                    -- "%d," .. ExportScript.Config.Separator .. -- alt
+                    "%d" .. ExportScript.Config.Separator .. -- Hdg
+                    "%d" .. ExportScript.Config.Separator  -- type
+                    -- "%s" .. ExportScript.Config.Separator -- Name
+                    ,
+    
+                    val.CoalitionID,			-- CoalitionID (1 or 2)
+                    val.LatLongAlt.Lat, 		-- Lat
+                    val.LatLongAlt.Long,		-- Lng
+                    -- val.LatLongAlt.Alt * m2feets, 		-- ALT
+                    val.Heading * (180/math.pi),				-- HDG
+                    val.Type.level2			-- type
+                    -- val.Name					-- Name
+                )
+                ExportScript.Tools.NavDataAll[id] = packetObjects
+                objects = true
+            end
         end
     end
 
     if objects then
-        ExportScript.Tools.SendPacket("N4A" .. ExportScript.Config.Separator .. "start" .. ExportScript.Config.Separator .. "\n")
-
+        -- ExportScript.Tools.SendPacket("N4A" .. ExportScript.Config.Separator .. "start" .. ExportScript.Config.Separator .. "\n")
         for key, value in pairs(ExportScript.Tools.NavDataAll) do
             ExportScript.Tools.SendNavAllData("N4A" .. ExportScript.Config.Separator .. key, value)
         end
-
         ExportScript.Tools.SendPacket("N4A" .. ExportScript.Config.Separator .. "stop" .. ExportScript.Config.Separator .. "\n")
     end
 end
@@ -419,93 +536,12 @@ function ExportScript.Tools.ProcessNavWeapon()
     end
 
     if weapons then
-        ExportScript.Tools.SendPacket("N4W" .. ExportScript.Config.Separator .. "start" .. ExportScript.Config.Separator .. "\n")
-
+        -- ExportScript.Tools.SendPacket("N4W" .. ExportScript.Config.Separator .. "start" .. ExportScript.Config.Separator .. "\n")
         for key, value in pairs(ExportScript.Tools.NavDataWeapons) do
             ExportScript.Tools.SendNavAllData("N4W" .. ExportScript.Config.Separator .. key, value)
         end
-
         ExportScript.Tools.SendPacket("N4W" .. ExportScript.Config.Separator .. "stop" .. ExportScript.Config.Separator .. "\n")
     end
-end
-
--- function export data based on registered Lock On internal functions / export in LowTickInterval
-function ExportScript.Tools.ProcessSelfData()
-    local SD = LoGetSelfData
-
-    -- geo data
-    local Latitude = SD().LatLongAlt.Lat
-    local Longitude = SD().LatLongAlt.Long
-    local Altitude = SD().LatLongAlt.Alt
-    local AltitudeFeets = Altitude * m2feets
-    local AltBar = LoGetAltitudeAboveSeaLevel()	-- (args - 0, results - 1 (meters))
-    local AltRad = LoGetAltitudeAboveGroundLevel()	-- (args - 0, results - 1 (meters))
-    
-    -- course data
-    local Heading = SD().Heading*(180/math.pi)
-
-    -- plane data
-    local pitch, bank, yaw = LoGetADIPitchBankYaw()
-    local AoA = LoGetAngleOfAttack() -- (args - 0, results - 1 (rad))
-    local Accel = LoGetAccelerationUnits()	-- G-Force
-    pitch = pitch * rad2deg
-    bank = bank * rad2deg
-    yaw = yaw * rad2deg
-    -- 
-    local Velocity = LoGetVectorVelocity()  --{x,y,z}
-    local VX = Velocity.x
-    local VY = Velocity.y
-    local VZ = Velocity.z
-
-    -- speed data
-    local IAS = LoGetIndicatedAirSpeed() * ms2knots	-- (args - 0, results - 1 (m/s)) => convert to Knots
-    local TAS = LoGetTrueAirSpeed() * ms2knots -- (args - 0, results - 1 (m/s)) => convert to Knots
-    local GS = math.sqrt(math.pow(VX, 2)+ math.pow(VZ, 2)) * ms2knots -- ground speed (m/s) => convert to Knots
-    local VSpeed = LoGetVerticalVelocity() * ms2fpm  -- (args - 0, results - 1(m/s))
-    local Mach = LoGetMachNumber()
-
-    -- mechanical data
-    local mech = LoGetMechInfo()
-
-    -- engine data
-    local engine = LoGetEngineInfo()
-
-    local wind = LoGetVectorWindVelocity()
-    local windSpeed = math.abs(math.sqrt(math.pow(wind.x, 2) + math.pow(wind.y, 2) + math.pow(wind.z, 2)))
-    local windAngle = math.atan2(wind.y, wind.x) * 180/math.pi
-    
-    -- countermeasures data
-    local Countermeasures = LoGetSnares()
-    
-    -- create exporting data
-    local sModule = string.format( "File=%s;D4T4", ExportScript.ModuleName)
-    local sGeo = string.format("Lat=%010.6f;Lon=%0010.6f;Alt=%.1f;AltFt=%d;AltBar=%d;AltRad=%d", Latitude, Longitude, Altitude, AltitudeFeets, AltBar, AltRad)
-    local sCourse = string.format( "Heading=%02d", Heading)
-    local sSpeed = string.format("IAS=%d;TAS=%d;GS=%d;VSpeed=%d;Mach=%.2f", IAS, TAS, GS, VSpeed, Mach)
-    local sPlane = string.format("Pitch=%.1f;Bank=%.1f;Yaw=%.1f;AoA=%.1f;G=%.1f", pitch, bank, yaw, AoA, Accel.y)
-    local sMechanics = string.format("Gear=%.2f;Flaps=%.2f;Speedbrakes=%.2f;Boom=%.2f;Wheelbrakes=%.2f", mech.gear.value, mech.flaps.value, mech.speedbrakes.value, mech.refuelingboom.value, mech.wheelbrakes.value)
-    --local sEngine = string.format("FuelExt=%d;FuelInt%d", engine.fuel_external, engine.fuel_internal)
-    local sCountermeasures = string.format("Chaff=%d;Flare=%d", Countermeasures.chaff, Countermeasures.flare)
-    local sWind = string.format("WindSpd=%d;angle=%.1f", windSpeed, windAngle)
-    
-    -- join exporting strings into one packet
-    local _packet = string.format("%s;%s;%s;%s;%s;%s;%s;%s;\r\n", sModule, sGeo, sCourse, sSpeed, sPlane, sMechanics, sCountermeasures, sWind)
-
-    local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() end)
-        -- if ExportScript.Config.Export1SD == true then
-        --     try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host, ExportScript.Config.Port))
-        -- end
-        -- if ExportScript.Config.Export2SD == true then
-        --     try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host2, ExportScript.Config.Port))
-        -- end
-        -- if ExportScript.Config.Export3SD == true then
-        --     try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host3, ExportScript.Config.Port))
-        -- end
-        -- if ExportScript.Config.Export4SD == true then
-        --     try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host4, ExportScript.Config.Port))
-        -- end
-
-        ExportScript.Tools.DebugProcess(try, _packet)
 end
 
 function ExportScript.Tools.ProcessTWS()
@@ -546,6 +582,11 @@ function ExportScript.Tools.ProcessOutput()
             ExportScript.NoLuaExportBeforeNextFrame = false
 			ExportScript.Tools.SelectModule()  -- point globals to Module functions and data.
 			return
+        else
+            if (initiated == false) then
+                ExportScript.Tools.ExportInit()
+                initiated = true
+            end
         end
         _info = nil
     end
@@ -580,31 +621,14 @@ function ExportScript.Tools.ProcessOutput()
 
         timestamp = LoGetModelTime()
 
-        if (ExportScript.Config.ExportNavData == true and lShowOnMapPlayer == true) then
-            if (timestamp > timestampNav + timeSecNav) then
-                ExportScript.Tools.ProcessNavData()
+        if (ExportScript.Config.ExportNavData == true and lSelfNavData == true) then
+            if (timestamp > timestampNav + timeSecPlayer) then
+                local coProcessNavData = coroutine.create(ExportScript.Tools.ProcessNavData)
+                _coStatus = coroutine.resume(coProcessNavData)
                 timestampNav = timestamp
             end
         end
 
-        if (ExportScript.Config.ExportNavData == true and lShowOnMapWea == true) then
-            if (timestamp > timestampNavWea + timeSecWea) then
-                ExportScript.Tools.ProcessNavWeapon()
-                timestampNavWea = timestamp
-            end
-        end
-
-        if (ExportScript.Config.ExportNavAllData == true and lShowOnMapObj == true) then
-            if (timestamp > timestampNavObj + timeSecObj) then
-                ExportScript.Tools.ProcessNavObjects()
-                timestampNavObj = timestamp
-            end
-        end
-
-        ----process SelfData info
-        -- if exportSelf == true then
-        --     ExportScript.Tools.ProcessSelfData()
-        -- end
 
     if ExportScript.Config.Export then
         ExportScript.Tools.FlushData()
@@ -636,35 +660,14 @@ function ExportScript.Tools.ProcessOutput()
 
         timestamp = LoGetModelTime()
 
-        if (ExportScript.Config.ExportNavData == true and lShowOnMapPlayer == true) then
-            if (timestamp > timestampNav + timeSecNav) then
-                ExportScript.Tools.ProcessNavData()
+        if (ExportScript.Config.ExportNavData == true and lSelfNavData == true) then
+            if (timestamp > timestampNav + timeSecPlayer) then
+                local coProcessNavData = coroutine.create(ExportScript.Tools.ProcessNavData)
+                _coStatus = coroutine.resume(coProcessNavData)
                 timestampNav = timestamp
             end
         end
 
-        if (ExportScript.Config.ExportNavData == true and lShowOnMapWea == true) then
-            if (timestamp > timestampNavWea + timeSecWea) then
-                ExportScript.Tools.ProcessNavWeapon()
-                timestampNavWea = timestamp
-            end
-        end
-
-        if (ExportScript.Config.ExportNavAllData == true and lShowOnMapObj == true) then
-            if (timestamp > timestampNavObj + timeSecObj) then
-                ExportScript.Tools.ProcessNavObjects()
-                timestampNavObj = timestamp
-            end
-        end
-
-        -- -- process SelfData info
-        -- if exportSelf == true then
-        --     ExportScript.Tools.ProcessSelfData()
-        -- end
-
-        -- if exportTws == true then
-        --     ExportScript.Tools.ProcessTWS()
-        -- end
 
     if ExportScript.Config.Export then
         ExportScript.Tools.FlushData()
@@ -672,7 +675,6 @@ function ExportScript.Tools.ProcessOutput()
     if (ExportScript.Config.ExportNavData == true) then
         ExportScript.Tools.FlushNavData()
     end
-
     else -- No Module found
         if ExportScript.FoundNoModul then
             ExportScript.Tools.SelectModule()  -- point globals to Module functions and data.
@@ -718,11 +720,51 @@ function ExportScript.Tools.ProcessArguments(device, arguments)
     end
 end
 
+function ExportScript.Tools.GetArgumentsValue(argument, format)
+    local _device = GetDevice(0)
+    local _argumentValue
+
+    if type(_device) == "table" then
+        _device:update_arguments()
+        _argumentValue = string.format(format,_device:get_argument_value(argument))
+        return _argumentValue
+    else
+        return 0
+    end
+end
+
 function ExportScript.Tools.SendPacket(packet)
     local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() end)
         try(ExportScript.UDPsender:sendto(packet, lDeviceIpMap, ExportScript.Config.Port))
 
     ExportScript.Tools.DebugProcess(try, packet)
+end
+
+function ExportScript.Tools.SendShortData(message)
+    local _flushData = ExportScript.socket.protect(function()
+        local _packet = message .. "\n"
+
+        local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() ExportScript.Tools.ResetChangeValues() end)
+
+        if ExportScript.Config.Export then
+            try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host, ExportScript.Config.Port))
+        end
+
+        if ExportScript.Config.Export2 then
+            try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host2, ExportScript.Config.Port))
+        end
+
+        if ExportScript.Config.Export3 then
+            try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host3, ExportScript.Config.Port))
+        end
+
+        if ExportScript.Config.Export4 then
+            try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host4, ExportScript.Config.Port))
+        end
+
+        ExportScript.Tools.DebugProcess(try, _packet)
+	end)
+    _flushData()
 end
 
 -- Network Functions for GlassCockpit
@@ -922,8 +964,24 @@ function ExportScript.Tools.SelectModule()
             ExportScript.ProcessFCLowImportance   = ExportScript.ProcessFCLowImportanceConfig
         end
 
+        actualMap = ExportScript.Tools.GetMap(_info)
         ExportScript.Tools.FlushData()
     end
+end
+
+function ExportScript.Tools.GetMap(player)
+    local lMap
+    for Map, LatLong in pairs(ExportScript.Maps) do
+        if player.LatLongAlt.Lat > LatLong.Lat2 and player.LatLongAlt.Lat < LatLong.Lat1 then
+            if player.LatLongAlt.Long > LatLong.Long1 and player.LatLongAlt.Long < LatLong.Long2 then
+                lMap = Map
+                ExportScript.Tools.WriteToLog("Loaded Map: "..Map)
+                -- ExportScript.Tools.SendShortData("Map=" .. Map .. ExportScript.Config.Separator)
+                break
+            end
+        end
+    end
+    return lMap
 end
 
 -- The function returns a correctly formatted string with the given radio frequency.
