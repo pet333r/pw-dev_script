@@ -10,7 +10,7 @@ ExportScript.SendNavStrings	= {}
 ExportScript.SendNavAllStrings	= {}
 ExportScript.LastData       = {}
 ExportScript.LastDataAll       = {}
--- ExportScript.LastDataNav       = {}
+ExportScript.LastDataNav       = {}
 
 ExportScript.lastExportTimeHI       = 0
 ExportScript.lastExportTimeLI       = 0

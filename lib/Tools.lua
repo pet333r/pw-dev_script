@@ -1,5 +1,7 @@
 ExportScript.Tools = {}
 
+local PlayerData = {}
+
 local isObjects = true
 local isSensors = true
 local isOwnship = true
@@ -129,7 +131,6 @@ end
 
 function ExportScript.Tools.ExportInit()
     playerId = ExportScript.Tools.GetPlayerId()
-    -- ExportScript.Tools.SendShortData(playerId)
     ExportScript.Tools.SendShortData("EX=ON")
     ExportScript.Tools.SendShortData("Map=" .. actualMap .. ExportScript.Config.Separator)
     ExportScript.Tools.SendShortData("File=" .. ExportScript.ModuleName .. ExportScript.Config.Separator)
@@ -164,7 +165,6 @@ function ExportScript.Tools.ProcessInput()
             if _command == "R" then
                 ExportScript.Tools.ResetChangeValues()
                 initiated = false
-                -- ExportScript.Tools.ExportInit()
             end
 
             if _command == "E" then
@@ -209,23 +209,25 @@ function ExportScript.Tools.ProcessInput()
             if (_command == "C") then
                 _commandArgs = ExportScript.Tools.StrSplit(string.sub(_input,2),",")
 				local _deviceID = tonumber(_commandArgs[1])
+                -- DCS Modules arguments
 				if _deviceID < 1000 then
-					-- DCS Modules
 					_device = GetDevice(_commandArgs[1])
 					if ExportScript.FoundDCSModule and type(_device) == "table" then
 						_device:performClickableAction(_commandArgs[2],_commandArgs[3])
 					end
+
+                -- Buttons
                 elseif _deviceID == 2000 then
-                    -- Flaming Cliffs Module (Buttons)
-                    if ExportScript.FoundFCModule then
+                    if ExportScript.FoundDCSModule or ExportScript.FoundFCModule then
                         local lComandID = (tonumber(_commandArgs[2]))
                         if tonumber(_commandArgs[3]) == 1.0 then
                             LoSetCommand(lComandID)
                         end
                     end
+
+                -- Analog
                 elseif _deviceID == 2001 then
-                    -- Flaming Cliffs Module (analog axies)
-                    if ExportScript.FoundFCModule then
+                    if ExportScript.FoundDCSModule or ExportScript.FoundFCModule then
                         local lComandID = (tonumber(_commandArgs[2]))
                         LoSetCommand(lComandID, _commandArgs[3])
                     end
@@ -237,55 +239,18 @@ function ExportScript.Tools.ProcessInput()
 	end
 end
 
--- funkcja do przesylania danych nawigacyjnych konkretnych obiektow na mapie
+--! DEPRECATED
+--* funkcja do przesylania danych nawigacyjnych konkretnych obiektow na mapie
 function ExportScript.Tools.ProcessNavData()
-	local SD = LoGetSelfData()
-	if SD == nil then
-		return
-    end
-
-	local lLat = SD.LatLongAlt.Lat
-	local lLon = SD.LatLongAlt.Long
-	local lAlt = SD.LatLongAlt.Alt
-    local lMagvar = LoGetMagneticYaw()
-	local lHdg = SD.Heading
-
-	local lIas = LoGetIndicatedAirSpeed()
-	-- local lVspd = LoGetVerticalVelocity()
-	local lMach = LoGetMachNumber()
-
-	-- local lAoa = LoGetAngleOfAttack() -- (args - 0, results - 1 (rad))
-	local lAcc = LoGetAccelerationUnits()	-- G-Force
-
-		ExportScript.Tools.NavData = {}
-    ExportScript.Tools.NavData["Lat"] = string.format("%010.6f", lLat)
-	ExportScript.Tools.NavData["Lon"] = string.format("%010.6f", lLon)
-    ExportScript.Tools.NavData["Magvar"] = string.format("%.1f", lMagvar * rad2deg)
-	ExportScript.Tools.NavData["AltFt"] = string.format("%d", lAlt * m2feets)
-    ExportScript.Tools.NavData["Heading"] = string.format("%d", lHdg * (180/math.pi))
-	ExportScript.Tools.NavData["IAS"] = string.format("%d", lIas * ms2knots)
-	-- ExportScript.Tools.NavData["VSpd"] = string.format("%d", lVspd * ms2fpm)
-	ExportScript.Tools.NavData["Mach"] = string.format("%.2f", lMach)
-	-- ExportScript.Tools.NavData["Aoa"] = string.format("%.1f", lAoa)
-	ExportScript.Tools.NavData["G"] = string.format("%.1f", lAcc.y)
-
-    -- if (SD and lRoute) then -- if neither are nil
-    --     local myLoc					= LoGeoCoordinatesToLoCoordinates(lLon, lLat)
-    --     --lDistanceToWay				= math.sqrt((myLoc.x - lRoute.goto_point.world_point.x)^2 + (myLoc.y -  lRoute.goto_point.world_point.y)^2)
-    --     -- lDistanceToWay              = math.sqrt((myLoc.x - lRoute.goto_point.world_point.x)^2 + (myLoc.z -  lRoute.goto_point.world_point.z)^2)
-    --     val = lRoute.goto_point.world_point.x
-    -- end
-
-    -- local route = LoGetRoute()
-	-- if route then
-	-- 	ExportScript.Tools.LogPath:write(string.format("Goto_point :\n point_num = %d ,wpt_pos = (%f, %f ,%f) ,next %d\n", route.goto_point.this_point_num, route.goto_point.world_point.x, route.goto_point.world_point.y, route.goto_point.world_point.z, route.goto_point.next_point_num))
-	-- 	ExportScript.Tools.LogPath:write(string.format("Route points:\n"))
-	-- 	for num,wpt in pairs(route.route) do
-	-- 		ExportScript.Tools.LogPath:write(string.format("point_num = %d ,wpt_pos = (%f, %f ,%f) ,next %d\n",wpt.this_point_num, wpt.world_point.x, wpt.world_point.y, wpt.world_point.z, wpt.next_point_num))
-
-    --         -- ExportScript.Tools.NavData["dsfsdfds"] = string.format("%d", wpt.next_point_num)
-	-- 	end
-	-- end
+    ExportScript.Tools.NavData = {}
+    ExportScript.Tools.NavData["Lat"] = string.format("%010.6f", PlayerData.Lat)
+	ExportScript.Tools.NavData["Lon"] = string.format("%010.6f", PlayerData.Lon)
+    ExportScript.Tools.NavData["Magvar"] = string.format("%.1f", PlayerData.Magvar)
+	ExportScript.Tools.NavData["AltFt"] = string.format("%d", PlayerData.Alt)
+    ExportScript.Tools.NavData["Heading"] = string.format("%d", PlayerData.Hdg)
+	ExportScript.Tools.NavData["IAS"] = string.format("%d", PlayerData.Ias)
+	ExportScript.Tools.NavData["Mach"] = string.format("%.2f", PlayerData.Mach)
+	ExportScript.Tools.NavData["G"] = string.format("%.1f", PlayerData.Acc)
 
 	if ExportScript.Tools.NavData ~= nil then
 		for key, value in pairs(ExportScript.Tools.NavData) do
@@ -294,6 +259,7 @@ function ExportScript.Tools.ProcessNavData()
 	end
 end
 
+--* Pobranie Id maszyny uzytkownika
 function ExportScript.Tools.GetPlayerId()
 	local id = LoGetPlayerPlaneId()
 	if id == nil then
@@ -303,90 +269,94 @@ function ExportScript.Tools.GetPlayerId()
     end
 end
 
-function ExportScript.Tools.ProcessNavDataD()
-	local SD = LoGetSelfData()
+--* Pobranie danych maszyny uzytkownika
+function ExportScript.Tools.GetPlayerData()
+    local SD = LoGetSelfData()
 	if SD == nil then
 		return
     end
 
-	local lLat = SD.LatLongAlt.Lat
-	local lLon = SD.LatLongAlt.Long
-	local lAlt = SD.LatLongAlt.Alt * m2feets
-    local lAltM = SD.LatLongAlt.Alt
-    local lMagvar = LoGetMagneticYaw() * rad2deg
-    local lBalt = LoGetAltitudeAboveSeaLevel() * m2feets
-	local lRAlt = LoGetAltitudeAboveGroundLevel() * m2feets
-	local lHdg = SD.Heading * (180/math.pi)
+	PlayerData.Lat = SD.LatLongAlt.Lat
+	PlayerData.Lon = SD.LatLongAlt.Long
+	PlayerData.Alt = SD.LatLongAlt.Alt * m2feets
+    PlayerData.AltM = SD.LatLongAlt.Alt
+    PlayerData.Magvar = LoGetMagneticYaw() * rad2deg
+    PlayerData.Balt = LoGetAltitudeAboveSeaLevel() * m2feets
+	PlayerData.RAlt = LoGetAltitudeAboveGroundLevel() * m2feets
+	PlayerData.Hdg = SD.Heading * (180/math.pi)
 
-	local lIas = LoGetIndicatedAirSpeed() * ms2knots
-    local lTas = LoGetTrueAirSpeed() * ms2knots
-	local lVspd = LoGetVerticalVelocity() * ms2fpm
-	local lMach = LoGetMachNumber()
+	PlayerData.Ias = LoGetIndicatedAirSpeed() * ms2knots
+    PlayerData.Tas = LoGetTrueAirSpeed() * ms2knots
+	PlayerData.Vspd = LoGetVerticalVelocity() * ms2fpm
+	PlayerData.Mach = LoGetMachNumber()
 
-	local lAoa = LoGetAngleOfAttack() * rad2deg
-	local lAcc = LoGetAccelerationUnits().y	-- G-Force
-	local lPitch, lBank, lYaw = LoGetADIPitchBankYaw()
-	lPitch = lPitch * rad2deg
-	lBank = lBank * rad2deg
-	lYaw = lYaw * rad2deg
+	PlayerData.Aoa = LoGetAngleOfAttack() * rad2deg
+	PlayerData.Acc = LoGetAccelerationUnits().y	-- G-Force
+	PlayerData.Pitch, PlayerData.Bank, PlayerData.Yaw = LoGetADIPitchBankYaw()
+	PlayerData.Pitch = PlayerData.Pitch * rad2deg
+	PlayerData.Bank = PlayerData.Bank * rad2deg
+	PlayerData.Yaw = PlayerData.Yaw * rad2deg
 
-    local Velocity = LoGetVectorVelocity()
-    local VX = Velocity.x
-    local VZ = Velocity.z
-    local lGspd = math.sqrt(math.pow(VX, 2)+ math.pow(VZ, 2)) * ms2knots
-    
+    PlayerData.Velocity = LoGetVectorVelocity()
+    PlayerData.VX = PlayerData.Velocity.x
+    PlayerData.VZ = PlayerData.Velocity.z
+    PlayerData.Gspd = math.sqrt(math.pow(PlayerData.VX, 2)+ math.pow(PlayerData.VZ, 2)) * ms2knots
+
+    PlayerData.Cam = LoGetCameraPosition()
+
+    PlayerData.Wind = LoGetVectorWindVelocity()
+    PlayerData.WindSpd = math.abs(math.sqrt(math.pow(PlayerData.Wind.x, 2) + math.pow(PlayerData.Wind.y, 2) + math.pow(PlayerData.Wind.z, 2)))
+    PlayerData.WindAng = math.atan2(PlayerData.Wind.y, PlayerData.Wind.x) * 180/math.pi
+
     -- local oilPres
     -- if (ExportScript.ModuleName == "F-16C_50") then
     --     oilPres = ExportScript.Tools.GetArgumentsValue(93, "%f")
     -- end
+end
 
-    local cam = LoGetCameraPosition()
-
-    local wind = LoGetVectorWindVelocity()
-    local windSpd = math.abs(math.sqrt(math.pow(wind.x, 2) + math.pow(wind.y, 2) + math.pow(wind.z, 2)))
-    local windAng = math.atan2(wind.y, wind.x) * 180/math.pi
-
+--* zapis danych do plikow
+function ExportScript.Tools.WriteToNavFiles()
     if (ExportScript.Fdr ~= nil) then
-        if (ExportScript.Config.WriteNavFile ~= nil and ExportScript.Config.WriteNavFile == true) then
-            -- 0-5
-            local data1 = string.format("%d;%.6f;%.6f;%d;%d;%d;", timestamp, lLon, lLat, lAlt, lBalt, lRAlt)
-            -- 6-10
-            local data2 = string.format("%d;%d;%d;%d;%.2f;", lIas, lTas, lGspd, lVspd, lMach)
-            -- 11-12
-            local data3 = string.format("%.1f;%.1f;", lAoa, lAcc)
-            -- 13-14
-            local data4 = string.format("%d;%d;", lHdg, lMagvar)
-            -- 15-17
-            local data5 = string.format("%.1f;%.1f;%d;", lPitch, lBank, lYaw)
-            -- 18-19
-            local data6 = string.format("%d;%d;", windSpd, windAng)
-            -- 20-31
-            local data7 = string.format("%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;",
-                cam.x.x, cam.x.y, cam.x.z, cam.y.x, cam.y.y, cam.y.z, cam.z.x, cam.z.y, cam.z.z, cam.p.x, cam.p.y, cam.p.z)
-            local csvPacket = string.format("%s%s%s%s%s%s%s\n", data1, data2, data3, data4, data5, data6, data7)
-            ExportScript.Fdr.CsvFileWrite(csvPacket)
+        -- 0-5
+        local data1 = string.format("%d;%.6f;%.6f;%d;%d;%d;", timestamp, PlayerData.Lon, PlayerData.Lat, PlayerData.Alt, PlayerData.Balt, PlayerData.RAlt)
+        -- 6-10
+        local data2 = string.format("%d;%d;%d;%d;%.2f;", PlayerData.Ias, PlayerData.Tas, PlayerData.Gspd, PlayerData.Vspd, PlayerData.Mach)
+        -- 11-12
+        local data3 = string.format("%.1f;%.1f;", PlayerData.Aoa, PlayerData.Acc)
+        -- 13-14
+        local data4 = string.format("%d;%d;", PlayerData.Hdg, PlayerData.Magvar)
+        -- 15-17
+        local data5 = string.format("%.1f;%.1f;%d;", PlayerData.Pitch, PlayerData.Bank, PlayerData.Yaw)
+        -- 18-19
+        local data6 = string.format("%d;%d;", PlayerData.WindSpd, PlayerData.WindAng)
+        -- 20-31
+        local data7 = string.format("%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;",
+        PlayerData.Cam.x.x, PlayerData.Cam.x.y, PlayerData.Cam.x.z, PlayerData.Cam.y.x, PlayerData.Cam.y.y, PlayerData.Cam.y.z, PlayerData.Cam.z.x, PlayerData.Cam.z.y, PlayerData.Cam.z.z, PlayerData.Cam.p.x, PlayerData.Cam.p.y, PlayerData.Cam.p.z)
+        local csvPacket = string.format("%s%s%s%s%s%s%s\n", data1, data2, data3, data4, data5, data6, data7)
+        ExportScript.Fdr.CsvFileWrite(csvPacket)
 
-            local navPacket = string.format("%.6f,%.6f,%d\n", lLon, lLat, lAltM)
-            ExportScript.Fdr.NavFileWrite(navPacket)
-        end
+        local navPacket = string.format("%.6f,%.6f,%d\n", PlayerData.Lon, PlayerData.Lat, PlayerData.AltM)
+        ExportScript.Fdr.NavFileWrite(navPacket)
     end
+end
 
+--* funkcja do przesylania danych nawigacyjnych konkretnych obiektow na mapie
+function ExportScript.Tools.ProcessNavDataD()
 	ExportScript.Tools.NavDataD = {}
-    ExportScript.Tools.NavDataD[70] = string.format("%010.6f", lLat)
-	ExportScript.Tools.NavDataD[71] = string.format("%010.6f", lLon)
-    ExportScript.Tools.NavDataD[72] = string.format("%.1f", lHdg)
-    ExportScript.Tools.NavDataD[73] = string.format("%.1f", lMagvar)
-	ExportScript.Tools.NavDataD[74] = string.format("%d", lAlt)
-	ExportScript.Tools.NavDataD[75] = string.format("%d", lRAlt)
-	ExportScript.Tools.NavDataD[76] = string.format("%d", lIas)
-	ExportScript.Tools.NavDataD[77] = string.format("%d", lVspd)
-	ExportScript.Tools.NavDataD[78] = string.format("%.2f", lMach)
+    ExportScript.Tools.NavDataD[70] = string.format("%010.6f", PlayerData.Lat)
+	ExportScript.Tools.NavDataD[71] = string.format("%010.6f", PlayerData.Lon)
+    ExportScript.Tools.NavDataD[72] = string.format("%.1f", PlayerData.Hdg)
+    ExportScript.Tools.NavDataD[73] = string.format("%.1f", PlayerData.Magvar)
+	ExportScript.Tools.NavDataD[74] = string.format("%d", PlayerData.Alt)
+	ExportScript.Tools.NavDataD[75] = string.format("%d", PlayerData.RAlt)
+	ExportScript.Tools.NavDataD[76] = string.format("%d", PlayerData.Ias)
+	ExportScript.Tools.NavDataD[77] = string.format("%d", PlayerData.Vspd)
+	ExportScript.Tools.NavDataD[78] = string.format("%.2f", PlayerData.Mach)
+	ExportScript.Tools.NavDataD[79] = string.format("%.1f", PlayerData.Acc)
 	-- ExportScript.Tools.NavDataD[79] = string.format("%.1f", lAoa)
-	ExportScript.Tools.NavDataD[79] = string.format("%.1f", lAcc)
 	-- ExportScript.Tools.NavDataD[80] = string.format("%.1f", lPitch)
 	-- ExportScript.Tools.NavDataD[81] = string.format("%.1f", lBank)
 	-- ExportScript.Tools.NavDataD[82] = string.format("%.1f", lYaw)
-
 
 	if ExportScript.Tools.NavDataD ~= nil then
 		for key, value in pairs(ExportScript.Tools.NavDataD) do
@@ -395,6 +365,7 @@ function ExportScript.Tools.ProcessNavDataD()
 	end
 end
 
+--* obsluga obiektow naziemnych
 function ExportScript.Tools.ProcessNavGround()
     local obj = LoGetWorldObjects()
     if obj == nil then
@@ -449,6 +420,7 @@ function ExportScript.Tools.ProcessNavGround()
     end
 end
 
+--* obsluga obiektow "w locie"
 function ExportScript.Tools.ProcessNavAir()
     local obj = LoGetWorldObjects()
     if obj == nil then
@@ -621,14 +593,46 @@ function ExportScript.Tools.ProcessOutput()
 
         timestamp = LoGetModelTime()
 
-        if (ExportScript.Config.ExportNavData == true and lSelfNavData == true) then
+        if (ExportScript.Config.ExportNavData == true and (ExportScript.Config.WriteNavFile or lSelfNavData)) then
             if (timestamp > timestampNav + timeSecPlayer) then
-                local coProcessNavData = coroutine.create(ExportScript.Tools.ProcessNavData)
-                _coStatus = coroutine.resume(coProcessNavData)
+
+                ExportScript.Tools.GetPlayerData()
+
+                if (ExportScript.Config.WriteNavFile ~= nil and ExportScript.Config.WriteNavFile == true) then
+                    local coProcessWriteFile = coroutine.create(ExportScript.Tools.WriteToNavFiles)
+                    _coStatus = coroutine.resume(coProcessWriteFile)
+                end
+                if lSelfNavData then
+                    local coProcessNavData = coroutine.create(ExportScript.Tools.ProcessNavData)
+                    _coStatus = coroutine.resume(coProcessNavData)
+                end
                 timestampNav = timestamp
             end
         end
 
+        if (ExportScript.Config.ExportNavAllData == true and lShowOnMapWea == true) then
+            if (timestamp > timestampNavWea + timeSecWea) then
+                local coProcessNavWeapon = coroutine.create(ExportScript.Tools.ProcessNavWeapon)
+                _coStatus = coroutine.resume(coProcessNavWeapon)
+                timestampNavWea = timestamp
+            end
+        end
+
+        if (ExportScript.Config.ExportNavAllData == true and lShowOnMapAir == true) then
+            if (timestamp > timestampNavAir + timeSecAir) then
+                local coProcessNavObjects = coroutine.create(ExportScript.Tools.ProcessNavAir)
+                _coStatus = coroutine.resume(coProcessNavObjects)
+                timestampNavAir = timestamp
+            end
+        end
+
+        if (ExportScript.Config.ExportNavAllData == true and lShowOnMapGnd == true) then
+            if (timestamp > timestampNavGnd + timeSecGnd) then
+                local coProcessNavGround = coroutine.create(ExportScript.Tools.ProcessNavGround)
+                _coStatus = coroutine.resume(coProcessNavGround)
+                timestampNavGnd = timestamp
+            end
+        end
 
     if ExportScript.Config.Export then
         ExportScript.Tools.FlushData()
@@ -637,7 +641,8 @@ function ExportScript.Tools.ProcessOutput()
         ExportScript.Tools.FlushNavData()
     end
 
-    elseif ExportScript.FoundFCModule then -- Assume FC Aircraft
+    -- FC3 Aircraft
+    elseif ExportScript.FoundFCModule then
         ExportScript.AF.EventNumber = os.clock()
 
         ExportScript.coProcessGlassCockpitFCHighImportance = coroutine.create(ExportScript.ProcessFCHighImportance)
@@ -660,14 +665,46 @@ function ExportScript.Tools.ProcessOutput()
 
         timestamp = LoGetModelTime()
 
-        if (ExportScript.Config.ExportNavData == true and lSelfNavData == true) then
+        if (ExportScript.Config.ExportNavData == true and (ExportScript.Config.WriteNavFile or lSelfNavData)) then
             if (timestamp > timestampNav + timeSecPlayer) then
-                local coProcessNavData = coroutine.create(ExportScript.Tools.ProcessNavData)
-                _coStatus = coroutine.resume(coProcessNavData)
+
+                ExportScript.Tools.GetPlayerData()
+
+                if (ExportScript.Config.WriteNavFile ~= nil and ExportScript.Config.WriteNavFile == true) then
+                    local coProcessWriteFile = coroutine.create(ExportScript.Tools.WriteToNavFiles)
+                    _coStatus = coroutine.resume(coProcessWriteFile)
+                end
+                if lSelfNavData then
+                    local coProcessNavData = coroutine.create(ExportScript.Tools.ProcessNavData)
+                    _coStatus = coroutine.resume(coProcessNavData)
+                end
                 timestampNav = timestamp
             end
         end
 
+        if (ExportScript.Config.ExportNavAllData == true and lShowOnMapWea == true) then
+            if (timestamp > timestampNavWea + timeSecWea) then
+                local coProcessNavWeapon = coroutine.create(ExportScript.Tools.ProcessNavWeapon)
+                _coStatus = coroutine.resume(coProcessNavWeapon)
+                timestampNavWea = timestamp
+            end
+        end
+
+        if (ExportScript.Config.ExportNavAllData == true and lShowOnMapAir == true) then
+            if (timestamp > timestampNavAir + timeSecAir) then
+                local coProcessNavObjects = coroutine.create(ExportScript.Tools.ProcessNavAir)
+                _coStatus = coroutine.resume(coProcessNavObjects)
+                timestampNavAir = timestamp
+            end
+        end
+
+        if (ExportScript.Config.ExportNavAllData == true and lShowOnMapGnd == true) then
+            if (timestamp > timestampNavGnd + timeSecGnd) then
+                local coProcessNavGround = coroutine.create(ExportScript.Tools.ProcessNavGround)
+                _coStatus = coroutine.resume(coProcessNavGround)
+                timestampNavGnd = timestamp
+            end
+        end
 
     if ExportScript.Config.Export then
         ExportScript.Tools.FlushData()
@@ -735,7 +772,9 @@ end
 
 function ExportScript.Tools.SendPacket(packet)
     local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() end)
+    if (lDeviceIpMap ~= "") then
         try(ExportScript.UDPsender:sendto(packet, lDeviceIpMap, ExportScript.Config.Port))
+    end
 
     ExportScript.Tools.DebugProcess(try, packet)
 end
@@ -791,24 +830,37 @@ function ExportScript.Tools.FlushData()
 	local _flushData = ExportScript.socket.protect(function()
 		if #ExportScript.SendStrings > 0 then
             local _packet = "File=" .. ExportScript.ModuleName .. ExportScript.Config.Separator .. "R4G" .. ExportScript.Config.Separator ..
+            -- local _packet = "R4G" .. ExportScript.Config.Separator ..
                 table.concat(ExportScript.SendStrings, ExportScript.Config.Separator) .. ExportScript.Config.Separator .. "\n"
 
             local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() ExportScript.Tools.ResetChangeValues() end)
 
             if ExportScript.Config.Export then
-                try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host, ExportScript.Config.Port))
+                if (ExportScript.Config.Host == lDeviceIpMap) then
+                else
+                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host, ExportScript.Config.Port))
+                end
             end
 
             if ExportScript.Config.Export2 then
-                try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host2, ExportScript.Config.Port))
+                if (ExportScript.Config.Host2 == lDeviceIpMap) then
+                else
+                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host2, ExportScript.Config.Port))
+                end
             end
 
             if ExportScript.Config.Export3 then
-                try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host3, ExportScript.Config.Port))
+                if (ExportScript.Config.Host3 == lDeviceIpMap) then
+                else
+                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host3, ExportScript.Config.Port))
+                end
             end
 
             if ExportScript.Config.Export4 then
-                try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host4, ExportScript.Config.Port))
+                if (ExportScript.Config.Host4 == lDeviceIpMap) then
+                else
+                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host4, ExportScript.Config.Port))
+                end
             end
 
 			ExportScript.SendStrings = {}
@@ -822,9 +874,9 @@ end
 
 -- NavData
 function ExportScript.Tools.SendNavData(id, value)
-    if string.len(value) > 3 and value == string.sub("-0.00000000",1, string.len(value)) then
-        value = value:sub(2)
-    end
+    -- if string.len(value) > 3 and value == string.sub("-0.00000000",1, string.len(value)) then
+    --     value = value:sub(2)
+    -- end
 
     if ExportScript.LastData[id] == nil or ExportScript.LastData[id] ~= value then
         local _data    =  id .. "=" .. value
@@ -864,7 +916,9 @@ function ExportScript.Tools.FlushNavData()
                 try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host4, ExportScript.Config.Port))
             end
 
-            -- try(ExportScript.UDPsender:sendto(_packet, lDeviceIpMap, ExportScript.Config.Port))
+            if (lDeviceIpMap ~= "") then
+                try(ExportScript.UDPsender:sendto(_packet, lDeviceIpMap, ExportScript.Config.Port))
+            end
 
 			ExportScript.SendNavStrings = {}
 			ExportScript.PacketNavSize  = 0
@@ -888,7 +942,9 @@ function ExportScript.Tools.FlushNavAllData()
 	local _flushData = ExportScript.socket.protect(function()
         local _packet = table.concat(ExportScript.SendNavAllStrings, ExportScript.Config.Separator) .. "\n"
         local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() end)
+        if (lDeviceIpMap ~= "") then
             try(ExportScript.UDPsender:sendto(_packet, lDeviceIpMap, ExportScript.Config.Port))
+        end
 
         ExportScript.SendNavAllStrings = {}
         ExportScript.Tools.DebugProcess(try, _packet)
@@ -975,8 +1031,7 @@ function ExportScript.Tools.GetMap(player)
         if player.LatLongAlt.Lat > LatLong.Lat2 and player.LatLongAlt.Lat < LatLong.Lat1 then
             if player.LatLongAlt.Long > LatLong.Long1 and player.LatLongAlt.Long < LatLong.Long2 then
                 lMap = Map
-                ExportScript.Tools.WriteToLog("Loaded Map: "..Map)
-                -- ExportScript.Tools.SendShortData("Map=" .. Map .. ExportScript.Config.Separator)
+                ExportScript.Tools.WriteToLog("Loaded Map: " .. Map .. "\n")
                 break
             end
         end
@@ -1006,7 +1061,7 @@ function ExportScript.Tools.RoundFreqeuncy(Freqeuncy, Format, PrefixZeros, Least
 	_tmpString = (_tmp3 + (bla3 * _leastvalue ))
 
 	_tmpString = string.format("%.".._tmp2.."f", _tmpString)
-	
+
 	_tmpString = string.rep(" ", _tmp1 - string.len(_tmpString)) .. _tmpString
 
 	if _prefixzeros then
