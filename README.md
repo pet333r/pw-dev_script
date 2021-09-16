@@ -9,7 +9,7 @@ Step by step how to install DCS World script
 [![How to install script](.gfx/yt_script.png)](https://youtu.be/saFq3Png-ds)
 
 # latest script version in zip file
-if you have any problem understanding how the DCS World script should be installed, download the zip file, it contains a schematic of the entire "Scripts" folder along with the main "Export.lua" file and the entire script
+if you have any problem understanding how the DCS World script should be installed, download the zip file, it contains a schematic of the entire `Scripts` folder along with the main `Export.lua` file and the entire script
 
 you'll find it on the "Releases" page
 [https://github.com/pet333r/pw-dev_script/releases](https://github.com/pet333r/pw-dev_script/releases)
@@ -99,7 +99,7 @@ in folder `pw-dev_script` open `Config.lua` for edit, there are several "groups"
 choose one of them and edit `Host` and `Port` (you can leave port the same, in 99% cases you don't even need to change)  
 it is <span style="color:red">**IMPORTANT**</span> that the device's IP address matches and `PC / phone / tablet` must be on the same network  
 
-### configuration for apps
+<!-- ### configuration for apps
 - if You only use `DCS UFC` [https://play.google.com/store/apps/details?id=com.dcsufc](https://play.google.com/store/apps/details?id=com.dcsufc) set `ExportSelfData` to `false` (less data to be sent and processed by the application, longer battery life)
 ```
 ExportScript.Config.ExportSelfData          = false
@@ -109,7 +109,7 @@ ExportScript.Config.ExportSelfData          = false
 ExportScript.Config.ExportXSD               = true (where X is Your device group to which the IP of the device from the DCS AoA Indexer is assigned)
 ...
 ExportScript.Config.ExportSelfData          = true
-```
+``` -->
 
 example you will find below in the [example connection](#example-connection)
 
@@ -122,8 +122,10 @@ just run it from time to time or add a shortcut in the Windows Startup folder to
 
 # how to find IP's of PC and Android device
 
+## Android
 To find Android device IP: go to `Settings > WiFi` > check the properties of your network   
 
+## PC
 to find the IP address of the computer with DCS World installed: [https://www.digitalcitizen.life/find-ip-address-windows](https://www.digitalcitizen.life/find-ip-address-windows)  
 or run `my_local_PC_IP.cmd` file in script folder, a console window will open  
 
@@ -152,6 +154,15 @@ Android device IP: 192.168.0.12
 ***`4`*** where to enter the IP address of the device to which I want to send the data from the script?  
 In one of the "groups" in the Config.lua file which is located in the folder with the script. Never enter the same IP address in several groups with the same port number, it may block data transfer on this port.
 
+
+# features
+## additional script functions:
+
+***`1`*** saving telemetry data to KML and CSV files, files are saved in one of the folders (depending on your DCS World version)  
+  * `c:\Users\{Your username}\Saved Games\DCS.openbeta\Logs\`
+  * `c:\Users\{Your username}\Saved Games\DCS\Logs\`  
+  - KML file (the file can be opened in any application that supports that file format):
+  ![](.gfx/ge1.png)
 # known issues
 
 ***`1`*** If You can interact with DCS but not receiving data  
@@ -200,5 +211,5 @@ local Tacviewlfs=require('lfs');dofile(Tacviewlfs.writedir()..'Scripts/TacviewGa
 # license
 
 The script is available free of charge under the LGPLv3 license.  
-Part of the script was based on `DCS-ExportScripts` [https://github.com/s-d-a/DCS-ExportScripts](https://github.com/s-d-a/DCS-ExportScripts)  
+Part of the script was based on `DCS-ExportScripts` 
 Additional functionality was added and modified to increase performance and separate sending of individual data to reduce the load on the application.
