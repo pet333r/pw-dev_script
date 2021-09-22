@@ -443,7 +443,6 @@ function ExportScript.Tools.ProcessNavGround()
     end
 
     if gndObjects then
-        -- ExportScript.Tools.SendPacket("N4G" .. ExportScript.Config.Separator .. "start" .. ExportScript.Config.Separator .. "\n")
         for key, value in pairs(ExportScript.Tools.NavDataGnd) do
             ExportScript.Tools.SendNavAllData("N4G" .. ExportScript.Config.Separator .. key, value)
         end
@@ -495,7 +494,6 @@ function ExportScript.Tools.ProcessNavAir()
     end
 
     if objects then
-        -- ExportScript.Tools.SendPacket("N4A" .. ExportScript.Config.Separator .. "start" .. ExportScript.Config.Separator .. "\n")
         for key, value in pairs(ExportScript.Tools.NavDataAll) do
             ExportScript.Tools.SendNavAllData("N4A" .. ExportScript.Config.Separator .. key, value)
         end
@@ -539,7 +537,6 @@ function ExportScript.Tools.ProcessNavWeapon()
     end
 
     if weapons then
-        -- ExportScript.Tools.SendPacket("N4W" .. ExportScript.Config.Separator .. "start" .. ExportScript.Config.Separator .. "\n")
         for key, value in pairs(ExportScript.Tools.NavDataWeapons) do
             ExportScript.Tools.SendNavAllData("N4W" .. ExportScript.Config.Separator .. key, value)
         end
@@ -930,28 +927,28 @@ function ExportScript.Tools.FlushNavData()
             if ExportScript.Config.Export1Nav then
                 if (ExportScript.Config.Host == lDeviceIpMap) then
                 else
-                try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host, ExportScript.Config.Port))
+                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host, ExportScript.Config.Port))
                 end
             end
 
             if ExportScript.Config.Export2Nav then
                 if (ExportScript.Config.Host2 == lDeviceIpMap) then
                 else
-                try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host2, ExportScript.Config.Port))
+                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host2, ExportScript.Config.Port))
                 end
             end
 
             if ExportScript.Config.Export3Nav then
                 if (ExportScript.Config.Host3 == lDeviceIpMap) then
                 else
-                try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host3, ExportScript.Config.Port))
+                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host3, ExportScript.Config.Port))
                 end
             end
 
             if ExportScript.Config.Export4Nav then
                 if (ExportScript.Config.Host4 == lDeviceIpMap) then
                 else
-                try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host4, ExportScript.Config.Port))
+                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host4, ExportScript.Config.Port))
                 end
             end
 
