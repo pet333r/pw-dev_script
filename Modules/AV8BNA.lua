@@ -188,8 +188,8 @@ ExportScript.ConfigEveryFrameArguments =
 	-- [359] = "%.4f",	--IN HG 4. NUMBER
 
 	--AOA
-	[360] = "%.4f",	--AOA FLAG
-	[361] = "%.4f",	--AOA POINTER
+	[360] = "%.1f",	--AOA FLAG
+	[361] = "%.1f",	--AOA POINTER
 
 	--VVI
 	-- [362] = "%.4f",	--VVI POINTER
@@ -211,7 +211,7 @@ ExportScript.ConfigArguments =
 	[280] = "%.1f",	--AG Master Mode Selector
 
 	-- Engine Display Panel
-	[272] = "%.4f",	--EDP Brightness Control
+	[272] = "%.1f",	--EDP Brightness Control
 	[655] = "%1d",	--EDP BIT Button
 
 	-- HUD Control Panel

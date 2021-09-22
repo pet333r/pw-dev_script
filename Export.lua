@@ -192,7 +192,6 @@ end
 function ExportScript.Stop()
 	-- Works once just after mission stop.
 	ExportScript.Tools.SendShortData("EX=OF")
-	-- ExportScript.Tools.SendData("exporting", "stop")
 	-- ExportScript.Tools.FlushData()
 
 	ExportScript.UDPsender:close()
