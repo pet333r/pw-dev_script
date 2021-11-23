@@ -1,6 +1,26 @@
 ExportScript.Tools = {}
 
 local PlayerData = {}
+PlayerData.MechGearNose = 0.0
+PlayerData.MechGearLeft = 0.0
+PlayerData.MechGearRigh = 0.0
+PlayerData.MechAirBrakeLeft = 0.0
+PlayerData.MechAirBrakeRigh = 0.0
+PlayerData.MechRefueling = 0.0
+PlayerData.MechHook = 0.0
+PlayerData.MechNozzLeft = 0.0
+PlayerData.MechNozzRigh = 0.0
+
+PlayerData.AltGearLeft = 0
+PlayerData.AltGearNose = 0
+PlayerData.AltGearRigh = 0
+PlayerData.IndRefueling = 0
+PlayerData.IndHook = 0
+PlayerData.ThrottleLeft = 0.0
+PlayerData.ThrottleRigh = 0.0
+PlayerData.EngineRpmLeft = 0.0
+PlayerData.EngineRpmRigh = 0.0
+PlayerData.FuelFlow = 0
 
 local isObjects = true
 local isSensors = true
@@ -323,19 +343,117 @@ function ExportScript.Tools.GetPlayerData()
     PlayerData.WindSpd = math.abs(math.sqrt(math.pow(PlayerData.Wind.x, 2) + math.pow(PlayerData.Wind.y, 2) + math.pow(PlayerData.Wind.z, 2)))
     PlayerData.WindAng = math.atan2(PlayerData.Wind.y, PlayerData.Wind.x) * 180/math.pi
 
-    if (ExportScript.ModuleName == "FA-18C_hornet") then
-        PlayerData.AltGearLeft = ExportScript.Tools.GetArgumentsValue(165, "%d")
-        PlayerData.AltGearNose = ExportScript.Tools.GetArgumentsValue(166, "%d")
-        PlayerData.AltGearRigh = ExportScript.Tools.GetArgumentsValue(167, "%d")
-    elseif (ExportScript.ModuleName == "F-14A-135-GR" or "F-14B") then
-        PlayerData.AltGearLeft = ExportScript.Tools.GetArgumentsValue(8302, "%d")
-        PlayerData.AltGearNose = ExportScript.Tools.GetArgumentsValue(8301, "%d")
-        PlayerData.AltGearRigh = ExportScript.Tools.GetArgumentsValue(8305, "%d")
+    if ((ExportScript.ModuleName == "A-10C") or (ExportScript.ModuleName == "A-10C_2")) then
+        PlayerData.AltGearLeft  = ExportScript.Tools.GetArgumentsValue(660, "%d")
+        PlayerData.AltGearNose  = ExportScript.Tools.GetArgumentsValue(659, "%d")
+        PlayerData.AltGearRigh  = ExportScript.Tools.GetArgumentsValue(661, "%d")
+        PlayerData.ThrottleLeft  = ExportScript.Tools.GetArgumentsValue(8, "%.1f")
+        PlayerData.ThrottleRigh  = ExportScript.Tools.GetArgumentsValue(9, "%.1f")
+
+        -- refueling
+        PlayerData.MechRefueling = LoGetAircraftDrawArgumentValue(22)
+        -- brake
+        PlayerData.MechAirBrakeRigh = LoGetAircraftDrawArgumentValue(182)
+        PlayerData.MechAirBrakeLeft = LoGetAircraftDrawArgumentValue(184)
+    elseif (ExportScript.ModuleName == "F-5E-3") then
+        PlayerData.AltGearLeft  = ExportScript.Tools.GetArgumentsValue(53, "%d")
+        PlayerData.AltGearNose  = ExportScript.Tools.GetArgumentsValue(54, "%d")
+        PlayerData.AltGearRigh  = ExportScript.Tools.GetArgumentsValue(55, "%d")
+        -- PlayerData.IndHook  = ExportScript.Tools.GetArgumentsValue(90, "%d")
     elseif (ExportScript.ModuleName == "F-16C_50") then
+        PlayerData.AltGearLeft  = ExportScript.Tools.GetArgumentsValue(351, "%d")
+        PlayerData.AltGearNose  = ExportScript.Tools.GetArgumentsValue(350, "%d")
+        PlayerData.AltGearRigh  = ExportScript.Tools.GetArgumentsValue(352, "%d")
+        PlayerData.IndRefueling    = ExportScript.Tools.GetArgumentsValue(555, "%d")
+        PlayerData.IndHook         = ExportScript.Tools.GetArgumentsValue(354, "%d")
+        PlayerData.EngineRpmLeft = ExportScript.Tools.GetArgumentsValue(95, "%.1f")
+
+        PlayerData.MechGearNose = LoGetAircraftDrawArgumentValue(0)
+        PlayerData.MechGearRigh = LoGetAircraftDrawArgumentValue(3)
+        PlayerData.MechGearLeft = LoGetAircraftDrawArgumentValue(5)
+        -- refueling
+        PlayerData.MechRefueling = LoGetAircraftDrawArgumentValue(22)
+        -- hook
+        PlayerData.MechHook = LoGetAircraftDrawArgumentValue(25)
+        -- nozzle
+        PlayerData.MechNozzLeft = LoGetAircraftDrawArgumentValue(90)
+        -- brake
+        PlayerData.MechAirBrakeRigh = LoGetAircraftDrawArgumentValue(182)
+        PlayerData.MechAirBrakeLeft = LoGetAircraftDrawArgumentValue(184)
+    elseif ((ExportScript.ModuleName == "F-14A-135-GR") or (ExportScript.ModuleName == "F-14B")) then
+        PlayerData.AltGearLeft  = ExportScript.Tools.GetArgumentsValue(8302, "%d")
+        PlayerData.AltGearNose  = ExportScript.Tools.GetArgumentsValue(8301, "%d")
+        PlayerData.AltGearRigh  = ExportScript.Tools.GetArgumentsValue(8305, "%d")
+        PlayerData.IndHook         = ExportScript.Tools.GetArgumentsValue(238, "%d")
+        PlayerData.EngineRpmLeft = ExportScript.Tools.GetArgumentsValue(1057, "%.1f")
+        PlayerData.EngineRpmRigh = ExportScript.Tools.GetArgumentsValue(1058, "%.1f")
+        -- brake
+        PlayerData.MechAirBrakeLeft = LoGetAircraftDrawArgumentValue(21)
+        -- refueling
+        PlayerData.MechRefueling = LoGetAircraftDrawArgumentValue(22)
+        -- hook
+        PlayerData.MechHook = LoGetAircraftDrawArgumentValue(25)
+        -- nozzle 2x
+        PlayerData.MechNozzRigh = LoGetAircraftDrawArgumentValue(433)
+        PlayerData.MechNozzLeft = LoGetAircraftDrawArgumentValue(434)
+    elseif (ExportScript.ModuleName == "FA-18C_hornet") then
+        PlayerData.AltGearLeft  = ExportScript.Tools.GetArgumentsValue(165, "%d")
+        PlayerData.AltGearNose  = ExportScript.Tools.GetArgumentsValue(166, "%d")
+        PlayerData.AltGearRigh  = ExportScript.Tools.GetArgumentsValue(167, "%d")
+        PlayerData.Refueling    = ExportScript.Tools.GetArgumentsValue(555, "%d")
+        PlayerData.IndHook         = ExportScript.Tools.GetArgumentsValue(293, "%d")
+
+        -- brake
+        PlayerData.MechAirBrakeLeft = LoGetAircraftDrawArgumentValue(21)
+        -- refueling
+        PlayerData.MechRefueling = LoGetAircraftDrawArgumentValue(22)
+        -- hook
+        PlayerData.MechHook = LoGetAircraftDrawArgumentValue(25)
+        -- nozzle 2x
+        PlayerData.MechNozzRigh = LoGetAircraftDrawArgumentValue(89)
+        PlayerData.MechNozzLeft = LoGetAircraftDrawArgumentValue(90)
+    elseif (ExportScript.ModuleName == "JF-17") then
+        PlayerData.AltGearLeft  = ExportScript.Tools.GetArgumentsValue(101, "%d")
+        PlayerData.AltGearNose  = ExportScript.Tools.GetArgumentsValue(102, "%d")
+        PlayerData.AltGearRigh  = ExportScript.Tools.GetArgumentsValue(103, "%d")
+        -- nozzle
+        PlayerData.MechNozzLeft = LoGetAircraftDrawArgumentValue(90)
+        -- brake
+        PlayerData.MechAirBrakeRigh = LoGetAircraftDrawArgumentValue(182)
+        PlayerData.MechAirBrakeLeft = LoGetAircraftDrawArgumentValue(184)
+    elseif (ExportScript.ModuleName == "M-2000C") then
+        PlayerData.AltGearLeft  = ExportScript.Tools.GetArgumentsValue(417, "%d")
+        PlayerData.AltGearNose  = ExportScript.Tools.GetArgumentsValue(418, "%d")
+        PlayerData.AltGearRigh  = ExportScript.Tools.GetArgumentsValue(419, "%d")
+        PlayerData.IndHook         = ExportScript.Tools.GetArgumentsValue(414, "%d")
+        -- refueling
+        PlayerData.MechRefueling = LoGetAircraftDrawArgumentValue(22)
+        -- nozzle
+        PlayerData.MechNozzLeft = LoGetAircraftDrawArgumentValue(90)
+        -- brake
+        PlayerData.MechAirBrakeRigh = LoGetAircraftDrawArgumentValue(182)
+        PlayerData.MechAirBrakeLeft = LoGetAircraftDrawArgumentValue(184)
     else
-        PlayerData.AltGearLeft = 0
-        PlayerData.AltGearNose = 0
-        PlayerData.AltGearRigh = 0
+        -- PlayerData.MechGearNose = 0.0
+        -- PlayerData.MechGearLeft = 0.0
+        -- PlayerData.MechGearRigh = 0.0
+        -- PlayerData.MechAirBrakeLeft = 0.0
+        -- PlayerData.MechAirBrakeRigh = 0.0
+        -- PlayerData.MechRefueling = 0.0
+        -- PlayerData.MechHook = 0.0
+        -- PlayerData.MechNozzLeft = 0.0
+        -- PlayerData.MechNozzRigh = 0.0
+        
+        -- PlayerData.AltGearLeft = 0
+        -- PlayerData.AltGearNose = 0
+        -- PlayerData.AltGearRigh = 0
+        -- PlayerData.IndRefueling = 0
+        -- PlayerData.IndHook = 0
+        -- PlayerData.ThrottleLeft = 0.0
+        -- PlayerData.ThrottleRigh = 0.0
+        -- PlayerData.EngineRpmLeft = 0.0
+        -- PlayerData.EngineRpmRigh = 0.0
+        -- PlayerData.FuelFlow = 0
     end
 end
 
@@ -356,11 +474,19 @@ function ExportScript.Tools.WriteToNavFiles()
         local data6 = string.format("%d;%d;", PlayerData.WindSpd, PlayerData.WindAng)
         -- 21-24
         local data7 = string.format("%d;%d;%d;%d;", PlayerData.OnGround, PlayerData.AltGearLeft, PlayerData.AltGearNose, PlayerData.AltGearRigh)
-        -- 25-36
-        local data8 = string.format("%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;",
+        -- 25-28
+        local data8 = string.format("%d;%d;%.1f;%.1f;", PlayerData.IndRefueling, PlayerData.IndHook, PlayerData.ThrottleLeft, PlayerData.ThrottleRigh)
+        -- 29-33
+        local data9 = string.format("%.1f;%.1f;%d;%.2f;%.2f;", PlayerData.EngineRpmLeft, PlayerData.EngineRpmRigh, PlayerData.FuelFlow, PlayerData.MechNozzLeft, PlayerData.MechNozzRigh)
+        -- 34-36
+        local data10 = string.format("%.1f;%.1f;%.1f;", PlayerData.MechGearNose, PlayerData.MechGearLeft, PlayerData.MechGearRigh)
+        -- 37-40
+        local data11 = string.format("%.1f;%.1f;%.1f;%.1f;", PlayerData.MechAirBrakeLeft, PlayerData.MechAirBrakeRigh, PlayerData.MechRefueling, PlayerData.MechHook)
+        -- 41-52
+        local data12 = string.format("%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;",
         PlayerData.Cam.x.x, PlayerData.Cam.x.y, PlayerData.Cam.x.z, PlayerData.Cam.y.x, PlayerData.Cam.y.y, PlayerData.Cam.y.z, PlayerData.Cam.z.x, PlayerData.Cam.z.y, PlayerData.Cam.z.z, PlayerData.Cam.p.x, PlayerData.Cam.p.y, PlayerData.Cam.p.z)
         
-        local csvPacket = string.format("%s%s%s%s%s%s%s%s\n", data1, data2, data3, data4, data5, data6, data7, data8)
+        local csvPacket = string.format("%s%s%s%s%s%s%s%s%s%s%s%s\n", data1, data2, data3, data4, data5, data6, data7, data8, data9, data10, data11, data12)
         ExportScript.Fdr.CsvFileWrite(csvPacket)
 
         local navPacket = string.format("%.6f,%.6f,%d\n", PlayerData.Lon, PlayerData.Lat, PlayerData.AltM)
@@ -631,7 +757,7 @@ function ExportScript.Tools.ProcessOutput()
                     _coStatus = coroutine.resume(coProcessWriteFile)
                 end
                 if lShowOnMapPlayer then
-                    local coProcessNavData = coroutine.create(ExportScript.Tools.ProcessNavData)
+                    local coProcessNavData = coroutine.create(ExportScript.Tools.ProcessNavDataD)
                     _coStatus = coroutine.resume(coProcessNavData)
                 end
                 timestampNav = timestamp
@@ -703,7 +829,7 @@ function ExportScript.Tools.ProcessOutput()
                     _coStatus = coroutine.resume(coProcessWriteFile)
                 end
                 if lShowOnMapPlayer then
-                    local coProcessNavData = coroutine.create(ExportScript.Tools.ProcessNavData)
+                    local coProcessNavData = coroutine.create(ExportScript.Tools.ProcessNavDataD)
                     _coStatus = coroutine.resume(coProcessNavData)
                 end
                 timestampNav = timestamp
@@ -857,8 +983,8 @@ end
 function ExportScript.Tools.FlushData()
 	local _flushData = ExportScript.socket.protect(function()
 		if #ExportScript.SendStrings > 0 then
-            local _packet = "File=" .. ExportScript.ModuleName .. ExportScript.Config.Separator .. "R4G" .. ExportScript.Config.Separator ..
-            -- local _packet = "R4G" .. ExportScript.Config.Separator ..
+            -- local _packet = "File=" .. ExportScript.ModuleName .. ExportScript.Config.Separator .. "R4G" .. ExportScript.Config.Separator ..
+            local _packet = "R4G" .. ExportScript.Config.Separator ..
                 table.concat(ExportScript.SendStrings, ExportScript.Config.Separator) .. ExportScript.Config.Separator .. "\n"
 
             local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() ExportScript.Tools.ResetChangeValues() end)
@@ -919,38 +1045,39 @@ end
 function ExportScript.Tools.FlushNavData()
 	local _flushData = ExportScript.socket.protect(function()
 		if #ExportScript.SendNavStrings > 0 then
-            local _packet = "N4D" .. ExportScript.Config.Separator .. "Mod=" .. ExportScript.ModuleName .. ExportScript.Config.Separator ..
+            -- local _packet = "N4D" .. ExportScript.Config.Separator .. "Mod=" .. ExportScript.ModuleName .. ExportScript.Config.Separator ..
+            local _packet = "N4D" .. ExportScript.Config.Separator ..
                 table.concat(ExportScript.SendNavStrings, ExportScript.Config.Separator) .. ExportScript.Config.Separator .. "\n"
 
             local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() ExportScript.Tools.ResetChangeValues() end)
 
-            if ExportScript.Config.Export1Nav then
-                if (ExportScript.Config.Host == lDeviceIpMap) then
-                else
-                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host, ExportScript.Config.Port))
-                end
-            end
+            -- if ExportScript.Config.Export1Nav then
+            --     if ((ExportScript.Config.Host == lDeviceIpMap) or (lDeviceIpMap == "")) then
+            --     else
+            --         try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host, ExportScript.Config.Port))
+            --     end
+            -- end
 
-            if ExportScript.Config.Export2Nav then
-                if (ExportScript.Config.Host2 == lDeviceIpMap) then
-                else
-                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host2, ExportScript.Config.Port))
-                end
-            end
+            -- if ExportScript.Config.Export2Nav then
+            --     if (ExportScript.Config.Host2 == lDeviceIpMap) then
+            --     else
+            --         try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host2, ExportScript.Config.Port))
+            --     end
+            -- end
 
-            if ExportScript.Config.Export3Nav then
-                if (ExportScript.Config.Host3 == lDeviceIpMap) then
-                else
-                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host3, ExportScript.Config.Port))
-                end
-            end
+            -- if ExportScript.Config.Export3Nav then
+            --     if (ExportScript.Config.Host3 == lDeviceIpMap) then
+            --     else
+            --         try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host3, ExportScript.Config.Port))
+            --     end
+            -- end
 
-            if ExportScript.Config.Export4Nav then
-                if (ExportScript.Config.Host4 == lDeviceIpMap) then
-                else
-                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host4, ExportScript.Config.Port))
-                end
-            end
+            -- if ExportScript.Config.Export4Nav then
+            --     if (ExportScript.Config.Host4 == lDeviceIpMap) then
+            --     else
+            --         try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host4, ExportScript.Config.Port))
+            --     end
+            -- end
 
             if (lDeviceIpMap ~= "") then
                 try(ExportScript.UDPsender:sendto(_packet, lDeviceIpMap, ExportScript.Config.Port))

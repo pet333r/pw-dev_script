@@ -6,6 +6,8 @@ ExportScript = {}
 -- will be removed from script folder in future
 ---------------------------------------------------
 
+ExportScript.Id = string.format("%08x*",os.time())
+
 -- State data for export
 ExportScript.PacketSize     = 0
 ExportScript.SendStrings    = {}
