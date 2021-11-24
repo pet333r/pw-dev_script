@@ -1043,6 +1043,10 @@ function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
 		ExportScript.Tools.SendData(2104, DEDLine4)
 		ExportScript.Tools.SendData(2105, DEDLine5)
 
+		-- UHF
+		ExportScript.Tools.SendData(2305, get_UHF_CHAN())
+		ExportScript.Tools.SendData(2306, get_UHF_FREQUENCY())
+
 		-- CMDS
 		local cmds = ExportScript.Tools.getListIndicatorValue(16)
 		CMDS_O1_Amount = "    "
@@ -1059,10 +1063,6 @@ function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
 		ExportScript.Tools.SendData(2302, CMDS_O2_Amount)
 		ExportScript.Tools.SendData(2303, CMDS_CH_Amount)
 		ExportScript.Tools.SendData(2304, CMDS_FL_Amount)
-
-		-- UHF
-		ExportScript.Tools.SendData(2305, get_UHF_CHAN())
-		ExportScript.Tools.SendData(2306, get_UHF_FREQUENCY())
 	end
 
 	-- local val = ExportScript.Tools.getListIndicatorValue(14)
