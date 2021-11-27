@@ -52,3 +52,8 @@ Modules/UH-1H.lua
 Modules/Yak-52.lua
 Utilities/config.cfg
 Utilities/DCSUtil.exe
+add_firewall_rules.bat
+Config.lua
+ExportInit.lua
+my_local_PC_IP.cmd
+version
