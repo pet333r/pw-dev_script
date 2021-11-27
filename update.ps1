@@ -5,7 +5,7 @@ $fileName = "update.ps1"
 $fileNameTmp = "updateTmp.ps1"
 $urlUpdateScript = "https://raw.githubusercontent.com/pet333r/pw-dev_script/master/.update/" + $fileName
 
-# main dir
+# main directory path
 $dirMain = "$PSScriptRoot\"
 
 Write-Host "Trying to download update file: $urlUpdateScript"
