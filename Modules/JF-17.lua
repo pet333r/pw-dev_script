@@ -131,7 +131,7 @@ ExportScript.ConfigEveryFrameArguments =
     [944] = "%.2f", -- Instrument Light Knob
     [945] = "%.2f", -- Console Light Knob
     [946] = "%.2f", -- Flood Light Knob
-    
+
     -- EXT LIG
     [947] = "%1d", -- Exterior Light Master Switch 1/0/-1
     [948] = "%.1f", -- Formation Light Knob Selector 0/3/5/8/1.0
@@ -152,57 +152,49 @@ ExportScript.ConfigArguments =
     [732] = "%.1f", -- UFCP Brightness Knob
 }
 
-function processUFCPLine(ufcpLine, lineNum)
-	local temp_txt_win    = ufcpLine["txt_win"..lineNum]
-	local txt_win_fill    = ufcpLine["txt_win"..lineNum.."_fill"]
-	local cur_win      = ufcpLine["cur_win"..lineNum]
-	local txt_winr      = ufcpLine["txt_win"..lineNum.."r"]
-	local cur_winr      = ufcpLine["cur_win"..lineNum.."r"]
-	local UFCPLineLength = 8
+local function processUFCPLine(ufcpLine, lineNum)
+	local temp_txt_win      = ufcpLine["txt_win" .. lineNum]
+	local txt_win_fill      = ufcpLine["txt_win" .. lineNum .. "_fill"]
+	local cur_win           = ufcpLine["cur_win" .. lineNum]
+	local txt_winr          = ufcpLine["txt_win" .. lineNum .. "r"]
+	local cur_winr          = ufcpLine["cur_win" .. lineNum .. "r"]
+	local UFCPLineLength    = 8
 	local txt_win
- 
+
 	if temp_txt_win ~= null then
-			txt_win = temp_txt_win:gsub(string.char(127),"^")
-	 else
-		 txt_win = ""
-	 end
+        txt_win = temp_txt_win:gsub(string.char(127), "^")
+    else
+        txt_win = ""
+    end
 
 	if txt_win_fill ~= null then
-	   local full_txt_win_fill  = txt_win_fill..string.rep(" ",UFCPLineLength - string.len(txt_win_fill))
-	   if temp_txt_win ~= null then
-		  if cur_win ~= null then
-			 if txt_win:find("-") then
-				processedUFCPLine = txt_win:sub(1,txt_win:find("-") - cur_win:len()) .. cur_win .. txt_win:sub(txt_win:find("-") + cur_win:len()) .. full_txt_win_fill:sub(txt_win:len()+1)
-			 else
-				processedUFCPLine = txt_win:sub(1,txt_win:len() - cur_win:len()) .. cur_win .. full_txt_win_fill:sub(txt_win:len()+1)
-			 end
-		  else
-			 processedUFCPLine = txt_win .. full_txt_win_fill:sub(txt_win:len() + 1)
-		  end
+	    local full_txt_win_fill  = txt_win_fill..string.rep(" ", UFCPLineLength - string.len(txt_win_fill))
+	    if temp_txt_win ~= null then
+		    if cur_win ~= null then
+			    if txt_win:find("-") then
+				    processedUFCPLine = txt_win:sub(1, txt_win:find("-") - cur_win:len()) .. cur_win .. txt_win:sub(txt_win:find("-") + cur_win:len()) .. full_txt_win_fill:sub(txt_win:len() + 1)
+			    else
+				    processedUFCPLine = txt_win:sub(1, txt_win:len() - cur_win:len()) .. cur_win .. full_txt_win_fill:sub(txt_win:len() + 1)
+			    end
+		    else
+			    processedUFCPLine = txt_win .. full_txt_win_fill:sub(txt_win:len() + 1)
+		    end
 		else
-		  if cur_winr ~= null then
-			 processedUFCPLine = full_txt_win_fill:sub(1,UFCPLineLength - txt_winr:len()) .. txt_winr:sub(1,txt_winr:len() - cur_winr:len())..cur_winr
-		  else
-			 processedUFCPLine = full_txt_win_fill:sub(1,UFCPLineLength - txt_winr:len())..txt_winr
-		  end
+		    if cur_winr ~= null then
+			    processedUFCPLine = full_txt_win_fill:sub(1, UFCPLineLength - txt_winr:len()) .. txt_winr:sub(1, txt_winr:len() - cur_winr:len()) .. cur_winr
+		    else
+			    processedUFCPLine = full_txt_win_fill:sub(1, UFCPLineLength - txt_winr:len()) .. txt_winr
+		    end
 		end
 	elseif txt_win ~= null then
-	   processedUFCPLine = txt_win
+	    processedUFCPLine = txt_win
 	else
-	   processedUFCPLine = txt_winr
+	    processedUFCPLine = txt_winr
 	end
-	return processedUFCPLine      
+	return processedUFCPLine
 end
 
--- function coerce_nil_to_string(value)
--- 	if value == nil then
--- 		return ""
--- 	else
--- 		return value
--- 	end
--- end
-
-function radio_parse_indication(indicator_id)  -- Thanks to [FSF]Ian code
+local function radio_parse_indication(indicator_id)  -- Thanks to [FSF]Ian code
 	local ret = {}
 	local li = list_indication(indicator_id)
 	if li == "" then return nil end
@@ -211,7 +203,7 @@ function radio_parse_indication(indicator_id)  -- Thanks to [FSF]Ian code
 		local name, value = m()
 		if not name then break end
 			-- there's # characters in one of the radio indicator names which break parsing if it isn't replaced
-			ret[name:gsub("\#","hash")] = value
+			ret[name:gsub("\#", "hash")] = value
 		end
 	return ret
 end
@@ -231,28 +223,28 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
         if not indLcd1 then
             return
         end
-        ufcLcdLine1 = ExportScript.Tools.coerce_nil_to_string(processUFCPLine(indLcd1,1))
+        ufcLcdLine1 = ExportScript.Tools.coerce_nil_to_string(processUFCPLine(indLcd1, 1))
         ExportScript.Tools.SendData(2001, ufcLcdLine1)
 
         local indLcd2 = ExportScript.Tools.getListIndicatorValue(4)
         if not indLcd2 then
             return
         end
-        ufcLcdLine2 = ExportScript.Tools.coerce_nil_to_string(processUFCPLine(indLcd2,2))
+        ufcLcdLine2 = ExportScript.Tools.coerce_nil_to_string(processUFCPLine(indLcd2, 2))
         ExportScript.Tools.SendData(2002, ufcLcdLine2)
 
         local indLcd3 = ExportScript.Tools.getListIndicatorValue(5)
         if not indLcd3 then
             return
         end
-        ufcLcdLine3 = ExportScript.Tools.coerce_nil_to_string(processUFCPLine(indLcd3,3))
+        ufcLcdLine3 = ExportScript.Tools.coerce_nil_to_string(processUFCPLine(indLcd3, 3))
         ExportScript.Tools.SendData(2003, ufcLcdLine3)
 
         local indLcd4 = ExportScript.Tools.getListIndicatorValue(6)
         if not indLcd4 then
             return
         end
-        ufcLcdLine4 = ExportScript.Tools.coerce_nil_to_string(processUFCPLine(indLcd4,4))
+        ufcLcdLine4 = ExportScript.Tools.coerce_nil_to_string(processUFCPLine(indLcd4, 4))
         ExportScript.Tools.SendData(2004, ufcLcdLine4)
 
 
@@ -280,17 +272,17 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
         end
         if radioDisplay.radio_or then
             radio_or_light = 1;
-        end 
+        end
         if radioDisplay.radio_take then
             radio_take_light = 1;
-        end 
+        end
         if radioDisplay.radio_go then
             radio_go_light = 1;
         end
         if radioDisplay.radio_tx then
             radio_tx_light = 1;
-        end 
-        
+        end
+
         -- Radio Display Line 2 uses unprintable characters to display the power symbol - replace these with something printable
         if radioDisplay.radio_disp_l2 then
             local charReplacements = {
@@ -298,22 +290,22 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
                 [string.char(30)] = "|",
                 [string.char(31)] = "^"
             }
-            radio_line_2 = radioDisplay.radio_disp_l2:gsub(".",charReplacements)	
+            radio_line_2 = radioDisplay.radio_disp_l2:gsub(".", charReplacements)
         end
-        
+
         -- original name for field is "#3#"" but this is modified in radio_parse_indication to "hash3hash"
         if radioDisplay.hash3hash then
             local tempString
             if radioDisplay.radio_cursor and radioDisplay.radio_cursor:len() > 0 then
                 if radioDisplay.radio_disp_l1 and radioDisplay.radio_disp_l1:len() > 1 then
-                   tempString = radioDisplay.radio_disp_l1:sub(1,radioDisplay.radio_disp_l1:len() - 1)..radioDisplay.radio_cursor
+                   tempString = radioDisplay.radio_disp_l1:sub(1, radioDisplay.radio_disp_l1:len() - 1) .. radioDisplay.radio_cursor
                 else
                    tempString = radioDisplay.radio_cursor
-                end 
+                end
             else
                 tempString = radioDisplay.radio_disp_l1
             end
-            radio_line_1 = radioDisplay.hash3hash:sub(1,radioDisplay.hash3hash:len() - tempString:len())..tempString
+            radio_line_1 = radioDisplay.hash3hash:sub(1, radioDisplay.hash3hash:len() - tempString:len()) .. tempString
         else
             radio_line_1 = radioDisplay.radio_disp_l1
         end

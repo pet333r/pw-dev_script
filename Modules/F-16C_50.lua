@@ -62,6 +62,14 @@ ExportScript.ConfigEveryFrameArguments =
 	[420] = "%.1f", -- UHF Volume Control
 
 	-- ECM
+	[460] = "%1d", -- btn 1
+	[465] = "%1d", -- btn 2
+	[470] = "%1d", -- btn 3
+	[475] = "%1d", -- btn 4
+	[480] = "%1d", -- btn 5
+	[485] = "%1d", -- btn 
+	[490] = "%1d", -- btn FRM
+	[495] = "%1d", -- btn SPL
 	[455] = "%1d", -- switch OPR/STBY/OFF
 	[457] = "%1d", -- switch 123/XMIT
 	[461] = "%1d", -- Button 1 S Light (yellow)
@@ -154,6 +162,9 @@ ExportScript.ConfigEveryFrameArguments =
 }
 ExportScript.ConfigArguments = 
 {
+	-- [17] = "%.2f", -- ADI Pitch
+	-- [18] = "%.2f", -- ADI Bank
+
 	-- CMDS
 	[365] = "%1d", 	-- O1 Expendable Category Switch, ON/OFF
 	[366] = "%1d", 	-- O2 Expendable Category Switch, ON/OFF
@@ -1077,5 +1088,7 @@ end
 
 -- Pointed to by ExportScript.ProcessDCSConfigLowImportance
 function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
-
+	-- General
+	ExportScript.Tools.SendData(2901, -ExportScript.Tools.GetArgumentsValue(17, "%.2f"))
+	ExportScript.Tools.SendData(2902, ExportScript.Tools.GetArgumentsValue(18, "%.2f"))
 end
