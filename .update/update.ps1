@@ -98,7 +98,7 @@ foreach ($module in $modulesList) {
       $output = $dirModules + $module
       #Write-Host "Downloading:" $module
       Invoke-WebRequest -Uri $url -OutFile $output
-      Write-Host "$url"
+      Write-Host "Downloading:" $module
 }
 
 # download folder 'Utilities'
