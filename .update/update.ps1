@@ -51,9 +51,11 @@ $listFilesMain = @(
 $urlModFile =  -Join($urlUpdate, "update_modules")
 $modulesList = (Invoke-webrequest -URI $urlModFile ).Content -split "`n"
 
+# libs
 $urlLibFile =  -Join($urlUpdate, "update_lib")
 $libList = (Invoke-webrequest -URI $urlLibFile ).Content -split "`n"
 
+# utilities
 $urlUtilFile =  -Join($urlUpdate, "update_utils")
 $utilList = (Invoke-webrequest -URI $urlUtilFile ).Content -split "`n"
 
@@ -107,5 +109,7 @@ foreach ($file in $utilList) {
       Invoke-WebRequest -Uri $url -OutFile $output
       Write-Host "Downloading:" $file
 }
+
+#--------------------------------------------------------------------------
 
 Write-Output "`nTime taken: $((Get-Date).Subtract($start_time).Seconds):$((Get-Date).Subtract($start_time).Milliseconds) s"

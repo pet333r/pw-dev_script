@@ -188,13 +188,13 @@ ExportScript.ConfigArguments =
 	[180] = "%1d",   -- AMPCD Gain Control Switch, UP/DOWN {1.0,0.0,-1.0}
 }
 
-function coerce_nil_to_string(value)
-	if value == nil then
-		return ""
-	else
-		return value
-	end
-end
+-- function coerce_nil_to_string(value)
+-- 	if value == nil then
+-- 		return ""
+-- 	else
+-- 		return value
+-- 	end
+-- end
 
 -- Pointed to by ProcessDCSHighImportance
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)

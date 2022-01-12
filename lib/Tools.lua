@@ -152,6 +152,7 @@ end
 function ExportScript.Tools.ExportInit()
     playerId = ExportScript.Tools.GetPlayerId()
     ExportScript.Tools.SendShortData("EX=ON")
+    ExportScript.Tools.SendShortData("Ver=" .. ExportScript.VersionStr)
     ExportScript.Tools.SendShortData("Map=" .. actualMap .. ExportScript.Config.Separator)
     ExportScript.Tools.SendShortData("File=" .. ExportScript.ModuleName .. ExportScript.Config.Separator)
 end
@@ -188,14 +189,14 @@ function ExportScript.Tools.ProcessInput()
             end
 
             if _command == "E" then
-                lDeviceIpMap = from
+                ExportScript.Tools.lDeviceIpMap = from
                 local opt = tonumber(string.sub(_input,2,-3))
                 local vis = tonumber(string.sub(_input,3,-2))
                 local val = tonumber(string.sub(_input,4,-1))
                 if opt == 0 then
                     if (vis == 0) then
                         ExportScript.Tools.ExportMapPlayer(false)
-                        lDeviceIpMap = ""
+                        ExportScript.Tools.lDeviceIpMap = ""
                     else
                         ExportScript.Tools.ExportMapPlayer(true)
                         ExportScript.Tools.SetSecNav(val)
@@ -926,8 +927,8 @@ end
 
 function ExportScript.Tools.SendPacket(packet)
     local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() end)
-    if (lDeviceIpMap ~= "") then
-        try(ExportScript.UDPsender:sendto(packet, lDeviceIpMap, ExportScript.Config.Port))
+    if (ExportScript.Tools.lDeviceIpMap ~= "") then
+        try(ExportScript.UDPsender:sendto(packet, ExportScript.Tools.lDeviceIpMap, ExportScript.Config.Port))
     end
 
     ExportScript.Tools.DebugProcess(try, packet)
@@ -990,31 +991,39 @@ function ExportScript.Tools.FlushData()
             local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() ExportScript.Tools.ResetChangeValues() end)
 
             if ExportScript.Config.Export then
-                if (ExportScript.Config.Host == lDeviceIpMap) then
+                if (ExportScript.Config.Host == ExportScript.Tools.lDeviceIpMap) then
                 else
                     try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host, ExportScript.Config.Port))
                 end
             end
 
             if ExportScript.Config.Export2 then
-                if (ExportScript.Config.Host2 == lDeviceIpMap) then
+                if (ExportScript.Config.Host2 == ExportScript.Tools.lDeviceIpMap) then
                 else
                     try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host2, ExportScript.Config.Port))
                 end
             end
 
             if ExportScript.Config.Export3 then
-                if (ExportScript.Config.Host3 == lDeviceIpMap) then
+                if (ExportScript.Config.Host3 == ExportScript.Tools.lDeviceIpMap) then
                 else
                     try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host3, ExportScript.Config.Port))
                 end
             end
 
             if ExportScript.Config.Export4 then
-                if (ExportScript.Config.Host4 == lDeviceIpMap) then
+                if (ExportScript.Config.Host4 == ExportScript.Tools.lDeviceIpMap) then
                 else
                     try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host4, ExportScript.Config.Port))
                 end
+            end
+
+            if ExportScript.Config.StreamDeckExport then
+                local _id = ""
+                _id = ExportScript.Id
+                local _packetStreamDeck = _id .. table.concat(ExportScript.SendStrings, ExportScript.Config.StreamDeckSeparator) .. "\n"
+
+                try(ExportScript.UDPsender:sendto(_packetStreamDeck, ExportScript.Config.StreamDeckHost, ExportScript.Config.StreamDeckPort))
             end
 
 			ExportScript.SendStrings = {}
@@ -1051,36 +1060,8 @@ function ExportScript.Tools.FlushNavData()
 
             local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() ExportScript.Tools.ResetChangeValues() end)
 
-            -- if ExportScript.Config.Export1Nav then
-            --     if ((ExportScript.Config.Host == lDeviceIpMap) or (lDeviceIpMap == "")) then
-            --     else
-            --         try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host, ExportScript.Config.Port))
-            --     end
-            -- end
-
-            -- if ExportScript.Config.Export2Nav then
-            --     if (ExportScript.Config.Host2 == lDeviceIpMap) then
-            --     else
-            --         try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host2, ExportScript.Config.Port))
-            --     end
-            -- end
-
-            -- if ExportScript.Config.Export3Nav then
-            --     if (ExportScript.Config.Host3 == lDeviceIpMap) then
-            --     else
-            --         try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host3, ExportScript.Config.Port))
-            --     end
-            -- end
-
-            -- if ExportScript.Config.Export4Nav then
-            --     if (ExportScript.Config.Host4 == lDeviceIpMap) then
-            --     else
-            --         try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host4, ExportScript.Config.Port))
-            --     end
-            -- end
-
-            if (lDeviceIpMap ~= "") then
-                try(ExportScript.UDPsender:sendto(_packet, lDeviceIpMap, ExportScript.Config.Port))
+            if (ExportScript.Tools.lDeviceIpMap ~= "") then
+                try(ExportScript.UDPsender:sendto(_packet, ExportScript.Tools.lDeviceIpMap, ExportScript.Config.Port))
             end
 
 			ExportScript.SendNavStrings = {}
@@ -1105,8 +1086,8 @@ function ExportScript.Tools.FlushNavAllData()
 	local _flushData = ExportScript.socket.protect(function()
         local _packet = table.concat(ExportScript.SendNavAllStrings, ExportScript.Config.Separator) .. "\n"
         local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() end)
-        if (lDeviceIpMap ~= "") then
-            try(ExportScript.UDPsender:sendto(_packet, lDeviceIpMap, ExportScript.Config.Port))
+        if (ExportScript.Tools.lDeviceIpMap ~= "") then
+            try(ExportScript.UDPsender:sendto(_packet, ExportScript.Tools.lDeviceIpMap, ExportScript.Config.Port))
         end
 
         ExportScript.SendNavAllStrings = {}

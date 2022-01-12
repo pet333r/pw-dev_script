@@ -42,6 +42,15 @@ ExportScript.FoundDCSModule = false
 ExportScript.FoundFCModule  = false
 ExportScript.FoundNoModul   = true
 
+ExportScript.VersionStr = 2
+
+function ExportScript.CheckDcs()
+	if (string.match(lfs.writedir(), "openbeta")) then
+		ExportScript.VersionStr = 1
+	else
+		ExportScript.VersionStr = 0
+	end
+end
 
 function LuaExportStart()
 	local status, err = pcall(function()
@@ -106,6 +115,8 @@ function ExportScript.Start()
 	-- Works once just before mission start.
 	package.path  = package.path..";.\\LuaSocket\\?.lua"
 	package.cpath = package.cpath..";.\\LuaSocket\\?.dll"
+
+	ExportScript.CheckDcs()
 
 	if (ExportScript.Tools.DebugScript == true) then
 		ExportScript.logFile = io.open(ExportScript.Tools.LogPath, "wa") -- "W+"

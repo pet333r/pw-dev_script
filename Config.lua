@@ -1,39 +1,44 @@
+-- #INFO
+-- file version: 2021.01.14
+
 -- properties
 ExportScript.Config = {}
 
 -- device 1
-ExportScript.Config.Export      = true;              -- sending data
-ExportScript.Config.Export1Nav  = true;              -- true if you want to show position on map on this device
-ExportScript.Config.Host        = "192.168.0.12"    -- IP for 1st app
-ExportScript.Config.Port        = 5160;              -- port for sending data for all connected devices
+ExportScript.Config.Export  = true;              -- sending data
+ExportScript.Config.Host    = "192.168.0.12"     -- IP for 1st app
+ExportScript.Config.Port    = 5160;              -- port for sending data for all connected devices
 
 -- device 2
-ExportScript.Config.Export2     = true;              -- sending data
-ExportScript.Config.Export2Nav  = true;              -- true if you want to show position on map on this device
-ExportScript.Config.Host2       = "192.168.0.14"    -- IP for 2nd app
+ExportScript.Config.Export2 = true;             -- sending data
+ExportScript.Config.Host2   = "192.168.0.14"    -- IP for 2nd app
 
 -- device 3
-ExportScript.Config.Export3     = true;              -- sending data
-ExportScript.Config.Export3Nav  = true;              -- true if you want to show position on map on this device
-ExportScript.Config.Host3       = "192.168.0.16"    -- IP for 3rd app
+ExportScript.Config.Export3 = false;            -- sending data
+ExportScript.Config.Host3   = "192.168.0.16"    -- IP for 3rd app
 
 -- device 4
-ExportScript.Config.Export4     = true;              -- sending data
-ExportScript.Config.Export4Nav  = true;              -- true if you want to show position on map on this device
-ExportScript.Config.Host4       = "192.168.0.18"    -- IP for 4rd app
+ExportScript.Config.Export4 = false;            -- sending data
+ExportScript.Config.Host4   = "192.168.0.18"    -- IP for 4rd app
+
+-- StreamDeck
+ExportScript.Config.StreamDeckExport = false;       -- sending data to StreamDeck
+ExportScript.Config.StreamDeckHost = "127.0.0.1"    -- local IP (default: 127.0.0.1)
+ExportScript.Config.StreamDeckPort = 1725;
+ExportScript.Config.StreamDeckSeparator = ":"
 
 -- receive commands from external apps
-ExportScript.Config.Listener         = true;         -- listen commands from apps
-ExportScript.Config.ListenerPort     = 25070;        -- Listener Port receiving commands
+ExportScript.Config.Listener     = true;        -- listen commands from apps
+ExportScript.Config.ListenerPort = 25070;       -- Listener Port receiving commands
 
-ExportScript.Config.WriteNavFile     = false;
+ExportScript.Config.WriteNavFile = false;       -- saving flight telemetry to CSV and KML files (Logs folder)
 
 -- data separator (do not change)
 ExportScript.Config.Separator = ";"
 
 -- Other
-ExportScript.Config.ExportInterval          = 0.05;	-- export every 0.05 seconds
-ExportScript.Config.ExportLowTickInterval   = 0.1;	-- export every 0.x seconds
+ExportScript.Config.ExportInterval          = 0.05;	-- export every 0.xx seconds (def: 0.05)
+ExportScript.Config.ExportLowTickInterval   = 0.1;	-- export every 0.x seconds (def: 0.1)
 ExportScript.Config.ExportModulePath        = lfs.writedir()..[[Scripts\pw-dev_script\Modules\]]
 ExportScript.Config.FirstNewDataSend        = true;
 ExportScript.Config.FirstNewDataSendCount   = 100;
@@ -44,7 +49,7 @@ ExportScript.Config.ExportNavAllData        = true;      -- true if you want to 
 -- default: 5 (ex. 0 = 10fps / 5 = 2fps / 10 = 1fps)
 -- if your device is fast enough, you can lower this value to get smoother map performance
 ExportScript.Config.ExportNavLow            = 5;         -- ExportLowTickInterval multiplier
-ExportScript.Config.ExportNavAllLow         = 20;        -- don't change this (10)
+ExportScript.Config.ExportNavAllLow         = 20;        --
 
 -- export Displays data
 ExportScript.Config.ExportDisplaysA10C      = true;      -- A-10C
