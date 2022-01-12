@@ -1,0 +1,848 @@
+-- pw-dev panel page in DCS Options
+
+-- Layout
+
+local lGridXSpace = 230
+local lGridX1 = 40
+local lGridX2 = lGridX1 + lGridXSpace
+local lGridX3 = lGridX1 + (2* lGridXSpace)
+local lGridX4 = lGridX1 + (3* lGridXSpace)
+
+local lGridY1 = 48
+local lGridY2 = 80
+local lGridY3 = 200
+local lGridY4 = 280
+local lGridY5 = 400
+local lGridY6 = 460
+
+local TopMargin = 48
+local LeftMargin = 32
+local CenterMargin = 80
+
+local LeftColumnX = LeftMargin
+local LeftColumnLabelWidth = 232
+local LeftColumnOptionWidth = 272
+local LeftColumnWidth = LeftColumnLabelWidth + LeftColumnOptionWidth
+
+local RightColumnX = LeftColumnX + LeftColumnWidth + CenterMargin
+local RightColumnLabelWidth = 192
+local RightColumnOptionWidth = 128
+local RightColumnWidth = RightColumnLabelWidth + RightColumnOptionWidth
+
+local LineHeight = 24
+local TotalLineHeight = LineHeight + 8
+
+local HelpLineHeight = 16
+
+----------------------------------------
+-- Skins
+
+local EditBoxSkin = {
+	["params"] = {
+		["name"] = "editBoxSkin_login",
+	}
+}
+
+local CheckBoxSkin = {
+	["params"] = {
+		["name"] = "checkBoxSkin_options",
+	}
+}
+
+local TitleSkin = {
+	["params"] = {
+		["name"] = "staticOptionsTitleSkin",
+	},
+	["states"] = {
+		["released"] = {
+			[1] = {
+				["text"] = {
+					["horzAlign"] = {
+						["type"] = "min"
+					}
+				}
+			}
+		}
+	}
+}
+
+local LabelSkin = {
+	["params"] = {
+		["name"] = "staticOptionsCaptionSkin",
+	}
+}
+
+local HelpSkin = {
+	["params"] = {
+		["name"] = "staticSkin2",
+	},
+	["states"] = {
+		["released"] = {
+			[1] = {
+				["text"] = {
+					["fontSize"] = 10,
+					["horzAlign"] = {
+						["type"] = "min"
+					}
+				}
+			}
+		}
+	}
+}
+
+local ComboListSkin = {
+	["params"] = {
+		["name"] = "comboListSkin_options",
+	}
+}
+
+----------------------------------------
+-- Content
+
+dialog = {
+	["children"] = {
+		["containerPlugin"] = {
+			["children"] =  {
+				----------------------------------------
+				-- Title FILE EXIST
+				["pwScriptExistLabel"] = {
+					["params"] = {
+						["enabled"] = true,
+						["bounds"] = {
+							["x"] = 300,
+							["y"] = 300,
+							["w"] = 500,
+							["h"] = 24,
+						},
+						["visible"] = true,
+						["tooltip"] = "",
+						["zindex"] = 0,
+						["text"] = "",
+					},
+					["skin"] = TitleSkin,
+					["type"] = "Static",
+				},
+				----------------------------------------
+				-- Enable script configurator
+				["pwScriptEnabledCheckbox"] = {
+					["params"] = {
+						["bounds"] = {
+							["x"] = LeftColumnX,
+							["y"] = TopMargin,
+							["w"] = 256,
+							["h"] = LineHeight,
+						},
+						["enabled"] = true,
+						["state"] = false,
+						["text"] = "Turn ON to edit Config.lua file",
+						["tooltip"] = "Enable to be able to edit the settings file",
+						["visible"] = true,
+						["zindex"] = 0,
+						["tabOrder"] = 1,
+					},
+					["skin"] = CheckBoxSkin,
+					["type"] = "CheckBox",
+				},
+
+				----------------------------------------
+				-- Title
+				["pwScriptTitleLabel"] = {
+					["params"] = {
+						["enabled"] = true,
+						["bounds"] = {
+							["x"] = 360,
+							["y"] = 30,
+							["w"] = 400,
+							["h"] = 24,
+						},
+						["visible"] = true,
+						["tooltip"] = "",
+						["zindex"] = 0,
+						["text"] = "SCRIPT CONFIGURATOR by pet333r",
+					},
+					["skin"] = TitleSkin,
+					["type"] = "Static",
+				},
+
+				----------------------------------------
+				-- Network ports
+				["pwScriptNetworkTitleLabel"] = {
+					["params"] = {
+						["bounds"] = {
+							["x"] = lGridX1,
+							["y"] = lGridY2,
+							["w"] = 100,
+							["h"] = LineHeight,
+						},
+						["enabled"] = true,
+						["text"] = "Network ports:",
+						["tooltip"] = "",
+						["visible"] = true,
+						["zindex"] = 0,
+					},
+					["skin"] = TitleSkin,
+					["type"] = "Static",
+				},
+				["pwScriptNetworkPortSendLabel"] = {
+					["params"] = {
+						["bounds"] = {
+							["x"] = lGridX1 + 12,
+							["y"] = lGridY2 + 26,
+							["w"] = 80,
+							["h"] = LineHeight,
+						},
+						["enabled"] = true,
+						["text"] = "Send:",
+						["tooltip"] = "",
+						["visible"] = true,
+						["zindex"] = 0,
+					},
+					["skin"] = OptionLabelSkin,
+					["type"] = "Static",
+				},
+				["pwScriptNetworkPortSendEditBox"] = {
+					["params"] = {
+						["acceptDecimalPoint"] = true,
+						["bounds"] = {
+							["x"] = lGridX1 + 80,
+							["y"] = lGridY2 + 18,
+							["w"] = RightColumnOptionWidth,
+							["h"] = LineHeight,
+						},
+						["enabled"] = true,
+						["multiline"] = false,
+						["numeric"] = true,
+						["password"] = false,
+						["readOnly"] = false,
+						["text"] = "",
+						["textWrapping"] = false,
+						["tooltip"] = "The port on which data is sent to the device",
+						["visible"] = true,
+						["zindex"] = 0,
+						["tabOrder"] = 2,
+					},
+					["skin"] = EditBoxSkin,
+					["type"] = "EditBox",
+				},
+				["pwScriptNetworkPortSendDefaultLabel"] = {
+					["params"] = {
+						["bounds"] = {
+							["x"] = lGridX1 + 220,
+							["y"] = lGridY2 + 26,
+							["w"] = 100,
+							["h"] = LineHeight,
+						},
+						["enabled"] = true,
+						["text"] = "default: 5160",
+						["tooltip"] = "",
+						["visible"] = true,
+						["zindex"] = 0,
+					},
+					["skin"] = OptionLabelSkin,
+					["type"] = "Static",
+				},
+
+				["pwScriptNetworkPortRecvLabel"] = {
+					["params"] = {
+						["bounds"] = {
+							["x"] = lGridX1 + 12,
+							["y"] = lGridY2 + 52,
+							["w"] = 80,
+							["h"] = LineHeight,
+						},
+						["enabled"] = true,
+						["text"] = "Receive:",
+						["tooltip"] = "",
+						["visible"] = true,
+						["zindex"] = 0,
+					},
+					["skin"] = OptionLabelSkin,
+					["type"] = "Static",
+				},
+				["pwScriptNetworkPortRecvEditBox"] = {
+					["params"] = {
+						["acceptDecimalPoint"] = true,
+						["bounds"] = {
+							["x"] = lGridX1 + 80,
+							["y"] = lGridY2 + 44,
+							["w"] = RightColumnOptionWidth,
+							["h"] = LineHeight,
+						},
+						["enabled"] = true,
+						["multiline"] = false,
+						["numeric"] = true,
+						["password"] = false,
+						["readOnly"] = false,
+						["text"] = "",
+						["textWrapping"] = false,
+						["tooltip"] = "Port where data is received in DCS World",
+						["visible"] = true,
+						["zindex"] = 0,
+						["tabOrder"] = 3,
+					},
+					["skin"] = EditBoxSkin,
+					["type"] = "EditBox",
+				},
+				["pwScriptNetworkPortRecvDefaultLabel"] = {
+					["params"] = {
+						["bounds"] = {
+							["x"] = lGridX1 + 220,
+							["y"] = lGridY2 + 52,
+							["w"] = 110,
+							["h"] = LineHeight,
+						},
+						["enabled"] = true,
+						["text"] = "default: 25070",
+						["tooltip"] = "",
+						["visible"] = true,
+						["zindex"] = 0,
+					},
+					["skin"] = OptionLabelSkin,
+					["type"] = "Static",
+				},
+
+				----------------------------------------
+				-- IP's header
+				["pwScriptDevicesTitleLabel"] = {
+					["params"] = {
+						["bounds"] = {
+							["x"] = lGridX1,
+							["y"] = lGridY3 - 28,
+							["w"] = 120,
+							["h"] = LineHeight,
+						},
+						["enabled"] = true,
+						["text"] = "Your devices IP's",
+						["tooltip"] = "",
+						["visible"] = true,
+						["zindex"] = 0,
+					},
+					["skin"] = TitleSkin,
+					["type"] = "Static",
+				},
+				----------------------------------------
+				-- Device # 1
+				["pwScriptDevice1EnabledCheckbox"] = {
+					["params"] = {
+						["bounds"] = {
+							["x"] = lGridX1,
+							["y"] = lGridY3,
+							["w"] = 256,
+							["h"] = LineHeight,
+						},
+						["enabled"] = true,
+						["state"] = false,
+						["text"] = "Device #1",
+						["tooltip"] = "Send data to this device",
+						["visible"] = true,
+						["zindex"] = 0,
+						["tabOrder"] = 4,
+					},
+					["skin"] = CheckBoxSkin,
+					["type"] = "CheckBox",
+				},
+
+				["pwScriptDeviceIp1EditBox"] = {
+					["params"] = {
+						["acceptDecimalPoint"] = true,
+						["bounds"] = {
+							["x"] = lGridX1,
+							["y"] = lGridY3 + 30,
+							["w"] = RightColumnOptionWidth,
+							["h"] = LineHeight,
+						},
+						["enabled"] = true,
+						["multiline"] = false,
+						["numeric"] = false,
+						["password"] = false,
+						["readOnly"] = false,
+						["text"] = "",
+						["textWrapping"] = false,
+						["tooltip"] = "The device's IP address in the local network",
+						["visible"] = true,
+						["zindex"] = 0,
+						["tabOrder"] = 5,
+					},
+					["skin"] = EditBoxSkin,
+					["type"] = "EditBox",
+				},
+				----------------------------------------
+				-- Device # 2
+				["pwScriptDevice2EnabledCheckbox"] = {
+					["params"] = {
+						["bounds"] = {
+							["x"] = lGridX2,
+							["y"] = lGridY3,
+							["w"] = 256,
+							["h"] = LineHeight,
+						},
+						["enabled"] = true,
+						["state"] = false,
+						["text"] = "Device #2",
+						["tooltip"] = "Send data to this device",
+						["visible"] = true,
+						["zindex"] = 0,
+						["tabOrder"] = 6,
+					},
+					["skin"] = CheckBoxSkin,
+					["type"] = "CheckBox",
+				},
+
+				["pwScriptDeviceIp2EditBox"] = {
+					["params"] = {
+						["acceptDecimalPoint"] = true,
+						["bounds"] = {
+							["x"] = lGridX2,
+							["y"] = lGridY3 + 30,
+							["w"] = RightColumnOptionWidth,
+							["h"] = LineHeight,
+						},
+						["enabled"] = true,
+						["multiline"] = false,
+						["numeric"] = false,
+						["password"] = false,
+						["readOnly"] = false,
+						["text"] = "",
+						["textWrapping"] = false,
+						["tooltip"] = "The device's IP address in the local network",
+						["visible"] = true,
+						["zindex"] = 0,
+						["tabOrder"] = 7,
+					},
+					["skin"] = EditBoxSkin,
+					["type"] = "EditBox",
+				},
+
+				----------------------------------------
+				-- Device # 3
+				["pwScriptDevice3EnabledCheckbox"] = {
+					["params"] = {
+						["bounds"] = {
+							["x"] = lGridX3,
+							["y"] = lGridY3,
+							["w"] = 256,
+							["h"] = LineHeight,
+						},
+						["enabled"] = true,
+						["state"] = false,
+						["text"] = "Device #3",
+						["tooltip"] = "Send data to this device",
+						["visible"] = true,
+						["zindex"] = 0,
+						["tabOrder"] = 8,
+					},
+					["skin"] = CheckBoxSkin,
+					["type"] = "CheckBox",
+				},
+
+				["pwScriptDeviceIp3EditBox"] = {
+					["params"] = {
+						["acceptDecimalPoint"] = true,
+						["bounds"] = {
+							["x"] = lGridX3,
+							["y"] = lGridY3 + 30,
+							["w"] = RightColumnOptionWidth,
+							["h"] = LineHeight,
+						},
+						["enabled"] = true,
+						["multiline"] = false,
+						["numeric"] = false,
+						["password"] = false,
+						["readOnly"] = false,
+						["text"] = "",
+						["textWrapping"] = false,
+						["tooltip"] = "The device's IP address in the local network",
+						["visible"] = true,
+						["zindex"] = 0,
+						["tabOrder"] = 9,
+					},
+					["skin"] = EditBoxSkin,
+					["type"] = "EditBox",
+				},
+				----------------------------------------
+				-- Device # 4
+				["pwScriptDevice4EnabledCheckbox"] = {
+					["params"] = {
+						["bounds"] = {
+							["x"] = lGridX4,
+							["y"] = lGridY3,
+							["w"] = 256,
+							["h"] = LineHeight,
+						},
+						["enabled"] = true,
+						["state"] = false,
+						["text"] = "Device #4",
+						["tooltip"] = "Send data to this device",
+						["visible"] = true,
+						["zindex"] = 0,
+						["tabOrder"] = 10,
+					},
+					["skin"] = CheckBoxSkin,
+					["type"] = "CheckBox",
+				},
+
+				["pwScriptDeviceIp4EditBox"] = {
+					["params"] = {
+						["acceptDecimalPoint"] = true,
+						["bounds"] = {
+							["x"] = lGridX4,
+							["y"] = lGridY3 + 30,
+							["w"] = RightColumnOptionWidth,
+							["h"] = LineHeight,
+						},
+						["enabled"] = true,
+						["multiline"] = false,
+						["numeric"] = false,
+						["password"] = false,
+						["readOnly"] = false,
+						["text"] = "",
+						["textWrapping"] = false,
+						["tooltip"] = "The device's IP address in the local network",
+						["visible"] = true,
+						["zindex"] = 0,
+						["tabOrder"] = 11,
+					},
+					["skin"] = EditBoxSkin,
+					["type"] = "EditBox",
+				},
+
+				----------------------------------------
+				-- StreamDeck header
+				["pwScriptStreamDeckTitleLabel"] = {
+					["params"] = {
+						["bounds"] = {
+							["x"] = lGridX1,
+							["y"] = 280,
+							["w"] = 240,
+							["h"] = LineHeight,
+						},
+						["enabled"] = true,
+						["text"] = "Configuration for StreamDeck",
+						["tooltip"] = "",
+						["visible"] = true,
+						["zindex"] = 0,
+					},
+					["skin"] = TitleSkin,
+					["type"] = "Static",
+				},
+				----------------------------------------
+				-- StreamDeck checkbox
+				["pwScriptStreamDeckEnabledCheckbox"] = {
+					["params"] = {
+						["bounds"] = {
+							["x"] = lGridX1,
+							["y"] = 300,
+							["w"] = 256,
+							["h"] = LineHeight,
+						},
+						["enabled"] = true,
+						["state"] = false,
+						["text"] = "StreamDeck",
+						["tooltip"] = "Enable if you want to send values to StreamDeck",
+						["visible"] = true,
+						["zindex"] = 0,
+						["tabOrder"] = 4,
+					},
+					["skin"] = CheckBoxSkin,
+					["type"] = "CheckBox",
+				},
+				-- StreamDeck IP
+				["pwScriptStreamDeckIpLabel"] = {
+					["params"] = {
+						["bounds"] = {
+							["x"] = lGridX1 + 12,
+							["y"] = 330 + 8,
+							["w"] = 40,
+							["h"] = LineHeight,
+						},
+						["enabled"] = true,
+						["text"] = "IP:",
+						["tooltip"] = "",
+						["visible"] = true,
+						["zindex"] = 0,
+					},
+					["skin"] = OptionLabelSkin,
+					["type"] = "Static",
+				},
+				["pwScriptStreamDeckIpEditBox"] = {
+					["params"] = {
+						["acceptDecimalPoint"] = true,
+						["bounds"] = {
+							["x"] = lGridX1 + 60,
+							["y"] = 330,
+							["w"] = RightColumnOptionWidth,
+							["h"] = LineHeight,
+						},
+						["enabled"] = true,
+						["multiline"] = false,
+						["numeric"] = false,
+						["password"] = false,
+						["readOnly"] = false,
+						["text"] = "",
+						["textWrapping"] = false,
+						["tooltip"] = "Set the PC IP with StreamDeck connected (default same PC: 127.0.0.1)",
+						["visible"] = true,
+						["zindex"] = 0,
+						["tabOrder"] = 5,
+					},
+					["skin"] = EditBoxSkin,
+					["type"] = "EditBox",
+				},
+				["pwScriptStreamDeckIpDefaultLabel"] = {
+					["params"] = {
+						["bounds"] = {
+							["x"] = lGridX1 + 200,
+							["y"] = 330 + 8,
+							["w"] = 120,
+							["h"] = LineHeight,
+						},
+						["enabled"] = true,
+						["text"] = "default: 127.0.0.1",
+						["tooltip"] = "",
+						["visible"] = true,
+						["zindex"] = 0,
+					},
+					["skin"] = OptionLabelSkin,
+					["type"] = "Static",
+				},
+				-- StreamDeck port
+				["pwScriptStreamDeckPortLabel"] = {
+					["params"] = {
+						["bounds"] = {
+							["x"] = lGridX1 + 12,
+							["y"] = 360 + 8,
+							["w"] = 40,
+							["h"] = LineHeight,
+						},
+						["enabled"] = true,
+						["text"] = "Port:",
+						["tooltip"] = "",
+						["visible"] = true,
+						["zindex"] = 0,
+					},
+					["skin"] = OptionLabelSkin,
+					["type"] = "Static",
+				},
+				["pwScriptStreamDeckPortEditBox"] = {
+					["params"] = {
+						["acceptDecimalPoint"] = true,
+						["bounds"] = {
+							["x"] = lGridX1 + 60,
+							["y"] = 360,
+							["w"] = RightColumnOptionWidth,
+							["h"] = LineHeight,
+						},
+						["enabled"] = true,
+						["multiline"] = false,
+						["numeric"] = false,
+						["password"] = false,
+						["readOnly"] = false,
+						["text"] = "",
+						["textWrapping"] = false,
+						["tooltip"] = "Set the port for sending data to StreamDeck (default: 1725)",
+						["visible"] = true,
+						["zindex"] = 0,
+						["tabOrder"] = 5,
+					},
+					["skin"] = EditBoxSkin,
+					["type"] = "EditBox",
+				},
+				["pwScriptStreamDeckPortDefaultLabel"] = {
+					["params"] = {
+						["bounds"] = {
+							["x"] = lGridX1 + 200,
+							["y"] = 360 + 8,
+							["w"] = 100,
+							["h"] = LineHeight,
+						},
+						["enabled"] = true,
+						["text"] = "default: 1725",
+						["tooltip"] = "",
+						["visible"] = true,
+						["zindex"] = 0,
+					},
+					["skin"] = OptionLabelSkin,
+					["type"] = "Static",
+				},
+
+				----------------------------------------
+				-- Write Nav File
+				["pwScriptWriteNavFileTitleLabel"] = {
+					["params"] = {
+						["bounds"] = {
+							["x"] = lGridX1,
+							["y"] = lGridY5,
+							["w"] = 300,
+							["h"] = LineHeight,
+						},
+						["enabled"] = true,
+						["text"] = "Write navigation data to file (KML & CSV)",
+						["tooltip"] = "",
+						["visible"] = true,
+						["zindex"] = 0,
+					},
+					["skin"] = TitleSkin,
+					["type"] = "Static",
+				},
+				["pwScriptWriteNavFileEnabledCheckbox"] = {
+					["params"] = {
+						["bounds"] = {
+							["x"] = lGridX1 + 10,
+							["y"] = lGridY5 + 20,
+							["w"] = 256,
+							["h"] = LineHeight,
+						},
+						["enabled"] = true,
+						["state"] = false,
+						["text"] = "Write to file",
+						["tooltip"] = "Enable the option of saving data to CSV & KML files (files will be saved in the 'Logs' folder)",
+						["visible"] = true,
+						["zindex"] = 0,
+						["tabOrder"] = 12,
+					},
+					["skin"] = CheckBoxSkin,
+					["type"] = "CheckBox",
+				},
+
+				----------------------------------------
+				-- Help Labels
+				["Tips1Label"] = {
+					["params"] = {
+						["bounds"] = {
+							["h"] = 24,
+							["w"] = 500,
+							["x"] = lGridX1,
+							["y"] = lGridY6,
+						},
+						["enabled"] = true,
+						["text"] = "TIPS",
+						["tooltip"] = "",
+						["visible"] = true,
+						["zindex"] = 0,
+					},
+					["skin"] = HelpSkin,
+					["type"] = "Static",
+				},
+				["Tips2Label"] = {
+					["params"] = {
+						["bounds"] = {
+							["h"] = 24,
+							["w"] = 800,
+							["x"] = lGridX1,
+							["y"] = lGridY6 + 20,
+						},
+						["enabled"] = true,
+						["text"] = "It is not necessary to turn off additional devices if you do not have them (they will simply be ignored)",
+						["tooltip"] = "",
+						["visible"] = true,
+						["zindex"] = 0,
+					},
+					["skin"] = HelpSkin,
+					["type"] = "Static",
+				},
+				["Tips3Label"] = {
+					["params"] = {
+						["bounds"] = {
+							["h"] = 24,
+							["w"] = 500,
+							["x"] = lGridX1,
+							["y"] = lGridY6 + 40,
+						},
+						["enabled"] = true,
+						["text"] = "Never set the same IP address for several devices",
+						["tooltip"] = "",
+						["visible"] = true,
+						["zindex"] = 0,
+					},
+					["skin"] = HelpSkin,
+					["type"] = "Static",
+				},
+				["Tips4Label"] = {
+					["params"] = {
+						["bounds"] = {
+							["h"] = 24,
+							["w"] = 900,
+							["x"] = lGridX1,
+							["y"] = lGridY6 + 60,
+						},
+						["enabled"] = true,
+						["text"] = "To check the IP of an Android device: go to 'Settings' > 'WiFi' (Network) > connected network properties (it may differ depending on the Android system or the system overlay)",
+						["tooltip"] = "",
+						["visible"] = true,
+						["zindex"] = 0,
+					},
+					["skin"] = HelpSkin,
+					["type"] = "Static",
+				},
+			
+				----------------------------------------
+				-- Save configuration to file
+				["pwScriptSaveButton"] = {
+					["params"] = {
+						["bounds"] = {
+							["h"] = 34,
+							["w"] = 200,
+							["x"] = 380,
+							["y"] = 560,
+						},
+						["enabled"] = true,
+						["tabOrder"] = 0,
+						["text"] = "SAVE",
+						["tooltip"] = "Save current configuration to Config.lua file in script folder",
+						["visible"] = true,
+						["zindex"] = 0,
+					},
+					["skin"] = {
+						["params"] = {
+							["name"] = "buttonSkinAwacs",
+						},
+					},
+					["type"] = "Button",
+				},
+			
+			-----------------------------------------------
+			-- End
+			},
+			["type"] = "Panel",
+			["skin"] = {
+				["params"] = {
+					["name"] = "panelSkin",
+				},
+			},
+			["params"] = {
+				["enabled"] = true,
+				["bounds"] = {
+					["x"] = 0,
+					["y"] = 0,
+					["w"] = 974,
+					["h"] = 600,
+				},
+				["visible"] = true,
+				["tooltip"] = "",
+				["zindex"] = 2,
+				["text"] = "",
+			},
+		},
+	},
+	["type"] = "Window",
+	["skin"] = {
+		["params"] = {
+			["name"] = "windowSkin",
+		},
+	},
+	["params"] = {
+		["bounds"] = {
+			["h"] = 851,
+			["w"] = 1135,
+			["x"] = 0,
+			["y"] = 0,
+		},
+		["draggable"] = true,
+		["enabled"] =  true,
+		["hasCursor"] =  true,
+		["lockFlow"] = false,
+		["modal"] = false,
+		["text"] = "dialog",
+		["zOrder"] = 1,
+	},
+}
