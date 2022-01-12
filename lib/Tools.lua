@@ -261,27 +261,6 @@ function ExportScript.Tools.ProcessInput()
 	end
 end
 
---! DEPRECATED
---* funkcja do przesylania danych nawigacyjnych konkretnych obiektow na mapie
-function ExportScript.Tools.ProcessNavData()
-    ExportScript.Tools.NavData = {}
-    ExportScript.Tools.NavData["Lat"] = string.format("%010.6f", PlayerData.Lat)
-	ExportScript.Tools.NavData["Lon"] = string.format("%010.6f", PlayerData.Lon)
-    ExportScript.Tools.NavData["Magvar"] = string.format("%.1f", PlayerData.Magvar)
-	ExportScript.Tools.NavData["AltFt"] = string.format("%d", PlayerData.Alt)
-    ExportScript.Tools.NavData["Heading"] = string.format("%d", PlayerData.Hdg)
-	ExportScript.Tools.NavData["IAS"] = string.format("%d", PlayerData.Ias)
-	ExportScript.Tools.NavData["Mach"] = string.format("%.2f", PlayerData.Mach)
-	ExportScript.Tools.NavData["G"] = string.format("%.1f", PlayerData.Acc)
-
-	if ExportScript.Tools.NavData ~= nil then
-		for key, value in pairs(ExportScript.Tools.NavData) do
-				ExportScript.Tools.SendNavData(key, value)
-		end
-	end
-end
-
---* Pobranie Id maszyny uzytkownika
 function ExportScript.Tools.GetPlayerId()
 	local id = LoGetPlayerPlaneId()
 	if id == nil then
@@ -512,9 +491,6 @@ function ExportScript.Tools.ProcessNavDataD()
 	ExportScript.Tools.NavDataD[100] = string.format("%d", PlayerData.AltGearLeft)
 	ExportScript.Tools.NavDataD[101] = string.format("%d", PlayerData.AltGearNose)
 	ExportScript.Tools.NavDataD[102] = string.format("%d", PlayerData.AltGearRigh)
-	-- ExportScript.Tools.NavDataD[80] = string.format("%.1f", lPitch)
-	-- ExportScript.Tools.NavDataD[81] = string.format("%.1f", lBank)
-	-- ExportScript.Tools.NavDataD[82] = string.format("%.1f", lYaw)
 
 	if ExportScript.Tools.NavDataD ~= nil then
 		for key, value in pairs(ExportScript.Tools.NavDataD) do
