@@ -55,5 +55,27 @@ foreach ($file in $listFiles) {
 }
 
 #--------------------------------------------------------------------------
+Write-Host "`n$separator`n**************** Downloading additional files ***************`n"
+
+$urlAddons = "$urlMain.addons/"
+
+# go to parent folder (2x)
+$dirRoot = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
+
+$path = $dirRoot + "\Scripts\Hooks"
+If(!(test-path $path)) { New-Item -ItemType Directory -Force -Path $path }
+
+$path = $dirRoot + "\Mods\Services\pw-dev\Options\"
+If(!(test-path $path)) { New-Item -ItemType Directory -Force -Path $path }
+
+$path = $dirRoot + "\Mods\Services\pw-dev\Theme\"
+If(!(test-path $path)) { New-Item -ItemType Directory -Force -Path $path }
+
+foreach ($file in $listAddFiles) {
+      $url = $urlAddons + $file
+      $output = $dirRoot + $file
+      Invoke-WebRequest -Uri $url -OutFile $output
+      Write-Host "Downloading: $file"
+}
 
 Write-Output "`nTime taken: $((Get-Date).Subtract($start_time).Seconds):$((Get-Date).Subtract($start_time).Milliseconds) s"
