@@ -379,13 +379,18 @@ end
 
 -- Pointed to by ProcessDCSHighImportance
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
-end
-
--- Pointed to by ExportScript.ProcessDCSConfigLowImportance
-function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	ExportScript.Tools.SendData(20001, getAmmo())
 	ExportScript.Tools.SendData(20002, getPLTFuelLeft())
 	ExportScript.Tools.SendData(20003, getPLTFuelRight())
 	ExportScript.Tools.SendData(20004, getPLTFuelTotal())
 	ExportScript.Tools.SendData(20005, getPLTFuelBingo())
+end
+
+-- Pointed to by ExportScript.ProcessDCSConfigLowImportance
+function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
+
+
+	-- -- General
+	-- ExportScript.Tools.SendData(2901, -ExportScript.Tools.GetArgumentsValue(3001, "%.2f"))
+	-- ExportScript.Tools.SendData(2902, ExportScript.Tools.GetArgumentsValue(3002, "%.2f"))
 end

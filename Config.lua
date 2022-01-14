@@ -37,8 +37,8 @@ ExportScript.Config.WriteNavFile = false;       -- saving flight telemetry to CS
 ExportScript.Config.Separator = ";"
 
 -- Other
-ExportScript.Config.ExportInterval          = 0.05;	-- export every 0.xx seconds (def: 0.05)
-ExportScript.Config.ExportLowTickInterval   = 0.1;	-- export every 0.x seconds (def: 0.1)
+ExportScript.Config.ExportInterval          = 0.15;	-- export every 0.xx seconds (def: 0.05)
+ExportScript.Config.ExportLowTickInterval   = 0.3;	-- export every 0.x seconds (def: 0.1)
 ExportScript.Config.ExportModulePath        = lfs.writedir()..[[Scripts\pw-dev_script\Modules\]]
 ExportScript.Config.FirstNewDataSend        = true;
 ExportScript.Config.FirstNewDataSendCount   = 100;

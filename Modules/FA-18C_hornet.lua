@@ -188,20 +188,9 @@ ExportScript.ConfigArguments =
 	[180] = "%1d",   -- AMPCD Gain Control Switch, UP/DOWN {1.0,0.0,-1.0}
 }
 
--- function coerce_nil_to_string(value)
--- 	if value == nil then
--- 		return ""
--- 	else
--- 		return value
--- 	end
--- end
 
 -- Pointed to by ProcessDCSHighImportance
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
-end
-
--- Pointed to by ExportScript.ProcessDCSConfigLowImportance
-function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	if ExportScript.Config.ExportDisplaysFA18 == true then
 		-- UFC Displays
 		local _ufcDisplay = ExportScript.Tools.getListIndicatorValue(6)
@@ -391,6 +380,23 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		ExportScript.Tools.SendData(2202, RTexture)
 		ExportScript.Tools.SendData(2203, ZTexture)
 	end
+end
+
+-- Pointed to by ExportScript.ProcessDCSConfigLowImportance
+function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
+
+	-- -- check()
+	-- local Pitch, Bank, Yaw = LoGetADIPitchBankYaw() --LoGetADIPitchBankYaw()
+	-- Pitch = Pitch * 57.3
+	-- Bank = Bank * 57.3
+	-- -- General
+	-- ExportScript.Tools.SendData(2901, string.format("%.2f", -Pitch/90)) -- -ExportScript.Tools.GetArgumentsValue(205, "%.2f"))
+	-- ExportScript.Tools.SendData(2902, string.format("%d",-Bank )) -- ExportScript.Tools.GetArgumentsValue(206, "%.2f"))
+	-- ExportScript.Tools.SendData(2903, string.format("%d", (LoGetSelfData().LatLongAlt.Alt * 3.2808399)/10 )) -- ExportScript.Tools.GetArgumentsValue(206, "%.2f"))
+
+
+
+
 
 	-- if ExportScript.Config.ExportDisplaysFA18Fuel == true then
 	-- 	local TK1 = ""

@@ -388,11 +388,6 @@ ExportScript.ConfigArguments =
 
 -- Pointed to by ProcessDCSHighImportance
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
-
-end
-
--- Pointed to by ExportScript.ProcessDCSConfigLowImportance
-function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	if ExportScript.Config.ExportDisplaysAV8BNA == true then
 		--ENGINE DISPLAY
 		-- DUCT
@@ -791,4 +786,13 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		ExportScript.Tools.SendData(2035, string.format("%s", lacnip_line[3]))
 		ExportScript.Tools.SendData(2036, string.format("%s", lacnip_line[4]))
 	end
+end
+
+-- Pointed to by ExportScript.ProcessDCSConfigLowImportance
+function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
+	-- -- General
+	-- ExportScript.Tools.SendData(2901, -ExportScript.Tools.GetArgumentsValue(349, "%.2f"))
+	-- ExportScript.Tools.SendData(2902, ExportScript.Tools.GetArgumentsValue(348, "%.2f"))
+
+
 end
