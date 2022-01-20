@@ -75,14 +75,13 @@ local function getVhfNavFreq()
 end
 
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
+end
+
+function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
     ExportScript.Tools.SendData(2001, getUhfFreq())
     ExportScript.Tools.SendData(2002, getVhfCommFreq())
     ExportScript.Tools.SendData(2003, getVhfNavFreq())
 
     ExportScript.Tools.SendData(2011, getChaff())
     ExportScript.Tools.SendData(2012, getFlare())
-end
-
-function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
-
 end

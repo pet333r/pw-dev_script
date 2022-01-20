@@ -1,5 +1,5 @@
 -- #INFO
--- file version: 2021.01.14
+-- file version: 2021.01.20
 
 -- properties
 ExportScript.Config = {}
@@ -37,8 +37,8 @@ ExportScript.Config.WriteNavFile = false;       -- saving flight telemetry to CS
 ExportScript.Config.Separator = ";"
 
 -- Other
-ExportScript.Config.ExportInterval          = 0.15;	-- export every 0.xx seconds (def: 0.05)
-ExportScript.Config.ExportLowTickInterval   = 0.3;	-- export every 0.x seconds (def: 0.1)
+ExportScript.Config.ExportInterval          = 0.05;	-- export every 0.xx seconds (def: 0.05)
+ExportScript.Config.ExportLowTickInterval   = 0.1;	-- export every 0.x seconds (def: 0.1)
 ExportScript.Config.ExportModulePath        = lfs.writedir()..[[Scripts\pw-dev_script\Modules\]]
 ExportScript.Config.FirstNewDataSend        = true;
 ExportScript.Config.FirstNewDataSendCount   = 100;
@@ -46,7 +46,7 @@ ExportScript.Config.FirstNewDataSendCount   = 100;
 -- Navigation data
 ExportScript.Config.ExportNavData           = true;      -- true if you want to export navigation data to show position on map
 ExportScript.Config.ExportNavAllData        = true;      -- true if you want to show other objects on map
--- default: 5 (ex. 0 = 10fps / 5 = 2fps / 10 = 1fps)
+
 -- if your device is fast enough, you can lower this value to get smoother map performance
 ExportScript.Config.ExportNavLow            = 5;         -- ExportLowTickInterval multiplier
 ExportScript.Config.ExportNavAllLow         = 20;        --

@@ -346,6 +346,9 @@ local function getPPAIntDisp()
 end
 
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
+end
+
+function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	if ExportScript.Config.ExportDisplaysM2000 == true then
 		ExportScript.Tools.SendData(2011, ExportScript.Tools.getListIndicatorValueByName(4, "PCA_LCD_1_0", 3))
 		ExportScript.Tools.SendData(2012, ExportScript.Tools.getListIndicatorValueByName(4, "PCA_LCD_1_1", 3))
@@ -400,9 +403,7 @@ function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
 		digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(354) * 10)
 		ExportScript.Tools.SendData(2054, digits[1] .. digits[2] .. digits[3] .. "0")
 	end
-end
-
-function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
+	
 	-- -- General
 	-- ExportScript.Tools.SendData(2901, -ExportScript.Tools.GetArgumentsValue(316, "%.2f"))
 	-- ExportScript.Tools.SendData(2902, ExportScript.Tools.GetArgumentsValue(317, "%.2f"))

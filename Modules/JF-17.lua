@@ -209,6 +209,9 @@ local function radio_parse_indication(indicator_id)  -- Thanks to [FSF]Ian code
 end
 
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
+end
+
+function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
     if ExportScript.Config.ExportDisplaysJF17 == true then
         local ufcLcdLine1 = "        "
         local ufcLcdLine2 = "        "
@@ -332,8 +335,4 @@ function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
         -- clk2 = coerce_nil_to_string(clock2.txt_win2)
         -- ExportScript.Tools.SendData(2022, clk2)
     end
-end
-
-function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
-
 end

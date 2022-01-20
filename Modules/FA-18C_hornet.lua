@@ -191,6 +191,18 @@ ExportScript.ConfigArguments =
 
 -- Pointed to by ProcessDCSHighImportance
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
+end
+
+-- Pointed to by ExportScript.ProcessDCSConfigLowImportance
+function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
+	-- ExportScript.Tools.WinSetTempFolder()
+	-- ExportScript.Tools.DCSMap()
+	-- local be = getMainRefPoint(1)
+	-- ExportScript.Tools.SendData(4444, be)
+	-- local filename = "tempMission.miz"
+	-- ExportScript.Zip.ExtractZipAndCopyFiles("c:\\Users\\pet333r\\AppData\\Local\\Temp\\DCS.openbeta", filename, "x:\\")
+
+
 	if ExportScript.Config.ExportDisplaysFA18 == true then
 		-- UFC Displays
 		local _ufcDisplay = ExportScript.Tools.getListIndicatorValue(6)
@@ -380,11 +392,6 @@ function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
 		ExportScript.Tools.SendData(2202, RTexture)
 		ExportScript.Tools.SendData(2203, ZTexture)
 	end
-end
-
--- Pointed to by ExportScript.ProcessDCSConfigLowImportance
-function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
-
 	-- -- check()
 	-- local Pitch, Bank, Yaw = LoGetADIPitchBankYaw() --LoGetADIPitchBankYaw()
 	-- Pitch = Pitch * 57.3

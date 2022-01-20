@@ -49,6 +49,9 @@ ExportScript.ConfigArguments =
 -- end
 
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
+end
+
+function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
     if ExportScript.Config.ExportDisplaysKA50 == true then
         -- PVI-800 Navigation Control Panel 
         local indPVI = ExportScript.Tools.getListIndicatorValue(5)
@@ -65,8 +68,4 @@ function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
         ExportScript.Tools.SendData(2010, pviLine1Point)
         ExportScript.Tools.SendData(2011, pviLine2Point)
     end
-end
-
-function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
-
 end

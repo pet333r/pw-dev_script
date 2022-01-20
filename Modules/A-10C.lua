@@ -235,6 +235,10 @@ end
 
 -- Pointed to by ProcessDCSHighImportance
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
+end
+
+-- Pointed to by ExportScript.ProcessDCSConfigLowImportance
+function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
         -- ScratchPad
         local lScratchPad = ExportScript.Tools.getListIndicatorValue(5)
         ExportScript.Tools.SendData(2010, ExportScript.Tools.coerce_nil_to_string(lScratchPad.Scratch_PAD))
@@ -299,11 +303,6 @@ function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
         ExportScript.Tools.SendData(2024,  getTacanChannel())
         -- ILS
         ExportScript.Tools.SendData(2025,  getILSFrequency())
-end
-
--- Pointed to by ExportScript.ProcessDCSConfigLowImportance
-function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
-
 
     -- -- General
 	-- ExportScript.Tools.SendData(2901, ExportScript.Tools.GetArgumentsValue(17, "%.2f"))
