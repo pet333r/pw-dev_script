@@ -143,7 +143,7 @@ function ExportScript.Tools.createUDPListner()
 		local _createUDPListner = ExportScript.socket.protect(function()
 			ExportScript.UDPListener = ExportScript.socket.udp()
 			ExportScript.socket.try(ExportScript.UDPListener:setsockname("*", ExportScript.Config.ListenerPort))
-			ExportScript.socket.try(ExportScript.UDPListener:settimeout(.001)) -- set the timeout for reading the socket; 200 fps
+			ExportScript.socket.try(ExportScript.UDPListener:settimeout(0))
 		end)
         _createUDPListner()
 	end
