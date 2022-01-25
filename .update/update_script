@@ -49,6 +49,7 @@ Modules/Su-33.lua
 Modules/T-45.lua
 Modules/TF-51D.lua
 Modules/UH-1H.lua
+Modules/UH-60L.lua
 Modules/Yak-52.lua
 Utilities/config.cfg
 Utilities/DCSUtil.exe
