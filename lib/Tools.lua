@@ -33,6 +33,7 @@ local lShowOnMapObj = false
 local lShowOnMapWea = false
 local lShowOnMapAir = false
 local lShowOnMapGnd = false
+local lShowOnMapNav = false
 
 local actualMap
 local lSelfNavData = true
@@ -57,13 +58,15 @@ local timestampNavObj = 0
 local timestampNavWea = 0
 local timestampNavAir = 0
 local timestampNavGnd = 0
+local timestampNavNav = 0
 
 local timeSecPlayer = 1
-local timeSecNav = 1
+-- local timeSecNav = 1
 local timeSecObj = 4
 local timeSecWea = 2
 local timeSecAir = 4
 local timeSecGnd = 10
+local timeSecNav = 8
 
 ExportScript.Tools.LogPath = lfs.writedir()..[[Logs\pw-dev.log]]
 ExportScript.Tools.DebugScript = false
@@ -89,14 +92,6 @@ function ExportScript.Tools.CheckOwnshipExport()
     ExportScript.Tools.WriteToLog("export ownship: " .. tostring(isOwnship))
 end
 
--- deprecated
-function ExportScript.Tools.ExportSelfData(value)
-    exportSelf = value
-end
-function ExportScript.Tools.ExportTwsn(value)
-    exportTws = value
-end
-
 function ExportScript.Tools.ExportMapPlayer(value)
     lShowOnMapPlayer = value
 end
@@ -108,6 +103,9 @@ function ExportScript.Tools.ExportMapAir(value)
 end
 function ExportScript.Tools.ExportMapGnd(value)
     lShowOnMapGnd = value
+end
+function ExportScript.Tools.ExportMapNav(value)
+    lShowOnMapNav = value
 end
 
 
@@ -123,6 +121,16 @@ end
 function ExportScript.Tools.SetSecGnd(value)
     timeSecGnd = value
 end
+function ExportScript.Tools.SetSecNav(value)
+    timeSecNav = value
+end
+
+function ExportScript.Tools.GetDcsVersionStr()
+    return "Ver=" .. ExportScript.VersionStr .. ExportScript.Config.Separator
+end
+function ExportScript.Tools.GetDcsVersionId()
+    return "Id=" .. ExportScript.VersionId .. ExportScript.Config.Separator
+end
 
 
 function ExportScript.Tools.createUDPSender()
@@ -130,6 +138,7 @@ function ExportScript.Tools.createUDPSender()
 
 	local _createUDPSender = ExportScript.socket.protect(function()
 		ExportScript.UDPsender = ExportScript.socket.udp()
+        ExportScript.UDPsender:setoption('broadcast', true)
 		ExportScript.socket.try(ExportScript.UDPsender:setsockname("*", 0))
 		--ExportScript.socket.try(ExportScript.UDPsender:settimeout(.004)) -- set the timeout for reading the socket; 250 fps
 	end)
@@ -152,7 +161,7 @@ end
 function ExportScript.Tools.ExportInit()
     playerId = ExportScript.Tools.GetPlayerId()
     ExportScript.Tools.SendShortData("EX=ON")
-    ExportScript.Tools.SendShortData("Ver=" .. ExportScript.VersionStr)
+    ExportScript.Tools.SendShortData(ExportScript.Tools.GetDcsVersionStr() .. ExportScript.Tools.GetDcsVersionId())
     ExportScript.Tools.SendShortData("Map=" .. actualMap .. ExportScript.Config.Separator)
     ExportScript.Tools.SendShortData("File=" .. ExportScript.ModuleName .. ExportScript.Config.Separator)
 end
@@ -226,6 +235,14 @@ function ExportScript.Tools.ProcessInput()
                         ExportScript.Tools.SetSecGnd(val)
                     end
                 end
+                if opt == 4 then
+                    if (vis == 0) then
+                        ExportScript.Tools.ExportMapNav(false)
+                    else
+                        ExportScript.Tools.ExportMapNav(true)
+                        ExportScript.Tools.SetSecNav(val)
+                    end
+                end
             end
 
             if (_command == "C") then
@@ -268,6 +285,10 @@ function ExportScript.Tools.GetPlayerId()
     else
         return id
     end
+end
+
+function ExportScript.Tools.GetObjectCoalition(id)
+    return LoGetObjectById(id).CoalitionID
 end
 
 function ExportScript.Tools.GetDateTime()
@@ -1402,9 +1423,7 @@ function ExportScript.Fdr.NavFileInit(version)
         ExportScript.kmlFile:write("      </PolyStyle>\n")
         ExportScript.kmlFile:write("    </Style>\n")
         ExportScript.kmlFile:write("    <Placemark>\n")
-        ExportScript.kmlFile:write("      <description>Flight recorded in DCS World " ..
-            string.format("%d.%d.%d.%d",version.ProductVersion[1], version.ProductVersion[2],
-            version.ProductVersion[3], version.ProductVersion[4]) .. 
+        ExportScript.kmlFile:write("      <description>Flight recorded in DCS World " .. ExportScript.VersionId ..
             " @ " .. datetime .. "</description>\n")
         ExportScript.kmlFile:write("      <styleUrl>#StyleLineKML</styleUrl>\n")
         ExportScript.kmlFile:write("      <LineString>\n")

@@ -38,6 +38,7 @@ ExportScript.FoundFCModule  = false
 ExportScript.FoundNoModul   = true
 
 ExportScript.VersionStr = 2
+ExportScript.VersionId = 0
 
 function ExportScript.CheckDcs()
 	if (string.match(lfs.writedir(), "openbeta")) then
@@ -45,6 +46,14 @@ function ExportScript.CheckDcs()
 	else
 		ExportScript.VersionStr = 0
 	end
+end
+
+function ExportScript.CheckDcsVersionId(version)
+	ExportScript.VersionId = string.format("%d.%d.%d.%d",
+			version.FileVersion[1],
+			version.FileVersion[2],
+			version.FileVersion[3], -- head  revision (Continuously growth)
+			version.FileVersion[4]) -- build number   (Continuously growth)
 end
 
 function LuaExportStart()
@@ -113,15 +122,16 @@ function ExportScript.Start()
 
 	ExportScript.CheckDcs()
 
+	--request current version info (as it showed by Windows Explorer fo DCS.exe properties)
+	local version = LoGetVersionInfo()
+	ExportScript.CheckDcsVersionId(version)
+
 	if (ExportScript.Tools.DebugScript == true) then
 		ExportScript.logFile = io.open(ExportScript.Tools.LogPath, "wa") -- "W+"
 		if ExportScript.logFile then
 			ExportScript.logFile:write('\239\187\191') -- create a UTF-8 BOM
 		end
 	end
-
-		--request current version info (as it showed by Windows Explorer fo DCS.exe properties)
-		local version = LoGetVersionInfo()
 
 		if (ExportScript.Fdr ~= nil) then
 			if (ExportScript.Config.WriteNavFile ~= nil and ExportScript.Config.WriteNavFile == true) then
@@ -142,18 +152,10 @@ function ExportScript.Start()
 	ExportScript.Tools.SelectModule()   -- point globals to Module functions and data.
 
 	if (ExportScript.Tools.DebugScript == true) then
-		if version and ExportScript.logFile then
-			ExportScript.logFile:write("ProductName: "..version.ProductName..'\n')
-			ExportScript.logFile:write(string.format("FileVersion: %d.%d.%d.%d\n",
-													version.FileVersion[1],
-													version.FileVersion[2],
-													version.FileVersion[3],
-													version.FileVersion[4]))
-			ExportScript.logFile:write(string.format("ProductVersion: %d.%d.%d.%d\n",
-													version.ProductVersion[1],
-													version.ProductVersion[2],
-													version.ProductVersion[3],  -- head  revision (Continuously growth)
-													version.ProductVersion[4])) -- build number   (Continuously growth)
+		if ExportScript.logFile then
+			ExportScript.logFile:write(string.format("ProductName: %s\n", version.ProductName))
+			ExportScript.logFile:write(string.format("FileVersion: %s\n", ExportScript.VersionId))
+			ExportScript.logFile:write(string.format("ProductVersion: %s\n", ExportScript.VersionId))
 		end
 	end
 

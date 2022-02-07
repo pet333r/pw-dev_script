@@ -52,10 +52,8 @@
 --         ExportScript.kmlFile:write("      </PolyStyle>\n")
 --         ExportScript.kmlFile:write("    </Style>\n")
 --         ExportScript.kmlFile:write("    <Placemark>\n")
---         ExportScript.kmlFile:write("      <description>Flight recorded in DCS World " ..
---             string.format("%d.%d.%d.%d",version.ProductVersion[1], version.ProductVersion[2],
---             version.ProductVersion[3], version.ProductVersion[4]) .. 
---             " @ " .. datetime .. "</description>\n")
+-- ExportScript.kmlFile:write("      <description>Flight recorded in DCS World " .. ExportScript.VersionId .. 
+-- " @ " .. datetime .. "</description>\n")
 --         ExportScript.kmlFile:write("      <styleUrl>#StyleLineKML</styleUrl>\n")
 --         ExportScript.kmlFile:write("      <LineString>\n")
 --         ExportScript.kmlFile:write("        <extrude>true</extrude>\n")
