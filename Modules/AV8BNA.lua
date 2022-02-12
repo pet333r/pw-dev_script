@@ -28,15 +28,15 @@ ExportScript.ConfigEveryFrameArguments =
 	[344] = "%.f",	--GEN
 
 	--EYEBROW LIGHTS RIGHT SIGHT
-	-- [276] = "%.f",	--SAM
-	-- [277] = "%.f",	--CW
-	-- [278] = "%.f",	--AI
-	-- [279] = "%.f",	--AAA
+	[276] = "%d",	--SAM
+	[277] = "%d",	--CW
+	[278] = "%d",	--AI
+	[279] = "%d",	--AAA
 
 	--MIP OUTER LEFT SIDE
-	-- [283] = "%.f",	--NAV
-	-- [285] = "%.f",	--VSTOL
-	-- [281] = "%.f",	--A/G
+	[281] = "%d",	--A/G
+	[283] = "%d",	--NAV
+	[285] = "%d",	--VSTOL
 	-- [451] = "%.f",	--SEL
 	-- [452] = "%.f",	--CMBT
 	-- [453] = "%.f",	--STO
@@ -79,7 +79,7 @@ ExportScript.ConfigEveryFrameArguments =
 	[594] = "%1d",	--DROOP
 	[595] = "%1d",	--ROLL
 	[596] = "%1d",	--AFT BAY
-	[597] = "%1d",	--AV BIT -----MAYBE NOT WORKING !-----
+	[0] = "%1d",	--AV BIT
 	[598] = "%1d",	--"--"
 	[599] = "%1d",	--YAW
 	[600] = "%1d",	--CW NOGO
@@ -317,12 +317,12 @@ ExportScript.ConfigArguments =
 	-- [509] = "%1d",	--Fuel Dump R Switch"
 
 	-- External Lights Panel
-	-- [472] = "%.1f",	--Landing/Taxi Lights Switch
-	-- [503] = "%.1f",	--External Lights Mode Switch"
-	-- [510] = "%.4f",	--Formation Lights Knob
-	-- [511] = "%1d",	--Position Lights Switch
-	-- [512] = "%1d",	--Anti-Collision Lights Switch
-	-- [513] = "%1d",	--External Auxiliary Lights Switch
+	[472] = "%d",	--Landing/Taxi Lights Switch
+	[503] = "%d",	--External Lights Mode Switch"
+	[510] = "%.1f",	--Formation Lights Knob
+	[511] = "%1d",	--Position Lights Switch
+	[512] = "%1d",	--Anti-Collision Lights Switch
+	[513] = "%1d",	--External Auxiliary Lights Switch
 
 	-- Pilot Service Panel
 	-- [514] = "%1d",	--"Oxygen Switch
@@ -338,45 +338,45 @@ ExportScript.ConfigArguments =
 
 	-- Electrical Panel
 	-- [609] = "%.1f",	--DC Test Switch
-	-- [610] = "%.1f",	--APU Generator Switch
-	-- [611] = "%1d",	--Engine Start Switch
-	-- [612] = "%.1f",	--Generator Switch
-	-- [613] = "%.1f",	--Battery Switch
+	[610] = "%.1f",	--APU Generator Switch
+	[611] = "%1d",	--Engine Start Switch
+	[612] = "%.1f",	--Generator Switch
+	[613] = "%.1f",	--Battery Switch
 
 	-- V/UHF Radio Panel
-	-- [614] = "%.4f",	--V/UHF RSC Volume Knob
-	-- [615] = "%.3f",	--V/UHF RSC Chan/Freq Knob
-	-- [616] = "%.1f",	--V/UHF RSC Operational Mode Switch
+	[614] = "%.1f",	--V/UHF RSC Volume Knob
+	[615] = "%.2f",	--V/UHF RSC Chan/Freq Knob
+	[616] = "%.1f",	--V/UHF RSC Operational Mode Switch
 	-- [617] = "%1d",	--V/UHF RSC Ancillary Mode Pointer
 	-- [618] = "%1d",	--V/UHF RSC Ancillary Mode Switch
-	-- [619] = "%.1f",	--V/UHF RSC Frequency Mode Switch
+	[619] = "%.2f",	--V/UHF RSC Frequency Mode Switch
 	-- [620] = "%1d",	--V/UHF RSC LOAD/OFST Switch
 
 	-- ACNIP
-	-- [621] = "%1d",	--ACNIP Mode Switch
-	-- [622] = "%1d",	--KY-1 Cipher Type Selector Switch
-	-- [623] = "%1d",	--KY-2 Cipher Type Selector Switch
-	-- [624] = "%1d",	--KY-1 Code/Mode Switch
-	-- [625] = "%1d",	--KY-2 Code/Mode Switch
-	-- [626] = "%1d",	--ACNIP Radio Selector Switch
-	-- [627] = "%1d",	--KY-58 Codes Clear Switch
-	-- [628] = "%1d",	--KY-58 Remote Codes Load Switch
+	[621] = "%1d",	--ACNIP Mode Switch
+	[622] = "%1d",	--KY-1 Cipher Type Selector Switch
+	[623] = "%1d",	--KY-2 Cipher Type Selector Switch
+	[624] = "%1d",	--KY-1 Code/Mode Switch
+	[625] = "%1d",	--KY-2 Code/Mode Switch
+	[626] = "%1d",	--ACNIP Radio Selector Switch
+	[627] = "%1d",	--KY-58 Codes Clear Switch
+	[628] = "%1d",	--KY-58 Remote Codes Load Switch
 
 	-- ICS
-	-- [629] = "%.4f",	--ICS Aux Volume Knob
-	-- [630] = "%.4f",	--ICS Ground Volume Knob
-	-- [631] = "%.1f",	--ICS Mic Operational Mode Switch
+	[629] = "%.1f",	--ICS Aux Volume Knob
+	[630] = "%.1f",	--ICS Ground Volume Knob
+	[631] = "%.1f",	--ICS Mic Operational Mode Switch
 
 	-- IFF
-	-- [632] = "%1d",	--IFF Operational Mode Switch
-	-- [633] = "%1d",	--IFF Crypto Mode Switch
+	[632] = "%1d",	--IFF Operational Mode Switch
+	[633] = "%1d",	--IFF Crypto Mode Switch
 
 	-- Interior Lights Panel
-	-- [634] = "%1d",	--Compass Light/Test Lights
-	-- [635] = "%.4f",	--Instruments Lights
-	-- [636] = "%.4f",	--Console Lights
-	-- [637] = "%.4f",	--Flood Lights
-	-- [638] = "%.4f",	--Annunciator Lights
+	[634] = "%1d",	--Compass Light/Test Lights
+	[635] = "%.1f",	--Instruments Lights
+	[636] = "%.1f",	--Console Lights
+	[637] = "%.1f",	--Flood Lights
+	[638] = "%.1f",	--Annunciator Lights
 
 	--UPPER AMARMENT PANEL
 	[385] = "%.1f",	--MODE	-/AUT/CIP/DSL/DIR/AGM

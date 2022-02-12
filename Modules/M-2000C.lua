@@ -27,15 +27,15 @@ ExportScript.ConfigEveryFrameArguments =
 	[246] = "%1d", 	-- Gun Mode Button KL1 Light
 	[247] = "%1d", 	-- Gun Mode Button KL1 Light
 	[251] = "%1d",	-- Weapons Button 1 S Light
-	[252] = "%1d",	-- Weapons Button 1 R Light
+	[252] = "%1d",	-- Weapons Button 1 P Light
 	[254] = "%1d",	-- Weapons Button 2 S Light
-	[255] = "%1d",	-- Weapons Button 2 R Light
+	[255] = "%1d",	-- Weapons Button 2 P Light
 	[257] = "%1d",	-- Weapons Button 3 S Light
-	[258] = "%1d",	-- Weapons Button 3 R Light
+	[258] = "%1d",	-- Weapons Button 3 P Light
 	[260] = "%1d",	-- Weapons Button 4 S Light
-	[261] = "%1d",	-- Weapons Button 4 R Light
+	[261] = "%1d",	-- Weapons Button 4 P Light
 	[263] = "%1d",	-- Weapons Button 5 S Light
-	[264] = "%1d",	-- Weapons Button 5 R Light
+	[264] = "%1d",	-- Weapons Button 5 P Light
 
 	-- PPA
 	[265] = "%1d", -- Missile Selector Switch
@@ -97,7 +97,10 @@ ExportScript.ConfigEveryFrameArguments =
 	[563] = "%1d",	--  PARK.
 
 	-- PCN
-	-- [569] = "%1d",	-- UNI Light
+	[437] = "%1d",	-- BAD green Indicator Light
+	[438] = "%1d",	-- REC green Indicator Light
+	[439] = "%1d",	-- MRC green Indicator Light
+	[440] = "%1d",	-- VAL green Indicator Light
 	[564] = "%1d",	-- PRET Indicator Light
 	[565] = "%1d",	-- ALN Indicator Light
 	[566] = "%1d",	-- MIP Indicator Light
@@ -124,6 +127,12 @@ ExportScript.ConfigEveryFrameArguments =
 	[578] = "%1d",  -- INS Update (REC)
 	[580] = "%1d",  -- Validate Data Entry (VAL)
 	[582] = "%1d",  -- Mark Position (MRC)
+
+	-- INS
+	[627] = "%.1f",  -- INS Mode Selector
+	[629] = "%.1f",  -- INS Operational Selector
+
+	[728] = "%1d",	-- arg lights
 
 	-- VHF Radio
 	[950] = "%.1f", -- Mode knob

@@ -203,7 +203,7 @@ ExportScript.ConfigArguments =
 	[687] = "%.1f", -- PRIMARY DATA ENTRY DISPLAY BRT Knob
 	[688] = "%.1f", -- FLOOD CONSOLES BRT Knob
 	[690] = "%.1f", -- FLOOD INST PNL BRT Knob
-	--[691] = "%.1f", -- MAL & IND LTS Switch, BRT/Center/DIM
+	[691] = "%d", -- MAL & IND LTS Switch, BRT/Center/DIM
 }
 
 -- DED Layout Information ------------------------------------------------------

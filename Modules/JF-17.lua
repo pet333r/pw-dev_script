@@ -127,6 +127,15 @@ ExportScript.ConfigEveryFrameArguments =
     [909] = "%.1f", -- AAP Brightness Knob
     [910] = "%1d", -- HUD Symbology Reject Switch
 
+    -- ACP
+    [934] = "%.1f", -- COM1 Volume Knob
+    [935] = "%d",   -- Intercom Switch
+    [936] = "%d",   -- Radio Top/Bottom Antenna Switch
+    [937] = "%d",   -- Speaker Control Box Channel Antenna Switch
+    [938] = "%.1f", -- COM2 Volume Knob
+    [939] = "%.1f", -- TCN/ILS Volume Knob
+    [940] = "%.1f", -- MSL Volume Knob
+
     -- INT LTS
     [944] = "%.2f", -- Instrument Light Knob
     [945] = "%.2f", -- Console Light Knob
