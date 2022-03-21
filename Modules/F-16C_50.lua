@@ -67,7 +67,7 @@ ExportScript.ConfigEveryFrameArguments =
 	[470] = "%1d", -- btn 3
 	[475] = "%1d", -- btn 4
 	[480] = "%1d", -- btn 5
-	[485] = "%1d", -- btn 
+	[485] = "%1d", -- btn
 	[490] = "%1d", -- btn FRM
 	[495] = "%1d", -- btn SPL
 	[455] = "%1d", -- switch OPR/STBY/OFF
@@ -214,7 +214,7 @@ local DEDLayout_l4={}
 local DEDLayout_l5={}
 
 --CNI
-DEDLayout_l1["UHF Mode Rotary"]={1,3}
+DEDLayout_l1["UHF Mode Rotary"]={1,3,0,"_inv","I"}
 DEDLayout_l1["UHF IncDecSymbol"]={5,1}
 DEDLayout_l1["Selected UHF Frequency"]={6,6}
 DEDLayout_l1["Steerpoint Use"]={14,4}
@@ -261,10 +261,11 @@ DEDLayout_l1["ALOW Selected Steerpoint"] = {19,2}
 DEDLayout_l1["ALOW WPT IncDecSymbol"] = {23,1}
 --STPT
 DEDLayout_l1["STEERPOINT LABEL"] = {6,4}
-DEDLayout_l1["STEERPOINT NUMBER"] = {12,2,0,"_inv","I"}
+DEDLayout_l1["STEERPOINT NUMBER"] = {12,3,0,"_inv","I"}
 DEDLayout_l1["STEERPOINT IncDecSymbol"] = {16,1}
 DEDLayout_l1["STEERPOINT SEQUENCE"] = {18,4}
 DEDLayout_l1["STEERPOINT NUMBER Asteriscs_both"] = {11,1,15,"","I"}
+DEDLayout_l1["STEERPOINT SEQUENCE Asteriscs_both"] = {17,1,22,"","I"}
 --TIME
 DEDLayout_l1["TIME_label"] = {9,4}
 --BINGO
@@ -339,8 +340,8 @@ DEDLayout_l1["Asterisks_T1_both"] = {17,1,21,"","I"}
 DEDLayout_l1["Visual initial point to TGT Label"] = {4,10}
 DEDLayout_l1["VIP to TGT Label Asteriscs_both"] = {3,1,14,"","I"}
 -- VRP
-DEDLayout_l1["Target to VRP Label"] = {4,10}
-DEDLayout_l1["Target to VRP Label Asteriscs_both"] = {3,1,14,"","I"}
+DEDLayout_l1["Target to VRP Label"] = {5,10}
+DEDLayout_l1["Target to VRP Label Asteriscs_both"] = {4,1,15,"","I"}
 --HMCS
 DEDLayout_l1["HMCS DISPLAY HMCS_DISPLAY_TOPIC"] = {7,12}
 DEDLayout_l1["HMCS DISPLAY INS_SelectedSteerpoint"] = {20,2}
@@ -351,6 +352,13 @@ DEDLayout_l1["HMCS ALIGN INS_STPT_IncDecSymbol"] = {23,1}
 --BULL
 DEDLayout_l1["BULLSEYE LABEL"] = {6,8,0,"_inv","I"}
 DEDLayout_l1["BULLSEYE LABEL Asteriscs_both"] = {5,1,14,"","I"}
+--MARK
+DEDLayout_l1["MARK"] = {1,4}
+DEDLayout_l1["MARK SOURCE"] = {7,4}
+DEDLayout_l1["MARK SOURCE Asteriscs_both"] = {6,1,11,"","I"}
+DEDLayout_l1["STPT NUMBER"] = {15,2,0,"_inv","I"}
+DEDLayout_l1["MARK IncDecSymbol"] = {18,1}
+DEDLayout_l1["MARK Number Asteriscs_both"] = {14,1,19,"","I"}
 --DEDLayout_l1[""] = {,}
 
 --TODO
@@ -405,7 +413,7 @@ DEDLayout_l2["CMDS_CH_Asterisks_both"] = {6,1,9,"","I"}
 -- DLNK
 DEDLayout_l2["FC lbl"] = {3,2}
 DEDLayout_l2["FC value"] = {6,3,0,"_inv","I"}
-DEDLayout_l2["Asterisks on FC_both"] = {15,1,20,"","I"}
+DEDLayout_l2["Asterisks on FC_both"] = {5,1,9,"","I"}
 DEDLayout_l2["CallSign Name char1"] = {11,1,0,"_inv","I"}
 DEDLayout_l2["CallSign Name char2"] = {12,1,0,"_inv","I"}
 DEDLayout_l2["Asterisks on CS Name_both"] = {10,1,13,"","I"}
@@ -413,9 +421,11 @@ DEDLayout_l2["VCS IncDecSymbol"] = {14,1}
 DEDLayout_l2["CallSign Number"] = {16,2,0,"_inv","I"}
 DEDLayout_l2["Asterisks on CS Number_both"] = {15,1,18,"","I"}
 DEDLayout_l2["STN id lbl1"] = {0,2}
-DEDLayout_l2["STN value1"] = {3,5}
+DEDLayout_l2["STN value1"] = {3,5,0,"_inv","I"}
 DEDLayout_l2["STN id lbl5"] = {9,2}
-DEDLayout_l2["STN value5"] = {12,5}
+DEDLayout_l2["STN value5"] = {12,5,0,"_inv","I"}
+DEDLayout_l2["Asterisks on STN1_both"] = {2,1,8,"","I"}
+DEDLayout_l2["Asterisks on STN5_both"] = {11,1,17,"","I"}
 DEDLayout_l2["OWN lbl"] = {18,3}
 DEDLayout_l2["GPS TIME lbl"] = {0,8}
 DEDLayout_l2["GPS TIME status"] = {9,3,0,"_inv","I"}
@@ -469,9 +479,13 @@ DEDLayout_l2["BULL POINT LABEL"] = {6,4}
 DEDLayout_l2["BULLSEYE NUMBER"] = {12,4,0,"_inv","I"}
 DEDLayout_l2["BULLSEYE IncDecSymbol"] = {16,1}
 DEDLayout_l2["BULLSEYE SEQUENCE Asteriscs_both"] = {11,1,15,"","I"} 
+--MARK
+DEDLayout_l2["MARK Latitude"] = {2,3}
+DEDLayout_l2["MARK Latitude Value"] = {6,12,0,"_inv","I"}
+DEDLayout_l2["MARK Latitude Asteriscs_both"] = {5,1,18,"","I"}
 --DEDLayout_l2[""] = {,}
 --CNI
-DEDLayout_l3["VHF Label"]={1,3}
+DEDLayout_l3["VHF Label"]={1,3,0,"_inv","I"}
 DEDLayout_l3["VHF IncDecSymbol"]={5,1}
 DEDLayout_l3["Selected VHF Frequency"]={6,6}
 DEDLayout_l3["System Time"]={15,8}
@@ -574,14 +588,17 @@ DEDLayout_l3["FL status"] = {16,3,0,"_inv","I"}
 DEDLayout_l3["Asterisks on FL_both"] = {15,1,19,"","I"}
 DEDLayout_l3["NUM lbl"] = {18,1}
 DEDLayout_l3["Own num value"] = {20,1}
+DEDLayout_l3["Asterisks on Own_both"]  = {19,1,21,"","I"}
 DEDLayout_l3["TIME lbl"] = {4,4}
 DEDLayout_l3["TIME value"] = {9,8,0,"_inv","I"}
 DEDLayout_l3["Asterisks on TIME_both"] = {8,1,17,"","I"}
 DEDLayout_l3["STN id lbl2"] = {0,2}
-DEDLayout_l3["STN value2"] = {3,5}
+DEDLayout_l3["STN value2"] = {3,5,0,"","_inv"}
+DEDLayout_l3["Asterisks on STN2_both"] = {2,1,8,"","I"}
 DEDLayout_l3["STN id lbl6"] = {9,2}
-DEDLayout_l3["STN value6"] = {12,5}
-DEDLayout_l3["OWN lbl"] = {3,3}
+DEDLayout_l3["STN value6"] = {12,5,0,"","_inv"}
+DEDLayout_l3["Asterisks on STN6_both"] = {11,1,17,"","I"}
+-- DEDLayout_l3["OWN lbl"] = {3,3} --frk
 DEDLayout_l3["OWN value"] = {7,2}
 DEDLayout_l3["DATA lbl"] = {12,4}
 DEDLayout_l3["DATA value"] = {7,3}
@@ -631,8 +648,11 @@ DEDLayout_l3["Target bearing Asteriscs_both"] = {8,1,15,"","I"}
 DEDLayout_l3["HMCS DISPLAY HMCS_CKPT_BLANK"] = {3,9,0,"_inv","I"}
 DEDLayout_l3["HMCS DISPLAY Asterisks_CKPT_BLANK_both"] = {2,1,12,"","I"}
 DEDLayout_l3["HMCS ALIGN HMCS_AZ_EL"] = {2,5,0,"_inv","I"}
-DEDLayout_l3["HMCS ALIGN Asterisks_AZ_EL_both"] = {1,1,7,"","I"}
-
+DEDLayout_l3["HMCS ALIGN Asterisks_AZ_ELAZ_EL_both"] = {1,1,7,"","I"}
+--MARK
+DEDLayout_l3["MARK Longitude"] = {2,3}
+DEDLayout_l3["MARK Longitude Value"] = {6,12,0,"_inv","I"}
+DEDLayout_l3["MARK Longitude Asteriscs_both"] = {5,1,18,"","I"} 
 --DEDLayout_l3[""] = {,}
 --TODO
 DEDLayout_l4["TODO remove label"] = {4,20}
@@ -726,7 +746,7 @@ DEDLayout_l4["INS_FIX_NECESSARY_lbl"] = {3,17}
 --CMDS
 DEDLayout_l4["CMDS_SQ_lbl"] = {6,2}
 DEDLayout_l4["CMDS_SQ_Scratchpad"] = {10,2,0,"_inv","I"}
-DEDLayout_l4["CMDS_SQ_Asterisks_both"] = {9,1,13,"","I"}
+DEDLayout_l4["CMDS_SQ_Asterisks_both"] = {9,1,12,"","I"}
 DEDLayout_l4["CMDS_O1_lbl"] = {2,2}
 DEDLayout_l4["CMDS_O1_Scratchpad"] = {7,2,0,"_inv","I"}
 DEDLayout_l4["CMDS_O1_Asterisks_both"] = {6,1,9,"","I"}
@@ -739,14 +759,16 @@ DEDLayout_l4["SC value"] = {6,3,0,"_inv","I"}
 DEDLayout_l4["Asterisks on SC_both"] = {5,1,9,"","I"}
 DEDLayout_l4["XMT lbl"] = {11,3}
 DEDLayout_l4["XMT status"] = {16,2,0,"_inv","I"}
-DEDLayout_l4["Asterisks on XMT_both"] = {15,1,18,"","I"}
+DEDLayout_l4["Asterisks on XMT_both"] = {15,1,20,"","I"}
 DEDLayout_l4["NTR lbl"] = {5,3}
 DEDLayout_l4["NTR status"] = {9,3,0,"_inv","I"}
 DEDLayout_l4["Asterisks on NTR_both"] = {8,1,12,"","I"}
 DEDLayout_l4["STN id lbl3"] = {0,2}
-DEDLayout_l4["STN value3"] = {3,5}
+DEDLayout_l4["STN value3"] = {3,5,0,"","_inv"}
+DEDLayout_l4["Asterisks on STN3_both"] = {2,1,8,"","I"}
 DEDLayout_l4["STN id lbl7"] = {9,2}
-DEDLayout_l4["STN value7"] = {12,5}
+DEDLayout_l4["STN value7"] = {12,5,0,"","_inv"}
+DEDLayout_l4["Asterisks on STN7_both"] = {11,1,17,"","I"}
 DEDLayout_l4["FILL lbl"] = {2,4}
 DEDLayout_l4["FILL status"] = {7,3}
 DEDLayout_l4["PRTL lbl"] = {12,4}
@@ -778,8 +800,8 @@ DEDLayout_l4["T4_code"] = {18,3,0,"_inv","I"}
 DEDLayout_l4["Asterisks_T4_both"] = {17,1,21,"","I"}
 -- VIP & VRP
 DEDLayout_l4["Range"] = {4,3}
-DEDLayout_l4["Range value"] = {11,4,0,"_inv","I"}
-DEDLayout_l4["Range Asteriscs_both"] = {10,1,15,"","I"}
+DEDLayout_l4["Range value"] = {9,8,0,"_inv","I"}
+DEDLayout_l4["Range Asteriscs_both"] = {8,1,17,"","I"}
 DEDLayout_l4["Range NM"] = {16,2}
 --HMCS
 DEDLayout_l4["HMCS DISPLAY HMCS_DECLUTTER"] = {3,14}
@@ -787,7 +809,10 @@ DEDLayout_l4["HMCS DISPLAY HMCS_DECLUTTER_STATUS"] = {17,1}
 DEDLayout_l4["HMCS DISPLAY Asterisks_DECLUTTER_both"] = {12,1,18,"","I"}
 DEDLayout_l4["HMCS ALIGN HMCS_ROLL"] = {2,4,0,"_inv","I"}
 DEDLayout_l4["HMCS ALIGN Asterisks_ROLL_both"] = {1,1,6,"","I"}
-
+--MARK
+DEDLayout_l4["MARK Elevation"] = {1,4}
+DEDLayout_l4["MARK Elevation Value"] = {6,8,0,"_inv","I"}
+DEDLayout_l4["MARK Elevation Asteriscs_both"] = {5,1,14,"","I"}
 --DEDLayout_l4[""] = {,}
 --CNI
 DEDLayout_l5["IFF Modes Label"]={1,1}
@@ -800,7 +825,7 @@ DEDLayout_l5["TACAN Band"]={23,1}
 DEDLayout_l5["TACAN A-A Distance"]={19,5}
 --COM
 DEDLayout_l5["Preset Frequency"]={5,6,0,"_inv","I"}
-DEDLayout_l5["Asterisks on PresetFrequency_both"]={4,11,11,"","I"}
+DEDLayout_l5["Asterisks on PresetFrequency_both"]={4,1,11,"","I"}
 DEDLayout_l5["Bandwidth"]={18,2,0,"_inv","I"}
 DEDLayout_l5["Asterisks on Band_both"]={17,1,20,"","I"}
 DEDLayout_l5["Preset Channel Number"]={20,2}
@@ -874,12 +899,14 @@ DEDLayout_l5["P2 lbl"] = {21,3}
 DEDLayout_l5["P3 lbl"] = {21,3}
 DEDLayout_l5["SYNC lbl"] = {4,4}
 DEDLayout_l5["SYNC status"] = {9,4,0,"_inv","I"}
-DEDLayout_l5["Asterisks on SYNC_both"] = {8,1,13,"","I"}
+DEDLayout_l5["Asterisks on SYNC_both"] = {8,1,15,"","I"}
 DEDLayout_l5["P1 lbl"] = {21,3}
 DEDLayout_l5["STN id lbl4"] = {0,2}
-DEDLayout_l5["STN value4"] = {3,5}
+DEDLayout_l5["STN value4"] = {3,5,0,"","_inv"}
+DEDLayout_l5["Asterisks on STN4_both"] = {2,1,8,"","I"}
 DEDLayout_l5["STN id lbl8"] = {9,2}
-DEDLayout_l5["STN value8"] = {12,5}
+DEDLayout_l5["STN value8"] = {12,5,0,"","_inv"}
+DEDLayout_l5["Asterisks on STN8_both"] = {11,1,17,"","I"}
 DEDLayout_l5["P5 lbl"] = {21,3}
 DEDLayout_l5["INTRAFLIGHT STN id lbl4"] = {1,2}
 DEDLayout_l5["INTRAFLIGHT STN value4"] = {4,5}
@@ -896,7 +923,7 @@ DEDLayout_l5["Laser ST Time Asteriscs_both"] = {16,1,19,"","I"}
 DEDLayout_l5["INTG M3 Mode"] = {0,2,0,"_inv","I"}
 DEDLayout_l5["INTG M3 Decoupled Status"] = {3,1}
 DEDLayout_l5["INTG M3 Code"] = {4,4}
-DEDLayout_l5["INTG Asterisks_both"] = {9,1,16,"","I"}
+DEDLayout_l5["INTG Asterisks_both"] = {9,1,15,"","I"}
 DEDLayout_l5["INTG Scratchpad"] = {10,5,0,"_inv","I"}
 DEDLayout_l5["INTG COUPLE Mode"] = {16,4,0,"_inv","I"}
 DEDLayout_l5["INTG COUPLE Key"] = {20,3}
@@ -906,12 +933,23 @@ DEDLayout_l5["T5_code"] = {18,3,0,"_inv","I"}
 DEDLayout_l5["Asterisks_T5_both"] = {17,1,21,"","I"}
 -- VIP & VRP
 DEDLayout_l5["Elevation"] = {3,4}
-DEDLayout_l5["Elevation value"] = {9,6,0,"_inv","I"}
+DEDLayout_l5["Elevation value"] = {9,8,0,"_inv","I"}
 DEDLayout_l5["Elevation Asteriscs_both"] = {8,1,17,"","I"}
 --HMCS
 DEDLayout_l5["HMCS DISPLAY HMCS_RWR_DISPLAY"] = {3,9}
 DEDLayout_l5["HMCS DISPLAY HMCS_RWR_DISPLAY_STATUS"] = {13,3}
 DEDLayout_l5["HMCS DISPLAY Asterisks_RWR_DISPLAY_both"] = {12,1,16,"","I"}
+--MARK
+DEDLayout_l5["MARK MGRS"] = {1,4}
+DEDLayout_l5["MARK GRID DIGIT Value"] = {6,2,0,"_inv","I"}
+DEDLayout_l5["MARK GRID SYMBOL Value"] = {8,2,0,"_inv","I"}
+DEDLayout_l5["MARK SQUARE Value1"] = {9,2,0,"_inv","I"}
+DEDLayout_l5["MARK SQUARE Value2"] = {10,2,0,"_inv","I"}
+DEDLayout_l5["MARK EAST Value"] = {12,5,0,"_inv","I"}
+DEDLayout_l5["MARK Slash"] = {17,1}
+DEDLayout_l5["MARK NORTH Value"]={18,5,0,"_inv","I"}
+DEDLayout_l5["MARK MGRS Asteriscs_both"]={5,1,23,"","I"}
+
 --DEDLayout_l5[""] = {,}
 
 DEDLayout = {DEDLayout_l1, DEDLayout_l2, DEDLayout_l3, DEDLayout_l4, DEDLayout_l5}
@@ -925,7 +963,7 @@ local function buildDEDLine(line)
 		local layout
 		local label
 		local value
-
+		local inverse = 0
 		-- Base Output String
 		local dataLine ="                         "
 
@@ -959,7 +997,7 @@ local function buildDEDLine(line)
 			elseif bingo ~= nil and line == 1 then
 				label = bingo.." "..k
 			-- Handle Duplicate Key Names on INS INFL ALGN page Lines 1 & 3 items
-			elseif inflt_algn ~= nil and (line == 1 or line == 3) then
+			elseif inflt_algn ~= nil and (line == 1 or line==3) then
 				label = inflt_algn.." "..k
 			-- Handle Duplicate Key Names on DLNK INTRAFLIGHT page
 			elseif intraflight ~= nil then
@@ -1089,4 +1127,6 @@ end
 -- Pointed to by ExportScript.ProcessDCSConfigLowImportance
 function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	-- -- General
+	-- ExportScript.Tools.SendData(2901, -ExportScript.Tools.GetArgumentsValue(17, "%.2f"))
+	-- ExportScript.Tools.SendData(2902, ExportScript.Tools.GetArgumentsValue(18, "%.2f"))
 end
