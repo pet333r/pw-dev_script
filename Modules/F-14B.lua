@@ -23,9 +23,9 @@ ExportScript.ConfigEveryFrameArguments =
 	[29] = "%.1f",		-- PD Threshold Clutter
 	[30] = "%.1f",		-- PD Threshold Clear
 
-	[2121] = "%.2f",		-- RIO Radar Elevation Arrow
-	[2122] = "%.2f",		-- TCS Elevation Arrow
-	[6100] = "%.2f",		-- Range Roller
+	[2121] = "%.2f",		-- RIO Radar Elevation Arrow (-1 - 1)
+	[2122] = "%.2f",		-- TCS Elevation Arrow (-1 - 1)
+	[6100] = "%.2f",		-- Range Roller (0.15)
 	[6102] = "%.2f",		-- Raadar Mode Gauge
 	[9958] = "%.1f",		-- XMTR CHAN
 	[9959] = "%.1f",		-- MSL CHAN
@@ -46,6 +46,38 @@ ExportScript.ConfigEveryFrameArguments =
 	[6121] = "%.1f",		-- CCM SPL Light
 	[6122] = "%.1f",		-- CCM ALT OFF Light
 	[6123] = "%.1f",		-- CCM VGS Light
+
+	-- INS
+	[48] = "%1d",   -- TID Brightness, (1, 0, 1)
+	[49] = "%1d",   -- TID Contrast, (1, 0, 1)
+	[50] = "%.1f",   -- NAV MODE knob
+	[51] = "%.1f",   -- DEST knob
+
+	-- TID
+	[2005]  =  "%.5f",   --      TID_mode_knob
+	[2006]  =  "%.1f",   --      TID_range_knob
+	[6125] = "%.1f",		-- TID TRACK HOLD selector
+	[6126] = "%.1f",		-- TID CLSN
+	[6127] = "%.1f",		-- TID RID DSBL
+	[6128] = "%.1f",		-- TID ALT NUM
+	[6129] = "%.1f",		-- TID SYM ELEM
+	[6130] = "%.1f",		-- TID DATA LINK
+	[6131] = "%.1f",		-- TID JAM STROBE
+	[6132] = "%.1f",		-- TID NON-ATTK
+	[6133] = "%.1f",		-- TID LAUNCH ZONE
+	[6134] = "%.1f",		-- TID VEL VECTOR
+
+	-- HCU
+	[407]  =  "%d",   -- HCU_POWER_RESET_LIGHT
+	[408]  =  "%d",   -- HCU_WCS_POWER_LIGHT
+	[409]  =  "%d",   -- HCU_IR_STBY_LIGHT
+	[2011]  =  "%.1f",   -- HCU_TVIR switch
+	[2012]  =  "%.1f",   -- HCU_WCS switch
+
+	[6135] = "%.1f",		-- HCU IR/TV Mode
+	[6136] = "%.1f",		-- HCU RADAR Mode
+	[6137] = "%.1f",		-- HCU DDD Mode
+	[6138] = "%.1f",		-- HCU TID Mode
 
 	[11503] = "%1d",		-- ANT TRK Light
 	[11504] = "%1d",		-- RDROT Light

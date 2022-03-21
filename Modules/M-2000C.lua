@@ -3,6 +3,16 @@ ExportScript.FoundDCSModule = true
 
 ExportScript.ConfigEveryFrameArguments = 
 {
+	[199] = "%d",	-- master warning
+	[200] = "%d",	-- master caution
+
+	-- RWR Lamps
+	[229] = "%d",	-- V
+	[230] = "%d",	-- BR
+	[231] = "%d",	-- DA
+	[232] = "%d",	-- D2M
+	[233] = "%d",	-- LL
+
 	-- Fuel panel
 	[198] = "%1d", 	-- Air Refueling Light
 	[356] = "%.1f", -- Transfer Switch
@@ -48,6 +58,20 @@ ExportScript.ConfigEveryFrameArguments =
 	[280] = "%1d", -- TOT Light
 	[281] = "%1d", -- PAR Light
 	[276] = "%.1f", -- Bomb Fuze Selector Switch
+
+	-- AUTOPILOT lights
+	[283] = "%d",	--P
+	[284] = "%d",	--A
+	[286] = "%d",	--Alt 1
+	[287] = "%d",	--blank Alt
+	[289] = "%d",	--Alt 2
+	[290] = "%d",	--AFF
+	[292] = "%d",	--blank1
+	[293] = "%d",	--blank2
+	[295] = "%d", --left
+	[296] = "%d",	--blank L
+	[297] = "%d",	--G
+	[298] = "%d",	--blank G
 
     -- WARNING PANEL
 	[520] = "%1d",	--  Main Battery Switch
@@ -162,6 +186,12 @@ ExportScript.ConfigEveryFrameArguments =
 	[987] = "%.1f", -- ZERO
 	[988] = "%.1f", -- 0
 	[989] = "%.1f", -- CONF
+
+	-- 
+	[991] = "%d",	-- LL
+	[992] = "%d",	-- EM
+	[993] = "%d",	-- IR
+	[994] = "%d",	-- EO
 }
 
 ExportScript.ConfigArguments = 

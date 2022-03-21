@@ -1234,6 +1234,29 @@ function ExportScript.Tools.getListIndicatorValue(IndicatorID)
 	return TmpReturn
 end
 
+function ExportScript.Tools.getListIndicatorValueByNameLeft(IndicatorID, NameID, Length)
+	local ListIindicator = list_indication(IndicatorID)
+
+	if ListIindicator == "" then
+		return nil
+    end
+
+    local data = ""
+
+	local ListindicatorMatch = ListIindicator:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+	while true do
+		local Key, Value = ListindicatorMatch()
+		if not Key then
+			break
+        end
+        if Key == NameID then
+            data = Value
+        end
+	end
+    while data:len() < Length do data = data .. " " end
+	return data
+end
+
 -- funkcja zwraca konkretna wartosc dla danego klucza w tabeli argumentow
 -- pobiera: nr argumentu / nazwa klucza / dlugosc zwracanego ciagu
 function ExportScript.Tools.getListIndicatorValueByName(IndicatorID, NameID, Length)
