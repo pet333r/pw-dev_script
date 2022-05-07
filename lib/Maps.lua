@@ -1,51 +1,51 @@
--- -- Load the corresponding map and read the latitude and longitude values and write specify the decimal degree format (convert from degrees, decimal to decimal degrees).
--- -- Lat1 and Long1 contain the coordinates of the upper left corner.
--- -- Lat2 and Long2 contain the coordinates of the lower right corner.
+-- Load the corresponding map and read the latitude and longitude values and write specify the decimal degree format (convert from degrees, decimal to decimal degrees).
+-- Lat1 and Long1 contain the coordinates of the upper left corner.
+-- Lat2 and Long2 contain the coordinates of the lower right corner.
 
--- -- https://www.fcc.gov/media/radio/dms-decimal
--- -- lalt+y change coordinate system
+-- https://www.fcc.gov/media/radio/dms-decimal
+-- lalt+y change coordinate system
 
--- -- Maps
--- ExportScript.Maps = {}
--- -- Caucasus Map
--- ExportScript.Maps.CaucasusBase          = {}
--- ExportScript.Maps.CaucasusBase.Lat1     = 48.391667  -- 48°23'30" N
--- ExportScript.Maps.CaucasusBase.Long1    = 26.868056  -- 26°52'5" E
--- ExportScript.Maps.CaucasusBase.Lat2     = 38.881667  -- 38°52'54" N
--- ExportScript.Maps.CaucasusBase.Long2    = 47.142222   -- 47°8'32" E
--- -- Nevada (NTTR) Map
--- ExportScript.Maps.Nevada                = {}
--- ExportScript.Maps.Nevada.Lat1           = 39.801667   -- 39°48'6" N
--- ExportScript.Maps.Nevada.Long1          = -119.99 --  -119°59'24" W
--- ExportScript.Maps.Nevada.Lat2           = 34.346667   -- 34°20'48" N
--- ExportScript.Maps.Nevada.Long2          = -112.445833 -- -112°26'45" W
--- -- Normandy Map
--- ExportScript.Maps.Normandy              = {}
--- ExportScript.Maps.Normandy.Lat1         = 53.85556   -- 
--- ExportScript.Maps.Normandy.Long1        = -15.02667 -- 
--- ExportScript.Maps.Normandy.Lat2         = 45.07167   -- 
--- ExportScript.Maps.Normandy.Long2        = 8.437222 -- 
--- -- Persian Gulf Map
--- ExportScript.Maps.PersianGulf           = {}
--- ExportScript.Maps.PersianGulf.Lat1      = 32.955278  -- 32°57'19" N
--- ExportScript.Maps.PersianGulf.Long1     = 46.583333  -- 46°35'0" E
--- ExportScript.Maps.PersianGulf.Lat2      = 21.897222  -- 21°53'50" N
--- ExportScript.Maps.PersianGulf.Long2     = 63.683611   -- 63°41'1" E
--- -- Syria Map
--- ExportScript.Maps.Syria                 = {}
--- ExportScript.Maps.Syria.Lat1            = 37.362778   -- 37°21'46" N
--- ExportScript.Maps.Syria.Long1           = 29.268889   -- 29°16'8" E
--- ExportScript.Maps.Syria.Lat2            = 32.136111    -- 32°8'10" N
--- ExportScript.Maps.Syria.Long2           = 42.150278    -- 42°9'1" E
--- -- Mariana Islands Map
--- ExportScript.Maps.MarianaIslands        = {}
--- ExportScript.Maps.MarianaIslands.Lat1   = 22.09   -- 22°5'24" N
--- ExportScript.Maps.MarianaIslands.Long1  = 135.0575   -- 135°3'27" E
--- ExportScript.Maps.MarianaIslands.Lat2   = 10.772222    -- 10°46'20" N
--- ExportScript.Maps.MarianaIslands.Long2  = 149.391667    -- 149°23'30" E
--- -- The Channel
--- ExportScript.Maps.TheChannel            = {}
--- ExportScript.Maps.TheChannel.Lat1       = 51.517295
--- ExportScript.Maps.TheChannel.Long1      = -0.089791
--- ExportScript.Maps.TheChannel.Lat2       = 49.713717
--- ExportScript.Maps.TheChannel.Long2      = 3.424733
+-- Maps
+ExportScript.Maps = {}
+-- Caucasus Map
+ExportScript.Maps.CaucasusBase          = {}
+ExportScript.Maps.CaucasusBase.Lat1     = 48.387642
+ExportScript.Maps.CaucasusBase.Long1    = 26.778781
+ExportScript.Maps.CaucasusBase.Lat2     = 38.865153
+ExportScript.Maps.CaucasusBase.Long2    = 47.142275
+-- Nevada (NTTR) Map
+ExportScript.Maps.Nevada                = {}
+ExportScript.Maps.Nevada.Lat1           = 39.801711
+ExportScript.Maps.Nevada.Long1          = -119.990225
+ExportScript.Maps.Nevada.Lat2           = 34.346914
+ExportScript.Maps.Nevada.Long2          = -112.445997
+-- Normandy Map
+ExportScript.Maps.Normandy              = {}
+ExportScript.Maps.Normandy.Lat1         = 53.85556
+ExportScript.Maps.Normandy.Long1        = -15.02667
+ExportScript.Maps.Normandy.Lat2         = 45.07167
+ExportScript.Maps.Normandy.Long2        = 8.437222
+-- Persian Gulf Map
+ExportScript.Maps.PersianGulf           = {}
+ExportScript.Maps.PersianGulf.Lat1      = 32.955517
+ExportScript.Maps.PersianGulf.Long1     = 46.583444
+ExportScript.Maps.PersianGulf.Lat2      = 21.869711
+ExportScript.Maps.PersianGulf.Long2     = 63.997372
+-- Syria Map
+ExportScript.Maps.Syria                 = {}
+ExportScript.Maps.Syria.Lat1            = 37.858862
+ExportScript.Maps.Syria.Long1           = 29.268889
+ExportScript.Maps.Syria.Lat2            = 31.960958
+ExportScript.Maps.Syria.Long2           = 41.932889
+-- Mariana Islands Map
+ExportScript.Maps.MarianaIslands        = {}
+ExportScript.Maps.MarianaIslands.Lat1   = 22.090214
+ExportScript.Maps.MarianaIslands.Long1  = 135.057381
+ExportScript.Maps.MarianaIslands.Lat2   = 10.772458
+ExportScript.Maps.MarianaIslands.Long2  = 149.391997
+-- The Channel
+ExportScript.Maps.TheChannel            = {}
+ExportScript.Maps.TheChannel.Lat1       = 51.517378
+ExportScript.Maps.TheChannel.Long1      = -0.089928
+ExportScript.Maps.TheChannel.Lat2       = 49.713733
+ExportScript.Maps.TheChannel.Long2      = 3.424786

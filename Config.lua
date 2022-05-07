@@ -1,5 +1,5 @@
 -- #INFO
--- file version: 2021.01.20
+-- file version: 2021.05.07
 
 -- properties
 ExportScript.Config = {}
@@ -35,6 +35,10 @@ ExportScript.Config.WriteNavFile = false;       -- saving flight telemetry to CS
 
 -- data separator (do not change)
 ExportScript.Config.Separator = ";"
+
+ExportScript.Config.MapPlayerDiv        = 1.0      -- refreshing the user's position on the map (less = more often) range: 0.1 - 1.0
+ExportScript.Config.MapMissileDiv       = 1.0      -- refreshing the missile position on the map (less = more often) range: 0.1 - 1.0
+ExportScript.Config.MapMapPlanesDiv     = 1.0      -- refreshing the planes/heli's position on the map (less = more often) range: 0.1 - 1.0
 
 -- Other
 ExportScript.Config.ExportInterval          = 0.05;	-- export every 0.xx seconds (def: 0.05)

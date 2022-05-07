@@ -165,6 +165,8 @@ function ExportScript.Start()
 
 	ExportScript.Tools.playerId = ExportScript.Tools.GetPlayerId()
 
+	ExportScript.Tools.SendShortData("EX=ON")
+
 	PrevExportScript.LuaExportStart()
 end
 
