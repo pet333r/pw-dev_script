@@ -3,26 +3,34 @@
 Script for exporting data from DCS World
 
 # Table of context
-- [How to install script](#how-to-install-script--video)
-- [Supported software](#supported-software)
-- [Automatic script installation](#automatic-script-installation)
-- [Script configuration in DCS World option menu](#configure-script-in-dcs-world)
-- [Manual script installation](#manual-installation)
-  * [if you don't have a folder "Scripts"](#if-you-dont-have-a-folder-scripts)
-  * [if you have "Scripts" folder and have installed other scripts](#if-you-have-scripts-folder-and-have-installed-other-scripts)
-  * [Folder scheme](#folder-scheme)
-  * [Edit Config.lua](#edit-configlua)
+<!-- - [DCS World Script](#dcs-world-script) -->
+<!-- - [Table of context](#table-of-context) -->
+- [HOW TO INSTALL SCRIPT / Video](#how-to-install-script--video)
+  * [Click on the link or graphic to play the video on YouTube: https://youtu.be/saFq3Png-ds](#click-on-the-link-or-graphic-to-play-the-video-on-youtube-httpsyoutubesafq3png-ds)
+- [latest script version in zip file](#latest-script-version-in-zip-file)
+- [supported software](#supported-software)
+- [automatic script installation](#automatic-script-installation)
+  * [configure script in DCS World](#configure-script-in-dcs-world)
+- [files scheme](#files-scheme)
+- [manual installation](#manual-installation)
+  * [*if you don't have a folder 'Scripts'*](#if-you-dont-have-a-folder-scripts)
+  * [*if you have 'Scripts' folder and have installed other scripts*](#if-you-have-scripts-folder-and-have-installed-other-scripts)
+  * [*folder scheme*](#folder-scheme)
+  * [*manual edit Config.lua*](#edit-configlua)
 - [Automatic script update](#automatic-update-script)
-- [How to find device IP's](#how-to-find-ips-of-pc-and-android-device)
+- [How to find device IP](#how-to-find-ips-of-pc-and-android-device)
   * [Android](#android)
   * [PC](#pc)
 - [Example connection](#example-connection)
-- [Connection](#connection)
 - [Features](#features)
+  * [show flight route](#additional-script-functions)
+  * [view telemetry data](#additional-script-functions)
 - [Known issues](#known-issues)
 - [FAQ](#faq)
 - [Compability](#compability)
-- [Stream Deck compatibility](#stream-deck-support)
+- [Stream Deck support](#stream-deck-support)
+  * [plugin config](#plugin-config)
+- [license](#license)
 
 # HOW TO INSTALL SCRIPT / Video
 Step by step how to install DCS World script  
@@ -41,6 +49,7 @@ you'll find it on the "Releases" page
 [![](.gfx/icon_dcsufc.png)](https://play.google.com/store/apps/details?id=com.dcsufc) 
 [![](.gfx/icon_aoa.png)](https://play.google.com/store/apps/details?id=com.dcsaoaindexer) 
 [![](.gfx/icon_mfdexporter.png)](http://pw-developer.com/soft_dcs_mfd.html)
+[![](.gfx/icon_dcsfdr.png)](http://pw-developer.com/soft_dcs_fdr.html)
 
 * DCS UFC [https://play.google.com/store/apps/details?id=com.dcsufc](https://play.google.com/store/apps/details?id=com.dcsufc)
 * DCS AoA Indexer > [https://play.google.com/store/apps/details?id=com.dcsaoaindexer](https://play.google.com/store/apps/details?id=com.dcsaoaindexer)
@@ -220,6 +229,15 @@ In one of the "groups" in the Config.lua file which is located in the folder wit
 
     `1.1` **KML file** (the file can be opened in any application that supports that file format):
   ![](.gfx/ge1.png)
+
+  `1.2` **CSV file** : an additional application is required to open the file and view the saved data, which can be downloaded from this link:: [https://www.dropbox.com/s/piif8wybqlp4okq/DCS_FDR_Viewer.zip](https://www.dropbox.com/s/piif8wybqlp4okq/DCS_FDR_Viewer.zip) App displays the flight route in a 3D view and others data on 2D graphs
+
+
+  <p align="left" width="100%">
+    <img width="33.6%" src=".gfx/py1.png">
+    <img width="65.6%" src=".gfx/py2.png">
+  </p>
+
 # known issues
 
 ***`1`*** If You can interact with DCS but not receiving data  
