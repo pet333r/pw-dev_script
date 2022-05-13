@@ -218,30 +218,47 @@ DEDLayout_l1["UHF Mode Rotary"]={1,3,0,"_inv","I"}
 DEDLayout_l1["UHF IncDecSymbol"]={5,1}
 DEDLayout_l1["Selected UHF Frequency"]={6,6}
 DEDLayout_l1["Steerpoint Use"]={14,4}
-DEDLayout_l1["WPT IncDecSymbol"]={19,1}
 DEDLayout_l1["Selected Steerpoint"] = {20,3}
+DEDLayout_l1["WPT IncDecSymbol"]={19,1}
 --COM
 DEDLayout_l1["Secure Voice"] = {1,3}
 DEDLayout_l1["COM 1 Mode"] = {5,3}
 DEDLayout_l1["Receiver Mode"] = {13,4}
 DEDLayout_l1["COM 1 Power Status"] = {13,2}
-DEDLayout_l1["COM 2 Mode"] = {9,3}
+DEDLayout_l1["COM 2 Mode"] = {8,3}
 DEDLayout_l1["COM 2 Mode Voice"] = {8,3}
-DEDLayout_l1["Receiver Power Status"] = {15,2}
+DEDLayout_l1["Receiver Power Status"] = {13,3}
 DEDLayout_l1["GUARD VHF Label"] = {8,3}
-DEDLayout_l1["GUARD COM 2 Receiver Mode"] = {13,2}
+DEDLayout_l1["GUARD COM 2 Receiver Mode"] = {13,3}
+--DEST
+DEDLayout_l1["DEST DIR DEST_DIR"] = {2,8}
+DEDLayout_l1["DEST DIR DEST_DIR_SelectedSteerpoint"] = {12,2,0,"_inv","I"}
+DEDLayout_l1["DEST DIR DEST_DIR_STPT_IncDecSymbol"] = {16,1}
+DEDLayout_l1["DEST DIR Asterisks_NUM_STEERPOINT_both"] = {11,1,15,"","I"}
+DEDLayout_l1["DEST OA1 DEST_OA1"] = {2,8}
+DEDLayout_l1["DEST OA1 DEST_OA1_SelectedSteerpoint"] = {11,2,0,"_inv","I"}
+DEDLayout_l1["DEST OA1 DEST_OA1_STPT_IncDecSymbol"] = {15,1}
+DEDLayout_l1["DEST OA1 Asterisks_NUM_STEERPOINT_both"] = {10,1,14,"","I"}
+DEDLayout_l1["DEST OA2 DEST_OA2"] = {2,8}
+DEDLayout_l1["DEST OA2 DEST_OA2_SelectedSteerpoint"] = {11,2,0,"_inv","I"}
+DEDLayout_l1["DEST OA2 DEST_OA2_STPT_IncDecSymbol"] = {15,1}
+DEDLayout_l1["DEST OA2 Asterisks_NUM_STEERPOINT_both"] = {10,1,14,"","I"}
+DEDLayout_l1["UTM_DEST"] = {2,8}
+DEDLayout_l1["UTM_DEST_SelectedSteerpoint"] = {12,2,0,"_inv","I"}
+DEDLayout_l1["UTM_DEST_STPT_IncDecSymbol"] = {16,1}
+DEDLayout_l1["Asterisks_NUM_STEERPOINT_both"] = {11,1,15,"","I"}
 --IFF
 DEDLayout_l1["STAT IFF label"] = {1,3}
-DEDLayout_l1["STAT IFF Power Status"] = {5,3}
-DEDLayout_l1["STAT Mode label"] = {12,3}
+DEDLayout_l1["STAT IFF Power Status"] = {5,4}
+DEDLayout_l1["STAT Mode label"] = {12,4}
 DEDLayout_l1["STAT Event Occured"] = {18,3}
 DEDLayout_l1["POS IFF label"] = {1,3}
-DEDLayout_l1["POS IFF Power Status"] = {5,3,0,"","I"}
+DEDLayout_l1["POS IFF Power Status"] = {5,4,0,"","I"}
 DEDLayout_l1["POS Event Occured"] = {18,3,0,"","I"}
 DEDLayout_l1["POS Mode Group State"] = {22,1}
 DEDLayout_l1["POS IncDec Symbol"] = {23,1}
 DEDLayout_l1["TIM IFF label"] = {1,3}
-DEDLayout_l1["TIM IFF Power Status"] = {5,3}
+DEDLayout_l1["TIM IFF Power Status"] = {5,4}
 DEDLayout_l1["TIM Event Occured"] = {18,3,0,"","I"}
 DEDLayout_l1["TIM Code Group State"] = {22,1}
 DEDLayout_l1["TIM IncDec Symbol"] = {23,1}
@@ -263,8 +280,8 @@ DEDLayout_l1["ALOW WPT IncDecSymbol"] = {23,1}
 DEDLayout_l1["STEERPOINT LABEL"] = {6,4}
 DEDLayout_l1["STEERPOINT NUMBER"] = {12,3,0,"_inv","I"}
 DEDLayout_l1["STEERPOINT IncDecSymbol"] = {16,1}
-DEDLayout_l1["STEERPOINT SEQUENCE"] = {18,4}
 DEDLayout_l1["STEERPOINT NUMBER Asteriscs_both"] = {11,1,15,"","I"}
+DEDLayout_l1["STEERPOINT SEQUENCE"] = {18,4}
 DEDLayout_l1["STEERPOINT SEQUENCE Asteriscs_both"] = {17,1,22,"","I"}
 --TIME
 DEDLayout_l1["TIME_label"] = {9,4}
@@ -279,6 +296,8 @@ DEDLayout_l1["NAV STATUS INS_SelectedSteerpoint"] = {20,2}
 DEDLayout_l1["NAV STATUS INS_STPT_IncDecSymbol"] = {23,1}
 DEDLayout_l1["NAV COMMANDS INS_SelectedSteerpoint"] = {20,2}
 DEDLayout_l1["NAV COMMANDS INS_STPT_IncDecSymbol"] = {23,1}
+DEDLayout_l1["NAV COMMON INS_SelectedSteerpoint"] = {20,2}
+DEDLayout_l1["NAV COMMON INS_STPT_IncDecSymbol"] = {23,1}
 --MAN
 DEDLayout_l1["MAN Label"] = {10,3}
 DEDLayout_l1["MAN STPT Num"] = {20,2}
@@ -303,23 +322,26 @@ DEDLayout_l1["BINGO CMDS_BINGO_label"] = {5,11}
 DEDLayout_l1["BINGO Selected Steerpoint"] = {19,2}
 DEDLayout_l1["BINGO WPT IncDecSymbol"] = {23,1}
 DEDLayout_l1["CMDS_CHAFF_label"] = {2,9}
-DEDLayout_l1["CMDS_FLARE_label"] = {2,9}
-DEDLayout_l1["CMDS_OTHER1_label"] = {2,10}
-DEDLayout_l1["CMDS_OTHER2_label"] = {2,10}
+DEDLayout_l1["CMDS_FLARE_label"] = {2,10}
+DEDLayout_l1["CMDS_OTHER1_label"] = {2,11}
+DEDLayout_l1["CMDS_OTHER2_label"] = {2,11}
 --Mode
 DEDLayout_l1["Master_mode_label"] = {4,4}
 DEDLayout_l1["Master_mode"] = {10,3,0,"_inv","I"}
 DEDLayout_l1["Master_mode_ast_both"] = {9, 1, 13,"","I"}
 -- DLNK
+DEDLayout_l1["LINK16 INS_SelectedSteerpoint"] = {20,2}
+DEDLayout_l1["LINK16 INS_STPT_IncDecSymbol"] = {23,1}
 DEDLayout_l1["LINK16 lbl"] = {7,6}
 DEDLayout_l1["LINK16 STN lbl"] = {5,11}
 DEDLayout_l1["NET STATUS lbl"] = {5,10}
 DEDLayout_l1["AG DL lbl"] = {7,6}
-DEDLayout_l1["NET STATUS lbl"] = {5,10}
 DEDLayout_l1["INTRAFLIGHT INTRAFLIGHT lbl"] = {7,11}
 --Misc
 DEDLayout_l1["MISC Label"] = {10,4}
 --MAGV
+DEDLayout_l1["MAGV INS_SelectedSteerpoint"] = {20,2}
+DEDLayout_l1["MAGV INS_STPT_IncDecSymbol"] = {23,1}
 DEDLayout_l1["MAGV lbl"] = {7,4}
 DEDLayout_l1["MAGV Mode"] = {13,4}
 DEDLayout_l1["Asterisks_on_MAGV_Mode_both"] = {12,1,17,"","I"}
@@ -330,24 +352,28 @@ DEDLayout_l1["INTG INTG label"] = {13,4}
 DEDLayout_l1["INTG INTG Mode"] = {8,4}
 DEDLayout_l1["INTG TIM Event"] = {20,3}
 --HARM
-DEDLayout_l1["HARM"] = {1,4}
-DEDLayout_l1["TblNum"] = {6,4}
-DEDLayout_l1["Angles"] = {10,1}
-DEDLayout_l1["T1"] = {14,2}
-DEDLayout_l1["T1_code"] = {18,3,0,"_inv","I"}
-DEDLayout_l1["Asterisks_T1_both"] = {17,1,21,"","I"}
+DEDLayout_l1["HARM HARM"] = {1,4}
+DEDLayout_l1["HARM TblNum"] = {6,4}
+DEDLayout_l1["HARM Angles"] = {10,1}
+DEDLayout_l1["HARM T1"] = {14,2}
+DEDLayout_l1["HARM T1_code"] = {18,3,0,"_inv","I"}
+DEDLayout_l1["HARM Asterisks_T1_both"] = {17,1,21,"","I"}
+--HTS
+DEDLayout_l1["HTS"] = {8,7}
+-- DEDLayout_l1["HTS SEAD HTS"] = {4,4}
 -- VIP
-DEDLayout_l1["Visual initial point to TGT Label"] = {4,10}
-DEDLayout_l1["VIP to TGT Label Asteriscs_both"] = {3,1,14,"","I"}
+DEDLayout_l1["Visual initial point to TGT Label"] = {6,10}
+DEDLayout_l1["VIP to TGT Label Asteriscs_both"] = {5,1,16,"","I"}
 -- VRP
-DEDLayout_l1["Target to VRP Label"] = {5,10}
-DEDLayout_l1["Target to VRP Label Asteriscs_both"] = {4,1,15,"","I"}
+DEDLayout_l1["Target to VRP Label"] = {6,10}
+DEDLayout_l1["Target to VRP Label Asteriscs_both"] = {5,1,16,"","I"}
 --HMCS
-DEDLayout_l1["HMCS DISPLAY HMCS_DISPLAY_TOPIC"] = {7,12}
-DEDLayout_l1["HMCS DISPLAY INS_SelectedSteerpoint"] = {20,2}
+-- DEDLayout_l1["HMCS DISPLAY HMCS_DISPLAY_label"] = {6,12}	-- duplicated with HMCS_DISPLAY_TOPIC
+DEDLayout_l1["HMCS DISPLAY HMCS_DISPLAY_TOPIC"] = {6,12}
+DEDLayout_l1["HMCS DISPLAY INS_SelectedSteerpoint"] = {19,2}
 DEDLayout_l1["HMCS DISPLAY INS_STPT_IncDecSymbol"] = {23,1}
 DEDLayout_l1["HMCS ALIGN HMCS_ALIGN_TOPIC"] = {6,10}
-DEDLayout_l1["HMCS ALIGN INS_SelectedSteerpoint"] = {20,2}
+DEDLayout_l1["HMCS ALIGN INS_SelectedSteerpoint"] = {19,2}
 DEDLayout_l1["HMCS ALIGN INS_STPT_IncDecSymbol"] = {23,1}
 --BULL
 DEDLayout_l1["BULLSEYE LABEL"] = {6,8,0,"_inv","I"}
@@ -356,11 +382,10 @@ DEDLayout_l1["BULLSEYE LABEL Asteriscs_both"] = {5,1,14,"","I"}
 DEDLayout_l1["MARK"] = {1,4}
 DEDLayout_l1["MARK SOURCE"] = {7,4}
 DEDLayout_l1["MARK SOURCE Asteriscs_both"] = {6,1,11,"","I"}
-DEDLayout_l1["STPT NUMBER"] = {15,2,0,"_inv","I"}
-DEDLayout_l1["MARK IncDecSymbol"] = {18,1}
-DEDLayout_l1["MARK Number Asteriscs_both"] = {14,1,19,"","I"}
---DEDLayout_l1[""] = {,}
-
+DEDLayout_l1["STPT NUMBER"] = {14,2,0,"_inv","I"}
+DEDLayout_l1["MARK IncDecSymbol"] = {17,1}
+DEDLayout_l1["MARK Number Asteriscs_both"] = {13,1,19,"","I"}
+DEDLayout_l1["MARK STPT"] = {19,4}
 --TODO
 DEDLayout_l2["TODO remove lbl"]={4,20}
 --CNI
@@ -369,8 +394,19 @@ DEDLayout_l2["Default Value Indication"]={11,1}
 DEDLayout_l2["Wind Magnetic Direction"]={16,2}
 DEDLayout_l2["Wind Speed"]={20,2}
 --COM
-DEDLayout_l2["Active Frequency or Channel"]={2,6}
-DEDLayout_l2["Active Frequency or Channe"]={2,6}
+DEDLayout_l2["Active Frequency or Channel"]={2,2}
+DEDLayout_l2["Active Frequency or Channe"]={2,2}
+--DEST
+DEDLayout_l2["DEST DIR DEST_LAT"]={3,3}
+DEDLayout_l2["DEST DIR LAT"]={8,12,0,"_inv","I"}
+DEDLayout_l2["DEST DIR Asterisks_LAT_both"]={7,1,20,"","I"}
+DEDLayout_l2["UTM_DEST_GRID"]={6,4}
+DEDLayout_l2["GRID_DIGIT"]={12,2,0,"_inv","I"}
+DEDLayout_l2["GRID_SYMBOL"]={14,1,0,"_inv","I"}
+DEDLayout_l2["Asterisks_GRID_DIGIT_both"]={11,1,15,"","I"}
+DEDLayout_l2["Asterisks_GRID_SYMBOL_both"]={11,1,15,"","I"}
+DEDLayout_l2["UTM_DEST_CNVRT"]={18,5,0,"_inv","I"}
+DEDLayout_l2["Asterisks_CNVRT_both"]={17,1,23,"","I"}
 --IFF
 DEDLayout_l2["STAT Mode Asterisks_both"]={17,1,23,"","I"}
 DEDLayout_l2["STAT Mode Scratchpad"]={18,5,0,"_inv","I"}
@@ -407,7 +443,7 @@ DEDLayout_l2["Asterisks_on_LAT_Scratchpad_both"] = {6,1,17,"","I"}
 DEDLayout_l2["CMDS_BQ_lbl"] = {6,2}
 DEDLayout_l2["CMDS_BQ_Scratchpad"] = {10,2,0,"_inv","I"}
 DEDLayout_l2["CMDS_BQ_Asterisks_both"] = {9,1,12,"","I"}
-DEDLayout_l2["CMDS_CH_lbl"] = {1,2}
+DEDLayout_l2["CMDS_CH_lbl"] = {2,2}
 DEDLayout_l2["CMDS_CH_Scratchpad"] = {7,2,0,"_inv","I"}
 DEDLayout_l2["CMDS_CH_Asterisks_both"] = {6,1,9,"","I"}
 -- DLNK
@@ -426,7 +462,7 @@ DEDLayout_l2["STN id lbl5"] = {9,2}
 DEDLayout_l2["STN value5"] = {12,5,0,"_inv","I"}
 DEDLayout_l2["Asterisks on STN1_both"] = {2,1,8,"","I"}
 DEDLayout_l2["Asterisks on STN5_both"] = {11,1,17,"","I"}
-DEDLayout_l2["OWN lbl"] = {18,3}
+DEDLayout_l2["OWN lbl"] = {20,3}
 DEDLayout_l2["GPS TIME lbl"] = {0,8}
 DEDLayout_l2["GPS TIME status"] = {9,3,0,"_inv","I"}
 DEDLayout_l2["Asterisks on ETR_both"] = {8,1,12,"","I"}
@@ -442,38 +478,57 @@ DEDLayout_l2["INTRAFLIGHT STN id lbl5"] = {7,2}
 DEDLayout_l2["INTRAFLIGHT STN value5"] = {10,5}
 DEDLayout_l2["INTRAFLIGHT COMM lbl"] = {13,4}
 DEDLayout_l2["INTRAFLIGHT COMM status"] = {18,3}
+DEDLayout_l2["STN id lbl_1"] = {0,1}
+DEDLayout_l2["STN TDOA value_1"] = {2,1}
+DEDLayout_l2["STN value_1"] = {4,5}
+DEDLayout_l2["Asterisks on STN TDOA_1"] = {1,1,3,"","I"}
+DEDLayout_l2["Asterisks on STN_1"] = {3,1,9,"","I"}
+DEDLayout_l2["STN id lbl_5"] = {10,1}
+DEDLayout_l2["STN TDOA value_5"] = {12,1}
+DEDLayout_l2["STN value_5"] = {14,5}
+DEDLayout_l2["Asterisks on STN TDOA_5"] = {11,1,13,"","I"}
+DEDLayout_l2["Asterisks on STN_5"] = {13,1,19,"","I"}
 --Misc
-DEDLayout_l2["Misc Item 1 Number"]={0,1,0,"","I"}
-DEDLayout_l2["Misc Item 1 Name"]={1,4}
-DEDLayout_l2["Misc Item 2 Number"]={6,1,0,"","I"}
-DEDLayout_l2["Misc Item 2 Name"]={7,4}
-DEDLayout_l2["Misc Item 3 Number"]={12,1,0,"","I"}
-DEDLayout_l2["Misc Item 3 Name"]={13,4}
-DEDLayout_l2["Misc Item R Number"]={18,1,0,"","I"}
-DEDLayout_l2["Misc Item R Name"]={19,4}
+DEDLayout_l2["Misc Item 1 Number"]	={0,1,0,"","I"}
+DEDLayout_l2["Misc Item 1 Name"]	={1,4}
+DEDLayout_l2["Misc Item 2 Number"]	={6,1,0,"","I"}
+DEDLayout_l2["Misc Item 2 Name"]	={7,4}
+DEDLayout_l2["Misc Item 3 Number"]	={12,1,0,"","I"}
+DEDLayout_l2["Misc Item 3 Name"]	={13,4}
+DEDLayout_l2["Misc Item R Number"]	={18,1,0,"","I"}
+DEDLayout_l2["Misc Item R Name"]	={19,4}
 --LASER
 DEDLayout_l2["TGP CODE LABEL"] = {1,8}
 DEDLayout_l2["TGP CODE VALUE"] = {13,4,0,"_inv","I"}
 DEDLayout_l2["TGP CODE Asteriscs_both"] = {12,1,17,"","I"}
 --HARM
-DEDLayout_l2["T2"] = {14,2}
-DEDLayout_l2["T2_code"] = {18,3,0,"_inv","I"}
-DEDLayout_l2["Asterisks_T2_both"] = {17,1,21,"","I"}
+DEDLayout_l2["HARM T2"] = {14,2}
+DEDLayout_l2["HARM T2_code"] = {18,3,0,"_inv","I"}
+DEDLayout_l2["HARM Asterisks_T2_both"] = {17,1,21,"","I"}
 -- VIP
-DEDLayout_l2["Visual initial point number"] = {4,3}
-DEDLayout_l2["VIP number value"] = {9,3,0,"_inv","I"}
-DEDLayout_l2["VIP number up down arrows"] = {13,1}
-DEDLayout_l2["VIP number Asteriscs_both"] = {8,1,12,"","I"}
+DEDLayout_l2["Visual initial point number"] = {5,3}
+DEDLayout_l2["VIP number value"] = {10,3,0,"_inv","I"}
+DEDLayout_l2["VIP number Asteriscs_both"] = {9,1,13,"","I"}
+DEDLayout_l2["VIP number up down arrows"] = {14,1}
 -- VRP
-DEDLayout_l2["Target number"] = {4,3}
-DEDLayout_l2["Target number value"] = {9,3,0,"_inv","I"}
-DEDLayout_l2["Target number up down arrows"] = {13,1}
-DEDLayout_l2["Target number Asteriscs_both"] = {8,1,12,"","I"}
+DEDLayout_l2["Target number"] = {5,3}
+DEDLayout_l2["Target number value"] = {10,3,0,"_inv","I"}
+DEDLayout_l2["Target number Asteriscs_both"] = {9,1,13,"","I"}
+DEDLayout_l2["Target number up down arrows"] = {14,1}
 --HMCS
-DEDLayout_l2["HMCS DISPLAY HMCS_HUD_BLANK"] = {3,8,0,"_inv","I"}
-DEDLayout_l2["HMCS DISPLAY Asterisks_HUD_BLANK_both"] = {2,1,11,"","I"}
+DEDLayout_l2["HMCS DISPLAY HMCS_HUD_BLANK"] = {2,8,0,"_inv","I"}
+DEDLayout_l2["HMCS DISPLAY Asterisks_HUD_BLANK_both"] = {1,1,10,"","I"}
 DEDLayout_l2["HMCS ALIGN HMCS_COARSE"] = {2,6,0,"_inv","I"}
 DEDLayout_l2["HMCS ALIGN Asterisks_COARSE_both"] = {1,1,8,"","I"}
+--HTS
+DEDLayout_l2["T1"] = {1,1}
+DEDLayout_l2["T1_code"] = {3,4,0,"_inv",""}
+DEDLayout_l2["Asterisks_T1_both"] = {2,1,7,"","I"}
+DEDLayout_l2["T5"] = {10,1}
+DEDLayout_l2["T5_code"] = {12,4,0,"_inv",""}
+DEDLayout_l2["Asterisks_T5_both"] = {11,1,16,"","I"}
+DEDLayout_l2["HTS_LAT_lbl"] = {2,3}
+DEDLayout_l2["HTS_LAT"] = {7,10}
 --BULL
 DEDLayout_l2["BULL POINT LABEL"] = {6,4}
 DEDLayout_l2["BULLSEYE NUMBER"] = {12,4,0,"_inv","I"}
@@ -483,7 +538,14 @@ DEDLayout_l2["BULLSEYE SEQUENCE Asteriscs_both"] = {11,1,15,"","I"}
 DEDLayout_l2["MARK Latitude"] = {2,3}
 DEDLayout_l2["MARK Latitude Value"] = {6,12,0,"_inv","I"}
 DEDLayout_l2["MARK Latitude Asteriscs_both"] = {5,1,18,"","I"}
---DEDLayout_l2[""] = {,}
+--STPT
+DEDLayout_l2["STEERPOINT GRID"] = {6,4}
+DEDLayout_l2["STEERPOINT GRID DIGIT Value"]={12,4,0,"_inv","I"}
+DEDLayout_l2["STEERPOINT GRID SYMBOL Value"]={14,1,0,"_inv","I"}
+DEDLayout_l2["STEERPOINT GRID DIGIT Asteriscs_both"]={11,1,15,"","I"}
+DEDLayout_l2["STEERPOINT GRID SYMBOL Asteriscs_both"]={11,1,15,"","I"}
+DEDLayout_l2["STEERPOINT GRID CNVRT"] = {17,5}
+DEDLayout_l2["STEERPOINT CNVRT Asteriscs_both"]={16,1,18,"","I"}
 --CNI
 DEDLayout_l3["VHF Label"]={1,3,0,"_inv","I"}
 DEDLayout_l3["VHF IncDecSymbol"]={5,1}
@@ -492,9 +554,25 @@ DEDLayout_l3["System Time"]={15,8}
 --COM
 DEDLayout_l3["Scratchpad"]={14,6,0,"_inv","I"}
 DEDLayout_l3["Asterisks on Scratchpad_both"]={13,1,20,"","I"}
-DEDLayout_l3["Guard or Backup Status"]={9,5}
+DEDLayout_l3["Guard or Backup Status"]={9,6}
 DEDLayout_l3["GUARD COM 2 Receiver Band"]={8,2}
 DEDLayout_l3["GUARD Guard Label"]={12,5}
+--DEST
+DEDLayout_l3["DEST DIR DEST_LON"]={3,3}
+DEDLayout_l3["DEST DIR LON"]={8,12,0,"_inv","I"}
+DEDLayout_l3["DEST DIR Asterisks_LON_both"]={7,1,20,"","I"}
+DEDLayout_l3["DEST OA1 DEST_OA1_RNG"]={3,3}
+DEDLayout_l3["DEST OA1 RNG"]={8,8,0,"_inv","I"}
+DEDLayout_l3["DEST OA1 Asterisks_RNG_both"]={7,1,16,"","I"}
+DEDLayout_l3["DEST OA2 DEST_OA2_RNG"]={3,3}
+DEDLayout_l3["DEST OA2 RNG"]={8,8,0,"_inv","I"}
+DEDLayout_l3["DEST OA2 Asterisks_RNG_both"]={7,1,16,"","I"}
+-- DEDLayout_l3["RNG"]={8,8,0,"_inv","I"}
+DEDLayout_l3["UTM_DEST_SQUARE"]={4,6}
+DEDLayout_l3["SQUARE"]={12,1,0,"_inv","I"}
+DEDLayout_l3["SQUARE2"]={13,1,0,"_inv","I"}
+DEDLayout_l3["Asterisks_SQUARE_both"]={11,1,14,"","I"}
+DEDLayout_l3["Asterisks_SQUARE2_both"]={11,1,14,"","I"}
 --IFF
 DEDLayout_l3["STAT M1 Mode"]={0,2,0,"_inv","I"}
 DEDLayout_l3["STAT M1 Lockout Status"]={3,1}
@@ -507,20 +585,20 @@ DEDLayout_l3["STAT POS EVENT - OF"]={20,2}
 DEDLayout_l3["STAT POS EVENT - Number"]={22,1}
 DEDLayout_l3["POS M1 Mode"]={1,2,0,"_inv","I"}
 DEDLayout_l3["POS M1 Lockout Status"]={3,1}
-DEDLayout_l3["POS M1 Code"]={4,5}
+DEDLayout_l3["POS M1 Code"]={4,2}
 DEDLayout_l3["POS M4 Mode"]={9,2,0,"_inv","I"}
 DEDLayout_l3["POS M4 Code"]={13,1}
-DEDLayout_l3["POS M4 Key"]={14,2}
+DEDLayout_l3["POS M4 Key"]={14,3}
 DEDLayout_l3["POS Mode Asterisks_both"]={18,1,23,"","I"}
-DEDLayout_l3["POS Mode Scratchpad"]={14,5,0,"_inv","I"}
+DEDLayout_l3["POS Mode Scratchpad"]={19,5,0,"_inv","I"}
 DEDLayout_l3["TIM M1 Mode"]={1,2,0,"_inv","I"}
 DEDLayout_l3["TIM M1 Lockout Status"]={3,1}
-DEDLayout_l3["TIM M1 Code"]={4,5}
+DEDLayout_l3["TIM M1 Code"]={4,2}
 DEDLayout_l3["TIM M4 Mode"]={9,2,0,"_inv","I"}
 DEDLayout_l3["TIM M4 Code"]={13,1}
-DEDLayout_l3["TIM M4 Key"]={14,2}
+DEDLayout_l3["TIM M4 Key"]={14,3}
 DEDLayout_l3["TIM Mode Asterisks_both"]={18,1,23,"","I"}
-DEDLayout_l3["TIM Mode Scratchpad"]={14,5,0,"_inv","I"}
+DEDLayout_l3["TIM Mode Scratchpad"]={19,5,0,"_inv","I"}
 DEDLayout_l3["BACKUP label"]={9,6}
 --List
 DEDLayout_l3["List Item 4 Number"]={0,1,0,"","I"}
@@ -549,7 +627,7 @@ DEDLayout_l3["STEERPOINT Longitude Asteriscs_both"] = {7,1,20,"","I"}
 DEDLayout_l3["HACK_label"] = {6,4}
 DEDLayout_l3["HACK_value"] = {13,8,0,"_inv","I"}
 DEDLayout_l3["Asterisks_on_HACK_both"] = {12,1,21,"","I"}
-DEDLayout_l3["HACK_IncDecSymbol"] = {23,1}
+DEDLayout_l3["HACK_IncDecSymbol"] = {22,1}
 --BINGO
 DEDLayout_l3["SET label"] = {6,3}
 DEDLayout_l3["BINGO Asterisks_both"] = {10,1,19,"","I"}
@@ -586,9 +664,9 @@ DEDLayout_l3["Asterisks on MC_both"] = {5,1,9,"","I"}
 DEDLayout_l3["FL lbl"] = {12,2}
 DEDLayout_l3["FL status"] = {16,3,0,"_inv","I"}
 DEDLayout_l3["Asterisks on FL_both"] = {15,1,19,"","I"}
-DEDLayout_l3["NUM lbl"] = {18,1}
-DEDLayout_l3["Own num value"] = {20,1}
-DEDLayout_l3["Asterisks on Own_both"]  = {19,1,21,"","I"}
+DEDLayout_l3["NUM lbl"] = {20,1}
+DEDLayout_l3["Own num value"] = {22,1,0,"_inv","I"}
+DEDLayout_l3["Asterisks on Own_both"]  = {21,1,23,"","I"}
 DEDLayout_l3["TIME lbl"] = {4,4}
 DEDLayout_l3["TIME value"] = {9,8,0,"_inv","I"}
 DEDLayout_l3["Asterisks on TIME_both"] = {8,1,17,"","I"}
@@ -598,16 +676,26 @@ DEDLayout_l3["Asterisks on STN2_both"] = {2,1,8,"","I"}
 DEDLayout_l3["STN id lbl6"] = {9,2}
 DEDLayout_l3["STN value6"] = {12,5,0,"","_inv"}
 DEDLayout_l3["Asterisks on STN6_both"] = {11,1,17,"","I"}
--- DEDLayout_l3["OWN lbl"] = {3,3} --frk
-DEDLayout_l3["OWN value"] = {7,2}
-DEDLayout_l3["DATA lbl"] = {12,4}
-DEDLayout_l3["DATA value"] = {7,3}
+DEDLayout_l3["A-G DL OWN lbl"] = {3,3} --frk
+DEDLayout_l3["A-G DL OWN value"] = {7,2}
+DEDLayout_l3["A-G DL DATA lbl"] = {12,4}
+DEDLayout_l3["A-G DL DATA value"] = {17,3}
 DEDLayout_l3["INTRAFLIGHT STN id lbl2"] = {1,2}
 DEDLayout_l3["INTRAFLIGHT STN value2"] = {4,5}
 DEDLayout_l3["INTRAFLIGHT STN id lbl6"] = {7,2}
 DEDLayout_l3["INTRAFLIGHT STN value6"] = {10,5}
 DEDLayout_l3["INTRAFLIGHT DATA lbl"] = {13,4}
 DEDLayout_l3["INTRAFLIGHT DATA value"] = {18,3}
+DEDLayout_l3["STN id lbl_2"] = {0,1}
+DEDLayout_l3["STN TDOA value_2"] = {2,1}
+DEDLayout_l3["STN value_2"] = {4,5}
+DEDLayout_l3["Asterisks on STN TDOA_2"] = {1,1,3,"","I"}
+DEDLayout_l3["Asterisks on STN_2"] = {3,1,9,"","I"}
+DEDLayout_l3["STN id lbl_6"] = {10,1}
+DEDLayout_l3["STN TDOA value_6"] = {12,1}
+DEDLayout_l3["STN value_6"] = {14,5}
+DEDLayout_l3["Asterisks on STN TDOA_6"] = {11,1,13,"","I"}
+DEDLayout_l3["Asterisks on STN_6"] = {13,1,19,"","I"}
 --Misc
 DEDLayout_l3["Misc Item 4 Number"]={0,1,0,"","I"}
 DEDLayout_l3["Misc Item 4 Name"]={1,4}
@@ -633,27 +721,41 @@ DEDLayout_l3["INTG M4 Decoupled Status"] = {19,1}
 DEDLayout_l3["INTG M4 Code"] = {20,1,0,"_inv","I"}
 DEDLayout_l3["INTG M4 Key"] = {21,3}
 --HARM
-DEDLayout_l3["T3"] = {14,2}
-DEDLayout_l3["T3_code"] = {18,3,0,"_inv","I"}
-DEDLayout_l3["Asterisks_T3_both"] = {17,1,21,"","I"}
+DEDLayout_l3["HARM T3"] = {14,2}
+DEDLayout_l3["HARM T3_code"] = {18,3,0,"_inv","I"}
+DEDLayout_l3["HARM Asterisks_T3_both"] = {17,1,21,"","I"}
 -- VIP
-DEDLayout_l3["VIP bearing"] = {3,4}
-DEDLayout_l3["VIP bearing value"] = {9,6,0,"_inv","I"}
-DEDLayout_l3["VIP bearing Asteriscs_both"] = {8,1,15,"","I"}
+DEDLayout_l3["VIP bearing"] = {4,4}
+DEDLayout_l3["VIP bearing value"] = {10,6,0,"_inv","I"}
+DEDLayout_l3["VIP bearing Asteriscs_both"] = {9,1,16,"","I"}
 -- VRP
-DEDLayout_l3["Target bearing"] = {3,4}
-DEDLayout_l3["Target bearing value"] = {9,6,0,"_inv","I"}
-DEDLayout_l3["Target bearing Asteriscs_both"] = {8,1,15,"","I"}
+DEDLayout_l3["Target bearing"] = {4,4}
+DEDLayout_l3["Target bearing value"] = {10,6,0,"_inv","I"}
+DEDLayout_l3["Target bearing Asteriscs_both"] = {9,1,16,"","I"}
 --HMCS
-DEDLayout_l3["HMCS DISPLAY HMCS_CKPT_BLANK"] = {3,9,0,"_inv","I"}
-DEDLayout_l3["HMCS DISPLAY Asterisks_CKPT_BLANK_both"] = {2,1,12,"","I"}
+DEDLayout_l3["HMCS DISPLAY HMCS_CKPT_BLANK"] = {2,9,0,"_inv","I"}
+DEDLayout_l3["HMCS DISPLAY Asterisks_CKPT_BLANK_both"] = {1,1,11,"","I"}
 DEDLayout_l3["HMCS ALIGN HMCS_AZ_EL"] = {2,5,0,"_inv","I"}
 DEDLayout_l3["HMCS ALIGN Asterisks_AZ_ELAZ_EL_both"] = {1,1,7,"","I"}
+--HTS
+DEDLayout_l3["T2"] = {1,1}
+DEDLayout_l3["T2_code"] = {3,4,0,"_inv",""}
+DEDLayout_l3["Asterisks_T2_both"] = {2,1,7,"","I"}
+DEDLayout_l3["T6"] = {10,1}
+DEDLayout_l3["T6_code"] = {12,4,0,"_inv",""}
+DEDLayout_l3["Asterisks_T6_both"] = {11,1,16,"","I"}
+DEDLayout_l3["HTS_LNG_lbl"] = {2,3}
+DEDLayout_l3["HTS_LNG"] = {7,10}
 --MARK
 DEDLayout_l3["MARK Longitude"] = {2,3}
 DEDLayout_l3["MARK Longitude Value"] = {6,12,0,"_inv","I"}
 DEDLayout_l3["MARK Longitude Asteriscs_both"] = {5,1,18,"","I"} 
---DEDLayout_l3[""] = {,}
+--STPT
+DEDLayout_l3["STEERPOINT SQUARE"] = {4,6}
+DEDLayout_l3["STEERPOINT SQUARE Value1"]={12,1,0,"_inv","I"}
+DEDLayout_l3["STEERPOINT SQUARE Value2"]={13,2,0,"_inv","I"}
+DEDLayout_l3["STEERPOINT SQUARE Asteriscs_both"] = {11,1,14,"","I"} 
+DEDLayout_l3["STEERPOINT SQUARE2 Asteriscs_both"] = {11,1,14,"","I"} 
 --TODO
 DEDLayout_l4["TODO remove label"] = {4,20}
 --CNI
@@ -664,13 +766,20 @@ DEDLayout_l4["Preset Label"]={2,9}
 DEDLayout_l4["Preset Number"]={7,2,0,"_inv","I"}
 DEDLayout_l4["Asterisks on PresetChannel_both"]={6,1,9,"","I"}
 DEDLayout_l4["TOD Label"]={17,3}
+--DEST
+DEDLayout_l4["DEST DIR DEST_ELEV"]={2,4}
+DEDLayout_l4["DEST DIR ELEV"]={8,6,0,"_inv","I"}
+DEDLayout_l4["DEST DIR Asterisks_ELEV_both"]={7,1,15,"","I"}
+DEDLayout_l4["DEST OA1 DEST_OA1_BRG"]={3,3}
+DEDLayout_l4["DEST OA1 BRG"]={8,6,0,"_inv","I"}
+DEDLayout_l4["DEST OA1 Asterisks_BRG_both"]={7,1,14,"","I"}
+DEDLayout_l4["DEST OA2 DEST_OA2_BRG"]={3,3}
+DEDLayout_l4["DEST OA2 BRG"]={8,6,0,"_inv","I"}
+DEDLayout_l4["DEST OA2 Asterisks_BRG_both"]={7,1,14,"","I"}
+DEDLayout_l4["UTM_DEST_EAST/NORTH"]={0,10}
+DEDLayout_l4["EAST/NORTH"]={12,11,0,"_inv","I"}
+DEDLayout_l4["Asterisks_EAST/NORTH_both"]={11,1,23,"","I"}
 --IFF
-DEDLayout_l4["STAT M2 Mode"]={0,2,0,"_inv","I"}
-DEDLayout_l4["STAT M2 Lockout Status"]={3,1}
-DEDLayout_l4["STAT M2 Code"]={4,4}
-DEDLayout_l4["STAT MC Mode"]={9,2,0,"_inv","I"}
-DEDLayout_l4["STAT MC Code"]={12,1}
-DEDLayout_l4["STAT MC Key"]={14,3}
 DEDLayout_l4["STAT M2 Mode"]={0,2,0,"_inv","I"}
 DEDLayout_l4["STAT M2 Lockout Status"]={3,1}
 DEDLayout_l4["STAT M2 Code"]={4,4}
@@ -716,7 +825,7 @@ DEDLayout_l4["MSL FLOOR label"] = {3,9}
 DEDLayout_l4["MSL FLOOR Scratchpad"] = {15,7,0,"_inv","I"}
 DEDLayout_l4["MSL FLOOR Asterisks_both"] = {14,1,22,"","I"}
 --STPT
-DEDLayout_l4["STEERPOINT Elevation"] = {2,3}
+DEDLayout_l4["STEERPOINT Elevation"] = {2,4}
 DEDLayout_l4["STEERPOINT Elevation Value"] = {8,8,0,"_inv","I"}
 DEDLayout_l4["STEERPOINT Elevation Asteriscs_both"] = {7,1,16,"","I"}
 --TIME
@@ -758,7 +867,7 @@ DEDLayout_l4["SC lbl"] = {3,2}
 DEDLayout_l4["SC value"] = {6,3,0,"_inv","I"}
 DEDLayout_l4["Asterisks on SC_both"] = {5,1,9,"","I"}
 DEDLayout_l4["XMT lbl"] = {11,3}
-DEDLayout_l4["XMT status"] = {16,2,0,"_inv","I"}
+DEDLayout_l4["XMT status"] = {16,4,0,"_inv","I"}
 DEDLayout_l4["Asterisks on XMT_both"] = {15,1,20,"","I"}
 DEDLayout_l4["NTR lbl"] = {5,3}
 DEDLayout_l4["NTR status"] = {9,3,0,"_inv","I"}
@@ -769,16 +878,26 @@ DEDLayout_l4["Asterisks on STN3_both"] = {2,1,8,"","I"}
 DEDLayout_l4["STN id lbl7"] = {9,2}
 DEDLayout_l4["STN value7"] = {12,5,0,"","_inv"}
 DEDLayout_l4["Asterisks on STN7_both"] = {11,1,17,"","I"}
-DEDLayout_l4["FILL lbl"] = {2,4}
-DEDLayout_l4["FILL status"] = {7,3}
-DEDLayout_l4["PRTL lbl"] = {12,4}
-DEDLayout_l4["PRTL status"] = {17,5}
+DEDLayout_l4["A-G DL FILL lbl"] = {2,4}
+DEDLayout_l4["A-G DL FILL status"] = {7,3}
+DEDLayout_l4["A-G DL PRTL lbl"] = {12,4}
+DEDLayout_l4["A-G DL PRTL status"] = {17,5}
 DEDLayout_l4["INTRAFLIGHT STN id lbl3"] = {1,2}
 DEDLayout_l4["INTRAFLIGHT STN value3"] = {4,5}
 DEDLayout_l4["INTRAFLIGHT STN id lbl7"] = {7,2}
 DEDLayout_l4["INTRAFLIGHT STN value7"] = {10,5}
-DEDLayout_l4["INTRAFLIGHT OWN lbl"] = {14,4}
+DEDLayout_l4["INTRAFLIGHT OWN lbl"] = {14,3}
 DEDLayout_l4["INTRAFLIGHT Own value"] = {18,2}
+DEDLayout_l4["STN id lbl_3"] = {0,1}
+DEDLayout_l4["STN TDOA value_3"] = {2,1}
+DEDLayout_l4["STN value_3"] = {4,5}
+DEDLayout_l4["Asterisks on STN TDOA_3"] = {1,1,3,"","I"}
+DEDLayout_l4["Asterisks on STN_3"] = {3,1,9,"","I"}
+DEDLayout_l4["STN id lbl_7"] = {10,1}
+DEDLayout_l4["STN TDOA value_7"] = {12,1}
+DEDLayout_l4["STN value_7"] = {14,5}
+DEDLayout_l4["Asterisks on STN TDOA_7"] = {11,1,13,"","I"}
+DEDLayout_l4["Asterisks on STN_7"] = {13,1,19,"","I"}
 --Misc
 DEDLayout_l4["Misc Item 7 Number"]={0,1,0,"","I"}
 DEDLayout_l4["Misc Item 7 Name"]={1,4}
@@ -795,25 +914,39 @@ DEDLayout_l4["INTG M2 Code"] = {4,4}
 DEDLayout_l4["INTG IJAM Mode"] = {15,4}
 DEDLayout_l4["INTG IJAM Key"] = {20,3}
 --HARM
-DEDLayout_l4["T4"] = {14,2}
-DEDLayout_l4["T4_code"] = {18,3,0,"_inv","I"}
-DEDLayout_l4["Asterisks_T4_both"] = {17,1,21,"","I"}
+DEDLayout_l4["HARM T4"] = {14,2}
+DEDLayout_l4["HARM T4_code"] = {18,3,0,"_inv","I"}
+DEDLayout_l4["HARM Asterisks_T4_both"] = {17,1,21,"","I"}
 -- VIP & VRP
-DEDLayout_l4["Range"] = {4,3}
-DEDLayout_l4["Range value"] = {9,8,0,"_inv","I"}
-DEDLayout_l4["Range Asteriscs_both"] = {8,1,17,"","I"}
-DEDLayout_l4["Range NM"] = {16,2}
+DEDLayout_l4["Range"] = {5,3}
+DEDLayout_l4["Range value"] = {10,8,0,"_inv","I"}
+DEDLayout_l4["Range Asteriscs_both"] = {9,1,18,"","I"}
+DEDLayout_l4["Range NM"] = {17,2}
+-- DEDLayout_l4["VRP Range value"] = {10,8,0,"_inv","I"}
+-- DEDLayout_l4["VRP Range Asteriscs_both"] = {9,1,18,"","I"}
 --HMCS
-DEDLayout_l4["HMCS DISPLAY HMCS_DECLUTTER"] = {3,14}
-DEDLayout_l4["HMCS DISPLAY HMCS_DECLUTTER_STATUS"] = {17,1}
-DEDLayout_l4["HMCS DISPLAY Asterisks_DECLUTTER_both"] = {12,1,18,"","I"}
+DEDLayout_l4["HMCS DISPLAY HMCS_DECLUTTER"] = {2,14}
+DEDLayout_l4["HMCS DISPLAY HMCS_DECLUTTER_STATUS"] = {16,1}
+DEDLayout_l4["HMCS DISPLAY Asterisks_DECLUTTER_both"] = {11,1,17,"","I"}
 DEDLayout_l4["HMCS ALIGN HMCS_ROLL"] = {2,4,0,"_inv","I"}
 DEDLayout_l4["HMCS ALIGN Asterisks_ROLL_both"] = {1,1,6,"","I"}
+--HTS
+DEDLayout_l4["T3"] = {1,1}
+DEDLayout_l4["T3_code"] = {3,4,0,"_inv",""}
+DEDLayout_l4["Asterisks_T3_both"] = {2,1,7,"","I"}
+DEDLayout_l4["T7"] = {10,1}
+DEDLayout_l4["T7_code"] = {12,4,0,"_inv",""}
+DEDLayout_l4["Asterisks_T7_both"] = {11,1,16,"","I"}
+DEDLayout_l4["HTS_ELEV_lbl"] = {2,3}
+DEDLayout_l4["HTS_ELEV"] = {7,6}
 --MARK
 DEDLayout_l4["MARK Elevation"] = {1,4}
 DEDLayout_l4["MARK Elevation Value"] = {6,8,0,"_inv","I"}
 DEDLayout_l4["MARK Elevation Asteriscs_both"] = {5,1,14,"","I"}
---DEDLayout_l4[""] = {,}
+--STPT
+DEDLayout_l4["STEERPOINT EAST NORTH"] = {0,10}
+DEDLayout_l4["STEERPOINT EAST NORTH Value"] = {12,3}
+DEDLayout_l4["STEERPOINT EAST NORTH Asteriscs_both"] = {11,1,23,"","I"}
 --CNI
 DEDLayout_l5["IFF Modes Label"]={1,1}
 DEDLayout_l5["IFF Modes Enabled"]={2,6}
@@ -828,8 +961,25 @@ DEDLayout_l5["Preset Frequency"]={5,6,0,"_inv","I"}
 DEDLayout_l5["Asterisks on PresetFrequency_both"]={4,1,11,"","I"}
 DEDLayout_l5["Bandwidth"]={18,2,0,"_inv","I"}
 DEDLayout_l5["Asterisks on Band_both"]={17,1,20,"","I"}
-DEDLayout_l5["Preset Channel Number"]={20,2}
+DEDLayout_l5["Preset Channel Number"]={7,2}
 DEDLayout_l5["Guard or Backup Frequency"]={10,6}
+--DEST
+DEDLayout_l5["DEST DIR DEST_TOS"]={3,3}
+DEDLayout_l5["DEST DIR TOS"]={8,8,0,"_inv","I"}
+DEDLayout_l5["DEST DIR Asterisks_TOS_both"]={7,1,16,"","I"}
+DEDLayout_l5["DEST DIR P2lbl"]={21,3}
+DEDLayout_l5["DEST OA1 DEST_OA1_ELEV"]={2,4}
+DEDLayout_l5["DEST OA1 ELEV"]={8,8,0,"_inv","I"}
+DEDLayout_l5["DEST OA1 Asterisks_ELEV_both"]={7,1,16,"","I"}
+DEDLayout_l5["DEST OA1 P3lbl"]={21,3}
+DEDLayout_l5["DEST OA2 DEST_OA2_ELEV"]={2,4}
+DEDLayout_l5["DEST OA2 ELEV"]={8,8,0,"_inv","I"}
+DEDLayout_l5["DEST OA2 Asterisks_ELEV_both"]={7,1,16,"","I"}
+DEDLayout_l5["DEST OA2 P4lbl"]={21,3}
+DEDLayout_l5["UTM_DEST_ELEV"]={6,4}
+DEDLayout_l5["ELEV"]={12,6,0,"_inv","I"}
+DEDLayout_l5["Asterisks_ELEV_both"]={11,1,19,"","I"}
+DEDLayout_l5["P1 lbl"]={21,3}
 --IFF
 DEDLayout_l5["STAT M3 Mode"] = {0,2,0,"_inv","I"}
 DEDLayout_l5["STAT M3 Lockout Status"] = {3,1}
@@ -898,7 +1048,7 @@ DEDLayout_l5["CMDS_BINGO_Asterisks_both"] = {18,1,22,"","I"}
 DEDLayout_l5["P2 lbl"] = {21,3}
 DEDLayout_l5["P3 lbl"] = {21,3}
 DEDLayout_l5["SYNC lbl"] = {4,4}
-DEDLayout_l5["SYNC status"] = {9,4,0,"_inv","I"}
+DEDLayout_l5["SYNC status"] = {9,6,0,"_inv","I"}
 DEDLayout_l5["Asterisks on SYNC_both"] = {8,1,15,"","I"}
 DEDLayout_l5["P1 lbl"] = {21,3}
 DEDLayout_l5["STN id lbl4"] = {0,2}
@@ -915,6 +1065,16 @@ DEDLayout_l5["INTRAFLIGHT STN value8"] = {10,5}
 DEDLayout_l5["INTRAFLIGHT LAST lbl"] = {13,4}
 DEDLayout_l5["INTRAFLIGHT LAST value"] = {18,2}
 DEDLayout_l5["INTRAFLIGHT P6 lbl"] = {21,3}
+DEDLayout_l5["STN id lbl_4"] = {0,1}
+DEDLayout_l5["STN TDOA value_4"] = {2,1}
+DEDLayout_l5["STN value_4"] = {4,5}
+DEDLayout_l5["Asterisks on STN TDOA_4"] = {1,1,3,"","I"}
+DEDLayout_l5["Asterisks on STN_4"] = {3,1,9,"","I"}
+DEDLayout_l5["STN id lbl_8"] = {10,1}
+DEDLayout_l5["STN TDOA value_8"] = {12,1}
+DEDLayout_l5["STN value_8"] = {14,5}
+DEDLayout_l5["Asterisks on STN TDOA_8"] = {11,1,13,"","I"}
+DEDLayout_l5["Asterisks on STN_8"] = {13,1,19,"","I"}
 --LASER
 DEDLayout_l5["Laser ST Time LABEL"] = {1,13}
 DEDLayout_l5["Laser ST Time VALUE"] = {17,2,0,"_inv","I"}
@@ -928,17 +1088,26 @@ DEDLayout_l5["INTG Scratchpad"] = {10,5,0,"_inv","I"}
 DEDLayout_l5["INTG COUPLE Mode"] = {16,4,0,"_inv","I"}
 DEDLayout_l5["INTG COUPLE Key"] = {20,3}
 --HARM
-DEDLayout_l5["T5"] = {14,2}
-DEDLayout_l5["T5_code"] = {18,3,0,"_inv","I"}
-DEDLayout_l5["Asterisks_T5_both"] = {17,1,21,"","I"}
+DEDLayout_l5["HARM T5"] = {14,2}
+DEDLayout_l5["HARM T5_code"] = {18,3,0,"_inv","I"}
+DEDLayout_l5["HARM Asterisks_T5_both"] = {17,1,21,"","I"}
 -- VIP & VRP
-DEDLayout_l5["Elevation"] = {3,4}
-DEDLayout_l5["Elevation value"] = {9,8,0,"_inv","I"}
-DEDLayout_l5["Elevation Asteriscs_both"] = {8,1,17,"","I"}
+DEDLayout_l5["Elevation"] = {4,4}
+DEDLayout_l5["Elevation value"] = {10,8,0,"_inv","I"}
+DEDLayout_l5["Elevation Asteriscs_both"] = {9,1,18,"","I"}
 --HMCS
-DEDLayout_l5["HMCS DISPLAY HMCS_RWR_DISPLAY"] = {3,9}
-DEDLayout_l5["HMCS DISPLAY HMCS_RWR_DISPLAY_STATUS"] = {13,3}
-DEDLayout_l5["HMCS DISPLAY Asterisks_RWR_DISPLAY_both"] = {12,1,16,"","I"}
+DEDLayout_l5["HMCS DISPLAY HMCS_RWR_DISPLAY"] = {2,9}
+DEDLayout_l5["HMCS DISPLAY HMCS_RWR_DISPLAY_STATUS"] = {12,3}
+DEDLayout_l5["HMCS DISPLAY Asterisks_RWR_DISPLAY_both"] = {11,1,15,"","I"}
+--HTS
+DEDLayout_l5["T4"] = {1,1}
+DEDLayout_l5["T4_code"] = {3,4,0,"_inv",""}
+DEDLayout_l5["Asterisks_T4_both"] = {2,1,7,"","I"}
+DEDLayout_l5["T8"] = {10,1}
+DEDLayout_l5["T8_code"] = {12,4,0,"_inv",""}
+DEDLayout_l5["Asterisks_T8_both"] = {11,1,16,"","I"}
+DEDLayout_l5["HTS_TOT_lbl"] = {2,3}
+DEDLayout_l5["HTS_TOT"] = {7,8}
 --MARK
 DEDLayout_l5["MARK MGRS"] = {1,4}
 DEDLayout_l5["MARK GRID DIGIT Value"] = {6,2,0,"_inv","I"}
@@ -949,8 +1118,10 @@ DEDLayout_l5["MARK EAST Value"] = {12,5,0,"_inv","I"}
 DEDLayout_l5["MARK Slash"] = {17,1}
 DEDLayout_l5["MARK NORTH Value"]={18,5,0,"_inv","I"}
 DEDLayout_l5["MARK MGRS Asteriscs_both"]={5,1,23,"","I"}
-
---DEDLayout_l5[""] = {,}
+--STPT
+DEDLayout_l5["STEERPOINT ElevationMGRS"] = {6,4}
+DEDLayout_l5["STEERPOINT ElevationMGRS Value"] = {11,4,0,"_inv","I"}
+DEDLayout_l5["STEERPOINT ElevationMGRS Asteriscs_both"]={11,1,20,"","I"}
 
 DEDLayout = {DEDLayout_l1, DEDLayout_l2, DEDLayout_l3, DEDLayout_l4, DEDLayout_l5}
 
@@ -979,9 +1150,13 @@ local function buildDEDLine(line)
 		local nav_status 	= DED_fields["NAV Status lbl"]
 		local hmcs_display 	= DED_fields["HMCS_DISPLAY_TOPIC"]
 		local hmcs_align 	= DED_fields["HMCS_ALIGN_TOPIC"]
+		local harm 			= DED_fields["HARM"]
+		local dest_dir 		= DED_fields["DEST_DIR"]
+		local dest_oa1 		= DED_fields["DEST_OA1"]
+		local dest_oa2 		= DED_fields["DEST_OA2"]
 		--Loop through Exported DED Objects
 		for k,v in pairs(DED_fields) do
-			-- Handle Duplicate Key Names on COM2 Guard page items        
+			-- Handle Duplicate Key Names on COM2 Guard page items
 			if guard ~= nil then
 				label = guard.." "..k
 			-- Handle Duplicate Key Names on IFF STAT page items
@@ -1005,15 +1180,23 @@ local function buildDEDLine(line)
 			-- Handle Duplicate Key Names on DLNK A-G page Line 2 items
 			elseif dlnk_A_G ~= nil and line == 2 then
 				label = dlnk_A_G.." "..k
-			-- Handle Duplicate Key Names on NAV page		
+			-- Handle Duplicate Key Names on NAV page
 			elseif nav_status ~= nil then
 				label = nav_status.." "..k
-				-- Handle Duplicate Key Names on HMCS Display page		
+			-- Handle Duplicate Key Names on HMCS Display page
 			elseif hmcs_display ~= nil then
 				label = hmcs_display.." "..k
-			-- Handle Duplicate Key Names on HMCS Align page		
+			-- Handle Duplicate Key Names on HMCS Align page
 			elseif hmcs_align ~= nil then
 				label = hmcs_align.." "..k
+			elseif harm ~= nil then
+				label = harm.." "..k
+			elseif dest_dir ~= nil then
+				label = dest_dir.." "..k
+			elseif dest_oa1 ~= nil then
+				label = dest_oa1.." "..k
+			elseif dest_oa2 ~= nil then
+				label = dest_oa2.." "..k
 			else
 				label = k
 			end

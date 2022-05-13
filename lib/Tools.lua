@@ -472,26 +472,7 @@ function ExportScript.Tools.GetPlayerData()
         PlayerData.MechAirBrakeRigh = LoGetAircraftDrawArgumentValue(182)
         PlayerData.MechAirBrakeLeft = LoGetAircraftDrawArgumentValue(184)
     else
-        -- PlayerData.MechGearNose = 0.0
-        -- PlayerData.MechGearLeft = 0.0
-        -- PlayerData.MechGearRigh = 0.0
-        -- PlayerData.MechAirBrakeLeft = 0.0
-        -- PlayerData.MechAirBrakeRigh = 0.0
-        -- PlayerData.MechRefueling = 0.0
-        -- PlayerData.MechHook = 0.0
-        -- PlayerData.MechNozzLeft = 0.0
-        -- PlayerData.MechNozzRigh = 0.0
         
-        -- PlayerData.AltGearLeft = 0
-        -- PlayerData.AltGearNose = 0
-        -- PlayerData.AltGearRigh = 0
-        -- PlayerData.IndRefueling = 0
-        -- PlayerData.IndHook = 0
-        -- PlayerData.ThrottleLeft = 0.0
-        -- PlayerData.ThrottleRigh = 0.0
-        -- PlayerData.EngineRpmLeft = 0.0
-        -- PlayerData.EngineRpmRigh = 0.0
-        -- PlayerData.FuelFlow = 0
     end
 end
 
@@ -523,7 +504,7 @@ function ExportScript.Tools.WriteToNavFiles()
         -- 41-52
         local data12 = string.format("%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;%.2f;",
         PlayerData.Cam.x.x, PlayerData.Cam.x.y, PlayerData.Cam.x.z, PlayerData.Cam.y.x, PlayerData.Cam.y.y, PlayerData.Cam.y.z, PlayerData.Cam.z.x, PlayerData.Cam.z.y, PlayerData.Cam.z.z, PlayerData.Cam.p.x, PlayerData.Cam.p.y, PlayerData.Cam.p.z)
-        
+
         local csvPacket = string.format("%s%s%s%s%s%s%s%s%s%s%s%s\n", data1, data2, data3, data4, data5, data6, data7, data8, data9, data10, data11, data12)
         ExportScript.Fdr.CsvFileWrite(csvPacket)
 
@@ -713,16 +694,16 @@ function ExportScript.Tools.ProcessTWS()
     -- read from TWS FC3 export
     local threats = LoGetTWSInfo()
     local jsonThreats = "{ 'Mode':1.0, 'Emiters':[{ 'ID':'test', 'Power':0.5, 'Azimuth':0.8, 'Priority':150, 'SignalType':'scan', 'Type':'TEST' }] }\n"
-    if threats then		
+    if threats then
         -- add emiters to json
         local jsonEmiters = "[ "
         for mode,emit in pairs (threats.Emitters) do
-            local jsonEmit = ""		
+            local jsonEmit = ""
             local threatType = LoGetNameByType(emit.Type.level1, emit.Type.level2, emit.Type.level3, emit.Type.level4)
             if threatType then
-                jsonEmit = string.format("{ 'ID':'%s', 'Power':%f, 'Azimuth':%f, 'Priority':%f, 'SignalType':'%s', 'Type':'%s' }", emit.ID, emit.Power, emit.Azimuth, emit.Priority, emit.SignalType, threatType)		
+                jsonEmit = string.format("{ 'ID':'%s', 'Power':%f, 'Azimuth':%f, 'Priority':%f, 'SignalType':'%s', 'Type':'%s' }", emit.ID, emit.Power, emit.Azimuth, emit.Priority, emit.SignalType, threatType)
             else
-                jsonEmit = string.format("{ 'ID':'%s', 'Power':%f, 'Azimuth':%f, 'Priority':%f, 'SignalType':'%s', 'Type':'U' }", emit.ID, emit.Power, emit.Azimuth, emit.Priority, emit.SignalType)		
+                jsonEmit = string.format("{ 'ID':'%s', 'Power':%f, 'Azimuth':%f, 'Priority':%f, 'SignalType':'%s', 'Type':'U' }", emit.ID, emit.Power, emit.Azimuth, emit.Priority, emit.SignalType)
             end
             if jsonEmiters ~= "[ " then
                 jsonEmiters = jsonEmiters .. ","
@@ -1167,7 +1148,7 @@ function ExportScript.Tools.SelectModule()
         -- load Aircraft File
         dofile(_moduleFile)
 
-        ExportScript.FirstNewDataSend      = ExportScript.Config.FirstNewDataSend 
+        ExportScript.FirstNewDataSend      = ExportScript.Config.FirstNewDataSend
         ExportScript.FirstNewDataSendCount = ExportScript.Config.FirstNewDataSendCount
 
         if ExportScript.FoundDCSModule then
@@ -1258,7 +1239,7 @@ end
 function ExportScript.Tools.getListIndicatorValue(IndicatorID)
 	local ListIindicator = list_indication(IndicatorID)
 	local TmpReturn = {}
-	
+
 	if ListIindicator == "" then
 		return nil
 	end
@@ -1302,11 +1283,11 @@ end
 -- pobiera: nr argumentu / nazwa klucza / dlugosc zwracanego ciagu
 function ExportScript.Tools.getListIndicatorValueByName(IndicatorID, NameID, Length)
 	local ListIindicator = list_indication(IndicatorID)
-	
+
 	if ListIindicator == "" then
 		return nil
     end
-    
+
     local data = ""
     -- tworzy pusty string o danej dlugosci
     while data:len() < Length do data = data .. " " end
@@ -1333,10 +1314,10 @@ function ExportScript.Tools.DisplayFormat(String, maxChars, LEFTorRight, DAC)
 	local lLEFTorRight = LEFTorRight or "r"
 	local lTmpLen      = 0
 	local lRep         = " "
-	
+
 	lString = ExportScript.utf8.sub(lString, 0, lmaxChars)
 	lTmpLen = ExportScript.utf8.len(lString)
-	
+
 	if lTmpLen < lmaxChars then
 		if string.lower(lLEFTorRight) == "l" then
 			lString = lString..string.rep(" ", lmaxChars - lTmpLen)
@@ -1344,7 +1325,7 @@ function ExportScript.Tools.DisplayFormat(String, maxChars, LEFTorRight, DAC)
 			lString = string.rep(" ", lmaxChars - lTmpLen)..lString
 		end
 	end
-	
+
 	return lString
 end
 
