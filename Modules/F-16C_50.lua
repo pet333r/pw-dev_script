@@ -389,8 +389,8 @@ DEDLayout_l1["MARK STPT"] = {19,4}
 --TODO
 DEDLayout_l2["TODO remove lbl"]={4,20}
 --CNI
-DEDLayout_l2["UHF Status"]={1,1}
-DEDLayout_l2["Default Value Indication"]={11,1}
+DEDLayout_l2["UHF Status"]={1,3}
+DEDLayout_l2["Default Value Indication"]={11,4}
 DEDLayout_l2["Wind Magnetic Direction"]={16,2}
 DEDLayout_l2["Wind Speed"]={20,2}
 --COM
@@ -759,7 +759,7 @@ DEDLayout_l3["STEERPOINT SQUARE2 Asteriscs_both"] = {11,1,14,"","I"}
 --TODO
 DEDLayout_l4["TODO remove label"] = {4,20}
 --CNI
-DEDLayout_l4["VHF Status"]={1,1}
+DEDLayout_l4["VHF Status"]={1,3}
 DEDLayout_l4["Hack Time"]={15,8}
 --COM
 DEDLayout_l4["Preset Label"]={2,9}
@@ -951,7 +951,7 @@ DEDLayout_l4["STEERPOINT EAST NORTH Asteriscs_both"] = {11,1,23,"","I"}
 DEDLayout_l5["IFF Modes Label"]={1,1}
 DEDLayout_l5["IFF Modes Enabled"]={2,6}
 DEDLayout_l5["Active Mode 3 Code"]={9,4}
-DEDLayout_l5["IFF Switching"]={14,1}
+DEDLayout_l5["IFF Switching"]={14,4}
 DEDLayout_l5["TACAN Label"]={19,1}
 DEDLayout_l5["TACAN Channel"]={20,3}
 DEDLayout_l5["TACAN Band"]={23,1}
