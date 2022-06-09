@@ -19,6 +19,37 @@ ExportScript.ConfigEveryFrameArguments =
 	-- [84] = "%.2f",		-- EngineLeftFuelFlow
     -- [85] = "%.2f",		-- EngineRightFuelFlow
 
+    -- AM Radio
+	[133] = "%.1f",   -- PTR-ANARC186-VHFAM-VOLUME (Volume)
+	[134] = "%d",     -- PTR-ANARC186-VHFAM-SQUELCH (Squelch / TONE) -1/1
+	[135] = "%.1f",   -- PTR-ANARC186-VHFAM-FREQEMER-CONTROL (Frequency Selection Dial) 0-0.3
+	-- [136] = "%d",     -- PTR-ANARC186-VHFAM-LOAD (Load btn)
+	[137] = "%.2f",   -- PTR-ANARC186-VHFAM-PRESET (Preset Channel Selector) 0.01 0-0.2
+	[138] = "%.1f",   -- PTR-ANARC186-VHFAM-MODE (Frequency Mode Dial) 0-0.2
+	[139] = "%.2f",   -- PTR-ANARC186-VHFAM-FREQ-1 (Frequency Selector the 1nd)
+	[140] = "%.1f",   -- PTR-ANARC186-VHFAM-FREQ-2 (Frequency Selector the 2nd)
+	[141] = "%.1f",   -- PTR-ANARC186-VHFAM-FREQ-3 (Frequency Selector the 3nd)
+	[142] = "%.1f",   -- PTR-ANARC186-VHFAM-FREQ-4 (Frequency Selector the 4nd)
+	[143] = "%.2f",   -- Frequency 1nd val 0.05 0-0.75
+	[144] = "%.1f",   -- Frequency 2nd val 0.1 0-1
+	[145] = "%.1f",   -- Frequency 3nd val 0.1 0-1
+	[146] = "%.2f",   -- Frequency 4nd val 0.25 0-1
+    -- FM Radio
+	[147] = "%.1f",   -- PTR-ANARC186-VHFFM-VOLUME (Volume)
+	[148] = "%d",     -- PTR-ANARC186-VHFFM-SQUELCH (Squelch / TONE) -1/1
+	[149] = "%.1f",   -- PTR-ANARC186-VHFFM-FREQEMER-CONTROL (Frequency Selection Dial) 0-0.3
+	-- [150] = "%d",     -- PTR-ANARC186-VHFFM-LOAD (Load btn)
+	[151] = "%.2f",   -- PTR-ANARC186-VHFFM-PRESET (Preset Channel Selector) 0.01 0-0.2
+	[152] = "%.2f",   -- PTR-ANARC186-VHFFM-MODE (Frequency Mode Dial)
+	[153] = "%.1f",   -- PTR-ANARC186-VHFFM-FREQ-1 (Frequency Selector the 1nd)
+	[154] = "%.1f",   -- PTR-ANARC186-VHFFM-FREQ-2 (Frequency Selector the 2nd)
+	[155] = "%.1f",   -- PTR-ANARC186-VHFFM-FREQ-3 (Frequency Selector the 3nd)
+	[156] = "%.1f",   -- PTR-ANARC186-VHFFM-FREQ-4 (Frequency Selector the 4nd)
+    [157] = "%.2f",   -- Frequency 1nd val 0.05 0-0.75
+	[158] = "%.1f",   -- Frequency 2nd val 0.1 0-1
+	[159] = "%.1f",   -- Frequency 3nd val 0.1 0-1
+	[160] = "%.2f",   -- Frequency 4nd val 0.25 0-1
+
     -- UHF
     [161] = "%.2f", -- UHF Preset Channel Selector
     [162] = "%.1f", -- UHF 100MHz Selector
@@ -164,6 +195,9 @@ ExportScript.ConfigEveryFrameArguments =
     [614] = "%1d",		-- ANCHR
     [616] = "%1d",		-- TCN
     [618] = "%1d",		-- ILS
+    [619] = "%1d",		-- UHF
+	[620] = "%1d",		-- FM
+    [621] = "%1d",     -- PTR-NMSP-ABLE-STOW (ABLE-STOW ADI Localizer Bar)
 
     [730] = "%1d",		-- Air Refuel READY
     [731] = "%1d",		-- Air Refuel LATCHED

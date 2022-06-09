@@ -1256,6 +1256,43 @@ function ExportScript.Tools.getListIndicatorValue(IndicatorID)
 	return TmpReturn
 end
 
+function ExportScript.Tools.parseListIndicatorList(IndicatorID)
+	local ret = {}
+	local ListIindicator = list_indication(IndicatorID)
+	if ListIindicator == "" then return nil end
+
+	local m = ListIindicator:gmatch("([^\n]*)\n")
+	local newval = false
+	local name = nil
+	local value = {}
+
+	while true do
+		local line = m()
+		if not line then
+			if name ~= nil then
+				ret[name] = value
+			end
+			break
+		end
+		if line == "-----------------------------------------" then
+			newval = true
+			if name ~= nil then
+				ret[name] = value
+				name = nil
+				value = {}
+			end
+		else
+			if newval == true then
+				newval = false
+				name = line
+			else
+				value[#value+1] = line
+			end
+		end
+	end
+	return ret
+end
+
 function ExportScript.Tools.getListIndicatorValueByNameLeft(IndicatorID, NameID, Length)
 	local ListIindicator = list_indication(IndicatorID)
 

@@ -133,15 +133,15 @@ function ExportScript.Start()
 		end
 	end
 
-		if (ExportScript.Fdr ~= nil) then
-			if (ExportScript.Config.WriteNavFile ~= nil and ExportScript.Config.WriteNavFile == true) then
-				ExportScript.Fdr.CsvFileInit()
-			end
-	
-			if (ExportScript.Config.WriteNavFile ~= nil and ExportScript.Config.WriteNavFile == true) then
-				ExportScript.Fdr.NavFileInit(version)
-			end
+	if (ExportScript.Fdr ~= nil) then
+		if (ExportScript.Config.WriteNavFile ~= nil and ExportScript.Config.WriteNavFile == true) then
+			ExportScript.Fdr.CsvFileInit()
 		end
+
+		if (ExportScript.Config.WriteNavFile ~= nil and ExportScript.Config.WriteNavFile == true) then
+			ExportScript.Fdr.NavFileInit(version)
+		end
+	end
 	
 	ExportScript.Tools.createUDPSender()
 	ExportScript.Tools.createUDPListner()

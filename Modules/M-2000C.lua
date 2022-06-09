@@ -424,8 +424,8 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		-- U/VHF
 		ExportScript.Tools.SendData(2055, ExportScript.Tools.getListIndicatorValueByName(8, "text_COM_VHF", 9))
 		-- UHF
-		ExportScript.Tools.SendData(2061, ExportScript.Tools.getListIndicatorValueByName(7, "text_COM_UHF1", 6))
-		ExportScript.Tools.SendData(2062, ExportScript.Tools.getListIndicatorValueByName(7, "text_COM_UHF2", 6))
+		ExportScript.Tools.SendData(2061, ExportScript.Tools.getListIndicatorValueByName(7, "text_COM_UHF1", 8))
+		ExportScript.Tools.SendData(2062, ExportScript.Tools.getListIndicatorValueByName(7, "text_COM_UHF2", 8))
 		-- FUEL
 		ExportScript.Tools.SendData(2071, ExportScript.Tools.getListIndicatorValueByName(3, "txt_fuel_g", 3))
 
@@ -441,6 +441,9 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(353) * 10)
 		digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(354) * 10)
 		ExportScript.Tools.SendData(2054, digits[1] .. digits[2] .. digits[3] .. "0")
+
+		-- EVF
+		ExportScript.Tools.SendData(2055, ExportScript.Tools.getListIndicatorValueByName(11, "evf-digits", 2))
 	end
 	
 	-- -- General

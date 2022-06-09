@@ -589,21 +589,21 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		local to1, to2, from1, from2, lUFC_Chnl1, lUFC_Chnl2, lUFC_Left_Position, lUFC_Right_Position, lUFC_Display = nil, nil, nil, nil, "", "", "", "", ""
 		to1, to2 = lUfcDisplays:find("UFC_DISPLAY")
 		if (to1 ~= nil) then
-			-- from1, from2 = lUfcDisplays:find("ufc_chnl_1_.%c")
-			-- if (from2 ~= nill) then
-			-- 	to1, to2 = lUfcDisplays:find("%c", from2+2)
-			-- 	if (to1 ~= nil) then
-			-- 		lUFC_Chnl1 = lUfcDisplays:sub(from2+1, to1-1)
-			-- 	end
-			-- end
+			from1, from2 = lUfcDisplays:find("ufc_chnl_1_.%c")
+			if (from2 ~= nill) then
+				to1, to2 = lUfcDisplays:find("%c", from2+2)
+				if (to1 ~= nil) then
+					lUFC_Chnl1 = lUfcDisplays:sub(from2+1, to1-1)
+				end
+			end
 
-			-- from1, from2 = lUfcDisplays:find("ufc_chnl_2_.%c", to2)
-			-- if (from2 ~= nill) then
-			-- 	to1, to2 = lUfcDisplays:find("%c", from2+2)
-			-- 	if (to1 ~= nil) then
-			-- 		lUFC_Chnl2 = lUfcDisplays:sub(from2+1, to1-1)
-			-- 	end
-			-- end
+			from1, from2 = lUfcDisplays:find("ufc_chnl_2_.%c", to2)
+			if (from2 ~= nill) then
+				to1, to2 = lUfcDisplays:find("%c", from2+2)
+				if (to1 ~= nil) then
+					lUFC_Chnl2 = lUfcDisplays:sub(from2+1, to1-1)
+				end
+			end
 
 			from1, from2 = lUfcDisplays:find("ufc_left_position%c", to2)
 			if (from2 ~= nill) then
@@ -638,9 +638,10 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		local lRep = 8 - lUFC_Left_Position:len() - lUFC_Right_Position:len()
 
 		lUFC_Display = lUFC_Left_Position..string.rep(" ", lRep)..lUFC_Right_Position
+		lUFC_Display = lUFC_Display:gsub(";", " ")
 
-		ExportScript.Tools.SendData(2023, string.format("%s", getComm1())) -- string with max 2 charachters
-		ExportScript.Tools.SendData(2024, string.format("%s", getComm2())) -- string with max 2 charachters
+		ExportScript.Tools.SendData(2023, ExportScript.Tools.coerce_nil_to_string(comm.ufc_chnl_1_m)) -- string with max 2 charachters
+		ExportScript.Tools.SendData(2024, ExportScript.Tools.coerce_nil_to_string(comm.ufc_chnl_2_m)) -- string with max 2 charachters
 		ExportScript.Tools.SendData(2025, string.format("%s", lUFC_Display)) -- string with max 8 charachters
 
 		-- ODU Display

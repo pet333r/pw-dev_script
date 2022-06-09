@@ -2,6 +2,8 @@ lib/Fdr.lua
 lib/Maps.lua
 lib/Tools.lua
 lib/utf8.lua
+json/A-10C_CDU.json
+json/AH-64D_EUFD.json
 Modules/A-4E-C.lua
 Modules/A-10A.lua
 Modules/A-10C.lua
@@ -49,6 +51,7 @@ Modules/Su-25T.lua
 Modules/Su-27.lua
 Modules/Su-33.lua
 Modules/T-45.lua
+Modules/TextDisplay.lua
 Modules/TF-51D.lua
 Modules/UH-1H.lua
 Modules/UH-60L.lua

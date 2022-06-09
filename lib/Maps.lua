@@ -31,6 +31,12 @@ ExportScript.Maps.PersianGulf.Lat1      = 32.955517
 ExportScript.Maps.PersianGulf.Long1     = 46.583444
 ExportScript.Maps.PersianGulf.Lat2      = 21.869711
 ExportScript.Maps.PersianGulf.Long2     = 63.997372
+-- South Atlantic Map
+ExportScript.Maps.SouthAtlantic         = {}
+ExportScript.Maps.SouthAtlantic.Lat1    = -45.850933
+ExportScript.Maps.SouthAtlantic.Long1   = -84.73315
+ExportScript.Maps.SouthAtlantic.Lat2    = -56.442333
+ExportScript.Maps.SouthAtlantic.Long2   = -38.1723
 -- Syria Map
 ExportScript.Maps.Syria                 = {}
 ExportScript.Maps.Syria.Lat1            = 37.858862

@@ -1130,7 +1130,7 @@ local function buildDEDLine(line)
 		-- Get Layout Information for line being built
 		local DEDLayoutLine = DEDLayout[line]
 		-- Get Exported DED Objects
-		local DED_fields = ExportScript.Tools.getListIndicatorValue(6)
+		local DED_fields = ExportScript.Tools.getListIndicatorValue(6) or {}
 		local layout
 		local label
 		local value
@@ -1280,7 +1280,7 @@ function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
 		ExportScript.Tools.SendData(2306, get_UHF_FREQUENCY())
 
 		-- CMDS
-		local cmds = ExportScript.Tools.getListIndicatorValue(16)
+		local cmds = ExportScript.Tools.getListIndicatorValue(16) or {}
 		CMDS_O1_Amount = "    "
 		CMDS_O2_Amount = "    "
 		CMDS_CH_Amount = "    "
