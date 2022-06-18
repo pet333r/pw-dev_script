@@ -608,31 +608,56 @@ function ExportScript.Tools.ProcessNavAir()
 
     for key, val in pairs(obj) do
         id = key
-        if ((val.Type.level1 == 1 or val.Type.level1 == 3) and val.Type.level2 ~= 3) then
-        -- if (val.GroupName ~= nil) then
+        if (val.Type.level1 == 1 and val.Type.level2 < 3) then
             if val.CoalitionID == 0 then
             elseif (key ~= playerId) then
-                local packetObjects =
-                string.format(
-                    "%d" .. ExportScript.Config.Separator .. -- Coalition ID
-                    "%.6f" .. ExportScript.Config.Separator .. -- Lat
-                    "%.6f" .. ExportScript.Config.Separator .. -- Lng
-                    -- "%d," .. ExportScript.Config.Separator .. -- alt
-                    "%d" .. ExportScript.Config.Separator .. -- Hdg
-                    "%d" .. ExportScript.Config.Separator  -- type
-                    -- "%s" .. ExportScript.Config.Separator -- Name
-                    ,
-    
-                    val.CoalitionID,			-- CoalitionID (1 or 2)
-                    val.LatLongAlt.Lat, 		-- Lat
-                    val.LatLongAlt.Long,		-- Lng
-                    -- val.LatLongAlt.Alt * m2feets, 		-- ALT
-                    val.Heading * (180/math.pi),				-- HDG
-                    val.Type.level2			-- type
-                    -- val.Name					-- Name
-                )
-                ExportScript.Tools.NavDataAll[id] = packetObjects
-                objects = true
+                if val.Flags.Born == true then
+                    --
+                    local hum = 0
+                    if (val.Flags.Human == true) then
+                        hum = 1
+                    end
+                    --
+                    local invisible = 0
+                    if (val.Flags.Invisible == true) then
+                        invisible = 1
+                    end
+                    --
+                    local static = 0
+                    if (val.Flags.Static == true) then
+                        static = 1
+                    end
+
+                    local packetObjects =
+                    string.format(
+                        "%d" .. ExportScript.Config.Separator .. -- Coalition ID
+                        "%.6f" .. ExportScript.Config.Separator .. -- Lat
+                        "%.6f" .. ExportScript.Config.Separator .. -- Lng
+                        "%d" .. ExportScript.Config.Separator .. -- type
+                        "%d" .. ExportScript.Config.Separator .. -- type
+                        "%d" .. ExportScript.Config.Separator .. -- hum
+                        "%d" .. ExportScript.Config.Separator .. -- invisible
+                        "%d" .. ExportScript.Config.Separator .. -- static
+                        -- "%d," .. ExportScript.Config.Separator .. -- alt
+                        "%d" .. ExportScript.Config.Separator  -- Hdg
+                        -- "%s" .. ExportScript.Config.Separator -- Name
+                        ,
+
+                        val.CoalitionID,			-- CoalitionID (1 or 2)
+                        val.LatLongAlt.Lat, 		-- Lat
+                        val.LatLongAlt.Long,		-- Lng
+                        val.Type.level2,			-- type
+                        val.Type.level3,			-- type
+                        hum,			-- hum
+                        invisible,
+                        static,
+                        -- val.LatLongAlt.Alt * m2feets, 		-- ALT
+                        val.Heading * (180/math.pi)				-- HDG
+                        -- val.Name					-- Name
+                    )
+                    ExportScript.Tools.NavDataAll[id] = packetObjects
+                    objects = true
+                end
             end
         end
     end
@@ -643,6 +668,65 @@ function ExportScript.Tools.ProcessNavAir()
             ExportScript.Tools.SendNavAllData("N4A" .. ExportScript.Config.Separator .. key, value)
         end
         ExportScript.Tools.SendPacket("N4A" .. ExportScript.Config.Separator .. "stop" .. ExportScript.Config.Separator .. "\n")
+    end
+end
+
+function ExportScript.Tools.ProcessNavNav()
+    local obj = LoGetWorldObjects()
+    if obj == nil then
+        return
+    end
+
+    local objects = false
+    local id
+
+    ExportScript.Tools.NavDataNav = {}
+
+    for key, val in pairs(obj) do
+        id = key
+        if (val.Type.level1 == 3) then
+            if val.Flags.Born == true then
+                --
+                local invisible = 0
+                if (val.Flags.Invisible == true) then
+                    invisible = 1
+                end
+                --
+                local static = 0
+                if (val.Flags.Static == true) then
+                    static = 1
+                end
+                local packetObjects =
+                string.format(
+                    "%d" .. ExportScript.Config.Separator .. -- Coalition ID
+                    "%.6f" .. ExportScript.Config.Separator .. -- Lat
+                    "%.6f" .. ExportScript.Config.Separator .. -- Lng
+                    "%d" .. ExportScript.Config.Separator .. -- type
+                    "%d" .. ExportScript.Config.Separator .. -- invisible
+                    "%d" .. ExportScript.Config.Separator  -- static
+                    -- "%s" .. ExportScript.Config.Separator -- Name
+                    ,
+
+                    val.CoalitionID,			-- CoalitionID (1 or 2)
+                    val.LatLongAlt.Lat, 		-- Lat
+                    val.LatLongAlt.Long,		-- Lng
+                    val.Type.level3,			-- type
+                    invisible,
+                    static
+                    -- val.Name					-- Name
+                )
+                ExportScript.Tools.NavDataNav[id] = packetObjects
+                objects = true
+            end
+        end
+    end
+
+    if objects then
+        ExportScript.Tools.SendPacket("N4N" .. ExportScript.Config.Separator .. "start" .. ExportScript.Config.Separator .. "\n")
+        for key, value in pairs(ExportScript.Tools.NavDataNav) do
+            ExportScript.Tools.SendNavAllData("N4N" .. ExportScript.Config.Separator .. key, value)
+        end
+        ExportScript.Tools.SendPacket("N4N" .. ExportScript.Config.Separator .. "stop" .. ExportScript.Config.Separator .. "\n")
     end
 end
 
@@ -800,6 +884,14 @@ function ExportScript.Tools.ProcessOutput()
             end
         end
 
+        if (ExportScript.Config.ExportNavAllData == true and lShowOnMapNav == true) then
+            if (timestamp > timestampNavNav + timeSecNav) then
+                local coProcessNavNavy = coroutine.create(ExportScript.Tools.ProcessNavNav)
+                _coStatus = coroutine.resume(coProcessNavNavy)
+                timestampNavNav = timestamp
+            end
+        end
+
         if (ExportScript.Config.ExportNavAllData == true and lShowOnMapGnd == true) then
             if (timestamp > timestampNavGnd + timeSecGnd) then
                 local coProcessNavGround = coroutine.create(ExportScript.Tools.ProcessNavGround)
@@ -829,6 +921,7 @@ function ExportScript.Tools.ProcessOutput()
             ExportScript.FirstNewDataSendCount = ExportScript.FirstNewDataSendCount - 1
         end
         ExportScript.lastExportTimeHI = ExportScript.lastExportTimeHI + ExportScript.Config.ExportInterval
+
 		if ExportScript.lastExportTimeHI > ExportScript.Config.ExportLowTickInterval then
             if ExportScript.Config.Export then
                 ExportScript.coProcessFCLowImportance = coroutine.create(ExportScript.ProcessFCLowImportance)
@@ -869,6 +962,14 @@ function ExportScript.Tools.ProcessOutput()
                 local coProcessNavObjects = coroutine.create(ExportScript.Tools.ProcessNavAir)
                 _coStatus = coroutine.resume(coProcessNavObjects)
                 timestampNavAir = timestamp
+            end
+        end
+
+        if (ExportScript.Config.ExportNavAllData == true and lShowOnMapNav == true) then
+            if (timestamp > timestampNavNav + timeSecNav) then
+                local coProcessNavNavy = coroutine.create(ExportScript.Tools.ProcessNavNav)
+                _coStatus = coroutine.resume(coProcessNavNavy)
+                timestampNavNav = timestamp
             end
         end
 
@@ -1197,6 +1298,8 @@ function ExportScript.Tools.GetMap(player)
                 ExportScript.Tools.WriteToLog("Loaded Map: " .. Map .. "\n")
                 break
             end
+        else
+            lMap = "NA"
         end
     end
     return lMap
@@ -1232,6 +1335,39 @@ function ExportScript.Tools.RoundFreqeuncy(Freqeuncy, Format, PrefixZeros, Least
 	end
 
 	return _tmpString
+end
+
+function ExportScript.Tools.getListCockpitParam(param)
+    local lpos1, pos2, lpos3, pos4
+    local paramTxt = ""
+    local lCockpitParams = list_cockpit_params()
+    if lCockpitParams ~= nil then
+        lpos1, pos2 = lCockpitParams:find(param .. ":", 1)
+        if pos2 ~= nil then
+            lpos3, pos4 = lCockpitParams:find("%c", pos2)
+            if lpos3 ~= nil then
+                paramTxt = lCockpitParams:sub(pos2 + 1, lpos3 - 2)
+            else
+                paramTxt = lCockpitParams:sub(pos2 + 1)
+            end
+        end
+        return paramTxt
+    end
+end
+
+function ExportScript.Tools.getListCockpitParams()
+	local ListIindicator = list_cockpit_params()
+	local TmpReturn = {}
+    local ListindicatorMatch = ListIindicator:gmatch("([^\n]+):([^\n]+)")
+
+    while true do
+        local Key, Value = ListindicatorMatch()
+        if not Key then
+            break
+        end
+        TmpReturn[Key] = Value
+    end
+	return TmpReturn
 end
 
 -- The function return a table with values of given indicator

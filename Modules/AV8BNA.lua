@@ -622,18 +622,7 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 			end
 		end
 
-		local function getComm1()
-			local ind = ExportScript.Tools.getListIndicatorValue(5)
-			if ind == nil then return "    " end
-			local channel1 = ind["ufc_chnl_1_m"]
-			return channel1:sub(2,4)
-		end
-		local function getComm2()
-			local ind = ExportScript.Tools.getListIndicatorValue(5)
-			if ind == nil then return "    " end
-			local channel1 = ind["ufc_chnl_2_m"]
-			return channel1:sub(2,4)
-		end
+		local comm = ExportScript.Tools.getListIndicatorValue(5) or {}
 
 		local lRep = 8 - lUFC_Left_Position:len() - lUFC_Right_Position:len()
 

@@ -21,10 +21,10 @@ ExportScript.Maps.Nevada.Lat2           = 34.346914
 ExportScript.Maps.Nevada.Long2          = -112.445997
 -- Normandy Map
 ExportScript.Maps.Normandy              = {}
-ExportScript.Maps.Normandy.Lat1         = 53.85556
-ExportScript.Maps.Normandy.Long1        = -15.02667
-ExportScript.Maps.Normandy.Lat2         = 45.07167
-ExportScript.Maps.Normandy.Long2        = 8.437222
+ExportScript.Maps.Normandy.Lat1         = 51.487778
+ExportScript.Maps.Normandy.Long1        = -4.216111
+ExportScript.Maps.Normandy.Lat2         = 48.229722
+ExportScript.Maps.Normandy.Long2        = 2.191667
 -- Persian Gulf Map
 ExportScript.Maps.PersianGulf           = {}
 ExportScript.Maps.PersianGulf.Lat1      = 32.955517
