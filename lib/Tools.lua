@@ -558,30 +558,48 @@ function ExportScript.Tools.ProcessNavGround()
 
         -- if (val.Type.level2 == 8 or val.Type.level2 == 9 or val.Type.level2 == 16 or val.Type.level2 == 17) then
         if (val.Type.level2 == 16) then
-            -- if threats then	
-            --     for mode,emit in pairs (threats.Emitters) do
-            --         if emit.ID == key then
-            --             emitPower = emit.Power
-            --         end
-            --     end
-            -- end
-            local packetObjects =
-            string.format(
-                "%d" .. ExportScript.Config.Separator .. -- Coalition ID
-                "%.6f" .. ExportScript.Config.Separator .. -- Lat
-                "%.6f" .. ExportScript.Config.Separator .. -- Lng
-                "%d" .. ExportScript.Config.Separator -- type
-                -- "%f" .. ExportScript.Config.Separator
-                ,
+            if val.Flags.Born == true then
+                
+                local hum = 0
+                if (val.Flags.Human == true) then
+                    hum = 1
+                end
+                
+                local invisible = 0
+                if (val.Flags.Invisible == true) then
+                    invisible = 1
+                end
+                --
+                local static = 0
+                if (val.Flags.Static == true) then
+                    static = 1
+                end
+                local packetObjects =
+                string.format(
+                    "%d" .. ExportScript.Config.Separator .. -- Coalition ID
+                    "%.6f" .. ExportScript.Config.Separator .. -- Lat
+                    "%.6f" .. ExportScript.Config.Separator .. -- Lng
+                    "%d" .. ExportScript.Config.Separator .. -- type
+                    "%d" .. ExportScript.Config.Separator .. -- hum
+                    "%d" .. ExportScript.Config.Separator .. -- invisible
+                    "%d" .. ExportScript.Config.Separator .. -- static
+                    "%s" .. ExportScript.Config.Separator  -- Name
+                    -- "%s" .. ExportScript.Config.Separator -- Name
+                    ,
 
-                val.CoalitionID,			-- CoalitionID (1 or 2)
-                val.LatLongAlt.Lat, 		-- Lat
-                val.LatLongAlt.Long,		-- Lng
-                val.Type.level2			-- type
-                -- emitPower
-            )
-            ExportScript.Tools.NavDataGnd[id] = packetObjects
-            gndObjects = true
+                    val.CoalitionID,			-- CoalitionID (1 or 2)
+                    val.LatLongAlt.Lat, 		-- Lat
+                    val.LatLongAlt.Long,		-- Lng
+                    val.Type.level2,			-- type
+                    hum,			-- hum
+                    invisible,
+                    static,
+                    val.Type.level4
+                    -- val.Name
+                )
+                ExportScript.Tools.NavDataGnd[id] = packetObjects
+                gndObjects = true
+            end
         end
     end
 
