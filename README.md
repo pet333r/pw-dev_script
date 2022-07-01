@@ -73,7 +73,7 @@ you'll find it on the "Releases" page
   - setting everything up in DCS World > [configure script in DCS World](#configure-script-in-dcs-world)
 - in the future, you can check the script update by clicking the "**Check for update**" button
 
-- the last thing is to enter your computer's IP address in the Android application settings (**DCS UFC** / **DCS AoA Indexer**)
+- the last thing is to enter your computer's IP address in the Android application settings (**DCS UFC** / **DCS NAV** / **DCS AoA Indexer**)
 
 ## configure script in DCS World
 After installing the script, enter the IP addresses of your Android devices in the `Config.lua` file, you can do this in `DCS World > Options > Special > pw-dev` which is easier than edit this file manually
