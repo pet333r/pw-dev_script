@@ -5,31 +5,28 @@ Script for exporting data from DCS World
 # Table of context
 <!-- - [DCS World Script](#dcs-world-script) -->
 <!-- - [Table of context](#table-of-context) -->
+- [DCS World Script](#dcs-world-script)
+- [Table of context](#table-of-context)
 - [HOW TO INSTALL SCRIPT / Video](#how-to-install-script--video)
-  * [Click on the link or graphic to play the video on YouTube: https://youtu.be/saFq3Png-ds](#click-on-the-link-or-graphic-to-play-the-video-on-youtube-httpsyoutubesafq3png-ds)
+    - [Click on the link or graphic to play the video on YouTube: https://youtu.be/saFq3Png-ds](#click-on-the-link-or-graphic-to-play-the-video-on-youtube-httpsyoutubesafq3png-ds)
 - [latest script version in zip file](#latest-script-version-in-zip-file)
 - [supported software](#supported-software)
 - [automatic script installation](#automatic-script-installation)
-  * [configure script in DCS World](#configure-script-in-dcs-world)
+  - [configure script in DCS World](#configure-script-in-dcs-world)
 - [files scheme](#files-scheme)
-- [manual installation](#manual-installation)
-  * [*if you don't have a folder 'Scripts'*](#if-you-dont-have-a-folder-scripts)
-  * [*if you have 'Scripts' folder and have installed other scripts*](#if-you-have-scripts-folder-and-have-installed-other-scripts)
-  * [*folder scheme*](#folder-scheme)
-  * [*manual edit Config.lua*](#edit-configlua)
 - [Automatic script update](#automatic-update-script)
 - [How to find device IP](#how-to-find-ips-of-pc-and-android-device)
-  * [Android](#android)
-  * [PC](#pc)
+  - [Android](#android)
+  - [PC](#pc)
 - [Example connection](#example-connection)
 - [Features](#features)
-  * [show flight route](#additional-script-functions)
-  * [view telemetry data](#additional-script-functions)
+  - [show flight route](#additional-script-functions)
+  - [view telemetry data](#additional-script-functions)
 - [Known issues](#known-issues)
 - [FAQ](#faq)
 - [Compability](#compability)
 - [Stream Deck support](#stream-deck-support)
-  * [plugin config](#plugin-config)
+  - [plugin config](#plugin-config)
 - [license](#license)
 
 # HOW TO INSTALL SCRIPT / Video
@@ -47,11 +44,13 @@ you'll find it on the "Releases" page
 # supported software
 
 [![](.gfx/icon_dcsufc.png)](https://play.google.com/store/apps/details?id=com.dcsufc) 
+[![](.gfx/icon_dcsnav.png)](https://play.google.com/store/apps/details?id=com.pwdev.dcsnav) 
 [![](.gfx/icon_aoa.png)](https://play.google.com/store/apps/details?id=com.dcsaoaindexer) 
 [![](.gfx/icon_mfdexporter.png)](http://pw-developer.com/soft_dcs_mfd.html)
 [![](.gfx/icon_dcsfdr.png)](http://pw-developer.com/soft_dcs_fdr.html)
 
 * DCS UFC [https://play.google.com/store/apps/details?id=com.dcsufc](https://play.google.com/store/apps/details?id=com.dcsufc)
+* DCS NAV [https://play.google.com/store/apps/details?id=com.pwdev.dcsnav](https://play.google.com/store/apps/details?id=com.pwdev.dcsnav)
 * DCS AoA Indexer > [https://play.google.com/store/apps/details?id=com.dcsaoaindexer](https://play.google.com/store/apps/details?id=com.dcsaoaindexer)
 * DCS World MFD Exporter [http://pw-developer.com/soft_dcs_mfd.html](http://pw-developer.com/soft_dcs_mfd.html)
 <!-- * SimFDR [http://pw-developer.com/soft_simfdr.html](http://pw-developer.com/soft_simfdr.html) -->
@@ -132,20 +131,6 @@ pcall(function() local pw=require('lfs');dofile(pw.writedir()..[[Scripts\pw-dev_
 - now go to [Edit Config.lua](#edit-configlua)
 
 ## *folder scheme*
-
-<!-- this is how the file scheme with folders should look
-
-```
-\Scripts
-  - \pw-dev_script
-    - \lib
-    - \Modules
-    - \Utilities
-    -  Config.lua (edit IP / port connected devices)
-    -  ExportInit.lua
-
-  - Export.lua add:  pcall(function() local pw=require('lfs');dofile(pw.writedir()..[[Scripts\pw-dev_script\ExportInit.lua]]); end,nil);
-  ``` -->
 
 this is what the scheme of the folder with the script installed should look like (depending on the DCS version)
 folder `Scripts`  
