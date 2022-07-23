@@ -41,6 +41,7 @@ Modules/MiG-21Bis.lua
 Modules/MiG-29A.lua
 Modules/MiG-29G.lua
 Modules/MiG-29S.lua
+modtime/Mirage-F1CE.lua
 Modules/MosquitoFBMkVI.lua
 Modules/P-47D.lua
 Modules/P-51D.lua
