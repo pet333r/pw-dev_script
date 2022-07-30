@@ -213,6 +213,14 @@ local DEDLayout_l3={}
 local DEDLayout_l4={}
 local DEDLayout_l5={}
 
+--ACAL
+DEDLayout_l1["AUTO_ACAL"] = {1,9}
+DEDLayout_l1["ACAL_AUTO_Sensors"] = {12,3,0,"_inv","I"}
+DEDLayout_l1["Asterisks_AUTO_both"] = {11,1,15,"","I"}
+DEDLayout_l1["ACAL_SENSORS"] = {1,4}
+DEDLayout_l1["ACAL_SelectedSensors"] = {8,3,0,"_inv","I"}
+DEDLayout_l1["Asterisks_ACAL_SENSORS_both"] = {7,1,12,"","I"}
+DEDLayout_l1["ACAL_ALT_label"] = {14,3}
 --CNI
 DEDLayout_l1["UHF Mode Rotary"]={1,3,0,"_inv","I"}
 DEDLayout_l1["UHF IncDecSymbol"]={5,1}
@@ -230,6 +238,14 @@ DEDLayout_l1["COM 2 Mode Voice"] = {8,3}
 DEDLayout_l1["Receiver Power Status"] = {13,3}
 DEDLayout_l1["GUARD VHF Label"] = {8,3}
 DEDLayout_l1["GUARD COM 2 Receiver Mode"] = {13,3}
+--CRUS
+DEDLayout_l1["CRUS_MODE"] = {7,4}
+DEDLayout_l1["EDR_MODE"] = {13,3}
+DEDLayout_l1["HOME_MODE"] = {13,4}
+DEDLayout_l1["Asterisks_RNG_MODE_both"] = {12,1,16,"","I"}
+DEDLayout_l1["RNG_MODE"] = {13,3}
+DEDLayout_l1["TOS_MODE"] = {13,3}
+DEDLayout_l1["Asterisks_TOS_MODE_both"] = {12,1,16,"","I"}
 --DEST
 DEDLayout_l1["DEST DIR DEST_DIR"] = {2,8}
 DEDLayout_l1["DEST DIR DEST_DIR_SelectedSteerpoint"] = {12,2,0,"_inv","I"}
@@ -247,6 +263,10 @@ DEDLayout_l1["UTM_DEST"] = {2,8}
 DEDLayout_l1["UTM_DEST_SelectedSteerpoint"] = {12,2,0,"_inv","I"}
 DEDLayout_l1["UTM_DEST_STPT_IncDecSymbol"] = {16,1}
 DEDLayout_l1["Asterisks_NUM_STEERPOINT_both"] = {11,1,15,"","I"}
+--FIX
+DEDLayout_l1["FIX FIX_SENSORS"] = {6,3}
+DEDLayout_l1["FIX FIX_SelectedSensors"] = {11,3,0,"_inv","I"}
+DEDLayout_l1["FIX Asterisks_FIX_SENSORS_both"] = {10,1,15,"","I"}
 --IFF
 DEDLayout_l1["STAT IFF label"] = {1,3}
 DEDLayout_l1["STAT IFF Power Status"] = {5,4}
@@ -388,6 +408,11 @@ DEDLayout_l1["MARK Number Asteriscs_both"] = {13,1,19,"","I"}
 DEDLayout_l1["MARK STPT"] = {19,4}
 --TODO
 DEDLayout_l2["TODO remove lbl"]={4,20}
+--ACAL
+DEDLayout_l2["ACAL_MODE"] = {8,3}
+DEDLayout_l2["Asterisks_ACAL_SelectedMode_both"] = {7,1,12,"","I"}
+DEDLayout_l2["NAV_FILTER_label"] = {2,10}
+DEDLayout_l2["NAV_FILTER_mode"] = {14,4,0,"_inv","I"}
 --CNI
 DEDLayout_l2["UHF Status"]={1,3}
 DEDLayout_l2["Default Value Indication"]={11,4}
@@ -396,6 +421,18 @@ DEDLayout_l2["Wind Speed"]={20,2}
 --COM
 DEDLayout_l2["Active Frequency or Channel"]={2,2}
 DEDLayout_l2["Active Frequency or Channe"]={2,2}
+--CRUS
+DEDLayout_l2["EDR_STPT_NUM"] = {7,4}
+DEDLayout_l2["EDR_INS_SelectedSteerpoint"] = {12,3}
+DEDLayout_l2["EDR_INS_STPT_IncDecSymbol"] = {16,1}
+DEDLayout_l2["HOME_STPT_NUM"] = {7,4}
+DEDLayout_l2["HOME_INS_SelectedSteerpoint"] = {12,3}
+DEDLayout_l2["HOME_INS_STPT_IncDecSymbol"] = {16,1}
+DEDLayout_l2["RNG_STPT_NUM"] = {7,4}
+DEDLayout_l2["RNG_INS_SelectedSteerpoint"] = {12,3}
+DEDLayout_l2["RNG_INS_STPT_IncDecSymbol"] = {16,1}
+DEDLayout_l2["TOS_SYSTEM_TIME_label"] = {7,4}
+DEDLayout_l2["TOS_SYSTEM_TIME_value"] = {13,8}
 --DEST
 DEDLayout_l2["DEST DIR DEST_LAT"]={3,3}
 DEDLayout_l2["DEST DIR LAT"]={8,12,0,"_inv","I"}
@@ -407,6 +444,11 @@ DEDLayout_l2["Asterisks_GRID_DIGIT_both"]={11,1,15,"","I"}
 DEDLayout_l2["Asterisks_GRID_SYMBOL_both"]={11,1,15,"","I"}
 DEDLayout_l2["UTM_DEST_CNVRT"]={18,5,0,"_inv","I"}
 DEDLayout_l2["Asterisks_CNVRT_both"]={17,1,23,"","I"}
+--FIX
+DEDLayout_l2["FIX FIX_STPT"] = {4,4}
+DEDLayout_l2["FIX INS_SelectedSteerpoint"] = {10,3,0,"_inv","I"}
+DEDLayout_l2["FIX Asterisks_STPT_NUMBER"] = {9,1,13,"","I"}
+DEDLayout_l2["FIX INS_STPT_IncDecSymbol"] = {14,1}
 --IFF
 DEDLayout_l2["STAT Mode Asterisks_both"]={17,1,23,"","I"}
 DEDLayout_l2["STAT Mode Scratchpad"]={18,5,0,"_inv","I"}
@@ -546,6 +588,12 @@ DEDLayout_l2["STEERPOINT GRID DIGIT Asteriscs_both"]={11,1,15,"","I"}
 DEDLayout_l2["STEERPOINT GRID SYMBOL Asteriscs_both"]={11,1,15,"","I"}
 DEDLayout_l2["STEERPOINT GRID CNVRT"] = {17,5}
 DEDLayout_l2["STEERPOINT CNVRT Asteriscs_both"]={16,1,18,"","I"}
+--ACAL
+DEDLayout_l3["ACAL_ALEV"] = {8,4}
+DEDLayout_l3["ELEV"]={16,7,0,"_inv","I"}
+DEDLayout_l3["Asterisks_ELEV_both"] = {15,1,23,"","I"}
+DEDLayout_l3["GPS_ACCURACY_label"] = {3,9}
+DEDLayout_l3["GPS_ACCURACY_value"] = {14,4,0,"_inv","I"}
 --CNI
 DEDLayout_l3["VHF Label"]={1,3,0,"_inv","I"}
 DEDLayout_l3["VHF IncDecSymbol"]={5,1}
@@ -557,6 +605,16 @@ DEDLayout_l3["Asterisks on Scratchpad_both"]={13,1,20,"","I"}
 DEDLayout_l3["Guard or Backup Status"]={9,6}
 DEDLayout_l3["GUARD COM 2 Receiver Band"]={8,2}
 DEDLayout_l3["GUARD Guard Label"]={12,5}
+--CRUS
+DEDLayout_l3["EDR_TO_BINGO_label"] = {4,7}
+DEDLayout_l3["EDR_TO_BINGO_value"] = {13,8}
+DEDLayout_l3["HOME_FUEL_REMANING"] = {7,4}
+DEDLayout_l3["HOME_FUEL_REMANING_Value"] = {12,4}
+DEDLayout_l3["RNG_FUEL_REMANING"] = {7,4}
+DEDLayout_l3["RNG_FUEL_REMANING_Value"] = {12,4}
+DEDLayout_l3["TOS_DES_TOS_label"] = {4,7}
+DEDLayout_l3["TOS_DES_TOS_value"] = {13,8}
+DEDLayout_l3["Asterisks_DES_TOS_both"] = {12,1,21,"","I"}
 --DEST
 DEDLayout_l3["DEST DIR DEST_LON"]={3,3}
 DEDLayout_l3["DEST DIR LON"]={8,12,0,"_inv","I"}
@@ -573,6 +631,9 @@ DEDLayout_l3["SQUARE"]={12,1,0,"_inv","I"}
 DEDLayout_l3["SQUARE2"]={13,1,0,"_inv","I"}
 DEDLayout_l3["Asterisks_SQUARE_both"]={11,1,14,"","I"}
 DEDLayout_l3["Asterisks_SQUARE2_both"]={11,1,14,"","I"}
+--FIX
+DEDLayout_l3["FIX FIX_DELTA"] = {3,5}
+DEDLayout_l3["FIX DELTA"] = {13,7}
 --IFF
 DEDLayout_l3["STAT M1 Mode"]={0,2,0,"_inv","I"}
 DEDLayout_l3["STAT M1 Lockout Status"]={3,1}
@@ -758,6 +819,14 @@ DEDLayout_l3["STEERPOINT SQUARE Asteriscs_both"] = {11,1,14,"","I"}
 DEDLayout_l3["STEERPOINT SQUARE2 Asteriscs_both"] = {11,1,14,"","I"} 
 --TODO
 DEDLayout_l4["TODO remove label"] = {4,20}
+--ACAL
+DEDLayout_l4["ACAL_ALT_DELTA"] = {8,5}
+DEDLayout_l4["ACAL_ALT_DELTA_label"] = {2,3}
+DEDLayout_l4["DELTA_ALT"] = {16,7}
+DEDLayout_l4["DTS_STATUS_label"] = {9,3}
+DEDLayout_l4["DTS_STATUS_value"] = {14,3,0,"_inv","I"}
+DEDLayout_l4["DTS_ACCURACY_HPU_label"] = {21,2}
+DEDLayout_l4["DTS_ACCURACY_HPU_value"] = {23,1,0,"_inv","I"}
 --CNI
 DEDLayout_l4["VHF Status"]={1,3}
 DEDLayout_l4["Hack Time"]={15,8}
@@ -766,6 +835,15 @@ DEDLayout_l4["Preset Label"]={2,9}
 DEDLayout_l4["Preset Number"]={7,2,0,"_inv","I"}
 DEDLayout_l4["Asterisks on PresetChannel_both"]={6,1,9,"","I"}
 DEDLayout_l4["TOD Label"]={17,3}
+--CRUS
+DEDLayout_l4["EDR_OPT_MACH_label"] = {3,8}
+DEDLayout_l4["EDR_OPT_MACH_value"] = {13,3}
+DEDLayout_l4["HOME_OPT_ALT_label"] = {4,7}
+DEDLayout_l4["HOME_OPT_ALT_value"] = {13,5}
+DEDLayout_l4["RNG_WIND_AT_ALTITUDE"] = {7,4}
+DEDLayout_l4["RNG_WIND_AT_ALTITUDE_Value"] = {13,12}
+DEDLayout_l4["TOS_ETA_label"] = {8,3}
+DEDLayout_l4["TOS_ETA_value"] = {13,8}
 --DEST
 DEDLayout_l4["DEST DIR DEST_ELEV"]={2,4}
 DEDLayout_l4["DEST DIR ELEV"]={8,6,0,"_inv","I"}
@@ -779,6 +857,9 @@ DEDLayout_l4["DEST OA2 Asterisks_BRG_both"]={7,1,14,"","I"}
 DEDLayout_l4["UTM_DEST_EAST/NORTH"]={0,10}
 DEDLayout_l4["EAST/NORTH"]={12,11,0,"_inv","I"}
 DEDLayout_l4["Asterisks_EAST/NORTH_both"]={11,1,23,"","I"}
+--FIX
+DEDLayout_l4["FIX SYS ACCURACY label"] = {4,9}
+DEDLayout_l4["FIX SYS ACCURACY value"] = {14,4,0,"_inv","I"}
 --IFF
 DEDLayout_l4["STAT M2 Mode"]={0,2,0,"_inv","I"}
 DEDLayout_l4["STAT M2 Lockout Status"]={3,1}
@@ -947,6 +1028,12 @@ DEDLayout_l4["MARK Elevation Asteriscs_both"] = {5,1,14,"","I"}
 DEDLayout_l4["STEERPOINT EAST NORTH"] = {0,10}
 DEDLayout_l4["STEERPOINT EAST NORTH Value"] = {12,3}
 DEDLayout_l4["STEERPOINT EAST NORTH Asteriscs_both"] = {11,1,23,"","I"}
+--ACAL
+DEDLayout_l5["ACAL_POS_DELTA"] = {8,5}
+DEDLayout_l5["ACAL_POS_DELTA_label"] = {2,3}
+DEDLayout_l5["DELTA_POS"] = {16,7}
+DEDLayout_l5["DTS_ACCURACY_VPU_label"] = {21,2}
+DEDLayout_l5["DTS_ACCURACY_VPU_value"] = {23,1,0,"_inv","I"}
 --CNI
 DEDLayout_l5["IFF Modes Label"]={1,1}
 DEDLayout_l5["IFF Modes Enabled"]={2,6}
@@ -963,6 +1050,13 @@ DEDLayout_l5["Bandwidth"]={18,2,0,"_inv","I"}
 DEDLayout_l5["Asterisks on Band_both"]={17,1,20,"","I"}
 DEDLayout_l5["Preset Channel Number"]={7,2}
 DEDLayout_l5["Guard or Backup Frequency"]={10,6}
+--CRUS
+DEDLayout_l5["EDR_WIND_AT_ALTITUDE"] = {7,4}
+DEDLayout_l5["EDR_WIND_AT_ALTITUDE_Value"] = {13,12}
+DEDLayout_l5["HOME_WIND_AT_ALTITUDE"] = {7,4}
+DEDLayout_l5["HOME_WIND_AT_ALTITUDE_Value"] = {13,12}
+DEDLayout_l5["TOS_REQ_GS_label"] = {4,7}
+DEDLayout_l5["TOS_REQ_GS_value"] = {13,3}
 --DEST
 DEDLayout_l5["DEST DIR DEST_TOS"]={3,3}
 DEDLayout_l5["DEST DIR TOS"]={8,8,0,"_inv","I"}
@@ -980,6 +1074,9 @@ DEDLayout_l5["UTM_DEST_ELEV"]={6,4}
 DEDLayout_l5["ELEV"]={12,6,0,"_inv","I"}
 DEDLayout_l5["Asterisks_ELEV_both"]={11,1,19,"","I"}
 DEDLayout_l5["P1 lbl"]={21,3}
+--FIX
+DEDLayout_l5["FIX GPS ACCURACY label"] = {4,9}
+DEDLayout_l5["FIX GPS ACCURACY value"] = {14,4,0,"_inv","I"}
 --IFF
 DEDLayout_l5["STAT M3 Mode"] = {0,2,0,"_inv","I"}
 DEDLayout_l5["STAT M3 Lockout Status"] = {3,1}
@@ -1154,6 +1251,7 @@ local function buildDEDLine(line)
 		local dest_dir 		= DED_fields["DEST_DIR"]
 		local dest_oa1 		= DED_fields["DEST_OA1"]
 		local dest_oa2 		= DED_fields["DEST_OA2"]
+		local fix 			= DED_fields["FIX_SENSORS"]
 		--Loop through Exported DED Objects
 		for k,v in pairs(DED_fields) do
 			-- Handle Duplicate Key Names on COM2 Guard page items
@@ -1197,6 +1295,8 @@ local function buildDEDLine(line)
 				label = dest_oa1.." "..k
 			elseif dest_oa2 ~= nil then
 				label = dest_oa2.." "..k
+			elseif fix ~= nil then
+				label = fix.." "..k
 			else
 				label = k
 			end

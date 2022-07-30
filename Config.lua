@@ -1,13 +1,21 @@
 -- #INFO
--- file version: 2021.05.07
+-- file version: 2021.07.30
+
+--[[ IMPORTANT
+    - Do not enter the same IP address multiple times
+    - If you use, for ex. one device, you can leave others IP by default (there is no need to change them)
+]]
 
 -- properties
 ExportScript.Config = {}
+
+ExportScript.Config.MultiAppDevice = false;      -- true: if you want to use several apps on the same device at the same time
 
 -- device 1
 ExportScript.Config.Export  = true;              -- sending data
 ExportScript.Config.Host    = "192.168.0.12"     -- IP for 1st app
 ExportScript.Config.Port    = 5160;              -- port for sending data for all connected devices
+ExportScript.Config.Port2   = 5161;              -- port for sending data (if you use several apps on the same device)
 
 -- device 2
 ExportScript.Config.Export2 = true;             -- sending data

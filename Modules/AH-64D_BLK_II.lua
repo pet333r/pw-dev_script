@@ -16,6 +16,9 @@ ExportScript.ConfigEveryFrameArguments =
     [148] = "%.1f",  -- GAIN knob
     [149] = "%.1f",  -- LEV knob
     [154] = "%.1f",  -- DAY/NT/OFF knob
+    [494] = "%d",    -- TADS Sensor Select Switch, FLIR/TV/DVO
+    [510] = "%d",    -- Laser Tracker Mode Switch, A/O/M
+    [507] = "%d",    -- Image Auto Tracker Polarity Switch, W/A/B
 
     [265] = "%.1f",  -- EUFD BRT knob
 
