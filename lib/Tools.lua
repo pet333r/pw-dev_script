@@ -408,6 +408,13 @@ function ExportScript.Tools.GetPlayerData()
         -- brake
         PlayerData.MechAirBrakeLeft = LoGetAircraftDrawArgumentValue(184)
         PlayerData.MechAirBrakeRigh = LoGetAircraftDrawArgumentValue(182)
+
+        local arm = ExportScript.Tools.GetArgumentsValue(375, "%.1f")
+        if (arm == "0.2") then
+            PlayerData.Arm = 1
+        elseif (arm == "0.0" or arm == "0.1") then
+            PlayerData.Arm = 0
+        end
     elseif (ExportScript.ModuleName == "AJS37") then
         PlayerData.MechGearNose = LoGetAircraftDrawArgumentValue(0)
         PlayerData.MechGearLeft = LoGetAircraftDrawArgumentValue(5)
@@ -419,6 +426,9 @@ function ExportScript.Tools.GetPlayerData()
         PlayerData.MechGearLeft = LoGetAircraftDrawArgumentValue(5)
         PlayerData.MechGearRigh = LoGetAircraftDrawArgumentValue(3)
         PlayerData.MechAirBrakeLeft = LoGetAircraftDrawArgumentValue(182)
+
+        PlayerData.AG = ExportScript.Tools.GetArgumentsValue(281, "%d")
+        PlayerData.Arm = ExportScript.Tools.GetArgumentsValue(287, "%d")
     elseif (ExportScript.ModuleName == "C-101CC") then
         PlayerData.MechGearNose = LoGetAircraftDrawArgumentValue(0)
         PlayerData.MechGearLeft = LoGetAircraftDrawArgumentValue(5)
@@ -445,6 +455,15 @@ function ExportScript.Tools.GetPlayerData()
         -- nozzle 2x
         PlayerData.MechNozzLeft = LoGetAircraftDrawArgumentValue(434)
         PlayerData.MechNozzRigh = LoGetAircraftDrawArgumentValue(433)
+
+        PlayerData.AA = ExportScript.Tools.GetArgumentsValue(1013, "%d")
+        PlayerData.AG = ExportScript.Tools.GetArgumentsValue(1012, "%d")
+        local arm = ExportScript.Tools.GetArgumentsValue(1047, "%d")
+        if (arm == "-1") then
+            PlayerData.Arm = 1
+        elseif (arm == "0" or arm == "1") then
+            PlayerData.Arm = 0
+        end
     elseif (ExportScript.ModuleName == "F-16C_50") then
         PlayerData.AltGearNose  = ExportScript.Tools.GetArgumentsValue(350, "%d")
         PlayerData.AltGearLeft  = ExportScript.Tools.GetArgumentsValue(351, "%d")
@@ -465,6 +484,8 @@ function ExportScript.Tools.GetPlayerData()
         -- brake
         PlayerData.MechAirBrakeLeft = LoGetAircraftDrawArgumentValue(184)
         PlayerData.MechAirBrakeRigh = LoGetAircraftDrawArgumentValue(182)
+
+        PlayerData.Arm = ExportScript.Tools.GetArgumentsValue(105, "%d")
     elseif (ExportScript.ModuleName == "FA-18C_hornet") then
         PlayerData.AltGearLeft  = ExportScript.Tools.GetArgumentsValue(165, "%d")
         PlayerData.AltGearNose  = ExportScript.Tools.GetArgumentsValue(166, "%d")
@@ -486,6 +507,8 @@ function ExportScript.Tools.GetPlayerData()
         PlayerData.MechNozzLeft = LoGetAircraftDrawArgumentValue(90)
 
         PlayerData.AA = ExportScript.Tools.GetArgumentsValue(47, "%d")
+        PlayerData.AG = ExportScript.Tools.GetArgumentsValue(48, "%d")
+        PlayerData.Arm = ExportScript.Tools.GetArgumentsValue(49, "%d")
     elseif (ExportScript.ModuleName == "F-86F Sabre") then
         PlayerData.MechGearNose  = LoGetAircraftDrawArgumentValue(0)
         PlayerData.MechGearLeft  = LoGetAircraftDrawArgumentValue(5)
@@ -514,6 +537,10 @@ function ExportScript.Tools.GetPlayerData()
         -- brake
         PlayerData.MechAirBrakeRigh = LoGetAircraftDrawArgumentValue(182)
         PlayerData.MechAirBrakeLeft = LoGetAircraftDrawArgumentValue(184)
+
+        PlayerData.AA = ExportScript.Tools.GetArgumentsValue(163, "%d")
+        PlayerData.AG = ExportScript.Tools.GetArgumentsValue(164, "%d")
+        PlayerData.Arm = ExportScript.Tools.GetArgumentsValue(509, "%d")
     elseif (ExportScript.ModuleName == "M-2000C") then
         PlayerData.AltGearLeft  = ExportScript.Tools.GetArgumentsValue(417, "%d")
         PlayerData.AltGearNose  = ExportScript.Tools.GetArgumentsValue(418, "%d")
@@ -530,12 +557,21 @@ function ExportScript.Tools.GetPlayerData()
         -- brake
         PlayerData.MechAirBrakeLeft = LoGetAircraftDrawArgumentValue(182)
         PlayerData.MechAirBrakeRigh = LoGetAircraftDrawArgumentValue(184)
+
+        PlayerData.Arm = ExportScript.Tools.GetArgumentsValue(234, "%d")
     elseif ((ExportScript.ModuleName == "Mirage-F1CE") or (ExportScript.ModuleName == "Mirage-F1B")) then
         PlayerData.MechGearNose  = LoGetAircraftDrawArgumentValue(0)
         PlayerData.MechGearLeft  = LoGetAircraftDrawArgumentValue(5)
         PlayerData.MechGearRigh  = LoGetAircraftDrawArgumentValue(3)
         PlayerData.MechAirBrakeLeft = LoGetAircraftDrawArgumentValue(184)
         PlayerData.MechAirBrakeRigh = LoGetAircraftDrawArgumentValue(182)
+
+        local arm = ExportScript.Tools.GetArgumentsValue(433, "%.1f")
+        if (arm == "0.0") then
+            PlayerData.Arm = 1
+        elseif (arm == "1.0" or arm == "0.5") then
+            PlayerData.Arm = 0
+        end
     elseif (ExportScript.ModuleName == "Mi-24P") then
         PlayerData.MechGearNose  = LoGetAircraftDrawArgumentValue(0)
         PlayerData.MechGearLeft  = LoGetAircraftDrawArgumentValue(5)
@@ -1167,19 +1203,55 @@ function ExportScript.Tools.SendShortData(message)
         local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() ExportScript.Tools.ResetChangeValues() end)
 
         if ExportScript.Config.Export then
-            try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host, ExportScript.Config.Port))
+            if (ExportScript.Config.Host == ExportScript.Tools.lDeviceIpMap) then
+                if (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice == false) then
+                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Tools.lDeviceIpMap, lDevicePortMap))
+                elseif (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice) then
+                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host, ExportScript.Config.Port))
+                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Tools.lDeviceIpMap, lDevicePortMap))
+                end
+            else
+                try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host, ExportScript.Config.Port))
+            end
         end
 
         if ExportScript.Config.Export2 then
-            try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host2, ExportScript.Config.Port))
+            if (ExportScript.Config.Host2 == ExportScript.Tools.lDeviceIpMap) then
+                if (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice == false) then
+                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Tools.lDeviceIpMap, lDevicePortMap))
+                elseif (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice) then
+                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host2, ExportScript.Config.Port))
+                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Tools.lDeviceIpMap, lDevicePortMap))
+                end
+            else
+                try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host2, ExportScript.Config.Port))
+            end
         end
 
         if ExportScript.Config.Export3 then
-            try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host3, ExportScript.Config.Port))
+            if (ExportScript.Config.Host3 == ExportScript.Tools.lDeviceIpMap) then
+                if (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice == false) then
+                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Tools.lDeviceIpMap, lDevicePortMap))
+                elseif (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice) then
+                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host3, ExportScript.Config.Port))
+                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Tools.lDeviceIpMap, lDevicePortMap))
+                end
+            else
+                try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host3, ExportScript.Config.Port))
+            end
         end
 
         if ExportScript.Config.Export4 then
-            try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host4, ExportScript.Config.Port))
+            if (ExportScript.Config.Host4 == ExportScript.Tools.lDeviceIpMap) then
+                if (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice == false) then
+                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Tools.lDeviceIpMap, lDevicePortMap))
+                elseif (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice) then
+                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host4, ExportScript.Config.Port))
+                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Tools.lDeviceIpMap, lDevicePortMap))
+                end
+            else
+                try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host4, ExportScript.Config.Port))
+            end
         end
 
         ExportScript.Tools.DebugProcess(try, _packet)
@@ -1218,6 +1290,9 @@ function ExportScript.Tools.FlushData()
 
             if ExportScript.Config.Export then
                 if (ExportScript.Config.Host == ExportScript.Tools.lDeviceIpMap) then
+                    if (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice) then
+                        try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host, ExportScript.Config.Port))
+                    end
                 else
                     try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host, ExportScript.Config.Port))
                 end
@@ -1225,6 +1300,9 @@ function ExportScript.Tools.FlushData()
 
             if ExportScript.Config.Export2 then
                 if (ExportScript.Config.Host2 == ExportScript.Tools.lDeviceIpMap) then
+                    if (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice) then
+                        try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host2, ExportScript.Config.Port))
+                    end
                 else
                     try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host2, ExportScript.Config.Port))
                 end
@@ -1232,6 +1310,9 @@ function ExportScript.Tools.FlushData()
 
             if ExportScript.Config.Export3 then
                 if (ExportScript.Config.Host3 == ExportScript.Tools.lDeviceIpMap) then
+                    if (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice) then
+                        try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host3, ExportScript.Config.Port))
+                    end
                 else
                     try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host3, ExportScript.Config.Port))
                 end
@@ -1239,6 +1320,9 @@ function ExportScript.Tools.FlushData()
 
             if ExportScript.Config.Export4 then
                 if (ExportScript.Config.Host4 == ExportScript.Tools.lDeviceIpMap) then
+                    if (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice) then
+                        try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host4, ExportScript.Config.Port))
+                    end
                 else
                     try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host4, ExportScript.Config.Port))
                 end

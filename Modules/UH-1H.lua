@@ -31,12 +31,12 @@ ExportScript.ConfigEveryFrameArguments =
     [225] = "%1d", -- Anticollision Lights OFF/ON
 
     -- INST LTG
-    [230] = "%1d", -- Overhead Console Panel Lights Brightness
-    [231] = "%1d", -- Pedestal Lights Brightness
-    [232] = "%1d", -- Secondary Instrument Lights Brightness
-    [233] = "%1d", -- Engine Instrument Lights Brightness
-    [234] = "%1d", -- Copilot Instrument Lights Brightness
-    [235] = "%1d", -- Pilot Instrument Lights Brightness
+    [230] = "%.1f", -- Overhead Console Panel Lights Brightness
+    [231] = "%.1f", -- Pedestal Lights Brightness
+    [232] = "%.1f", -- Secondary Instrument Lights Brightness
+    [233] = "%.1f", -- Engine Instrument Lights Brightness
+    [234] = "%.1f", -- Copilot Instrument Lights Brightness
+    [235] = "%.1f", -- Pilot Instrument Lights Brightness
 
     [252] = "%1d", -- Master Arm OFF/SAFE/ARMED
     [253] = "%1d", -- Gun Selector LEFT / BOTH / RIGHT
