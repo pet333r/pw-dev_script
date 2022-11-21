@@ -43,6 +43,12 @@ local actualMap
 local lSelfNavData = true
 local playerId
 
+local lDevicesNo = 0
+local lDeviceIp1 = ""
+local lDeviceIp2 = ""
+local lDeviceIp3 = ""
+local lDeviceIp4 = ""
+
 local lDeviceIpSelf = ""
 local lDeviceIpTws = ""
 local lDeviceIpMap = ""
@@ -311,6 +317,63 @@ function ExportScript.Tools.ProcessInput()
                 local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() end)
 
                 try(ExportScript.UDPsender:sendto("STAT=OK;", from, ExportScript.Config.Port))
+
+                if (lDevicesNo == 0) then
+
+                elseif (lDevicesNo == 1) then
+                elseif (lDevicesNo == 2) then
+                elseif (lDevicesNo == 3) then
+                elseif (lDevicesNo == 4) then
+                end
+
+                local opt = tonumber(string.sub(_input,2,2))
+
+                if opt == 0 then
+                    if (lDeviceIp1 == from) then lDeviceIp1 = "" end
+                    if (lDeviceIp2 == from) then lDeviceIp2 = "" end
+                    if (lDeviceIp3 == from) then lDeviceIp3 = "" end
+                    if (lDeviceIp4 == from) then lDeviceIp4 = "" end
+                end
+
+                if opt == 1 then
+                    if (lDeviceIp1 == "") then
+                        ExportScript.Tools.lDeviceIp1 = from
+                        return
+                    elseif (lDeviceIp1 ~= "") then
+                        if (from == lDeviceIp1) then
+                            ExportScript.Tools.lDeviceIp1 = from
+                            return
+                        end
+                    -- Device 2	
+                    elseif (lDeviceIp2 == "") then
+                        ExportScript.Tools.lDeviceIp2 = from
+                        return
+                    elseif (lDeviceIp2 ~= "") then
+                        if (from == lDeviceIp2) then
+                            ExportScript.Tools.lDeviceIp2 = from
+                            return
+                        end
+                    -- Device 3
+                    elseif (lDeviceIp3 == "") then
+                        ExportScript.Tools.lDeviceIp3 = from
+                        return
+                    elseif (lDeviceIp3 ~= "") then
+                        if (from == lDeviceIp3) then
+                            ExportScript.Tools.lDeviceIp3 = from
+                            return
+                        end
+                    -- Device 4
+                    elseif (lDeviceIp4 == "") then
+                        ExportScript.Tools.lDeviceIp4 = from
+                        return
+                    elseif (lDeviceIp4 ~= "") then
+                        if (from == lDeviceIp4) then
+                            ExportScript.Tools.lDeviceIp4 = from
+                            return
+                        end
+                    end
+                end
+
             end
             ExportScript.Tools.WriteToLog(from .. " : " .. _input .. "\n")
 		end
