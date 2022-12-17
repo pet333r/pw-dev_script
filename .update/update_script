@@ -30,6 +30,7 @@ Modules/Hercules.lua
 Modules/I-16.lua
 Modules/J-11A.lua
 Modules/JF-17.lua
+Modules/Ka-50_3.lua
 Modules/Ka-50.lua
 Modules/L-39ZA.lua
 Modules/M-2000C.lua

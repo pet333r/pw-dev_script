@@ -1,4 +1,5 @@
 -- AV8BNA
+-- arg 181
 ExportScript.FoundDCSModule = true
 
 ExportScript.ConfigEveryFrameArguments = 
@@ -42,53 +43,53 @@ ExportScript.ConfigEveryFrameArguments =
 	-- [453] = "%.f",	--STO
 
 	--CAUTION PANEL (from upper left to lower right)
-	[560] = "%1d",	--OXY
-	[561] = "%1d",	--WSLD
-	[562] = "%1d",	--HYD 1
-	[563] = "%1d",	--HYD 2
-	[564] = "%1d",	--L PUMP
-	[565] = "%1d",	--R PUMP
-	[566] = "%1d",	--L TRANS
-	[567] = "%1d",	--R TRANS
-	[568] = "%1d",	--FLAPS 1
-	[569] = "%1d",	--FLAPS 2
-	[570] = "%1d",	--AUT FLP
-	[571] = "%1d",	--PROP
-	[572] = "%1d",	--LIDS
-	[573] = "%1d",	--OIL
-	[574] = "%1d",	--APU GEN
-	[575] = "%1d",	--"--"
-	[576] = "%1d",	--GPS
-	[577] = "%1d",	--DEP RES
-	[578] = "%1d",	--DC
-	[579] = "%1d",	--STBY TR
-	[580] = "%1d",	--CS COOL
-	[581] = "%1d",	--LOAD
-	[582] = "%1d",	--CANOPY
-	[583] = "%1d",	--INS
-	[584] = "%1d",	--SKID
-	[585] = "%1d",	--EFC
-	[586] = "%1d",	--NWS
-	[587] = "%1d",	--AFC
-	[588] = "%1d",	--C AUT
-	[589] = "%1d",	--H2O SEL
-	[590] = "%1d",	--APU
-	[591] = "%1d",	--PITCH
-	[592] = "%1d",	--IFF
-	[593] = "%1d",	--SPD BRK
-	[594] = "%1d",	--DROOP
-	[595] = "%1d",	--ROLL
-	[596] = "%1d",	--AFT BAY
-	[0] = "%1d",	--AV BIT
-	[598] = "%1d",	--"--"
-	[599] = "%1d",	--YAW
-	[600] = "%1d",	--CW NOGO
-	[601] = "%1d",	--P JAM
-	[602] = "%1d",	--JAM HOT
-	[603] = "%1d",	--ENG EXC
-	[604] = "%1d",	--P NOGO
-	[605] = "%1d",	--CW JAM
-	[606] = "%1d",	--REPLY
+	[560] = "%d",	--OXY
+	[561] = "%d",	--WSLD
+	[562] = "%d",	--HYD 1
+	[563] = "%d",	--HYD 2
+	[564] = "%d",	--L PUMP
+	[565] = "%d",	--R PUMP
+	[566] = "%d",	--L TRANS
+	[567] = "%d",	--R TRANS
+	[568] = "%d",	--FLAPS 1
+	[569] = "%d",	--FLAPS 2
+	[570] = "%d",	--AUT FLP
+	[571] = "%d",	--PROP
+	[572] = "%d",	--LIDS
+	[573] = "%d",	--OIL
+	[574] = "%d",	--APU GEN
+	[575] = "%d",	--"--"
+	[576] = "%d",	--GPS
+	[577] = "%d",	--DEP RES
+	[578] = "%d",	--DC
+	[579] = "%d",	--STBY TR
+	[580] = "%d",	--CS COOL
+	[581] = "%d",	--LOAD
+	[582] = "%d",	--CANOPY
+	[583] = "%d",	--INS
+	[584] = "%d",	--SKID
+	[585] = "%d",	--EFC
+	[586] = "%d",	--NWS
+	[587] = "%d",	--AFC
+	[588] = "%d",	--C AUT
+	[589] = "%d",	--H2O SEL
+	[590] = "%d",	--APU
+	[591] = "%d",	--PITCH
+	[592] = "%d",	--IFF
+	[593] = "%d",	--SPD BRK
+	[594] = "%d",	--DROOP
+	[595] = "%d",	--ROLL
+	[596] = "%d",	--AFT BAY
+	[0] = "%d",	--AV BIT
+	[598] = "%d",	--"--"
+	[599] = "%d",	--YAW
+	[600] = "%d",	--CW NOGO
+	[601] = "%d",	--P JAM
+	[602] = "%d",	--JAM HOT
+	[603] = "%d",	--ENG EXC
+	[604] = "%d",	--P NOGO
+	[605] = "%d",	--CW JAM
+	[606] = "%d",	--REPLY
 
 	--ENGINE DISPLAY
 	-- [253] = "%.1f",	--DUCT 1. DRUM
@@ -212,7 +213,7 @@ ExportScript.ConfigArguments =
 
 	-- Engine Display Panel
 	[272] = "%.1f",	--EDP Brightness Control
-	[655] = "%1d",	--EDP BIT Button
+	[655] = "%d",	--EDP BIT Button
 
 	-- HUD Control Panel
 	[288] = "%.1f",	--HUD
@@ -220,7 +221,7 @@ ExportScript.ConfigArguments =
 	[290] = "%.1f",	--HUD Display Mode Switch
 	[291] = "%.1f",	--HUD Video Brightness Control
 	[292] = "%.1f",	--HUD Video Contrast Control
-	[293] = "%1d",	--HUD Altitude Selector Switch
+	[293] = "%d",	--HUD Altitude Selector Switch
 
 	-- UFC Panel
 	[295] = "%.1f",	--Display Brightness Control
@@ -253,20 +254,20 @@ ExportScript.ConfigArguments =
 	[395] = "%.1f",	--Manual Release Control Knob 0/.3/.7/1
 	[404] = "%.1f",	--Jettison Mode Selector
 	-- [405] = "%1d",	--Jettison Stores
-	[420] = "%1d",	--Ground IR Cool Switch
+	[420] = "%d",	--Ground IR Cool Switch
 
 	--LOWER AMARMENT PANEL
-	[406] = "%1d",	--SET FLAG 1
-	[408] = "%1d",	--SET FLAG 2
-	[410] = "%1d",	--SET FLAG 3
-	[412] = "%1d",	--SET FLAG 4
-	[414] = "%1d",	--SET FLAG 5
-	[416] = "%1d",	--SET FLAG 6
-	[418] = "%1d",	--SET FLAG 7
+	[406] = "%d",	--SET FLAG 1
+	[408] = "%d",	--SET FLAG 2
+	[410] = "%d",	--SET FLAG 3
+	[412] = "%d",	--SET FLAG 4
+	[414] = "%d",	--SET FLAG 5
+	[416] = "%d",	--SET FLAG 6
+	[418] = "%d",	--SET FLAG 7
 
 	-- Master Armament Panel
-	[286] = "%1d",	--Launch Flare Salvo
-	[287] = "%1d",	--Master Arm Switch
+	[286] = "%d",	--Launch Flare Salvo
+	[287] = "%d",	--Master Arm Switch
 
 	-- ECM Control Panel
 	-- [273] = "%.2f",	--RWR Power/Volume Button
@@ -301,28 +302,28 @@ ExportScript.ConfigArguments =
 	-- [421] = "%.1f",	--INS Mode Knob
 
 	-- SAAHS Panel
-	-- [476] = "%1d",	--Alt Hold Switch
-	-- [475] = "%1d",	--Q Feel Switch
-	-- [477] = "%.1f",	--AFC Switch
-	-- [478] = "%1d",	--SAS Yaw Switch"
-	-- [479] = "%1d",	--SAS Roll Switch
-	-- [480] = "%1d",	--SAS Pitch Switch
+	[475] = "%d",	--Q Feel Switch
+	[476] = "%d",	--Alt Hold Switch
+	[477] = "%.1f",	--AFC Switch
+	[478] = "%d",	--SAS Yaw Switch"
+	[479] = "%d",	--SAS Roll Switch
+	[480] = "%d",	--SAS Pitch Switch
 
 	-- Fuel Panel
-	-- [504] = "%1d",	--Fuel Proportioner
-	-- [505] = "%.1f",	--Fuel Pump L Switch
-	-- [506] = "%.1f",	--Fuel Pump R Switch
-	-- [507] = "%.1f",	--Air Refueling Probe Switch
-	-- [508] = "%1d",	--Fuel Dump L Switch
-	-- [509] = "%1d",	--Fuel Dump R Switch"
+	[504] = "%d",	--Fuel Proportioner
+	[505] = "%.1f",	--Fuel Pump L Switch
+	[506] = "%.1f",	--Fuel Pump R Switch
+	[507] = "%.1f",	--Air Refueling Probe Switch
+	[508] = "%d",	--Fuel Dump L Switch
+	[509] = "%d",	--Fuel Dump R Switch"
 
 	-- External Lights Panel
 	[472] = "%d",	--Landing/Taxi Lights Switch
 	[503] = "%d",	--External Lights Mode Switch"
 	[510] = "%.1f",	--Formation Lights Knob
-	[511] = "%1d",	--Position Lights Switch
-	[512] = "%1d",	--Anti-Collision Lights Switch
-	[513] = "%1d",	--External Auxiliary Lights Switch
+	[511] = "%d",	--Position Lights Switch
+	[512] = "%d",	--Anti-Collision Lights Switch
+	[513] = "%d",	--External Auxiliary Lights Switch
 
 	-- Pilot Service Panel
 	-- [514] = "%1d",	--"Oxygen Switch
@@ -339,7 +340,7 @@ ExportScript.ConfigArguments =
 	-- Electrical Panel
 	-- [609] = "%.1f",	--DC Test Switch
 	[610] = "%.1f",	--APU Generator Switch
-	[611] = "%1d",	--Engine Start Switch
+	[611] = "%d",	--Engine Start Switch
 	[612] = "%.1f",	--Generator Switch
 	[613] = "%.1f",	--Battery Switch
 
@@ -353,14 +354,14 @@ ExportScript.ConfigArguments =
 	-- [620] = "%1d",	--V/UHF RSC LOAD/OFST Switch
 
 	-- ACNIP
-	[621] = "%1d",	--ACNIP Mode Switch
-	[622] = "%1d",	--KY-1 Cipher Type Selector Switch
-	[623] = "%1d",	--KY-2 Cipher Type Selector Switch
-	[624] = "%1d",	--KY-1 Code/Mode Switch
-	[625] = "%1d",	--KY-2 Code/Mode Switch
-	[626] = "%1d",	--ACNIP Radio Selector Switch
-	[627] = "%1d",	--KY-58 Codes Clear Switch
-	[628] = "%1d",	--KY-58 Remote Codes Load Switch
+	[621] = "%d",	--ACNIP Mode Switch
+	[622] = "%d",	--KY-1 Cipher Type Selector Switch
+	[623] = "%d",	--KY-2 Cipher Type Selector Switch
+	[624] = "%d",	--KY-1 Code/Mode Switch
+	[625] = "%d",	--KY-2 Code/Mode Switch
+	[626] = "%d",	--ACNIP Radio Selector Switch
+	[627] = "%d",	--KY-58 Codes Clear Switch
+	[628] = "%d",	--KY-58 Remote Codes Load Switch
 
 	-- ICS
 	[629] = "%.1f",	--ICS Aux Volume Knob
@@ -368,11 +369,11 @@ ExportScript.ConfigArguments =
 	[631] = "%.1f",	--ICS Mic Operational Mode Switch
 
 	-- IFF
-	[632] = "%1d",	--IFF Operational Mode Switch
-	[633] = "%1d",	--IFF Crypto Mode Switch
+	[632] = "%d",	--IFF Operational Mode Switch
+	[633] = "%d",	--IFF Crypto Mode Switch
 
 	-- Interior Lights Panel
-	[634] = "%1d",	--Compass Light/Test Lights
+	[634] = "%d",	--Compass Light/Test Lights
 	[635] = "%.1f",	--Instruments Lights
 	[636] = "%.1f",	--Console Lights
 	[637] = "%.1f",	--Flood Lights
