@@ -48,13 +48,13 @@ ExportScript.ConfigEveryFrameArguments =
 	[6123] = "%.1f",		-- CCM VGS Light
 
 	-- INS
-	[48] = "%1d",   -- TID Brightness, (1, 0, 1)
-	[49] = "%1d",   -- TID Contrast, (1, 0, 1)
+	[48] = "%.1f",   -- TID Brightness, (1, 0, 1)
+	[49] = "%.1f",   -- TID Contrast, (1, 0, 1)
 	[50] = "%.1f",   -- NAV MODE knob
 	[51] = "%.1f",   -- DEST knob
 
 	-- TID
-	[2005]  =  "%.5f",   --      TID_mode_knob
+	[2005]  =  "%.1f",   --      TID_mode_knob
 	[2006]  =  "%.1f",   --      TID_range_knob
 	[6125] = "%.1f",		-- TID TRACK HOLD selector
 	[6126] = "%.1f",		-- TID CLSN
@@ -71,8 +71,8 @@ ExportScript.ConfigEveryFrameArguments =
 	[407]  =  "%d",   -- HCU_POWER_RESET_LIGHT
 	[408]  =  "%d",   -- HCU_WCS_POWER_LIGHT
 	[409]  =  "%d",   -- HCU_IR_STBY_LIGHT
-	[2011]  =  "%.1f",   -- HCU_TVIR switch
-	[2012]  =  "%.1f",   -- HCU_WCS switch
+	[2011]  =  "%d",   -- HCU_TVIR switch
+	[2012]  =  "%d",   -- HCU_WCS switch
 
 	[6135] = "%.1f",		-- HCU IR/TV Mode
 	[6136] = "%.1f",		-- HCU RADAR Mode

@@ -1174,8 +1174,8 @@ DEDLayout_l5["Asterisks on STN TDOA_8"] = {11,1,13,"","I"}
 DEDLayout_l5["Asterisks on STN_8"] = {13,1,19,"","I"}
 --LASER
 DEDLayout_l5["Laser ST Time LABEL"] = {1,13}
-DEDLayout_l5["Laser ST Time VALUE"] = {17,2,0,"_inv","I"}
-DEDLayout_l5["Laser ST Time Asteriscs_both"] = {16,1,19,"","I"}
+DEDLayout_l5["Laser ST Time VALUE"] = {16,2,0,"_inv","I"}
+DEDLayout_l5["Laser ST Time Asteriscs_both"] = {15,1,19,"","I"}
 --INTG
 DEDLayout_l5["INTG M3 Mode"] = {0,2,0,"_inv","I"}
 DEDLayout_l5["INTG M3 Decoupled Status"] = {3,1}

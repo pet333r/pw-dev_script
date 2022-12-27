@@ -321,7 +321,7 @@ ExportScript.ConfigArguments =
 	[472] = "%d",	--Landing/Taxi Lights Switch
 	[503] = "%d",	--External Lights Mode Switch"
 	[510] = "%.1f",	--Formation Lights Knob
-	[511] = "%d",	--Position Lights Switch
+	[511] = "%.1f",	--Position Lights Switch
 	[512] = "%d",	--Anti-Collision Lights Switch
 	[513] = "%d",	--External Auxiliary Lights Switch
 
@@ -338,7 +338,7 @@ ExportScript.ConfigArguments =
 	-- [520] = "%1d",	--DECS Switch
 
 	-- Electrical Panel
-	-- [609] = "%.1f",	--DC Test Switch
+	-- [609] = "%.1f",	--DC Test Switch 
 	[610] = "%.1f",	--APU Generator Switch
 	[611] = "%d",	--Engine Start Switch
 	[612] = "%.1f",	--Generator Switch
@@ -346,7 +346,7 @@ ExportScript.ConfigArguments =
 
 	-- V/UHF Radio Panel
 	[614] = "%.1f",	--V/UHF RSC Volume Knob
-	[615] = "%.2f",	--V/UHF RSC Chan/Freq Knob
+	[615] = "%.3f",	--V/UHF RSC Chan/Freq Knob
 	[616] = "%.1f",	--V/UHF RSC Operational Mode Switch
 	-- [617] = "%1d",	--V/UHF RSC Ancillary Mode Pointer
 	-- [618] = "%1d",	--V/UHF RSC Ancillary Mode Switch
@@ -373,7 +373,7 @@ ExportScript.ConfigArguments =
 	[633] = "%d",	--IFF Crypto Mode Switch
 
 	-- Interior Lights Panel
-	[634] = "%d",	--Compass Light/Test Lights
+	[634] = "%.1f",	--Compass Light/Test Lights
 	[635] = "%.1f",	--Instruments Lights
 	[636] = "%.1f",	--Console Lights
 	[637] = "%.1f",	--Flood Lights
