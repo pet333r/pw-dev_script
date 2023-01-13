@@ -86,20 +86,49 @@ local debugPort = ExportScript.Config.Port
 function ExportScript.Tools.CheckObjectExport()
     isObjects = LoIsObjectExportAllowed()
     if isObjects == nil then
-		return false
+		return 0
     end
-    ExportScript.Tools.SendData("export objects: " .. tostring(isObjects))
-    ExportScript.Tools.WriteToLog("export objects: " .. tostring(isObjects))
+
+    local value
+    if isObjects == true then
+        value = 1
+    else
+        value= 0
+    end
+    ExportScript.Tools.SendShortData("EO=" .. value)
+    ExportScript.Tools.WriteToLog("EO=" .. value)
 end
+
 function ExportScript.Tools.CheckSensorExport()
     isSensors = LoIsSensorExportAllowed()
-    ExportScript.Tools.SendData("export sensors: " .. tostring(isSensors))
-    ExportScript.Tools.WriteToLog("export sensors: " .. tostring(isSensors))
+    if isSensors == nil then
+		return 0
+    end
+
+    local value
+    if isSensors == true then
+        value = 1
+    else
+        value= 0
+    end
+    ExportScript.Tools.SendShortData("ES=" .. value)
+    ExportScript.Tools.WriteToLog("ES=" .. value)
 end
+
 function ExportScript.Tools.CheckOwnshipExport()
     isOwnship = LoIsOwnshipExportAllowed()
-    ExportScript.Tools.SendData("export ownship: " .. tostring(isOwnship))
-    ExportScript.Tools.WriteToLog("export ownship: " .. tostring(isOwnship))
+    if isOwnship == nil then
+		return 0
+    end
+
+    local value
+    if isOwnship == true then
+        value = 1
+    else
+        value= 0
+    end
+    ExportScript.Tools.SendShortData("EP=" .. value)
+    ExportScript.Tools.WriteToLog("EP=" .. value)
 end
 
 function ExportScript.Tools.ExportMapPlayer(value)

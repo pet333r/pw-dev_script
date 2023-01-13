@@ -273,70 +273,68 @@ end
 
 -- Pointed to by ExportScript.ProcessDCSConfigLowImportance
 function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
-        -- ScratchPad
-        local lScratchPad = ExportScript.Tools.getListIndicatorValue(5)
-        ExportScript.Tools.SendData(2010, ExportScript.Tools.coerce_nil_to_string(lScratchPad.Scratch_PAD))
-    
-        -- CMSC 2020 (Text only)
-        -------------------------------------------------
-        if mainPanelDevice:get_argument_value(364) > 0 then
-            local lCMSCTable = ExportScript.Tools.getListIndicatorValue(8)
-    
-            if lCMSCTable ~= nil and lCMSCTable.txt_JMR ~= nil then
-                ExportScript.Tools.SendData(2011, string.format("%s", lCMSCTable.txt_CHAFF_FLARE))	-- txt_CHAFF_FLARE
-                ExportScript.Tools.SendData(2012, string.format("%s", lCMSCTable.txt_JMR))	-- txt_JMR
-                ExportScript.Tools.SendData(2013, string.format("%s", lCMSCTable.txt_MWS))	-- txt_MWS
-            end
-        else
-            ExportScript.Tools.SendData(2011, " ")	-- txt_CHAFF_FLARE
-            ExportScript.Tools.SendData(2012, " ")	-- txt_JMR
-            ExportScript.Tools.SendData(2013, " ")	-- txt_MWS
+    -- ScratchPad
+    local lScratchPad = ExportScript.Tools.getListIndicatorValue(5)
+    ExportScript.Tools.SendData(2010, ExportScript.Tools.coerce_nil_to_string(lScratchPad.Scratch_PAD))
+
+    -- CMSC 2020 (Text only)
+    -------------------------------------------------
+    if mainPanelDevice:get_argument_value(364) > 0 then
+        local lCMSCTable = ExportScript.Tools.getListIndicatorValue(8)
+
+        if lCMSCTable ~= nil and lCMSCTable.txt_JMR ~= nil then
+            ExportScript.Tools.SendData(2011, string.format("%s", lCMSCTable.txt_CHAFF_FLARE))	-- txt_CHAFF_FLARE
+            ExportScript.Tools.SendData(2012, string.format("%s", lCMSCTable.txt_JMR))	-- txt_JMR
+            ExportScript.Tools.SendData(2013, string.format("%s", lCMSCTable.txt_MWS))	-- txt_MWS
         end
-    
-        -- CMSP
-        -------------------------------------------------
-        if mainPanelDevice:get_argument_value(364) > 0 then
-            local lCMSP = ExportScript.Tools.getListIndicatorValue(7)
-    
-            local lCMSPTable = {"","","",""}
-    
-            if lCMSP ~= nil and lCMSP.txt_UP ~= nil then
-                lCMSP.txt_UP = lCMSP.txt_UP:gsub("  ", " ")
-                lCMSP.txt_UP = lCMSP.txt_UP.." "
-                lCMSPTable  = ExportScript.Tools.split(lCMSP.txt_UP, "%s")
-            end
-    
-            ExportScript.Tools.SendData(2014,  string.format("%s", lCMSPTable[1]))
-            ExportScript.Tools.SendData(2015,  string.format("%s", lCMSPTable[2]))
-            ExportScript.Tools.SendData(2016,  string.format("%s", lCMSPTable[3]))
-            ExportScript.Tools.SendData(2017,  string.format("%s", lCMSPTable[4]))
-            ExportScript.Tools.SendData(2018,  string.format("%s", lCMSP.txt_DOWN1))
-            ExportScript.Tools.SendData(2019,  string.format("%s", lCMSP.txt_DOWN2))
-            ExportScript.Tools.SendData(2020,  string.format("%s", lCMSP.txt_DOWN3))
-            ExportScript.Tools.SendData(2021,  string.format("%s", lCMSP.txt_DOWN4))
-        else
-            ExportScript.Tools.SendData(2014,  " ")
-            ExportScript.Tools.SendData(2015,  " ")
-            ExportScript.Tools.SendData(2016,  " ")
-            ExportScript.Tools.SendData(2017,  " ")
-            ExportScript.Tools.SendData(2018,  " ")
-            ExportScript.Tools.SendData(2019,  " ")
-            ExportScript.Tools.SendData(2020,  " ")
-            ExportScript.Tools.SendData(2021,  " ")
+    else
+        ExportScript.Tools.SendData(2011, " ")	-- txt_CHAFF_FLARE
+        ExportScript.Tools.SendData(2012, " ")	-- txt_JMR
+        ExportScript.Tools.SendData(2013, " ")	-- txt_MWS
+    end
+
+    -- CMSP
+    -------------------------------------------------
+    if mainPanelDevice:get_argument_value(364) > 0 then
+        local lCMSP = ExportScript.Tools.getListIndicatorValue(7)
+
+        local lCMSPTable = {"","","",""}
+
+        if lCMSP ~= nil and lCMSP.txt_UP ~= nil then
+            lCMSP.txt_UP = lCMSP.txt_UP:gsub("  ", " ")
+            lCMSP.txt_UP = lCMSP.txt_UP.." "
+            lCMSPTable  = ExportScript.Tools.split(lCMSP.txt_UP, "%s")
         end
-    
-        if ExportScript.Config.ExportA10C_CDU == true then
-            -- CDU Data
-            ExportScript.exportCDU()
-        end
-    
-        -- UHF
-        ExportScript.Tools.SendData(2022,  getUHFPreset())
-        ExportScript.Tools.SendData(2023,  getUHFFrequency())
-        -- TACAN_KNB
-        ExportScript.Tools.SendData(2024,  getTacanChannel())
-        -- ILS
-        ExportScript.Tools.SendData(2025,  getILSFrequency())
+
+        ExportScript.Tools.SendData(2014,  string.format("%s", lCMSPTable[1]))
+        ExportScript.Tools.SendData(2015,  string.format("%s", lCMSPTable[2]))
+        ExportScript.Tools.SendData(2016,  string.format("%s", lCMSPTable[3]))
+        ExportScript.Tools.SendData(2017,  string.format("%s", lCMSPTable[4]))
+        ExportScript.Tools.SendData(2018,  string.format("%s", lCMSP.txt_DOWN1))
+        ExportScript.Tools.SendData(2019,  string.format("%s", lCMSP.txt_DOWN2))
+        ExportScript.Tools.SendData(2020,  string.format("%s", lCMSP.txt_DOWN3))
+        ExportScript.Tools.SendData(2021,  string.format("%s", lCMSP.txt_DOWN4))
+    else
+        ExportScript.Tools.SendData(2014,  " ")
+        ExportScript.Tools.SendData(2015,  " ")
+        ExportScript.Tools.SendData(2016,  " ")
+        ExportScript.Tools.SendData(2017,  " ")
+        ExportScript.Tools.SendData(2018,  " ")
+        ExportScript.Tools.SendData(2019,  " ")
+        ExportScript.Tools.SendData(2020,  " ")
+        ExportScript.Tools.SendData(2021,  " ")
+    end
+
+    -- CDU Data
+    ExportScript.exportCDU()
+
+    -- UHF
+    ExportScript.Tools.SendData(2022,  getUHFPreset())
+    ExportScript.Tools.SendData(2023,  getUHFFrequency())
+    -- TACAN_KNB
+    ExportScript.Tools.SendData(2024,  getTacanChannel())
+    -- ILS
+    ExportScript.Tools.SendData(2025,  getILSFrequency())
 
     -- -- General
 	-- ExportScript.Tools.SendData(2901, ExportScript.Tools.GetArgumentsValue(17, "%.2f"))

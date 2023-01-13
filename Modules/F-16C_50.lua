@@ -1361,41 +1361,39 @@ function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
 	local CMDS_CH_Amount
 	local CMDS_FL_Amount
 
-	if ExportScript.Config.ExportDisplaysF16 == true then
-		-- Build DED Display Lines
-		DEDLine1 = ExportScript.replaceSymbols(buildDEDLine(1)) --buildDEDLine(1);
-		DEDLine2 = ExportScript.replaceSymbols(buildDEDLine(2)) --buildDEDLine(2);
-		DEDLine3 = ExportScript.replaceSymbols(buildDEDLine(3)) --buildDEDLine(3);
-		DEDLine4 = ExportScript.replaceSymbols(buildDEDLine(4)) --buildDEDLine(4);
-		DEDLine5 = ExportScript.replaceSymbols(buildDEDLine(5)) --buildDEDLine(5);
+	-- Build DED Display Lines
+	DEDLine1 = ExportScript.replaceSymbols(buildDEDLine(1)) --buildDEDLine(1);
+	DEDLine2 = ExportScript.replaceSymbols(buildDEDLine(2)) --buildDEDLine(2);
+	DEDLine3 = ExportScript.replaceSymbols(buildDEDLine(3)) --buildDEDLine(3);
+	DEDLine4 = ExportScript.replaceSymbols(buildDEDLine(4)) --buildDEDLine(4);
+	DEDLine5 = ExportScript.replaceSymbols(buildDEDLine(5)) --buildDEDLine(5);
 
-		ExportScript.Tools.SendData(2101, DEDLine1)
-		ExportScript.Tools.SendData(2102, DEDLine2)
-		ExportScript.Tools.SendData(2103, DEDLine3)
-		ExportScript.Tools.SendData(2104, DEDLine4)
-		ExportScript.Tools.SendData(2105, DEDLine5)
+	ExportScript.Tools.SendData(2101, DEDLine1)
+	ExportScript.Tools.SendData(2102, DEDLine2)
+	ExportScript.Tools.SendData(2103, DEDLine3)
+	ExportScript.Tools.SendData(2104, DEDLine4)
+	ExportScript.Tools.SendData(2105, DEDLine5)
 
-		-- UHF
-		ExportScript.Tools.SendData(2305, get_UHF_CHAN())
-		ExportScript.Tools.SendData(2306, get_UHF_FREQUENCY())
+	-- UHF
+	ExportScript.Tools.SendData(2305, get_UHF_CHAN())
+	ExportScript.Tools.SendData(2306, get_UHF_FREQUENCY())
 
-		-- CMDS
-		local cmds = ExportScript.Tools.getListIndicatorValue(16) or {}
-		CMDS_O1_Amount = "    "
-		CMDS_O2_Amount = "    "
-		CMDS_CH_Amount = "    "
-		CMDS_FL_Amount = "    "
+	-- CMDS
+	local cmds = ExportScript.Tools.getListIndicatorValue(16) or {}
+	CMDS_O1_Amount = "    "
+	CMDS_O2_Amount = "    "
+	CMDS_CH_Amount = "    "
+	CMDS_FL_Amount = "    "
 
-		CMDS_O1_Amount = ExportScript.Tools.coerce_nil_to_string(cmds.CMDS_O1_Amount)
-		CMDS_O2_Amount = ExportScript.Tools.coerce_nil_to_string(cmds.CMDS_O2_Amount)
-		CMDS_CH_Amount = ExportScript.Tools.coerce_nil_to_string(cmds.CMDS_CH_Amount)
-		CMDS_FL_Amount = ExportScript.Tools.coerce_nil_to_string(cmds.CMDS_FL_Amount)
+	CMDS_O1_Amount = ExportScript.Tools.coerce_nil_to_string(cmds.CMDS_O1_Amount)
+	CMDS_O2_Amount = ExportScript.Tools.coerce_nil_to_string(cmds.CMDS_O2_Amount)
+	CMDS_CH_Amount = ExportScript.Tools.coerce_nil_to_string(cmds.CMDS_CH_Amount)
+	CMDS_FL_Amount = ExportScript.Tools.coerce_nil_to_string(cmds.CMDS_FL_Amount)
 
-		ExportScript.Tools.SendData(2301, CMDS_O1_Amount)
-		ExportScript.Tools.SendData(2302, CMDS_O2_Amount)
-		ExportScript.Tools.SendData(2303, CMDS_CH_Amount)
-		ExportScript.Tools.SendData(2304, CMDS_FL_Amount)
-	end
+	ExportScript.Tools.SendData(2301, CMDS_O1_Amount)
+	ExportScript.Tools.SendData(2302, CMDS_O2_Amount)
+	ExportScript.Tools.SendData(2303, CMDS_CH_Amount)
+	ExportScript.Tools.SendData(2304, CMDS_FL_Amount)
 
 	-- local val = ExportScript.Tools.getListIndicatorValue(14)
 	-- if not val then

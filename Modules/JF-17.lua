@@ -221,127 +221,125 @@ function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
 
 function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
-    if ExportScript.Config.ExportDisplaysJF17 == true then
-        local ufcLcdLine1 = "        "
-        local ufcLcdLine2 = "        "
-        local ufcLcdLine3 = "        "
-        local ufcLcdLine4 = "        "
+    local ufcLcdLine1 = "        "
+    local ufcLcdLine2 = "        "
+    local ufcLcdLine3 = "        "
+    local ufcLcdLine4 = "        "
 
-        -- 3 / 4 / 5 / 6
-        local indLcd1 = ExportScript.Tools.getListIndicatorValue(3)
-        if not indLcd1 then
-            return
-        end
-        ufcLcdLine1 = ExportScript.Tools.coerce_nil_to_string(processUFCPLine(indLcd1, 1))
-        ExportScript.Tools.SendData(2001, ufcLcdLine1)
-
-        local indLcd2 = ExportScript.Tools.getListIndicatorValue(4)
-        if not indLcd2 then
-            return
-        end
-        ufcLcdLine2 = ExportScript.Tools.coerce_nil_to_string(processUFCPLine(indLcd2, 2))
-        ExportScript.Tools.SendData(2002, ufcLcdLine2)
-
-        local indLcd3 = ExportScript.Tools.getListIndicatorValue(5)
-        if not indLcd3 then
-            return
-        end
-        ufcLcdLine3 = ExportScript.Tools.coerce_nil_to_string(processUFCPLine(indLcd3, 3))
-        ExportScript.Tools.SendData(2003, ufcLcdLine3)
-
-        local indLcd4 = ExportScript.Tools.getListIndicatorValue(6)
-        if not indLcd4 then
-            return
-        end
-        ufcLcdLine4 = ExportScript.Tools.coerce_nil_to_string(processUFCPLine(indLcd4, 4))
-        ExportScript.Tools.SendData(2004, ufcLcdLine4)
-
-
-        local radio_line_1
-        local radio_line_2
-        local radio_sql_light
-        local radio_or_light
-        local radio_take_light
-        local radio_go_light
-        local radio_tx_light
-
-        local radioDisplay = radio_parse_indication(7)
-        radio_line_1 = "        "
-        radio_line_2 = "        "
-        radio_sql_light = 0
-        radio_or_light = 0
-        radio_take_light = 0
-        radio_go_light= 0
-        radio_tx_light = 0
-        if not radioDisplay then
-            return
-        end
-        if radioDisplay.radio_sql then
-            radio_sql_light = 1;
-        end
-        if radioDisplay.radio_or then
-            radio_or_light = 1;
-        end
-        if radioDisplay.radio_take then
-            radio_take_light = 1;
-        end
-        if radioDisplay.radio_go then
-            radio_go_light = 1;
-        end
-        if radioDisplay.radio_tx then
-            radio_tx_light = 1;
-        end
-
-        -- Radio Display Line 2 uses unprintable characters to display the power symbol - replace these with something printable
-        if radioDisplay.radio_disp_l2 then
-            local charReplacements = {
-                [string.char(29)] = "_",
-                [string.char(30)] = "|",
-                [string.char(31)] = "^"
-            }
-            radio_line_2 = radioDisplay.radio_disp_l2:gsub(".", charReplacements)
-        end
-
-        -- original name for field is "#3#"" but this is modified in radio_parse_indication to "hash3hash"
-        if radioDisplay.hash3hash then
-            local tempString
-            if radioDisplay.radio_cursor and radioDisplay.radio_cursor:len() > 0 then
-                if radioDisplay.radio_disp_l1 and radioDisplay.radio_disp_l1:len() > 1 then
-                   tempString = radioDisplay.radio_disp_l1:sub(1, radioDisplay.radio_disp_l1:len() - 1) .. radioDisplay.radio_cursor
-                else
-                   tempString = radioDisplay.radio_cursor
-                end
-            else
-                tempString = radioDisplay.radio_disp_l1
-            end
-            radio_line_1 = radioDisplay.hash3hash:sub(1, radioDisplay.hash3hash:len() - tempString:len()) .. tempString
-        else
-            radio_line_1 = radioDisplay.radio_disp_l1
-        end
-
-        ExportScript.Tools.SendData(2010, radio_line_1)
-        ExportScript.Tools.SendData(2011, radio_line_2)
-        ExportScript.Tools.SendData(2012, radio_sql_light)
-        ExportScript.Tools.SendData(2013, radio_or_light)
-        ExportScript.Tools.SendData(2014, radio_take_light)
-        ExportScript.Tools.SendData(2015, radio_go_light)
-        ExportScript.Tools.SendData(2016, radio_tx_light)
-
-        -- local clk1 = "        "
-        -- local clk2 = "        "
-
-        -- local clock1 = ExportScript.Tools.getListIndicatorValue(11)
-        -- if not clock1 then
-        --     return
-        -- end
-        -- clk1 = coerce_nil_to_string(clock1.txt_win1)
-        -- ExportScript.Tools.SendData(2021, clk1)
-
-        -- local clock2 = ExportScript.Tools.getListIndicatorValue(12)
-        -- if not clock2 then
-        --     return
-        -- end
-        -- clk2 = coerce_nil_to_string(clock2.txt_win2)
-        -- ExportScript.Tools.SendData(2022, clk2)
+    -- 3 / 4 / 5 / 6
+    local indLcd1 = ExportScript.Tools.getListIndicatorValue(3)
+    if not indLcd1 then
+        return
     end
+    ufcLcdLine1 = ExportScript.Tools.coerce_nil_to_string(processUFCPLine(indLcd1, 1))
+    ExportScript.Tools.SendData(2001, ufcLcdLine1)
+
+    local indLcd2 = ExportScript.Tools.getListIndicatorValue(4)
+    if not indLcd2 then
+        return
+    end
+    ufcLcdLine2 = ExportScript.Tools.coerce_nil_to_string(processUFCPLine(indLcd2, 2))
+    ExportScript.Tools.SendData(2002, ufcLcdLine2)
+
+    local indLcd3 = ExportScript.Tools.getListIndicatorValue(5)
+    if not indLcd3 then
+        return
+    end
+    ufcLcdLine3 = ExportScript.Tools.coerce_nil_to_string(processUFCPLine(indLcd3, 3))
+    ExportScript.Tools.SendData(2003, ufcLcdLine3)
+
+    local indLcd4 = ExportScript.Tools.getListIndicatorValue(6)
+    if not indLcd4 then
+        return
+    end
+    ufcLcdLine4 = ExportScript.Tools.coerce_nil_to_string(processUFCPLine(indLcd4, 4))
+    ExportScript.Tools.SendData(2004, ufcLcdLine4)
+
+
+    local radio_line_1
+    local radio_line_2
+    local radio_sql_light
+    local radio_or_light
+    local radio_take_light
+    local radio_go_light
+    local radio_tx_light
+
+    local radioDisplay = radio_parse_indication(7)
+    radio_line_1 = "        "
+    radio_line_2 = "        "
+    radio_sql_light = 0
+    radio_or_light = 0
+    radio_take_light = 0
+    radio_go_light= 0
+    radio_tx_light = 0
+    if not radioDisplay then
+        return
+    end
+    if radioDisplay.radio_sql then
+        radio_sql_light = 1;
+    end
+    if radioDisplay.radio_or then
+        radio_or_light = 1;
+    end
+    if radioDisplay.radio_take then
+        radio_take_light = 1;
+    end
+    if radioDisplay.radio_go then
+        radio_go_light = 1;
+    end
+    if radioDisplay.radio_tx then
+        radio_tx_light = 1;
+    end
+
+    -- Radio Display Line 2 uses unprintable characters to display the power symbol - replace these with something printable
+    if radioDisplay.radio_disp_l2 then
+        local charReplacements = {
+            [string.char(29)] = "_",
+            [string.char(30)] = "|",
+            [string.char(31)] = "^"
+        }
+        radio_line_2 = radioDisplay.radio_disp_l2:gsub(".", charReplacements)
+    end
+
+    -- original name for field is "#3#"" but this is modified in radio_parse_indication to "hash3hash"
+    if radioDisplay.hash3hash then
+        local tempString
+        if radioDisplay.radio_cursor and radioDisplay.radio_cursor:len() > 0 then
+            if radioDisplay.radio_disp_l1 and radioDisplay.radio_disp_l1:len() > 1 then
+                tempString = radioDisplay.radio_disp_l1:sub(1, radioDisplay.radio_disp_l1:len() - 1) .. radioDisplay.radio_cursor
+            else
+                tempString = radioDisplay.radio_cursor
+            end
+        else
+            tempString = radioDisplay.radio_disp_l1
+        end
+        radio_line_1 = radioDisplay.hash3hash:sub(1, radioDisplay.hash3hash:len() - tempString:len()) .. tempString
+    else
+        radio_line_1 = radioDisplay.radio_disp_l1
+    end
+
+    ExportScript.Tools.SendData(2010, radio_line_1)
+    ExportScript.Tools.SendData(2011, radio_line_2)
+    ExportScript.Tools.SendData(2012, radio_sql_light)
+    ExportScript.Tools.SendData(2013, radio_or_light)
+    ExportScript.Tools.SendData(2014, radio_take_light)
+    ExportScript.Tools.SendData(2015, radio_go_light)
+    ExportScript.Tools.SendData(2016, radio_tx_light)
+
+    -- local clk1 = "        "
+    -- local clk2 = "        "
+
+    -- local clock1 = ExportScript.Tools.getListIndicatorValue(11)
+    -- if not clock1 then
+    --     return
+    -- end
+    -- clk1 = coerce_nil_to_string(clock1.txt_win1)
+    -- ExportScript.Tools.SendData(2021, clk1)
+
+    -- local clock2 = ExportScript.Tools.getListIndicatorValue(12)
+    -- if not clock2 then
+    --     return
+    -- end
+    -- clk2 = coerce_nil_to_string(clock2.txt_win2)
+    -- ExportScript.Tools.SendData(2022, clk2)
 end

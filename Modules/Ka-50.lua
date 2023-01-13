@@ -116,39 +116,36 @@ function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
 
 function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
-    if ExportScript.Config.ExportDisplaysKA50 == true then
-        -- ABRIS
-        local ABRIS = ExportScript.Tools.getListIndicatorValue(3) or {}
-        ExportScript.Tools.SendData(2031, ExportScript.Tools.coerce_nil_to_string(ABRIS.button1))
-        ExportScript.Tools.SendData(2032, ExportScript.Tools.coerce_nil_to_string(ABRIS.button2))
-        ExportScript.Tools.SendData(2033, ExportScript.Tools.coerce_nil_to_string(ABRIS.button3))
-        ExportScript.Tools.SendData(2034, ExportScript.Tools.coerce_nil_to_string(ABRIS.button4))
-        ExportScript.Tools.SendData(2035, ExportScript.Tools.coerce_nil_to_string(ABRIS.button5))
-        -- PVI-800 Navigation Control Panel 
-        local indPVI = ExportScript.Tools.getListIndicatorValue(5)
+    -- ABRIS
+    local ABRIS = ExportScript.Tools.getListIndicatorValue(3) or {}
+    ExportScript.Tools.SendData(2031, ExportScript.Tools.coerce_nil_to_string(ABRIS.button1))
+    ExportScript.Tools.SendData(2032, ExportScript.Tools.coerce_nil_to_string(ABRIS.button2))
+    ExportScript.Tools.SendData(2033, ExportScript.Tools.coerce_nil_to_string(ABRIS.button3))
+    ExportScript.Tools.SendData(2034, ExportScript.Tools.coerce_nil_to_string(ABRIS.button4))
+    ExportScript.Tools.SendData(2035, ExportScript.Tools.coerce_nil_to_string(ABRIS.button5))
+    -- PVI-800 Navigation Control Panel 
+    local indPVI = ExportScript.Tools.getListIndicatorValue(5)
 
-        if not indPVI then
-            return
-        end
-        local pviLine1      = ExportScript.Tools.coerce_nil_to_string(indPVI.txt_VIT)
-        local pviLine2      = ExportScript.Tools.coerce_nil_to_string(indPVI.txt_NIT)
-        local pviLine1Point = ExportScript.Tools.coerce_nil_to_string(indPVI.txt_OIT_PPM)
-        local pviLine2Point = ExportScript.Tools.coerce_nil_to_string(indPVI.txt_OIT_NOT)
-        ExportScript.Tools.SendData(2008, pviLine1)
-        ExportScript.Tools.SendData(2009, pviLine2)
-        ExportScript.Tools.SendData(2010, pviLine1Point)
-        ExportScript.Tools.SendData(2011, pviLine2Point)
-
-        ExportScript.Tools.SendData(801, ExportScript.Tools.coerce_nil_to_string(indPVI.txt_VIT_apostrophe1))
-        ExportScript.Tools.SendData(802, ExportScript.Tools.coerce_nil_to_string(indPVI.txt_VIT_apostrophe2))
-        ExportScript.Tools.SendData(803, ExportScript.Tools.coerce_nil_to_string(indPVI.txt_NIT_apostrophe1))
-        ExportScript.Tools.SendData(804, ExportScript.Tools.coerce_nil_to_string(indPVI.txt_NIT_apostrophe2))
-
-        local Cannon = ExportScript.Tools.getListIndicatorValue(6) or {}
-        ExportScript.Tools.SendData(2061, ExportScript.Tools.coerce_nil_to_string(Cannon.txt_cannon_count))
-
-        local UV26 = ExportScript.Tools.getListIndicatorValue(7) or {}
-        ExportScript.Tools.SendData(2071, ExportScript.Tools.coerce_nil_to_string(UV26.txt_digits))
-
+    if not indPVI then
+        return
     end
+    local pviLine1      = ExportScript.Tools.coerce_nil_to_string(indPVI.txt_VIT)
+    local pviLine2      = ExportScript.Tools.coerce_nil_to_string(indPVI.txt_NIT)
+    local pviLine1Point = ExportScript.Tools.coerce_nil_to_string(indPVI.txt_OIT_PPM)
+    local pviLine2Point = ExportScript.Tools.coerce_nil_to_string(indPVI.txt_OIT_NOT)
+    ExportScript.Tools.SendData(2008, pviLine1)
+    ExportScript.Tools.SendData(2009, pviLine2)
+    ExportScript.Tools.SendData(2010, pviLine1Point)
+    ExportScript.Tools.SendData(2011, pviLine2Point)
+
+    ExportScript.Tools.SendData(801, ExportScript.Tools.coerce_nil_to_string(indPVI.txt_VIT_apostrophe1))
+    ExportScript.Tools.SendData(802, ExportScript.Tools.coerce_nil_to_string(indPVI.txt_VIT_apostrophe2))
+    ExportScript.Tools.SendData(803, ExportScript.Tools.coerce_nil_to_string(indPVI.txt_NIT_apostrophe1))
+    ExportScript.Tools.SendData(804, ExportScript.Tools.coerce_nil_to_string(indPVI.txt_NIT_apostrophe2))
+
+    local Cannon = ExportScript.Tools.getListIndicatorValue(6) or {}
+    ExportScript.Tools.SendData(2061, ExportScript.Tools.coerce_nil_to_string(Cannon.txt_cannon_count))
+
+    local UV26 = ExportScript.Tools.getListIndicatorValue(7) or {}
+    ExportScript.Tools.SendData(2071, ExportScript.Tools.coerce_nil_to_string(UV26.txt_digits))
 end
