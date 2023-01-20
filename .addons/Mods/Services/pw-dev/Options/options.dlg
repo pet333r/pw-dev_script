@@ -943,6 +943,41 @@ dialog = {
 					["type"] = "Static",
 				},
 				----------------------------------------
+				-- Script Config version
+				["TipsConfigLabel"] = {
+					["params"] = {
+						["bounds"] = {
+							["h"] = 24,
+							["w"] = 120,
+							["x"] = lGridX4 + 100,
+							["y"] = 580,
+						},
+						["enabled"] = true,
+						["text"] = "$CONFIG_INSTALLED",
+						["tooltip"] = "",
+						["visible"] = true,
+						["zindex"] = 0,
+					},
+					["skin"] = HelpSkin,
+					["type"] = "Static",
+				},
+				["pwScriptConfigVersion"] = {
+					["params"] = {
+						["bounds"] = {
+							["h"] = 24,
+							["w"] = 60,
+							["x"] = lGridX4 + 180,
+							["y"] = 580,
+						},
+						["enabled"] = true,
+						["text"] = "-",
+						["tooltip"] = "",
+						["visible"] = true,
+						["zindex"] = 0,
+					},
+					["skin"] = HelpSkin,
+					["type"] = "Static",
+				},
 				-- Script NEW version
 				["TipsScriptNewLabel"] = {
 					["params"] = {

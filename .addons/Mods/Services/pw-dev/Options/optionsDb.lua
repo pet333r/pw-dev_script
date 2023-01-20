@@ -10,6 +10,8 @@ local exist = false
 local pwScriptConfigDlg = nil
 local content
 local scriptInit = ""
+local scriptVersion = ""
+local configVersion = ""
 
 local networkPortSend = 0
 local networkPortRecv = 0
@@ -63,15 +65,24 @@ local function ExecuteUpdate()
 	os.execute(command)
 end
 
-local function ReadVersionFile()
-	local file = io.open(VERSION_PATH, "r")
+local function getNthLine(fileName, n)
+    local file = io.open(fileName, "r")
+    local count = 1
 
-	local version = file:read("*all")
-	file:flush()
-	file:close()
-
-	pwScriptConfigDlg.pwScriptInstalledVersion:setText(version)
+	if file ~= nil then
+		for line in file:lines() do
+			if count == n then
+				file:close()
+				return line
+			end
+			count = count + 1
+		end
+	
+		file:close()
+	end
+	return "-"
 end
+
 local tableMapDiv = {
     DbOption.Item(_('0.1')):Value(0),
     DbOption.Item(_('0.2')):Value(1),
@@ -87,6 +98,8 @@ local function ReadConfigFile()
 		content = file:read("*all")
 		file:flush()
 		file:close()
+
+		configVersion = content:match("--%s+file%s+version:%s+(.-)\n")
 
 		if (content:match("ExportScript.Config")) then
 			scriptInit = "ExportScript.Config"
@@ -289,9 +302,10 @@ local function OnShowDialog(dialogBox)
 	-- zaladowanie danych z pliku zaraz po przejsciu na panel
 	ReadConfigFile()
 
-	-- pobranie aktualnie zainstalowanej wersji skryptu
-	ReadVersionFile()
-	-- auktualnienie stanu kontrolek
+	scriptVersion = getNthLine(VERSION_PATH, 1)
+	pwScriptConfigDlg.pwScriptInstalledVersion:setText(scriptVersion)
+	pwScriptConfigDlg.pwScriptConfigVersion:setText(configVersion)
+
 	UpdateOptions()
 end
 

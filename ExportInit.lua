@@ -32,6 +32,8 @@ dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Tools.lua]])
 dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Fdr.lua]])
 dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Maps.lua]])
 
+local versionFile = lfs.writedir()..[[Scripts\pw-dev_script\version]]
+
 -- Found DCS or FC Module
 ExportScript.FoundDCSModule = false
 ExportScript.FoundFCModule  = false
@@ -39,6 +41,9 @@ ExportScript.FoundNoModul   = true
 
 ExportScript.VersionStr = 2
 ExportScript.VersionId = 0
+ExportScript.ExportObject = 0
+ExportScript.ExportOwnship = 0
+ExportScript.ExportSensor = 0
 
 function ExportScript.CheckDcs()
 	if (string.match(lfs.writedir(), "openbeta")) then

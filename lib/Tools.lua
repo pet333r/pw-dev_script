@@ -40,7 +40,6 @@ local lShowOnMapGnd = false
 local lShowOnMapNav = false
 
 local actualMap
-local lSelfNavData = true
 local playerId
 
 local lDevicesNo = 0
@@ -49,8 +48,6 @@ local lDeviceIp2 = ""
 local lDeviceIp3 = ""
 local lDeviceIp4 = ""
 
-local lDeviceIpSelf = ""
-local lDeviceIpTws = ""
 local lDeviceIpMap = ""
 local lDevicePortMap = ExportScript.Config.Port
 
@@ -58,10 +55,7 @@ local lDevicePortMap = ExportScript.Config.Port
 local ms2knots  = 1.94384449 -- m/s to knots
 local ms2fpm    = 196.85 -- m/s to feets/minute
 local m2feets   = 3.2808399 -- meters to feets
-local rad2deg   = 57.3 -- radians to degrees
-
-local exportSelf = false
-local exportTws = false
+local rad2deg   = 57.296 -- radians to degrees
 
 local timestamp = 0
 local timestampNav = 0
@@ -93,10 +87,9 @@ function ExportScript.Tools.CheckObjectExport()
     if isObjects == true then
         value = 1
     else
-        value= 0
+        value = 0
     end
-    ExportScript.Tools.SendShortData("EO=" .. value)
-    ExportScript.Tools.WriteToLog("EO=" .. value)
+    return value
 end
 
 function ExportScript.Tools.CheckSensorExport()
@@ -109,10 +102,9 @@ function ExportScript.Tools.CheckSensorExport()
     if isSensors == true then
         value = 1
     else
-        value= 0
+        value = 0
     end
-    ExportScript.Tools.SendShortData("ES=" .. value)
-    ExportScript.Tools.WriteToLog("ES=" .. value)
+    return value
 end
 
 function ExportScript.Tools.CheckOwnshipExport()
@@ -125,10 +117,9 @@ function ExportScript.Tools.CheckOwnshipExport()
     if isOwnship == true then
         value = 1
     else
-        value= 0
+        value = 0
     end
-    ExportScript.Tools.SendShortData("EP=" .. value)
-    ExportScript.Tools.WriteToLog("EP=" .. value)
+    return value
 end
 
 function ExportScript.Tools.ExportMapPlayer(value)
@@ -148,7 +139,7 @@ function ExportScript.Tools.ExportMapNav(value)
 end
 
 
-function ExportScript.Tools.SetSecNav(value)
+function ExportScript.Tools.SetSecPla(value)
     timeSecPlayer = value
 end
 function ExportScript.Tools.SetSecWea(value)
@@ -277,7 +268,7 @@ function ExportScript.Tools.ProcessInput()
                         ExportScript.Tools.lDeviceIpMap = ""
                     else
                         ExportScript.Tools.ExportMapPlayer(true)
-                        ExportScript.Tools.SetSecNav(val)
+                        ExportScript.Tools.SetSecPla(val)
                     end
                 end
                 if opt == 1 then
@@ -1008,34 +999,6 @@ function ExportScript.Tools.ProcessNavWeapon()
     end
 end
 
-function ExportScript.Tools.ProcessTWS()
-    -- read from TWS FC3 export
-    local threats = LoGetTWSInfo()
-    local jsonThreats = "{ 'Mode':1.0, 'Emiters':[{ 'ID':'test', 'Power':0.5, 'Azimuth':0.8, 'Priority':150, 'SignalType':'scan', 'Type':'TEST' }] }\n"
-    if threats then
-        -- add emiters to json
-        local jsonEmiters = "[ "
-        for mode,emit in pairs (threats.Emitters) do
-            local jsonEmit = ""
-            local threatType = LoGetNameByType(emit.Type.level1, emit.Type.level2, emit.Type.level3, emit.Type.level4)
-            if threatType then
-                jsonEmit = string.format("{ 'ID':'%s', 'Power':%f, 'Azimuth':%f, 'Priority':%f, 'SignalType':'%s', 'Type':'%s' }", emit.ID, emit.Power, emit.Azimuth, emit.Priority, emit.SignalType, threatType)
-            else
-                jsonEmit = string.format("{ 'ID':'%s', 'Power':%f, 'Azimuth':%f, 'Priority':%f, 'SignalType':'%s', 'Type':'U' }", emit.ID, emit.Power, emit.Azimuth, emit.Priority, emit.SignalType)
-            end
-            if jsonEmiters ~= "[ " then
-                jsonEmiters = jsonEmiters .. ","
-            end
-            jsonEmiters = jsonEmiters .. jsonEmit
-        end
-        jsonEmiters = jsonEmiters .. "]"
-        jsonThreats = string.format("{ 'Mode':%f, 'Emiters':%s }\n", threats.Mode, jsonEmiters)
-
-        local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() end)
-
-        ExportScript.Tools.DebugProcess(try, jsonThreats)
-    end
-end
 
 function ExportScript.Tools.ProcessOutput()
     local _coStatus
@@ -1587,6 +1550,10 @@ function ExportScript.Tools.GetMap(player)
     return lMap
 end
 
+local function file_exists(name)
+    local f = io.open(name,"r")
+    if f ~= nil then io.close(f) return true else return false end
+end
 -- The function returns a correctly formatted string with the given radio frequency.
 -- Frequency: MHz/KHz, format: e.g. "7.3" or "5.2", fill with leading zeros (default false), least value of frequency (default 0.025 (MHz))
 function ExportScript.Tools.RoundFreqeuncy(Freqeuncy, Format, PrefixZeros, LeastValue)

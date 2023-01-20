@@ -1,5 +1,10 @@
 ExportScript.Fdr = {}
 
+local telemetryFolder = lfs.writedir() .. [[Logs\telemetry\]]
+lfs.mkdir(telemetryFolder)
+local pathCsv = telemetryFolder
+local pathKml = telemetryFolder
+
 ExportScript.Fdr.WriteFdrFile = true
 ExportScript.Fdr.WriteNavFile = true
 
@@ -14,9 +19,9 @@ end
 function ExportScript.Fdr.CsvFileInit()
     local datetime = ExportScript.Fdr.GetDateTime()
 
-    ExportScript.csvFile = io.open(lfs.writedir()..[[Logs\]] .. datetime ..  ".csv", "wa")
+    ExportScript.csvFile = io.open(pathCsv .. datetime ..  ".csv", "wa")
     if ExportScript.csvFile then
-        ExportScript.Tools.WriteToLog("write CSV file: " .. lfs.writedir() .. [[Logs\]] .. datetime .. ".csv\n")
+        ExportScript.Tools.WriteToLog("write CSV file: " .. pathCsv .. datetime .. ".csv\n")
         ExportScript.csvFile:write('\239\187\191') -- create a UTF-8 BOM
     end
 end
@@ -38,9 +43,9 @@ end
 function ExportScript.Fdr.NavFileInit(version)
     local datetime = ExportScript.Fdr.GetDateTime()
 
-    ExportScript.kmlFile = io.open(lfs.writedir()..[[Logs\]] .. datetime .. ".kml", "wa") -- "W+"
+    ExportScript.kmlFile = io.open(pathKml .. datetime .. ".kml", "wa") -- "W+"
     if ExportScript.kmlFile then
-        ExportScript.Tools.WriteToLog("write KML file: " .. lfs.writedir() .. [[Logs\]] .. datetime .. ".kml\n")
+        ExportScript.Tools.WriteToLog("write KML file: " .. pathKml .. datetime .. ".kml\n")
 
         ExportScript.kmlFile:write('\239\187\191') -- create a UTF-8 BOM
         ExportScript.kmlFile:write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")

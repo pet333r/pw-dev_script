@@ -1,5 +1,5 @@
--- #INFO
--- file version: 2021.07.30
+-- INFO
+-- file version: 2023.01.20
 
 --[[ IMPORTANT
     - Do not enter the same IP address multiple times
@@ -15,7 +15,6 @@ ExportScript.Config.MultiAppDevice = false;      -- true: if you want to use sev
 ExportScript.Config.Export  = true;              -- sending data
 ExportScript.Config.Host    = "192.168.0.12"     -- IP for 1st app
 ExportScript.Config.Port    = 5160;              -- port for sending data for all connected devices
-ExportScript.Config.Port2   = 5161;              -- port for sending data (if you use several apps on the same device)
 
 -- device 2
 ExportScript.Config.Export2 = true;             -- sending data
@@ -44,6 +43,7 @@ ExportScript.Config.WriteNavFile = false;       -- saving flight telemetry to CS
 -- data separator (do not change)
 ExportScript.Config.Separator = ";"
 
+-- for DCS Nav
 ExportScript.Config.MapPlayerDiv        = 1.0      -- refreshing the user's position on the map (less = more often) range: 0.1 - 1.0
 ExportScript.Config.MapMissileDiv       = 1.0      -- refreshing the missile position on the map (less = more often) range: 0.1 - 1.0
 ExportScript.Config.MapMapPlanesDiv     = 1.0      -- refreshing the planes/heli's position on the map (less = more often) range: 0.1 - 1.0
@@ -62,17 +62,3 @@ ExportScript.Config.ExportNavAllData        = true;      -- true if you want to 
 -- if your device is fast enough, you can lower this value to get smoother map performance
 ExportScript.Config.ExportNavLow            = 5;         -- ExportLowTickInterval multiplier
 ExportScript.Config.ExportNavAllLow         = 20;        --
-
--- export Displays data
-ExportScript.Config.ExportDisplaysA10C      = true;      -- A-10C
-ExportScript.Config.ExportDisplaysAV8BNA    = true;      -- AV8BNA (UFC, ODU, UVHF)
-ExportScript.Config.ExportDisplaysF14B      = true;      -- F-14B
-ExportScript.Config.ExportDisplaysF16       = true;      -- F-16C Viper (DED, CMDS, UHF)
-ExportScript.Config.ExportDisplaysFA18      = true;      -- F/A-18C (UFC)
-ExportScript.Config.ExportDisplaysFA18Ifei  = true;      -- F/A-18C (IFEI)
-ExportScript.Config.ExportDisplaysJF17      = true;      -- JF-17 (UFC)
-ExportScript.Config.ExportDisplaysM2000     = true;      -- Mirage 2000C
-ExportScript.Config.ExportDisplaysKA50      = true;      -- Ka-50
-
--- if you don't use CDU in A-10C and you want better performance on older devices, change to false
-ExportScript.Config.ExportA10C_CDU          = true;

@@ -72,5 +72,7 @@ cdata = {
 
     SCRIPT_INSTALLED = _('script installed:'),
     SCRIPT_INSTALLED_TOOLTIP = _('Script installed on your PC'),
+    CONFIG_INSTALLED = _('config.lua ver.:'),
+    CONFIG_INSTALLED_TOOLTIP = _('Your version of the Config.lua file'),
     SCRIPT_AVAIBLE = _('update avaible:'),
 }
