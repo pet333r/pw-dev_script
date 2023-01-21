@@ -14,17 +14,22 @@ Script for exporting data from DCS World
 - [automatic script installation](#automatic-script-installation)
   - [configure script in DCS World](#configure-script-in-dcs-world)
 - [files scheme](#files-scheme)
-- [Automatic script update](#automatic-update-script)
-- [How to find device IP](#how-to-find-ips-of-pc-and-android-device)
+- [manual installation](#manual-installation)
+  - [*if you don't have a folder 'Scripts'*](#if-you-dont-have-a-folder-scripts)
+  - [*if you have 'Scripts' folder and have installed other scripts*](#if-you-have-scripts-folder-and-have-installed-other-scripts)
+  - [*folder scheme*](#folder-scheme)
+  - [*edit Config.lua*](#edit-configlua)
+- [automatic update script](#automatic-update-script)
+- [how to find IP's of PC and Android device](#how-to-find-ips-of-pc-and-android-device)
   - [Android](#android)
   - [PC](#pc)
-- [Example connection](#example-connection)
-- [Features](#features)
-  - [show flight route](#additional-script-functions)
-  - [view telemetry data](#additional-script-functions)
-- [Known issues](#known-issues)
-- [FAQ](#faq)
-- [Compability](#compability)
+- [example connection](#example-connection)
+- [connection](#connection)
+- [features](#features)
+  - [additional script functions:](#additional-script-functions)
+- [known issues](#known-issues)
+- [faq](#faq)
+- [compability](#compability)
 - [Stream Deck support](#stream-deck-support)
   - [plugin config](#plugin-config)
 - [license](#license)
@@ -85,7 +90,8 @@ After installing the script, enter the IP addresses of your Android devices in t
 Scheme of folders with installed script
 ```
 DCS or DCS.openbeta
-├── Logs                            KML and CSV files are saved here
+├── Logs
+│   └── telemetry                   KML and CSV files are saved here
 ├── Mods
 │   └── Services
 │       └── pw-dev
@@ -178,7 +184,7 @@ To find Android device IP: on device go to `Settings > WiFi` > check the propert
 
 ## PC
 to find the IP address of your PC with DCS World installed: [https://www.digitalcitizen.life/find-ip-address-windows](https://www.digitalcitizen.life/find-ip-address-windows)  
-or run `my_local_PC_IP.cmd` file in script folder, a console window will open  
+or run `my_local_PC_IP.cmd` file in script folder or click on the `PC IP` button on the script configuration panel in DCS World, a console window will open  
 
 example:  
 [![](.gfx/ipconfig_small.png)](.gfx/ipconfig.png)  
