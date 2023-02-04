@@ -1,14 +1,12 @@
--- Main Table
 ExportScript = {}
 
 ExportScript.Id = string.format("%08x*",os.time())
 
--- State data for export
 ExportScript.PacketSize     = 0
 ExportScript.SendStrings    = {}
 ExportScript.PacketNavSize  = 0
 ExportScript.SendNavStrings	= {}
--- ExportScript.PacketNavAllSize  = 0
+
 ExportScript.SendNavAllStrings	= {}
 ExportScript.LastData       = {}
 ExportScript.LastDataAll       = {}
@@ -34,7 +32,6 @@ dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Maps.lua]])
 
 local versionFile = lfs.writedir()..[[Scripts\pw-dev_script\version]]
 
--- Found DCS or FC Module
 ExportScript.FoundDCSModule = false
 ExportScript.FoundFCModule  = false
 ExportScript.FoundNoModul   = true
@@ -119,24 +116,14 @@ function LuaExportStop()
 	end
 end
 
-
 function ExportScript.Start()
-	-- Works once just before mission start.
 	package.path  = package.path..";.\\LuaSocket\\?.lua"
 	package.cpath = package.cpath..";.\\LuaSocket\\?.dll"
 
 	ExportScript.CheckDcs()
 
-	--request current version info (as it showed by Windows Explorer fo DCS.exe properties)
 	local version = LoGetVersionInfo()
 	ExportScript.CheckDcsVersionId(version)
-
-	if (ExportScript.Tools.DebugScript == true) then
-		ExportScript.logFile = io.open(ExportScript.Tools.LogPath, "wa") -- "W+"
-		if ExportScript.logFile then
-			ExportScript.logFile:write('\239\187\191') -- create a UTF-8 BOM
-		end
-	end
 
 	if (ExportScript.Fdr ~= nil) then
 		if (ExportScript.Config.WriteNavFile ~= nil and ExportScript.Config.WriteNavFile == true) then
@@ -144,29 +131,21 @@ function ExportScript.Start()
 		end
 
 		if (ExportScript.Config.WriteNavFile ~= nil and ExportScript.Config.WriteNavFile == true) then
-			ExportScript.Fdr.NavFileInit(version)
+			ExportScript.Fdr.NavFileInit(ExportScript.VersionId)
 		end
 	end
 	
 	ExportScript.Tools.createUDPSender()
 	ExportScript.Tools.createUDPListner()
 
-	ExportScript.AF = {} -- Table for Auxiliary functions
+	ExportScript.AF = {}
 
 	ExportScript.NoLuaExportBeforeNextFrame = false
-	ExportScript.Tools.SelectModule()   -- point globals to Module functions and data.
+	ExportScript.Tools.SelectModule()
 
-	if (ExportScript.Tools.DebugScript == true) then
-		if ExportScript.logFile then
-			ExportScript.logFile:write(string.format("ProductName: %s\n", version.ProductName))
-			ExportScript.logFile:write(string.format("FileVersion: %s\n", ExportScript.VersionId))
-			ExportScript.logFile:write(string.format("ProductVersion: %s\n", ExportScript.VersionId))
-		end
-	end
-
-	-- ExportScript.Tools.CheckObjectExport()
-	-- ExportScript.Tools.CheckSensorExport()
-	-- ExportScript.Tools.CheckOwnshipExport()
+	-- ExportScript.ExportObject = ExportScript.Tools.CheckObjectExport()
+	-- ExportScript.ExportSensor = ExportScript.Tools.CheckSensorExport()
+	-- ExportScript.ExportOwnship = ExportScript.Tools.CheckOwnshipExport()
 
 	ExportScript.Tools.playerId = ExportScript.Tools.GetPlayerId()
 
@@ -207,9 +186,7 @@ function ExportScript.LuaExportActivityNextEvent(t)
 end
 
 function ExportScript.Stop()
-	-- Works once just after mission stop.
 	ExportScript.Tools.SendShortData("EX=OF")
-	-- ExportScript.Tools.FlushData()
 
 	ExportScript.UDPsender:close()
 	if ExportScript.Config.Listener then
@@ -218,15 +195,6 @@ function ExportScript.Stop()
 	
 	ExportScript.ModuleName   = nil
 	ExportScript.FoundNoModul = false
-
-	if (ExportScript.Tools.DebugScript == true) then
-		if ExportScript.logFile then
-			ExportScript.Tools.WriteToLog("====== EOF ======")
-			ExportScript.logFile:flush()
-			ExportScript.logFile:close()
-			ExportScript.logFile = nil
-		end
-	end
 
 	if (ExportScript.Fdr ~= nil) then
 		if (ExportScript.Config.WriteNavFile ~= nil and ExportScript.Config.WriteNavFile == true) then

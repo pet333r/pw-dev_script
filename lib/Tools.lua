@@ -73,9 +73,6 @@ local timeSecGnd = 9
 local timeSecNav = 8
 
 ExportScript.Tools.LogPath = lfs.writedir()..[[Logs\pw-dev.log]]
-ExportScript.Tools.DebugScript = false
-local debugIp = "127.0.0.1"
-local debugPort = ExportScript.Config.Port
 
 function ExportScript.Tools.CheckObjectExport()
     isObjects = LoIsObjectExportAllowed()
@@ -122,38 +119,17 @@ function ExportScript.Tools.CheckOwnshipExport()
     return value
 end
 
-function ExportScript.Tools.ExportMapPlayer(value)
-    lShowOnMapPlayer = value
-end
-function ExportScript.Tools.ExportMapWea(value)
-    lShowOnMapWea = value
-end
-function ExportScript.Tools.ExportMapAir(value)
-    lShowOnMapAir = value
-end
-function ExportScript.Tools.ExportMapGnd(value)
-    lShowOnMapGnd = value
-end
-function ExportScript.Tools.ExportMapNav(value)
-    lShowOnMapNav = value
-end
+function ExportScript.Tools.ExportMapPlayer(value) lShowOnMapPlayer = value end
+function ExportScript.Tools.ExportMapWea(value) lShowOnMapWea = value end
+function ExportScript.Tools.ExportMapAir(value) lShowOnMapAir = value end
+function ExportScript.Tools.ExportMapGnd(value) lShowOnMapGnd = value end
+function ExportScript.Tools.ExportMapNav(value)lShowOnMapNav = value end
 
-
-function ExportScript.Tools.SetSecPla(value)
-    timeSecPlayer = value
-end
-function ExportScript.Tools.SetSecWea(value)
-    timeSecWea = value
-end
-function ExportScript.Tools.SetSecAir(value)
-    timeSecAir = value
-end
-function ExportScript.Tools.SetSecGnd(value)
-    timeSecGnd = value
-end
-function ExportScript.Tools.SetSecNav(value)
-    timeSecNav = value
-end
+function ExportScript.Tools.SetSecPla(value) timeSecPlayer = value end
+function ExportScript.Tools.SetSecWea(value) timeSecWea = value end
+function ExportScript.Tools.SetSecAir(value) timeSecAir = value end
+function ExportScript.Tools.SetSecGnd(value) timeSecGnd = value end
+function ExportScript.Tools.SetSecNav(value) timeSecNav = value end
 
 function ExportScript.Tools.GetDcsVersionStr()
     return "Ver=" .. ExportScript.VersionStr .. ExportScript.Config.Separator
@@ -194,7 +170,6 @@ function ExportScript.Tools.createUDPSender()
 		ExportScript.UDPsender = ExportScript.socket.udp()
         ExportScript.UDPsender:setoption('broadcast', true)
 		ExportScript.socket.try(ExportScript.UDPsender:setsockname("*", 0))
-		--ExportScript.socket.try(ExportScript.UDPsender:settimeout(.004)) -- set the timeout for reading the socket; 250 fps
 	end)
     _createUDPSender()
 end
@@ -214,19 +189,15 @@ end
 
 function ExportScript.Tools.ExportInit()
     playerId = ExportScript.Tools.GetPlayerId()
-    -- ExportScript.Tools.SendShortData("EX=ON")
+    coalition = LoGetSelfData().CoalitionID
+    callsign = LoGetPilotName()
     ExportScript.Tools.SendShortData(ExportScript.Tools.GetDcsVersionStr() .. ExportScript.Tools.GetDcsVersionId())
     ExportScript.Tools.SendShortData("Map=" .. actualMap .. ExportScript.Config.Separator)
-    ExportScript.Tools.SendShortData("File=" .. ExportScript.ModuleName .. ExportScript.Config.Separator .. "Coal=" .. LoGetSelfData().CoalitionID .. ExportScript.Config.Separator)
+    ExportScript.Tools.SendShortData("File=" .. ExportScript.ModuleName .. ExportScript.Config.Separator .. "Coal=" .. coalition .. ExportScript.Config.Separator .. "Call=" .. callsign .. ExportScript.Config.Separator)
 end
 
 function ExportScript.Tools.ProcessInput()
     local _command, _commandArgs, _device
-    -- C1,3001,4
-    -- lComand = C
-    -- _commandArgs[1] = 1 => _device
-    -- _commandArgs[2] = 3001 => ButtonID
-    -- _commandArgs[3] = 4 => Value
     if ExportScript.Config.Listener then
 		ExportScript.UDPListenerValues = {}
 
@@ -245,7 +216,6 @@ function ExportScript.Tools.ProcessInput()
         if _input then
             _command = string.sub(_input,1,1)
 
-            -- R == Reset
             if _command == "R" then
                 ExportScript.Tools.ResetChangeValues()
                 initiated = false
@@ -308,14 +278,12 @@ function ExportScript.Tools.ProcessInput()
             if (_command == "C") then
                 _commandArgs = ExportScript.Tools.StrSplit(string.sub(_input,2),",")
 				local _deviceID = tonumber(_commandArgs[1])
-                -- DCS Modules arguments
 				if _deviceID < 1000 then
 					_device = GetDevice(_commandArgs[1])
 					if ExportScript.FoundDCSModule and type(_device) == "table" then
 						_device:performClickableAction(_commandArgs[2],_commandArgs[3])
 					end
 
-                -- Buttons
                 elseif _deviceID == 2000 then
                     if ExportScript.FoundDCSModule or ExportScript.FoundFCModule then
                         local lComandID = (tonumber(_commandArgs[2]))
@@ -324,7 +292,6 @@ function ExportScript.Tools.ProcessInput()
                         end
                     end
 
-                -- Analog
                 elseif _deviceID == 2001 then
                     if ExportScript.FoundDCSModule or ExportScript.FoundFCModule then
                         local lComandID = (tonumber(_commandArgs[2]))
@@ -395,7 +362,6 @@ function ExportScript.Tools.ProcessInput()
                 end
 
             end
-            ExportScript.Tools.WriteToLog(from .. " : " .. _input .. "\n")
 		end
 	end
 end
@@ -477,7 +443,7 @@ function ExportScript.Tools.GetPlayerData()
 
     PlayerData.Wind = LoGetVectorWindVelocity()
     PlayerData.WindSpd = math.abs(math.sqrt(math.pow(PlayerData.Wind.x, 2) + math.pow(PlayerData.Wind.y, 2) + math.pow(PlayerData.Wind.z, 2)))
-    PlayerData.WindAng = math.atan2(PlayerData.Wind.y, PlayerData.Wind.x) * 180/math.pi
+    PlayerData.WindAng = math.atan2(PlayerData.Wind.y, PlayerData.Wind.x) * rad2deg + 180 --* 180/math.pi
 
     if ((ExportScript.ModuleName == "A-10C") or (ExportScript.ModuleName == "A-10C_2")) then
         PlayerData.AltGearNose  = ExportScript.Tools.GetArgumentsValue(659, "%d")
@@ -681,7 +647,6 @@ function ExportScript.Tools.GetPlayerData()
     end
 end
 
---* zapis danych do plikow
 function ExportScript.Tools.WriteToNavFiles()
     if (ExportScript.Fdr ~= nil) then
         -- 0-6
@@ -718,7 +683,6 @@ function ExportScript.Tools.WriteToNavFiles()
     end
 end
 
---* funkcja do przesylania danych nawigacyjnych konkretnych obiektow na mapie
 function ExportScript.Tools.ProcessNavDataD()
 	ExportScript.Tools.NavDataD = {}
     ExportScript.Tools.NavDataD[0]  = string.format("%d", ExportScript.Tools.GetTime())
@@ -748,7 +712,6 @@ function ExportScript.Tools.ProcessNavDataD()
 	end
 end
 
---* obsluga obiektow naziemnych
 function ExportScript.Tools.ProcessNavGround()
     local obj = LoGetWorldObjects()
     if obj == nil then
@@ -763,7 +726,6 @@ function ExportScript.Tools.ProcessNavGround()
     for key, val in pairs(obj) do
         id = key
 
-        -- if (val.Type.level2 == 8 or val.Type.level2 == 9 or val.Type.level2 == 16 or val.Type.level2 == 17) then
         if (val.Type.level2 == 16) then
             if val.Flags.Born == true then
                 
@@ -819,7 +781,6 @@ function ExportScript.Tools.ProcessNavGround()
     end
 end
 
---* obsluga obiektow "w locie"
 function ExportScript.Tools.ProcessNavAir()
     local obj = LoGetWorldObjects()
     if obj == nil then
@@ -999,7 +960,6 @@ function ExportScript.Tools.ProcessNavWeapon()
     end
 end
 
-
 function ExportScript.Tools.ProcessOutput()
     local _coStatus
 
@@ -1007,7 +967,7 @@ function ExportScript.Tools.ProcessOutput()
     if _info ~= nil then
         if ExportScript.ModuleName ~= _info.Name then
             ExportScript.NoLuaExportBeforeNextFrame = false
-			ExportScript.Tools.SelectModule()  -- point globals to Module functions and data.
+			ExportScript.Tools.SelectModule()
 			return
         else
             if (initiated == false) then
@@ -1104,7 +1064,6 @@ function ExportScript.Tools.ProcessOutput()
         ExportScript.Tools.FlushNavData()
     end
 
-    -- FC3 Aircraft
     elseif ExportScript.FoundFCModule then
         ExportScript.AF.EventNumber = os.clock()
 
@@ -1184,40 +1143,36 @@ function ExportScript.Tools.ProcessOutput()
     if (ExportScript.Config.ExportNavData == true) then
         ExportScript.Tools.FlushNavData()
     end
-    else -- No Module found
+    else
         if ExportScript.FoundNoModul then
-            ExportScript.Tools.SelectModule()  -- point globals to Module functions and data.
+            ExportScript.Tools.SelectModule()
         end
     end
 end
 
 function ExportScript.Tools.StrSplit(str, delim, maxNb)
-    -- Eliminate bad cases...
     if string.find(str, delim) == nil then
         return { str }
     end
     if maxNb == nil or maxNb < 1 then
-        maxNb = 0    -- No limit
+        maxNb = 0
     end
     local lResult = {}
     local lPat = "(.-)" .. delim .. "()"
     local lNb  = 0
     local lLastPos
     for part, pos in string.gfind(str, lPat) do
-	-- for part, pos in string.gmatch(str, lPat) do -- Lua Version > 5.1
         lNb = lNb + 1
         lResult[lNb] = part
         lLastPos = pos
         if lNb == maxNb then break end
     end
-    -- Handle the last field
     if lNb ~= maxNb then
         lResult[lNb + 1] = string.sub(str, lLastPos)
     end
     return lResult
 end
 
--- Status Gathering Functions
 function ExportScript.Tools.ProcessArguments(device, arguments)
     local _argument , _format , _argumentValue
     local _counter = 0
@@ -1247,8 +1202,6 @@ function ExportScript.Tools.SendPacket(packet)
     if (ExportScript.Tools.lDeviceIpMap ~= "") then
         try(ExportScript.UDPsender:sendto(packet, ExportScript.Tools.lDeviceIpMap, lDevicePortMap))
     end
-
-    ExportScript.Tools.DebugProcess(try, packet)
 end
 
 function ExportScript.Tools.SendShortData(message)
@@ -1308,13 +1261,10 @@ function ExportScript.Tools.SendShortData(message)
                 try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host4, ExportScript.Config.Port))
             end
         end
-
-        ExportScript.Tools.DebugProcess(try, _packet)
 	end)
     _flushData()
 end
 
--- Network Functions for GlassCockpit
 function ExportScript.Tools.SendData(id, value)
     if string.len(value) > 3 and value == string.sub("-0.00000000",1, string.len(value)) then
         value = value:sub(2)
@@ -1337,7 +1287,6 @@ end
 function ExportScript.Tools.FlushData()
 	local _flushData = ExportScript.socket.protect(function()
 		if #ExportScript.SendStrings > 0 then
-            -- local _packet = "File=" .. ExportScript.ModuleName .. ExportScript.Config.Separator .. "R4G" .. ExportScript.Config.Separator ..
             local _packet = "R4G" .. ExportScript.Config.Separator ..
                 table.concat(ExportScript.SendStrings, ExportScript.Config.Separator) .. ExportScript.Config.Separator .. "\n"
 
@@ -1393,14 +1342,11 @@ function ExportScript.Tools.FlushData()
 
 			ExportScript.SendStrings = {}
 			ExportScript.PacketSize  = 0
-
-            ExportScript.Tools.DebugProcess(try, _packet)
 		end
 	end)
     _flushData()
 end
 
--- NavData
 function ExportScript.Tools.SendNavData(id, value)
     if ExportScript.LastDataNav[id] == nil or ExportScript.LastDataNav[id] ~= value then
         local _data    =  id .. "=" .. value
@@ -1419,7 +1365,6 @@ end
 function ExportScript.Tools.FlushNavData()
 	local _flushData = ExportScript.socket.protect(function()
 		if #ExportScript.SendNavStrings > 0 then
-            -- local _packet = "N4D" .. ExportScript.Config.Separator .. "Mod=" .. ExportScript.ModuleName .. ExportScript.Config.Separator ..
             local _packet = "N4D" .. ExportScript.Config.Separator ..
                 table.concat(ExportScript.SendNavStrings, ExportScript.Config.Separator) .. ExportScript.Config.Separator .. "\n"
 
@@ -1431,8 +1376,6 @@ function ExportScript.Tools.FlushNavData()
 
 			ExportScript.SendNavStrings = {}
 			ExportScript.PacketNavSize  = 0
-
-            ExportScript.Tools.DebugProcess(try, _packet)
 		else
 
 		end
@@ -1456,7 +1399,6 @@ function ExportScript.Tools.FlushNavAllData()
         end
 
         ExportScript.SendNavAllStrings = {}
-        ExportScript.Tools.DebugProcess(try, _packet)
 	end)
     _flushData()
 end
@@ -1466,13 +1408,12 @@ function ExportScript.Tools.ResetChangeValues()
 end
 
 function ExportScript.Tools.SelectModule()
-   -- Select Module...
     ExportScript.FoundDCSModule = false
     ExportScript.FoundFCModule  = false
     ExportScript.FoundNoModul   = true
 
     local _info = LoGetSelfData()
-    if _info == nil then  -- End SelectModule, if don't selected a aircraft
+    if _info == nil then
         return
     end
 
@@ -1491,7 +1432,6 @@ function ExportScript.Tools.SelectModule()
     end
 
     if string.len(_moduleFile) > 1 then
-        -- load Aircraft File
         dofile(_moduleFile)
 
         ExportScript.FirstNewDataSend      = ExportScript.Config.FirstNewDataSend
@@ -1506,7 +1446,6 @@ function ExportScript.Tools.SelectModule()
             if _counter > 0 then
                 ExportScript.EveryFrameArguments = ExportScript.ConfigEveryFrameArguments
             else
-                -- no Arguments
                 ExportScript.EveryFrameArguments = {}
             end
             _counter = 0
@@ -1517,7 +1456,6 @@ function ExportScript.Tools.SelectModule()
             if _counter > 0 then
                 ExportScript.Arguments = ExportScript.ConfigArguments
             else
-                -- no Arguments
                 ExportScript.Arguments = {}
             end
 
@@ -1540,7 +1478,6 @@ function ExportScript.Tools.GetMap(player)
         if player.LatLongAlt.Lat > LatLong.Lat2 and player.LatLongAlt.Lat < LatLong.Lat1 then
             if player.LatLongAlt.Long > LatLong.Long1 and player.LatLongAlt.Long < LatLong.Long2 then
                 lMap = Map
-                ExportScript.Tools.WriteToLog("Loaded Map: " .. Map .. "\n")
                 break
             end
         else
@@ -1554,8 +1491,7 @@ local function file_exists(name)
     local f = io.open(name,"r")
     if f ~= nil then io.close(f) return true else return false end
 end
--- The function returns a correctly formatted string with the given radio frequency.
--- Frequency: MHz/KHz, format: e.g. "7.3" or "5.2", fill with leading zeros (default false), least value of frequency (default 0.025 (MHz))
+
 function ExportScript.Tools.RoundFreqeuncy(Freqeuncy, Format, PrefixZeros, LeastValue)
 	local _freqeuncy   = Freqeuncy   or 0.0
 	local _format      = Format      or "7.3"
@@ -1619,8 +1555,6 @@ function ExportScript.Tools.getListCockpitParams()
 	return TmpReturn
 end
 
--- The function return a table with values of given indicator
--- The value is retrievable via a named index. e.g. TmpReturn.txt_digits
 function ExportScript.Tools.getListIndicatorValue(IndicatorID)
 	local ListIindicator = list_indication(IndicatorID)
 	local TmpReturn = {}
@@ -1701,8 +1635,6 @@ function ExportScript.Tools.getListIndicatorValueByNameLeft(IndicatorID, NameID,
 	return data
 end
 
--- funkcja zwraca konkretna wartosc dla danego klucza w tabeli argumentow
--- pobiera: nr argumentu / nazwa klucza / dlugosc zwracanego ciagu
 function ExportScript.Tools.getListIndicatorValueByName(IndicatorID, NameID, Length)
 	local ListIindicator = list_indication(IndicatorID)
 
@@ -1711,7 +1643,6 @@ function ExportScript.Tools.getListIndicatorValueByName(IndicatorID, NameID, Len
     end
 
     local data = ""
-    -- tworzy pusty string o danej dlugosci
     while data:len() < Length do data = data .. " " end
 
 	local ListindicatorMatch = ListIindicator:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
@@ -1728,8 +1659,6 @@ function ExportScript.Tools.getListIndicatorValueByName(IndicatorID, NameID, Len
 	return data
 end
 
--- The function format a given string for a display
--- String: value for show in display, maxChars: Display size (default 5), LEFTorRIGHT: flush with left "l" or right "r" site (default "r")
 function ExportScript.Tools.DisplayFormat(String, maxChars, LEFTorRight, DAC)
 	local lString      = String      or ""
 	local lmaxChars    = maxChars    or 5
@@ -1770,10 +1699,6 @@ function ExportScript.Tools.mergeString(original_string, new_data, location)
 	return before..table.concat(merged)..after
 end
 
--- split function for string libraray
--- stringvalue: value
--- delimiter  : delimiter for split
--- for example, see http://www.lua.org/manual/5.1/manual.html#5.4.1
 function ExportScript.Tools.split(stringvalue, delimiter)
     result = {};
     for match in (stringvalue..delimiter):gmatch("(.-)"..delimiter) do
@@ -1790,18 +1715,11 @@ function ExportScript.Tools.coerce_nil_to_string(value)
 	end
 end
 
--- round function for math libraray
--- number  : value
--- decimals: number of decimal
--- method  :  ceil: Returns the smallest integer larger than or equal to number
---           floor: Returns the smallest integer smaller than or equal to number
 function ExportScript.Tools.round(number, decimals, method)
     if string.find(number, "%p" ) ~= nil then
         decimals = decimals or 0
         local lFactor = 10 ^ decimals
         if (method == "ceil" or method == "floor") then
-            -- ceil: Returns the smallest integer larger than or equal to number
-            -- floor: Returns the smallest integer smaller than or equal to number
             return math[method](number * lFactor) / lFactor
         else
             return tonumber(("%."..decimals.."f"):format(number))
@@ -1811,24 +1729,29 @@ function ExportScript.Tools.round(number, decimals, method)
     end
 end
 
-function ExportScript.Tools.DebugProcess(try, packet)
-    if (ExportScript.Tools.DebugScript == true) then
-        try(ExportScript.UDPsender:sendto(packet, debugIp, debugPort))
-        ExportScript.Tools.WriteToLog(packet)
-    end
-end
+function ExportScript.Tools.GetFileData(fileName, n)
+    local file = io.open(fileName, "r")
+    local fTmp = io.open(fileName, "r")
+    local count = 1
+    local lNum = 0
 
-function ExportScript.Tools.WriteToLog(message)
-    if (ExportScript.logFile and ExportScript.Tools.DebugScript == true) then
-        local ltmp, lMiliseconds = math.modf(os.clock())
-        if lMiliseconds == 0 then
-            lMiliseconds='000'
-        else
-            lMiliseconds=tostring(lMiliseconds):sub(3,5)
+    if file ~= nil then
+        for line in fTmp:lines() do
+            lNum = lNum + 1
         end
-        ExportScript.logFile:write(os.date("%X") .. ":" .. lMiliseconds .. " : " .. message)
+        fTmp:close()
+
+        for line in file:lines() do
+            if n > lNum then
+                return "-"
+            else
+                if count == n then
+                    file:close()
+                    return line
+                end
+                count = count + 1
+            end
+        end
+        file:close()
     end
 end
-
-
---------------------------------------------------------------------------------------------
