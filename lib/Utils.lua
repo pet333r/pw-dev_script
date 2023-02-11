@@ -9,8 +9,8 @@ do
 
     PWDEV.Properties.MultiAppDevice = false
 
-    PWDEV.Properties.Export  = false
-    PWDEV.Properties.Host    = ""
+    PWDEV.Properties.Export1 = false
+    PWDEV.Properties.Host1   = ""
     PWDEV.Properties.Port    = 0
 
     PWDEV.Properties.Export2 = false
@@ -53,8 +53,8 @@ end
 
 function PWDEV.Utils.SetOld()
     PWDEV.Properties.MultiAppDevice         = ExportScript.Config.MultiAppDevice
-    PWDEV.Properties.Export                 = ExportScript.Config.Export
-    PWDEV.Properties.Host                   = ExportScript.Config.Host
+    PWDEV.Properties.Export1                = ExportScript.Config.Export
+    PWDEV.Properties.Host1                  = ExportScript.Config.Host
     PWDEV.Properties.Port                   = ExportScript.Config.Port
     PWDEV.Properties.Export2                = ExportScript.Config.Export2
     PWDEV.Properties.Host2                  = ExportScript.Config.Host2
@@ -86,8 +86,8 @@ end
 
 function PWDEV.Utils.SetNew()
     PWDEV.Properties.MultiAppDevice         = PWDEV.Config.MultiAppDevice
-    PWDEV.Properties.Export                 = PWDEV.Config.Export
-    PWDEV.Properties.Host                   = PWDEV.Config.Host
+    PWDEV.Properties.Export1                = PWDEV.Config.Export1
+    PWDEV.Properties.Host1                  = PWDEV.Config.Host1
     PWDEV.Properties.Port                   = PWDEV.Config.Port
     PWDEV.Properties.Export2                = PWDEV.Config.Export2
     PWDEV.Properties.Host2                  = PWDEV.Config.Host2

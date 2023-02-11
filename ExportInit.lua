@@ -24,13 +24,46 @@ PrevExportScript.LuaExportBeforeNextFrame = LuaExportBeforeNextFrame
 PrevExportScript.LuaExportAfterNextFrame  = LuaExportAfterNextFrame
 PrevExportScript.LuaExportActivityNextEvent = LuaExportActivityNextEvent
 
+local versionFile = lfs.writedir()..[[Scripts\pw-dev_script\version]]
+local configFile = lfs.writedir()..[[Scripts\pw-dev_script\Config.lua]]
+local minConfig = "2023.02.11"
+
+local function GetConfigFileVersion()
+    local file = io.open(configFile, "r")
+	if (file ~= nil) then
+		content = file:read("*all")
+		file:flush()
+		file:close()
+		version = content:match("--%s+file%s+version:%s+(.-)\n")
+		if (version ~= nil) then
+			version = string.gsub(version, "[\r\n]", "")
+			version = string.gsub(version, "%s+", "")
+			return version
+		else
+			return 0
+		end
+	else
+		return 0
+	end
+end
+
+local function getTimestampFromDate(date)
+    if (date == 0) then
+        return 0
+    else
+        local pattern = "(%d+).(%d+).(%d+)"
+        local dyear, dmonth, dday = date:match(pattern)
+        local timestamp = os.time({year = dyear, month = dmonth, day = dday})
+        return timestamp
+    end
+end
 dofile(lfs.writedir()..[[Scripts\pw-dev_script\Config.lua]])
 ExportScript.utf8 = dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\utf8.lua]])
 dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Tools.lua]])
 dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Fdr.lua]])
 dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Maps.lua]])
 
-local versionFile = lfs.writedir()..[[Scripts\pw-dev_script\version]]
+local separator = ExportScript.Config.Separator
 
 ExportScript.FoundDCSModule = false
 ExportScript.FoundFCModule  = false
@@ -143,9 +176,9 @@ function ExportScript.Start()
 	ExportScript.NoLuaExportBeforeNextFrame = false
 	ExportScript.Tools.SelectModule()
 
-	-- ExportScript.ExportObject = ExportScript.Tools.CheckObjectExport()
-	-- ExportScript.ExportSensor = ExportScript.Tools.CheckSensorExport()
-	-- ExportScript.ExportOwnship = ExportScript.Tools.CheckOwnshipExport()
+	ExportScript.ExportObject = ExportScript.Tools.CheckObjectExport()
+	ExportScript.ExportSensor = ExportScript.Tools.CheckSensorExport()
+	ExportScript.ExportOwnship = ExportScript.Tools.CheckOwnshipExport()
 
 	ExportScript.Tools.playerId = ExportScript.Tools.GetPlayerId()
 

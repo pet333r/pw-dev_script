@@ -35,6 +35,8 @@ local hwStreamDeckPort = 0
 
 local writeNavFile = false
 
+local host1New = false
+local export1New = false
 
 local function CheckPcIp()
 	local command = string.format("start cmd /k ipconfig.exe")
@@ -100,6 +102,7 @@ local function ReadConfigFile()
 		file:close()
 
 		configVersion = content:match("--%s+file%s+version:%s+(.-)\n")
+		configVersion = string.gsub(configVersion, "[\r\n]", "")
 
 		if (content:match("ExportScript.Config")) then
 			scriptInit = "ExportScript.Config"
@@ -116,7 +119,15 @@ local function ReadConfigFile()
 		if (multiAppEnableTmp == "true") then multiAppEnabled = true else multiAppEnabled = false end
 
 		-- IP's
-		deviceIp1 = content:match(scriptInit .. ".Host%s+=%s+\"(.-)\"")
+		local tmp = content:match(scriptInit .. ".Host%s+=%s+\"(.-)\"")
+		if (tmp ~= nil) then
+            deviceIp1 = tmp
+			host1New = false
+        else
+            deviceIp1 = content:match(scriptInit .. ".Host1%s+=%s+\"(.-)\"")
+			host1New = true
+        end
+		
 		deviceIp2 = content:match(scriptInit .. ".Host2%s+=%s+\"(.-)\"")
 		deviceIp3 = content:match(scriptInit .. ".Host3%s+=%s+\"(.-)\"")
 		deviceIp4 = content:match(scriptInit .. ".Host4%s+=%s+\"(.-)\"")
@@ -125,6 +136,12 @@ local function ReadConfigFile()
 		hwStreamDeckPort 	= content:match(scriptInit .. ".StreamDeckPort%s+=%s+(.-);")
 
 		local device1EnableTmp = content:match(scriptInit .. ".Export%s+=%s+(.-);")
+		if (device1EnableTmp ~= nil) then
+			export1New = false
+        else
+            device1EnableTmp = content:match(scriptInit .. ".Export1%s+=%s+(.-);")
+			export1New = true
+        end
 		if (device1EnableTmp == "true") then device1Enabled = true else device1Enabled = false end
 
 		local device2EnableTmp = content:match(scriptInit .. ".Export2%s+=%s+(.-);")
@@ -178,14 +195,22 @@ local function SaveToConfig()
 
 	content = string.gsub(content, scriptInit .. ".MultiAppDevice%s+=%s+(.-);", scriptInit .. ".MultiAppDevice = " .. tostring(multiAppEnabled) .. ";")
 
-	content = string.gsub(content, scriptInit .. ".Export%s+=%s+(.-);", scriptInit .. ".Export = " .. tostring(device1Enabled) .. ";")
+	if (export1New) then
+		content = string.gsub(content, scriptInit .. ".Export1%s+=%s+(.-);", scriptInit .. ".Export1 = " .. tostring(device1Enabled) .. ";")
+	else
+		content = string.gsub(content, scriptInit .. ".Export%s+=%s+(.-);", scriptInit .. ".Export = " .. tostring(device1Enabled) .. ";")
+	end
 	content = string.gsub(content, scriptInit .. ".Export2%s+=%s+(.-);", scriptInit .. ".Export2 = " .. tostring(device2Enabled) .. ";")
 	content = string.gsub(content, scriptInit .. ".Export3%s+=%s+(.-);", scriptInit .. ".Export3 = " .. tostring(device3Enabled) .. ";")
 	content = string.gsub(content, scriptInit .. ".Export4%s+=%s+(.-);", scriptInit .. ".Export4 = " .. tostring(device4Enabled) .. ";")
 
 	content = string.gsub(content, scriptInit .. ".Port%s+=%s+(.-);", 	scriptInit .. ".Port = " .. networkPortSend .. ";")
 
-	content = string.gsub(content, scriptInit .. ".Host%s+=%s+\"(.-)\"", scriptInit .. ".Host = \"" .. deviceIp1 .. "\"")
+	if (host1New) then
+		content = string.gsub(content, scriptInit .. ".Host1%s+=%s+\"(.-)\"", scriptInit .. ".Host1 = \"" .. deviceIp1 .. "\"")
+	else
+		content = string.gsub(content, scriptInit .. ".Host%s+=%s+\"(.-)\"", scriptInit .. ".Host = \"" .. deviceIp1 .. "\"")
+	end
 	content = string.gsub(content, scriptInit .. ".Host2%s+=%s+\"(.-)\"", scriptInit .. ".Host2 = \"" .. deviceIp2 .. "\"")
 	content = string.gsub(content, scriptInit .. ".Host3%s+=%s+\"(.-)\"", scriptInit .. ".Host3 = \"" .. deviceIp3 .. "\"")
 	content = string.gsub(content, scriptInit .. ".Host4%s+=%s+\"(.-)\"", scriptInit .. ".Host4 = \"" .. deviceIp4 .. "\"")

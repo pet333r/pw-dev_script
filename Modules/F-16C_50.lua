@@ -242,7 +242,7 @@ DEDLayout_l1["GUARD COM 2 Receiver Mode"] = {13,3}
 DEDLayout_l1["CRUS_MODE"] = {7,4}
 DEDLayout_l1["EDR_MODE"] = {13,3}
 DEDLayout_l1["HOME_MODE"] = {13,4}
-DEDLayout_l1["Asterisks_RNG_MODE_both"] = {12,1,16,"","I"}
+DEDLayout_l1["Asterisks_RNG_MODE_both"] = {12,1,17,"","I"}
 DEDLayout_l1["RNG_MODE"] = {13,3}
 DEDLayout_l1["TOS_MODE"] = {13,3}
 DEDLayout_l1["Asterisks_TOS_MODE_both"] = {12,1,16,"","I"}
@@ -406,8 +406,6 @@ DEDLayout_l1["STPT NUMBER"] = {14,2,0,"_inv","I"}
 DEDLayout_l1["MARK IncDecSymbol"] = {17,1}
 DEDLayout_l1["MARK Number Asteriscs_both"] = {13,1,19,"","I"}
 DEDLayout_l1["MARK STPT"] = {19,4}
---TODO
-DEDLayout_l2["TODO remove lbl"]={4,20}
 --ACAL
 DEDLayout_l2["ACAL_MODE"] = {8,3}
 DEDLayout_l2["Asterisks_ACAL_SelectedMode_both"] = {7,1,12,"","I"}
@@ -426,7 +424,8 @@ DEDLayout_l2["EDR_STPT_NUM"] = {7,4}
 DEDLayout_l2["EDR_INS_SelectedSteerpoint"] = {12,3}
 DEDLayout_l2["EDR_INS_STPT_IncDecSymbol"] = {16,1}
 DEDLayout_l2["HOME_STPT_NUM"] = {7,4}
-DEDLayout_l2["HOME_INS_SelectedSteerpoint"] = {12,3}
+DEDLayout_l2["Asterisks_HOME_STPT_NUM_both"] = {11,1,17,"","I"}
+DEDLayout_l2["HOME_INS_SelectedSteerpoint"] = {12,3,0,"_inv","I"}
 DEDLayout_l2["HOME_INS_STPT_IncDecSymbol"] = {16,1}
 DEDLayout_l2["RNG_STPT_NUM"] = {7,4}
 DEDLayout_l2["RNG_INS_SelectedSteerpoint"] = {12,3}
@@ -613,7 +612,7 @@ DEDLayout_l3["HOME_FUEL_REMANING_Value"] = {12,4}
 DEDLayout_l3["RNG_FUEL_REMANING"] = {7,4}
 DEDLayout_l3["RNG_FUEL_REMANING_Value"] = {12,4}
 DEDLayout_l3["TOS_DES_TOS_label"] = {4,7}
-DEDLayout_l3["TOS_DES_TOS_value"] = {13,8}
+DEDLayout_l3["TOS_DES_TOS_value"] = {13,8,0,"_inv","I"}
 DEDLayout_l3["Asterisks_DES_TOS_both"] = {12,1,21,"","I"}
 --DEST
 DEDLayout_l3["DEST DIR DEST_LON"]={3,3}
@@ -817,8 +816,6 @@ DEDLayout_l3["STEERPOINT SQUARE Value1"]={12,1,0,"_inv","I"}
 DEDLayout_l3["STEERPOINT SQUARE Value2"]={13,2,0,"_inv","I"}
 DEDLayout_l3["STEERPOINT SQUARE Asteriscs_both"] = {11,1,14,"","I"} 
 DEDLayout_l3["STEERPOINT SQUARE2 Asteriscs_both"] = {11,1,14,"","I"} 
---TODO
-DEDLayout_l4["TODO remove label"] = {4,20}
 --ACAL
 DEDLayout_l4["ACAL_ALT_DELTA"] = {8,5}
 DEDLayout_l4["ACAL_ALT_DELTA_label"] = {2,3}

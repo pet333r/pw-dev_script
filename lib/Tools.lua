@@ -51,6 +51,8 @@ local lDeviceIp4 = ""
 local lDeviceIpMap = ""
 local lDevicePortMap = ExportScript.Config.Port
 
+local separator = ExportScript.Config.Separator
+
 -- const
 local ms2knots  = 1.94384449 -- m/s to knots
 local ms2fpm    = 196.85 -- m/s to feets/minute
@@ -78,45 +80,33 @@ function ExportScript.Tools.CheckObjectExport()
     isObjects = LoIsObjectExportAllowed()
     if isObjects == nil then
 		return 0
-    end
-
-    local value
-    if isObjects == true then
-        value = 1
+    elseif isObjects == true then
+        return 1
     else
-        value = 0
+        return 0
     end
-    return value
 end
 
 function ExportScript.Tools.CheckSensorExport()
     isSensors = LoIsSensorExportAllowed()
     if isSensors == nil then
 		return 0
-    end
-
-    local value
-    if isSensors == true then
-        value = 1
+    elseif isSensors == true then
+        return 1
     else
-        value = 0
+        return 0
     end
-    return value
 end
 
 function ExportScript.Tools.CheckOwnshipExport()
     isOwnship = LoIsOwnshipExportAllowed()
     if isOwnship == nil then
 		return 0
-    end
-
-    local value
-    if isOwnship == true then
-        value = 1
+    elseif isOwnship == true then
+        return 1
     else
-        value = 0
+        return 0
     end
-    return value
 end
 
 function ExportScript.Tools.ExportMapPlayer(value) lShowOnMapPlayer = value end
@@ -132,10 +122,10 @@ function ExportScript.Tools.SetSecGnd(value) timeSecGnd = value end
 function ExportScript.Tools.SetSecNav(value) timeSecNav = value end
 
 function ExportScript.Tools.GetDcsVersionStr()
-    return "Ver=" .. ExportScript.VersionStr .. ExportScript.Config.Separator
+    return "Ver=" .. ExportScript.VersionStr .. separator
 end
 function ExportScript.Tools.GetDcsVersionId()
-    return "Id=" .. ExportScript.VersionId .. ExportScript.Config.Separator
+    return "Id=" .. ExportScript.VersionId .. separator
 end
 
 function ExportScript.Tools.GetMapPlayerDiv()
@@ -222,7 +212,7 @@ function ExportScript.Tools.ProcessInput()
             end
 
             if _command == "E" then
-                ExportScript.Tools.lDeviceIpMap = from
+                lDeviceIpMap = from
                 local len = string.len(_input)
                 if (len > 4) then
                     lDevicePortMap = tonumber(string.sub(_input, 5, -1))
@@ -235,7 +225,7 @@ function ExportScript.Tools.ProcessInput()
                 if opt == 0 then
                     if (vis == 0) then
                         ExportScript.Tools.ExportMapPlayer(false)
-                        ExportScript.Tools.lDeviceIpMap = ""
+                        lDeviceIpMap = ""
                     else
                         ExportScript.Tools.ExportMapPlayer(true)
                         ExportScript.Tools.SetSecPla(val)
@@ -745,15 +735,15 @@ function ExportScript.Tools.ProcessNavGround()
                 end
                 local packetObjects =
                 string.format(
-                    "%d" .. ExportScript.Config.Separator .. -- Coalition ID
-                    "%.6f" .. ExportScript.Config.Separator .. -- Lat
-                    "%.6f" .. ExportScript.Config.Separator .. -- Lng
-                    "%d" .. ExportScript.Config.Separator .. -- type
-                    "%d" .. ExportScript.Config.Separator .. -- hum
-                    "%d" .. ExportScript.Config.Separator .. -- invisible
-                    "%d" .. ExportScript.Config.Separator .. -- static
-                    "%s" .. ExportScript.Config.Separator  -- Name
-                    -- "%s" .. ExportScript.Config.Separator -- Name
+                    "%d" .. separator .. -- Coalition ID
+                    "%.6f" .. separator .. -- Lat
+                    "%.6f" .. separator .. -- Lng
+                    "%d" .. separator .. -- type
+                    "%d" .. separator .. -- hum
+                    "%d" .. separator .. -- invisible
+                    "%d" .. separator .. -- static
+                    "%s" .. separator  -- Name
+                    -- "%s" .. separator -- Name
                     ,
 
                     val.CoalitionID,			-- CoalitionID (1 or 2)
@@ -773,11 +763,11 @@ function ExportScript.Tools.ProcessNavGround()
     end
 
     if gndObjects then
-        ExportScript.Tools.SendPacket("N4G" .. ExportScript.Config.Separator .. "start" .. ExportScript.Config.Separator .. "\n")
+        ExportScript.Tools.SendPacket("N4G" .. separator .. "start" .. separator .. "\n")
         for key, value in pairs(ExportScript.Tools.NavDataGnd) do
-            ExportScript.Tools.SendNavAllData("N4G" .. ExportScript.Config.Separator .. key, value)
+            ExportScript.Tools.SendNavAllData("N4G" .. separator .. key, value)
         end
-        ExportScript.Tools.SendPacket("N4G" .. ExportScript.Config.Separator .. "stop" .. ExportScript.Config.Separator .. "\n")
+        ExportScript.Tools.SendPacket("N4G" .. separator .. "stop" .. separator .. "\n")
     end
 end
 
@@ -816,17 +806,17 @@ function ExportScript.Tools.ProcessNavAir()
 
                     local packetObjects =
                     string.format(
-                        "%d" .. ExportScript.Config.Separator .. -- Coalition ID
-                        "%.6f" .. ExportScript.Config.Separator .. -- Lat
-                        "%.6f" .. ExportScript.Config.Separator .. -- Lng
-                        "%d" .. ExportScript.Config.Separator .. -- type
-                        "%d" .. ExportScript.Config.Separator .. -- type
-                        "%d" .. ExportScript.Config.Separator .. -- hum
-                        "%d" .. ExportScript.Config.Separator .. -- invisible
-                        "%d" .. ExportScript.Config.Separator .. -- static
-                        -- "%d," .. ExportScript.Config.Separator .. -- alt
-                        "%d" .. ExportScript.Config.Separator  -- Hdg
-                        -- "%s" .. ExportScript.Config.Separator -- Name
+                        "%d" .. separator .. -- Coalition ID
+                        "%.6f" .. separator .. -- Lat
+                        "%.6f" .. separator .. -- Lng
+                        "%d" .. separator .. -- type
+                        "%d" .. separator .. -- type
+                        "%d" .. separator .. -- hum
+                        "%d" .. separator .. -- invisible
+                        "%d" .. separator .. -- static
+                        -- "%d," .. separator .. -- alt
+                        "%d" .. separator  -- Hdg
+                        -- "%s" .. separator -- Name
                         ,
 
                         val.CoalitionID,			-- CoalitionID (1 or 2)
@@ -849,11 +839,11 @@ function ExportScript.Tools.ProcessNavAir()
     end
 
     if objects then
-        ExportScript.Tools.SendPacket("N4A" .. ExportScript.Config.Separator .. "start" .. ExportScript.Config.Separator .. "\n")
+        ExportScript.Tools.SendPacket("N4A" .. separator .. "start" .. separator .. "\n")
         for key, value in pairs(ExportScript.Tools.NavDataAll) do
-            ExportScript.Tools.SendNavAllData("N4A" .. ExportScript.Config.Separator .. key, value)
+            ExportScript.Tools.SendNavAllData("N4A" .. separator .. key, value)
         end
-        ExportScript.Tools.SendPacket("N4A" .. ExportScript.Config.Separator .. "stop" .. ExportScript.Config.Separator .. "\n")
+        ExportScript.Tools.SendPacket("N4A" .. separator .. "stop" .. separator .. "\n")
     end
 end
 
@@ -884,13 +874,13 @@ function ExportScript.Tools.ProcessNavNav()
                 end
                 local packetObjects =
                 string.format(
-                    "%d" .. ExportScript.Config.Separator .. -- Coalition ID
-                    "%.6f" .. ExportScript.Config.Separator .. -- Lat
-                    "%.6f" .. ExportScript.Config.Separator .. -- Lng
-                    "%d" .. ExportScript.Config.Separator .. -- type
-                    "%d" .. ExportScript.Config.Separator .. -- invisible
-                    "%d" .. ExportScript.Config.Separator  -- static
-                    -- "%s" .. ExportScript.Config.Separator -- Name
+                    "%d" .. separator .. -- Coalition ID
+                    "%.6f" .. separator .. -- Lat
+                    "%.6f" .. separator .. -- Lng
+                    "%d" .. separator .. -- type
+                    "%d" .. separator .. -- invisible
+                    "%d" .. separator  -- static
+                    -- "%s" .. separator -- Name
                     ,
 
                     val.CoalitionID,			-- CoalitionID (1 or 2)
@@ -908,11 +898,11 @@ function ExportScript.Tools.ProcessNavNav()
     end
 
     if objects then
-        ExportScript.Tools.SendPacket("N4N" .. ExportScript.Config.Separator .. "start" .. ExportScript.Config.Separator .. "\n")
+        ExportScript.Tools.SendPacket("N4N" .. separator .. "start" .. separator .. "\n")
         for key, value in pairs(ExportScript.Tools.NavDataNav) do
-            ExportScript.Tools.SendNavAllData("N4N" .. ExportScript.Config.Separator .. key, value)
+            ExportScript.Tools.SendNavAllData("N4N" .. separator .. key, value)
         end
-        ExportScript.Tools.SendPacket("N4N" .. ExportScript.Config.Separator .. "stop" .. ExportScript.Config.Separator .. "\n")
+        ExportScript.Tools.SendPacket("N4N" .. separator .. "stop" .. separator .. "\n")
     end
 end
 
@@ -933,11 +923,11 @@ function ExportScript.Tools.ProcessNavWeapon()
         if (val.Type.level1 == 4 and (val.Type.level2 == 4 or val.Type.level2 == 5)) then
             local packetWeapons =
             string.format(
-                "%d" .. ExportScript.Config.Separator ..    -- CoalitionID (1 or 2)
-                "%d" .. ExportScript.Config.Separator ..    -- Type
-                "%.6f" .. ExportScript.Config.Separator ..  -- Lat
-                "%.6f" .. ExportScript.Config.Separator ..  -- Lng
-                "%s" .. ExportScript.Config.Separator       -- Name
+                "%d" .. separator ..    -- CoalitionID (1 or 2)
+                "%d" .. separator ..    -- Type
+                "%.6f" .. separator ..  -- Lat
+                "%.6f" .. separator ..  -- Lng
+                "%s" .. separator       -- Name
                 ,
 
                 val.CoalitionID,		-- CoalitionID (1 or 2)
@@ -952,11 +942,11 @@ function ExportScript.Tools.ProcessNavWeapon()
     end
 
     if weapons then
-        ExportScript.Tools.SendPacket("N4W" .. ExportScript.Config.Separator .. "start" .. ExportScript.Config.Separator .. "\n")
+        ExportScript.Tools.SendPacket("N4W" .. separator .. "start" .. separator .. "\n")
         for key, value in pairs(ExportScript.Tools.NavDataWeapons) do
-            ExportScript.Tools.SendNavAllData("N4W" .. ExportScript.Config.Separator .. key, value)
+            ExportScript.Tools.SendNavAllData("N4W" .. separator .. key, value)
         end
-        ExportScript.Tools.SendPacket("N4W" .. ExportScript.Config.Separator .. "stop" .. ExportScript.Config.Separator .. "\n")
+        ExportScript.Tools.SendPacket("N4W" .. separator .. "stop" .. separator .. "\n")
     end
 end
 
@@ -1199,8 +1189,8 @@ end
 
 function ExportScript.Tools.SendPacket(packet)
     local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() end)
-    if (ExportScript.Tools.lDeviceIpMap ~= "") then
-        try(ExportScript.UDPsender:sendto(packet, ExportScript.Tools.lDeviceIpMap, lDevicePortMap))
+    if (lDeviceIpMap ~= "") then
+        try(ExportScript.UDPsender:sendto(packet, lDeviceIpMap, lDevicePortMap))
     end
 end
 
@@ -1211,12 +1201,12 @@ function ExportScript.Tools.SendShortData(message)
         local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() ExportScript.Tools.ResetChangeValues() end)
 
         if ExportScript.Config.Export then
-            if (ExportScript.Config.Host == ExportScript.Tools.lDeviceIpMap) then
+            if (ExportScript.Config.Host == lDeviceIpMap) then
                 if (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice == false) then
-                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Tools.lDeviceIpMap, lDevicePortMap))
+                    try(ExportScript.UDPsender:sendto(_packet, lDeviceIpMap, lDevicePortMap))
                 elseif (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice) then
                     try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host, ExportScript.Config.Port))
-                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Tools.lDeviceIpMap, lDevicePortMap))
+                    try(ExportScript.UDPsender:sendto(_packet, lDeviceIpMap, lDevicePortMap))
                 end
             else
                 try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host, ExportScript.Config.Port))
@@ -1224,12 +1214,12 @@ function ExportScript.Tools.SendShortData(message)
         end
 
         if ExportScript.Config.Export2 then
-            if (ExportScript.Config.Host2 == ExportScript.Tools.lDeviceIpMap) then
+            if (ExportScript.Config.Host2 == lDeviceIpMap) then
                 if (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice == false) then
-                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Tools.lDeviceIpMap, lDevicePortMap))
+                    try(ExportScript.UDPsender:sendto(_packet, lDeviceIpMap, lDevicePortMap))
                 elseif (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice) then
                     try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host2, ExportScript.Config.Port))
-                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Tools.lDeviceIpMap, lDevicePortMap))
+                    try(ExportScript.UDPsender:sendto(_packet, lDeviceIpMap, lDevicePortMap))
                 end
             else
                 try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host2, ExportScript.Config.Port))
@@ -1237,12 +1227,12 @@ function ExportScript.Tools.SendShortData(message)
         end
 
         if ExportScript.Config.Export3 then
-            if (ExportScript.Config.Host3 == ExportScript.Tools.lDeviceIpMap) then
+            if (ExportScript.Config.Host3 == lDeviceIpMap) then
                 if (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice == false) then
-                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Tools.lDeviceIpMap, lDevicePortMap))
+                    try(ExportScript.UDPsender:sendto(_packet, lDeviceIpMap, lDevicePortMap))
                 elseif (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice) then
                     try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host3, ExportScript.Config.Port))
-                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Tools.lDeviceIpMap, lDevicePortMap))
+                    try(ExportScript.UDPsender:sendto(_packet, lDeviceIpMap, lDevicePortMap))
                 end
             else
                 try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host3, ExportScript.Config.Port))
@@ -1250,12 +1240,12 @@ function ExportScript.Tools.SendShortData(message)
         end
 
         if ExportScript.Config.Export4 then
-            if (ExportScript.Config.Host4 == ExportScript.Tools.lDeviceIpMap) then
+            if (ExportScript.Config.Host4 == lDeviceIpMap) then
                 if (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice == false) then
-                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Tools.lDeviceIpMap, lDevicePortMap))
+                    try(ExportScript.UDPsender:sendto(_packet, lDeviceIpMap, lDevicePortMap))
                 elseif (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice) then
                     try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host4, ExportScript.Config.Port))
-                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Tools.lDeviceIpMap, lDevicePortMap))
+                    try(ExportScript.UDPsender:sendto(_packet, lDeviceIpMap, lDevicePortMap))
                 end
             else
                 try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host4, ExportScript.Config.Port))
@@ -1287,13 +1277,13 @@ end
 function ExportScript.Tools.FlushData()
 	local _flushData = ExportScript.socket.protect(function()
 		if #ExportScript.SendStrings > 0 then
-            local _packet = "R4G" .. ExportScript.Config.Separator ..
-                table.concat(ExportScript.SendStrings, ExportScript.Config.Separator) .. ExportScript.Config.Separator .. "\n"
+            local _packet = "R4G" .. separator ..
+                table.concat(ExportScript.SendStrings, separator) .. separator .. "\n"
 
             local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() ExportScript.Tools.ResetChangeValues() end)
 
             if ExportScript.Config.Export then
-                if (ExportScript.Config.Host == ExportScript.Tools.lDeviceIpMap) then
+                if (ExportScript.Config.Host == lDeviceIpMap) then
                     if (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice) then
                         try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host, ExportScript.Config.Port))
                     end
@@ -1303,7 +1293,7 @@ function ExportScript.Tools.FlushData()
             end
 
             if ExportScript.Config.Export2 then
-                if (ExportScript.Config.Host2 == ExportScript.Tools.lDeviceIpMap) then
+                if (ExportScript.Config.Host2 == lDeviceIpMap) then
                     if (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice) then
                         try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host2, ExportScript.Config.Port))
                     end
@@ -1313,7 +1303,7 @@ function ExportScript.Tools.FlushData()
             end
 
             if ExportScript.Config.Export3 then
-                if (ExportScript.Config.Host3 == ExportScript.Tools.lDeviceIpMap) then
+                if (ExportScript.Config.Host3 == lDeviceIpMap) then
                     if (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice) then
                         try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host3, ExportScript.Config.Port))
                     end
@@ -1323,7 +1313,7 @@ function ExportScript.Tools.FlushData()
             end
 
             if ExportScript.Config.Export4 then
-                if (ExportScript.Config.Host4 == ExportScript.Tools.lDeviceIpMap) then
+                if (ExportScript.Config.Host4 == lDeviceIpMap) then
                     if (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice) then
                         try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host4, ExportScript.Config.Port))
                     end
@@ -1365,13 +1355,13 @@ end
 function ExportScript.Tools.FlushNavData()
 	local _flushData = ExportScript.socket.protect(function()
 		if #ExportScript.SendNavStrings > 0 then
-            local _packet = "N4D" .. ExportScript.Config.Separator ..
-                table.concat(ExportScript.SendNavStrings, ExportScript.Config.Separator) .. ExportScript.Config.Separator .. "\n"
+            local _packet = "N4D" .. separator ..
+                table.concat(ExportScript.SendNavStrings, separator) .. separator .. "\n"
 
             local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() ExportScript.Tools.ResetChangeValues() end)
 
-            if (ExportScript.Tools.lDeviceIpMap ~= "") then
-                try(ExportScript.UDPsender:sendto(_packet, ExportScript.Tools.lDeviceIpMap, lDevicePortMap))
+            if (lDeviceIpMap ~= "") then
+                try(ExportScript.UDPsender:sendto(_packet, lDeviceIpMap, lDevicePortMap))
             end
 
 			ExportScript.SendNavStrings = {}
@@ -1384,7 +1374,7 @@ function ExportScript.Tools.FlushNavData()
 end
 
 function ExportScript.Tools.SendNavAllData(id, value)
-    local _data = id .. ExportScript.Config.Separator .. value
+    local _data = id .. separator .. value
 
     table.insert(ExportScript.SendNavAllStrings, _data)
     ExportScript.Tools.FlushNavAllData()
@@ -1392,10 +1382,10 @@ end
 
 function ExportScript.Tools.FlushNavAllData()
 	local _flushData = ExportScript.socket.protect(function()
-        local _packet = table.concat(ExportScript.SendNavAllStrings, ExportScript.Config.Separator) .. "\n"
+        local _packet = table.concat(ExportScript.SendNavAllStrings, separator) .. "\n"
         local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() end)
-        if (ExportScript.Tools.lDeviceIpMap ~= "") then
-            try(ExportScript.UDPsender:sendto(_packet, ExportScript.Tools.lDeviceIpMap, lDevicePortMap))
+        if (lDeviceIpMap ~= "") then
+            try(ExportScript.UDPsender:sendto(_packet, lDeviceIpMap, lDevicePortMap))
         end
 
         ExportScript.SendNavAllStrings = {}
@@ -1544,6 +1534,21 @@ function ExportScript.Tools.getListCockpitParams()
 	local ListIindicator = list_cockpit_params()
 	local TmpReturn = {}
     local ListindicatorMatch = ListIindicator:gmatch("([^\n]+):([^\n]+)")
+
+    while true do
+        local Key, Value = ListindicatorMatch()
+        if not Key then
+            break
+        end
+        TmpReturn[Key] = Value
+    end
+	return TmpReturn
+end
+
+function ExportScript.Tools.getListCockpitParamsStr()
+	local ListIindicator = list_cockpit_params()
+	local TmpReturn = {}
+    local ListindicatorMatch = ListIindicator:gmatch("([^\n]+):(\"[^\n]+)\"")
 
     while true do
         local Key, Value = ListindicatorMatch()
@@ -1753,5 +1758,7 @@ function ExportScript.Tools.GetFileData(fileName, n)
             end
         end
         file:close()
+    else
+        return 0
     end
 end
