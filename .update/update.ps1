@@ -21,6 +21,9 @@ Write-Host "$separator`n**************** Updating pw-dev_script ***************`
 $start_time = Get-Date
 
 # checking directories
+$path = "json"
+If(!(test-path $path)) { New-Item -ItemType Directory -Force -Path $path }
+
 $path = "lib"
 If(!(test-path $path)) { New-Item -ItemType Directory -Force -Path $path }
 
