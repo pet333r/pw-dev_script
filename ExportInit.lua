@@ -17,19 +17,18 @@ ExportScript.lastExportTimeLI       = 0
 
 ExportScript.NoLuaExportBeforeNextFrame = false
 
-local PrevExportScript                    = {}
-PrevExportScript.LuaExportStart           = LuaExportStart
-PrevExportScript.LuaExportStop            = LuaExportStop
-PrevExportScript.LuaExportBeforeNextFrame = LuaExportBeforeNextFrame
-PrevExportScript.LuaExportAfterNextFrame  = LuaExportAfterNextFrame
-PrevExportScript.LuaExportActivityNextEvent = LuaExportActivityNextEvent
+local PrevPWDEV                    = {}
+PrevPWDEV.LuaExportStart           = LuaExportStart
+PrevPWDEV.LuaExportStop            = LuaExportStop
+PrevPWDEV.LuaExportBeforeNextFrame = LuaExportBeforeNextFrame
+PrevPWDEV.LuaExportAfterNextFrame  = LuaExportAfterNextFrame
+PrevPWDEV.LuaExportActivityNextEvent = LuaExportActivityNextEvent
 
 local versionFile = lfs.writedir()..[[Scripts\pw-dev_script\version]]
-local configFile = lfs.writedir()..[[Scripts\pw-dev_script\Config.lua]]
 local minConfig = "2023.02.11"
 
 local function GetConfigFileVersion()
-    local file = io.open(configFile, "r")
+    local file = io.open(lfs.writedir()..[[Scripts\pw-dev_script\Config.lua]], "r")
 	if (file ~= nil) then
 		content = file:read("*all")
 		file:flush()
@@ -57,6 +56,7 @@ local function getTimestampFromDate(date)
         return timestamp
     end
 end
+
 dofile(lfs.writedir()..[[Scripts\pw-dev_script\Config.lua]])
 ExportScript.utf8 = dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\utf8.lua]])
 dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Tools.lua]])
@@ -71,9 +71,6 @@ ExportScript.FoundNoModul   = true
 
 ExportScript.VersionStr = 2
 ExportScript.VersionId = 0
-ExportScript.ExportObject = 0
-ExportScript.ExportOwnship = 0
-ExportScript.ExportSensor = 0
 
 function ExportScript.CheckDcs()
 	if (string.match(lfs.writedir(), "openbeta")) then
@@ -91,65 +88,7 @@ function ExportScript.CheckDcsVersionId(version)
 			version.FileVersion[4]) -- build number   (Continuously growth)
 end
 
-function LuaExportStart()
-	local status, err = pcall(function()
-		ExportScript.Start()
-	end)
-
-	if PrevExportScript.LuaExportStart then
-		PrevExportScript.LuaExportStart()
-	end
-end
-
-function LuaExportBeforeNextFrame()
-	local status, err = pcall(function()
-		ExportScript.BeforeNextFrame()
-	end)
-
-	if PrevExportScript.LuaExportBeforeNextFrame then
-		PrevExportScript.LuaExportBeforeNextFrame()
-	end
-	
-	return NextTime
-end
-
-function LuaExportAfterNextFrame()
-	local status, err = pcall(function()
-		ExportScript.LuaExportAfterNextFrame()
-	end)
-
-	if PrevExportScript.LuaExportAfterNextFrame then
-		PrevExportScript.LuaExportAfterNextFrame()
-	end
-	
-	return NextTime
-end
-
-function LuaExportActivityNextEvent(currenttime)
-    local NextTime = currenttime + ExportScript.Config.ExportInterval
-
-	local status, err = pcall(function()
-		ExportScript.LuaExportActivityNextEvent()
-	end)
-
-	if PrevExportScript.LuaExportActivityNextEvent then
-		PrevExportScript.LuaExportActivityNextEvent(currenttime)
-	end
-
-	return NextTime
-end
-
-function LuaExportStop()
-	local status, err = pcall(function()
-		ExportScript.Stop()
-	end)
-	
-	if PrevExportScript.LuaExportStop then
-		PrevExportScript.LuaExportStop()
-	end
-end
-
-function ExportScript.Start()
+LuaExportStart = function()
 	package.path  = package.path..";.\\LuaSocket\\?.lua"
 	package.cpath = package.cpath..";.\\LuaSocket\\?.dll"
 
@@ -176,39 +115,37 @@ function ExportScript.Start()
 	ExportScript.NoLuaExportBeforeNextFrame = false
 	ExportScript.Tools.SelectModule()
 
-	ExportScript.ExportObject = ExportScript.Tools.CheckObjectExport()
-	ExportScript.ExportSensor = ExportScript.Tools.CheckSensorExport()
-	ExportScript.ExportOwnship = ExportScript.Tools.CheckOwnshipExport()
-
 	ExportScript.Tools.playerId = ExportScript.Tools.GetPlayerId()
 
 	ExportScript.Tools.SendShortData("EX=ON")
 
-	PrevExportScript.LuaExportStart()
-end
-
-function ExportScript.BeforeNextFrame()
-	if PrevExportScript.LuaExportBeforeNextFrame then
-		PrevExportScript.LuaExportBeforeNextFrame()
+	if PrevPWDEV.LuaExportStart then
+		PrevPWDEV.LuaExportStart()
 	end
 end
 
-function ExportScript.LuaExportAfterNextFrame()
+function LuaExportBeforeNextFrame()
+	if PrevPWDEV.LuaExportBeforeNextFrame then
+		PrevPWDEV.LuaExportBeforeNextFrame()
+	end
+end
+
+function LuaExportAfterNextFrame()
 	if ExportScript.NoLuaExportBeforeNextFrame then
 		ExportScript.Tools.ProcessOutput()
 	end
-	
-	if PrevExportScript.LuaExportAfterNextFrame then
-		PrevExportScript.LuaExportAfterNextFrame()
+
+	if PrevPWDEV.LuaExportAfterNextFrame then
+		PrevPWDEV.LuaExportAfterNextFrame()
 	end
 end
 
-function ExportScript.LuaExportActivityNextEvent(t)
-	local tNext = t
+function LuaExportActivityNextEvent(currenttime)
+	local tNext = currenttime
 
 	ExportScript.coProcessArguments_BeforeNextFrame = coroutine.create(ExportScript.Tools.ProcessInput)
 	coStatus = coroutine.resume(ExportScript.coProcessArguments_BeforeNextFrame)
-	
+
 	if ExportScript.NoLuaExportBeforeNextFrame == false then
 		ExportScript.Tools.ProcessOutput()
 	end
@@ -218,7 +155,7 @@ function ExportScript.LuaExportActivityNextEvent(t)
 	return tNext
 end
 
-function ExportScript.Stop()
+LuaExportStop = function()
 	ExportScript.Tools.SendShortData("EX=OF")
 
 	ExportScript.UDPsender:close()
@@ -238,7 +175,7 @@ function ExportScript.Stop()
 		end
 	end
 
-	if PrevExportScript.LuaExportStop then
-		PrevExportScript.LuaExportStop()
+	if PrevPWDEV.LuaExportStop then
+		PrevPWDEV.LuaExportStop()
 	end
 end
