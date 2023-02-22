@@ -104,13 +104,29 @@ ExportScript.ConfigArguments =
     [245] = "%d", -- 2 (yellow)
 }
 
--- function coerce_nil_to_string(value)
--- 	if value == nil then
--- 		return ""
--- 	else
--- 		return value
--- 	end
--- end
+local indEKRAN = nil
+local function getEKRAN_memory()
+    if indEKRAN == nil or indEKRAN.txt_memory == nil then return "0" end
+    return "1"
+end
+local function getEKRAN_queue()
+	if indEKRAN == nil or indEKRAN.txt_queue == nil then return "0" end
+    return "1"
+end
+local function getEKRAN_failure()
+	if indEKRAN == nil or indEKRAN.txt_failure == nil then return "0" end
+    return "1"
+end
+
+local function getEKRAN_txt1_line(value)
+	if indEKRAN == nil or indEKRAN.txt_1 == nil then return "          " end
+	return indEKRAN.txt_1[value] or "          "
+end
+
+local function getEKRAN_txt2_line(value)
+	if indEKRAN == nil or indEKRAN.txt_2 == nil then return "          " end
+	return indEKRAN.txt_2[value] or "          "
+end
 
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
 end

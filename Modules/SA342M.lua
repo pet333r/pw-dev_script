@@ -62,6 +62,15 @@ ExportScript.ConfigArguments =
 {
 }
 
+local function GetDigit(arg)
+    tmp = string.format("%1.0f",GetDevice(0):get_argument_value(arg) * 10)
+    if (tmp == "10") then
+        return "0"
+    else
+        return tmp
+    end
+end
+
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
 
     local nadir = ExportScript.Tools.getListIndicatorValue(3)
