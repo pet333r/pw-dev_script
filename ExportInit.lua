@@ -1,4 +1,5 @@
 ExportScript = {}
+PWDEV = {}
 
 ExportScript.Id = string.format("%08x*",os.time())
 
@@ -57,6 +58,9 @@ local function getTimestampFromDate(date)
     end
 end
 
+local configFileVer = GetConfigFileVersion()
+
+dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Init.lua]])
 dofile(lfs.writedir()..[[Scripts\pw-dev_script\Config.lua]])
 ExportScript.utf8 = dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\utf8.lua]])
 dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Tools.lua]])
@@ -115,9 +119,10 @@ LuaExportStart = function()
 	ExportScript.NoLuaExportBeforeNextFrame = false
 	ExportScript.Tools.SelectModule()
 
+	local scriptVer = ExportScript.Tools.GetFileData(versionFile, 1)
 	ExportScript.Tools.playerId = ExportScript.Tools.GetPlayerId()
 
-	ExportScript.Tools.SendShortData("EX=ON")
+	ExportScript.Tools.SendShortData("EX=ON"..separator.."SV="..scriptVer..separator.."CV="..configFileVer..separator)
 
 	if PrevPWDEV.LuaExportStart then
 		PrevPWDEV.LuaExportStart()
