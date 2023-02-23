@@ -60,6 +60,9 @@ end
 
 local configFileVer = GetConfigFileVersion()
 
+local minTime = getTimestampFromDate(minConfig)
+local cfgTime = getTimestampFromDate(configFileVer)
+
 dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Init.lua]])
 dofile(lfs.writedir()..[[Scripts\pw-dev_script\Config.lua]])
 ExportScript.utf8 = dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\utf8.lua]])
@@ -73,33 +76,14 @@ ExportScript.FoundDCSModule = false
 ExportScript.FoundFCModule  = false
 ExportScript.FoundNoModul   = true
 
-ExportScript.VersionStr = 2
-ExportScript.VersionId = 0
-
-function ExportScript.CheckDcs()
-	if (string.match(lfs.writedir(), "openbeta")) then
-		ExportScript.VersionStr = 1
-	else
-		ExportScript.VersionStr = 0
-	end
-end
-
-function ExportScript.CheckDcsVersionId(version)
-	ExportScript.VersionId = string.format("%d.%d.%d.%d",
-			version.FileVersion[1],
-			version.FileVersion[2],
-			version.FileVersion[3], -- head  revision (Continuously growth)
-			version.FileVersion[4]) -- build number   (Continuously growth)
-end
-
 LuaExportStart = function()
 	package.path  = package.path..";.\\LuaSocket\\?.lua"
 	package.cpath = package.cpath..";.\\LuaSocket\\?.dll"
 
-	ExportScript.CheckDcs()
+	ExportScript.Init.CheckDcs()
 
 	local version = LoGetVersionInfo()
-	ExportScript.CheckDcsVersionId(version)
+	ExportScript.Init.CheckDcsVersionId(version)
 
 	if (ExportScript.Fdr ~= nil) then
 		if (ExportScript.Config.WriteNavFile ~= nil and ExportScript.Config.WriteNavFile == true) then
@@ -107,7 +91,7 @@ LuaExportStart = function()
 		end
 
 		if (ExportScript.Config.WriteNavFile ~= nil and ExportScript.Config.WriteNavFile == true) then
-			ExportScript.Fdr.NavFileInit(ExportScript.VersionId)
+			ExportScript.Fdr.NavFileInit(ExportScript.Init.VersionId)
 		end
 	end
 	
@@ -122,7 +106,7 @@ LuaExportStart = function()
 	local scriptVer = ExportScript.Tools.GetFileData(versionFile, 1)
 	ExportScript.Tools.playerId = ExportScript.Tools.GetPlayerId()
 
-	ExportScript.Tools.SendShortData("EX=ON"..separator.."SV="..scriptVer..separator.."CV="..configFileVer..separator)
+	ExportScript.Tools.SendShortData("EX=ON;Ver="..ExportScript.Init.VersionStr .. separator.."VId="..ExportScript.Init.VersionId..separator.."MOE="..ExportScript.Init.CheckObjectExport()..separator.."MSE="..ExportScript.Init.CheckSensorExport()..separator.."MPE="..ExportScript.Init.CheckOwnshipExport()..separator.."SV="..scriptVer..separator.."CV="..configFileVer..separator)
 
 	if PrevPWDEV.LuaExportStart then
 		PrevPWDEV.LuaExportStart()

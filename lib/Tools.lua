@@ -26,10 +26,6 @@ PlayerData.AA = 0
 PlayerData.AG = 0
 PlayerData.Arm = 0
 
-local isObjects = true
-local isSensors = true
-local isOwnship = true
-
 local initiated = false
 
 local lShowOnMapPlayer = true
@@ -74,41 +70,6 @@ local timeSecAir = 2
 local timeSecGnd = 9
 local timeSecNav = 8
 
-ExportScript.Tools.LogPath = lfs.writedir()..[[Logs\pw-dev.log]]
-
-function ExportScript.Tools.CheckObjectExport()
-    isObjects = LoIsObjectExportAllowed()
-    if isObjects == nil then
-		return 0
-    elseif isObjects == true then
-        return 1
-    else
-        return 0
-    end
-end
-
-function ExportScript.Tools.CheckSensorExport()
-    isSensors = LoIsSensorExportAllowed()
-    if isSensors == nil then
-		return 0
-    elseif isSensors == true then
-        return 1
-    else
-        return 0
-    end
-end
-
-function ExportScript.Tools.CheckOwnshipExport()
-    isOwnship = LoIsOwnshipExportAllowed()
-    if isOwnship == nil then
-		return 0
-    elseif isOwnship == true then
-        return 1
-    else
-        return 0
-    end
-end
-
 function ExportScript.Tools.ExportMapPlayer(value) lShowOnMapPlayer = value end
 function ExportScript.Tools.ExportMapWea(value) lShowOnMapWea = value end
 function ExportScript.Tools.ExportMapAir(value) lShowOnMapAir = value end
@@ -120,13 +81,6 @@ function ExportScript.Tools.SetSecWea(value) timeSecWea = value end
 function ExportScript.Tools.SetSecAir(value) timeSecAir = value end
 function ExportScript.Tools.SetSecGnd(value) timeSecGnd = value end
 function ExportScript.Tools.SetSecNav(value) timeSecNav = value end
-
-function ExportScript.Tools.GetDcsVersionStr()
-    return "Ver=" .. ExportScript.VersionStr .. separator
-end
-function ExportScript.Tools.GetDcsVersionId()
-    return "Id=" .. ExportScript.VersionId .. separator
-end
 
 function ExportScript.Tools.GetMapPlayerDiv()
     if (ExportScript.Config.MapPlayerDiv == nil) then
@@ -180,10 +134,18 @@ end
 function ExportScript.Tools.ExportInit()
     playerId = ExportScript.Tools.GetPlayerId()
     coalition = LoGetSelfData().CoalitionID
-    callsign = LoGetPilotName()
-    ExportScript.Tools.SendShortData(ExportScript.Tools.GetDcsVersionStr() .. ExportScript.Tools.GetDcsVersionId())
-    ExportScript.Tools.SendShortData("Map=" .. actualMap .. ExportScript.Config.Separator)
-    ExportScript.Tools.SendShortData("File=" .. ExportScript.ModuleName .. ExportScript.Config.Separator .. "Coal=" .. coalition .. ExportScript.Config.Separator .. "Call=" .. callsign .. ExportScript.Config.Separator)
+    ExportScript.Tools.SendShortData("Map=" .. actualMap .. separator)
+
+    local be = {}
+	be.latitude = 0.0
+	be.longitude = 0.0
+
+    local data = ExportScript.Tools.GetCoalitionBullseye(coalition)
+
+	be.latitude = data.latitude
+	be.longitude = data.longitude
+
+    ExportScript.Tools.SendShortData("File="..ExportScript.ModuleName..separator.."Coal="..coalition..separator.."Call="..LoGetPilotName()..separator.."bex="..be.latitude..separator.."bey="..be.longitude..separator)
 end
 
 function ExportScript.Tools.ProcessInput()
@@ -468,7 +430,8 @@ function ExportScript.Tools.GetPlayerData()
 
         PlayerData.AG = ExportScript.Tools.GetArgumentsValue(281, "%d")
         PlayerData.Arm = ExportScript.Tools.GetArgumentsValue(287, "%d")
-    elseif (ExportScript.ModuleName == "C-101CC") then
+    elseif ((ExportScript.ModuleName == "C-101CC") or
+            (ExportScript.ModuleName == "C-101EB")) then
         PlayerData.MechGearNose = LoGetAircraftDrawArgumentValue(0)
         PlayerData.MechGearLeft = LoGetAircraftDrawArgumentValue(5)
         PlayerData.MechGearRigh = LoGetAircraftDrawArgumentValue(3)
@@ -598,10 +561,15 @@ function ExportScript.Tools.GetPlayerData()
         PlayerData.MechAirBrakeRigh = LoGetAircraftDrawArgumentValue(184)
 
         PlayerData.Arm = ExportScript.Tools.GetArgumentsValue(234, "%d")
-    elseif ((ExportScript.ModuleName == "Mirage-F1CE") or (ExportScript.ModuleName == "Mirage-F1B")) then
+    elseif ((ExportScript.ModuleName == "Mirage-F1CE") or
+            (ExportScript.ModuleName == "Mirage-F1B") or
+            (ExportScript.ModuleName == "Mirage-F1EE")) then
         PlayerData.MechGearNose  = LoGetAircraftDrawArgumentValue(0)
         PlayerData.MechGearLeft  = LoGetAircraftDrawArgumentValue(5)
         PlayerData.MechGearRigh  = LoGetAircraftDrawArgumentValue(3)
+
+        PlayerData.MechNozzLeft = LoGetAircraftDrawArgumentValue(90)
+
         PlayerData.MechAirBrakeLeft = LoGetAircraftDrawArgumentValue(184)
         PlayerData.MechAirBrakeRigh = LoGetAircraftDrawArgumentValue(182)
 
@@ -611,6 +579,12 @@ function ExportScript.Tools.GetPlayerData()
         elseif (arm == "1.0" or arm == "0.5") then
             PlayerData.Arm = 0
         end
+    elseif ((ExportScript.ModuleName == "MB-339A") or
+            (ExportScript.ModuleName == "MB-339APAN")) then
+        PlayerData.MechGearNose  = LoGetAircraftDrawArgumentValue(0)
+        PlayerData.MechGearLeft  = LoGetAircraftDrawArgumentValue(5)
+        PlayerData.MechGearRigh  = LoGetAircraftDrawArgumentValue(3)
+        PlayerData.MechAirBrakeLeft = LoGetAircraftDrawArgumentValue(21)
     elseif (ExportScript.ModuleName == "Mi-24P") then
         PlayerData.MechGearNose  = LoGetAircraftDrawArgumentValue(0)
         PlayerData.MechGearLeft  = LoGetAircraftDrawArgumentValue(5)
@@ -676,6 +650,8 @@ end
 function ExportScript.Tools.ProcessNavDataD()
 	ExportScript.Tools.NavDataD = {}
     ExportScript.Tools.NavDataD[0]  = string.format("%d", ExportScript.Tools.GetTime())
+    ExportScript.Tools.NavDataD[60] = string.format("%d", PlayerData.WindAng)
+    ExportScript.Tools.NavDataD[61] = string.format("%d", PlayerData.WindSpd)
     ExportScript.Tools.NavDataD[70] = string.format("%010.6f", PlayerData.Lat)
 	ExportScript.Tools.NavDataD[71] = string.format("%010.6f", PlayerData.Lon)
     ExportScript.Tools.NavDataD[72] = string.format("%.1f", PlayerData.Hdg)
@@ -1482,6 +1458,53 @@ local function file_exists(name)
     if f ~= nil then io.close(f) return true else return false end
 end
 
+function ExportScript.Tools.GetMissionPath(version)
+    local temp =  os.getenv('TEMP')
+    local dirM = "\\Mission\\mission"
+
+    if version == 0 then
+        return (temp .. "\\DCS" .. dirM)
+    elseif version == 1 then
+        return (temp .. "\\DCS.openbeta" .. dirM)
+    end
+end
+
+function ExportScript.Tools.GetCoalitionBullseye(coalition)
+    local path
+    local x = 0
+    local y = 0
+    local gps = {}
+    gps.latitude = 0.0
+    gps.longitude = 0.0
+
+    path = ExportScript.Tools.GetMissionPath(ExportScript.Init.VersionStr)
+
+    local exist = file_exists(path)
+    if exist then
+        dofile(path)
+
+        if coalition == 0 then
+            if (_G.mission.coalition.neutrals.bullseye ~= nil) then
+                x = _G.mission.coalition.neutrals.bullseye.x
+                y = _G.mission.coalition.neutrals.bullseye.y
+            end
+        elseif coalition == 1 then
+            if (_G.mission.coalition.red.bullseye ~= nil) then
+                x = _G.mission.coalition.red.bullseye.x
+                y = _G.mission.coalition.red.bullseye.y
+            end
+        elseif coalition == 2 then
+            if (_G.mission.coalition.blue.bullseye ~= nil) then
+                x = _G.mission.coalition.blue.bullseye.x
+                y = _G.mission.coalition.blue.bullseye.y
+            end
+        end
+        gps.latitude = LoLoCoordinatesToGeoCoordinates(x,y).latitude
+        gps.longitude = LoLoCoordinatesToGeoCoordinates(x,y).longitude
+    end
+    return gps
+end
+
 function ExportScript.Tools.RoundFreqeuncy(Freqeuncy, Format, PrefixZeros, LeastValue)
 	local _freqeuncy   = Freqeuncy   or 0.0
 	local _format      = Format      or "7.3"
@@ -1548,7 +1571,7 @@ end
 function ExportScript.Tools.getListCockpitParamsStr()
 	local ListIindicator = list_cockpit_params()
 	local TmpReturn = {}
-    local ListindicatorMatch = ListIindicator:gmatch("([^\n]+):(\"[^\n]+)\"")
+    local ListindicatorMatch = ListIindicator:gmatch("([^\n]+):\"([^\n]+)\"")
 
     while true do
         local Key, Value = ListindicatorMatch()
@@ -1758,6 +1781,7 @@ function ExportScript.Tools.GetFileData(fileName, n)
             end
         end
         file:close()
+        return 0
     else
         return 0
     end
