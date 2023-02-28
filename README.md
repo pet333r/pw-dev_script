@@ -65,9 +65,9 @@ you'll find it on the "Releases" page
 [![DCS AoA Indexer](.gfx/yt_aoa.jpg)](https://youtu.be/OU6KO8tjmGo) -->
 
 <p align="left" width="100%">
-  <a href="https://youtu.be/qGfzUdCVLwc"><img width="33%" src=".gfx/yt_dcsufc.png"></a>
-  <a href="https://youtu.be/6ang0UBaxTo"><img width="33%" src=".gfx/yt_dcsnav.png"></a>
-  <a href="https://youtu.be/OU6KO8tjmGo"><img width="33%" src=".gfx/yt_aoa.jpg"></a>
+  <a href="https://youtu.be/qGfzUdCVLwc"><img width="30%" src=".gfx/yt_dcsufc.png"></a>
+  <a href="https://youtu.be/6ang0UBaxTo"><img width="30%" src=".gfx/yt_dcsnav.png"></a>
+  <a href="https://youtu.be/OU6KO8tjmGo"><img width="30%" src=".gfx/yt_aoa.jpg"></a>
 </p>
 
 # automatic script installation
