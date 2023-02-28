@@ -60,9 +60,15 @@ you'll find it on the "Releases" page
 * DCS World MFD Exporter [http://pw-developer.com/soft_dcs_mfd.html](http://pw-developer.com/soft_dcs_mfd.html)
 <!-- * SimFDR [http://pw-developer.com/soft_simfdr.html](http://pw-developer.com/soft_simfdr.html) -->
 
-[![DCS UFC](.gfx/yt_dcsufc.png)](https://youtu.be/qGfzUdCVLwc)  
+<!-- [![DCS UFC](.gfx/yt_dcsufc.png)](https://youtu.be/qGfzUdCVLwc)  
 [![DCS Nav](.gfx/yt_dcsnav.png)](https://youtu.be/6ang0UBaxTo)  
-[![DCS AoA Indexer](.gfx/yt_aoa.jpg)](https://youtu.be/OU6KO8tjmGo)
+[![DCS AoA Indexer](.gfx/yt_aoa.jpg)](https://youtu.be/OU6KO8tjmGo) -->
+
+<p align="left" width="100%">
+  <a href="https://youtu.be/qGfzUdCVLwc"><img width="33%" src=".gfx/yt_dcsufc.png"></a>
+  <a href="https://youtu.be/6ang0UBaxTo"><img width="33%" src=".gfx/yt_dcsnav.png"></a>
+  <a href="https://youtu.be/OU6KO8tjmGo"><img width="33%" src=".gfx/yt_aoa.jpg"></a>
+</p>
 
 # automatic script installation
 - download Script Configurator from this link: [https://github.com/pet333r/pw-dev_script/releases/download/configurator/Script.Configurator-2022.zip](https://github.com/pet333r/pw-dev_script/releases/download/configurator/Script.Configurator-2022.zip)
