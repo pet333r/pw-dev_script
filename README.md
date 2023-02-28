@@ -56,17 +56,18 @@ you'll find it on the "Releases" page
 
 * DCS UFC [https://play.google.com/store/apps/details?id=com.dcsufc](https://play.google.com/store/apps/details?id=com.dcsufc)
 * DCS NAV [https://play.google.com/store/apps/details?id=com.pwdev.dcsnav](https://play.google.com/store/apps/details?id=com.pwdev.dcsnav)
-* DCS AoA Indexer > [https://play.google.com/store/apps/details?id=com.dcsaoaindexer](https://play.google.com/store/apps/details?id=com.dcsaoaindexer)
+* DCS AoA Indexer [https://play.google.com/store/apps/details?id=com.dcsaoaindexer](https://play.google.com/store/apps/details?id=com.dcsaoaindexer)
 * DCS World MFD Exporter [http://pw-developer.com/soft_dcs_mfd.html](http://pw-developer.com/soft_dcs_mfd.html)
 <!-- * SimFDR [http://pw-developer.com/soft_simfdr.html](http://pw-developer.com/soft_simfdr.html) -->
 
 [![DCS UFC](.gfx/yt_dcsufc.png)](https://youtu.be/qGfzUdCVLwc)  
+[![DCS Nav](.gfx/yt_dcsnav.png)](https://youtu.be/6ang0UBaxTo)  
 [![DCS AoA Indexer](.gfx/yt_aoa.jpg)](https://youtu.be/OU6KO8tjmGo)
 
 # automatic script installation
 - download Script Configurator from this link: [https://github.com/pet333r/pw-dev_script/releases/download/configurator/Script.Configurator-2022.zip](https://github.com/pet333r/pw-dev_script/releases/download/configurator/Script.Configurator-2022.zip)
 - extract somewhere to disk and run  
-- click the "**...**" button to select the path to install the script (the path should look like this:)  
+- click the "**...**" button to select the path to install the script, the path should look like this:  
   * `c:\Users\{Your username}\Saved Games\DCS.openbeta\`
   * `c:\Users\{Your username}\Saved Games\DCS\`  
 
@@ -106,7 +107,6 @@ DCS or DCS.openbeta
     │   ├── Config.lua              main script configuration file
     │   ├── ExportInit.lua
     │   ├── my_local_PC_IP          checking the PC IP address
-    │   ├── update_pw-dev_script    file for automatic script update
     │   └── version                 installed script version
     └── Export.lua                  main Export.lua file with entries for additional scripts
 ```
@@ -215,8 +215,8 @@ In one of the "groups" in the Config.lua file which is located in the folder wit
 ## additional script functions:
 
 ***`1`*** saving telemetry data to **KML** and **CSV** files, files are saved in one of the folders (depending on your DCS World version)  
-  * `c:\Users\{Your username}\Saved Games\DCS.openbeta\Logs\`
-  * `c:\Users\{Your username}\Saved Games\DCS\Logs\`  
+  * `c:\Users\{Your username}\Saved Games\DCS.openbeta\Logs\telemetry\`
+  * `c:\Users\{Your username}\Saved Games\DCS\Logs\telemetry\`  
 
     `1.1` **KML file** (the file can be opened in any application that supports that file format):
   ![](.gfx/ge1.png)
@@ -243,8 +243,10 @@ In one of the "groups" in the Config.lua file which is located in the folder wit
   [https://www.windowscentral.com/how-open-port-windows-firewall](https://www.windowscentral.com/how-open-port-windows-firewall)
 
 # faq
-***`1`*** What version of the system do Android applications work with? [ `DCS UFC` / `DCS AoA Indexer`]
-  - applications run on systems version 4.1 and above [ about 99% of devices available on the market ]
+***`1`*** What are the minimum Android versions for each app? [ `DCS UFC` / `DCS Nav` / `DCS AoA Indexer`]
+  - DCS UFC: Android 4.1 and above
+  - DCS Nav: Android 7.0 and above
+  - DCS AoA Indexer: Android 4.1 and above
 
 ***`2`*** do the applications and script work in multiplayer?
   - YES, on the server the property must be set: `Allow player export: yes`, about 95% of servers have this option turned on;-)
