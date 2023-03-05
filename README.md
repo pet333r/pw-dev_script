@@ -3,23 +3,19 @@
 Script for exporting data from DCS World
 
 # Table of context
-<!-- - [DCS World Script](#dcs-world-script) -->
-<!-- - [Table of context](#table-of-context) -->
 - [DCS World Script](#dcs-world-script)
 - [Table of context](#table-of-context)
 - [HOW TO INSTALL SCRIPT / Video](#how-to-install-script--video)
-    - [Click on the link or graphic to play the video on YouTube: https://youtu.be/saFq3Png-ds](#click-on-the-link-or-graphic-to-play-the-video-on-youtube-httpsyoutubesafq3png-ds)
-- [latest script version in zip file](#latest-script-version-in-zip-file)
 - [supported software](#supported-software)
 - [automatic script installation](#automatic-script-installation)
-  - [configure script in DCS World](#configure-script-in-dcs-world)
+- [configure script for DCS World](#configure-script-for-dcs-world)
+- [update script](#update-script)
 - [files scheme](#files-scheme)
 - [manual installation](#manual-installation)
   - [*if you don't have a folder 'Scripts'*](#if-you-dont-have-a-folder-scripts)
   - [*if you have 'Scripts' folder and have installed other scripts*](#if-you-have-scripts-folder-and-have-installed-other-scripts)
   - [*folder scheme*](#folder-scheme)
   - [*edit Config.lua*](#edit-configlua)
-- [automatic update script](#automatic-update-script)
 - [how to find IP's of PC and Android device](#how-to-find-ips-of-pc-and-android-device)
   - [Android](#android)
   - [PC](#pc)
@@ -36,15 +32,9 @@ Script for exporting data from DCS World
 
 # HOW TO INSTALL SCRIPT / Video
 Step by step how to install DCS World script  
-### Click on the link or graphic to play the video on YouTube: [https://youtu.be/saFq3Png-ds](https://youtu.be/saFq3Png-ds)
+* Click on the link or graphic to play the video on YouTube: [https://youtu.be/k6oPIDvX9LQ](https://youtu.be/k6oPIDvX9LQ)
 
-[![How to install script](.gfx/yt_script.png)](https://youtu.be/saFq3Png-ds)
-
-# latest script version in zip file
-if you have any problem understanding how the DCS World script should be installed, download the zip file, it contains a schematic of the entire `Scripts` folder along with the main `Export.lua` file and the entire script
-
-you'll find it on the "Releases" page
-[https://github.com/pet333r/pw-dev_script/releases](https://github.com/pet333r/pw-dev_script/releases)
+[![How to install script](.gfx/yt_script.png)](https://youtu.be/k6oPIDvX9LQ)
 
 # supported software
 
@@ -71,26 +61,35 @@ you'll find it on the "Releases" page
 </p>
 
 # automatic script installation
-- download Script Configurator from this link: [https://github.com/pet333r/pw-dev_script/releases/download/configurator/Script.Configurator-2022.zip](https://github.com/pet333r/pw-dev_script/releases/download/configurator/Script.Configurator-2022.zip)
+- download Script Configurator from this link: [https://github.com/pet333r/pw-dev_script/releases/download/configurator/Script.Configurator.zip](https://github.com/pet333r/pw-dev_script/releases/download/configurator/Script.Configurator.zip)
 - extract somewhere to disk and run  
 - click the "**...**" button to select the path to install the script, the path should look like this:  
   * `c:\Users\{Your username}\Saved Games\DCS.openbeta\`
   * `c:\Users\{Your username}\Saved Games\DCS\`  
 
-  [![](.gfx/sc1.png)](https://github.com/pet333r/pw-dev_script/blob/master/.gfx/sc1.png) [![](.gfx/sc2.png)](https://github.com/pet333r/pw-dev_script/blob/master/.gfx/sc2.png)
+  [![](.gfx/si01.png)](https://github.com/pet333r/pw-dev_script/blob/master/.gfx/si01.png) [![](.gfx/si02.png)](https://github.com/pet333r/pw-dev_script/blob/master/.gfx/si02.png)
 - after selecting the correct path, click the "**Download & install script**" button, the zip file with the script will be downloaded and installed in the appropriate place, additionally an entry will be automatically added to the main Export.lua file
-- you can check if the script entry is added in the file Export.lua (button "**Open main Export.lua**")
-- then set correct IP addresses of your Android devices in the Config.lua file (you can do this in two ways):
+- then set correct IP addresses of your Android devices in the Config.lua file (you can do this in a few ways):
+  - set the IP of your devices on the **CONFIGURATION** tab in app > [configure script in DCS World](#configure-script-for-dcs-world)
+  - setting everything up in DCS World > [configure script in DCS World](#configure-script-for-dcs-world)
   - manually editing the file ("**Edit Config.lua**" button) example you will find below in the [example connection](#example-connection)
-  - setting everything up in DCS World > [configure script in DCS World](#configure-script-in-dcs-world)
-- in the future, you can check the script update by clicking the "**Check for update**" button
+- in the future, when a script update will be available, you will be able to easily update it by clicking the "**Update script**" button
 
 - the last thing is to enter your computer's IP address in the Android application settings (**DCS UFC** / **DCS NAV** / **DCS AoA Indexer**)
 
-## configure script in DCS World
-After installing the script, enter the IP addresses of your Android devices in the `Config.lua` file, you can do this in `DCS World > Options > Special > pw-dev` which is easier than edit this file manually
-
+# configure script for DCS World
+After installing the script, enter the IP addresses of your Android devices in the `Config.lua` file, you can do this:
+  - on the **CONFIGURATION** tab in the application  
+   -- change the IP address to the IP address of your device (tablet/phone)    
+[![](.gfx/si03.png)](https://github.com/pet333r/pw-dev_script/blob/master/.gfx/si03.png)  
+  - in the menu in DCS World `DCS World > Options > Special > pw-dev`
 ![](.gfx/options1.png)  
+
+# update script
+
+in the application you can also check the version of the script that is installed and whether a newer version is available. In case an update is available, the entire script can be easily updated by clicking the "Update script" button  
+
+&emsp; ![](.gfx/si04.png) 
 
 # files scheme
 
@@ -161,27 +160,7 @@ in folder `pw-dev_script` open `Config.lua` for edit, there are several "groups"
 choose one of them and edit `Host` and `Port` (you can leave port the same, in 99% cases you don't even need to change)  
 it is <span style="color:red">**IMPORTANT**</span> that the device's IP address matches and `PC / phone / tablet` must be on the same network  
 
-<!-- ### configuration for apps
-- if You only use `DCS UFC` [https://play.google.com/store/apps/details?id=com.dcsufc](https://play.google.com/store/apps/details?id=com.dcsufc) set `ExportSelfData` to `false` (less data to be sent and processed by the application, longer battery life)
-```
-ExportScript.Config.ExportSelfData          = false
-```
-- `DCS AoA Indexer` [https://play.google.com/store/apps/details?id=com.dcsaoaindexer](https://play.google.com/store/apps/details?id=com.dcsaoaindexer) must have `ExportSelfData` and `ExportXSD` set to `true` for proper working
-```
-ExportScript.Config.ExportXSD               = true (where X is Your device group to which the IP of the device from the DCS AoA Indexer is assigned)
-...
-ExportScript.Config.ExportSelfData          = true
-``` -->
-
 example you will find below in the [example connection](#example-connection)
-
-
-# automatic update script
-
-in the future, just run the file `update_pw-dev_script.bat` to download the latest version of the script (the `Config.lua` file with your IP's will be kept, the others will be replaced with the latest version)  
-
-In each program update, a notification about new addons is displayed and additionally, information about the minimum script version for proper operation is displayed. If you see that a newer version of the script is required than the one you currently have, just run the automatic script update and wait for it to download the latest versions of files.
-
 
 # how to find IP's of PC and Android device
 
