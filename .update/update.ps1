@@ -1,3 +1,5 @@
+start http://pw-developer.com/soft_dcs_si.html
+
 Set-ExecutionPolicy RemoteSigned
 
 $urlMain = "https://raw.githubusercontent.com/pet333r/pw-dev_script/master/"
