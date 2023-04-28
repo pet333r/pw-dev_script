@@ -19,6 +19,10 @@ ExportScript.ConfigEveryFrameArguments =
 	-- [84] = "%.2f",		-- EngineLeftFuelFlow
     -- [85] = "%.2f",		-- EngineRightFuelFlow
 
+    -- Autopilot
+    [129] = "%1d",   -- EAC On/Off
+    [130] = "%1d",   -- Radar Altimeter
+    [132] = "%1d",   -- AP MODE
     -- AM Radio
 	[133] = "%.1f",   -- PTR-ANARC186-VHFAM-VOLUME (Volume)
 	[134] = "%d",     -- PTR-ANARC186-VHFAM-SQUELCH (Squelch / TONE) -1/1
@@ -187,6 +191,17 @@ ExportScript.ConfigEveryFrameArguments =
 	[525] = "%1d",		-- L_GEN
 	[526] = "%1d",		-- R_GEN
     [527] = "%1d",		-- INST_INV
+
+    -- ARC-210
+    [551] = "%.1f",		-- knob
+    [552] = "%.2f",		-- knob Channel
+    [553] = "%.1f",		-- knob
+    [554] = "%.1f",		-- 100 MHz Selector
+    [555] = "%.1f",		-- 10 MHz Selector
+    [556] = "%.1f",		-- 1 MHz Selector
+    [557] = "%.1f",		-- 100 KHz Selector
+    [558] = "%.1f",		-- 25 KHz Selector
+    [568] = "%.1f",		-- Squelch on/off
     
     [606] = "%1d",		-- HARS
     [608] = "%1d",		-- EGI
@@ -202,6 +217,8 @@ ExportScript.ConfigEveryFrameArguments =
     [730] = "%1d",		-- Air Refuel READY
     [731] = "%1d",		-- Air Refuel LATCHED
     [732] = "%1d",		-- Air Refuel DISCONNECT
+
+    [998] = "%1d",		-- ARC-210
 }
 
 ExportScript.ConfigArguments = 
@@ -335,6 +352,12 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
     ExportScript.Tools.SendData(2024,  getTacanChannel())
     -- ILS
     ExportScript.Tools.SendData(2025,  getILSFrequency())
+
+    -- ARC-210
+    local arc210 = ExportScript.Tools.getListIndicatorValue(18)
+    local arcFreq = string.format(ExportScript.Tools.coerce_nil_to_string(arc210.freq_label_mhz) .. ExportScript.Tools.coerce_nil_to_string(arc210.freq_label_khz))
+    ExportScript.Tools.SendData(2041, ExportScript.Tools.coerce_nil_to_string(arc210.active_channel))
+    ExportScript.Tools.SendData(2042, ExportScript.Tools.DisplayFormat(arcFreq, 6))
 
     -- -- General
 	-- ExportScript.Tools.SendData(2901, ExportScript.Tools.GetArgumentsValue(17, "%.2f"))

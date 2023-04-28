@@ -25,7 +25,11 @@ ExportScript.Maps.Normandy.Lat1         = 51.487778
 ExportScript.Maps.Normandy.Long1        = -4.216111
 ExportScript.Maps.Normandy.Lat2         = 48.229722
 ExportScript.Maps.Normandy.Long2        = 2.191667
--- Persian Gulf Map
+ExportScript.Maps.Normandy2            	= {}
+ExportScript.Maps.Normandy2.Lat1       	= 51.85305
+ExportScript.Maps.Normandy2.Long1      	= -3.5005
+ExportScript.Maps.Normandy2.Lat2       	= 48.182817
+ExportScript.Maps.Normandy2.Long2      	= 3.129567
 ExportScript.Maps.PersianGulf           = {}
 ExportScript.Maps.PersianGulf.Lat1      = 32.955517
 ExportScript.Maps.PersianGulf.Long1     = 46.583444

@@ -313,28 +313,6 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	local ZTexture = "0"
 	if not ifei then
 		return
-	-- else
-	-- 	ExportScript.Tools.SendData(2101, " ")
-	-- 	ExportScript.Tools.SendData(2102, " ")
-	-- 	ExportScript.Tools.SendData(2103, " ")
-	-- 	ExportScript.Tools.SendData(2104, " ")
-	-- 	ExportScript.Tools.SendData(2105, " ")
-	-- 	ExportScript.Tools.SendData(2106, " ")
-	-- 	ExportScript.Tools.SendData(2107, " ")
-	-- 	ExportScript.Tools.SendData(2108, " ")
-	-- 	ExportScript.Tools.SendData(2109, " ")
-	-- 	ExportScript.Tools.SendData(2110, " ")
-	-- 	ExportScript.Tools.SendData(2111, " ")
-	-- 	ExportScript.Tools.SendData(2112, " ")
-	-- 	ExportScript.Tools.SendData(2113, " ")
-	-- 	ExportScript.Tools.SendData(2114, " ")
-	-- 	ExportScript.Tools.SendData(2115, " ")
-	-- 	ExportScript.Tools.SendData(2116, " ")
-	-- 	ExportScript.Tools.SendData(2117, " ")
-		-- ExportScript.Tools.SendData(2118, " ")
-		-- ExportScript.Tools.SendData(2119, " ")
-		-- ExportScript.Tools.SendData(2120, " ")
-		-- ExportScript.Tools.SendData(2121, " ")
 	end
 	txt_RPM_L		= ExportScript.Tools.coerce_nil_to_string(ifei.txt_RPM_L)
 	txt_RPM_R		= ExportScript.Tools.coerce_nil_to_string(ifei.txt_RPM_R)
@@ -367,7 +345,7 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	if (txt_TIMER_S == "") then txt_TIMER_S = "  " end
 	if (txt_TIMER_M == "") then txt_TIMER_M = "  " end
 	if (txt_TIMER_H == "") then txt_TIMER_H = "  " end
-	
+
 	ExportScript.Tools.SendData(2101, ExportScript.Tools.DisplayFormat(txt_BINGO, 5))
 	ExportScript.Tools.SendData(2102, ExportScript.Tools.DisplayFormat(txt_CLOCK_H .. ":" .. txt_CLOCK_M .. ":" .. txt_CLOCK_S, 8))
 	ExportScript.Tools.SendData(2103, ExportScript.Tools.DisplayFormat(txt_TIMER_H .. ":" .. txt_TIMER_M .. ":" .. txt_TIMER_S, 8))

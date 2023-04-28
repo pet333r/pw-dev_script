@@ -9,6 +9,32 @@ ExportScript.ConfigEveryFrameArguments =
 	[49] = "%1d",	-- AOA Indexer green
 	[50] = "%1d",	-- AOA Indexer yellow
 
+	-- Lighting
+	[221] = "%.1f", -- Flood Lights Knob
+	[222] = "%.1f", -- Flight Instruments Lights Knob
+	[223] = "%.1f", -- Engine Instruments Lights Knob
+	[224] = "%.1f", -- Console Lights Knob
+	[225] = "%.1f", -- Bright/Dim Switch, BRT/NEUT/DIM
+	[226] = "%.1f", -- Warning Test Switch
+	[227] = "%.1f",	-- Nav Lights Knob
+	[228] = "%.1f",	-- Formation Lights Knob
+	[229] = "%.1f",	-- Beacon Light Switch
+	[353] = "%.1f",	-- Landing & Taxi Light Switch, ON/OFF
+
+	[340] = "%1d",	-- Interval Switch [sec], .06/.10/.14 {-1.0, 0.0, 1.0}
+	[341] = "%.1f",	-- Bombs Arm Switch, SAFE/TAIL/NOSE & TAIL/NOSE {0.0, 0.1, 0.2, 0.3}
+	[342] = "%1d",	-- GUNS MSL Cover 0/1
+	[343] = "%1d",	-- GUNS MSL CAMR / OFF / CAMR ONLY 1/0/-1
+	[344] = "%.1f",	-- External Stores Selector, RIPL/BOMB/SAFE/RKT DISP {0.0,0.1,0.2,0.3}
+	[345] = "%.2f",	-- Missile Volume Knob - Rotate to adjust volume (Axis) {0.0, 1.0} in 0.15 Steps
+	[346] = "%1d",	-- Armament Position Selector Switch - LEFT WINGTIP, ON/OFF
+	[347] = "%1d",	-- Armament Position Selector Switch - LEFT OUTBD, ON/OFF
+	[348] = "%1d",	-- Armament Position Selector Switch - LEFT INBD, ON/OFF
+	[349] = "%1d",	-- Armament Position Selector Switch - CENTERLINE, ON/OFF
+	[350] = "%1d",	-- Armament Position Selector Switch - RIGHT INBD, ON/OFF
+	[351] = "%1d",	-- Armament Position Selector Switch - RIGHT OUTBD, ON/OFF
+	[352] = "%1d",	-- Armament Position Selector Switch - RIGHT WINGTIP, ON/OFF
+
 	[530] = "%1d", -- L Generator Lamp
 	[531] = "%1d", -- Canopy Open
 	[532] = "%1d", -- R Generator Lamp
@@ -52,23 +78,20 @@ ExportScript.ConfigEveryFrameArguments =
 }
 ExportScript.ConfigArguments = 
 {
-	[340] = "%1d",	-- Interval Switch [sec], .06/.10/.14 {-1.0, 0.0, 1.0}
-	[341] = "%.1f",	-- Bombs Arm Switch, SAFE/TAIL/NOSE & TAIL/NOSE {0.0, 0.1, 0.2, 0.3}
-	[342] = "%1d",	-- GUNS MSL Cover 0/1
-	[343] = "%1d",	-- GUNS MSL CAMR / OFF / CAMR ONLY 1/0/-1
-	[344] = "%.1f",	-- External Stores Selector, RIPL/BOMB/SAFE/RKT DISP {0.0,0.1,0.2,0.3}
-	[345] = "%.2f",	-- Missile Volume Knob - Rotate to adjust volume (Axis) {0.0, 1.0} in 0.15 Steps
-	[346] = "%1d",	-- Armament Position Selector Switch - LEFT WINGTIP, ON/OFF
-	[347] = "%1d",	-- Armament Position Selector Switch - LEFT OUTBD, ON/OFF
-	[348] = "%1d",	-- Armament Position Selector Switch - LEFT INBD, ON/OFF
-	[349] = "%1d",	-- Armament Position Selector Switch - CENTERLINE, ON/OFF
-	[350] = "%1d",	-- Armament Position Selector Switch - RIGHT INBD, ON/OFF
-	[351] = "%1d",	-- Armament Position Selector Switch - RIGHT OUTBD, ON/OFF
-	[352] = "%1d",	-- Armament Position Selector Switch - RIGHT WINGTIP, ON/OFF
 }
 
 -- Pointed to by ProcessDCSHighImportance
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
+	-- flares
+	local flares = {}
+	flares[1] = string.format("%.0f", mainPanelDevice:get_argument_value(405)*10)
+    flares[2] = string.format("%.0f", mainPanelDevice:get_argument_value(406)*10)
+	ExportScript.Tools.SendData(2011, flares[1]..flares[2])
+	-- chaffs
+	local chaffs = {}
+	chaffs[1] = string.format("%.0f", mainPanelDevice:get_argument_value(401)*10)
+	chaffs[2] = string.format("%.0f", mainPanelDevice:get_argument_value(402)*10)
+	ExportScript.Tools.SendData(2012, chaffs[1]..chaffs[2])
 end
 
 -- Pointed to by ExportScript.ProcessDCSConfigLowImportance

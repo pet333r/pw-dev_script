@@ -111,6 +111,23 @@ ExportScript.ConfigEveryFrameArguments =
     [280] = "%1d", -- CMBT (green)
     [281] = "%1d", -- TRAIN (green)
 
+    -- FCS
+    [527] = "%d", -- Record Switch
+    [528] = "%d", -- EFCS Switch
+    [529] = "%d", -- Yaw/Roll CAS Switch
+    [530] = "%d", -- Direct Mode Switch
+    [531] = "%d", -- BIT Button
+    [532] = "%d", -- Yaw Trim Switch
+    [533] = "%d", -- Flight Test Switch 1
+    [534] = "%d", -- Flight Test Switch 2
+    [535] = "%d", -- AG1/AG2 Switch
+    [536] = "%d", -- AA/AG Switch
+
+    --
+    [539] = "%d", -- Emergency Hydraulic Pump Switch
+    [540] = "%d", -- SHARS Switch
+    [553] = "%d", -- P.H. Test Switch
+
     -- Radio
     [545] = "%.1f", -- Radio Volume Knob
     [546] = "%1d", -- Squelch OFF/SQL/ACKN

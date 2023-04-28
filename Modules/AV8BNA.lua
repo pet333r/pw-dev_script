@@ -38,9 +38,10 @@ ExportScript.ConfigEveryFrameArguments =
 	[281] = "%d",	--A/G
 	[283] = "%d",	--NAV
 	[285] = "%d",	--VSTOL
-	-- [451] = "%.f",	--SEL
-	-- [452] = "%.f",	--CMBT
-	-- [453] = "%.f",	--STO
+
+	[451] = "%.f",	--SEL
+	[452] = "%.f",	--CMBT
+	[453] = "%.f",	--STO
 
 	--CAUTION PANEL (from upper left to lower right)
 	[560] = "%d",	--OXY
@@ -114,7 +115,7 @@ ExportScript.ConfigEveryFrameArguments =
 	-- [271] = "%.1f",	--NOZZLE POINTER
 
 	--FUEL PANEL DISPLAY
-	-- [365] = "%.1f",	--ON/OFF FLAG
+	[365] = "%d",	--ON/OFF FLAG
 	-- [366] = "%.1f",	--TOT FUEL 1. DRUM
 	-- [367] = "%.1f",	--TOT FUEL 2.
 	-- [368] = "%.1f",	--TOT FUEL 3.
@@ -233,7 +234,7 @@ ExportScript.ConfigArguments =
 	-- [179] = "%.4f",	--Comm 2 Channel Show Button
 
 	-- Fuel Quantity Indicator
-	-- [379] = "%.1f",	--Fuel Totalizer Selector
+	[379] = "%.1f",	--Fuel Totalizer Selector
 	-- [380] = "%.4f",	--Bingo Fuel Set Knob
 
 	-- MPCD left

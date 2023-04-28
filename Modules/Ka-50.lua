@@ -18,6 +18,26 @@ ExportScript.ConfigEveryFrameArguments =
     [23] = "%.1f", -- Target #3/Other type LED
     [50] = "%.1f", -- Ingress point LED
 
+    -- autopilot
+    [330] = "%.1f", -- Bank hold LED (green)
+    [331] = "%.1f", -- Pitch hold LED (green)
+    [332] = "%.1f", -- Heading hold LED (green)
+    [333] = "%.1f", -- Altitude hold LED (green)
+    [334] = "%.1f", -- Flight director LED (green)
+    [335] = "%.1f", -- BARO/RALT altitude hold mode Switch
+    [336] = "%.1f", -- DH/DT Switch
+
+    [431] = "%.1f", -- Weapon system mode selector
+    [432] = "%1d", -- Training mode Switch
+    [433] = "%1d", -- K-041 power Switch
+    [434] = "%1d", -- HMS/NVG power Switch
+    [435] = "%1d", -- Laser standby ON/OFF Switch
+    [437] = "%1d", -- Automatic turn on target LED (green)
+    [438] = "%1d", -- Airborne target LED
+    [439] = "%1d", -- Head-on airborne target LED
+    [440] = "%1d", -- Ground moving target LED
+    [441] = "%1d", -- Targeting mode reset LED
+
     -- PVI-800
     [315] = "%.1f", -- Waypoints LED
     [519] = "%.1f", -- Inflight INU Realignment LED

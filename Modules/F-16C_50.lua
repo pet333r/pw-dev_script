@@ -3,6 +3,46 @@ ExportScript.FoundDCSModule = true
 
 ExportScript.ConfigEveryFrameArguments = 
 {
+	-- CMDS
+	[365] = "%1d", 	-- O1 Expendable Category Switch, ON/OFF
+	[366] = "%1d", 	-- O2 Expendable Category Switch, ON/OFF
+	[367] = "%1d", 	-- CH Expendable Category Switch, ON/OFF
+	[368] = "%1d", 	-- FL Expendable Category Switch, ON/OFF
+	[375] = "%1d", 	-- RWR Source Switch, ON/OFF
+	[374] = "%1d", 	-- JMR Source Switch, ON/OFF
+	[373] = "%1d", 	-- MWS Source Switch, ON/OFF
+	[371] = "%1d", 	-- Jettison Switch, JETT/OFF
+	[377] = "%.1f", -- PROGRAM Knob, BIT/1/2/3/4
+	[378] = "%.1f", -- MODE Knob, OFF/STBY/MAN/SEMI/AUTO/BYP
+	[370] = "%1d", 	-- NO GO Light (green)
+	[372] = "%1d", 	-- GO Light (green)
+	[376] = "%1d", 	-- DISPENSE Light (green)
+	[379] = "%1d", 	-- RDY Light (green)
+
+	-- SNSR
+	[670] = "%1d", 	-- LEFT HDPT Switch
+	[671] = "%1d", 	-- RIGHT HDPT Switch
+	[672] = "%1d", 	-- FCR Switch
+	[673] = "%1d", -- RDR ALT Switch
+
+	--HUD Remote Control Panel
+	[675] = "%1d", -- Scales Switch, VV/VAH / VAH / OFF
+	[676] = "%1d", -- Flightpath Marker Switch, ATT/FPM / FPM / OFF
+	[677] = "%1d", -- DED/PFLD Data Switch, DED / PFL / OFF
+	[678] = "%1d", -- Depressible Reticle Switch, STBY / PRI / OFF
+	[679] = "%1d", -- Velocity Switch, CAS / TAS / GND SPD
+	[680] = "%1d", -- Altitude Switch, RADAR / BARO / AUTO
+	[681] = "%1d", -- Brightness Control Switch, DAY / AUTO BRT / NIGHT
+	[682] = "%1d", -- TEST Switch, STEP / ON / OFF
+
+	-- LIGHTING
+	[685] = "%.1f", -- PRIMARY CONSOLES BRT Knob
+	[686] = "%.1f", -- PRIMARY INST PNL BRT Knob
+	[687] = "%.1f", -- PRIMARY DATA ENTRY DISPLAY BRT Knob
+	[688] = "%.1f", -- FLOOD CONSOLES BRT Knob
+	[690] = "%.1f", -- FLOOD INST PNL BRT Knob
+	[691] = "%d", -- MAL & IND LTS Switch, BRT/Center/DIM
+	
 	[110] = "%1d",	-- Warning, Caution and IndicatorLights","AoA Light up (red)
 	[111] = "%1d",	-- Warning, Caution and IndicatorLights","AoA Light up (green)
 	[112] = "%1d",	-- Warning, Caution and IndicatorLights","AoA Light up (yellow)
@@ -162,48 +202,6 @@ ExportScript.ConfigEveryFrameArguments =
 }
 ExportScript.ConfigArguments = 
 {
-	-- [17] = "%.2f", -- ADI Pitch
-	-- [18] = "%.2f", -- ADI Bank
-
-	-- CMDS
-	[365] = "%1d", 	-- O1 Expendable Category Switch, ON/OFF
-	[366] = "%1d", 	-- O2 Expendable Category Switch, ON/OFF
-	[367] = "%1d", 	-- CH Expendable Category Switch, ON/OFF
-	[368] = "%1d", 	-- FL Expendable Category Switch, ON/OFF
-	[375] = "%1d", 	-- RWR Source Switch, ON/OFF
-	[374] = "%1d", 	-- JMR Source Switch, ON/OFF
-	[373] = "%1d", 	-- MWS Source Switch, ON/OFF
-	[371] = "%1d", 	-- Jettison Switch, JETT/OFF
-	[377] = "%.1f", -- PROGRAM Knob, BIT/1/2/3/4
-	[378] = "%.1f", -- MODE Knob, OFF/STBY/MAN/SEMI/AUTO/BYP
-	[370] = "%1d", 	-- NO GO Light (green)
-	[372] = "%1d", 	-- GO Light (green)
-	[376] = "%1d", 	-- DISPENSE Light (green)
-	[379] = "%1d", 	-- RDY Light (green)
-
-	-- SNSR
-	[670] = "%1d", 	-- LEFT HDPT Switch
-	[671] = "%1d", 	-- RIGHT HDPT Switch
-	[672] = "%1d", 	-- FCR Switch
-	[673] = "%1d", -- RDR ALT Switch
-
-	--HUD Remote Control Panel
-	[675] = "%1d", -- Scales Switch, VV/VAH / VAH / OFF
-	[676] = "%1d", -- Flightpath Marker Switch, ATT/FPM / FPM / OFF
-	[677] = "%1d", -- DED/PFLD Data Switch, DED / PFL / OFF
-	[678] = "%1d", -- Depressible Reticle Switch, STBY / PRI / OFF
-	[679] = "%1d", -- Velocity Switch, CAS / TAS / GND SPD
-	[680] = "%1d", -- Altitude Switch, RADAR / BARO / AUTO
-	[681] = "%1d", -- Brightness Control Switch, DAY / AUTO BRT / NIGHT
-	[682] = "%1d", -- TEST Switch, STEP / ON / OFF
-
-	-- LIGHTING
-	[685] = "%.1f", -- PRIMARY CONSOLES BRT Knob
-	[686] = "%.1f", -- PRIMARY INST PNL BRT Knob
-	[687] = "%.1f", -- PRIMARY DATA ENTRY DISPLAY BRT Knob
-	[688] = "%.1f", -- FLOOD CONSOLES BRT Knob
-	[690] = "%.1f", -- FLOOD INST PNL BRT Knob
-	[691] = "%d", -- MAL & IND LTS Switch, BRT/Center/DIM
 }
 
 -- DED Layout Information ------------------------------------------------------
@@ -406,6 +404,7 @@ DEDLayout_l1["STPT NUMBER"] = {14,2,0,"_inv","I"}
 DEDLayout_l1["MARK IncDecSymbol"] = {17,1}
 DEDLayout_l1["MARK Number Asteriscs_both"] = {13,1,19,"","I"}
 DEDLayout_l1["MARK STPT"] = {19,4}
+--TO-DO
 --ACAL
 DEDLayout_l2["ACAL_MODE"] = {8,3}
 DEDLayout_l2["Asterisks_ACAL_SelectedMode_both"] = {7,1,12,"","I"}

@@ -54,8 +54,8 @@ ExportScript.ConfigEveryFrameArguments =
 	[51] = "%.1f",   -- DEST knob
 
 	-- TID
-	[2005]  =  "%.1f",   --      TID_mode_knob
-	[2006]  =  "%.1f",   --      TID_range_knob
+	[2005]  =  "%.1f",   	-- TID_mode_knob
+	[2006]  =  "%.1f",   	-- TID_range_knob
 	[6125] = "%.1f",		-- TID TRACK HOLD selector
 	[6126] = "%.1f",		-- TID CLSN
 	[6127] = "%.1f",		-- TID RID DSBL
@@ -74,15 +74,27 @@ ExportScript.ConfigEveryFrameArguments =
 	[2011]  =  "%d",   -- HCU_TVIR switch
 	[2012]  =  "%d",   -- HCU_WCS switch
 
-	[6135] = "%.1f",		-- HCU IR/TV Mode
-	[6136] = "%.1f",		-- HCU RADAR Mode
-	[6137] = "%.1f",		-- HCU DDD Mode
-	[6138] = "%.1f",		-- HCU TID Mode
+	-- UHF ARC-159
+	[383]  =  "%.1f",   -- ARC-159 Volume
+	[2027]  =  "%.1f",   -- ARC-159 Display Brightness
+	[2030]  =  "%d",   -- ARC-159 100MHz & 10MHz Dial
+	[2029]  =  "%d",   -- ARC-159 1MHz Dial
+	[2028]  =  "%d",   -- ARC-159 0.1MHz Dial
+	[2026]  =  "%d",   -- ARC-159 0.025MHz Dial
+	[2032]  =  "%.2f",   -- ARC-159 Preset Channel Selector
+	[2033]  =  "%.1f",   -- ARC-159 Freq Mode
+	[2034]  =  "%.1f",   -- ARC-159 Function
+	[2035]  =  "%d",   -- ARC-159 Squelch Switch
 
-	[11503] = "%1d",		-- ANT TRK Light
-	[11504] = "%1d",		-- RDROT Light
-	[11505] = "%1d",		-- JAT Light
-	[11506] = "%1d",		-- IROT Light
+	[6135] = "%.1f",	-- HCU IR/TV Mode
+	[6136] = "%.1f",	-- HCU RADAR Mode
+	[6137] = "%.1f",	-- HCU DDD Mode
+	[6138] = "%.1f",	-- HCU TID Mode
+
+	[11503] = "%1d",	-- ANT TRK Light
+	[11504] = "%1d",	-- RDROT Light
+	[11505] = "%1d",	-- JAT Light
+	[11506] = "%1d",	-- IROT Light
 
 	-- ACMP
 	[2003] = "%.2f",	-- PILOT AOA Unit Slider
@@ -184,13 +196,26 @@ ExportScript.ConfigEveryFrameArguments =
 	[1009] = "%1d", 	-- HUD Power On/Off
 	[1008] = "%1d", 	-- HSD/ECMD Power On/Off
 
+	-- FUEL
+	[1054] = "%.2f", 	-- PILOT Fuel AFT & L
+	[1055] = "%.2f", 	-- PILOT Fuel FWD & R
+
 	-- RMP / TIT / FF
 	[1057] = "%.2f", 	-- PILOT Engine RPM Left
 	[1058] = "%.2f", 	-- PILOT Engine RPM Right
-	[1059] = "%.2f", 	-- PILOT Engine TIT Left
-	[1060] = "%.2f", 	-- PILOT Engine TIT Right
+	[1059] = "%.2f", 	-- PILOT Engine TIT / EGT Left
+	[1060] = "%.2f", 	-- PILOT Engine TIT / EGT Right
 	[1061] = "%.2f", 	-- PILOT Engine FF Left
 	[1062] = "%.2f", 	-- PILOT Engine FF Right
+
+	-- AFCS
+	[2106] = "%1d", 	-- PITCH 0/1
+	[2107] = "%1d", 	-- ROLL 0/1
+	[2108] = "%1d", 	-- YAW 0/1
+	[2109] = "%1d", 	-- VEC/PCD -1/0/1
+	[2110] = "%1d", 	-- ALT 0/1
+	[2111] = "%1d", 	-- HDG -1/0/1
+	[2112] = "%1d", 	-- ENGAGE -2/2
 
 	[9357] = "%1d",		-- Pilot SAM
 	[9358] = "%1d",		-- Pilot AAA
@@ -332,18 +357,6 @@ ExportScript.ConfigEveryFrameArguments =
 }
 ExportScript.ConfigArguments = 
 {
-	-- FUEL
-	[1054] = "%.2f", 	-- PILOT Fuel AFT & L
-	[1055] = "%.2f", 	-- PILOT Fuel FWD & R
-
-	-- AFCS
-	[2106] = "%1d", 	-- PITCH 0/1
-	[2107] = "%1d", 	-- ROLL 0/1
-	[2108] = "%1d", 	-- YAW 0/1
-	[2109] = "%1d", 	-- VEC/PCD -1/0/1
-	[2110] = "%1d", 	-- ALT 0/1
-	[2111] = "%1d", 	-- HDG -1/0/1
-	[2112] = "%1d", 	-- ENGAGE -2/2
 }
 
 local function getAmmo()
@@ -370,9 +383,7 @@ local function getPLTFuelLeft()
 	if digit1 == nil then digit1 = "0" end
     local digit2 = string.format("%.0f", GetDevice(0):get_argument_value(6001)*10)
 	if digit2 == nil then digit2 = "0" end
-	local digit3 = 0
-    local digit4 = 0
-    return tonumber(digit1 .. digit2 .. digit3 .. digit4)
+    return string.format(digit1 .. digit2 .. "00")
 end
 
 local function getPLTFuelRight()
@@ -380,9 +391,7 @@ local function getPLTFuelRight()
 	if digit1 == nil then digit1 = "0" end
     local digit2 = string.format("%.0f", GetDevice(0):get_argument_value(6005)*10)
 	if digit2 == nil then digit2 = "0" end
-	local digit3 = 0
-    local digit4 = 0
-    return tonumber(digit1 .. digit2 .. digit3 .. digit4)
+    return string.format(digit1 .. digit2 .. "00")
 end
 
 local function getPLTFuelTotal()
@@ -392,9 +401,7 @@ local function getPLTFuelTotal()
 	if digit2 == nil then digit2 = "0" end
 	local digit3 = string.format("%.0f", GetDevice(0):get_argument_value(6012)*10)
 	if digit3 == nil then digit3 = "0" end
-    local digit4 = 0
-	local digit5 = 0
-    return tonumber(digit1 .. digit2 .. digit3 .. digit4 .. digit5)
+    return string.format(digit1 .. digit2 .. digit3 .. "00")
 end
 
 local function getPLTFuelBingo()
@@ -404,9 +411,11 @@ local function getPLTFuelBingo()
 	if digit2 == nil then digit2 = "0" end
 	local digit3 = string.format("%.0f", GetDevice(0):get_argument_value(6022)*10)
 	if digit3 == nil then digit3 = "0" end
-    local digit4 = 0
-	local digit5 = 0
-    return tonumber(digit1 .. digit2 .. digit3 .. digit4 .. digit5)
+    return string.format(digit1 .. digit2 .. digit3 .. "00")
+end
+
+local function getUhf()
+	return ExportScript.Tools.getListCockpitParam("COMM1_FREQ")
 end
 
 -- Pointed to by ProcessDCSHighImportance
@@ -420,6 +429,7 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	ExportScript.Tools.SendData(20003, getPLTFuelRight())
 	ExportScript.Tools.SendData(20004, getPLTFuelTotal())
 	ExportScript.Tools.SendData(20005, getPLTFuelBingo())
+	ExportScript.Tools.SendData(20006, getUhf())
 
 	-- -- General
 	-- ExportScript.Tools.SendData(2901, -ExportScript.Tools.GetArgumentsValue(3001, "%.2f"))
