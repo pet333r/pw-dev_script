@@ -43,6 +43,10 @@ local lDeviceIp1 = ""
 local lDeviceIp2 = ""
 local lDeviceIp3 = ""
 local lDeviceIp4 = ""
+local lDeviceIp5 = ""
+local lDeviceIp6 = ""
+local lDeviceIp7 = ""
+local lDeviceIp8 = ""
 
 local lDeviceIpMap = ""
 local lDevicePortMap = ExportScript.Config.Port
@@ -263,6 +267,10 @@ function ExportScript.Tools.ProcessInput()
                 elseif (lDevicesNo == 2) then
                 elseif (lDevicesNo == 3) then
                 elseif (lDevicesNo == 4) then
+                elseif (lDevicesNo == 5) then
+                elseif (lDevicesNo == 6) then
+                elseif (lDevicesNo == 7) then
+                elseif (lDevicesNo == 8) then
                 end
 
                 local opt = tonumber(string.sub(_input,2,2))
@@ -272,6 +280,10 @@ function ExportScript.Tools.ProcessInput()
                     if (lDeviceIp2 == from) then lDeviceIp2 = "" end
                     if (lDeviceIp3 == from) then lDeviceIp3 = "" end
                     if (lDeviceIp4 == from) then lDeviceIp4 = "" end
+                    if (lDeviceIp5 == from) then lDeviceIp5 = "" end
+                    if (lDeviceIp6 == from) then lDeviceIp6 = "" end
+                    if (lDeviceIp7 == from) then lDeviceIp7 = "" end
+                    if (lDeviceIp8 == from) then lDeviceIp8 = "" end
                 end
 
                 if opt == 1 then
@@ -308,6 +320,42 @@ function ExportScript.Tools.ProcessInput()
                     elseif (lDeviceIp4 ~= "") then
                         if (from == lDeviceIp4) then
                             ExportScript.Tools.lDeviceIp4 = from
+                            return
+                        end
+                    -- Device 5
+                    elseif (lDeviceIp5 == "") then
+                        ExportScript.Tools.lDeviceIp5 = from
+                        return
+                    elseif (lDeviceIp5 ~= "") then
+                        if (from == lDeviceIp5) then
+                            ExportScript.Tools.lDeviceIp5 = from
+                            return
+                        end
+                    -- Device 6
+                    elseif (lDeviceIp6 == "") then
+                        ExportScript.Tools.lDeviceIp6 = from
+                        return
+                    elseif (lDeviceIp6 ~= "") then
+                        if (from == lDeviceIp6) then
+                            ExportScript.Tools.lDeviceIp6 = from
+                            return
+                        end
+                    -- Device 7
+                    elseif (lDeviceIp7 == "") then
+                        ExportScript.Tools.lDeviceIp7 = from
+                        return
+                    elseif (lDeviceIp7 ~= "") then
+                        if (from == lDeviceIp7) then
+                            ExportScript.Tools.lDeviceIp7 = from
+                            return
+                        end
+                    -- Device 8
+                    elseif (lDeviceIp8 == "") then
+                        ExportScript.Tools.lDeviceIp8 = from
+                        return
+                    elseif (lDeviceIp8 ~= "") then
+                        if (from == lDeviceIp8) then
+                            ExportScript.Tools.lDeviceIp8 = from
                             return
                         end
                     end
@@ -1227,6 +1275,58 @@ function ExportScript.Tools.SendShortData(message)
                 try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host4, ExportScript.Config.Port))
             end
         end
+
+        if ExportScript.Config.Export5 then
+            if (ExportScript.Config.Host5 == lDeviceIpMap) then
+                if (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice == false) then
+                    try(ExportScript.UDPsender:sendto(_packet, lDeviceIpMap, lDevicePortMap))
+                elseif (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice) then
+                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host5, ExportScript.Config.Port))
+                    try(ExportScript.UDPsender:sendto(_packet, lDeviceIpMap, lDevicePortMap))
+                end
+            else
+                try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host5, ExportScript.Config.Port))
+            end
+        end
+
+        if ExportScript.Config.Export6 then
+            if (ExportScript.Config.Host6 == lDeviceIpMap) then
+                if (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice == false) then
+                    try(ExportScript.UDPsender:sendto(_packet, lDeviceIpMap, lDevicePortMap))
+                elseif (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice) then
+                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host6, ExportScript.Config.Port))
+                    try(ExportScript.UDPsender:sendto(_packet, lDeviceIpMap, lDevicePortMap))
+                end
+            else
+                try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host6, ExportScript.Config.Port))
+            end
+        end
+
+        if ExportScript.Config.Export7 then
+            if (ExportScript.Config.Host7 == lDeviceIpMap) then
+                if (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice == false) then
+                    try(ExportScript.UDPsender:sendto(_packet, lDeviceIpMap, lDevicePortMap))
+                elseif (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice) then
+                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host7, ExportScript.Config.Port))
+                    try(ExportScript.UDPsender:sendto(_packet, lDeviceIpMap, lDevicePortMap))
+                end
+            else
+                try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host7, ExportScript.Config.Port))
+            end
+        end
+
+        if ExportScript.Config.Export8 then
+            if (ExportScript.Config.Host8 == lDeviceIpMap) then
+                if (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice == false) then
+                    try(ExportScript.UDPsender:sendto(_packet, lDeviceIpMap, lDevicePortMap))
+                elseif (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice) then
+                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host8, ExportScript.Config.Port))
+                    try(ExportScript.UDPsender:sendto(_packet, lDeviceIpMap, lDevicePortMap))
+                end
+            else
+                try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host8, ExportScript.Config.Port))
+            end
+        end
 	end)
     _flushData()
 end
@@ -1295,6 +1395,46 @@ function ExportScript.Tools.FlushData()
                     end
                 else
                     try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host4, ExportScript.Config.Port))
+                end
+            end
+
+            if ExportScript.Config.Export5 then
+                if (ExportScript.Config.Host5 == lDeviceIpMap) then
+                    if (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice) then
+                        try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host5, ExportScript.Config.Port))
+                    end
+                else
+                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host5, ExportScript.Config.Port))
+                end
+            end
+
+            if ExportScript.Config.Export6 then
+                if (ExportScript.Config.Host6 == lDeviceIpMap) then
+                    if (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice) then
+                        try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host6, ExportScript.Config.Port))
+                    end
+                else
+                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host6, ExportScript.Config.Port))
+                end
+            end
+
+            if ExportScript.Config.Export7 then
+                if (ExportScript.Config.Host7 == lDeviceIpMap) then
+                    if (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice) then
+                        try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host7, ExportScript.Config.Port))
+                    end
+                else
+                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host7, ExportScript.Config.Port))
+                end
+            end
+
+            if ExportScript.Config.Export8 then
+                if (ExportScript.Config.Host8 == lDeviceIpMap) then
+                    if (ExportScript.Config.MultiAppDevice ~= nil and ExportScript.Config.MultiAppDevice) then
+                        try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host8, ExportScript.Config.Port))
+                    end
+                else
+                    try(ExportScript.UDPsender:sendto(_packet, ExportScript.Config.Host8, ExportScript.Config.Port))
                 end
             end
 

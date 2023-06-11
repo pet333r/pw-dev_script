@@ -12,21 +12,37 @@ ExportScript.Config = {}
 ExportScript.Config.MultiAppDevice = false;      -- true: if you want to use several apps on the same device at the same time
 
 -- device 1
-ExportScript.Config.Export  = true;              -- sending data
-ExportScript.Config.Host    = "192.168.0.12"     -- IP for 1st app
-ExportScript.Config.Port    = 5160;              -- port for sending data for all connected devices
+ExportScript.Config.Export  = true;             -- sending data
+ExportScript.Config.Host    = "192.168.0.11"    -- IP for 1st app
+ExportScript.Config.Port    = 5160;             -- port for sending data for all connected devices
 
 -- device 2
 ExportScript.Config.Export2 = true;             -- sending data
-ExportScript.Config.Host2   = "192.168.0.14"    -- IP for 2nd app
+ExportScript.Config.Host2   = "192.168.0.12"    -- IP for 2nd app
 
 -- device 3
-ExportScript.Config.Export3 = false;            -- sending data
-ExportScript.Config.Host3   = "192.168.0.16"    -- IP for 3rd app
+ExportScript.Config.Export3 = true;             -- sending data
+ExportScript.Config.Host3   = "192.168.0.13"    -- IP for 3rd app
 
 -- device 4
-ExportScript.Config.Export4 = false;            -- sending data
-ExportScript.Config.Host4   = "192.168.0.18"    -- IP for 4rd app
+ExportScript.Config.Export4 = true;             -- sending data
+ExportScript.Config.Host4   = "192.168.0.14"    -- IP for 4th app
+
+-- device 5
+ExportScript.Config.Export5 = true;             -- sending data
+ExportScript.Config.Host5   = "192.168.0.15"    -- IP for 5th app
+
+-- device 6
+ExportScript.Config.Export6 = true;             -- sending data
+ExportScript.Config.Host6   = "192.168.0.16"    -- IP for 6th app
+
+-- device 7
+ExportScript.Config.Export7 = true;             -- sending data
+ExportScript.Config.Host7   = "192.168.0.17"    -- IP for 7th app
+
+-- device 8
+ExportScript.Config.Export8 = true;             -- sending data
+ExportScript.Config.Host8   = "192.168.0.18"    -- IP for 8th app
 
 -- StreamDeck
 ExportScript.Config.StreamDeckExport = false;       -- sending data to StreamDeck
