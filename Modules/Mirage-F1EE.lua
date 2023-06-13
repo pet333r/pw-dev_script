@@ -3,11 +3,13 @@ ExportScript.FoundDCSModule = true
 
 ExportScript.ConfigEveryFrameArguments = 
 {
+    [111] = "%.1f", -- Navigation Light Control
+    [112] = "%.1f", -- Formation Light Control
     -- cautions
-    [113] = "%.1f", -- BATT switch
-    [114] = "%.1f", -- ALT 1 switch
-    [115] = "%.1f", -- ALT 2 switch
-    [117] = "%.1f", -- CONV REARM switch
+    [113] = "%1d", -- BATT switch
+    [114] = "%1d", -- ALT 1 switch
+    [115] = "%1d", -- ALT 2 switch
+    [117] = "%1d", -- CONV REARM switch
     [120] = "%.1f", -- BATT
     [121] = "%.1f", -- ALT 1
     [122] = "%.1f", -- ALT 2
@@ -43,6 +45,34 @@ ExportScript.ConfigEveryFrameArguments =
     [152] = "%.1f", -- VAN.D
 
     [203] = "%.2f", -- AoA (0.24 - 0.92)
+
+    [474] = "%d",   -- Standby Horizon Switch
+    [475] = "%d",   -- Electro-Pump Switch
+    [476] = "%d",   -- Warning Horn Switch
+    [477] = "%d",   -- Probe Heater Switch
+    [478] = "%d",   -- Radar Detector Switch
+    [479] = "%d",   -- Search Light Control switch
+    [485] = "%d",	--  X/Y selector
+    [486] = "%.1f",	--  FREQUENCY HUNDREDS AND TENS SELECTOR
+    [487] = "%.1f",	--  MODE SELECTOR A/A T/R REC OFF
+    [488] = "%.1f",	--  FREQUENCY UNITS SELECTOR
+    [503] = "%d",	--  on/off selector
+    [504] = "%.1f",	--  MHZ FREQUENCY SELECTOR
+    [505] = "%d",	--  test selector
+    [506] = "%.1f",	--  KHZ FREQUENCY SELECTOR
+    [544] = "%.1f",	--  knob out
+    [545] = "%.1f",	--  knob in
+
+    [590] = "%.1f",	--  Armament Sight Selector
+    [591] = "%1d",	--  Firing Fuel Dipper Switch
+    [592] = "%.1f",	--  Armament Bomb/Rocket Selector
+    [593] = "%1d",	--  MATRA 550 or Sidewinder Missile Switch
+    [594] = "%1d",	--  Fore/Aft Selector Switch
+    [595] = "%1d",	--  Auto/Manual Firing Selector Switch
+    [596] = "%1d",	--  Single/Salvo Selector
+    [597] = "%.1f",	--  Instantaneous/Delay/Safe Selector Switch
+    [601] = "%1d",	--  R 530 Missile Normal/Altitude Difference Selector Switch
+    [603] = "%1d",	--  Normal/Jammer Pursuit Switch
 
     -- armament
     [604] = "%d",	-- EXT G btn

@@ -35,6 +35,11 @@ ExportScript.Maps.PersianGulf.Lat1      = 32.955517
 ExportScript.Maps.PersianGulf.Long1     = 46.583444
 ExportScript.Maps.PersianGulf.Lat2      = 21.869711
 ExportScript.Maps.PersianGulf.Long2     = 63.997372
+ExportScript.Maps.Sinai                 = {}
+ExportScript.Maps.Sinai.Lat1            = 34.471389
+ExportScript.Maps.Sinai.Long1           = 28.110833
+ExportScript.Maps.Sinai.Lat2            = 25.943889
+ExportScript.Maps.Sinai.Long2           = 36.900833
 -- South Atlantic Map
 ExportScript.Maps.SouthAtlantic         = {}
 ExportScript.Maps.SouthAtlantic.Lat1    = -45.850933

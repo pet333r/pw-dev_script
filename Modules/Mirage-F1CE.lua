@@ -3,11 +3,13 @@ ExportScript.FoundDCSModule = true
 
 ExportScript.ConfigEveryFrameArguments = 
 {
+    [111] = "%.1f", -- Navigation Light Control
+    [112] = "%.1f", -- Formation Light Control
     -- cautions
-    [113] = "%.1f", -- BATT switch
-    [114] = "%.1f", -- ALT 1 switch
-    [115] = "%.1f", -- ALT 2 switch
-    [117] = "%.1f", -- CONV REARM switch
+    [113] = "%1d", -- BATT switch
+    [114] = "%1d", -- ALT 1 switch
+    [115] = "%1d", -- ALT 2 switch
+    [117] = "%1d", -- CONV REARM switch
     [120] = "%.1f", -- BATT
     [121] = "%.1f", -- ALT 1
     [122] = "%.1f", -- ALT 2
@@ -85,15 +87,15 @@ ExportScript.ConfigEveryFrameArguments =
     [544] = "%.1f",	--  knob out
     [545] = "%.1f",	--  knob in
 
-    [590] = "%d",	--  Switch
+    [590] = "%.1f",	-- Sight Selector Switch
     [591] = "%d",	--  Switch
-    [592] = "%d",	-- BOMB/ROD Switch
+    [592] = "%.1f",	-- BOMB/ROD Switch
     [593] = "%d",	-- EXT M A Switch
     [594] = "%d",	-- AV AR Switch
     [595] = "%d",	-- TIR Switch AUTO MAN
     [596] = "%d",	-- CPC Switch
-    [597] = "%d",	-- INST Switch
-    [598] = "%d",	-- RADAR EMIS Switch
+    [597] = "%.1f",	-- INST Switch
+    [598] = "%.1f",	-- RADAR EMIS Switch
     [599] = "%d",	-- 
     [600] = "%d",	-- 
     [601] = "%d",	-- 

@@ -73,6 +73,8 @@ ExportScript.ConfigEveryFrameArguments =
 	[297] = "%d",	--G
 	[298] = "%d",	--blank G
 
+	[331] = "%.2f", -- AoA
+
     -- WARNING PANEL
 	[520] = "%1d",	--  Main Battery Switch
 	[521] = "%1d",	--  Electric Power Transfer Switch
