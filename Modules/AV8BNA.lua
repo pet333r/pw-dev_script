@@ -116,23 +116,6 @@ ExportScript.ConfigEveryFrameArguments =
 
 	--FUEL PANEL DISPLAY
 	[365] = "%d",	--ON/OFF FLAG
-	-- [366] = "%.1f",	--TOT FUEL 1. DRUM
-	-- [367] = "%.1f",	--TOT FUEL 2.
-	-- [368] = "%.1f",	--TOT FUEL 3.
-	-- [369] = "%.1f",	--TOT FUEL 4.
-	-- [370] = "%.1f",	--TOT FUEL 5.
-	-- [371] = "%.1f",	--LBS L 1. DRUM
-	-- [372] = "%.1f",	--LBS L	2.
-	-- [373] = "%.1f",	--LBS L 3.
-	-- [374] = "%.1f",	--LBS L 4.
-	-- [375] = "%.1f",	--LBS R 1. DRUM 
-	-- [376] = "%.1f",	--LBS R	2.
-	-- [377] = "%.1f",	--LBS R 3.
-	-- [378] = "%.1f",	--LBS R 4.
-	-- [381] = "%.1f",	--BINGO 1. DRUM 
-	-- [382] = "%.1f",	--BINGO 2.
-	-- [383] = "%.1f",	--BINGO 3.
-	-- [384] = "%.1f",	--BINGO 4.
 
 	--UPPER AMARMENT PANEL
 	-- [385] = "%.4f",	--MODE
@@ -235,21 +218,6 @@ ExportScript.ConfigArguments =
 
 	-- Fuel Quantity Indicator
 	[379] = "%.1f",	--Fuel Totalizer Selector
-	-- [380] = "%.4f",	--Bingo Fuel Set Knob
-
-	-- MPCD left
-	-- [220] = "%1d",	--MPCD Left Display DAY/NIGHT Mode
-	-- [221] = "%1d",	--MPCD Left Display Symbology
-	-- [222] = "%1d",	--MPCD Left Display Gain
-	-- [223] = "%1d",	--MPCD Left Display Contrast
-	-- [194] = "%.4f",	--MPCD Left Off/Brightness Control
-
-	-- MPCD Right
-	-- [244] = "%1d",	--MPCD Right Display DAY/NIGHT Mode
-	-- [245] = "%1d",	--MPCD Right Display Symbology
-	-- [246] = "%1d",	--MPCD Right Display Gain
-	-- [247] = "%1d",	--MPCD Right Display Contrast
-	-- [195] = "%.4f",	--MPCD Right Off/Brightness Control
 
 	-- Armament Control Panel ACP
 	[395] = "%.1f",	--Manual Release Control Knob 0/.3/.7/1
@@ -531,22 +499,6 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	local to1, to2, from1, from2, lUFC_Chnl1, lUFC_Chnl2, lUFC_Left_Position, lUFC_Right_Position, lUFC_Display = nil, nil, nil, nil, "", "", "", "", ""
 	to1, to2 = lUfcDisplays:find("UFC_DISPLAY")
 	if (to1 ~= nil) then
-		from1, from2 = lUfcDisplays:find("ufc_chnl_1_.%c")
-		if (from2 ~= nill) then
-			to1, to2 = lUfcDisplays:find("%c", from2+2)
-			if (to1 ~= nil) then
-				lUFC_Chnl1 = lUfcDisplays:sub(from2+1, to1-1)
-			end
-		end
-
-		from1, from2 = lUfcDisplays:find("ufc_chnl_2_.%c", to2)
-		if (from2 ~= nill) then
-			to1, to2 = lUfcDisplays:find("%c", from2+2)
-			if (to1 ~= nil) then
-				lUFC_Chnl2 = lUfcDisplays:sub(from2+1, to1-1)
-			end
-		end
-
 		from1, from2 = lUfcDisplays:find("ufc_left_position%c", to2)
 		if (from2 ~= nill) then
 			to1, to2 = lUfcDisplays:find("%c", from2+2)

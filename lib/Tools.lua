@@ -115,7 +115,10 @@ function ExportScript.Tools.createUDPSender()
         ExportScript.UDPsender:setoption('broadcast', true)
 		ExportScript.socket.try(ExportScript.UDPsender:setsockname("*", 0))
 	end)
-    _createUDPSender()
+    local ln, lerror = _createUDPSender()
+    if lerror ~= nil then
+		return
+	end
 end
 
 function ExportScript.Tools.createUDPListner()
@@ -127,7 +130,11 @@ function ExportScript.Tools.createUDPListner()
 			ExportScript.socket.try(ExportScript.UDPListener:setsockname("*", ExportScript.Config.ListenerPort))
 			ExportScript.socket.try(ExportScript.UDPListener:settimeout(0))
 		end)
-        _createUDPListner()
+
+        local ln, lerror = _createUDPListner()
+        if lerror ~= nil then
+            return
+        end
 	end
 end
 
@@ -466,6 +473,23 @@ function ExportScript.Tools.GetPlayerData()
         elseif (arm == "0" or arm == "1") then
             PlayerData.Arm = 0
         end
+    elseif (ExportScript.ModuleName == "F-15ESE") then
+        PlayerData.AA = ExportScript.Tools.GetArgumentsValue(326, "%d")
+        PlayerData.AG = ExportScript.Tools.GetArgumentsValue(327, "%d")
+        PlayerData.Arm = ExportScript.Tools.GetArgumentsValue(323, "%d")
+
+        PlayerData.MechGearNose = LoGetAircraftDrawArgumentValue(0)
+        PlayerData.MechGearLeft = LoGetAircraftDrawArgumentValue(5)
+        PlayerData.MechGearRigh = LoGetAircraftDrawArgumentValue(3)
+        -- refueling
+        PlayerData.MechRefueling = LoGetAircraftDrawArgumentValue(22)
+        -- hook
+        PlayerData.MechHook = LoGetAircraftDrawArgumentValue(25)
+        -- nozzle 2x
+        PlayerData.MechNozzRigh = LoGetAircraftDrawArgumentValue(89)
+        PlayerData.MechNozzLeft = LoGetAircraftDrawArgumentValue(90)
+        -- brake
+        PlayerData.MechAirBrakeLeft = LoGetAircraftDrawArgumentValue(182)
     elseif (ExportScript.ModuleName == "F-16C_50") then
         PlayerData.AltGearNose  = ExportScript.Tools.GetArgumentsValue(350, "%d")
         PlayerData.AltGearLeft  = ExportScript.Tools.GetArgumentsValue(351, "%d")
@@ -972,6 +996,8 @@ function ExportScript.Tools.ProcessOutput()
             ExportScript.lastExportTimeHI = 0
         end
 
+        ExportScript.Tools.FlushData()
+
         timestamp = LoGetModelTime()
 
         if (ExportScript.Config.ExportNavData == true and (ExportScript.Config.WriteNavFile or lShowOnMapPlayer)) then
@@ -1023,12 +1049,10 @@ function ExportScript.Tools.ProcessOutput()
             end
         end
 
-    if ExportScript.Config.Export then
-        ExportScript.Tools.FlushData()
-    end
-    if (ExportScript.Config.ExportNavData == true) then
-        ExportScript.Tools.FlushNavData()
-    end
+     
+        if (ExportScript.Config.ExportNavData == true) then
+            ExportScript.Tools.FlushNavData()
+        end
 
     elseif ExportScript.FoundFCModule then
         ExportScript.AF.EventNumber = os.clock()
@@ -1045,10 +1069,9 @@ function ExportScript.Tools.ProcessOutput()
         ExportScript.lastExportTimeHI = ExportScript.lastExportTimeHI + ExportScript.Config.ExportInterval
 
 		if ExportScript.lastExportTimeHI > ExportScript.Config.ExportLowTickInterval then
-            if ExportScript.Config.Export then
-                ExportScript.coProcessFCLowImportance = coroutine.create(ExportScript.ProcessFCLowImportance)
-                _coStatus = coroutine.resume( ExportScript.coProcessFCLowImportance)
-            end
+            ExportScript.coProcessFCLowImportance = coroutine.create(ExportScript.ProcessFCLowImportance)
+            _coStatus = coroutine.resume( ExportScript.coProcessFCLowImportance)
+
             ExportScript.lastExportTimeHI = 0
         end
 
@@ -1103,12 +1126,11 @@ function ExportScript.Tools.ProcessOutput()
             end
         end
 
-    if ExportScript.Config.Export then
         ExportScript.Tools.FlushData()
-    end
-    if (ExportScript.Config.ExportNavData == true) then
-        ExportScript.Tools.FlushNavData()
-    end
+
+        if (ExportScript.Config.ExportNavData == true) then
+            ExportScript.Tools.FlushNavData()
+        end
     else
         if ExportScript.FoundNoModul then
             ExportScript.Tools.SelectModule()
@@ -1251,10 +1273,9 @@ function ExportScript.Tools.SendData(id, value)
 end
 
 function ExportScript.Tools.FlushData()
-	local _flushData = ExportScript.socket.protect(function()
-		if #ExportScript.SendStrings > 0 then
-            local _packet = "R4G" .. separator ..
-                table.concat(ExportScript.SendStrings, separator) .. separator .. "\n"
+    local _flushData = ExportScript.socket.protect(function()
+        if #ExportScript.SendStrings > 0 then
+            local _packet = "R4G" .. separator .. table.concat(ExportScript.SendStrings, separator) .. separator .. "\n"
 
             local try = ExportScript.socket.newtry(function() ExportScript.UDPsender:close() ExportScript.Tools.createUDPSender() ExportScript.Tools.ResetChangeValues() end)
 
@@ -1306,11 +1327,12 @@ function ExportScript.Tools.FlushData()
                 try(ExportScript.UDPsender:sendto(_packetStreamDeck, ExportScript.Config.StreamDeckHost, ExportScript.Config.StreamDeckPort))
             end
 
-			ExportScript.SendStrings = {}
-			ExportScript.PacketSize  = 0
-		end
-	end)
-    _flushData()
+            ExportScript.SendStrings = {}
+            ExportScript.PacketSize  = 0
+
+        end
+    end)
+    local ln, lerror = _flushData()
 end
 
 function ExportScript.Tools.SendNavData(id, value)

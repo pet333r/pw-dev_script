@@ -200,35 +200,7 @@ ExportScript.ConfigArguments =
 {
 }
 
-local function getPCNDispL()
-	local li = list_indication(9)
-	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
-	while true do
-		local name, value = m()
-		if not name then break end
-	   	if name:sub(0,10) == "text_PCN_L" then
-			value = "        " .. value
-			return value:sub(-8)
-	   	end
-	end
- 	return "        "
-end
- 
-local function getPCNDispR()
-	local li = list_indication(9)
-	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
-	while true do
-		local name, value = m()
-		if not name then break end
-	   	if name:sub(0,10) == "text_PCN_R" then
-			value = "        "..value
-			return value:sub(-9)
-	   	end
-	end
- 	return "         "
-end
 
- 
 local function getPCN2DigitR()
 	local li = list_indication(9)
 	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
@@ -239,20 +211,7 @@ local function getPCN2DigitR()
 	while true do
 		local name, value = m()
 		if not name then break end
-	   	if name == "text_PCN_EST" then
-			east="E"
-	   	end
-	   	if name == "text_PCN_OUEST" then
-			west="W"
-	   	end
-	   	if name == "text_PCN_PLUS_R" then
-			plus="+"
-		end
-		if name == "text_PCN_MOINS_R" then
-			minus="-"
-		end
 
-		-- new
 		if name == "PCN_UR_E" then
 			east="E"
 		end
@@ -266,9 +225,9 @@ local function getPCN2DigitR()
 			minus="-"
 		end
 	end
-	return string.format("%-2s", string.sub(east..west..plus..minus,1,2))
+	return string.format("%-4s", string.sub(east..west..plus..minus,1,4))
 end
- 
+
 local function getPCN2DigitL()
 	local li = list_indication(9)
 	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
@@ -279,20 +238,7 @@ local function getPCN2DigitL()
 	while true do
 		local name, value = m()
 		if not name then break end
-		if name == "text_PCN_NORD" then
-			north="N"
-		end
-		if name == "text_PCN_SUD" then
-			south="S"
-		end
-		if name == "text_PCN_PLUS_L" then
-			plus="+"
-		end
-		if name == "text_PCN_MOINS_L" then
-			minus="-"
-		end
 
-		-- new
 		if name == "PCN_UL_N" then
 			north="N"
 		end
@@ -306,84 +252,22 @@ local function getPCN2DigitL()
 			minus="-"
 		end
 	end
-	return string.format("%-2s", string.sub(north..south..plus..minus,1,2))
+	return string.format("%-4s", string.sub(north..south..plus..minus,1,4))
 end
  
-local function getPCNDispDest()
-	local li = list_indication(10)
+local function getPCNValue(nameStr, id)
+	local li = list_indication(id)
 	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
 	while true do
 		local name, value = m()
 		if not name then break end
-		if name == "text_PCN_BR2" then
-			value = "  " .. value
-			return value:sub(-2)
-		end
 
-		if name == "text_PCN_eBR2" then
-			value = "  " .. value
-			return value:sub(-2)
-		end
-		-- new
-		if name == "PCN_BR_DIGITS" then
+		if name == nameStr then
 			value = "  " .. value
 			return value:sub(-2)
 	  	end
 	end
  	return "  "
-end
- 
-local function getPCNDispPrep()
-	local li = list_indication(10)
-	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
-	while true do
-		local name, value = m()
-		if not name then break end
-		if name == "text_PCN_BR1" then
-			value = "  " .. value
-			return value:sub(-2)
-		end
-
-		if name == "text_PCN_eBR1" then
-			value = "  " .. value
-			return value:sub(-2)
-		end
-		-- new
-		if name == "PCN_BL_DIGITS" then
-			value = "  " .. value
-			return value:sub(-2)
-	  	end
-	end
- 	return "  "
-end
-
---PPA
-local function getPPAQtyDisp()
-	local li = list_indication(6)
-	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
-	while true do
-        local name, value = m()
-        if not name then break end
-		if name == "text_PPA_QTY" then
-        	value = "  "..value
-        	return value:sub(-2)
-      	end
-    end
-	return "         "
-end
-
-local function getPPAIntDisp()
-	local li = list_indication(6)
-	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
-	while true do
-        local name, value = m()
-        if not name then break end
-		if name == "text_PPA_INT" then
-        	value = "  "..value
-        	return value:sub(-2)
-      	end
-    end
-	return "         "
 end
 
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
@@ -404,23 +288,20 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 
 	-- PCN up
 	ExportScript.Tools.SendData(2031, getPCN2DigitL())		-- up/left 2-digit vertical
-	ExportScript.Tools.SendData(2032, getPCNDispL())		-- up/left 8-digit
 	ExportScript.Tools.SendData(2035, ExportScript.Tools.getListIndicatorValueByName(9, "PCN_UL_DIGITS", 6)) -- up/left 5-digit
 	ExportScript.Tools.SendData(2036, ExportScript.Tools.getListIndicatorValueByName(9, "PCN_UL_POINTS", 5)) -- dots
 
 	ExportScript.Tools.SendData(2033, getPCN2DigitR())		-- up/middle 2-digit vertical
-	ExportScript.Tools.SendData(2034, getPCNDispR())		-- up/right 9-digit
 	ExportScript.Tools.SendData(2037, ExportScript.Tools.getListIndicatorValueByName(9, "PCN_UR_DIGITS", 7)) -- up/right 6-digit
 	ExportScript.Tools.SendData(2038, ExportScript.Tools.getListIndicatorValueByName(9, "PCN_UR_POINTS", 6)) -- dots
 
-
 	-- PCN dn
-	ExportScript.Tools.SendData(2041, getPCNDispPrep())		-- dn/left 2-digit
-	ExportScript.Tools.SendData(2042, getPCNDispDest())		-- dn/mid 2-digit
+	ExportScript.Tools.SendData(2041, getPCNValue("PCN_BL_DIGITS", 10))		-- dn/left 2-digit
+	ExportScript.Tools.SendData(2042, getPCNValue("PCN_BR_DIGITS", 10))		-- dn/mid 2-digit
 
 	-- PPA
-	ExportScript.Tools.SendData(2051, getPPAQtyDisp())
-	ExportScript.Tools.SendData(2052, getPPAIntDisp())
+	ExportScript.Tools.SendData(2051, getPCNValue("text_PPA_QTY", 6))
+	ExportScript.Tools.SendData(2052, getPCNValue("text_PPA_INT", 6))
 
 	-- U/VHF
 	ExportScript.Tools.SendData(2055, ExportScript.Tools.getListIndicatorValueByName(8, "text_COM_VHF", 9))
@@ -444,7 +325,7 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	ExportScript.Tools.SendData(2054, digits[1] .. digits[2] .. digits[3] .. "0")
 
 	-- EVF
-	ExportScript.Tools.SendData(2055, ExportScript.Tools.getListIndicatorValueByName(11, "evf-digits", 2))
+	ExportScript.Tools.SendData(2056, ExportScript.Tools.getListIndicatorValueByName(11, "evf-digits", 2))
 
 	
 	-- -- General

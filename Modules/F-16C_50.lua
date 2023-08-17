@@ -204,6 +204,78 @@ ExportScript.ConfigArguments =
 {
 }
 
+-- PFLD Layout Information ------------------------------------------------------
+local PFLDLayout_l1={}
+local PFLDLayout_l2={}
+local PFLDLayout_l3={}
+local PFLDLayout_l4={}
+local PFLDLayout_l5={}
+
+PFLDLayout_l1["FLCS Label"] = {2,4}
+PFLDLayout_l1["ENG Label"] = {9,3}
+PFLDLayout_l1["AV Label"] = {18,2}
+
+PFLDLayout_l2["Fault 1 Warning Indicator Lhs"] = {2,1}
+PFLDLayout_l2["Fault 1 Warning Indicator Rhs"] = {19,1}
+PFLDLayout_l2["Fault 1 Subsystem"] = {3,4}
+PFLDLayout_l2["Fault 1 Function"] = {9,4}
+PFLDLayout_l2["Fault 1 Severity"] = {15,4}
+
+PFLDLayout_l3["Fault 2 Warning Indicator Lhs"] = {2,1}
+PFLDLayout_l3["Fault 2 Warning Indicator Rhs"] = {19,1}
+PFLDLayout_l3["Fault 2 Subsystem"] = {3,4}
+PFLDLayout_l3["Fault 2 Function"] = {9,4}
+PFLDLayout_l3["Fault 2 Severity"] = {15,4}
+
+PFLDLayout_l4["Fault 3 Warning Indicator Lhs"] = {2,1}
+PFLDLayout_l4["Fault 3 Warning Indicator Rhs"] = {19,1}
+PFLDLayout_l4["Fault 3 Subsystem"] = {3,4}
+PFLDLayout_l4["Fault 3 Function"] = {9,4}
+PFLDLayout_l4["Fault 3 Severity"] = {15,4}
+
+PFLDLayout_l5["More Fault Indicator Lhs"] = {1,1}
+PFLDLayout_l5["More Fault Indicator Rhs"] = {20,1}
+
+PFLDLayout_l4["Page Label"] = {20,1}
+PFLDLayout_l4["Page Index"] = {21,2}
+
+PFLDLayout = {PFLDLayout_l1, PFLDLayout_l2, PFLDLayout_l3, PFLDLayout_l4, PFLDLayout_l5}
+
+-- PFLD Display Main Function -----------------------------------------------
+local function buildPFLDLine(line)
+	-- Get Layout Information for line being built
+	local PFLDLayoutLine = PFLDLayout[line]
+	-- Get Exported PFLD Objects
+	local PFLD_fields = ExportScript.Tools.getListIndicatorValue(7) or {}
+	local layout
+	local label
+	local value
+	local dataLine ="                         "
+
+	--Loop through Exported PFLD Objects
+	for k,v in pairs(PFLD_fields) do
+		label = k
+		--Get layout data associated with current key
+		layout = PFLDLayoutLine[label:gsub("_inv", "", 1):gsub("_lhs", "_both", 1)]
+		if layout ~= nil then
+			--If layout value 6 is present then use this value to override the value returned from DCS
+			if layout[6] ~= nil then
+				value = layout[6]
+			else
+				value = v
+			end
+
+			dataLine = ExportScript.Tools.mergeString(dataLine, value, layout[1])
+
+			if layout[3] ~= nil and layout[3] > 0 then
+				dataLine = ExportScript.Tools.mergeString(dataLine, value, layout[3])
+			end
+		end
+	end
+
+    return dataLine
+end
+
 -- DED Layout Information ------------------------------------------------------
 local DEDLayout_l1={}
 local DEDLayout_l2={}

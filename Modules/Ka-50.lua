@@ -149,6 +149,21 @@ local function getEKRAN_txt2_line(value)
 end
 
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
+    indEKRAN = ExportScript.Tools.parseListIndicatorList(4)
+    ExportScript.Tools.SendData(2041, getEKRAN_txt1_line(1))
+    ExportScript.Tools.SendData(2042, getEKRAN_txt1_line(2))
+    ExportScript.Tools.SendData(2043, getEKRAN_txt1_line(3))
+    ExportScript.Tools.SendData(2044, getEKRAN_txt1_line(4))
+
+    ExportScript.Tools.SendData(2045, getEKRAN_txt2_line(1))
+    ExportScript.Tools.SendData(2046, getEKRAN_txt2_line(2))
+    ExportScript.Tools.SendData(2047, getEKRAN_txt2_line(3))
+    ExportScript.Tools.SendData(2048, getEKRAN_txt2_line(4))
+    
+    ExportScript.Tools.SendData(2049, getEKRAN_memory())
+    -- jeżeli jest 1 to wyświetlane są dane z EKRAN #2
+    ExportScript.Tools.SendData(2050, getEKRAN_queue())
+    ExportScript.Tools.SendData(2051, getEKRAN_failure())
 end
 
 function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)

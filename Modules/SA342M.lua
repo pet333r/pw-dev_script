@@ -54,7 +54,7 @@ ExportScript.ConfigEveryFrameArguments =
     [332] = "%.1f", -- Parameter
 
     -- UHF
-    [383] = "%.1f", -- Radio Mode Select
+    [383] = "%.2f", -- Radio Mode Select
     [386] = "%.1f", -- Radio Page Knob
 }
 

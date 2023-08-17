@@ -91,6 +91,109 @@ ExportScript.ConfigEveryFrameArguments =
     [617] = "%.1f",	-- CAN.S ROQ btn light
     [618] = "%d",	-- BOMB FUS btn
     [619] = "%.1f",	-- BOMB FUS btn light
+    
+    [643] = "%d", -- ALIGN light
+    [644] = "%d", -- PRET light
+    [645] = "%d", -- ALERTE light
+    [646] = "%d", -- UNI light
+    [647] = "%d", -- BAT light
+    [648] = "%d", -- SEC light
+    [649] = "%d", -- T light
+    [650] = "%d", -- T button
+    [651] = "%d", -- VALID button
+    [1275] = "%.1f", -- VALID button light
+    [652] = "%d", -- INSER button
+    [1274] = "%.1f", -- INSER button light
+
+    [653] = "%d", -- 1 button
+    [654] = "%d", -- 2 button
+    [655] = "%d", -- 3 button
+    [656] = "%d", -- 4 button
+    [657] = "%d", -- 5 button
+    [658] = "%d", -- 6 button
+    [659] = "%d", -- 7 button
+    [660] = "%d", -- 8 button
+    [661] = "%d", -- 9 button
+    [662] = "%d", -- * button
+    [663] = "%d", -- 0 button
+    [664] = "%d", -- CLR button
+
+    [665] = "%.1f", -- knob 1 0-0.5
+    [666] = "%.3f", -- knob 2 0-1, 0.125
+    [667] = "%.1f", -- knob 3 0-1, 0.11?
+    [668] = "%.1f", -- knob 3 0-1, 0.5
+
+    [921] = "%d",	-- PANNE (red)
+    [923] = "%d",	-- PANNE (yellow)
+    [929] = "%d",	-- TRAIN light (red)
+    [933] = "%d",	-- LIM light (red)
+
+    -- autopilot
+    -- [974] = "%.1f",   -- Autopilot PA Button
+    [975] = "%.1f",   -- Autopilot PA Button P Light (red)
+    [976] = "%.1f",   -- Autopilot PA Button A Light (green)
+    [977] = "%.1f",   -- Autopilot ALT Button ALT Light (green)
+    [978] = "%.1f",   -- Autopilot ALT Button ALT Light (red)
+    -- [979] = "%.1f",   -- Autopilot ALT Button
+    -- [980] = "%.1f",   -- Autopilot CAP Button
+    [981] = "%.1f",   -- Autopilot CAP Button CAP Light (green)
+    -- [982] = "%.1f",   -- Autopilot R Button
+    [983] = "%.1f",   -- Autopilot R Button < (red)
+    [984] = "%.1f",   -- Autopilot R Button R (red)
+    [985] = "%.1f",   -- Autopilot R Button light (green)
+    [986] = "%.1f",   -- Autopilot R Button > (red)
+    -- [987] = "%.1f",   -- Autopilot G Button
+    [988] = "%.1f",   -- Autopilot G Button G Light (red)
+    [989] = "%.1f",   -- Autopilot G Button up (red)
+    [990] = "%.1f",   -- Autopilot G Button dn (red)
+    [991] = "%.1f",   -- Autopilot G Button light (green)
+
+    [1029] = "%d",   -- INJ
+    [1030] = "%d",   -- INJ red
+    [1031] = "%d",   -- FON
+    [1032] = "%d",   -- FON green
+    [1033] = "%d",   -- ADR
+
+    [1283] = "%d",   -- REG green
+    [1284] = "%d",   -- TONO green
+    [1363] = "%d",   -- ELIM yellow
+    [1285] = "%d",   -- EXPL green
+    [1364] = "%d",   -- ELIM yellow
+    [1286] = "%d",   -- AMEN green
+    [1365] = "%d",   -- ELIM yellow
+    [1287] = "%d",   -- CURS green
+
+    -- LCD top lights
+    [1335] = "%d",   -- N
+    [1336] = "%d",   -- S
+    [1337] = "%d",   -- +
+    [1338] = "%d",   -- -
+    [1339] = "%d",   -- VERS
+    [1359] = "%d",   -- E
+    [1360] = "%d",   -- W
+    [1340] = "%d",   -- +
+    [1341] = "%d",   -- -
+    -- LCD (co 0.1, 1.0 -> puste)
+    [1342] = "%.1f",   -- nr. 01
+    [1343] = "%.1f",   -- nr. 02
+    [1344] = "%.1f",   -- nr. 03
+    [1345] = "%.1f",   -- nr. 04
+    [1346] = "%.1f",   -- nr. 05
+
+    [1361] = "%.1f",   -- nr. 06
+
+    [1347] = "%.1f",   -- nr. 07
+    [1348] = "%.1f",   -- nr. 08
+    [1349] = "%.1f",   -- nr. 09
+    [1350] = "%.1f",   -- nr. 10
+    [1351] = "%.1f",   -- nr. 11
+    [1352] = "%.1f",   -- nr. 12
+
+    -- LCD bottom lights
+    [1353] = "%d",   -- triangle 1
+    [1354] = "%d",   -- triangle 2
+    [1355] = "%d",   -- triangle 3
+    [1356] = "%d",   -- triangle 4
 }
 
 ExportScript.ConfigArguments = 

@@ -88,9 +88,6 @@ LuaExportStart = function()
 	if (ExportScript.Fdr ~= nil) then
 		if (ExportScript.Config.WriteNavFile ~= nil and ExportScript.Config.WriteNavFile == true) then
 			ExportScript.Fdr.CsvFileInit()
-		end
-
-		if (ExportScript.Config.WriteNavFile ~= nil and ExportScript.Config.WriteNavFile == true) then
 			ExportScript.Fdr.NavFileInit(ExportScript.Init.VersionId)
 		end
 	end
@@ -141,11 +138,17 @@ function LuaExportActivityNextEvent(currenttime)
 
 	tNext = tNext + ExportScript.Config.ExportInterval
 
+	if PrevPWDEV.LuaExportActivityNextEvent then
+		tNext = PrevPWDEV.LuaExportActivityNextEvent(currenttime)
+	end
+
 	return tNext
 end
 
 LuaExportStop = function()
 	ExportScript.Tools.SendShortData("EX=OF")
+
+	ExportScript.Tools.FlushData()
 
 	ExportScript.UDPsender:close()
 	if ExportScript.Config.Listener then
@@ -158,8 +161,6 @@ LuaExportStop = function()
 	if (ExportScript.Fdr ~= nil) then
 		if (ExportScript.Config.WriteNavFile ~= nil and ExportScript.Config.WriteNavFile == true) then
 			ExportScript.Fdr.CsvFileEnd()
-		end
-		if (ExportScript.Config.WriteNavFile ~= nil and ExportScript.Config.WriteNavFile == true) then
 			ExportScript.Fdr.NavFileEnd()
 		end
 	end
