@@ -22,6 +22,18 @@ do
     PWDEV.Properties.Export4 = false
     PWDEV.Properties.Host4   = ""
 
+    PWDEV.Properties.Export5 = false
+    PWDEV.Properties.Host5   = ""
+
+    PWDEV.Properties.Export6 = false
+    PWDEV.Properties.Host6   = ""
+
+    PWDEV.Properties.Export7 = false
+    PWDEV.Properties.Host7   = ""
+
+    PWDEV.Properties.Export8 = false
+    PWDEV.Properties.Host8   = ""
+
     PWDEV.Properties.StreamDeckExport = false
     PWDEV.Properties.StreamDeckHost = ""
     PWDEV.Properties.StreamDeckPort = 0
@@ -62,6 +74,14 @@ function PWDEV.Utils.SetOld()
     PWDEV.Properties.Host3                  = ExportScript.Config.Host3
     PWDEV.Properties.Export4                = ExportScript.Config.Export4
     PWDEV.Properties.Host4                  = ExportScript.Config.Host4
+    PWDEV.Properties.Export5                = ExportScript.Config.Export5
+    PWDEV.Properties.Host5                  = ExportScript.Config.Host5
+    PWDEV.Properties.Export6                = ExportScript.Config.Export6
+    PWDEV.Properties.Host6                  = ExportScript.Config.Host6
+    PWDEV.Properties.Export7                = ExportScript.Config.Export7
+    PWDEV.Properties.Host7                  = ExportScript.Config.Host7
+    PWDEV.Properties.Export8                = ExportScript.Config.Export8
+    PWDEV.Properties.Host8                  = ExportScript.Config.Host8
     PWDEV.Properties.StreamDeckExport       = ExportScript.Config.StreamDeckExport
     PWDEV.Properties.StreamDeckHost         = ExportScript.Config.StreamDeckHost
     PWDEV.Properties.StreamDeckPort         = ExportScript.Config.StreamDeckPort
@@ -95,6 +115,14 @@ function PWDEV.Utils.SetNew()
     PWDEV.Properties.Host3                  = PWDEV.Config.Host3
     PWDEV.Properties.Export4                = PWDEV.Config.Export4
     PWDEV.Properties.Host4                  = PWDEV.Config.Host4
+    PWDEV.Properties.Export5                = PWDEV.Config.Export5
+    PWDEV.Properties.Host5                  = PWDEV.Config.Host5
+    PWDEV.Properties.Export6                = PWDEV.Config.Export6
+    PWDEV.Properties.Host6                  = PWDEV.Config.Host6
+    PWDEV.Properties.Export7                = PWDEV.Config.Export7
+    PWDEV.Properties.Host7                  = PWDEV.Config.Host7
+    PWDEV.Properties.Export8                = PWDEV.Config.Export8
+    PWDEV.Properties.Host8                  = PWDEV.Config.Host8
     PWDEV.Properties.StreamDeckExport       = PWDEV.Config.StreamDeckExport
     PWDEV.Properties.StreamDeckHost         = PWDEV.Config.StreamDeckHost
     PWDEV.Properties.StreamDeckPort         = PWDEV.Config.StreamDeckPort
