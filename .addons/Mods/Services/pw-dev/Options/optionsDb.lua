@@ -1,3 +1,5 @@
+-- file version: 2023.09.20
+
 local DbOption  = require('Options.DbOption')
 -- local i18n      = require('i18n')
 -- local oms       = require('optionsModsScripts')
@@ -6,6 +8,8 @@ local DbOption  = require('Options.DbOption')
 local CONFIG_PATH = lfs.writedir() .. [[Scripts\pw-dev_script\Config.lua]]
 local VERSION_PATH = lfs.writedir() .. [[Scripts\pw-dev_script\version]]
 local exist = false
+
+local pwdev = false
 
 local pwScriptConfigDlg = nil
 local content
@@ -18,16 +22,16 @@ local networkPortRecv = 0
 
 local multiAppEnabled = false
 
--- IP's
-local deviceIp1 = ""
-local deviceIp2 = ""
-local deviceIp3 = ""
-local deviceIp4 = ""
+-- devices
+local DEVICES = 4
 
-local device1Enabled = false
-local device2Enabled = false
-local device3Enabled = false
-local device4Enabled = false
+local deviceIp = {}
+local deviceEnabled = {}
+
+for i = 1, DEVICES, 1 do
+	deviceIp[i] = ""
+	deviceEnabled[i] = false
+end
 
 local hwStreamDeckEnabled = false
 local hwStreamDeckIP = ""
@@ -108,6 +112,7 @@ local function ReadConfigFile()
 			scriptInit = "ExportScript.Config"
 		else
 			scriptInit = "PWDEV.Config"
+			pwdev = true
 		end
 
 		-- ports
@@ -115,50 +120,50 @@ local function ReadConfigFile()
 		networkPortRecv = content:match(scriptInit .. ".ListenerPort%s+=%s+(.-);")
 
 		-- multi app
-		local multiAppEnableTmp = content:match(scriptInit .. ".MultiAppDevice%s+=%s+(.-);")
-		if (multiAppEnableTmp == "true") then multiAppEnabled = true else multiAppEnabled = false end
+		if (content:match(scriptInit .. ".MultiAppDevice%s+=%s+(.-);") == "true") then multiAppEnabled = true else multiAppEnabled = false end
 
 		-- IP's
-		local tmp = content:match(scriptInit .. ".Host%s+=%s+\"(.-)\"")
-		if (tmp ~= nil) then
-            deviceIp1 = tmp
-			host1New = false
-        else
-            deviceIp1 = content:match(scriptInit .. ".Host1%s+=%s+\"(.-)\"")
-			host1New = true
-        end
-		
-		deviceIp2 = content:match(scriptInit .. ".Host2%s+=%s+\"(.-)\"")
-		deviceIp3 = content:match(scriptInit .. ".Host3%s+=%s+\"(.-)\"")
-		deviceIp4 = content:match(scriptInit .. ".Host4%s+=%s+\"(.-)\"")
+		if pwdev == true then
+			for i = 1, DEVICES, 1 do
+				deviceIp[i] = content:match(scriptInit .. ".Device%[".. i .."].Host%s+=%s+\"(.-)\"")
+				if (content:match(scriptInit .. ".Device%[".. i .."].Export%s+=%s+(.-);") == "true") then deviceEnabled[i] = true else deviceEnabled[i] = false end
+			end
+		else
+			local tmp = content:match(scriptInit .. ".Host%s+=%s+\"(.-)\"")
+			if (tmp ~= nil) then
+				deviceIp[1] = tmp
+				host1New = false
+			else
+				deviceIp[1] = content:match(scriptInit .. ".Host1%s+=%s+\"(.-)\"")
+				host1New = true
+			end
+
+			deviceIp[2] = content:match(scriptInit .. ".Host2%s+=%s+\"(.-)\"")
+			deviceIp[3] = content:match(scriptInit .. ".Host3%s+=%s+\"(.-)\"")
+			deviceIp[4] = content:match(scriptInit .. ".Host4%s+=%s+\"(.-)\"")
+
+			local device1EnableTmp = content:match(scriptInit .. ".Export%s+=%s+(.-);")
+			if (device1EnableTmp ~= nil) then
+				export1New = false
+			else
+				device1EnableTmp = content:match(scriptInit .. ".Export1%s+=%s+(.-);")
+				export1New = true
+			end
+			if (device1EnableTmp == "true") then deviceEnabled[1] = true else deviceEnabled[1] = false end
+
+			if (content:match(scriptInit .. ".Export2%s+=%s+(.-);") == "true") then deviceEnabled[2] = true else deviceEnabled[2] = false end
+			if (content:match(scriptInit .. ".Export3%s+=%s+(.-);") == "true") then deviceEnabled[3] = true else deviceEnabled[3] = false end
+			if (content:match(scriptInit .. ".Export4%s+=%s+(.-);") == "true") then deviceEnabled[4] = true else deviceEnabled[4] = false end
+		end
+
 		-- StreamDeck IP & port
 		hwStreamDeckIP 		= content:match(scriptInit .. ".StreamDeckHost%s+=%s+\"(.-)\"")
 		hwStreamDeckPort 	= content:match(scriptInit .. ".StreamDeckPort%s+=%s+(.-);")
 
-		local device1EnableTmp = content:match(scriptInit .. ".Export%s+=%s+(.-);")
-		if (device1EnableTmp ~= nil) then
-			export1New = false
-        else
-            device1EnableTmp = content:match(scriptInit .. ".Export1%s+=%s+(.-);")
-			export1New = true
-        end
-		if (device1EnableTmp == "true") then device1Enabled = true else device1Enabled = false end
-
-		local device2EnableTmp = content:match(scriptInit .. ".Export2%s+=%s+(.-);")
-		if (device2EnableTmp == "true") then device2Enabled = true else device2Enabled = false end
-
-		local device3EnableTmp = content:match(scriptInit .. ".Export3%s+=%s+(.-);")
-		if (device3EnableTmp == "true") then device3Enabled = true else device3Enabled = false end
-
-		local device4EnableTmp = content:match(scriptInit .. ".Export4%s+=%s+(.-);")
-		if (device4EnableTmp == "true") then device4Enabled = true else device4Enabled = false end
-
 		-- StreamDeck
-		local StreamDeckEnableTmp = content:match(scriptInit .. ".StreamDeckExport%s+=%s+(.-);")
-		if (StreamDeckEnableTmp == "true") then hwStreamDeckEnabled = true else hwStreamDeckEnabled = false end
+		if (content:match(scriptInit .. ".StreamDeckExport%s+=%s+(.-);") == "true") then hwStreamDeckEnabled = true else hwStreamDeckEnabled = false end
 
-		local writeNavFileTmp = content:match(scriptInit .. ".WriteNavFile%s+=%s+(.-);")
-		if (writeNavFileTmp == "true") then writeNavFile = true else writeNavFile = false end
+		if (content:match(scriptInit .. ".WriteNavFile%s+=%s+(.-);") == "true") then writeNavFile = true else writeNavFile = false end
 
 		-- Network ports:
 		pwScriptConfigDlg.pwScriptNetworkPortSendEditBox:setText(networkPortSend)
@@ -168,17 +173,17 @@ local function ReadConfigFile()
 		pwScriptConfigDlg.pwScriptMultiAppEnabledCheckbox:setState(multiAppEnabled)
 
 		-- set device 1
-		pwScriptConfigDlg.pwScriptDevice1EnabledCheckbox:setState(device1Enabled)
-		pwScriptConfigDlg.pwScriptDeviceIp1EditBox:setText(deviceIp1)
+		pwScriptConfigDlg.pwScriptDevice1EnabledCheckbox:setState(deviceEnabled[1])
+		pwScriptConfigDlg.pwScriptDeviceIp1EditBox:setText(deviceIp[1])
 		-- set device 2
-		pwScriptConfigDlg.pwScriptDevice2EnabledCheckbox:setState(device2Enabled)
-		pwScriptConfigDlg.pwScriptDeviceIp2EditBox:setText(deviceIp2)
+		pwScriptConfigDlg.pwScriptDevice2EnabledCheckbox:setState(deviceEnabled[2])
+		pwScriptConfigDlg.pwScriptDeviceIp2EditBox:setText(deviceIp[2])
 		-- set device 3
-		pwScriptConfigDlg.pwScriptDevice3EnabledCheckbox:setState(device3Enabled)
-		pwScriptConfigDlg.pwScriptDeviceIp3EditBox:setText(deviceIp3)
+		pwScriptConfigDlg.pwScriptDevice3EnabledCheckbox:setState(deviceEnabled[3])
+		pwScriptConfigDlg.pwScriptDeviceIp3EditBox:setText(deviceIp[3])
 		-- set device 4
-		pwScriptConfigDlg.pwScriptDevice4EnabledCheckbox:setState(device4Enabled)
-		pwScriptConfigDlg.pwScriptDeviceIp4EditBox:setText(deviceIp4)
+		pwScriptConfigDlg.pwScriptDevice4EnabledCheckbox:setState(deviceEnabled[4])
+		pwScriptConfigDlg.pwScriptDeviceIp4EditBox:setText(deviceIp[4])
 
 		-- StreamDeck
 		pwScriptConfigDlg.pwScriptStreamDeckEnabledCheckbox:setState(hwStreamDeckEnabled)
@@ -195,25 +200,33 @@ local function SaveToConfig()
 
 	content = string.gsub(content, scriptInit .. ".MultiAppDevice%s+=%s+(.-);", scriptInit .. ".MultiAppDevice = " .. tostring(multiAppEnabled) .. ";")
 
-	if (export1New) then
-		content = string.gsub(content, scriptInit .. ".Export1%s+=%s+(.-);", scriptInit .. ".Export1 = " .. tostring(device1Enabled) .. ";")
+	if pwdev == true then
+		for i = 1, DEVICES, 1 do
+			content = string.gsub(content, scriptInit .. ".Device%[".. i .."].Export%s+=%s+(.-);", scriptInit .. ".Device%[".. i .."].Export = " .. tostring(deviceEnabled[i]) .. ";")
+
+			content = string.gsub(content, scriptInit .. ".Device%[".. i .."].Host%s+=%s+\"(.-)\"", scriptInit .. ".Device%[".. i .."].Host = \"" .. deviceIp[i] .. "\"")
+		end
 	else
-		content = string.gsub(content, scriptInit .. ".Export%s+=%s+(.-);", scriptInit .. ".Export = " .. tostring(device1Enabled) .. ";")
+		if (export1New) then
+			content = string.gsub(content, scriptInit .. ".Export1%s+=%s+(.-);", scriptInit .. ".Export1 = " .. tostring(deviceEnabled[1]) .. ";")
+		else
+			content = string.gsub(content, scriptInit .. ".Export%s+=%s+(.-);", scriptInit .. ".Export = " .. tostring(deviceEnabled[1]) .. ";")
+		end
+		content = string.gsub(content, scriptInit .. ".Export2%s+=%s+(.-);", scriptInit .. ".Export2 = " .. tostring(deviceEnabled[2]) .. ";")
+		content = string.gsub(content, scriptInit .. ".Export3%s+=%s+(.-);", scriptInit .. ".Export3 = " .. tostring(deviceEnabled[3]) .. ";")
+		content = string.gsub(content, scriptInit .. ".Export4%s+=%s+(.-);", scriptInit .. ".Export4 = " .. tostring(deviceEnabled[4]) .. ";")
+
+		if (host1New) then
+			content = string.gsub(content, scriptInit .. ".Host1%s+=%s+\"(.-)\"", scriptInit .. ".Host1 = \"" .. deviceIp[1] .. "\"")
+		else
+			content = string.gsub(content, scriptInit .. ".Host%s+=%s+\"(.-)\"", scriptInit .. ".Host = \"" .. deviceIp[1] .. "\"")
+		end
+		content = string.gsub(content, scriptInit .. ".Host2%s+=%s+\"(.-)\"", scriptInit .. ".Host2 = \"" .. deviceIp[2] .. "\"")
+		content = string.gsub(content, scriptInit .. ".Host3%s+=%s+\"(.-)\"", scriptInit .. ".Host3 = \"" .. deviceIp[3] .. "\"")
+		content = string.gsub(content, scriptInit .. ".Host4%s+=%s+\"(.-)\"", scriptInit .. ".Host4 = \"" .. deviceIp[4] .. "\"")
 	end
-	content = string.gsub(content, scriptInit .. ".Export2%s+=%s+(.-);", scriptInit .. ".Export2 = " .. tostring(device2Enabled) .. ";")
-	content = string.gsub(content, scriptInit .. ".Export3%s+=%s+(.-);", scriptInit .. ".Export3 = " .. tostring(device3Enabled) .. ";")
-	content = string.gsub(content, scriptInit .. ".Export4%s+=%s+(.-);", scriptInit .. ".Export4 = " .. tostring(device4Enabled) .. ";")
 
 	content = string.gsub(content, scriptInit .. ".Port%s+=%s+(.-);", 	scriptInit .. ".Port = " .. networkPortSend .. ";")
-
-	if (host1New) then
-		content = string.gsub(content, scriptInit .. ".Host1%s+=%s+\"(.-)\"", scriptInit .. ".Host1 = \"" .. deviceIp1 .. "\"")
-	else
-		content = string.gsub(content, scriptInit .. ".Host%s+=%s+\"(.-)\"", scriptInit .. ".Host = \"" .. deviceIp1 .. "\"")
-	end
-	content = string.gsub(content, scriptInit .. ".Host2%s+=%s+\"(.-)\"", scriptInit .. ".Host2 = \"" .. deviceIp2 .. "\"")
-	content = string.gsub(content, scriptInit .. ".Host3%s+=%s+\"(.-)\"", scriptInit .. ".Host3 = \"" .. deviceIp3 .. "\"")
-	content = string.gsub(content, scriptInit .. ".Host4%s+=%s+\"(.-)\"", scriptInit .. ".Host4 = \"" .. deviceIp4 .. "\"")
 
 	-- StreamDeck
 	content = string.gsub(content, scriptInit .. ".StreamDeckExport%s+=%s+(.-);", scriptInit .. ".StreamDeckExport = " .. tostring(hwStreamDeckEnabled) .. ";")
@@ -223,6 +236,7 @@ local function SaveToConfig()
 	content = string.gsub(content, scriptInit .. ".WriteNavFile%s+=%s+(.-);", scriptInit .. ".WriteNavFile = " .. tostring(writeNavFile) .. ";")
 	-- IP's
 	content = string.gsub(content, scriptInit .. ".ListenerPort%s+=%s+(.-);", scriptInit .. ".ListenerPort = " .. networkPortRecv .. ";")
+
 	fileNew:write(content)
 	fileNew:flush()
 	fileNew:close()
@@ -255,24 +269,24 @@ local function UpdateOptions()
 	pwScriptConfigDlg.pwScriptDevicesTitleLabel:setEnabled(editEnabled)
 
 	-- device 1
-	device1Enabled = pwScriptConfigDlg.pwScriptDevice1EnabledCheckbox:getState()
+	deviceEnabled[1] = pwScriptConfigDlg.pwScriptDevice1EnabledCheckbox:getState()
 	pwScriptConfigDlg.pwScriptDevice1EnabledCheckbox:setEnabled(editEnabled)
-	pwScriptConfigDlg.pwScriptDeviceIp1EditBox:setEnabled(editEnabled and device1Enabled)
+	pwScriptConfigDlg.pwScriptDeviceIp1EditBox:setEnabled(editEnabled and deviceEnabled[1])
 
 	-- device 2
-	device2Enabled = pwScriptConfigDlg.pwScriptDevice2EnabledCheckbox:getState()
+	deviceEnabled[2] = pwScriptConfigDlg.pwScriptDevice2EnabledCheckbox:getState()
 	pwScriptConfigDlg.pwScriptDevice2EnabledCheckbox:setEnabled(editEnabled)
-	pwScriptConfigDlg.pwScriptDeviceIp2EditBox:setEnabled(editEnabled and device2Enabled)
+	pwScriptConfigDlg.pwScriptDeviceIp2EditBox:setEnabled(editEnabled and deviceEnabled[2])
 
 	-- device 3
-	device3Enabled = pwScriptConfigDlg.pwScriptDevice3EnabledCheckbox:getState()
+	deviceEnabled[3] = pwScriptConfigDlg.pwScriptDevice3EnabledCheckbox:getState()
 	pwScriptConfigDlg.pwScriptDevice3EnabledCheckbox:setEnabled(editEnabled)
-	pwScriptConfigDlg.pwScriptDeviceIp3EditBox:setEnabled(editEnabled and device3Enabled)
+	pwScriptConfigDlg.pwScriptDeviceIp3EditBox:setEnabled(editEnabled and deviceEnabled[3])
 
 	-- device 4
-	device4Enabled = pwScriptConfigDlg.pwScriptDevice4EnabledCheckbox:getState()
+	deviceEnabled[4] = pwScriptConfigDlg.pwScriptDevice4EnabledCheckbox:getState()
 	pwScriptConfigDlg.pwScriptDevice4EnabledCheckbox:setEnabled(editEnabled)
-	pwScriptConfigDlg.pwScriptDeviceIp4EditBox:setEnabled(editEnabled and device4Enabled)
+	pwScriptConfigDlg.pwScriptDeviceIp4EditBox:setEnabled(editEnabled and deviceEnabled[4])
 
 	-- StreamDeck
 	hwStreamDeckEnabled = pwScriptConfigDlg.pwScriptStreamDeckEnabledCheckbox:getState()
@@ -327,10 +341,12 @@ local function OnShowDialog(dialogBox)
 	-- zaladowanie danych z pliku zaraz po przejsciu na panel
 	ReadConfigFile()
 
+	-- pobranie aktualnie zainstalowanej wersji skryptu oraz pliku Config
 	scriptVersion = getNthLine(VERSION_PATH, 1)
 	pwScriptConfigDlg.pwScriptInstalledVersion:setText(scriptVersion)
 	pwScriptConfigDlg.pwScriptConfigVersion:setText(configVersion)
 
+	-- uaktualnienie stanu kontrolek
 	UpdateOptions()
 end
 
@@ -363,47 +379,47 @@ end)
 -- Devices enabled
 local pwScriptDevice1Enabled = DbOption.new():setValue(false):checkbox()
 :callback(function(value)
-	device1Enabled = value
+	deviceEnabled[1] = value
 	UpdateOptions()
 end)
 --
 local pwScriptDevice2Enabled = DbOption.new():setValue(false):checkbox()
 :callback(function(value)
-	device2Enabled = value
+	deviceEnabled[2] = value
 	UpdateOptions()
 end)
 --
 local pwScriptDevice3Enabled = DbOption.new():setValue(false):checkbox()
 :callback(function(value)
-	device3Enabled = value
+	deviceEnabled[3] = value
 	UpdateOptions()
 end)
 --
 local pwScriptDevice4Enabled = DbOption.new():setValue(false):checkbox()
 :callback(function(value)
-	device4Enabled = value
+	deviceEnabled[4] = value
 	UpdateOptions()
 end)
 
 -- IP's
 local pwScriptDeviceIp1 = DbOption.new():setValue(""):editbox()
 :callback(function(value)
-	deviceIp1 = value
+	deviceIp[1] = value
 end)
 --
 local pwScriptDeviceIp2 = DbOption.new():setValue(""):editbox()
 :callback(function(value)
-	deviceIp2 = value
+	deviceIp[2] = value
 end)
 --
 local pwScriptDeviceIp3 = DbOption.new():setValue(""):editbox()
 :callback(function(value)
-	deviceIp3 = value
+	deviceIp[3] = value
 end)
 --
 local pwScriptDeviceIp4 = DbOption.new():setValue(""):editbox()
 :callback(function(value)
-	deviceIp4 = value
+	deviceIp[4] = value
 end)
 
 -- StreamDeck Enabled

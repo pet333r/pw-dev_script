@@ -4,7 +4,7 @@ declare_plugin("pw-dev script config", {
 	developerName = _("pet333r"),
 	developerLink = _("http://pw-developer.com/"),
 	displayName = _("script cfg @pet333r"),
-	version = "23.01",
+	version = "23.09",
 	state = "installed",
 	info = _("The script configurator makes it easier to go through the configuration process in order to connect the application with DCS World"),
 	--binaries = {""},--dll goes here 

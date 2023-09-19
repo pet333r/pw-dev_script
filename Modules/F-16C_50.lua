@@ -1399,7 +1399,7 @@ end
 
 local function get_UHF_CHAN()
     local ind = ExportScript.Tools.getListIndicatorValue(10)
-    if ind == nil then return " " end
+    if ind == nil then return "" end
     return ind["txtPresetChannel"]
 end
 
@@ -1417,11 +1417,11 @@ end
 -- Pointed to by ProcessDCSHighImportance
 function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
 	-- DED Displays
-	local DEDLine1 = ""
-	local DEDLine2 = ""
-	local DEDLine3 = ""
-	local DEDLine4 = ""
-	local DEDLine5 = ""
+	-- local DEDLine1 = ""
+	-- local DEDLine2 = ""
+	-- local DEDLine3 = ""
+	-- local DEDLine4 = ""
+	-- local DEDLine5 = ""
 
 	-- CMDS Display
 	local CMDS_O1_Amount
@@ -1430,17 +1430,23 @@ function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
 	local CMDS_FL_Amount
 
 	-- Build DED Display Lines
-	DEDLine1 = ExportScript.replaceSymbols(buildDEDLine(1)) --buildDEDLine(1);
-	DEDLine2 = ExportScript.replaceSymbols(buildDEDLine(2)) --buildDEDLine(2);
-	DEDLine3 = ExportScript.replaceSymbols(buildDEDLine(3)) --buildDEDLine(3);
-	DEDLine4 = ExportScript.replaceSymbols(buildDEDLine(4)) --buildDEDLine(4);
-	DEDLine5 = ExportScript.replaceSymbols(buildDEDLine(5)) --buildDEDLine(5);
+	-- DEDLine1 = ExportScript.replaceSymbols(buildDEDLine(1))
+	-- DEDLine2 = ExportScript.replaceSymbols(buildDEDLine(2))
+	-- DEDLine3 = ExportScript.replaceSymbols(buildDEDLine(3))
+	-- DEDLine4 = ExportScript.replaceSymbols(buildDEDLine(4))
+	-- DEDLine5 = ExportScript.replaceSymbols(buildDEDLine(5))
 
-	ExportScript.Tools.SendData(2101, DEDLine1)
-	ExportScript.Tools.SendData(2102, DEDLine2)
-	ExportScript.Tools.SendData(2103, DEDLine3)
-	ExportScript.Tools.SendData(2104, DEDLine4)
-	ExportScript.Tools.SendData(2105, DEDLine5)
+	ExportScript.Tools.SendData(2101, ExportScript.replaceSymbols(buildDEDLine(1)))
+	ExportScript.Tools.SendData(2102, ExportScript.replaceSymbols(buildDEDLine(2)))
+	ExportScript.Tools.SendData(2103, ExportScript.replaceSymbols(buildDEDLine(3)))
+	ExportScript.Tools.SendData(2104, ExportScript.replaceSymbols(buildDEDLine(4)))
+	ExportScript.Tools.SendData(2105, ExportScript.replaceSymbols(buildDEDLine(5)))
+
+	ExportScript.Tools.SendData(2106, ExportScript.replaceSymbols(buildPFLDLine(1)))
+	ExportScript.Tools.SendData(2107, ExportScript.replaceSymbols(buildPFLDLine(2)))
+	ExportScript.Tools.SendData(2108, ExportScript.replaceSymbols(buildPFLDLine(3)))
+	ExportScript.Tools.SendData(2109, ExportScript.replaceSymbols(buildPFLDLine(4)))
+	ExportScript.Tools.SendData(2110, ExportScript.replaceSymbols(buildPFLDLine(5)))
 
 	-- UHF
 	ExportScript.Tools.SendData(2305, get_UHF_CHAN())
