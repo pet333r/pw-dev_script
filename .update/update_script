@@ -3,7 +3,6 @@ lib/Init.lua
 lib/Maps.lua
 lib/Tools.lua
 lib/utf8.lua
-lib/Utils.lua
 json/A-10C_CDU.json
 json/AH-64D_EUFD.json
 Modules/A-4E-C.lua

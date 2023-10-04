@@ -1,4 +1,4 @@
--- file version: 2023.09.20
+-- file version: 2023.10.04
 
 local DbOption  = require('Options.DbOption')
 -- local i18n      = require('i18n')
@@ -38,9 +38,6 @@ local hwStreamDeckIP = ""
 local hwStreamDeckPort = 0
 
 local writeNavFile = false
-
-local host1New = false
-local export1New = false
 
 local function CheckPcIp()
 	local command = string.format("start cmd /k ipconfig.exe")
@@ -129,28 +126,12 @@ local function ReadConfigFile()
 				if (content:match(scriptInit .. ".Device%[".. i .."].Export%s+=%s+(.-);") == "true") then deviceEnabled[i] = true else deviceEnabled[i] = false end
 			end
 		else
-			local tmp = content:match(scriptInit .. ".Host%s+=%s+\"(.-)\"")
-			if (tmp ~= nil) then
-				deviceIp[1] = tmp
-				host1New = false
-			else
-				deviceIp[1] = content:match(scriptInit .. ".Host1%s+=%s+\"(.-)\"")
-				host1New = true
-			end
-
+			deviceIp[1] = content:match(scriptInit .. ".Host%s+=%s+\"(.-)\"")
 			deviceIp[2] = content:match(scriptInit .. ".Host2%s+=%s+\"(.-)\"")
 			deviceIp[3] = content:match(scriptInit .. ".Host3%s+=%s+\"(.-)\"")
 			deviceIp[4] = content:match(scriptInit .. ".Host4%s+=%s+\"(.-)\"")
 
-			local device1EnableTmp = content:match(scriptInit .. ".Export%s+=%s+(.-);")
-			if (device1EnableTmp ~= nil) then
-				export1New = false
-			else
-				device1EnableTmp = content:match(scriptInit .. ".Export1%s+=%s+(.-);")
-				export1New = true
-			end
-			if (device1EnableTmp == "true") then deviceEnabled[1] = true else deviceEnabled[1] = false end
-
+			if (content:match(scriptInit .. ".Export%s+=%s+(.-);") == "true") then deviceEnabled[1] = true else deviceEnabled[1] = false end
 			if (content:match(scriptInit .. ".Export2%s+=%s+(.-);") == "true") then deviceEnabled[2] = true else deviceEnabled[2] = false end
 			if (content:match(scriptInit .. ".Export3%s+=%s+(.-);") == "true") then deviceEnabled[3] = true else deviceEnabled[3] = false end
 			if (content:match(scriptInit .. ".Export4%s+=%s+(.-);") == "true") then deviceEnabled[4] = true else deviceEnabled[4] = false end
@@ -207,20 +188,12 @@ local function SaveToConfig()
 			content = string.gsub(content, scriptInit .. ".Device%[".. i .."].Host%s+=%s+\"(.-)\"", scriptInit .. ".Device%[".. i .."].Host = \"" .. deviceIp[i] .. "\"")
 		end
 	else
-		if (export1New) then
-			content = string.gsub(content, scriptInit .. ".Export1%s+=%s+(.-);", scriptInit .. ".Export1 = " .. tostring(deviceEnabled[1]) .. ";")
-		else
-			content = string.gsub(content, scriptInit .. ".Export%s+=%s+(.-);", scriptInit .. ".Export = " .. tostring(deviceEnabled[1]) .. ";")
-		end
+		content = string.gsub(content, scriptInit .. ".Export%s+=%s+(.-);", scriptInit .. ".Export = " .. tostring(deviceEnabled[1]) .. ";")
 		content = string.gsub(content, scriptInit .. ".Export2%s+=%s+(.-);", scriptInit .. ".Export2 = " .. tostring(deviceEnabled[2]) .. ";")
 		content = string.gsub(content, scriptInit .. ".Export3%s+=%s+(.-);", scriptInit .. ".Export3 = " .. tostring(deviceEnabled[3]) .. ";")
 		content = string.gsub(content, scriptInit .. ".Export4%s+=%s+(.-);", scriptInit .. ".Export4 = " .. tostring(deviceEnabled[4]) .. ";")
 
-		if (host1New) then
-			content = string.gsub(content, scriptInit .. ".Host1%s+=%s+\"(.-)\"", scriptInit .. ".Host1 = \"" .. deviceIp[1] .. "\"")
-		else
-			content = string.gsub(content, scriptInit .. ".Host%s+=%s+\"(.-)\"", scriptInit .. ".Host = \"" .. deviceIp[1] .. "\"")
-		end
+		content = string.gsub(content, scriptInit .. ".Host%s+=%s+\"(.-)\"", scriptInit .. ".Host = \"" .. deviceIp[2] .. "\"")
 		content = string.gsub(content, scriptInit .. ".Host2%s+=%s+\"(.-)\"", scriptInit .. ".Host2 = \"" .. deviceIp[2] .. "\"")
 		content = string.gsub(content, scriptInit .. ".Host3%s+=%s+\"(.-)\"", scriptInit .. ".Host3 = \"" .. deviceIp[3] .. "\"")
 		content = string.gsub(content, scriptInit .. ".Host4%s+=%s+\"(.-)\"", scriptInit .. ".Host4 = \"" .. deviceIp[4] .. "\"")
