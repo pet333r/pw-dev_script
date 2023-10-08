@@ -1,9 +1,0 @@
-/Mods/Services/pw-dev/Options/options.dlg
-/Mods/Services/pw-dev/Options/optionsData.lua
-/Mods/Services/pw-dev/Options/optionsDb.lua
-/Mods/Services/pw-dev/Theme/icon_active.png
-/Mods/Services/pw-dev/Theme/icon_select.png
-/Mods/Services/pw-dev/Theme/icon-38x38.png
-/Mods/Services/pw-dev/Theme/icon.png
-/Mods/Services/pw-dev/entry.lua
-/Scripts/Hooks/pw_dcs_util-hook.lua
