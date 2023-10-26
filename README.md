@@ -275,7 +275,7 @@ For the script to work properly with StreamDeck, a plugin for the Elgato StreamD
 ## plugin config
 - IP Address: `127.0.0.1`
 - Listener Port: `1725` (default)
-- Send Port: `25070` (the same as in the `Config.lua` file > `ExportScript.Config.ListenerPort`)
+- Send Port: `25070` (the same as in the `Config.lua` file > `PWDEV.Config.ListenerPort`)
 ![](.gfx/streamdeck1.png)
 
 :red_circle: <span style="color:#FF4422">IMPORTANT</span>
