@@ -1,4 +1,4 @@
-ExportScript.Fdr = {}
+PWDEV.Fdr = {}
 
 local telemetryFolder = lfs.writedir() .. [[Logs\telemetry\]]
 lfs.mkdir(telemetryFolder)
@@ -8,7 +8,7 @@ local pathKml = telemetryFolder
 local WriteCsvFile = true
 local WriteKmlFile = true
 
-function ExportScript.Fdr.GetDateTime()
+function PWDEV.Fdr.GetDateTime()
     local date_table = os.date("*t")
 	local hour, minute, second = date_table.hour, date_table.min, date_table.sec
 	local year, month, day = date_table.year, date_table.month, date_table.day
@@ -16,86 +16,86 @@ function ExportScript.Fdr.GetDateTime()
     return dateResult
 end
 
-function ExportScript.Fdr.CsvFileInit()
-    local datetime = ExportScript.Fdr.GetDateTime()
+function PWDEV.Fdr.CsvFileInit()
+    local datetime = PWDEV.Fdr.GetDateTime()
 
     if (WriteCsvFile) then
-        ExportScript.csvFile = io.open(pathCsv .. datetime ..  ".csv", "wa")
-        if ExportScript.csvFile then
-            ExportScript.csvFile:write('\239\187\191') -- create a UTF-8 BOM
+        PWDEV.csvFile = io.open(pathCsv .. datetime ..  ".csv", "wa")
+        if PWDEV.csvFile then
+            PWDEV.csvFile:write('\239\187\191') -- create a UTF-8 BOM
         end
     end
 end
 
-function ExportScript.Fdr.CsvFileWrite(packet)
+function PWDEV.Fdr.CsvFileWrite(packet)
     if (WriteCsvFile) then
-        if ExportScript.csvFile then
-            ExportScript.csvFile:write(packet)
+        if PWDEV.csvFile then
+            PWDEV.csvFile:write(packet)
         end
     end
 end
 
-function ExportScript.Fdr.CsvFileEnd()
+function PWDEV.Fdr.CsvFileEnd()
     if (WriteCsvFile) then
-        if ExportScript.csvFile then
-            ExportScript.csvFile:flush()
-            ExportScript.csvFile:close()
-            ExportScript.csvFile = nil
+        if PWDEV.csvFile then
+            PWDEV.csvFile:flush()
+            PWDEV.csvFile:close()
+            PWDEV.csvFile = nil
         end
     end
 end
 
-function ExportScript.Fdr.NavFileInit(version)
-    local datetime = ExportScript.Fdr.GetDateTime()
+function PWDEV.Fdr.NavFileInit(version)
+    local datetime = PWDEV.Fdr.GetDateTime()
 
     if (WriteKmlFile) then
-        ExportScript.kmlFile = io.open(pathKml .. datetime .. ".kml", "wa") -- "W+"
-        if ExportScript.kmlFile then
-            ExportScript.kmlFile:write('\239\187\191') -- create a UTF-8 BOM
-            ExportScript.kmlFile:write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
-            ExportScript.kmlFile:write("<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n")
-            ExportScript.kmlFile:write("  <Document>\n")
-            ExportScript.kmlFile:write("    <Style id=\"StyleLineKML\">\n")
-            ExportScript.kmlFile:write("      <LineStyle id=\"lineStyle\">\n")
-            ExportScript.kmlFile:write("        <color>a032cfcb</color>\n")
-            ExportScript.kmlFile:write("        <width>2</width>\n")
-            ExportScript.kmlFile:write("      </LineStyle>\n")
-            ExportScript.kmlFile:write("      <PolyStyle>\n")
-            ExportScript.kmlFile:write("        <color>5046d774</color>\n")
-            ExportScript.kmlFile:write("      </PolyStyle>\n")
-            ExportScript.kmlFile:write("    </Style>\n")
-            ExportScript.kmlFile:write("    <Placemark>\n")
-    ExportScript.kmlFile:write("      <description>Flight recorded in DCS World " .. version .. 
+        PWDEV.kmlFile = io.open(pathKml .. datetime .. ".kml", "wa") -- "W+"
+        if PWDEV.kmlFile then
+            PWDEV.kmlFile:write('\239\187\191') -- create a UTF-8 BOM
+            PWDEV.kmlFile:write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
+            PWDEV.kmlFile:write("<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n")
+            PWDEV.kmlFile:write("  <Document>\n")
+            PWDEV.kmlFile:write("    <Style id=\"StyleLineKML\">\n")
+            PWDEV.kmlFile:write("      <LineStyle id=\"lineStyle\">\n")
+            PWDEV.kmlFile:write("        <color>a032cfcb</color>\n")
+            PWDEV.kmlFile:write("        <width>2</width>\n")
+            PWDEV.kmlFile:write("      </LineStyle>\n")
+            PWDEV.kmlFile:write("      <PolyStyle>\n")
+            PWDEV.kmlFile:write("        <color>5046d774</color>\n")
+            PWDEV.kmlFile:write("      </PolyStyle>\n")
+            PWDEV.kmlFile:write("    </Style>\n")
+            PWDEV.kmlFile:write("    <Placemark>\n")
+    PWDEV.kmlFile:write("      <description>Flight recorded in DCS World " .. version .. 
     " @ " .. datetime .. "</description>\n")
-            ExportScript.kmlFile:write("      <styleUrl>#StyleLineKML</styleUrl>\n")
-            ExportScript.kmlFile:write("      <LineString>\n")
-            ExportScript.kmlFile:write("        <extrude>true</extrude>\n")
-            ExportScript.kmlFile:write("        <tessellate>true</tessellate>\n")
-            ExportScript.kmlFile:write("        <altitudeMode>absolute</altitudeMode>\n")
-            ExportScript.kmlFile:write("        <coordinates>")
+            PWDEV.kmlFile:write("      <styleUrl>#StyleLineKML</styleUrl>\n")
+            PWDEV.kmlFile:write("      <LineString>\n")
+            PWDEV.kmlFile:write("        <extrude>true</extrude>\n")
+            PWDEV.kmlFile:write("        <tessellate>true</tessellate>\n")
+            PWDEV.kmlFile:write("        <altitudeMode>absolute</altitudeMode>\n")
+            PWDEV.kmlFile:write("        <coordinates>")
         end
     end
 end
 
-function ExportScript.Fdr.NavFileWrite(packet)
+function PWDEV.Fdr.NavFileWrite(packet)
     if (WriteKmlFile) then
-        if ExportScript.kmlFile then
-            ExportScript.kmlFile:write(packet)
+        if PWDEV.kmlFile then
+            PWDEV.kmlFile:write(packet)
         end
     end
 end
 
-function ExportScript.Fdr.NavFileEnd()
+function PWDEV.Fdr.NavFileEnd()
     if (WriteKmlFile) then
-        if ExportScript.kmlFile then
-            ExportScript.kmlFile:write("        </coordinates>\n")
-            ExportScript.kmlFile:write("      </LineString>\n")
-            ExportScript.kmlFile:write("    </Placemark>\n")
-            ExportScript.kmlFile:write("  </Document>\n")
-            ExportScript.kmlFile:write("</kml>\n")
-            ExportScript.kmlFile:flush()
-            ExportScript.kmlFile:close()
-            ExportScript.kmlFile = nil
+        if PWDEV.kmlFile then
+            PWDEV.kmlFile:write("        </coordinates>\n")
+            PWDEV.kmlFile:write("      </LineString>\n")
+            PWDEV.kmlFile:write("    </Placemark>\n")
+            PWDEV.kmlFile:write("  </Document>\n")
+            PWDEV.kmlFile:write("</kml>\n")
+            PWDEV.kmlFile:flush()
+            PWDEV.kmlFile:close()
+            PWDEV.kmlFile = nil
         end
     end
 end

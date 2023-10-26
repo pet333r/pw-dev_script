@@ -1,7 +1,10 @@
 -- A-10C
-ExportScript.FoundDCSModule = true
 
-ExportScript.ConfigEveryFrameArguments = 
+local coerce_nil_to_string = PWDEV.Tools.coerce_nil_to_string
+
+PWDEV.FoundDCSModule = true
+
+PWDEV.ConfigEveryFrameArguments = 
 {
     -- Engine Gauges
 	-- [70] = "%.2f",		-- Left Engine Temperature
@@ -221,7 +224,7 @@ ExportScript.ConfigEveryFrameArguments =
     [998] = "%1d",		-- ARC-210
 }
 
-ExportScript.ConfigArguments = 
+PWDEV.ConfigArguments = 
 {
 }
 
@@ -272,96 +275,96 @@ local function getILSFrequency()
 end
 
 local function getUHFPreset()
-    local ind = ExportScript.Tools.getListIndicatorValue(10)
+    local ind = PWDEV.Tools.getListIndicatorValue(10)
     if ind == nil then return " " end
     return ind["txtPresetChannel"]
 end
 
 local function getUHFFrequency()
-    local ind = ExportScript.Tools.getListIndicatorValue(11)
+    local ind = PWDEV.Tools.getListIndicatorValue(11)
     if ind == nil then return "       " end
     local freqStatus = ind["txtFreqStatus"] -- e.g. "251000"
     return freqStatus:sub(0,3) .. "." .. freqStatus:sub(4,6)
 end
 
 -- Pointed to by ProcessDCSHighImportance
-function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
+function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
 
--- Pointed to by ExportScript.ProcessDCSConfigLowImportance
-function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
+-- Pointed to by PWDEV.ProcessDCSConfigLowImportance
+function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
     -- ScratchPad
-    local lScratchPad = ExportScript.Tools.getListIndicatorValue(5)
-    ExportScript.Tools.SendData(2010, ExportScript.Tools.coerce_nil_to_string(lScratchPad.Scratch_PAD))
+    local lScratchPad = PWDEV.Tools.getListIndicatorValue(5)
+    PWDEV.Tools.SendData(2010, PWDEV.Tools.coerce_nil_to_string(lScratchPad.Scratch_PAD))
 
     -- CMSC 2020 (Text only)
     -------------------------------------------------
     if mainPanelDevice:get_argument_value(364) > 0 then
-        local lCMSCTable = ExportScript.Tools.getListIndicatorValue(8)
+        local lCMSCTable = PWDEV.Tools.getListIndicatorValue(8)
 
         if lCMSCTable ~= nil and lCMSCTable.txt_JMR ~= nil then
-            ExportScript.Tools.SendData(2011, string.format("%s", lCMSCTable.txt_CHAFF_FLARE))	-- txt_CHAFF_FLARE
-            ExportScript.Tools.SendData(2012, string.format("%s", lCMSCTable.txt_JMR))	-- txt_JMR
-            ExportScript.Tools.SendData(2013, string.format("%s", lCMSCTable.txt_MWS))	-- txt_MWS
+            PWDEV.Tools.SendData(2011, string.format("%s", lCMSCTable.txt_CHAFF_FLARE))	-- txt_CHAFF_FLARE
+            PWDEV.Tools.SendData(2012, string.format("%s", lCMSCTable.txt_JMR))	-- txt_JMR
+            PWDEV.Tools.SendData(2013, string.format("%s", lCMSCTable.txt_MWS))	-- txt_MWS
         end
     else
-        ExportScript.Tools.SendData(2011, " ")	-- txt_CHAFF_FLARE
-        ExportScript.Tools.SendData(2012, " ")	-- txt_JMR
-        ExportScript.Tools.SendData(2013, " ")	-- txt_MWS
+        PWDEV.Tools.SendData(2011, " ")	-- txt_CHAFF_FLARE
+        PWDEV.Tools.SendData(2012, " ")	-- txt_JMR
+        PWDEV.Tools.SendData(2013, " ")	-- txt_MWS
     end
 
     -- CMSP
     -------------------------------------------------
     if mainPanelDevice:get_argument_value(364) > 0 then
-        local lCMSP = ExportScript.Tools.getListIndicatorValue(7)
+        local lCMSP = PWDEV.Tools.getListIndicatorValue(7)
 
         local lCMSPTable = {"","","",""}
 
         if lCMSP ~= nil and lCMSP.txt_UP ~= nil then
             lCMSP.txt_UP = lCMSP.txt_UP:gsub("  ", " ")
             lCMSP.txt_UP = lCMSP.txt_UP.." "
-            lCMSPTable  = ExportScript.Tools.split(lCMSP.txt_UP, "%s")
+            lCMSPTable  = PWDEV.Tools.split(lCMSP.txt_UP, "%s")
         end
 
-        ExportScript.Tools.SendData(2014,  string.format("%s", lCMSPTable[1]))
-        ExportScript.Tools.SendData(2015,  string.format("%s", lCMSPTable[2]))
-        ExportScript.Tools.SendData(2016,  string.format("%s", lCMSPTable[3]))
-        ExportScript.Tools.SendData(2017,  string.format("%s", lCMSPTable[4]))
-        ExportScript.Tools.SendData(2018,  string.format("%s", lCMSP.txt_DOWN1))
-        ExportScript.Tools.SendData(2019,  string.format("%s", lCMSP.txt_DOWN2))
-        ExportScript.Tools.SendData(2020,  string.format("%s", lCMSP.txt_DOWN3))
-        ExportScript.Tools.SendData(2021,  string.format("%s", lCMSP.txt_DOWN4))
+        PWDEV.Tools.SendData(2014,  string.format("%s", lCMSPTable[1]))
+        PWDEV.Tools.SendData(2015,  string.format("%s", lCMSPTable[2]))
+        PWDEV.Tools.SendData(2016,  string.format("%s", lCMSPTable[3]))
+        PWDEV.Tools.SendData(2017,  string.format("%s", lCMSPTable[4]))
+        PWDEV.Tools.SendData(2018,  string.format("%s", lCMSP.txt_DOWN1))
+        PWDEV.Tools.SendData(2019,  string.format("%s", lCMSP.txt_DOWN2))
+        PWDEV.Tools.SendData(2020,  string.format("%s", lCMSP.txt_DOWN3))
+        PWDEV.Tools.SendData(2021,  string.format("%s", lCMSP.txt_DOWN4))
     else
-        ExportScript.Tools.SendData(2014,  " ")
-        ExportScript.Tools.SendData(2015,  " ")
-        ExportScript.Tools.SendData(2016,  " ")
-        ExportScript.Tools.SendData(2017,  " ")
-        ExportScript.Tools.SendData(2018,  " ")
-        ExportScript.Tools.SendData(2019,  " ")
-        ExportScript.Tools.SendData(2020,  " ")
-        ExportScript.Tools.SendData(2021,  " ")
+        PWDEV.Tools.SendData(2014,  " ")
+        PWDEV.Tools.SendData(2015,  " ")
+        PWDEV.Tools.SendData(2016,  " ")
+        PWDEV.Tools.SendData(2017,  " ")
+        PWDEV.Tools.SendData(2018,  " ")
+        PWDEV.Tools.SendData(2019,  " ")
+        PWDEV.Tools.SendData(2020,  " ")
+        PWDEV.Tools.SendData(2021,  " ")
     end
 
     -- CDU Data
-    ExportScript.exportCDU()
+    PWDEV.exportCDU()
 
     -- UHF
-    ExportScript.Tools.SendData(2022,  getUHFPreset())
-    ExportScript.Tools.SendData(2023,  getUHFFrequency())
+    PWDEV.Tools.SendData(2022,  getUHFPreset())
+    PWDEV.Tools.SendData(2023,  getUHFFrequency())
     -- TACAN_KNB
-    ExportScript.Tools.SendData(2024,  getTacanChannel())
+    PWDEV.Tools.SendData(2024,  getTacanChannel())
     -- ILS
-    ExportScript.Tools.SendData(2025,  getILSFrequency())
+    PWDEV.Tools.SendData(2025,  getILSFrequency())
 
     -- ARC-210
-    local arc210 = ExportScript.Tools.getListIndicatorValue(18)
-    local arcFreq = string.format(ExportScript.Tools.coerce_nil_to_string(arc210.freq_label_mhz) .. ExportScript.Tools.coerce_nil_to_string(arc210.freq_label_khz))
-    ExportScript.Tools.SendData(2041, ExportScript.Tools.coerce_nil_to_string(arc210.active_channel))
-    ExportScript.Tools.SendData(2042, ExportScript.Tools.DisplayFormat(arcFreq, 6))
+    local arc210 = PWDEV.Tools.getListIndicatorValue(18)
+    local arcFreq = string.format(PWDEV.Tools.coerce_nil_to_string(arc210.freq_label_mhz) .. PWDEV.Tools.coerce_nil_to_string(arc210.freq_label_khz))
+    PWDEV.Tools.SendData(2041, PWDEV.Tools.coerce_nil_to_string(arc210.active_channel))
+    PWDEV.Tools.SendData(2042, PWDEV.Tools.DisplayFormat(arcFreq, 6))
 
     -- -- General
-	-- ExportScript.Tools.SendData(2901, ExportScript.Tools.GetArgumentsValue(17, "%.2f"))
-	-- ExportScript.Tools.SendData(2902, -ExportScript.Tools.GetArgumentsValue(18, "%.2f"))
+	-- PWDEV.Tools.SendData(2901, PWDEV.Tools.GetArgumentsValue(17, "%.2f"))
+	-- PWDEV.Tools.SendData(2902, -PWDEV.Tools.GetArgumentsValue(18, "%.2f"))
 end
 
 
@@ -370,7 +373,7 @@ end
 -- https://github.com/dcs-bios/dcs-bios
 -----------------------------
 
-ExportScript.CDUIndicatorData={
+PWDEV.CDUIndicatorData={
     ACCEPT={
         {
             alignment="LFT",
@@ -20995,7 +20998,7 @@ ExportScript.CDUIndicatorData={
 }
 
 -- Unicode UTF-16
-function ExportScript.replaceSymbols(s)
+function PWDEV.replaceSymbols(s)
 	s = s:gsub(string.char(0xB0), "°") --DEGREE		"°"
 	s = s:gsub(string.char(0xB1), "±") --INC_DEC		"±"
 	s = s:gsub(string.char(0xA9), "ʘ") --INC_DEC		(Circle with Dot)
@@ -21010,7 +21013,7 @@ function ExportScript.replaceSymbols(s)
 	return s
 end
 
-function ExportScript.preReplaceSymbols(s)
+function PWDEV.preReplaceSymbols(s)
 	s = s:gsub(string.char(26), string.char(0xBB)) -- BRANCH_L
 	s = s:gsub(string.char(27), string.char(0xAB)) -- BRANCH_R
 	s = s:gsub(string.char(18), string.char(0xAE)) -- ROTARY
@@ -21022,8 +21025,8 @@ function ExportScript.preReplaceSymbols(s)
 	return s
 end
 
-function ExportScript.exportCDU()
-	local cdu = ExportScript.Tools.getListIndicatorValue(3)
+function PWDEV.exportCDU()
+	local cdu = PWDEV.Tools.getListIndicatorValue(3)
 	
 	local cdu_lines = {}
 	local empty_line = "                        " -- 24 spaces
@@ -21039,16 +21042,16 @@ function ExportScript.exportCDU()
 	cdu_lines[10] = empty_line
 	if not cdu then
 
-		ExportScript.Tools.SendData(2030, cdu_lines[1])
-		ExportScript.Tools.SendData(2031, cdu_lines[2])
-		ExportScript.Tools.SendData(2032, cdu_lines[3])
-		ExportScript.Tools.SendData(2033, cdu_lines[4])
-		ExportScript.Tools.SendData(2034, cdu_lines[5])
-		ExportScript.Tools.SendData(2035, cdu_lines[6])
-		ExportScript.Tools.SendData(2036, cdu_lines[7])
-		ExportScript.Tools.SendData(2037, cdu_lines[8])
-		ExportScript.Tools.SendData(2038, cdu_lines[9])
-		ExportScript.Tools.SendData(2039, cdu_lines[10])
+		PWDEV.Tools.SendData(2030, cdu_lines[1])
+		PWDEV.Tools.SendData(2031, cdu_lines[2])
+		PWDEV.Tools.SendData(2032, cdu_lines[3])
+		PWDEV.Tools.SendData(2033, cdu_lines[4])
+		PWDEV.Tools.SendData(2034, cdu_lines[5])
+		PWDEV.Tools.SendData(2035, cdu_lines[6])
+		PWDEV.Tools.SendData(2036, cdu_lines[7])
+		PWDEV.Tools.SendData(2037, cdu_lines[8])
+		PWDEV.Tools.SendData(2038, cdu_lines[9])
+		PWDEV.Tools.SendData(2039, cdu_lines[10])
 		return
 	end
 
@@ -21057,7 +21060,7 @@ function ExportScript.exportCDU()
 
 	if cdu.ScratchString then cursor_pos = cdu.ScratchString:len()+2 end
 	
-	ExportScript.CDUIndicatorData["Cursor"]={
+	PWDEV.CDUIndicatorData["Cursor"]={
 		[1]={
 			alignment="LFT",
 			x=cursor_pos,
@@ -21066,10 +21069,10 @@ function ExportScript.exportCDU()
 	}
 	
 	for k, v in pairs(cdu) do
-		local candidates = ExportScript.CDUIndicatorData[k]
+		local candidates = PWDEV.CDUIndicatorData[k]
 		if candidates then
 
-			v = ExportScript.preReplaceSymbols(v) -- make sure that 1 char == 1 byte
+			v = PWDEV.preReplaceSymbols(v) -- make sure that 1 char == 1 byte
 
 			local render_instructions = nil
 			if #candidates == 1 then
@@ -21109,26 +21112,26 @@ function ExportScript.exportCDU()
 		end
 	end
 	
-	cdu_lines[1] = ExportScript.replaceSymbols(cdu_lines[1])
-	cdu_lines[2] = ExportScript.replaceSymbols(cdu_lines[2])
-	cdu_lines[3] = ExportScript.replaceSymbols(cdu_lines[3])
-	cdu_lines[4] = ExportScript.replaceSymbols(cdu_lines[4])
-	cdu_lines[5] = ExportScript.replaceSymbols(cdu_lines[5])
-	cdu_lines[6] = ExportScript.replaceSymbols(cdu_lines[6])
-	cdu_lines[7] = ExportScript.replaceSymbols(cdu_lines[7])
-	cdu_lines[8] = ExportScript.replaceSymbols(cdu_lines[8])
-	cdu_lines[9] = ExportScript.replaceSymbols(cdu_lines[9])
-	cdu_lines[10] = ExportScript.replaceSymbols(cdu_lines[10])
+	cdu_lines[1] = PWDEV.replaceSymbols(cdu_lines[1])
+	cdu_lines[2] = PWDEV.replaceSymbols(cdu_lines[2])
+	cdu_lines[3] = PWDEV.replaceSymbols(cdu_lines[3])
+	cdu_lines[4] = PWDEV.replaceSymbols(cdu_lines[4])
+	cdu_lines[5] = PWDEV.replaceSymbols(cdu_lines[5])
+	cdu_lines[6] = PWDEV.replaceSymbols(cdu_lines[6])
+	cdu_lines[7] = PWDEV.replaceSymbols(cdu_lines[7])
+	cdu_lines[8] = PWDEV.replaceSymbols(cdu_lines[8])
+	cdu_lines[9] = PWDEV.replaceSymbols(cdu_lines[9])
+	cdu_lines[10] = PWDEV.replaceSymbols(cdu_lines[10])
 	
-	ExportScript.Tools.SendData(2030, cdu_lines[1])
-	ExportScript.Tools.SendData(2031, cdu_lines[2])
-	ExportScript.Tools.SendData(2032, cdu_lines[3])
-	ExportScript.Tools.SendData(2033, cdu_lines[4])
-	ExportScript.Tools.SendData(2034, cdu_lines[5])
-	ExportScript.Tools.SendData(2035, cdu_lines[6])
-	ExportScript.Tools.SendData(2036, cdu_lines[7])
-	ExportScript.Tools.SendData(2037, cdu_lines[8])
-	ExportScript.Tools.SendData(2038, cdu_lines[9])
-	ExportScript.Tools.SendData(2039, cdu_lines[10])
+	PWDEV.Tools.SendData(2030, cdu_lines[1])
+	PWDEV.Tools.SendData(2031, cdu_lines[2])
+	PWDEV.Tools.SendData(2032, cdu_lines[3])
+	PWDEV.Tools.SendData(2033, cdu_lines[4])
+	PWDEV.Tools.SendData(2034, cdu_lines[5])
+	PWDEV.Tools.SendData(2035, cdu_lines[6])
+	PWDEV.Tools.SendData(2036, cdu_lines[7])
+	PWDEV.Tools.SendData(2037, cdu_lines[8])
+	PWDEV.Tools.SendData(2038, cdu_lines[9])
+	PWDEV.Tools.SendData(2039, cdu_lines[10])
 	
 end

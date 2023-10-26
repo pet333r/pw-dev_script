@@ -1,7 +1,7 @@
 -- C-101CC
-ExportScript.FoundDCSModule = true
+PWDEV.FoundDCSModule = true
 
-ExportScript.ConfigEveryFrameArguments = 
+PWDEV.ConfigEveryFrameArguments = 
 {
     	-- Angle of attack indicator
 	[291] = "%1d",	-- AOA_INDEXER_HIGH
@@ -9,12 +9,12 @@ ExportScript.ConfigEveryFrameArguments =
 	[293] = "%1d",	-- AOA_INDEXER_LOW
 }
 
-ExportScript.ConfigArguments = 
+PWDEV.ConfigArguments = 
 {
 }
 
-function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
+function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
 
-function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
+function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
 end

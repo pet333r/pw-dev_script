@@ -1,9 +1,9 @@
 -- F-5E-3
 
 -- init arg 815
-ExportScript.FoundDCSModule = true
+PWDEV.FoundDCSModule = true
 
-ExportScript.ConfigEveryFrameArguments = 
+PWDEV.ConfigEveryFrameArguments = 
 {
 	[48] = "%1d",	-- AOA Indexer red
 	[49] = "%1d",	-- AOA Indexer green
@@ -76,24 +76,24 @@ ExportScript.ConfigEveryFrameArguments =
 	[575] = "%1d", -- System Power Button
 	[576] = "%1d", -- System Power
 }
-ExportScript.ConfigArguments = 
+PWDEV.ConfigArguments = 
 {
 }
 
 -- Pointed to by ProcessDCSHighImportance
-function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
+function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
 	-- flares
 	local flares = {}
 	flares[1] = string.format("%.0f", mainPanelDevice:get_argument_value(405)*10)
     flares[2] = string.format("%.0f", mainPanelDevice:get_argument_value(406)*10)
-	ExportScript.Tools.SendData(2011, flares[1]..flares[2])
+	PWDEV.Tools.SendData(2011, flares[1]..flares[2])
 	-- chaffs
 	local chaffs = {}
 	chaffs[1] = string.format("%.0f", mainPanelDevice:get_argument_value(401)*10)
 	chaffs[2] = string.format("%.0f", mainPanelDevice:get_argument_value(402)*10)
-	ExportScript.Tools.SendData(2012, chaffs[1]..chaffs[2])
+	PWDEV.Tools.SendData(2012, chaffs[1]..chaffs[2])
 end
 
--- Pointed to by ExportScript.ProcessDCSConfigLowImportance
-function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
+-- Pointed to by PWDEV.ProcessDCSConfigLowImportance
+function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
 end

@@ -1,7 +1,7 @@
 -- Mirage F1 EE
-ExportScript.FoundDCSModule = true
+PWDEV.FoundDCSModule = true
 
-ExportScript.ConfigEveryFrameArguments = 
+PWDEV.ConfigEveryFrameArguments = 
 {
     [111] = "%.1f", -- Navigation Light Control
     [112] = "%.1f", -- Formation Light Control
@@ -196,7 +196,7 @@ ExportScript.ConfigEveryFrameArguments =
     [1356] = "%d",   -- triangle 4
 }
 
-ExportScript.ConfigArguments = 
+PWDEV.ConfigArguments = 
 {
 }
 
@@ -209,8 +209,8 @@ local function GetDigit(arg)
     end
 end
 
-function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
+function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
 
-function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
+function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
 end

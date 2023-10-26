@@ -1,7 +1,7 @@
 -- VNAO T-45C Goshawk
-ExportScript.FoundDCSModule = true
+PWDEV.FoundDCSModule = true
 
-ExportScript.ConfigEveryFrameArguments = 
+PWDEV.ConfigEveryFrameArguments = 
 {
     -- Cautions
     [71] = "%1d", -- SEAT (red)
@@ -79,12 +79,12 @@ ExportScript.ConfigEveryFrameArguments =
     [322] = "%1d", -- AoA indexer Red
 }
 
-ExportScript.ConfigArguments = 
+PWDEV.ConfigArguments = 
 {
 }
 
-function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
+function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
 
-function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
+function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
 end

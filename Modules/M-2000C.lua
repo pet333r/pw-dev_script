@@ -1,7 +1,7 @@
 -- Mirage 2000C
-ExportScript.FoundDCSModule = true
+PWDEV.FoundDCSModule = true
 
-ExportScript.ConfigEveryFrameArguments = 
+PWDEV.ConfigEveryFrameArguments = 
 {
 	[199] = "%d",	-- master warning
 	[200] = "%d",	-- master caution
@@ -196,7 +196,7 @@ ExportScript.ConfigEveryFrameArguments =
 	[994] = "%d",	-- EO
 }
 
-ExportScript.ConfigArguments = 
+PWDEV.ConfigArguments = 
 {
 }
 
@@ -270,67 +270,60 @@ local function getPCNValue(nameStr, id)
  	return "  "
 end
 
-function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
+function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
 
-function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
-	ExportScript.Tools.SendData(2011, ExportScript.Tools.getListIndicatorValueByName(4, "PCA_LCD_1_0", 3))
-	ExportScript.Tools.SendData(2012, ExportScript.Tools.getListIndicatorValueByName(4, "PCA_LCD_1_1", 3))
-	ExportScript.Tools.SendData(2013, ExportScript.Tools.getListIndicatorValueByName(4, "PCA_LCD_1_2", 3))
-	ExportScript.Tools.SendData(2014, ExportScript.Tools.getListIndicatorValueByName(4, "PCA_LCD_1_3", 3))
-	ExportScript.Tools.SendData(2015, ExportScript.Tools.getListIndicatorValueByName(4, "PCA_LCD_1_4", 3))
+function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
+	PWDEV.Tools.SendData(2011, PWDEV.Tools.getListIndicatorValueByName(4, "PCA_LCD_1_0", 3))
+	PWDEV.Tools.SendData(2012, PWDEV.Tools.getListIndicatorValueByName(4, "PCA_LCD_1_1", 3))
+	PWDEV.Tools.SendData(2013, PWDEV.Tools.getListIndicatorValueByName(4, "PCA_LCD_1_2", 3))
+	PWDEV.Tools.SendData(2014, PWDEV.Tools.getListIndicatorValueByName(4, "PCA_LCD_1_3", 3))
+	PWDEV.Tools.SendData(2015, PWDEV.Tools.getListIndicatorValueByName(4, "PCA_LCD_1_4", 3))
 
-	ExportScript.Tools.SendData(2021, ExportScript.Tools.getListIndicatorValueByName(5, "PCA_LCD_2_0", 3))
-	ExportScript.Tools.SendData(2022, ExportScript.Tools.getListIndicatorValueByName(5, "PCA_LCD_2_1", 3))
-	ExportScript.Tools.SendData(2023, ExportScript.Tools.getListIndicatorValueByName(5, "PCA_LCD_2_2", 3))
-	ExportScript.Tools.SendData(2024, ExportScript.Tools.getListIndicatorValueByName(5, "PCA_LCD_2_3", 3))
-	ExportScript.Tools.SendData(2025, ExportScript.Tools.getListIndicatorValueByName(5, "PCA_LCD_2_4", 3))
+	PWDEV.Tools.SendData(2021, PWDEV.Tools.getListIndicatorValueByName(5, "PCA_LCD_2_0", 3))
+	PWDEV.Tools.SendData(2022, PWDEV.Tools.getListIndicatorValueByName(5, "PCA_LCD_2_1", 3))
+	PWDEV.Tools.SendData(2023, PWDEV.Tools.getListIndicatorValueByName(5, "PCA_LCD_2_2", 3))
+	PWDEV.Tools.SendData(2024, PWDEV.Tools.getListIndicatorValueByName(5, "PCA_LCD_2_3", 3))
+	PWDEV.Tools.SendData(2025, PWDEV.Tools.getListIndicatorValueByName(5, "PCA_LCD_2_4", 3))
 
 	-- PCN up
-	ExportScript.Tools.SendData(2031, getPCN2DigitL())		-- up/left 2-digit vertical
-	ExportScript.Tools.SendData(2035, ExportScript.Tools.getListIndicatorValueByName(9, "PCN_UL_DIGITS", 6)) -- up/left 5-digit
-	ExportScript.Tools.SendData(2036, ExportScript.Tools.getListIndicatorValueByName(9, "PCN_UL_POINTS", 5)) -- dots
+	PWDEV.Tools.SendData(2031, getPCN2DigitL())		-- up/left 2-digit vertical
+	PWDEV.Tools.SendData(2035, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UL_DIGITS", 6)) -- up/left 5-digit
+	PWDEV.Tools.SendData(2036, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UL_POINTS", 5)) -- dots
 
-	ExportScript.Tools.SendData(2033, getPCN2DigitR())		-- up/middle 2-digit vertical
-	ExportScript.Tools.SendData(2037, ExportScript.Tools.getListIndicatorValueByName(9, "PCN_UR_DIGITS", 7)) -- up/right 6-digit
-	ExportScript.Tools.SendData(2038, ExportScript.Tools.getListIndicatorValueByName(9, "PCN_UR_POINTS", 6)) -- dots
+	PWDEV.Tools.SendData(2033, getPCN2DigitR())		-- up/middle 2-digit vertical
+	PWDEV.Tools.SendData(2037, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UR_DIGITS", 7)) -- up/right 6-digit
+	PWDEV.Tools.SendData(2038, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UR_POINTS", 6)) -- dots
 
 	-- PCN dn
-	ExportScript.Tools.SendData(2041, getPCNValue("PCN_BL_DIGITS", 10))		-- dn/left 2-digit
-	ExportScript.Tools.SendData(2042, getPCNValue("PCN_BR_DIGITS", 10))		-- dn/mid 2-digit
+	PWDEV.Tools.SendData(2041, getPCNValue("PCN_BL_DIGITS", 10))		-- dn/left 2-digit
+	PWDEV.Tools.SendData(2042, getPCNValue("PCN_BR_DIGITS", 10))		-- dn/mid 2-digit
 
 	-- PPA
-	ExportScript.Tools.SendData(2051, getPCNValue("text_PPA_QTY", 6))
-	ExportScript.Tools.SendData(2052, getPCNValue("text_PPA_INT", 6))
+	PWDEV.Tools.SendData(2051, getPCNValue("text_PPA_QTY", 6))
+	PWDEV.Tools.SendData(2052, getPCNValue("text_PPA_INT", 6))
 
 	-- U/VHF
-	ExportScript.Tools.SendData(2055, ExportScript.Tools.getListIndicatorValueByName(8, "text_COM_VHF", 9))
+	PWDEV.Tools.SendData(2055, PWDEV.Tools.getListIndicatorValueByName(8, "text_COM_VHF", 9))
 	-- UHF
-	ExportScript.Tools.SendData(2061, ExportScript.Tools.getListIndicatorValueByName(7, "text_COM_UHF1", 8))
-	ExportScript.Tools.SendData(2062, ExportScript.Tools.getListIndicatorValueByName(7, "text_COM_UHF2", 8))
+	PWDEV.Tools.SendData(2061, PWDEV.Tools.getListIndicatorValueByName(7, "text_COM_UHF1", 8))
+	PWDEV.Tools.SendData(2062, PWDEV.Tools.getListIndicatorValueByName(7, "text_COM_UHF2", 8))
 	-- FUEL
-	ExportScript.Tools.SendData(2071, ExportScript.Tools.getListIndicatorValueByName(3, "txt_fuel_g", 3))
+	PWDEV.Tools.SendData(2071, PWDEV.Tools.getListIndicatorValueByName(3, "txt_fuel_g", 3))
 
 	-- Fuel
 	digits = {}
 	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(349) * 10)
 	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(350) * 10)
 	digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(351) * 10)
-	ExportScript.Tools.SendData(2053, digits[1] .. digits[2] .. digits[3] .. "0")
+	PWDEV.Tools.SendData(2053, digits[1] .. digits[2] .. digits[3] .. "0")
 
 	digits = {}
 	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(352) * 10)
 	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(353) * 10)
 	digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(354) * 10)
-	ExportScript.Tools.SendData(2054, digits[1] .. digits[2] .. digits[3] .. "0")
+	PWDEV.Tools.SendData(2054, digits[1] .. digits[2] .. digits[3] .. "0")
 
 	-- EVF
-	ExportScript.Tools.SendData(2056, ExportScript.Tools.getListIndicatorValueByName(11, "evf-digits", 2))
-
-	
-	-- -- General
-	-- ExportScript.Tools.SendData(2901, -ExportScript.Tools.GetArgumentsValue(316, "%.2f"))
-	-- ExportScript.Tools.SendData(2902, ExportScript.Tools.GetArgumentsValue(317, "%.2f"))
-
-
+	PWDEV.Tools.SendData(2056, PWDEV.Tools.getListIndicatorValueByName(11, "evf-digits", 2))
 end

@@ -1,15 +1,15 @@
 -- A-10A
-ExportScript.FoundFCModule = true
+PWDEV.FoundFCModule = true
 
 -- auxiliary function
-dofile(ExportScript.Config.ExportModulePath.."FC_Functions.lua")
+dofile(PWDEV.Config.ExportModulePath.."FC_Functions.lua")
 
-function ExportScript.ProcessFCHighImportanceConfig()
-    ExportScript.AF.FC_AoA_A10A()
+function PWDEV.ProcessFCHighImportanceConfig()
+    PWDEV.AF.FC_AoA_A10A()
 
     -- Cautions
-    ExportScript.AF.StatusLamp()
+    PWDEV.AF.StatusLamp()
 end
 
-function ExportScript.ProcessFCLowImportanceConfig()
+function PWDEV.ProcessFCLowImportanceConfig()
 end

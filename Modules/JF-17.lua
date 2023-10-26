@@ -1,7 +1,10 @@
 -- JF-17
-ExportScript.FoundDCSModule = true
 
-ExportScript.ConfigEveryFrameArguments =
+local coerce_nil_to_string = PWDEV.Tools.coerce_nil_to_string
+
+PWDEV.FoundDCSModule = true
+
+PWDEV.ConfigEveryFrameArguments =
 {
     -- warning/caution indicator lights (left side)
     [130] = "%1d", -- MASTER WARNING (red)
@@ -169,7 +172,7 @@ ExportScript.ConfigEveryFrameArguments =
     [964] = "%.2f", -- AAR Light Brightness Knob
 }
 
-ExportScript.ConfigArguments =
+PWDEV.ConfigArguments =
 {
     -- HUD panel
     [728] = "%.1f", -- HUD Contrast Knob
@@ -234,43 +237,43 @@ local function radio_parse_indication(indicator_id)  -- Thanks to [FSF]Ian code
 	return ret
 end
 
-function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
+function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
 
-function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
+function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
     local ufcLcdLine1 = "        "
     local ufcLcdLine2 = "        "
     local ufcLcdLine3 = "        "
     local ufcLcdLine4 = "        "
 
     -- 3 / 4 / 5 / 6
-    local indLcd1 = ExportScript.Tools.getListIndicatorValue(3)
+    local indLcd1 = PWDEV.Tools.getListIndicatorValue(3)
     if not indLcd1 then
         return
     end
-    ufcLcdLine1 = ExportScript.Tools.coerce_nil_to_string(processUFCPLine(indLcd1, 1))
-    ExportScript.Tools.SendData(2001, ufcLcdLine1)
+    ufcLcdLine1 = coerce_nil_to_string(processUFCPLine(indLcd1, 1))
+    PWDEV.Tools.SendData(2001, ufcLcdLine1)
 
-    local indLcd2 = ExportScript.Tools.getListIndicatorValue(4)
+    local indLcd2 = PWDEV.Tools.getListIndicatorValue(4)
     if not indLcd2 then
         return
     end
-    ufcLcdLine2 = ExportScript.Tools.coerce_nil_to_string(processUFCPLine(indLcd2, 2))
-    ExportScript.Tools.SendData(2002, ufcLcdLine2)
+    ufcLcdLine2 = coerce_nil_to_string(processUFCPLine(indLcd2, 2))
+    PWDEV.Tools.SendData(2002, ufcLcdLine2)
 
-    local indLcd3 = ExportScript.Tools.getListIndicatorValue(5)
+    local indLcd3 = PWDEV.Tools.getListIndicatorValue(5)
     if not indLcd3 then
         return
     end
-    ufcLcdLine3 = ExportScript.Tools.coerce_nil_to_string(processUFCPLine(indLcd3, 3))
-    ExportScript.Tools.SendData(2003, ufcLcdLine3)
+    ufcLcdLine3 = coerce_nil_to_string(processUFCPLine(indLcd3, 3))
+    PWDEV.Tools.SendData(2003, ufcLcdLine3)
 
-    local indLcd4 = ExportScript.Tools.getListIndicatorValue(6)
+    local indLcd4 = PWDEV.Tools.getListIndicatorValue(6)
     if not indLcd4 then
         return
     end
-    ufcLcdLine4 = ExportScript.Tools.coerce_nil_to_string(processUFCPLine(indLcd4, 4))
-    ExportScript.Tools.SendData(2004, ufcLcdLine4)
+    ufcLcdLine4 = coerce_nil_to_string(processUFCPLine(indLcd4, 4))
+    PWDEV.Tools.SendData(2004, ufcLcdLine4)
 
 
     local radio_line_1
@@ -335,28 +338,11 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
         radio_line_1 = radioDisplay.radio_disp_l1
     end
 
-    ExportScript.Tools.SendData(2010, radio_line_1)
-    ExportScript.Tools.SendData(2011, radio_line_2)
-    ExportScript.Tools.SendData(2012, radio_sql_light)
-    ExportScript.Tools.SendData(2013, radio_or_light)
-    ExportScript.Tools.SendData(2014, radio_take_light)
-    ExportScript.Tools.SendData(2015, radio_go_light)
-    ExportScript.Tools.SendData(2016, radio_tx_light)
-
-    -- local clk1 = "        "
-    -- local clk2 = "        "
-
-    -- local clock1 = ExportScript.Tools.getListIndicatorValue(11)
-    -- if not clock1 then
-    --     return
-    -- end
-    -- clk1 = coerce_nil_to_string(clock1.txt_win1)
-    -- ExportScript.Tools.SendData(2021, clk1)
-
-    -- local clock2 = ExportScript.Tools.getListIndicatorValue(12)
-    -- if not clock2 then
-    --     return
-    -- end
-    -- clk2 = coerce_nil_to_string(clock2.txt_win2)
-    -- ExportScript.Tools.SendData(2022, clk2)
+    PWDEV.Tools.SendData(2010, radio_line_1)
+    PWDEV.Tools.SendData(2011, radio_line_2)
+    PWDEV.Tools.SendData(2012, radio_sql_light)
+    PWDEV.Tools.SendData(2013, radio_or_light)
+    PWDEV.Tools.SendData(2014, radio_take_light)
+    PWDEV.Tools.SendData(2015, radio_go_light)
+    PWDEV.Tools.SendData(2016, radio_tx_light)
 end

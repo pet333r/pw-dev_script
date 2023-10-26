@@ -1,10 +1,10 @@
 -- F-15C
-ExportScript.FoundFCModule = true
+PWDEV.FoundFCModule = true
 
-function ExportScript.ProcessFCHighImportanceConfig()
+function PWDEV.ProcessFCHighImportanceConfig()
     -- Cautions
-    ExportScript.AF.StatusLamp()
+    PWDEV.AF.StatusLamp()
 end
 
-function ExportScript.ProcessFCLowImportanceConfig()
+function PWDEV.ProcessFCLowImportanceConfig()
 end

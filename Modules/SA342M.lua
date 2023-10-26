@@ -2,9 +2,9 @@
 
 -- init arg 398
 
-ExportScript.FoundDCSModule = true
+PWDEV.FoundDCSModule = true
 
-ExportScript.ConfigEveryFrameArguments = 
+PWDEV.ConfigEveryFrameArguments = 
 {
     -- Warnings
     [1] = "%1d",  -- Pitot Tube Warning
@@ -58,7 +58,7 @@ ExportScript.ConfigEveryFrameArguments =
     [386] = "%.1f", -- Radio Page Knob
 }
 
-ExportScript.ConfigArguments =
+PWDEV.ConfigArguments =
 {
 }
 
@@ -71,9 +71,9 @@ local function GetDigit(arg)
     end
 end
 
-function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
+function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
 
-    local nadir = ExportScript.Tools.getListIndicatorValue(3)
+    local nadir = PWDEV.Tools.getListIndicatorValue(3)
     if not nadir then
         return
     end
@@ -90,45 +90,17 @@ function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
     if nadir.X == nil then nadirX = "0" else nadirX = "1" end
     if nadir.Y == nil then nadirY = "0" else nadirY = "1" end
 
-    -- ExportScript.Tools.SendData(700, ExportScript.Tools.coerce_nil_to_string(nadir.N.element_params))
-    -- ExportScript.Tools.SendData(701, nadir.S)
-    -- ExportScript.Tools.SendData(702, nadir.W)
-    -- ExportScript.Tools.SendData(703, nadir.E)
-    -- ExportScript.Tools.SendData(704, nadir.X)
-    -- ExportScript.Tools.SendData(705, nadir.Y)
+    PWDEV.Tools.SendData(2001, PWDEV.Tools.DisplayFormat(nadir.CentMille..nadir.DixMille..nadir.Mille..nadir.Cent..nadir.Dix..nadir.Unit, 6))
+    PWDEV.Tools.SendData(2002, PWDEV.Tools.DisplayFormat(nadir.CentMilleI..nadir.DixMilleI..nadir.MilleI..nadir.CentI..nadir.DixI..nadir.UnitI, 6))
+    PWDEV.Tools.SendData(2003, nadir.F_unit)
 
-    -- ExportScript.Tools.SendData(706, nadir.Pt_CentMille)
-    -- ExportScript.Tools.SendData(707, nadir.Pt_DixMille)
-    -- ExportScript.Tools.SendData(708, nadir.Pt_Mille)
-    -- ExportScript.Tools.SendData(709, nadir.Pt_Cent)
-    -- ExportScript.Tools.SendData(710, nadir.Pt_Dix)
-    -- ExportScript.Tools.SendData(711, nadir.Pt_Unit)
-
-    -- ExportScript.Tools.SendData(712, nadir.Pt_CentMilleI)
-    -- ExportScript.Tools.SendData(713, nadir.Pt_DixMilleI)
-    -- ExportScript.Tools.SendData(714, nadir.Pt_MilleI)
-    -- ExportScript.Tools.SendData(715, nadir.Pt_CentI)
-    -- ExportScript.Tools.SendData(716, nadir.Pt_DixI)
-    -- ExportScript.Tools.SendData(717, nadir.Pt_UnitI)
-
-    -- ExportScript.Tools.SendData(718, nadir.GEL)
-    -- ExportScript.Tools.SendData(719, nadir.PILE)
-    -- ExportScript.Tools.SendData(720, nadir.AIR)
-    -- ExportScript.Tools.SendData(721, nadir.ERR)
-    -- ExportScript.Tools.SendData(722, nadir.NAV)
-    -- ExportScript.Tools.SendData(723, nadir.PANNE)
-
-    ExportScript.Tools.SendData(2001, ExportScript.Tools.DisplayFormat(nadir.CentMille..nadir.DixMille..nadir.Mille..nadir.Cent..nadir.Dix..nadir.Unit, 6))
-    ExportScript.Tools.SendData(2002, ExportScript.Tools.DisplayFormat(nadir.CentMilleI..nadir.DixMilleI..nadir.MilleI..nadir.CentI..nadir.DixI..nadir.UnitI, 6))
-    ExportScript.Tools.SendData(2003, nadir.F_unit)
-
-    ExportScript.Tools.SendData(2101, nadirS)
-    ExportScript.Tools.SendData(2102, nadirW)
-    ExportScript.Tools.SendData(2103, nadirE)
-    ExportScript.Tools.SendData(2104, nadirX)
-    ExportScript.Tools.SendData(2105, nadirY)
+    PWDEV.Tools.SendData(2101, nadirS)
+    PWDEV.Tools.SendData(2102, nadirW)
+    PWDEV.Tools.SendData(2103, nadirE)
+    PWDEV.Tools.SendData(2104, nadirX)
+    PWDEV.Tools.SendData(2105, nadirY)
 
 end
 
-function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
+function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
 end

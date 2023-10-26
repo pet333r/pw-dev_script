@@ -1,2 +1,2 @@
 -- C-101ED
-dofile(ExportScript.Config.ExportModulePath.."C-101CC.lua")
+dofile(PWDEV.Config.ExportModulePath.."C-101CC.lua")

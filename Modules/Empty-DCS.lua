@@ -1,38 +1,38 @@
 -- Module Name Export
-ExportScript.FoundDCSModule = true
+PWDEV.FoundDCSModule = true
 
-ExportScript.ConfigEveryFrameArguments = 
+PWDEV.ConfigEveryFrameArguments = 
 {
 }
 
-ExportScript.ConfigArguments = 
+PWDEV.ConfigArguments = 
 {
 }
 
 -- Pointed to by ProcessDCSHighImportance
-function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
+function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
 	--[[
 	every frame export to 
 	Example from A-10C
 	Get Radio Frequencies
 	get data from device
 	local lUHFRadio = GetDevice(54)
-	ExportScript.Tools.SendData("ExportID", "Format")
-	ExportScript.Tools.SendData(2000, string.format("%7.3f", lUHFRadio:get_frequency()/1000000)) -- <- special function for get frequency data
-	ExportScript.Tools.SendData(2000, ExportScript.Tools.RoundFreqeuncy((UHF_RADIO:get_frequency()/1000000))) -- ExportScript.Tools.RoundFreqeuncy(frequency (MHz|KHz), format ("7.3"), PrefixZeros (false), LeastValue (0.025))
+	PWDEV.Tools.SendData("ExportID", "Format")
+	PWDEV.Tools.SendData(2000, string.format("%7.3f", lUHFRadio:get_frequency()/1000000)) -- <- special function for get frequency data
+	PWDEV.Tools.SendData(2000, PWDEV.Tools.RoundFreqeuncy((UHF_RADIO:get_frequency()/1000000))) -- PWDEV.Tools.RoundFreqeuncy(frequency (MHz|KHz), format ("7.3"), PrefixZeros (false), LeastValue (0.025))
 	]]
 end
 
--- Pointed to by ExportScript.ProcessDCSConfigLowImportance
-function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
+-- Pointed to by PWDEV.ProcessDCSConfigLowImportance
+function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
 	--[[
 	export in low tick interval to 
 	Example from A-10C
 	Get Radio Frequencies
 	get data from device
 	local lUHFRadio = GetDevice(54)
-	ExportScript.Tools.SendData("ExportID", "Format")
-	ExportScript.Tools.SendData(2000, string.format("%7.3f", lUHFRadio:get_frequency()/1000000)) -- <- special function for get frequency data
-	ExportScript.Tools.SendData(2000, ExportScript.Tools.RoundFreqeuncy((UHF_RADIO:get_frequency()/1000000))) -- ExportScript.Tools.RoundFreqeuncy(frequency (MHz|KHz), format ("7.3"), PrefixZeros (false), LeastValue (0.025))
+	PWDEV.Tools.SendData("ExportID", "Format")
+	PWDEV.Tools.SendData(2000, string.format("%7.3f", lUHFRadio:get_frequency()/1000000)) -- <- special function for get frequency data
+	PWDEV.Tools.SendData(2000, PWDEV.Tools.RoundFreqeuncy((UHF_RADIO:get_frequency()/1000000))) -- PWDEV.Tools.RoundFreqeuncy(frequency (MHz|KHz), format ("7.3"), PrefixZeros (false), LeastValue (0.025))
 	]]
 end

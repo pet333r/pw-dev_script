@@ -1,8 +1,8 @@
 -- AV8BNA
 -- arg 181
-ExportScript.FoundDCSModule = true
+PWDEV.FoundDCSModule = true
 
-ExportScript.ConfigEveryFrameArguments = 
+PWDEV.ConfigEveryFrameArguments = 
 {
 	-- LAMPS --------------------------------------
 	--MIP INNER LEFT SIDE
@@ -188,7 +188,7 @@ ExportScript.ConfigEveryFrameArguments =
 	-- [559] = "%.4f",	--ACCU POINTER 
 }
 
-ExportScript.ConfigArguments = 
+PWDEV.ConfigArguments = 
 {
 	-- Master Modes Panel
 	[282] = "%.1f",	--Nav Master Mode selector
@@ -357,18 +357,18 @@ ExportScript.ConfigArguments =
 
 
 -- Pointed to by ProcessDCSHighImportance
-function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
+function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
 
--- Pointed to by ExportScript.ProcessDCSConfigLowImportance
-function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
+-- Pointed to by PWDEV.ProcessDCSConfigLowImportance
+function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
 	--ENGINE DISPLAY
 	-- DUCT
 	digits = {}
 	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(253) * 10)
 	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(254) * 10)
 	digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(255) * 10)
-	ExportScript.Tools.SendData(2001, digits[1]..digits[2]..digits[3])
+	PWDEV.Tools.SendData(2001, digits[1]..digits[2]..digits[3])
 
 	-- RPM
 	digits = {}
@@ -376,33 +376,33 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(257) * 10)
 	digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(258) * 10)
 	digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(259) * 10)
-	ExportScript.Tools.SendData(2002, digits[1]..digits[2]..digits[3]..digits[4])
+	PWDEV.Tools.SendData(2002, digits[1]..digits[2]..digits[3]..digits[4])
 
 	-- FF
 	digits = {}
 	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(260) * 10)
 	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(261) * 10)
 	digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(262) * 10)
-	ExportScript.Tools.SendData(2003, digits[1]..digits[2]..digits[3])
+	PWDEV.Tools.SendData(2003, digits[1]..digits[2]..digits[3])
 
 	-- JPT
 	digits = {}
 	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(263) * 10)
 	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(264) * 10)
 	digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(265) * 10)
-	ExportScript.Tools.SendData(2004, digits[1]..digits[2]..digits[3])
+	PWDEV.Tools.SendData(2004, digits[1]..digits[2]..digits[3])
 
 	-- STAB
 	digits = {}
 	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(267) * 10)
 	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(268) * 10)
-	ExportScript.Tools.SendData(2005, digits[1]..digits[2])
+	PWDEV.Tools.SendData(2005, digits[1]..digits[2])
 
 	-- H2O
 	digits = {}
 	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(269) * 10)
 	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(270) * 10)
-	ExportScript.Tools.SendData(2006, digits[1]..digits[2])
+	PWDEV.Tools.SendData(2006, digits[1]..digits[2])
 
 	-- Fuel Total
 	digits = {}
@@ -411,7 +411,7 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(368) * 10)
 	digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(369) * 10)
 	digits[5] = string.format("%1.0f",mainPanelDevice:get_argument_value(370) * 10)
-	ExportScript.Tools.SendData(2010, digits[1]..digits[2]..digits[3]..digits[4]..digits[5])
+	PWDEV.Tools.SendData(2010, digits[1]..digits[2]..digits[3]..digits[4]..digits[5])
 
 	-- Fuel Left
 	digits = {}
@@ -419,7 +419,7 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(372) * 10)
 	digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(373) * 10)
 	digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(374) * 10)
-	ExportScript.Tools.SendData(2011, digits[1]..digits[2]..digits[3]..digits[4])
+	PWDEV.Tools.SendData(2011, digits[1]..digits[2]..digits[3]..digits[4])
 
 	-- Fuel Right
 	digits = {}
@@ -427,7 +427,7 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(376) * 10)
 	digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(377) * 10)
 	digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(378) * 10)
-	ExportScript.Tools.SendData(2012, digits[1]..digits[2]..digits[3]..digits[4])
+	PWDEV.Tools.SendData(2012, digits[1]..digits[2]..digits[3]..digits[4])
 
 	-- Fuel Bingo
 	digits = {}
@@ -435,7 +435,7 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(382) * 10)
 	digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(383) * 10)
 	digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(384) * 10)
-	ExportScript.Tools.SendData(2013, digits[1]..digits[2]..digits[3]..digits[4])
+	PWDEV.Tools.SendData(2013, digits[1]..digits[2]..digits[3]..digits[4])
 	
 	--FLAP POSITION DISPLAY
 	--[455] = "%.4f",	--FLAP POS 1. DRUM 
@@ -444,7 +444,7 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	-- digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(455) * 10)
 	-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(456) * 10)
 	
-	-- ExportScript.Tools.SendData(2014, digits[1]..digits[2])
+	-- PWDEV.Tools.SendData(2014, digits[1]..digits[2])
 
 	--BRAKE/HYD DISPLAY
 	--[550] = "%.4f",	--BRAKE 1. DRUM 
@@ -455,7 +455,7 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(551) * 10)
 	-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(552) * 10)
 	
-	-- ExportScript.Tools.SendData(2015, digits[1]..digits[2]..digits[3])
+	-- PWDEV.Tools.SendData(2015, digits[1]..digits[2]..digits[3])
 	
 	--[553] = "%.4f",	--HYD1 1. DRUM 
 	--[554] = "%.4f",	--HYD1 2.
@@ -465,7 +465,7 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(554) * 10)
 	-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(555) * 10)
 	
-	-- ExportScript.Tools.SendData(2016, digits[1]..digits[2]..digits[3])
+	-- PWDEV.Tools.SendData(2016, digits[1]..digits[2]..digits[3])
 	
 	--[556] = "%.4f",	--HYD2 1. DRUM 
 	--[557] = "%.4f",	--HYD2 2.
@@ -475,23 +475,23 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	-- digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(557) * 10)
 	-- digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(558) * 10)
 	
-	-- ExportScript.Tools.SendData(2017, digits[1]..digits[2]..digits[3])
+	-- PWDEV.Tools.SendData(2017, digits[1]..digits[2]..digits[3])
 
 	
 	digits = {}
 	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(389) * 10)
 	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(390) * 10)
-	ExportScript.Tools.SendData(2020, digits[1]..digits[2])
+	PWDEV.Tools.SendData(2020, digits[1]..digits[2])
 	
 	digits = {}
 	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(391) * 10)
-	ExportScript.Tools.SendData(2021, digits[1])
+	PWDEV.Tools.SendData(2021, digits[1])
 	
 	digits = {}
 	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(392) * 10)
 	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(393) * 10)
 	digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(394) * 10)
-	ExportScript.Tools.SendData(2022, digits[1]..digits[2]..digits[3])
+	PWDEV.Tools.SendData(2022, digits[1]..digits[2]..digits[3])
 
 	-- UFC Displays
 	local lUfcDisplays = list_indication(5)
@@ -516,16 +516,16 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		end
 	end
 
-	local comm = ExportScript.Tools.getListIndicatorValue(5) or {}
+	local comm = PWDEV.Tools.getListIndicatorValue(5) or {}
 
 	local lRep = 8 - lUFC_Left_Position:len() - lUFC_Right_Position:len()
 
 	lUFC_Display = lUFC_Left_Position..string.rep(" ", lRep)..lUFC_Right_Position
 	lUFC_Display = lUFC_Display:gsub(";", " ")
 
-	ExportScript.Tools.SendData(2023, ExportScript.Tools.coerce_nil_to_string(comm.ufc_chnl_1_m)) -- string with max 2 charachters
-	ExportScript.Tools.SendData(2024, ExportScript.Tools.coerce_nil_to_string(comm.ufc_chnl_2_m)) -- string with max 2 charachters
-	ExportScript.Tools.SendData(2025, string.format("%s", lUFC_Display)) -- string with max 8 charachters
+	PWDEV.Tools.SendData(2023, PWDEV.Tools.coerce_nil_to_string(comm.ufc_chnl_1_m)) -- string with max 2 charachters
+	PWDEV.Tools.SendData(2024, PWDEV.Tools.coerce_nil_to_string(comm.ufc_chnl_2_m)) -- string with max 2 charachters
+	PWDEV.Tools.SendData(2025, string.format("%s", lUFC_Display)) -- string with max 8 charachters
 
 	-- ODU Display
 	local lODUDisplays = list_indication(6)
@@ -560,11 +560,11 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		end -- for
 	end
 
-	ExportScript.Tools.SendData(2026, string.format("%s", lODU_Text[1]))
-	ExportScript.Tools.SendData(2027, string.format("%s", lODU_Text[2]))
-	ExportScript.Tools.SendData(2028, string.format("%s", lODU_Text[3]))
-	ExportScript.Tools.SendData(2029, string.format("%s", lODU_Text[4]))
-	ExportScript.Tools.SendData(2030, string.format("%s", lODU_Text[5]))
+	PWDEV.Tools.SendData(2026, string.format("%s", lODU_Text[1]))
+	PWDEV.Tools.SendData(2027, string.format("%s", lODU_Text[2]))
+	PWDEV.Tools.SendData(2028, string.format("%s", lODU_Text[3]))
+	PWDEV.Tools.SendData(2029, string.format("%s", lODU_Text[4]))
+	PWDEV.Tools.SendData(2030, string.format("%s", lODU_Text[5]))
 
 	-- UVHF Display
 	local lUVHFDisplay = list_indication(7)
@@ -665,18 +665,18 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	lacnip_line[4] = string.rep(" ", lRep1)..lacnip_1_code.."  "..lacnip_2_code..string.rep(" ", lRep2)
 
 	-- string with max 2 charachters
-	ExportScript.Tools.SendData(2031, string.format("%s", lUVHF_Channel))
+	PWDEV.Tools.SendData(2031, string.format("%s", lUVHF_Channel))
 	-- string with max 7 charachters
-	ExportScript.Tools.SendData(2032, string.format("%s", lUHF_Freq_Left))
+	PWDEV.Tools.SendData(2032, string.format("%s", lUHF_Freq_Left))
 	-- string with max 10 charachters
-	ExportScript.Tools.SendData(2033, string.format("%s", lacnip_line[1]))
-	ExportScript.Tools.SendData(2034, string.format("%s", lacnip_line[2]))
-	ExportScript.Tools.SendData(2035, string.format("%s", lacnip_line[3]))
-	ExportScript.Tools.SendData(2036, string.format("%s", lacnip_line[4]))
+	PWDEV.Tools.SendData(2033, string.format("%s", lacnip_line[1]))
+	PWDEV.Tools.SendData(2034, string.format("%s", lacnip_line[2]))
+	PWDEV.Tools.SendData(2035, string.format("%s", lacnip_line[3]))
+	PWDEV.Tools.SendData(2036, string.format("%s", lacnip_line[4]))
 
 	-- -- General
-	-- ExportScript.Tools.SendData(2901, -ExportScript.Tools.GetArgumentsValue(349, "%.2f"))
-	-- ExportScript.Tools.SendData(2902, ExportScript.Tools.GetArgumentsValue(348, "%.2f"))
+	-- PWDEV.Tools.SendData(2901, -PWDEV.Tools.GetArgumentsValue(349, "%.2f"))
+	-- PWDEV.Tools.SendData(2902, PWDEV.Tools.GetArgumentsValue(348, "%.2f"))
 
 
 end

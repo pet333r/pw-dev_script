@@ -1,7 +1,7 @@
 -- UH-1H Huey
-ExportScript.FoundDCSModule = true
+PWDEV.FoundDCSModule = true
 
-ExportScript.ConfigEveryFrameArguments =
+PWDEV.ConfigEveryFrameArguments =
 {
     -- Warnings
     [91] = "%1d", -- ENGINE OIL PRESS (yellow)
@@ -49,7 +49,7 @@ ExportScript.ConfigEveryFrameArguments =
     [260] = "%1d", -- Jettison Switch
 }
 
-ExportScript.ConfigArguments =
+PWDEV.ConfigArguments =
 {
 }
 
@@ -74,14 +74,14 @@ local function getVhfNavFreq()
 	return string.format("%.0f%.0f%.0f", a(46)*10, a(47)*10, a(48)*10) .. "." .. string.format("%.0f%.0f", a(49)*10, a(50)*10)
 end
 
-function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
+function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
 
-function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
-    ExportScript.Tools.SendData(2001, getUhfFreq())
-    ExportScript.Tools.SendData(2002, getVhfCommFreq())
-    ExportScript.Tools.SendData(2003, getVhfNavFreq())
+function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
+    PWDEV.Tools.SendData(2001, getUhfFreq())
+    PWDEV.Tools.SendData(2002, getVhfCommFreq())
+    PWDEV.Tools.SendData(2003, getVhfNavFreq())
 
-    ExportScript.Tools.SendData(2011, getChaff())
-    ExportScript.Tools.SendData(2012, getFlare())
+    PWDEV.Tools.SendData(2011, getChaff())
+    PWDEV.Tools.SendData(2012, getFlare())
 end

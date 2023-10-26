@@ -1,15 +1,15 @@
 -- MIG-29G
-ExportScript.FoundFCModule = true
+PWDEV.FoundFCModule = true
 
 -- auxiliary function
-dofile(ExportScript.Config.ExportModulePath.."FC_Functions.lua")
+dofile(PWDEV.Config.ExportModulePath.."FC_Functions.lua")
 
-function ExportScript.ProcessFCHighImportanceConfig()
+function PWDEV.ProcessFCHighImportanceConfig()
     -- Cautions
-    ExportScript.AF.StatusLamp()
+    PWDEV.AF.StatusLamp()
 end
 
-function ExportScript.ProcessFCLowImportanceConfig()
+function PWDEV.ProcessFCLowImportanceConfig()
     -- SPO15 Radar Warning Reciver
-    ExportScript.AF.FC_SPO15RWR()
+    PWDEV.AF.FC_SPO15RWR()
 end

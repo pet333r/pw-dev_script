@@ -1,7 +1,10 @@
 -- F/A-18C Hornet
-ExportScript.FoundDCSModule = true
 
-ExportScript.ConfigEveryFrameArguments = 
+local coerce_nil_to_string = PWDEV.Tools.coerce_nil_to_string
+
+PWDEV.FoundDCSModule = true
+
+PWDEV.ConfigEveryFrameArguments = 
 {
 	-- AoA Indexer Lights
 	[4] = "%.1f",   -- CPT_LTS_AOA_HIGH
@@ -168,7 +171,7 @@ ExportScript.ConfigEveryFrameArguments =
 	[443] = "%.1f", -- INS Switch, OFF/CV/GND/NAV/IFA/GYRO/GB/TEST
 }
 
-ExportScript.ConfigArguments = 
+PWDEV.ConfigArguments = 
 {
 	-- Left MDI
 	[51] = "%1d",   -- Left MDI Brightness Selector Knob, OFF/NIGHT/DAY {0.0,0.1,0.2}
@@ -190,21 +193,14 @@ ExportScript.ConfigArguments =
 
 
 -- Pointed to by ProcessDCSHighImportance
-function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
+function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
 
--- Pointed to by ExportScript.ProcessDCSConfigLowImportance
-function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
-	-- ExportScript.Tools.WinSetTempFolder()
-	-- ExportScript.Tools.DCSMap()
-	-- local be = getMainRefPoint(1)
-	-- ExportScript.Tools.SendData(4444, be)
-	-- local filename = "tempMission.miz"
-	-- ExportScript.Zip.ExtractZipAndCopyFiles("c:\\Users\\pet333r\\AppData\\Local\\Temp\\DCS.openbeta", filename, "x:\\")
-
+-- Pointed to by PWDEV.ProcessDCSConfigLowImportance
+function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
 
 	-- UFC Displays
-	local _ufcDisplay = ExportScript.Tools.getListIndicatorValue(6)
+	local _ufcDisplay = PWDEV.Tools.getListIndicatorValue(6)
 
 	if _ufcDisplay ~= nil and _ufcDisplay.UFC_MainDummy ~= nil then
 		-- ScratchPadString Displays
@@ -214,53 +210,53 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 		_ufcDisplay.UFC_ScratchPadString2Display = string.gsub(_ufcDisplay.UFC_ScratchPadString2Display, "~", "2") -- need to be 2
 		_ufcDisplay.UFC_ScratchPadString1Display = string.gsub(_ufcDisplay.UFC_ScratchPadString1Display, "`", "1") -- need to be 1
 		_ufcDisplay.UFC_ScratchPadString2Display = string.gsub(_ufcDisplay.UFC_ScratchPadString2Display, "`", "1") -- need to be 1
-		ExportScript.Tools.SendData(2020, string.gsub(_ufcDisplay.UFC_ScratchPadString1Display, " ", "")) -- ExportScript.Tools.DisplayFormat(_ufcDisplay.UFC_ScratchPadString1Display, 1)) -- ScratchPadString1Display 2 character
-		ExportScript.Tools.SendData(2021, ExportScript.Tools.DisplayFormat(_ufcDisplay.UFC_ScratchPadString2Display, 2)) -- ScratchPadString2Display 2 character
-		ExportScript.Tools.SendData(2022, ExportScript.Tools.DisplayFormat(_ufcDisplay.UFC_ScratchPadNumberDisplay, 7)) -- ScratchPadNumberDisplay 7 character
+		PWDEV.Tools.SendData(2020, string.gsub(_ufcDisplay.UFC_ScratchPadString1Display, " ", "")) -- PWDEV.Tools.DisplayFormat(_ufcDisplay.UFC_ScratchPadString1Display, 1)) -- ScratchPadString1Display 2 character
+		PWDEV.Tools.SendData(2021, PWDEV.Tools.DisplayFormat(_ufcDisplay.UFC_ScratchPadString2Display, 2)) -- ScratchPadString2Display 2 character
+		PWDEV.Tools.SendData(2022, PWDEV.Tools.DisplayFormat(_ufcDisplay.UFC_ScratchPadNumberDisplay, 7)) -- ScratchPadNumberDisplay 7 character
 
 		local _tmpCueing = " "
 		-- Option Displays
 		_tmpCueing = (#_ufcDisplay.UFC_OptionCueing1 > 0 and "¦" or " ")
-		ExportScript.Tools.SendData(2023, ExportScript.Tools.DisplayFormat(_tmpCueing .. _ufcDisplay.UFC_OptionDisplay1, 5)) -- OptionDisplay1 5 character
+		PWDEV.Tools.SendData(2023, PWDEV.Tools.DisplayFormat(_tmpCueing .. _ufcDisplay.UFC_OptionDisplay1, 5)) -- OptionDisplay1 5 character
 		_tmpCueing = (#_ufcDisplay.UFC_OptionCueing2 > 0 and "¦" or " ")
-		ExportScript.Tools.SendData(2024, ExportScript.Tools.DisplayFormat(_tmpCueing .. _ufcDisplay.UFC_OptionDisplay2, 5)) -- OptionDisplay2 5 character
+		PWDEV.Tools.SendData(2024, PWDEV.Tools.DisplayFormat(_tmpCueing .. _ufcDisplay.UFC_OptionDisplay2, 5)) -- OptionDisplay2 5 character
 		_tmpCueing = (#_ufcDisplay.UFC_OptionCueing3 > 0 and "¦" or " ")
-		ExportScript.Tools.SendData(2025, ExportScript.Tools.DisplayFormat(_tmpCueing .. _ufcDisplay.UFC_OptionDisplay3, 5)) -- OptionDisplay3 5 character
+		PWDEV.Tools.SendData(2025, PWDEV.Tools.DisplayFormat(_tmpCueing .. _ufcDisplay.UFC_OptionDisplay3, 5)) -- OptionDisplay3 5 character
 		_tmpCueing = (#_ufcDisplay.UFC_OptionCueing4 > 0 and "¦" or " ")
-		ExportScript.Tools.SendData(2026, ExportScript.Tools.DisplayFormat(_tmpCueing .. _ufcDisplay.UFC_OptionDisplay4, 5)) -- OptionDisplay4 5 character
+		PWDEV.Tools.SendData(2026, PWDEV.Tools.DisplayFormat(_tmpCueing .. _ufcDisplay.UFC_OptionDisplay4, 5)) -- OptionDisplay4 5 character
 		_tmpCueing = (#_ufcDisplay.UFC_OptionCueing5 > 0 and "¦" or " ")
-		ExportScript.Tools.SendData(2027, ExportScript.Tools.DisplayFormat(_tmpCueing .. _ufcDisplay.UFC_OptionDisplay5, 5)) -- OptionDisplay5 5 character
+		PWDEV.Tools.SendData(2027, PWDEV.Tools.DisplayFormat(_tmpCueing .. _ufcDisplay.UFC_OptionDisplay5, 5)) -- OptionDisplay5 5 character
 
 		-- Comm Displays
 		_ufcDisplay.UFC_Comm1Display = string.gsub(_ufcDisplay.UFC_Comm1Display, "~", "2") -- need to be 2
 		_ufcDisplay.UFC_Comm2Display = string.gsub(_ufcDisplay.UFC_Comm2Display, "~", "2") -- need to be 2
 		_ufcDisplay.UFC_Comm1Display = string.gsub(_ufcDisplay.UFC_Comm1Display, "`", "1") -- need to be 1
 		_ufcDisplay.UFC_Comm2Display = string.gsub(_ufcDisplay.UFC_Comm2Display, "`", "1") -- need to be 1
-		ExportScript.Tools.SendData(2028, ExportScript.Tools.DisplayFormat(_ufcDisplay.UFC_Comm1Display, 2)) -- Comm1Display 2 character
-		ExportScript.Tools.SendData(2029, ExportScript.Tools.DisplayFormat(_ufcDisplay.UFC_Comm2Display, 2)) -- Comm2Display 2 character
+		PWDEV.Tools.SendData(2028, PWDEV.Tools.DisplayFormat(_ufcDisplay.UFC_Comm1Display, 2)) -- Comm1Display 2 character
+		PWDEV.Tools.SendData(2029, PWDEV.Tools.DisplayFormat(_ufcDisplay.UFC_Comm2Display, 2)) -- Comm2Display 2 character
 	else
 		-- ScratchPadString Displays
-		ExportScript.Tools.SendData(2020, "") -- ScratchPadString1Display 2 character
-		ExportScript.Tools.SendData(2021, " ") -- ScratchPadString2Display 2 character
-		ExportScript.Tools.SendData(2022, " ") -- ScratchPadNumberDisplay 7 character
+		PWDEV.Tools.SendData(2020, "") -- ScratchPadString1Display 2 character
+		PWDEV.Tools.SendData(2021, " ") -- ScratchPadString2Display 2 character
+		PWDEV.Tools.SendData(2022, " ") -- ScratchPadNumberDisplay 7 character
 
 		-- Option Displays
-		ExportScript.Tools.SendData(2023, " ") -- OptionDisplay1 5 character
-		ExportScript.Tools.SendData(2024, " ") -- OptionDisplay2 5 character
-		ExportScript.Tools.SendData(2025, " ") -- OptionDisplay3 5 character
-		ExportScript.Tools.SendData(2026, " ") -- OptionDisplay4 5 character
-		ExportScript.Tools.SendData(2027, " ") -- OptionDisplay5 5 character
+		PWDEV.Tools.SendData(2023, " ") -- OptionDisplay1 5 character
+		PWDEV.Tools.SendData(2024, " ") -- OptionDisplay2 5 character
+		PWDEV.Tools.SendData(2025, " ") -- OptionDisplay3 5 character
+		PWDEV.Tools.SendData(2026, " ") -- OptionDisplay4 5 character
+		PWDEV.Tools.SendData(2027, " ") -- OptionDisplay5 5 character
 
 		-- Comm Displays
-		ExportScript.Tools.SendData(2028, " ") -- Comm1Display 2 character
-		ExportScript.Tools.SendData(2029, " ") -- Comm2Display 2 character
+		PWDEV.Tools.SendData(2028, " ") -- Comm1Display 2 character
+		PWDEV.Tools.SendData(2029, " ") -- Comm2Display 2 character
 	end
 
 	local _UHF1Radio = GetDevice(38)
-	ExportScript.Tools.SendData(2030, ExportScript.Tools.DisplayFormat(ExportScript.Tools.RoundFreqeuncy((_UHF1Radio:get_frequency()/1000000))), 7)
+	PWDEV.Tools.SendData(2030, PWDEV.Tools.DisplayFormat(PWDEV.Tools.RoundFreqeuncy((_UHF1Radio:get_frequency()/1000000))), 7)
 
 	local _UHF2Radio = GetDevice(39)
-	ExportScript.Tools.SendData(2031, ExportScript.Tools.DisplayFormat(ExportScript.Tools.RoundFreqeuncy((_UHF2Radio:get_frequency()/1000000), "7.3", false, 0.005)), 7)
+	PWDEV.Tools.SendData(2031, PWDEV.Tools.DisplayFormat(PWDEV.Tools.RoundFreqeuncy((_UHF2Radio:get_frequency()/1000000), "7.3", false, 0.005)), 7)
 
 
 	-- IFEI
@@ -286,7 +282,7 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	local txt_T = ""
 	local txt_TimeSetMode = ""
 
-	local ifei = ExportScript.Tools.getListIndicatorValue(5)
+	local ifei = PWDEV.Tools.getListIndicatorValue(5)
 	txt_BINGO 		= "     "
 	txt_CLOCK_H 	= "  "
 	txt_CLOCK_M 	= "  "
@@ -314,27 +310,27 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	if not ifei then
 		return
 	end
-	txt_RPM_L		= ExportScript.Tools.coerce_nil_to_string(ifei.txt_RPM_L)
-	txt_RPM_R		= ExportScript.Tools.coerce_nil_to_string(ifei.txt_RPM_R)
-	txt_TEMP_L		= ExportScript.Tools.coerce_nil_to_string(ifei.txt_TEMP_L)
-	txt_TEMP_R		= ExportScript.Tools.coerce_nil_to_string(ifei.txt_TEMP_R)
-	txt_FF_L		= ExportScript.Tools.coerce_nil_to_string(ifei.txt_FF_L)
-	txt_FF_R		= ExportScript.Tools.coerce_nil_to_string(ifei.txt_FF_R)
-	txt_OilPress_L	= ExportScript.Tools.coerce_nil_to_string(ifei.txt_OilPress_L)
-	txt_OilPress_R	= ExportScript.Tools.coerce_nil_to_string(ifei.txt_OilPress_R)
-	txt_BINGO 		= ExportScript.Tools.coerce_nil_to_string(ifei.txt_BINGO)
-	txt_FUEL_UP		= ExportScript.Tools.coerce_nil_to_string(ifei.txt_FUEL_UP)
-	txt_FUEL_DOWN	= ExportScript.Tools.coerce_nil_to_string(ifei.txt_FUEL_DOWN)
-	txt_CLOCK_S		= ExportScript.Tools.coerce_nil_to_string(ifei.txt_CLOCK_S)
-	txt_CLOCK_M		= ExportScript.Tools.coerce_nil_to_string(ifei.txt_CLOCK_M)
-	txt_CLOCK_H		= ExportScript.Tools.coerce_nil_to_string(ifei.txt_CLOCK_H)
-	txt_TIMER_H		= ExportScript.Tools.coerce_nil_to_string(ifei.txt_TIMER_H)
-	txt_TIMER_M		= ExportScript.Tools.coerce_nil_to_string(ifei.txt_TIMER_M)
-	txt_TIMER_S		= ExportScript.Tools.coerce_nil_to_string(ifei.txt_TIMER_S)
-	txt_Codes		= ExportScript.Tools.coerce_nil_to_string(ifei.txt_Codes)
-	txt_SP			= ExportScript.Tools.coerce_nil_to_string(ifei.txt_SP)
-	txt_T			= ExportScript.Tools.coerce_nil_to_string(ifei.txt_T)
-	txt_TimeSetMode	= ExportScript.Tools.coerce_nil_to_string(ifei.txt_TimeSetMode)
+	txt_RPM_L		= coerce_nil_to_string(ifei.txt_RPM_L)
+	txt_RPM_R		= coerce_nil_to_string(ifei.txt_RPM_R)
+	txt_TEMP_L		= coerce_nil_to_string(ifei.txt_TEMP_L)
+	txt_TEMP_R		= coerce_nil_to_string(ifei.txt_TEMP_R)
+	txt_FF_L		= coerce_nil_to_string(ifei.txt_FF_L)
+	txt_FF_R		= coerce_nil_to_string(ifei.txt_FF_R)
+	txt_OilPress_L	= coerce_nil_to_string(ifei.txt_OilPress_L)
+	txt_OilPress_R	= coerce_nil_to_string(ifei.txt_OilPress_R)
+	txt_BINGO 		= coerce_nil_to_string(ifei.txt_BINGO)
+	txt_FUEL_UP		= coerce_nil_to_string(ifei.txt_FUEL_UP)
+	txt_FUEL_DOWN	= coerce_nil_to_string(ifei.txt_FUEL_DOWN)
+	txt_CLOCK_S		= coerce_nil_to_string(ifei.txt_CLOCK_S)
+	txt_CLOCK_M		= coerce_nil_to_string(ifei.txt_CLOCK_M)
+	txt_CLOCK_H		= coerce_nil_to_string(ifei.txt_CLOCK_H)
+	txt_TIMER_H		= coerce_nil_to_string(ifei.txt_TIMER_H)
+	txt_TIMER_M		= coerce_nil_to_string(ifei.txt_TIMER_M)
+	txt_TIMER_S		= coerce_nil_to_string(ifei.txt_TIMER_S)
+	txt_Codes		= coerce_nil_to_string(ifei.txt_Codes)
+	txt_SP			= coerce_nil_to_string(ifei.txt_SP)
+	txt_T			= coerce_nil_to_string(ifei.txt_T)
+	txt_TimeSetMode	= coerce_nil_to_string(ifei.txt_TimeSetMode)
 	if ifei.LTexture == nil then LTexture = "0" else LTexture = "1" end
 	if ifei.RTexture == nil then RTexture = "0" else RTexture = "1" end
 	if ifei.ZTexture == nil then ZTexture = "0" else ZTexture = "1" end
@@ -346,56 +342,25 @@ function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
 	if (txt_TIMER_M == "") then txt_TIMER_M = "  " end
 	if (txt_TIMER_H == "") then txt_TIMER_H = "  " end
 
-	ExportScript.Tools.SendData(2101, ExportScript.Tools.DisplayFormat(txt_BINGO, 5))
-	ExportScript.Tools.SendData(2102, ExportScript.Tools.DisplayFormat(txt_CLOCK_H .. ":" .. txt_CLOCK_M .. ":" .. txt_CLOCK_S, 8))
-	ExportScript.Tools.SendData(2103, ExportScript.Tools.DisplayFormat(txt_TIMER_H .. ":" .. txt_TIMER_M .. ":" .. txt_TIMER_S, 8))
-	ExportScript.Tools.SendData(2108, ExportScript.Tools.DisplayFormat(txt_FF_L, 3))
-	ExportScript.Tools.SendData(2109, ExportScript.Tools.DisplayFormat(txt_FF_R, 3, "l"))
-	ExportScript.Tools.SendData(2110, ExportScript.Tools.DisplayFormat(txt_FUEL_DOWN, 6))
-	ExportScript.Tools.SendData(2111, ExportScript.Tools.DisplayFormat(txt_FUEL_UP, 6))
-	ExportScript.Tools.SendData(2112, ExportScript.Tools.DisplayFormat(txt_OilPress_L, 3))
-	ExportScript.Tools.SendData(2113, ExportScript.Tools.DisplayFormat(txt_OilPress_R, 3, "l"))
-	ExportScript.Tools.SendData(2114, ExportScript.Tools.DisplayFormat(txt_RPM_L, 3))
-	ExportScript.Tools.SendData(2115, ExportScript.Tools.DisplayFormat(txt_RPM_R, 3, "l"))
-	ExportScript.Tools.SendData(2116, ExportScript.Tools.DisplayFormat(txt_TEMP_L, 3))
-	ExportScript.Tools.SendData(2117, ExportScript.Tools.DisplayFormat(txt_TEMP_R, 3, "l"))
-	ExportScript.Tools.SendData(2118, ExportScript.Tools.DisplayFormat(txt_SP, 3))
-	ExportScript.Tools.SendData(2119, ExportScript.Tools.DisplayFormat(txt_Codes, 3, "l"))
-	ExportScript.Tools.SendData(2120, ExportScript.Tools.DisplayFormat(txt_T, 6))
-	ExportScript.Tools.SendData(2121, ExportScript.Tools.DisplayFormat(txt_TimeSetMode, 6))
+	PWDEV.Tools.SendData(2101, PWDEV.Tools.DisplayFormat(txt_BINGO, 5))
+	PWDEV.Tools.SendData(2102, PWDEV.Tools.DisplayFormat(txt_CLOCK_H .. ":" .. txt_CLOCK_M .. ":" .. txt_CLOCK_S, 8))
+	PWDEV.Tools.SendData(2103, PWDEV.Tools.DisplayFormat(txt_TIMER_H .. ":" .. txt_TIMER_M .. ":" .. txt_TIMER_S, 8))
+	PWDEV.Tools.SendData(2108, PWDEV.Tools.DisplayFormat(txt_FF_L, 3))
+	PWDEV.Tools.SendData(2109, PWDEV.Tools.DisplayFormat(txt_FF_R, 3, "l"))
+	PWDEV.Tools.SendData(2110, PWDEV.Tools.DisplayFormat(txt_FUEL_DOWN, 6))
+	PWDEV.Tools.SendData(2111, PWDEV.Tools.DisplayFormat(txt_FUEL_UP, 6))
+	PWDEV.Tools.SendData(2112, PWDEV.Tools.DisplayFormat(txt_OilPress_L, 3))
+	PWDEV.Tools.SendData(2113, PWDEV.Tools.DisplayFormat(txt_OilPress_R, 3, "l"))
+	PWDEV.Tools.SendData(2114, PWDEV.Tools.DisplayFormat(txt_RPM_L, 3))
+	PWDEV.Tools.SendData(2115, PWDEV.Tools.DisplayFormat(txt_RPM_R, 3, "l"))
+	PWDEV.Tools.SendData(2116, PWDEV.Tools.DisplayFormat(txt_TEMP_L, 3))
+	PWDEV.Tools.SendData(2117, PWDEV.Tools.DisplayFormat(txt_TEMP_R, 3, "l"))
+	PWDEV.Tools.SendData(2118, PWDEV.Tools.DisplayFormat(txt_SP, 3))
+	PWDEV.Tools.SendData(2119, PWDEV.Tools.DisplayFormat(txt_Codes, 3, "l"))
+	PWDEV.Tools.SendData(2120, PWDEV.Tools.DisplayFormat(txt_T, 6))
+	PWDEV.Tools.SendData(2121, PWDEV.Tools.DisplayFormat(txt_TimeSetMode, 6))
 	-- texture values
-	ExportScript.Tools.SendData(2201, LTexture)
-	ExportScript.Tools.SendData(2202, RTexture)
-	ExportScript.Tools.SendData(2203, ZTexture)
-
-	-- -- check()
-	-- local Pitch, Bank, Yaw = LoGetADIPitchBankYaw() --LoGetADIPitchBankYaw()
-	-- Pitch = Pitch * 57.3
-	-- Bank = Bank * 57.3
-	-- -- General
-	-- ExportScript.Tools.SendData(2901, string.format("%.2f", -Pitch/90)) -- -ExportScript.Tools.GetArgumentsValue(205, "%.2f"))
-	-- ExportScript.Tools.SendData(2902, string.format("%d",-Bank )) -- ExportScript.Tools.GetArgumentsValue(206, "%.2f"))
-	-- ExportScript.Tools.SendData(2903, string.format("%d", (LoGetSelfData().LatLongAlt.Alt * 3.2808399)/10 )) -- ExportScript.Tools.GetArgumentsValue(206, "%.2f"))
-
-
-
-
-
-	-- 	local TK1 = ""
-	-- 	local LFD = ""
-	-- 	local RFD = ""
-	-- 	local TK4 = ""
-	-- 	local LWG = ""
-	-- 	local RWG = ""
-	-- 	local Bingo = ""
-	-- 	local Total = ""
-	-- 	local Internal = ""
-	-- 	local fuel = ExportScript.Tools.getListIndicatorValue(3)
-	-- 	if not fuel then
-	-- 		return
-	-- 	end
-
-	-- 	TK1 = coerce_nil_to_string(fuel.TK1)
-
-	-- 	ExportScript.Tools.SendData(2301, TK1)
+	PWDEV.Tools.SendData(2201, LTexture)
+	PWDEV.Tools.SendData(2202, RTexture)
+	PWDEV.Tools.SendData(2203, ZTexture)
 end

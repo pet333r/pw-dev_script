@@ -1,7 +1,7 @@
 -- F-14B
-ExportScript.FoundDCSModule = true
+PWDEV.FoundDCSModule = true
 
-ExportScript.ConfigEveryFrameArguments = 
+PWDEV.ConfigEveryFrameArguments = 
 {
 	-- RIO DDD
 	[34] = "%1d",		-- ASPECT
@@ -355,7 +355,7 @@ ExportScript.ConfigEveryFrameArguments =
 	[2259] = "%1d", -- BEAC OFF Light
 	[2260] = "%1d", -- RET BASE Light
 }
-ExportScript.ConfigArguments = 
+PWDEV.ConfigArguments = 
 {
 }
 
@@ -415,23 +415,20 @@ local function getPLTFuelBingo()
 end
 
 local function getUhf()
-	return ExportScript.Tools.getListCockpitParam("COMM1_FREQ")
+	return PWDEV.Tools.getListCockpitParam("COMM1_FREQ")
 end
 
 -- Pointed to by ProcessDCSHighImportance
-function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
+function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
 
--- Pointed to by ExportScript.ProcessDCSConfigLowImportance
-function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
-	ExportScript.Tools.SendData(20001, getAmmo())
-	ExportScript.Tools.SendData(20002, getPLTFuelLeft())
-	ExportScript.Tools.SendData(20003, getPLTFuelRight())
-	ExportScript.Tools.SendData(20004, getPLTFuelTotal())
-	ExportScript.Tools.SendData(20005, getPLTFuelBingo())
-	ExportScript.Tools.SendData(20006, getUhf())
+-- Pointed to by PWDEV.ProcessDCSConfigLowImportance
+function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
+	PWDEV.Tools.SendData(20001, getAmmo())
+	PWDEV.Tools.SendData(20002, getPLTFuelLeft())
+	PWDEV.Tools.SendData(20003, getPLTFuelRight())
+	PWDEV.Tools.SendData(20004, getPLTFuelTotal())
+	PWDEV.Tools.SendData(20005, getPLTFuelBingo())
+	PWDEV.Tools.SendData(20006, getUhf())
 
-	-- -- General
-	-- ExportScript.Tools.SendData(2901, -ExportScript.Tools.GetArgumentsValue(3001, "%.2f"))
-	-- ExportScript.Tools.SendData(2902, ExportScript.Tools.GetArgumentsValue(3002, "%.2f"))
 end

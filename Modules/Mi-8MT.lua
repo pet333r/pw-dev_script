@@ -1,7 +1,7 @@
 -- Mi-8MT
-ExportScript.FoundDCSModule = true
+PWDEV.FoundDCSModule = true
 
-ExportScript.ConfigEveryFrameArguments = 
+PWDEV.ConfigEveryFrameArguments = 
 {
     [64] = "%1d", -- LOW FUEL 270 LT
     [65] = "%1d", -- DOPPLER FAIL
@@ -128,12 +128,12 @@ ExportScript.ConfigEveryFrameArguments =
     [716] = "%1d", -- RACK 6 LOADED
 }
 
-ExportScript.ConfigArguments = 
+PWDEV.ConfigArguments = 
 {
 }
 
-function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
+function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
 
-function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
+function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
 end

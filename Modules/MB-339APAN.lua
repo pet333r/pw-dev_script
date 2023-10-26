@@ -1,2 +1,2 @@
 -- MB-339PAN
-dofile(ExportScript.Config.ExportModulePath.."MB-339A.lua")
+dofile(PWDEV.Config.ExportModulePath.."MB-339A.lua")

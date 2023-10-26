@@ -1,109 +1,109 @@
-function ExportScript.AF.FC_AoA_A10A()
+function PWDEV.AF.FC_AoA_A10A()
     local lAoA = LoGetAngleOfAttack()
 
-    --ExportScript.Tools.SendData(4, string.format("%.1f", lAoA))
+    --PWDEV.Tools.SendData(4, string.format("%.1f", lAoA))
 
     -- yellow  >= 11.5
     -- green >= 7.5 <= 12.6
     -- yellow <= 9
 
     if lAoA > 12.6 then
-        ExportScript.Tools.SendData(540, "1")
-        ExportScript.Tools.SendData(541, "0")
+        PWDEV.Tools.SendData(540, "1")
+        PWDEV.Tools.SendData(541, "0")
     end
 
     if lAoA >= 11.5 and lAoA <= 12.6 then
-        ExportScript.Tools.SendData(540, "1")
-        ExportScript.Tools.SendData(541, "1")
+        PWDEV.Tools.SendData(540, "1")
+        PWDEV.Tools.SendData(541, "1")
     end
 
     if lAoA > 9 and lAoA < 11.5 then
-        ExportScript.Tools.SendData(540, "0")
-        ExportScript.Tools.SendData(541, "1")
-        ExportScript.Tools.SendData(542, "0")
+        PWDEV.Tools.SendData(540, "0")
+        PWDEV.Tools.SendData(541, "1")
+        PWDEV.Tools.SendData(542, "0")
     end
 
     if lAoA >= 7.5 and lAoA <= 9 then
-        ExportScript.Tools.SendData(541, "1")
-        ExportScript.Tools.SendData(542, "1")
+        PWDEV.Tools.SendData(541, "1")
+        PWDEV.Tools.SendData(542, "1")
     end
 
     if lAoA < 7.5 then
-        ExportScript.Tools.SendData(541, "0")
-        ExportScript.Tools.SendData(542, "1")
+        PWDEV.Tools.SendData(541, "0")
+        PWDEV.Tools.SendData(542, "1")
     end
 end
 
-function ExportScript.AF.FC_AoA_Su33()
+function PWDEV.AF.FC_AoA_Su33()
     local lAoA = LoGetAngleOfAttack()
 
-    --ExportScript.Tools.SendData(4, string.format("%.1f", lAoA))
+    --PWDEV.Tools.SendData(4, string.format("%.1f", lAoA))
 
     -- yellow  <=9
     -- green >= 8.5 <= 10.5
     -- red >= 10
     if lAoA < 8.5 then
-        ExportScript.Tools.SendData(1, "1")
-        ExportScript.Tools.SendData(2, "0")
+        PWDEV.Tools.SendData(1, "1")
+        PWDEV.Tools.SendData(2, "0")
     end
 
     if lAoA >= 8.5 and lAoA <= 9 then
-        ExportScript.Tools.SendData(1, "1")
-        ExportScript.Tools.SendData(2, "1")
+        PWDEV.Tools.SendData(1, "1")
+        PWDEV.Tools.SendData(2, "1")
     end
 
     if lAoA > 9 and lAoA < 10 then
-        ExportScript.Tools.SendData(1, "0")
-		ExportScript.Tools.SendData(2, "1")
-		ExportScript.Tools.SendData(3, "0")
+        PWDEV.Tools.SendData(1, "0")
+		PWDEV.Tools.SendData(2, "1")
+		PWDEV.Tools.SendData(3, "0")
     end
 
     if lAoA >= 10 and lAoA <= 10.5 then
-        ExportScript.Tools.SendData(2, "1")
-        ExportScript.Tools.SendData(3, "1")
+        PWDEV.Tools.SendData(2, "1")
+        PWDEV.Tools.SendData(3, "1")
     end
 
     if lAoA > 10.5 then
-        ExportScript.Tools.SendData(2, "0")
-        ExportScript.Tools.SendData(3, "1")
+        PWDEV.Tools.SendData(2, "0")
+        PWDEV.Tools.SendData(3, "1")
     end
 end
 
-function ExportScript.AF.FC_SPO15RWR()
+function PWDEV.AF.FC_SPO15RWR()
     local lTWSInfo = LoGetTWSInfo() -- SPO15 Information
 	if lTWSInfo == nil then
 		return
     end
 
-	if ExportScript.AF.EventNumberFC_SPO15RWR == nil then
-		ExportScript.AF.EventNumberFC_SPO15RWR = 0
+	if PWDEV.AF.EventNumberFC_SPO15RWR == nil then
+		PWDEV.AF.EventNumberFC_SPO15RWR = 0
 	end 
 
-    if(ExportScript.AF.EventNumberFC_SPO15RWR < ExportScript.AF.EventNumber) then
-		ExportScript.AF.EventNumberFC_SPO15RWR = ExportScript.AF.EventNumber
+    if(PWDEV.AF.EventNumberFC_SPO15RWR < PWDEV.AF.EventNumber) then
+		PWDEV.AF.EventNumberFC_SPO15RWR = PWDEV.AF.EventNumber
         local lPriorityTmp		= 0
         local lPrimaryThreatTmp	= 0
         
-		if ExportScript.AF.SPO15RWRData == nil then
-			ExportScript.AF.SPO15RWRData = {}
+		if PWDEV.AF.SPO15RWRData == nil then
+			PWDEV.AF.SPO15RWRData = {}
 			
-			ExportScript.AF.SPO15RWRData[400] = 1	-- Power light
+			PWDEV.AF.SPO15RWRData[400] = 1	-- Power light
 		end
     
         -- 10 x for Secondary Thread direction
-		ExportScript.AF.SPO15RWRData[451]=0
-		ExportScript.AF.SPO15RWRData[452]=0
-		ExportScript.AF.SPO15RWRData[453]=0
-		ExportScript.AF.SPO15RWRData[454]=0
-		ExportScript.AF.SPO15RWRData[455]=0
-		ExportScript.AF.SPO15RWRData[456]=0
-		ExportScript.AF.SPO15RWRData[457]=0
-		ExportScript.AF.SPO15RWRData[458]=0
-		ExportScript.AF.SPO15RWRData[459]=0
-		ExportScript.AF.SPO15RWRData[460]=0
+		PWDEV.AF.SPO15RWRData[451]=0
+		PWDEV.AF.SPO15RWRData[452]=0
+		PWDEV.AF.SPO15RWRData[453]=0
+		PWDEV.AF.SPO15RWRData[454]=0
+		PWDEV.AF.SPO15RWRData[455]=0
+		PWDEV.AF.SPO15RWRData[456]=0
+		PWDEV.AF.SPO15RWRData[457]=0
+		PWDEV.AF.SPO15RWRData[458]=0
+		PWDEV.AF.SPO15RWRData[459]=0
+		PWDEV.AF.SPO15RWRData[460]=0
     
         if(#lTWSInfo.Emitters > 0) then
-            ExportScript.AF.SPO15_FoundErmitter = true
+            PWDEV.AF.SPO15_FoundErmitter = true
                 
                 for EmitterIndex = 1, #lTWSInfo.Emitters, 1 do
                     if(lTWSInfo.Emitters[EmitterIndex].Priority > lPriorityTmp) then
@@ -114,124 +114,124 @@ function ExportScript.AF.FC_SPO15RWR()
     
     
             for EmitterIndex = 1, #lTWSInfo.Emitters, 1 do
-                local lAzimut = ExportScript.Tools.round(lTWSInfo.Emitters[EmitterIndex].Azimuth * 90, 1)
+                local lAzimut = PWDEV.Tools.round(lTWSInfo.Emitters[EmitterIndex].Azimuth * 90, 1)
                 if EmitterIndex == lPrimaryThreatTmp then
                     -- primary threat
                     -- direction to the threat
-					ExportScript.AF.SPO15RWRData[401] = (lAzimut <= -170.0 and 1 or 0) -- left back side
-					ExportScript.AF.SPO15RWRData[402] = ((lAzimut <= -90.0  and lAzimut >= -170.0 ) and 1 or 0) -- left 90 degree
-					ExportScript.AF.SPO15RWRData[403] = ((lAzimut <= -55.0  and lAzimut >= -125.0 ) and 1 or 0) -- left 50 degree
-					ExportScript.AF.SPO15RWRData[404] = ((lAzimut <= -30.0  and lAzimut >= -70.0  ) and 1 or 0) -- left 30 degree
-					ExportScript.AF.SPO15RWRData[405] = ((lAzimut <=  5.0   and lAzimut >= -40.0  ) and 1 or 0) -- left 10 degree
-					ExportScript.AF.SPO15RWRData[406] = ((lAzimut >= -5.0   and lAzimut <=  40.0  ) and 1 or 0) -- right 10 degree
-					ExportScript.AF.SPO15RWRData[407] = ((lAzimut >=  30.0  and lAzimut <=  70.0  ) and 1 or 0) -- right 30 degree
-					ExportScript.AF.SPO15RWRData[408] = ((lAzimut >=  55.0  and lAzimut <= 125.0  ) and 1 or 0) -- right 50 degree
-					ExportScript.AF.SPO15RWRData[409] = ((lAzimut >=  90.0  and lAzimut <= 170.0  ) and 1 or 0) -- right 90 degree
-					ExportScript.AF.SPO15RWRData[410] = (lAzimut >= 170.0 and 1 or 0) -- right back side
+					PWDEV.AF.SPO15RWRData[401] = (lAzimut <= -170.0 and 1 or 0) -- left back side
+					PWDEV.AF.SPO15RWRData[402] = ((lAzimut <= -90.0  and lAzimut >= -170.0 ) and 1 or 0) -- left 90 degree
+					PWDEV.AF.SPO15RWRData[403] = ((lAzimut <= -55.0  and lAzimut >= -125.0 ) and 1 or 0) -- left 50 degree
+					PWDEV.AF.SPO15RWRData[404] = ((lAzimut <= -30.0  and lAzimut >= -70.0  ) and 1 or 0) -- left 30 degree
+					PWDEV.AF.SPO15RWRData[405] = ((lAzimut <=  5.0   and lAzimut >= -40.0  ) and 1 or 0) -- left 10 degree
+					PWDEV.AF.SPO15RWRData[406] = ((lAzimut >= -5.0   and lAzimut <=  40.0  ) and 1 or 0) -- right 10 degree
+					PWDEV.AF.SPO15RWRData[407] = ((lAzimut >=  30.0  and lAzimut <=  70.0  ) and 1 or 0) -- right 30 degree
+					PWDEV.AF.SPO15RWRData[408] = ((lAzimut >=  55.0  and lAzimut <= 125.0  ) and 1 or 0) -- right 50 degree
+					PWDEV.AF.SPO15RWRData[409] = ((lAzimut >=  90.0  and lAzimut <= 170.0  ) and 1 or 0) -- right 90 degree
+					PWDEV.AF.SPO15RWRData[410] = (lAzimut >= 170.0 and 1 or 0) -- right back side
             
                     -- power of the threat
-                    local lPower = ExportScript.Tools.round(lTWSInfo.Emitters[EmitterIndex].Power * 15, 0, "ceil") + 1
-                    ExportScript.AF.SPO15RWRData[411] = (lPower <= 1  and 0 or 1) -- 1. power lamp
-					ExportScript.AF.SPO15RWRData[412] = (lPower <= 2  and 0 or 1) -- 2. power lamp
-					ExportScript.AF.SPO15RWRData[413] = (lPower <= 3  and 0 or 1) -- 3. power lamp
-					ExportScript.AF.SPO15RWRData[414] = (lPower <= 4  and 0 or 1) -- 4. power lamp
-					ExportScript.AF.SPO15RWRData[415] = (lPower <= 5  and 0 or 1) -- 5. power lamp
-					ExportScript.AF.SPO15RWRData[416] = (lPower <= 6  and 0 or 1) -- 6. power lamp
-					ExportScript.AF.SPO15RWRData[417] = (lPower <= 7  and 0 or 1) -- 7. power lamp
-					ExportScript.AF.SPO15RWRData[418] = (lPower <= 8  and 0 or 1) -- 8. power lamp
-					ExportScript.AF.SPO15RWRData[419] = (lPower <= 9  and 0 or 1) -- 9. power lamp
-					ExportScript.AF.SPO15RWRData[420] = (lPower <= 10 and 0 or 1) -- 10. power lamp
-					ExportScript.AF.SPO15RWRData[421] = (lPower <= 11 and 0 or 1) -- 11. power lamp
-					ExportScript.AF.SPO15RWRData[422] = (lPower <= 12 and 0 or 1) -- 12. power lamp
-					ExportScript.AF.SPO15RWRData[423] = (lPower <= 13 and 0 or 1) -- 13. power lamp
-					ExportScript.AF.SPO15RWRData[424] = (lPower <= 14 and 0 or 1) -- 14. power lamp
-					ExportScript.AF.SPO15RWRData[425] = (lPower <= 15 and 0 or 1) -- 15. power lamp
+                    local lPower = PWDEV.Tools.round(lTWSInfo.Emitters[EmitterIndex].Power * 15, 0, "ceil") + 1
+                    PWDEV.AF.SPO15RWRData[411] = (lPower <= 1  and 0 or 1) -- 1. power lamp
+					PWDEV.AF.SPO15RWRData[412] = (lPower <= 2  and 0 or 1) -- 2. power lamp
+					PWDEV.AF.SPO15RWRData[413] = (lPower <= 3  and 0 or 1) -- 3. power lamp
+					PWDEV.AF.SPO15RWRData[414] = (lPower <= 4  and 0 or 1) -- 4. power lamp
+					PWDEV.AF.SPO15RWRData[415] = (lPower <= 5  and 0 or 1) -- 5. power lamp
+					PWDEV.AF.SPO15RWRData[416] = (lPower <= 6  and 0 or 1) -- 6. power lamp
+					PWDEV.AF.SPO15RWRData[417] = (lPower <= 7  and 0 or 1) -- 7. power lamp
+					PWDEV.AF.SPO15RWRData[418] = (lPower <= 8  and 0 or 1) -- 8. power lamp
+					PWDEV.AF.SPO15RWRData[419] = (lPower <= 9  and 0 or 1) -- 9. power lamp
+					PWDEV.AF.SPO15RWRData[420] = (lPower <= 10 and 0 or 1) -- 10. power lamp
+					PWDEV.AF.SPO15RWRData[421] = (lPower <= 11 and 0 or 1) -- 11. power lamp
+					PWDEV.AF.SPO15RWRData[422] = (lPower <= 12 and 0 or 1) -- 12. power lamp
+					PWDEV.AF.SPO15RWRData[423] = (lPower <= 13 and 0 or 1) -- 13. power lamp
+					PWDEV.AF.SPO15RWRData[424] = (lPower <= 14 and 0 or 1) -- 14. power lamp
+					PWDEV.AF.SPO15RWRData[425] = (lPower <= 15 and 0 or 1) -- 15. power lamp
                     
                     -- type of the threat
-                    local lPrimaryTypeTmp = ExportScript.AF.FindRadarTypeForSPO15(lTWSInfo, lPrimaryThreatTmp)
-                    ExportScript.AF.SPO15RWRData[430] = (lPrimaryTypeTmp.AIR == 1 and 1 or 0)	-- primary Air or Weapon
-					ExportScript.AF.SPO15RWRData[431] = (lPrimaryTypeTmp.LRR == 1 and 1 or 0)	-- long range radar
-					ExportScript.AF.SPO15RWRData[432] = (lPrimaryTypeTmp.MRR == 1 and 1 or 0)	-- mid range radar
-					ExportScript.AF.SPO15RWRData[433] = (lPrimaryTypeTmp.SRR == 1 and 1 or 0)	-- short range radar
-					ExportScript.AF.SPO15RWRData[434] = (lPrimaryTypeTmp.EWR == 1 and 1 or 0)	-- EWR
-					ExportScript.AF.SPO15RWRData[435] = (lPrimaryTypeTmp.AWACS == 1 and 1 or 0)	-- AWACS
+                    local lPrimaryTypeTmp = PWDEV.AF.FindRadarTypeForSPO15(lTWSInfo, lPrimaryThreatTmp)
+                    PWDEV.AF.SPO15RWRData[430] = (lPrimaryTypeTmp.AIR == 1 and 1 or 0)	-- primary Air or Weapon
+					PWDEV.AF.SPO15RWRData[431] = (lPrimaryTypeTmp.LRR == 1 and 1 or 0)	-- long range radar
+					PWDEV.AF.SPO15RWRData[432] = (lPrimaryTypeTmp.MRR == 1 and 1 or 0)	-- mid range radar
+					PWDEV.AF.SPO15RWRData[433] = (lPrimaryTypeTmp.SRR == 1 and 1 or 0)	-- short range radar
+					PWDEV.AF.SPO15RWRData[434] = (lPrimaryTypeTmp.EWR == 1 and 1 or 0)	-- EWR
+					PWDEV.AF.SPO15RWRData[435] = (lPrimaryTypeTmp.AWACS == 1 and 1 or 0)	-- AWACS
 
                     -- look or missil on air
 					if lPrimaryTypeTmp.Lock == 0.1 then
-						ExportScript.AF.SPO15RWRData[440] = 0
-						ExportScript.AF.SPO15RWRData[441] = 1 -- blinking lights on
+						PWDEV.AF.SPO15RWRData[440] = 0
+						PWDEV.AF.SPO15RWRData[441] = 1 -- blinking lights on
 					elseif lPrimaryTypeTmp.Lock == 0.2 then
-						ExportScript.AF.SPO15RWRData[440] = 1
-						ExportScript.AF.SPO15RWRData[441] = 0 -- blinking lights off
+						PWDEV.AF.SPO15RWRData[440] = 1
+						PWDEV.AF.SPO15RWRData[441] = 0 -- blinking lights off
 					end
 
 					 -- Lock
-					 ExportScript.AF.SPO15RWRData[444] = 0  -- off
-					 if ExportScript.AF.SPO15RWRData[440] == 1 then
-						 ExportScript.AF.SPO15RWRData[444] = 1	-- Lock
-					 elseif ExportScript.AF.SPO15RWRData[441] == 1 then
-						 ExportScript.AF.SPO15RWRData[444] = 0.5	-- Missle on air
+					 PWDEV.AF.SPO15RWRData[444] = 0  -- off
+					 if PWDEV.AF.SPO15RWRData[440] == 1 then
+						 PWDEV.AF.SPO15RWRData[444] = 1	-- Lock
+					 elseif PWDEV.AF.SPO15RWRData[441] == 1 then
+						 PWDEV.AF.SPO15RWRData[444] = 0.5	-- Missle on air
 					 end
 
 					if lPrimaryTypeTmp.Lock == 0 then
-						ExportScript.AF.SPO15RWRData[444] = 0
+						PWDEV.AF.SPO15RWRData[444] = 0
 					end
 
 					-- hemisphere
-					ExportScript.AF.SPO15RWRData[442] = lPrimaryTypeTmp.TopHemisphere	-- top hemisphere
-					ExportScript.AF.SPO15RWRData[443] = lPrimaryTypeTmp.BottomHemisphere	-- bottom hemisphere
+					PWDEV.AF.SPO15RWRData[442] = lPrimaryTypeTmp.TopHemisphere	-- top hemisphere
+					PWDEV.AF.SPO15RWRData[443] = lPrimaryTypeTmp.BottomHemisphere	-- bottom hemisphere
 					
 					lPrimaryTypeTmp = nil
                 end
                 --if EmitterIndex == 2 then
 				-- Secondary Thread direction
-				ExportScript.AF.SPO15RWR_SendData(451, lAzimut <= -170.0) -- left back side
-				ExportScript.AF.SPO15RWR_SendData(452, (lAzimut <= -90.0  and lAzimut >= -170.0 )) -- left 90 degree
-				ExportScript.AF.SPO15RWR_SendData(453, (lAzimut <= -55.0  and lAzimut >= -125.0 )) -- left 50 degree
-				ExportScript.AF.SPO15RWR_SendData(454, (lAzimut <= -30.0  and lAzimut >= -70.0  )) -- left 30 degree
-				ExportScript.AF.SPO15RWR_SendData(455, (lAzimut <=  5.0   and lAzimut >= -40.0  )) -- left 10 degree
-				ExportScript.AF.SPO15RWR_SendData(456, (lAzimut >= -5.0   and lAzimut <=  40.0  )) -- right 10 degree
-				ExportScript.AF.SPO15RWR_SendData(457, (lAzimut >=  30.0  and lAzimut <=  70.0  )) -- right 30 degree
-				ExportScript.AF.SPO15RWR_SendData(458, (lAzimut >=  55.0  and lAzimut <= 125.0  )) -- right 50 degree
-				ExportScript.AF.SPO15RWR_SendData(459, (lAzimut >=  90.0  and lAzimut <= 170.0  )) -- right 90 degree
-				ExportScript.AF.SPO15RWR_SendData(460, lAzimut >= 170.0) -- right back side
+				PWDEV.AF.SPO15RWR_SendData(451, lAzimut <= -170.0) -- left back side
+				PWDEV.AF.SPO15RWR_SendData(452, (lAzimut <= -90.0  and lAzimut >= -170.0 )) -- left 90 degree
+				PWDEV.AF.SPO15RWR_SendData(453, (lAzimut <= -55.0  and lAzimut >= -125.0 )) -- left 50 degree
+				PWDEV.AF.SPO15RWR_SendData(454, (lAzimut <= -30.0  and lAzimut >= -70.0  )) -- left 30 degree
+				PWDEV.AF.SPO15RWR_SendData(455, (lAzimut <=  5.0   and lAzimut >= -40.0  )) -- left 10 degree
+				PWDEV.AF.SPO15RWR_SendData(456, (lAzimut >= -5.0   and lAzimut <=  40.0  )) -- right 10 degree
+				PWDEV.AF.SPO15RWR_SendData(457, (lAzimut >=  30.0  and lAzimut <=  70.0  )) -- right 30 degree
+				PWDEV.AF.SPO15RWR_SendData(458, (lAzimut >=  55.0  and lAzimut <= 125.0  )) -- right 50 degree
+				PWDEV.AF.SPO15RWR_SendData(459, (lAzimut >=  90.0  and lAzimut <= 170.0  )) -- right 90 degree
+				PWDEV.AF.SPO15RWR_SendData(460, lAzimut >= 170.0) -- right back side
                 --end
 			end
 			
 			-- type of the secondary threat
-			local lSecondaryTypeTmp = ExportScript.AF.FindRadarTypeForSPO15(lTWSInfo)
-			ExportScript.AF.SPO15RWRData[470] = (lSecondaryTypeTmp.AIR == 1 and 1 or 0)	-- secondary Air or Weapon
-			ExportScript.AF.SPO15RWRData[471] = (lSecondaryTypeTmp.LRR == 1 and 1 or 0)	-- long range radar
-			ExportScript.AF.SPO15RWRData[472] = (lSecondaryTypeTmp.MRR == 1 and 1 or 0)	-- mid range radar
-			ExportScript.AF.SPO15RWRData[473] = (lSecondaryTypeTmp.SRR == 1 and 1 or 0)	-- short range radar
-			ExportScript.AF.SPO15RWRData[474] = (lSecondaryTypeTmp.EWR == 1 and 1 or 0)	-- EWR
-			ExportScript.AF.SPO15RWRData[475] = (lSecondaryTypeTmp.AWACS == 1 and 1 or 0)	-- AWACS
+			local lSecondaryTypeTmp = PWDEV.AF.FindRadarTypeForSPO15(lTWSInfo)
+			PWDEV.AF.SPO15RWRData[470] = (lSecondaryTypeTmp.AIR == 1 and 1 or 0)	-- secondary Air or Weapon
+			PWDEV.AF.SPO15RWRData[471] = (lSecondaryTypeTmp.LRR == 1 and 1 or 0)	-- long range radar
+			PWDEV.AF.SPO15RWRData[472] = (lSecondaryTypeTmp.MRR == 1 and 1 or 0)	-- mid range radar
+			PWDEV.AF.SPO15RWRData[473] = (lSecondaryTypeTmp.SRR == 1 and 1 or 0)	-- short range radar
+			PWDEV.AF.SPO15RWRData[474] = (lSecondaryTypeTmp.EWR == 1 and 1 or 0)	-- EWR
+			PWDEV.AF.SPO15RWRData[475] = (lSecondaryTypeTmp.AWACS == 1 and 1 or 0)	-- AWACS
 			lSecondaryTypeTmp = nil
         
             -- Ermitter Power Triangle
-            if ExportScript.AF.SPO15RWRData[411] == 1 then
-                ExportScript.AF.SPO15RWRData[426] = 1
+            if PWDEV.AF.SPO15RWRData[411] == 1 then
+                PWDEV.AF.SPO15RWRData[426] = 1
             else
-                ExportScript.AF.SPO15RWRData[426] = 0
+                PWDEV.AF.SPO15RWRData[426] = 0
             end
         else
             lPriorityTmp      = 0
 			lPrimaryThreatTmp = 0
 
-			if ExportScript.AF.SPO15_FoundErmitter == nil or ExportScript.AF.SPO15_FoundErmitter then
-				ExportScript.AF.SPO15RWR_Reset(401, 480)
+			if PWDEV.AF.SPO15_FoundErmitter == nil or PWDEV.AF.SPO15_FoundErmitter then
+				PWDEV.AF.SPO15RWR_Reset(401, 480)
 			end
         end
     end
 
-    if ExportScript.AF.SPO15RWRData ~= nil then
-        for key, value in pairs(ExportScript.AF.SPO15RWRData) do
-            ExportScript.Tools.SendData(key, value)
+    if PWDEV.AF.SPO15RWRData ~= nil then
+        for key, value in pairs(PWDEV.AF.SPO15RWRData) do
+            PWDEV.Tools.SendData(key, value)
         end
     end
 end
 
-function ExportScript.AF.FindRadarTypeForSPO15(lTWSInfo, PrimaryThreat)
+function PWDEV.AF.FindRadarTypeForSPO15(lTWSInfo, PrimaryThreat)
 	local lPrimaryThreat	= PrimaryThreat or 0
     local lReturn 			= {AIR = 0, LRR = 0, MRR = 0, SRR = 0, EWR = 0, AWACS = 0, Lock = 0, TopHemisphere = 0, BottomHemisphere = 0}
 
@@ -388,7 +388,7 @@ function ExportScript.AF.FindRadarTypeForSPO15(lTWSInfo, PrimaryThreat)
 			end
 
 			local lSelfData		= LoGetSelfData()
-			local lSelfDataAlt	= ExportScript.Tools.round(lSelfData.LatLongAlt.Alt, 0)
+			local lSelfDataAlt	= PWDEV.Tools.round(lSelfData.LatLongAlt.Alt, 0)
 
 			if lErmitterObjectAlt and lSelfDataAlt then
 				if lErmitterObjectAlt > (lSelfDataAlt + 400) then
@@ -410,59 +410,59 @@ function ExportScript.AF.FindRadarTypeForSPO15(lTWSInfo, PrimaryThreat)
    return lReturn
 end
 
-function ExportScript.AF.SPO15RWR_Reset(lMinId, lMaxID)
+function PWDEV.AF.SPO15RWR_Reset(lMinId, lMaxID)
     for lCounter = lMinId, lMaxID, 1 do
-        ExportScript.AF.SPO15RWRData[lCounter] = 0
+        PWDEV.AF.SPO15RWRData[lCounter] = 0
     end
-    ExportScript.AF.SPO15_FoundErmitter = false
+    PWDEV.AF.SPO15_FoundErmitter = false
 end
     
-function ExportScript.AF.SPO15RWR_SendData(lKey, lValue)
-    if ExportScript.AF.SPO15RWRData[lKey] == 0 then
+function PWDEV.AF.SPO15RWR_SendData(lKey, lValue)
+    if PWDEV.AF.SPO15RWRData[lKey] == 0 then
         if lValue then
-            ExportScript.AF.SPO15RWRData[lKey] =  1
+            PWDEV.AF.SPO15RWRData[lKey] =  1
         end
     end
 end
 
-function ExportScript.AF.StatusLamp()
+function PWDEV.AF.StatusLamp()
 	local lMCPState = LoGetMCPState() -- Warning Lights
 	if lMCPState == nil then
 		return
 	end
 
-	ExportScript.Tools.SendData("702", lMCPState.MasterWarning == true and 1 or 0 )
-	ExportScript.Tools.SendData("711", lMCPState.EOSFailure == true and 1 or 0 )
-	ExportScript.Tools.SendData("712", lMCPState.ECMFailure == true and 1 or 0 )
-	ExportScript.Tools.SendData("713", lMCPState.CannonFailure == true and 1 or 0 )
+	PWDEV.Tools.SendData("702", lMCPState.MasterWarning == true and 1 or 0 )
+	PWDEV.Tools.SendData("711", lMCPState.EOSFailure == true and 1 or 0 )
+	PWDEV.Tools.SendData("712", lMCPState.ECMFailure == true and 1 or 0 )
+	PWDEV.Tools.SendData("713", lMCPState.CannonFailure == true and 1 or 0 )
 
-	ExportScript.Tools.SendData("714", lMCPState.MLWSFailure == true and 1 or 0 )
-	ExportScript.Tools.SendData("715", lMCPState.ACSFailure == true and 1 or 0 )
-	ExportScript.Tools.SendData("716", lMCPState.RadarFailure == true and 1 or 0 )
-	ExportScript.Tools.SendData("717", lMCPState.HelmetFailure == true and 1 or 0 )
+	PWDEV.Tools.SendData("714", lMCPState.MLWSFailure == true and 1 or 0 )
+	PWDEV.Tools.SendData("715", lMCPState.ACSFailure == true and 1 or 0 )
+	PWDEV.Tools.SendData("716", lMCPState.RadarFailure == true and 1 or 0 )
+	PWDEV.Tools.SendData("717", lMCPState.HelmetFailure == true and 1 or 0 )
 
-	ExportScript.Tools.SendData("718", lMCPState.HUDFailure == true and 1 or 0 )
-	ExportScript.Tools.SendData("719", lMCPState.MFDFailure == true and 1 or 0 )
-	ExportScript.Tools.SendData("720", lMCPState.RWSFailure == true and 1 or 0 )
-	ExportScript.Tools.SendData("721", lMCPState.GearFailure == true and 1 or 0 )
+	PWDEV.Tools.SendData("718", lMCPState.HUDFailure == true and 1 or 0 )
+	PWDEV.Tools.SendData("719", lMCPState.MFDFailure == true and 1 or 0 )
+	PWDEV.Tools.SendData("720", lMCPState.RWSFailure == true and 1 or 0 )
+	PWDEV.Tools.SendData("721", lMCPState.GearFailure == true and 1 or 0 )
 
-	ExportScript.Tools.SendData("722", lMCPState.HydraulicsFailure == true and 1 or 0 )
-	ExportScript.Tools.SendData("723", lMCPState.AutopilotFailure == true and 1 or 0 )
-	ExportScript.Tools.SendData("724", lMCPState.FuelTankDamage == true and 1 or 0 )
-	ExportScript.Tools.SendData("725", lMCPState.CanopyOpen == true and 1 or 0 )
+	PWDEV.Tools.SendData("722", lMCPState.HydraulicsFailure == true and 1 or 0 )
+	PWDEV.Tools.SendData("723", lMCPState.AutopilotFailure == true and 1 or 0 )
+	PWDEV.Tools.SendData("724", lMCPState.FuelTankDamage == true and 1 or 0 )
+	PWDEV.Tools.SendData("725", lMCPState.CanopyOpen == true and 1 or 0 )
 
-	ExportScript.Tools.SendData("726", lMCPState.StallSignalization == true and 1 or 0 )
-	ExportScript.Tools.SendData("727", lMCPState.AutopilotOn == true and 1 or 0 )
-	ExportScript.Tools.SendData("709", lMCPState.LeftWingPumpFailure == true and 1 or 0 )
-	ExportScript.Tools.SendData("710", lMCPState.RightWingPumpFailure == true and 1 or 0)
+	PWDEV.Tools.SendData("726", lMCPState.StallSignalization == true and 1 or 0 )
+	PWDEV.Tools.SendData("727", lMCPState.AutopilotOn == true and 1 or 0 )
+	PWDEV.Tools.SendData("709", lMCPState.LeftWingPumpFailure == true and 1 or 0 )
+	PWDEV.Tools.SendData("710", lMCPState.RightWingPumpFailure == true and 1 or 0)
 
-	ExportScript.Tools.SendData("700", lMCPState.LeftTailPlaneFailure == true and 1 or 0 )
-	ExportScript.Tools.SendData("701", lMCPState.RightTailPlaneFailure == true and 1 or 0 )
-	ExportScript.Tools.SendData("703", lMCPState.LeftEngineFailure == true and 1 or 0 )
-	ExportScript.Tools.SendData("704", lMCPState.RightEngineFailure == true and 1 or 0 )
+	PWDEV.Tools.SendData("700", lMCPState.LeftTailPlaneFailure == true and 1 or 0 )
+	PWDEV.Tools.SendData("701", lMCPState.RightTailPlaneFailure == true and 1 or 0 )
+	PWDEV.Tools.SendData("703", lMCPState.LeftEngineFailure == true and 1 or 0 )
+	PWDEV.Tools.SendData("704", lMCPState.RightEngineFailure == true and 1 or 0 )
 
-	ExportScript.Tools.SendData("705", lMCPState.LeftAileronFailure == true and 1 or 0 )
-	ExportScript.Tools.SendData("706", lMCPState.RightAileronFailure == true and 1 or 0 )
-	ExportScript.Tools.SendData("707", lMCPState.LeftMainPumpFailure == true and 1 or 0 )
-	ExportScript.Tools.SendData("708", lMCPState.RightMainPumpFailure == true and 1 or 0 )
+	PWDEV.Tools.SendData("705", lMCPState.LeftAileronFailure == true and 1 or 0 )
+	PWDEV.Tools.SendData("706", lMCPState.RightAileronFailure == true and 1 or 0 )
+	PWDEV.Tools.SendData("707", lMCPState.LeftMainPumpFailure == true and 1 or 0 )
+	PWDEV.Tools.SendData("708", lMCPState.RightMainPumpFailure == true and 1 or 0 )
 end

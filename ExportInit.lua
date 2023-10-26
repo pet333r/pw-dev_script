@@ -1,22 +1,21 @@
-ExportScript = {}
 PWDEV = {}
 
-ExportScript.Id = string.format("%08x*",os.time())
+PWDEV.Id = string.format("%08x*",os.time())
 
-ExportScript.PacketSize     = 0
-ExportScript.SendStrings    = {}
-ExportScript.PacketNavSize  = 0
-ExportScript.SendNavStrings	= {}
+PWDEV.PacketSize     = {}
+PWDEV.SendStrings    = {}
+PWDEV.PacketNavSize  = 0
+PWDEV.SendNavStrings	= {}
 
-ExportScript.SendNavAllStrings	= {}
-ExportScript.LastData       = {}
-ExportScript.LastDataAll       = {}
-ExportScript.LastDataNav       = {}
+PWDEV.SendNavAllStrings	= {}
+PWDEV.LastData       = {}
+PWDEV.LastDataAll       = {}
+PWDEV.LastDataNav       = {}
 
-ExportScript.lastExportTimeHI       = 0
-ExportScript.lastExportTimeLI       = 0
+PWDEV.lastExportTimeHI       = 0
+PWDEV.lastExportTimeLI       = 0
 
-ExportScript.NoLuaExportBeforeNextFrame = false
+PWDEV.NoLuaExportBeforeNextFrame = false
 
 local PrevPWDEV                    = {}
 PrevPWDEV.LuaExportStart           = LuaExportStart
@@ -26,10 +25,8 @@ PrevPWDEV.LuaExportAfterNextFrame  = LuaExportAfterNextFrame
 PrevPWDEV.LuaExportActivityNextEvent = LuaExportActivityNextEvent
 
 local versionFile = lfs.writedir()..[[Scripts\pw-dev_script\version]]
-local minConfig = "2023.02.11"
-
 local function GetConfigFileVersion()
-    local file = io.open(lfs.writedir()..[[Scripts\pw-dev_script\Config.lua]], "r")
+	local file = io.open(lfs.writedir()..[[Scripts\pw-dev_script\Config.lua]], "r")
 	if (file ~= nil) then
 		content = file:read("*all")
 		file:flush()
@@ -47,63 +44,95 @@ local function GetConfigFileVersion()
 	end
 end
 
-local function getTimestampFromDate(date)
-    if (date == 0) then
-        return 0
-    else
-        local pattern = "(%d+).(%d+).(%d+)"
-        local dyear, dmonth, dday = date:match(pattern)
-        local timestamp = os.time({year = dyear, month = dmonth, day = dday})
-        return timestamp
-    end
-end
 
 local configFileVer = GetConfigFileVersion()
 
-local minTime = getTimestampFromDate(minConfig)
-local cfgTime = getTimestampFromDate(configFileVer)
 
 dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Init.lua]])
 dofile(lfs.writedir()..[[Scripts\pw-dev_script\Config.lua]])
-ExportScript.utf8 = dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\utf8.lua]])
+PWDEV.utf8 = dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\utf8.lua]])
 dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Tools.lua]])
 dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Fdr.lua]])
 dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Maps.lua]])
 
-local separator = ExportScript.Config.Separator
+for i = 1, #PWDEV.Config.Device, 1 do
+	PWDEV.PacketSize[i]  = 0
+	PWDEV.SendStrings[i] = {}
+	PWDEV.LastData[i]    = {}
+end
 
-ExportScript.FoundDCSModule = false
-ExportScript.FoundFCModule  = false
-ExportScript.FoundNoModul   = true
+local separator = PWDEV.Config.Separator
 
-LuaExportStart = function()
-	package.path  = package.path..";.\\LuaSocket\\?.lua"
-	package.cpath = package.cpath..";.\\LuaSocket\\?.dll"
+PWDEV.FoundDCSModule = false
+PWDEV.FoundFCModule  = false
+PWDEV.FoundNoModul   = true
 
-	ExportScript.Init.CheckDcs()
+package.path  = package.path..";.\\LuaSocket\\?.lua"
+package.cpath = package.cpath..";.\\LuaSocket\\?.dll"
+
+function PWDEV.Start()
+	PWDEV.Init.CheckDcs()
 
 	local version = LoGetVersionInfo()
-	ExportScript.Init.CheckDcsVersionId(version)
+	PWDEV.Init.CheckDcsVersionId(version)
 
-	if (ExportScript.Fdr ~= nil) then
-		if (ExportScript.Config.WriteNavFile ~= nil and ExportScript.Config.WriteNavFile == true) then
-			ExportScript.Fdr.CsvFileInit()
-			ExportScript.Fdr.NavFileInit(ExportScript.Init.VersionId)
+	if (PWDEV.Fdr ~= nil) then
+		if (PWDEV.Config.WriteNavFile ~= nil and PWDEV.Config.WriteNavFile == true) then
+			PWDEV.Fdr.CsvFileInit()
+			PWDEV.Fdr.NavFileInit(PWDEV.Init.VersionId)
 		end
 	end
 	
-	ExportScript.Tools.createUDPSender()
-	ExportScript.Tools.createUDPListner()
+	PWDEV.Tools.createUDPSender()
+	PWDEV.Tools.createUDPListner()
 
-	ExportScript.AF = {}
+	PWDEV.AF = {}
 
-	ExportScript.NoLuaExportBeforeNextFrame = false
-	ExportScript.Tools.SelectModule()
+	PWDEV.NoLuaExportBeforeNextFrame = false
+	PWDEV.Tools.SelectModule()
 
-	local scriptVer = ExportScript.Tools.GetFileData(versionFile, 1)
-	ExportScript.Tools.playerId = ExportScript.Tools.GetPlayerId()
+	local scriptVer = PWDEV.Tools.GetFileData(versionFile, 1)
+	PWDEV.Tools.playerId = PWDEV.Tools.GetPlayerId()
 
-	ExportScript.Tools.SendShortData("EX=ON;Ver="..ExportScript.Init.VersionStr .. separator.."VId="..ExportScript.Init.VersionId..separator.."MOE="..ExportScript.Init.CheckObjectExport()..separator.."MSE="..ExportScript.Init.CheckSensorExport()..separator.."MPE="..ExportScript.Init.CheckOwnshipExport()..separator.."SV="..scriptVer..separator.."CV="..configFileVer..separator)
+	PWDEV.Tools.SendShortData("EX=ON;Ver="..PWDEV.Init.VersionStr .. separator.."VId="..PWDEV.Init.VersionId..separator.."MOE="..PWDEV.Init.CheckObjectExport()..separator.."MSE="..PWDEV.Init.CheckSensorExport()..separator.."MPE="..PWDEV.Init.CheckOwnshipExport()..separator.."SV="..scriptVer..separator.."CV="..configFileVer..separator)
+
+end
+
+function PWDEV.ActivityNextEvent()
+	PWDEV.coProcessArguments_BeforeNextFrame = coroutine.create(PWDEV.Tools.ProcessInput)
+	coStatus = coroutine.resume(PWDEV.coProcessArguments_BeforeNextFrame)
+
+	if PWDEV.NoLuaExportBeforeNextFrame == false then
+		PWDEV.Tools.ProcessOutput()
+	end
+end
+
+function PWDEV.Stop()
+	for i=1, #PWDEV.Config.Device, 1 do
+		PWDEV.Tools.FlushDataDevice(i)
+	end
+	PWDEV.Tools.SendShortData("EX=OF")
+
+	PWDEV.UDPsender:close()
+	if PWDEV.Config.Listener then
+		PWDEV.UDPListener:close()
+	end
+	
+	PWDEV.ModuleName   = nil
+	PWDEV.FoundNoModul = false
+
+	if (PWDEV.Fdr ~= nil) then
+		if (PWDEV.Config.WriteNavFile ~= nil and PWDEV.Config.WriteNavFile == true) then
+			PWDEV.Fdr.CsvFileEnd()
+			PWDEV.Fdr.NavFileEnd()
+		end
+	end
+end
+
+LuaExportStart = function()
+	local status, err = pcall(function()
+		PWDEV.Start()
+	end)
 
 	if PrevPWDEV.LuaExportStart then
 		PrevPWDEV.LuaExportStart()
@@ -117,8 +146,8 @@ function LuaExportBeforeNextFrame()
 end
 
 function LuaExportAfterNextFrame()
-	if ExportScript.NoLuaExportBeforeNextFrame then
-		ExportScript.Tools.ProcessOutput()
+	if PWDEV.NoLuaExportBeforeNextFrame then
+		PWDEV.Tools.ProcessOutput()
 	end
 
 	if PrevPWDEV.LuaExportAfterNextFrame then
@@ -129,41 +158,24 @@ end
 function LuaExportActivityNextEvent(currenttime)
 	local tNext = currenttime
 
-	ExportScript.coProcessArguments_BeforeNextFrame = coroutine.create(ExportScript.Tools.ProcessInput)
-	coStatus = coroutine.resume(ExportScript.coProcessArguments_BeforeNextFrame)
+	local status, err = pcall(function()
+		PWDEV.ActivityNextEvent()
+	end)
 
-	if ExportScript.NoLuaExportBeforeNextFrame == false then
-		ExportScript.Tools.ProcessOutput()
-	end
 
-	tNext = tNext + ExportScript.Config.ExportInterval
 
-	if PrevPWDEV.LuaExportActivityNextEvent then
-		tNext = PrevPWDEV.LuaExportActivityNextEvent(currenttime)
-	end
+
+	tNext = tNext + PWDEV.Config.ExportInterval
 
 	return tNext
 end
 
 LuaExportStop = function()
-	ExportScript.Tools.SendShortData("EX=OF")
+	local status, err = pcall(function()
+		PWDEV.Stop()
+	end)
 
-	ExportScript.Tools.FlushData()
 
-	ExportScript.UDPsender:close()
-	if ExportScript.Config.Listener then
-		ExportScript.UDPListener:close()
-	end
-	
-	ExportScript.ModuleName   = nil
-	ExportScript.FoundNoModul = false
-
-	if (ExportScript.Fdr ~= nil) then
-		if (ExportScript.Config.WriteNavFile ~= nil and ExportScript.Config.WriteNavFile == true) then
-			ExportScript.Fdr.CsvFileEnd()
-			ExportScript.Fdr.NavFileEnd()
-		end
-	end
 
 	if PrevPWDEV.LuaExportStop then
 		PrevPWDEV.LuaExportStop()

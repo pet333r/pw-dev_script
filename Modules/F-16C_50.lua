@@ -1,7 +1,10 @@
  -- F-16C_50
-ExportScript.FoundDCSModule = true
 
-ExportScript.ConfigEveryFrameArguments = 
+ local coerce_nil_to_string = PWDEV.Tools.coerce_nil_to_string
+
+PWDEV.FoundDCSModule = true
+
+PWDEV.ConfigEveryFrameArguments = 
 {
 	-- CMDS
 	[365] = "%1d", 	-- O1 Expendable Category Switch, ON/OFF
@@ -200,7 +203,7 @@ ExportScript.ConfigEveryFrameArguments =
 	[721] = "%1d", -- DL Switch, DL/OFF
 	[723] = "%.1f", -- MIDS LVT Knob, ZERO/OFF/ON
 }
-ExportScript.ConfigArguments = 
+PWDEV.ConfigArguments = 
 {
 }
 
@@ -246,7 +249,7 @@ local function buildPFLDLine(line)
 	-- Get Layout Information for line being built
 	local PFLDLayoutLine = PFLDLayout[line]
 	-- Get Exported PFLD Objects
-	local PFLD_fields = ExportScript.Tools.getListIndicatorValue(7) or {}
+	local PFLD_fields = PWDEV.Tools.getListIndicatorValue(7) or {}
 	local layout
 	local label
 	local value
@@ -265,10 +268,10 @@ local function buildPFLDLine(line)
 				value = v
 			end
 
-			dataLine = ExportScript.Tools.mergeString(dataLine, value, layout[1])
+			dataLine = PWDEV.Tools.mergeString(dataLine, value, layout[1])
 
 			if layout[3] ~= nil and layout[3] > 0 then
-				dataLine = ExportScript.Tools.mergeString(dataLine, value, layout[3])
+				dataLine = PWDEV.Tools.mergeString(dataLine, value, layout[3])
 			end
 		end
 	end
@@ -1295,7 +1298,7 @@ local function buildDEDLine(line)
 		-- Get Layout Information for line being built
 		local DEDLayoutLine = DEDLayout[line]
 		-- Get Exported DED Objects
-		local DED_fields = ExportScript.Tools.getListIndicatorValue(6) or {}
+		local DED_fields = PWDEV.Tools.getListIndicatorValue(6) or {}
 		local layout
 		local label
 		local value
@@ -1378,12 +1381,12 @@ local function buildDEDLine(line)
 					value = v
 				end
 				
-				-- Add Value to dataLine using ExportScript.Tools.mergeString because some values are are supposed to fit within others
-				dataLine = ExportScript.Tools.mergeString(dataLine, value, layout[1])
+				-- Add Value to dataLine using PWDEV.Tools.mergeString because some values are are supposed to fit within others
+				dataLine = PWDEV.Tools.mergeString(dataLine, value, layout[1])
 	
 				--If layout value 3 > 0 we need to duplicate this item at position specific in value 3 (this is for "*"s marking enterable fields
 				if layout[3] ~= nil and layout[3] > 0 then
-					dataLine = ExportScript.Tools.mergeString(dataLine, value, layout[3])
+					dataLine = PWDEV.Tools.mergeString(dataLine, value, layout[3])
 				end
 			end
 		end
@@ -1391,20 +1394,20 @@ local function buildDEDLine(line)
 end
 
 -- Unicode UTF-16
-function ExportScript.replaceSymbols(s)
+function PWDEV.replaceSymbols(s)
 	s = s:gsub("a", "¦") -- INC_DEC		"±"
 	s = s:gsub("o", "°") -- DEGREE		"°"
 	return s
 end
 
 local function get_UHF_CHAN()
-    local ind = ExportScript.Tools.getListIndicatorValue(10)
-    if ind == nil then return "" end
+    local ind = PWDEV.Tools.getListIndicatorValue(10)
+    if ind == nil then return " " end
     return ind["txtPresetChannel"]
 end
 
 local function get_UHF_FREQUENCY()
-    local UHF = ExportScript.Tools.getListIndicatorValue(11)
+    local UHF = PWDEV.Tools.getListIndicatorValue(11)
     if UHF and UHF.txtFreqStatus then
         local UHF_Freq = UHF.txtFreqStatus
         local UHF_dot =  UHF.txtDot
@@ -1415,7 +1418,7 @@ local function get_UHF_FREQUENCY()
 end
 
 -- Pointed to by ProcessDCSHighImportance
-function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
+function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
 	-- DED Displays
 	-- local DEDLine1 = ""
 	-- local DEDLine2 = ""
@@ -1430,58 +1433,46 @@ function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
 	local CMDS_FL_Amount
 
 	-- Build DED Display Lines
-	-- DEDLine1 = ExportScript.replaceSymbols(buildDEDLine(1))
-	-- DEDLine2 = ExportScript.replaceSymbols(buildDEDLine(2))
-	-- DEDLine3 = ExportScript.replaceSymbols(buildDEDLine(3))
-	-- DEDLine4 = ExportScript.replaceSymbols(buildDEDLine(4))
-	-- DEDLine5 = ExportScript.replaceSymbols(buildDEDLine(5))
+	-- DEDLine1 = PWDEV.replaceSymbols(buildDEDLine(1))
+	-- DEDLine2 = PWDEV.replaceSymbols(buildDEDLine(2))
+	-- DEDLine3 = PWDEV.replaceSymbols(buildDEDLine(3))
+	-- DEDLine4 = PWDEV.replaceSymbols(buildDEDLine(4))
+	-- DEDLine5 = PWDEV.replaceSymbols(buildDEDLine(5))
 
-	ExportScript.Tools.SendData(2101, ExportScript.replaceSymbols(buildDEDLine(1)))
-	ExportScript.Tools.SendData(2102, ExportScript.replaceSymbols(buildDEDLine(2)))
-	ExportScript.Tools.SendData(2103, ExportScript.replaceSymbols(buildDEDLine(3)))
-	ExportScript.Tools.SendData(2104, ExportScript.replaceSymbols(buildDEDLine(4)))
-	ExportScript.Tools.SendData(2105, ExportScript.replaceSymbols(buildDEDLine(5)))
+	PWDEV.Tools.SendData(2101, PWDEV.replaceSymbols(buildDEDLine(1)))
+	PWDEV.Tools.SendData(2102, PWDEV.replaceSymbols(buildDEDLine(2)))
+	PWDEV.Tools.SendData(2103, PWDEV.replaceSymbols(buildDEDLine(3)))
+	PWDEV.Tools.SendData(2104, PWDEV.replaceSymbols(buildDEDLine(4)))
+	PWDEV.Tools.SendData(2105, PWDEV.replaceSymbols(buildDEDLine(5)))
 
-	ExportScript.Tools.SendData(2106, ExportScript.replaceSymbols(buildPFLDLine(1)))
-	ExportScript.Tools.SendData(2107, ExportScript.replaceSymbols(buildPFLDLine(2)))
-	ExportScript.Tools.SendData(2108, ExportScript.replaceSymbols(buildPFLDLine(3)))
-	ExportScript.Tools.SendData(2109, ExportScript.replaceSymbols(buildPFLDLine(4)))
-	ExportScript.Tools.SendData(2110, ExportScript.replaceSymbols(buildPFLDLine(5)))
+	PWDEV.Tools.SendData(2106, PWDEV.replaceSymbols(buildPFLDLine(1)))
+	PWDEV.Tools.SendData(2107, PWDEV.replaceSymbols(buildPFLDLine(2)))
+	PWDEV.Tools.SendData(2108, PWDEV.replaceSymbols(buildPFLDLine(3)))
+	PWDEV.Tools.SendData(2109, PWDEV.replaceSymbols(buildPFLDLine(4)))
+	PWDEV.Tools.SendData(2110, PWDEV.replaceSymbols(buildPFLDLine(5)))
 
 	-- UHF
-	ExportScript.Tools.SendData(2305, get_UHF_CHAN())
-	ExportScript.Tools.SendData(2306, get_UHF_FREQUENCY())
+	PWDEV.Tools.SendData(2305, get_UHF_CHAN())
+	PWDEV.Tools.SendData(2306, get_UHF_FREQUENCY())
 
 	-- CMDS
-	local cmds = ExportScript.Tools.getListIndicatorValue(16) or {}
+	local cmds = PWDEV.Tools.getListIndicatorValue(16) or {}
 	CMDS_O1_Amount = "    "
 	CMDS_O2_Amount = "    "
 	CMDS_CH_Amount = "    "
 	CMDS_FL_Amount = "    "
 
-	CMDS_O1_Amount = ExportScript.Tools.coerce_nil_to_string(cmds.CMDS_O1_Amount)
-	CMDS_O2_Amount = ExportScript.Tools.coerce_nil_to_string(cmds.CMDS_O2_Amount)
-	CMDS_CH_Amount = ExportScript.Tools.coerce_nil_to_string(cmds.CMDS_CH_Amount)
-	CMDS_FL_Amount = ExportScript.Tools.coerce_nil_to_string(cmds.CMDS_FL_Amount)
+	CMDS_O1_Amount = coerce_nil_to_string(cmds.CMDS_O1_Amount)
+	CMDS_O2_Amount = coerce_nil_to_string(cmds.CMDS_O2_Amount)
+	CMDS_CH_Amount = coerce_nil_to_string(cmds.CMDS_CH_Amount)
+	CMDS_FL_Amount = coerce_nil_to_string(cmds.CMDS_FL_Amount)
 
-	ExportScript.Tools.SendData(2301, CMDS_O1_Amount)
-	ExportScript.Tools.SendData(2302, CMDS_O2_Amount)
-	ExportScript.Tools.SendData(2303, CMDS_CH_Amount)
-	ExportScript.Tools.SendData(2304, CMDS_FL_Amount)
-
-	-- local val = ExportScript.Tools.getListIndicatorValue(14)
-	-- if not val then
-	-- 	return
-	-- end
-	-- local val1txt = val["CourseDeviation _plaseholder"]
-	-- local val1 = val1txt
-	-- ExportScript.Tools.SendData(2501, val1)
-
+	PWDEV.Tools.SendData(2301, CMDS_O1_Amount)
+	PWDEV.Tools.SendData(2302, CMDS_O2_Amount)
+	PWDEV.Tools.SendData(2303, CMDS_CH_Amount)
+	PWDEV.Tools.SendData(2304, CMDS_FL_Amount)
 end
 
--- Pointed to by ExportScript.ProcessDCSConfigLowImportance
-function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
-	-- -- General
-	-- ExportScript.Tools.SendData(2901, -ExportScript.Tools.GetArgumentsValue(17, "%.2f"))
-	-- ExportScript.Tools.SendData(2902, ExportScript.Tools.GetArgumentsValue(18, "%.2f"))
+-- Pointed to by PWDEV.ProcessDCSConfigLowImportance
+function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
 end

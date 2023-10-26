@@ -1,7 +1,7 @@
 -- AJS37 Viggen
-ExportScript.FoundDCSModule = true
+PWDEV.FoundDCSModule = true
 
-ExportScript.ConfigEveryFrameArguments =
+PWDEV.ConfigEveryFrameArguments =
 {
     -- Navigation Panel
     [200] = "%.1f",	-- Datapanel Selector
@@ -60,21 +60,18 @@ ExportScript.ConfigEveryFrameArguments =
     [1206] = "%1d", -- DME Selector
 }
 
-ExportScript.ConfigArguments =
+PWDEV.ConfigArguments =
 {
 }
 
-function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
+function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
 
-function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
-    local nav = ExportScript.Tools.getListIndicatorValue(2)
+function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
+    local nav = PWDEV.Tools.getListIndicatorValue(2)
     if not nav then
         return
     end
-    ExportScript.Tools.SendData(2001, ExportScript.Tools.DisplayFormat(nav.data1 .. nav.data2 .. nav.data3 .. nav.data4 .. nav.data5 .. nav.data6, 6))
+    PWDEV.Tools.SendData(2001, PWDEV.Tools.DisplayFormat(nav.data1 .. nav.data2 .. nav.data3 .. nav.data4 .. nav.data5 .. nav.data6, 6))
 
-    -- -- General
-	-- ExportScript.Tools.SendData(2901, ExportScript.Tools.GetArgumentsValue(105, "%.2f"))
-	-- ExportScript.Tools.SendData(2902, ExportScript.Tools.GetArgumentsValue(107, "%.2f"))
 end

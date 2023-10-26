@@ -1,25 +1,25 @@
-ExportScript.Init = {}
+PWDEV.Init = {}
 
-ExportScript.Init.VersionStr = 2
-ExportScript.Init.VersionId = 0
+PWDEV.Init.VersionStr = 2
+PWDEV.Init.VersionId = 0
 
-function ExportScript.Init.CheckDcs()
+function PWDEV.Init.CheckDcs()
 	if (string.match(lfs.writedir(), "openbeta")) then
-		ExportScript.Init.VersionStr = 1
+		PWDEV.Init.VersionStr = 1
 	else
-		ExportScript.Init.VersionStr = 0
+		PWDEV.Init.VersionStr = 0
 	end
 end
 
-function ExportScript.Init.CheckDcsVersionId(version)
-	ExportScript.Init.VersionId = string.format("%d.%d.%d.%d",
+function PWDEV.Init.CheckDcsVersionId(version)
+	PWDEV.Init.VersionId = string.format("%d.%d.%d.%d",
 			version.FileVersion[1],
 			version.FileVersion[2],
 			version.FileVersion[3], -- head  revision (Continuously growth)
 			version.FileVersion[4]) -- build number   (Continuously growth)
 end
 
-function ExportScript.Init.CheckObjectExport()
+function PWDEV.Init.CheckObjectExport()
     local isObjects = LoIsObjectExportAllowed()
     if isObjects == nil then
 		return 0
@@ -30,7 +30,7 @@ function ExportScript.Init.CheckObjectExport()
     end
 end
 
-function ExportScript.Init.CheckSensorExport()
+function PWDEV.Init.CheckSensorExport()
     local isSensors = LoIsSensorExportAllowed()
     if isSensors == nil then
 		return 0
@@ -41,7 +41,7 @@ function ExportScript.Init.CheckSensorExport()
     end
 end
 
-function ExportScript.Init.CheckOwnshipExport()
+function PWDEV.Init.CheckOwnshipExport()
     local isOwnship = LoIsOwnshipExportAllowed()
     if isOwnship == nil then
 		return 0

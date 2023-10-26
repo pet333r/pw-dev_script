@@ -1,7 +1,10 @@
 -- Ka-50
-ExportScript.FoundDCSModule = true
 
-ExportScript.ConfigEveryFrameArguments = 
+local coerce_nil_to_string = PWDEV.Tools.coerce_nil_to_string
+
+PWDEV.FoundDCSModule = true
+
+PWDEV.ConfigEveryFrameArguments = 
 {
     -- Datalink
     [159] = "%.1f", -- Send/Memory LED
@@ -60,7 +63,7 @@ ExportScript.ConfigEveryFrameArguments =
 	[327] = "%.1f", -- NAV Brightness
 }
 
-ExportScript.ConfigArguments =
+PWDEV.ConfigArguments =
 {
     -- warnings
     [47] = "%d", -- LASER WARNING (red)
@@ -148,55 +151,55 @@ local function getEKRAN_txt2_line(value)
 	return indEKRAN.txt_2[value] or "          "
 end
 
-function ExportScript.ProcessDCSConfigHighImportance(mainPanelDevice)
-    indEKRAN = ExportScript.Tools.parseListIndicatorList(4)
-    ExportScript.Tools.SendData(2041, getEKRAN_txt1_line(1))
-    ExportScript.Tools.SendData(2042, getEKRAN_txt1_line(2))
-    ExportScript.Tools.SendData(2043, getEKRAN_txt1_line(3))
-    ExportScript.Tools.SendData(2044, getEKRAN_txt1_line(4))
+function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
+    indEKRAN = PWDEV.Tools.parseListIndicatorList(4)
+    PWDEV.Tools.SendData(2041, getEKRAN_txt1_line(1))
+    PWDEV.Tools.SendData(2042, getEKRAN_txt1_line(2))
+    PWDEV.Tools.SendData(2043, getEKRAN_txt1_line(3))
+    PWDEV.Tools.SendData(2044, getEKRAN_txt1_line(4))
 
-    ExportScript.Tools.SendData(2045, getEKRAN_txt2_line(1))
-    ExportScript.Tools.SendData(2046, getEKRAN_txt2_line(2))
-    ExportScript.Tools.SendData(2047, getEKRAN_txt2_line(3))
-    ExportScript.Tools.SendData(2048, getEKRAN_txt2_line(4))
+    PWDEV.Tools.SendData(2045, getEKRAN_txt2_line(1))
+    PWDEV.Tools.SendData(2046, getEKRAN_txt2_line(2))
+    PWDEV.Tools.SendData(2047, getEKRAN_txt2_line(3))
+    PWDEV.Tools.SendData(2048, getEKRAN_txt2_line(4))
     
-    ExportScript.Tools.SendData(2049, getEKRAN_memory())
+    PWDEV.Tools.SendData(2049, getEKRAN_memory())
     -- jeżeli jest 1 to wyświetlane są dane z EKRAN #2
-    ExportScript.Tools.SendData(2050, getEKRAN_queue())
-    ExportScript.Tools.SendData(2051, getEKRAN_failure())
+    PWDEV.Tools.SendData(2050, getEKRAN_queue())
+    PWDEV.Tools.SendData(2051, getEKRAN_failure())
 end
 
-function ExportScript.ProcessDCSConfigLowImportance(mainPanelDevice)
+function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
     -- ABRIS
-    local ABRIS = ExportScript.Tools.getListIndicatorValue(3) or {}
-    ExportScript.Tools.SendData(2031, ExportScript.Tools.coerce_nil_to_string(ABRIS.button1))
-    ExportScript.Tools.SendData(2032, ExportScript.Tools.coerce_nil_to_string(ABRIS.button2))
-    ExportScript.Tools.SendData(2033, ExportScript.Tools.coerce_nil_to_string(ABRIS.button3))
-    ExportScript.Tools.SendData(2034, ExportScript.Tools.coerce_nil_to_string(ABRIS.button4))
-    ExportScript.Tools.SendData(2035, ExportScript.Tools.coerce_nil_to_string(ABRIS.button5))
+    local ABRIS = PWDEV.Tools.getListIndicatorValue(3) or {}
+    PWDEV.Tools.SendData(2031, PWDEV.Tools.coerce_nil_to_string(ABRIS.button1))
+    PWDEV.Tools.SendData(2032, PWDEV.Tools.coerce_nil_to_string(ABRIS.button2))
+    PWDEV.Tools.SendData(2033, PWDEV.Tools.coerce_nil_to_string(ABRIS.button3))
+    PWDEV.Tools.SendData(2034, PWDEV.Tools.coerce_nil_to_string(ABRIS.button4))
+    PWDEV.Tools.SendData(2035, PWDEV.Tools.coerce_nil_to_string(ABRIS.button5))
     -- PVI-800 Navigation Control Panel 
-    local indPVI = ExportScript.Tools.getListIndicatorValue(5)
+    local indPVI = PWDEV.Tools.getListIndicatorValue(5)
 
     if not indPVI then
         return
     end
-    local pviLine1      = ExportScript.Tools.coerce_nil_to_string(indPVI.txt_VIT)
-    local pviLine2      = ExportScript.Tools.coerce_nil_to_string(indPVI.txt_NIT)
-    local pviLine1Point = ExportScript.Tools.coerce_nil_to_string(indPVI.txt_OIT_PPM)
-    local pviLine2Point = ExportScript.Tools.coerce_nil_to_string(indPVI.txt_OIT_NOT)
-    ExportScript.Tools.SendData(2008, pviLine1)
-    ExportScript.Tools.SendData(2009, pviLine2)
-    ExportScript.Tools.SendData(2010, pviLine1Point)
-    ExportScript.Tools.SendData(2011, pviLine2Point)
+    local pviLine1      = coerce_nil_to_string(indPVI.txt_VIT)
+    local pviLine2      = coerce_nil_to_string(indPVI.txt_NIT)
+    local pviLine1Point = coerce_nil_to_string(indPVI.txt_OIT_PPM)
+    local pviLine2Point = coerce_nil_to_string(indPVI.txt_OIT_NOT)
+    PWDEV.Tools.SendData(2008, pviLine1)
+    PWDEV.Tools.SendData(2009, pviLine2)
+    PWDEV.Tools.SendData(2010, pviLine1Point)
+    PWDEV.Tools.SendData(2011, pviLine2Point)
 
-    ExportScript.Tools.SendData(801, ExportScript.Tools.coerce_nil_to_string(indPVI.txt_VIT_apostrophe1))
-    ExportScript.Tools.SendData(802, ExportScript.Tools.coerce_nil_to_string(indPVI.txt_VIT_apostrophe2))
-    ExportScript.Tools.SendData(803, ExportScript.Tools.coerce_nil_to_string(indPVI.txt_NIT_apostrophe1))
-    ExportScript.Tools.SendData(804, ExportScript.Tools.coerce_nil_to_string(indPVI.txt_NIT_apostrophe2))
+    PWDEV.Tools.SendData(801, coerce_nil_to_string(indPVI.txt_VIT_apostrophe1))
+    PWDEV.Tools.SendData(802, coerce_nil_to_string(indPVI.txt_VIT_apostrophe2))
+    PWDEV.Tools.SendData(803, coerce_nil_to_string(indPVI.txt_NIT_apostrophe1))
+    PWDEV.Tools.SendData(804, coerce_nil_to_string(indPVI.txt_NIT_apostrophe2))
 
-    local Cannon = ExportScript.Tools.getListIndicatorValue(6) or {}
-    ExportScript.Tools.SendData(2061, ExportScript.Tools.coerce_nil_to_string(Cannon.txt_cannon_count))
+    local Cannon = PWDEV.Tools.getListIndicatorValue(6) or {}
+    PWDEV.Tools.SendData(2061, coerce_nil_to_string(Cannon.txt_cannon_count))
 
-    local UV26 = ExportScript.Tools.getListIndicatorValue(7) or {}
-    ExportScript.Tools.SendData(2071, ExportScript.Tools.coerce_nil_to_string(UV26.txt_digits))
+    local UV26 = PWDEV.Tools.getListIndicatorValue(7) or {}
+    PWDEV.Tools.SendData(2071, coerce_nil_to_string(UV26.txt_digits))
 end
