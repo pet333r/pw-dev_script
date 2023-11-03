@@ -1453,5 +1453,7 @@ function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
 	send(2302, CMDS_O2_Amount)
 	send(2303, CMDS_CH_Amount)
 	send(2304, CMDS_FL_Amount)
+end
+
 function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
 end
