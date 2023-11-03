@@ -2,9 +2,11 @@
 
 -- init arg 398
 
+local send = PWDEV.Tools.SendData
+
 PWDEV.FoundDCSModule = true
 
-PWDEV.ConfigEveryFrameArguments = 
+PWDEV.ConfigEveryFrameArguments =
 {
     -- Warnings
     [1] = "%1d",  -- Pitot Tube Warning

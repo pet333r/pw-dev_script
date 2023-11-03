@@ -1,7 +1,9 @@
 -- Mirage 2000C
+local send = PWDEV.Tools.SendData
+
 PWDEV.FoundDCSModule = true
 
-PWDEV.ConfigEveryFrameArguments = 
+PWDEV.ConfigEveryFrameArguments =
 {
 	[199] = "%d",	-- master warning
 	[200] = "%d",	-- master caution
@@ -82,6 +84,7 @@ PWDEV.ConfigEveryFrameArguments =
 	[523] = "%1d",	--  Alternator 2 Switch
 	[524] = "%1d",	--  Lights Test Switch
 
+	[501] = "%1d",	--  blank 3x
 	[525] = "%1d",	--  BATT
 	[526] = "%1d",	--  TR
 	[527] = "%1d",	--  ALT 1
@@ -196,7 +199,7 @@ PWDEV.ConfigEveryFrameArguments =
 	[994] = "%d",	-- EO
 }
 
-PWDEV.ConfigArguments = 
+PWDEV.ConfigArguments =
 {
 }
 
@@ -274,56 +277,56 @@ function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
 
 function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
-	PWDEV.Tools.SendData(2011, PWDEV.Tools.getListIndicatorValueByName(4, "PCA_LCD_1_0", 3))
-	PWDEV.Tools.SendData(2012, PWDEV.Tools.getListIndicatorValueByName(4, "PCA_LCD_1_1", 3))
-	PWDEV.Tools.SendData(2013, PWDEV.Tools.getListIndicatorValueByName(4, "PCA_LCD_1_2", 3))
-	PWDEV.Tools.SendData(2014, PWDEV.Tools.getListIndicatorValueByName(4, "PCA_LCD_1_3", 3))
-	PWDEV.Tools.SendData(2015, PWDEV.Tools.getListIndicatorValueByName(4, "PCA_LCD_1_4", 3))
+	send(2011, PWDEV.Tools.getListIndicatorValueByName(4, "PCA_LCD_1_0", 3))
+	send(2012, PWDEV.Tools.getListIndicatorValueByName(4, "PCA_LCD_1_1", 3))
+	send(2013, PWDEV.Tools.getListIndicatorValueByName(4, "PCA_LCD_1_2", 3))
+	send(2014, PWDEV.Tools.getListIndicatorValueByName(4, "PCA_LCD_1_3", 3))
+	send(2015, PWDEV.Tools.getListIndicatorValueByName(4, "PCA_LCD_1_4", 3))
 
-	PWDEV.Tools.SendData(2021, PWDEV.Tools.getListIndicatorValueByName(5, "PCA_LCD_2_0", 3))
-	PWDEV.Tools.SendData(2022, PWDEV.Tools.getListIndicatorValueByName(5, "PCA_LCD_2_1", 3))
-	PWDEV.Tools.SendData(2023, PWDEV.Tools.getListIndicatorValueByName(5, "PCA_LCD_2_2", 3))
-	PWDEV.Tools.SendData(2024, PWDEV.Tools.getListIndicatorValueByName(5, "PCA_LCD_2_3", 3))
-	PWDEV.Tools.SendData(2025, PWDEV.Tools.getListIndicatorValueByName(5, "PCA_LCD_2_4", 3))
+	send(2021, PWDEV.Tools.getListIndicatorValueByName(5, "PCA_LCD_2_0", 3))
+	send(2022, PWDEV.Tools.getListIndicatorValueByName(5, "PCA_LCD_2_1", 3))
+	send(2023, PWDEV.Tools.getListIndicatorValueByName(5, "PCA_LCD_2_2", 3))
+	send(2024, PWDEV.Tools.getListIndicatorValueByName(5, "PCA_LCD_2_3", 3))
+	send(2025, PWDEV.Tools.getListIndicatorValueByName(5, "PCA_LCD_2_4", 3))
 
 	-- PCN up
-	PWDEV.Tools.SendData(2031, getPCN2DigitL())		-- up/left 2-digit vertical
-	PWDEV.Tools.SendData(2035, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UL_DIGITS", 6)) -- up/left 5-digit
-	PWDEV.Tools.SendData(2036, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UL_POINTS", 5)) -- dots
+	send(2031, getPCN2DigitL())		-- up/left 2-digit vertical
+	send(2035, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UL_DIGITS", 6)) -- up/left 5-digit
+	send(2036, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UL_POINTS", 5)) -- dots
 
-	PWDEV.Tools.SendData(2033, getPCN2DigitR())		-- up/middle 2-digit vertical
-	PWDEV.Tools.SendData(2037, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UR_DIGITS", 7)) -- up/right 6-digit
-	PWDEV.Tools.SendData(2038, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UR_POINTS", 6)) -- dots
+	send(2033, getPCN2DigitR())		-- up/middle 2-digit vertical
+	send(2037, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UR_DIGITS", 7)) -- up/right 6-digit
+	send(2038, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UR_POINTS", 6)) -- dots
 
 	-- PCN dn
-	PWDEV.Tools.SendData(2041, getPCNValue("PCN_BL_DIGITS", 10))		-- dn/left 2-digit
-	PWDEV.Tools.SendData(2042, getPCNValue("PCN_BR_DIGITS", 10))		-- dn/mid 2-digit
+	send(2041, getPCNValue("PCN_BL_DIGITS", 10))		-- dn/left 2-digit
+	send(2042, getPCNValue("PCN_BR_DIGITS", 10))		-- dn/mid 2-digit
 
 	-- PPA
-	PWDEV.Tools.SendData(2051, getPCNValue("text_PPA_QTY", 6))
-	PWDEV.Tools.SendData(2052, getPCNValue("text_PPA_INT", 6))
+	send(2051, getPCNValue("text_PPA_QTY", 6))
+	send(2052, getPCNValue("text_PPA_INT", 6))
 
 	-- U/VHF
-	PWDEV.Tools.SendData(2055, PWDEV.Tools.getListIndicatorValueByName(8, "text_COM_VHF", 9))
+	send(2055, PWDEV.Tools.getListIndicatorValueByName(8, "text_COM_VHF", 9))
 	-- UHF
-	PWDEV.Tools.SendData(2061, PWDEV.Tools.getListIndicatorValueByName(7, "text_COM_UHF1", 8))
-	PWDEV.Tools.SendData(2062, PWDEV.Tools.getListIndicatorValueByName(7, "text_COM_UHF2", 8))
+	send(2061, PWDEV.Tools.getListIndicatorValueByName(7, "text_COM_UHF1", 8))
+	send(2062, PWDEV.Tools.getListIndicatorValueByName(7, "text_COM_UHF2", 8))
 	-- FUEL
-	PWDEV.Tools.SendData(2071, PWDEV.Tools.getListIndicatorValueByName(3, "txt_fuel_g", 3))
+	send(2071, PWDEV.Tools.getListIndicatorValueByName(3, "txt_fuel_g", 3))
 
 	-- Fuel
 	digits = {}
 	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(349) * 10)
 	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(350) * 10)
 	digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(351) * 10)
-	PWDEV.Tools.SendData(2053, digits[1] .. digits[2] .. digits[3] .. "0")
+	send(2053, digits[1] .. digits[2] .. digits[3] .. "0")
 
 	digits = {}
 	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(352) * 10)
 	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(353) * 10)
 	digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(354) * 10)
-	PWDEV.Tools.SendData(2054, digits[1] .. digits[2] .. digits[3] .. "0")
+	send(2054, digits[1] .. digits[2] .. digits[3] .. "0")
 
 	-- EVF
-	PWDEV.Tools.SendData(2056, PWDEV.Tools.getListIndicatorValueByName(11, "evf-digits", 2))
+	send(2056, PWDEV.Tools.getListIndicatorValueByName(11, "evf-digits", 2))
 end

@@ -1,11 +1,11 @@
 -- TF-51D
 PWDEV.FoundDCSModule = true
 
-PWDEV.ConfigEveryFrameArguments = 
+PWDEV.ConfigEveryFrameArguments =
 {
 }
 
-PWDEV.ConfigArguments = 
+PWDEV.ConfigArguments =
 {
 }
 

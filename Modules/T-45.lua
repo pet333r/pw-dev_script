@@ -1,7 +1,7 @@
 -- VNAO T-45C Goshawk
 PWDEV.FoundDCSModule = true
 
-PWDEV.ConfigEveryFrameArguments = 
+PWDEV.ConfigEveryFrameArguments =
 {
     -- Cautions
     [71] = "%1d", -- SEAT (red)
@@ -79,7 +79,7 @@ PWDEV.ConfigEveryFrameArguments =
     [322] = "%1d", -- AoA indexer Red
 }
 
-PWDEV.ConfigArguments = 
+PWDEV.ConfigArguments =
 {
 }
 

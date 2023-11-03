@@ -1,11 +1,11 @@
 -- Bf-109K-4
 PWDEV.FoundDCSModule = true
 
-PWDEV.ConfigEveryFrameArguments = 
+PWDEV.ConfigEveryFrameArguments =
 {
 }
 
-PWDEV.ConfigArguments = 
+PWDEV.ConfigArguments =
 {
 }
 

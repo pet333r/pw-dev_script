@@ -1,71 +1,73 @@
+local send = PWDEV.Tools.SendData
+
 function PWDEV.AF.FC_AoA_A10A()
     local lAoA = LoGetAngleOfAttack()
 
-    --PWDEV.Tools.SendData(4, string.format("%.1f", lAoA))
+    --send(4, string.format("%.1f", lAoA))
 
     -- yellow  >= 11.5
     -- green >= 7.5 <= 12.6
     -- yellow <= 9
 
     if lAoA > 12.6 then
-        PWDEV.Tools.SendData(540, "1")
-        PWDEV.Tools.SendData(541, "0")
+        send(540, "1")
+        send(541, "0")
     end
 
     if lAoA >= 11.5 and lAoA <= 12.6 then
-        PWDEV.Tools.SendData(540, "1")
-        PWDEV.Tools.SendData(541, "1")
+        send(540, "1")
+        send(541, "1")
     end
 
     if lAoA > 9 and lAoA < 11.5 then
-        PWDEV.Tools.SendData(540, "0")
-        PWDEV.Tools.SendData(541, "1")
-        PWDEV.Tools.SendData(542, "0")
+        send(540, "0")
+        send(541, "1")
+        send(542, "0")
     end
 
     if lAoA >= 7.5 and lAoA <= 9 then
-        PWDEV.Tools.SendData(541, "1")
-        PWDEV.Tools.SendData(542, "1")
+        send(541, "1")
+        send(542, "1")
     end
 
     if lAoA < 7.5 then
-        PWDEV.Tools.SendData(541, "0")
-        PWDEV.Tools.SendData(542, "1")
+        send(541, "0")
+        send(542, "1")
     end
 end
 
 function PWDEV.AF.FC_AoA_Su33()
     local lAoA = LoGetAngleOfAttack()
 
-    --PWDEV.Tools.SendData(4, string.format("%.1f", lAoA))
+    --send(4, string.format("%.1f", lAoA))
 
     -- yellow  <=9
     -- green >= 8.5 <= 10.5
     -- red >= 10
     if lAoA < 8.5 then
-        PWDEV.Tools.SendData(1, "1")
-        PWDEV.Tools.SendData(2, "0")
+        send(1, "1")
+        send(2, "0")
     end
 
     if lAoA >= 8.5 and lAoA <= 9 then
-        PWDEV.Tools.SendData(1, "1")
-        PWDEV.Tools.SendData(2, "1")
+        send(1, "1")
+        send(2, "1")
     end
 
     if lAoA > 9 and lAoA < 10 then
-        PWDEV.Tools.SendData(1, "0")
-		PWDEV.Tools.SendData(2, "1")
-		PWDEV.Tools.SendData(3, "0")
+        send(1, "0")
+		send(2, "1")
+		send(3, "0")
     end
 
     if lAoA >= 10 and lAoA <= 10.5 then
-        PWDEV.Tools.SendData(2, "1")
-        PWDEV.Tools.SendData(3, "1")
+        send(2, "1")
+        send(3, "1")
     end
 
     if lAoA > 10.5 then
-        PWDEV.Tools.SendData(2, "0")
-        PWDEV.Tools.SendData(3, "1")
+        send(2, "0")
+        send(3, "1")
     end
 end
 
@@ -226,7 +228,7 @@ function PWDEV.AF.FC_SPO15RWR()
 
     if PWDEV.AF.SPO15RWRData ~= nil then
         for key, value in pairs(PWDEV.AF.SPO15RWRData) do
-            PWDEV.Tools.SendData(key, value)
+            send(key, value)
         end
     end
 end
@@ -431,38 +433,38 @@ function PWDEV.AF.StatusLamp()
 		return
 	end
 
-	PWDEV.Tools.SendData("702", lMCPState.MasterWarning == true and 1 or 0 )
-	PWDEV.Tools.SendData("711", lMCPState.EOSFailure == true and 1 or 0 )
-	PWDEV.Tools.SendData("712", lMCPState.ECMFailure == true and 1 or 0 )
-	PWDEV.Tools.SendData("713", lMCPState.CannonFailure == true and 1 or 0 )
+	send("702", lMCPState.MasterWarning == true and 1 or 0 )
+	send("711", lMCPState.EOSFailure == true and 1 or 0 )
+	send("712", lMCPState.ECMFailure == true and 1 or 0 )
+	send("713", lMCPState.CannonFailure == true and 1 or 0 )
 
-	PWDEV.Tools.SendData("714", lMCPState.MLWSFailure == true and 1 or 0 )
-	PWDEV.Tools.SendData("715", lMCPState.ACSFailure == true and 1 or 0 )
-	PWDEV.Tools.SendData("716", lMCPState.RadarFailure == true and 1 or 0 )
-	PWDEV.Tools.SendData("717", lMCPState.HelmetFailure == true and 1 or 0 )
+	send("714", lMCPState.MLWSFailure == true and 1 or 0 )
+	send("715", lMCPState.ACSFailure == true and 1 or 0 )
+	send("716", lMCPState.RadarFailure == true and 1 or 0 )
+	send("717", lMCPState.HelmetFailure == true and 1 or 0 )
 
-	PWDEV.Tools.SendData("718", lMCPState.HUDFailure == true and 1 or 0 )
-	PWDEV.Tools.SendData("719", lMCPState.MFDFailure == true and 1 or 0 )
-	PWDEV.Tools.SendData("720", lMCPState.RWSFailure == true and 1 or 0 )
-	PWDEV.Tools.SendData("721", lMCPState.GearFailure == true and 1 or 0 )
+	send("718", lMCPState.HUDFailure == true and 1 or 0 )
+	send("719", lMCPState.MFDFailure == true and 1 or 0 )
+	send("720", lMCPState.RWSFailure == true and 1 or 0 )
+	send("721", lMCPState.GearFailure == true and 1 or 0 )
 
-	PWDEV.Tools.SendData("722", lMCPState.HydraulicsFailure == true and 1 or 0 )
-	PWDEV.Tools.SendData("723", lMCPState.AutopilotFailure == true and 1 or 0 )
-	PWDEV.Tools.SendData("724", lMCPState.FuelTankDamage == true and 1 or 0 )
-	PWDEV.Tools.SendData("725", lMCPState.CanopyOpen == true and 1 or 0 )
+	send("722", lMCPState.HydraulicsFailure == true and 1 or 0 )
+	send("723", lMCPState.AutopilotFailure == true and 1 or 0 )
+	send("724", lMCPState.FuelTankDamage == true and 1 or 0 )
+	send("725", lMCPState.CanopyOpen == true and 1 or 0 )
 
-	PWDEV.Tools.SendData("726", lMCPState.StallSignalization == true and 1 or 0 )
-	PWDEV.Tools.SendData("727", lMCPState.AutopilotOn == true and 1 or 0 )
-	PWDEV.Tools.SendData("709", lMCPState.LeftWingPumpFailure == true and 1 or 0 )
-	PWDEV.Tools.SendData("710", lMCPState.RightWingPumpFailure == true and 1 or 0)
+	send("726", lMCPState.StallSignalization == true and 1 or 0 )
+	send("727", lMCPState.AutopilotOn == true and 1 or 0 )
+	send("709", lMCPState.LeftWingPumpFailure == true and 1 or 0 )
+	send("710", lMCPState.RightWingPumpFailure == true and 1 or 0)
 
-	PWDEV.Tools.SendData("700", lMCPState.LeftTailPlaneFailure == true and 1 or 0 )
-	PWDEV.Tools.SendData("701", lMCPState.RightTailPlaneFailure == true and 1 or 0 )
-	PWDEV.Tools.SendData("703", lMCPState.LeftEngineFailure == true and 1 or 0 )
-	PWDEV.Tools.SendData("704", lMCPState.RightEngineFailure == true and 1 or 0 )
+	send("700", lMCPState.LeftTailPlaneFailure == true and 1 or 0 )
+	send("701", lMCPState.RightTailPlaneFailure == true and 1 or 0 )
+	send("703", lMCPState.LeftEngineFailure == true and 1 or 0 )
+	send("704", lMCPState.RightEngineFailure == true and 1 or 0 )
 
-	PWDEV.Tools.SendData("705", lMCPState.LeftAileronFailure == true and 1 or 0 )
-	PWDEV.Tools.SendData("706", lMCPState.RightAileronFailure == true and 1 or 0 )
-	PWDEV.Tools.SendData("707", lMCPState.LeftMainPumpFailure == true and 1 or 0 )
-	PWDEV.Tools.SendData("708", lMCPState.RightMainPumpFailure == true and 1 or 0 )
+	send("705", lMCPState.LeftAileronFailure == true and 1 or 0 )
+	send("706", lMCPState.RightAileronFailure == true and 1 or 0 )
+	send("707", lMCPState.LeftMainPumpFailure == true and 1 or 0 )
+	send("708", lMCPState.RightMainPumpFailure == true and 1 or 0 )
 end

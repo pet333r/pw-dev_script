@@ -1,10 +1,11 @@
 -- F/A-18C Hornet
 
 local coerce_nil_to_string = PWDEV.Tools.coerce_nil_to_string
+local send = PWDEV.Tools.SendData
 
 PWDEV.FoundDCSModule = true
 
-PWDEV.ConfigEveryFrameArguments = 
+PWDEV.ConfigEveryFrameArguments =
 {
 	-- AoA Indexer Lights
 	[4] = "%.1f",   -- CPT_LTS_AOA_HIGH
@@ -171,7 +172,7 @@ PWDEV.ConfigEveryFrameArguments =
 	[443] = "%.1f", -- INS Switch, OFF/CV/GND/NAV/IFA/GYRO/GB/TEST
 }
 
-PWDEV.ConfigArguments = 
+PWDEV.ConfigArguments =
 {
 	-- Left MDI
 	[51] = "%1d",   -- Left MDI Brightness Selector Knob, OFF/NIGHT/DAY {0.0,0.1,0.2}
@@ -192,11 +193,9 @@ PWDEV.ConfigArguments =
 }
 
 
--- Pointed to by ProcessDCSHighImportance
 function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
 
--- Pointed to by PWDEV.ProcessDCSConfigLowImportance
 function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
 
 	-- UFC Displays
@@ -210,53 +209,53 @@ function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
 		_ufcDisplay.UFC_ScratchPadString2Display = string.gsub(_ufcDisplay.UFC_ScratchPadString2Display, "~", "2") -- need to be 2
 		_ufcDisplay.UFC_ScratchPadString1Display = string.gsub(_ufcDisplay.UFC_ScratchPadString1Display, "`", "1") -- need to be 1
 		_ufcDisplay.UFC_ScratchPadString2Display = string.gsub(_ufcDisplay.UFC_ScratchPadString2Display, "`", "1") -- need to be 1
-		PWDEV.Tools.SendData(2020, string.gsub(_ufcDisplay.UFC_ScratchPadString1Display, " ", "")) -- PWDEV.Tools.DisplayFormat(_ufcDisplay.UFC_ScratchPadString1Display, 1)) -- ScratchPadString1Display 2 character
-		PWDEV.Tools.SendData(2021, PWDEV.Tools.DisplayFormat(_ufcDisplay.UFC_ScratchPadString2Display, 2)) -- ScratchPadString2Display 2 character
-		PWDEV.Tools.SendData(2022, PWDEV.Tools.DisplayFormat(_ufcDisplay.UFC_ScratchPadNumberDisplay, 7)) -- ScratchPadNumberDisplay 7 character
+		send(2020, string.gsub(_ufcDisplay.UFC_ScratchPadString1Display, " ", "")) -- PWDEV.Tools.DisplayFormat(_ufcDisplay.UFC_ScratchPadString1Display, 1)) -- ScratchPadString1Display 2 character
+		send(2021, PWDEV.Tools.DisplayFormat(_ufcDisplay.UFC_ScratchPadString2Display, 2)) -- ScratchPadString2Display 2 character
+		send(2022, PWDEV.Tools.DisplayFormat(_ufcDisplay.UFC_ScratchPadNumberDisplay, 7)) -- ScratchPadNumberDisplay 7 character
 
 		local _tmpCueing = " "
 		-- Option Displays
 		_tmpCueing = (#_ufcDisplay.UFC_OptionCueing1 > 0 and "¦" or " ")
-		PWDEV.Tools.SendData(2023, PWDEV.Tools.DisplayFormat(_tmpCueing .. _ufcDisplay.UFC_OptionDisplay1, 5)) -- OptionDisplay1 5 character
+		send(2023, PWDEV.Tools.DisplayFormat(_tmpCueing .. _ufcDisplay.UFC_OptionDisplay1, 5)) -- OptionDisplay1 5 character
 		_tmpCueing = (#_ufcDisplay.UFC_OptionCueing2 > 0 and "¦" or " ")
-		PWDEV.Tools.SendData(2024, PWDEV.Tools.DisplayFormat(_tmpCueing .. _ufcDisplay.UFC_OptionDisplay2, 5)) -- OptionDisplay2 5 character
+		send(2024, PWDEV.Tools.DisplayFormat(_tmpCueing .. _ufcDisplay.UFC_OptionDisplay2, 5)) -- OptionDisplay2 5 character
 		_tmpCueing = (#_ufcDisplay.UFC_OptionCueing3 > 0 and "¦" or " ")
-		PWDEV.Tools.SendData(2025, PWDEV.Tools.DisplayFormat(_tmpCueing .. _ufcDisplay.UFC_OptionDisplay3, 5)) -- OptionDisplay3 5 character
+		send(2025, PWDEV.Tools.DisplayFormat(_tmpCueing .. _ufcDisplay.UFC_OptionDisplay3, 5)) -- OptionDisplay3 5 character
 		_tmpCueing = (#_ufcDisplay.UFC_OptionCueing4 > 0 and "¦" or " ")
-		PWDEV.Tools.SendData(2026, PWDEV.Tools.DisplayFormat(_tmpCueing .. _ufcDisplay.UFC_OptionDisplay4, 5)) -- OptionDisplay4 5 character
+		send(2026, PWDEV.Tools.DisplayFormat(_tmpCueing .. _ufcDisplay.UFC_OptionDisplay4, 5)) -- OptionDisplay4 5 character
 		_tmpCueing = (#_ufcDisplay.UFC_OptionCueing5 > 0 and "¦" or " ")
-		PWDEV.Tools.SendData(2027, PWDEV.Tools.DisplayFormat(_tmpCueing .. _ufcDisplay.UFC_OptionDisplay5, 5)) -- OptionDisplay5 5 character
+		send(2027, PWDEV.Tools.DisplayFormat(_tmpCueing .. _ufcDisplay.UFC_OptionDisplay5, 5)) -- OptionDisplay5 5 character
 
 		-- Comm Displays
 		_ufcDisplay.UFC_Comm1Display = string.gsub(_ufcDisplay.UFC_Comm1Display, "~", "2") -- need to be 2
 		_ufcDisplay.UFC_Comm2Display = string.gsub(_ufcDisplay.UFC_Comm2Display, "~", "2") -- need to be 2
 		_ufcDisplay.UFC_Comm1Display = string.gsub(_ufcDisplay.UFC_Comm1Display, "`", "1") -- need to be 1
 		_ufcDisplay.UFC_Comm2Display = string.gsub(_ufcDisplay.UFC_Comm2Display, "`", "1") -- need to be 1
-		PWDEV.Tools.SendData(2028, PWDEV.Tools.DisplayFormat(_ufcDisplay.UFC_Comm1Display, 2)) -- Comm1Display 2 character
-		PWDEV.Tools.SendData(2029, PWDEV.Tools.DisplayFormat(_ufcDisplay.UFC_Comm2Display, 2)) -- Comm2Display 2 character
+		send(2028, PWDEV.Tools.DisplayFormat(_ufcDisplay.UFC_Comm1Display, 2)) -- Comm1Display 2 character
+		send(2029, PWDEV.Tools.DisplayFormat(_ufcDisplay.UFC_Comm2Display, 2)) -- Comm2Display 2 character
 	else
 		-- ScratchPadString Displays
-		PWDEV.Tools.SendData(2020, "") -- ScratchPadString1Display 2 character
-		PWDEV.Tools.SendData(2021, " ") -- ScratchPadString2Display 2 character
-		PWDEV.Tools.SendData(2022, " ") -- ScratchPadNumberDisplay 7 character
+		send(2020, "") -- ScratchPadString1Display 2 character
+		send(2021, " ") -- ScratchPadString2Display 2 character
+		send(2022, " ") -- ScratchPadNumberDisplay 7 character
 
 		-- Option Displays
-		PWDEV.Tools.SendData(2023, " ") -- OptionDisplay1 5 character
-		PWDEV.Tools.SendData(2024, " ") -- OptionDisplay2 5 character
-		PWDEV.Tools.SendData(2025, " ") -- OptionDisplay3 5 character
-		PWDEV.Tools.SendData(2026, " ") -- OptionDisplay4 5 character
-		PWDEV.Tools.SendData(2027, " ") -- OptionDisplay5 5 character
+		send(2023, " ") -- OptionDisplay1 5 character
+		send(2024, " ") -- OptionDisplay2 5 character
+		send(2025, " ") -- OptionDisplay3 5 character
+		send(2026, " ") -- OptionDisplay4 5 character
+		send(2027, " ") -- OptionDisplay5 5 character
 
 		-- Comm Displays
-		PWDEV.Tools.SendData(2028, " ") -- Comm1Display 2 character
-		PWDEV.Tools.SendData(2029, " ") -- Comm2Display 2 character
+		send(2028, " ") -- Comm1Display 2 character
+		send(2029, " ") -- Comm2Display 2 character
 	end
 
 	local _UHF1Radio = GetDevice(38)
-	PWDEV.Tools.SendData(2030, PWDEV.Tools.DisplayFormat(PWDEV.Tools.RoundFreqeuncy((_UHF1Radio:get_frequency()/1000000))), 7)
+	send(2030, PWDEV.Tools.DisplayFormat(PWDEV.Tools.RoundFreqeuncy((_UHF1Radio:get_frequency()/1000000))), 7)
 
 	local _UHF2Radio = GetDevice(39)
-	PWDEV.Tools.SendData(2031, PWDEV.Tools.DisplayFormat(PWDEV.Tools.RoundFreqeuncy((_UHF2Radio:get_frequency()/1000000), "7.3", false, 0.005)), 7)
+	send(2031, PWDEV.Tools.DisplayFormat(PWDEV.Tools.RoundFreqeuncy((_UHF2Radio:get_frequency()/1000000), "7.3", false, 0.005)), 7)
 
 
 	-- IFEI

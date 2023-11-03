@@ -1,4 +1,7 @@
 -- UH-1H Huey
+
+local send = PWDEV.Tools.SendData
+
 PWDEV.FoundDCSModule = true
 
 PWDEV.ConfigEveryFrameArguments =
@@ -78,10 +81,10 @@ function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
 
 function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
-    PWDEV.Tools.SendData(2001, getUhfFreq())
-    PWDEV.Tools.SendData(2002, getVhfCommFreq())
-    PWDEV.Tools.SendData(2003, getVhfNavFreq())
+    send(2001, getUhfFreq())
+    send(2002, getVhfCommFreq())
+    send(2003, getVhfNavFreq())
 
-    PWDEV.Tools.SendData(2011, getChaff())
-    PWDEV.Tools.SendData(2012, getFlare())
+    send(2011, getChaff())
+    send(2012, getFlare())
 end

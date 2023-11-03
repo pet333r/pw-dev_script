@@ -82,30 +82,6 @@ function PWDEV.Tools.SetSecAir(value) timeSecAir = value end
 function PWDEV.Tools.SetSecGnd(value) timeSecGnd = value end
 function PWDEV.Tools.SetSecNav(value) timeSecNav = value end
 
-function PWDEV.Tools.GetMapPlayerDiv()
-    if (PWDEV.Config.MapPlayerDiv == nil) then
-        return 1.0
-    else
-        return PWDEV.Config.MapPlayerDiv
-    end
-end
-
-function PWDEV.Tools.GetMapMissileDiv()
-    if (PWDEV.Config.MapMissileDiv == nil) then
-        return 1.0
-    else
-        return PWDEV.Config.MapMissileDiv
-    end
-end
-
-function PWDEV.Tools.GetMapPlanesDiv()
-    if (PWDEV.Config.MapMapPlanesDiv == nil) then
-        return 1.0
-    else
-        return PWDEV.Config.MapMapPlanesDiv
-    end
-end
-
 
 function PWDEV.Tools.createUDPSender()
 	PWDEV.socket = require("socket")
@@ -404,7 +380,14 @@ function PWDEV.Tools.GetPlayerData()
     PlayerData.WindSpd = math.abs(math.sqrt(math.pow(PlayerData.Wind.x, 2) + math.pow(PlayerData.Wind.y, 2) + math.pow(PlayerData.Wind.z, 2)))
     PlayerData.WindAng = math.atan2(PlayerData.Wind.y, PlayerData.Wind.x) * rad2deg + 180 --* 180/math.pi
 
-    if ((PWDEV.ModuleName == "A-10C") or (PWDEV.ModuleName == "A-10C_2")) then
+    if (PWDEV.ModuleName == "A-4E-C") then
+        PlayerData.MechGearNose = LoGetAircraftDrawArgumentValue(0)
+        PlayerData.MechGearLeft = LoGetAircraftDrawArgumentValue(5)
+        PlayerData.MechGearRigh = LoGetAircraftDrawArgumentValue(3)
+        -- hook
+        PlayerData.MechHook = LoGetAircraftDrawArgumentValue(25)
+        PlayerData.MechAirBrakeLeft = LoGetAircraftDrawArgumentValue(500)
+    elseif ((PWDEV.ModuleName == "A-10C") or (PWDEV.ModuleName == "A-10C_2")) then
         PlayerData.AltGearNose  = PWDEV.Tools.GetArgumentsValue(659, "%d")
         PlayerData.AltGearLeft  = PWDEV.Tools.GetArgumentsValue(660, "%d")
         PlayerData.AltGearRigh  = PWDEV.Tools.GetArgumentsValue(661, "%d")
@@ -437,6 +420,10 @@ function PWDEV.Tools.GetPlayerData()
 
         PlayerData.AG = PWDEV.Tools.GetArgumentsValue(281, "%d")
         PlayerData.Arm = PWDEV.Tools.GetArgumentsValue(287, "%d")
+    elseif (PWDEV.ModuleName == "Bronco-OV-10A") then
+        PlayerData.MechGearNose = LoGetAircraftDrawArgumentValue(0)
+        PlayerData.MechGearLeft = LoGetAircraftDrawArgumentValue(5)
+        PlayerData.MechGearRigh = LoGetAircraftDrawArgumentValue(3)
     elseif ((PWDEV.ModuleName == "C-101CC") or
             (PWDEV.ModuleName == "C-101EB")) then
         PlayerData.MechGearNose = LoGetAircraftDrawArgumentValue(0)
@@ -444,9 +431,20 @@ function PWDEV.Tools.GetPlayerData()
         PlayerData.MechGearRigh = LoGetAircraftDrawArgumentValue(3)
         PlayerData.MechAirBrakeLeft = LoGetAircraftDrawArgumentValue(21)
     elseif (PWDEV.ModuleName == "F-5E-3") then
+        PlayerData.MechGearNose = LoGetAircraftDrawArgumentValue(0)
+        PlayerData.MechGearLeft = LoGetAircraftDrawArgumentValue(5)
+        PlayerData.MechGearRigh = LoGetAircraftDrawArgumentValue(3)
         PlayerData.AltGearLeft  = PWDEV.Tools.GetArgumentsValue(53, "%d")
         PlayerData.AltGearNose  = PWDEV.Tools.GetArgumentsValue(54, "%d")
         PlayerData.AltGearRigh  = PWDEV.Tools.GetArgumentsValue(55, "%d")
+        -- hook
+        PlayerData.MechHook = LoGetAircraftDrawArgumentValue(25)
+        -- nozzle 2x
+        PlayerData.MechNozzRigh = LoGetAircraftDrawArgumentValue(89)
+        PlayerData.MechNozzLeft = LoGetAircraftDrawArgumentValue(90)
+        -- brake
+        PlayerData.MechAirBrakeLeft = LoGetAircraftDrawArgumentValue(184)
+        PlayerData.MechAirBrakeRigh = LoGetAircraftDrawArgumentValue(182)
         -- PlayerData.IndHook  = PWDEV.Tools.GetArgumentsValue(90, "%d")
     elseif ((PWDEV.ModuleName == "F-14A-135-GR") or (PWDEV.ModuleName == "F-14B")) then
         PlayerData.AltGearNose  = PWDEV.Tools.GetArgumentsValue(8301, "%d")
@@ -585,8 +583,8 @@ function PWDEV.Tools.GetPlayerData()
         PlayerData.MechAirBrakeRigh = LoGetAircraftDrawArgumentValue(184)
 
         PlayerData.Arm = PWDEV.Tools.GetArgumentsValue(234, "%d")
-    elseif ((PWDEV.ModuleName == "Mirage-F1CE") or
-            (PWDEV.ModuleName == "Mirage-F1B") or
+    elseif ((PWDEV.ModuleName == "Mirage-F1BE") or
+            (PWDEV.ModuleName == "Mirage-F1CE") or
             (PWDEV.ModuleName == "Mirage-F1EE")) then
         PlayerData.MechGearNose  = LoGetAircraftDrawArgumentValue(0)
         PlayerData.MechGearLeft  = LoGetAircraftDrawArgumentValue(5)
@@ -630,6 +628,41 @@ function PWDEV.Tools.GetPlayerData()
         PlayerData.MechGearLeft  = LoGetAircraftDrawArgumentValue(5)
         PlayerData.MechGearRigh  = LoGetAircraftDrawArgumentValue(3)
         PlayerData.MechAirBrakeLeft = LoGetAircraftDrawArgumentValue(21)
+    elseif ((PWDEV.ModuleName == "MiG-29A") or
+            (PWDEV.ModuleName == "MiG-29G") or
+            (PWDEV.ModuleName == "MiG-29S")) then
+        PlayerData.MechGearNose  = LoGetAircraftDrawArgumentValue(0)
+        PlayerData.MechGearLeft  = LoGetAircraftDrawArgumentValue(5)
+        PlayerData.MechGearRigh  = LoGetAircraftDrawArgumentValue(3)
+        PlayerData.MechAirBrakeLeft = LoGetAircraftDrawArgumentValue(21)
+        -- nozzle 2x
+        PlayerData.MechNozzRigh = LoGetAircraftDrawArgumentValue(89)
+        PlayerData.MechNozzLeft = LoGetAircraftDrawArgumentValue(90)
+    elseif ((PWDEV.ModuleName == "Su-25") or (PWDEV.ModuleName == "Su-25T")) then
+        PlayerData.MechGearNose  = LoGetAircraftDrawArgumentValue(0)
+        PlayerData.MechGearLeft  = LoGetAircraftDrawArgumentValue(5)
+        PlayerData.MechGearRigh  = LoGetAircraftDrawArgumentValue(3)
+
+        PlayerData.MechAirBrakeLeft = LoGetAircraftDrawArgumentValue(186)
+        PlayerData.MechAirBrakeRigh = LoGetAircraftDrawArgumentValue(182)
+    elseif ((PWDEV.ModuleName == "Su-27") or (PWDEV.ModuleName == "Su-33")) then
+        PlayerData.MechGearNose  = LoGetAircraftDrawArgumentValue(0)
+        PlayerData.MechGearLeft  = LoGetAircraftDrawArgumentValue(5)
+        PlayerData.MechGearRigh  = LoGetAircraftDrawArgumentValue(3)
+        PlayerData.MechAirBrakeLeft = LoGetAircraftDrawArgumentValue(21)
+        -- refueling Su-33
+        PlayerData.MechRefueling = LoGetAircraftDrawArgumentValue(22)
+        -- hook Su-33
+        PlayerData.MechHook = LoGetAircraftDrawArgumentValue(25)
+        -- nozzle 2x
+        PlayerData.MechNozzRigh = LoGetAircraftDrawArgumentValue(89)
+        PlayerData.MechNozzLeft = LoGetAircraftDrawArgumentValue(90)
+    elseif (PWDEV.ModuleName == "T-45") then
+        PlayerData.MechGearNose  = LoGetAircraftDrawArgumentValue(0)
+        PlayerData.MechGearLeft  = LoGetAircraftDrawArgumentValue(5)
+        PlayerData.MechGearRigh  = LoGetAircraftDrawArgumentValue(3)
+        PlayerData.MechHook = LoGetAircraftDrawArgumentValue(25)
+        PlayerData.MechAirBrakeLeft = LoGetAircraftDrawArgumentValue(500)
     else
         
     end
@@ -1003,7 +1036,7 @@ function PWDEV.Tools.ProcessOutput()
         timestamp = LoGetModelTime()
 
         if (PWDEV.Config.ExportNavData == true and (PWDEV.Config.WriteNavFile or lShowOnMapPlayer)) then
-            if (timestamp > timestampNav + (PWDEV.Tools.GetMapPlayerDiv() * timeSecPlayer)) then
+            if (timestamp > timestampNav + (PWDEV.Config.MapPlayerDiv * timeSecPlayer)) then
 
                 PWDEV.Tools.GetPlayerData()
 
@@ -1020,7 +1053,7 @@ function PWDEV.Tools.ProcessOutput()
         end
 
         if (PWDEV.Config.ExportNavAllData == true and lShowOnMapWea == true) then
-            if (timestamp > timestampNavWea + (PWDEV.Tools.GetMapMissileDiv() * timeSecWea)) then
+            if (timestamp > timestampNavWea + (PWDEV.Config.MapMissileDiv * timeSecWea)) then
                 local coProcessNavWeapon = coroutine.create(PWDEV.Tools.ProcessNavWeapon)
                 _coStatus = coroutine.resume(coProcessNavWeapon)
                 timestampNavWea = timestamp
@@ -1028,7 +1061,7 @@ function PWDEV.Tools.ProcessOutput()
         end
 
         if (PWDEV.Config.ExportNavAllData == true and lShowOnMapAir == true) then
-            if (timestamp > timestampNavAir + (PWDEV.Tools.GetMapPlanesDiv() * timeSecAir)) then
+            if (timestamp > timestampNavAir + (PWDEV.Config.MapMapPlanesDiv * timeSecAir)) then
                 local coProcessNavObjects = coroutine.create(PWDEV.Tools.ProcessNavAir)
                 _coStatus = coroutine.resume(coProcessNavObjects)
                 timestampNavAir = timestamp
@@ -1079,7 +1112,7 @@ function PWDEV.Tools.ProcessOutput()
         timestamp = LoGetModelTime()
 
         if (PWDEV.Config.ExportNavData == true and (PWDEV.Config.WriteNavFile or lShowOnMapPlayer)) then
-            if (timestamp > timestampNav + (PWDEV.Tools.GetMapPlayerDiv() * timeSecPlayer)) then
+            if (timestamp > timestampNav + (PWDEV.Config.MapPlayerDiv * timeSecPlayer)) then
 
                 PWDEV.Tools.GetPlayerData()
 
@@ -1096,7 +1129,7 @@ function PWDEV.Tools.ProcessOutput()
         end
 
         if (PWDEV.Config.ExportNavAllData == true and lShowOnMapWea == true) then
-            if (timestamp > timestampNavWea + (PWDEV.Tools.GetMapMissileDiv() * timeSecWea)) then
+            if (timestamp > timestampNavWea + (PWDEV.Config.MapMissileDiv * timeSecWea)) then
                 local coProcessNavWeapon = coroutine.create(PWDEV.Tools.ProcessNavWeapon)
                 _coStatus = coroutine.resume(coProcessNavWeapon)
                 timestampNavWea = timestamp
@@ -1104,7 +1137,7 @@ function PWDEV.Tools.ProcessOutput()
         end
 
         if (PWDEV.Config.ExportNavAllData == true and lShowOnMapAir == true) then
-            if (timestamp > timestampNavAir + (PWDEV.Tools.GetMapPlanesDiv() * timeSecAir)) then
+            if (timestamp > timestampNavAir + (PWDEV.Config.MapMapPlanesDiv * timeSecAir)) then
                 local coProcessNavObjects = coroutine.create(PWDEV.Tools.ProcessNavAir)
                 _coStatus = coroutine.resume(coProcessNavObjects)
                 timestampNavAir = timestamp
@@ -1436,8 +1469,8 @@ function PWDEV.Tools.SelectModule()
         PWDEV.ProcessDCSLowImportance  = PWDEV.ProcessDCSLowImportanceNoConfig
         PWDEV.ProcessFCHighImportance  = PWDEV.ProcessFCHighImportanceNoConfig
         PWDEV.ProcessFCLowImportance   = PWDEV.ProcessFCLowImportanceNoConfig
-        PWDEV.EveryFrameArguments            = {}
-        PWDEV.Arguments                      = {}
+        PWDEV.EveryFrameArguments      = {}
+        PWDEV.Arguments                = {}
     end
 end
 

@@ -1,7 +1,10 @@
 -- Mirage F1 EE
+
+local send = PWDEV.Tools.SendData
+
 PWDEV.FoundDCSModule = true
 
-PWDEV.ConfigEveryFrameArguments = 
+PWDEV.ConfigEveryFrameArguments =
 {
     [111] = "%.1f", -- Navigation Light Control
     [112] = "%.1f", -- Formation Light Control
@@ -196,7 +199,7 @@ PWDEV.ConfigEveryFrameArguments =
     [1356] = "%d",   -- triangle 4
 }
 
-PWDEV.ConfigArguments = 
+PWDEV.ConfigArguments =
 {
 }
 

@@ -1,9 +1,12 @@
 -- F-5E-3
 
 -- init arg 815
+
+local send = PWDEV.Tools.SendData
+
 PWDEV.FoundDCSModule = true
 
-PWDEV.ConfigEveryFrameArguments = 
+PWDEV.ConfigEveryFrameArguments =
 {
 	[48] = "%1d",	-- AOA Indexer red
 	[49] = "%1d",	-- AOA Indexer green
@@ -76,24 +79,22 @@ PWDEV.ConfigEveryFrameArguments =
 	[575] = "%1d", -- System Power Button
 	[576] = "%1d", -- System Power
 }
-PWDEV.ConfigArguments = 
+PWDEV.ConfigArguments =
 {
 }
 
--- Pointed to by ProcessDCSHighImportance
 function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
 	-- flares
 	local flares = {}
 	flares[1] = string.format("%.0f", mainPanelDevice:get_argument_value(405)*10)
     flares[2] = string.format("%.0f", mainPanelDevice:get_argument_value(406)*10)
-	PWDEV.Tools.SendData(2011, flares[1]..flares[2])
+	send(2011, flares[1]..flares[2])
 	-- chaffs
 	local chaffs = {}
 	chaffs[1] = string.format("%.0f", mainPanelDevice:get_argument_value(401)*10)
 	chaffs[2] = string.format("%.0f", mainPanelDevice:get_argument_value(402)*10)
-	PWDEV.Tools.SendData(2012, chaffs[1]..chaffs[2])
+	send(2012, chaffs[1]..chaffs[2])
 end
 
--- Pointed to by PWDEV.ProcessDCSConfigLowImportance
 function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
 end

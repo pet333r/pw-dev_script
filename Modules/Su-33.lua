@@ -1,4 +1,5 @@
 -- Su-33
+local send = PWDEV.Tools.SendData
 PWDEV.FoundFCModule = true
 
 -- auxiliary function
@@ -136,13 +137,11 @@ function PWDEV.AF.FC_WeaponPanel_SU33()
 		end
 	end
 
-	if PWDEV.Config.Export  then
-		for key, value in pairs(PWDEV.AF.TmpWeaponPanelPresend) do
-			PWDEV.Tools.SendData(key, value)
-		end
-		for key, value in pairs(PWDEV.AF.TmpWeaponPanelActive) do
-			PWDEV.Tools.SendData(key, value)
-		end
+	for key, value in pairs(PWDEV.AF.TmpWeaponPanelPresend) do
+		send(key, value)
+	end
+	for key, value in pairs(PWDEV.AF.TmpWeaponPanelActive) do
+		send(key, value)
 	end
 end
 

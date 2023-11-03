@@ -1,7 +1,10 @@
 -- F-14B
+
+local send = PWDEV.Tools.SendData
+
 PWDEV.FoundDCSModule = true
 
-PWDEV.ConfigEveryFrameArguments = 
+PWDEV.ConfigEveryFrameArguments =
 {
 	-- RIO DDD
 	[34] = "%1d",		-- ASPECT
@@ -355,7 +358,7 @@ PWDEV.ConfigEveryFrameArguments =
 	[2259] = "%1d", -- BEAC OFF Light
 	[2260] = "%1d", -- RET BASE Light
 }
-PWDEV.ConfigArguments = 
+PWDEV.ConfigArguments =
 {
 }
 
@@ -418,17 +421,14 @@ local function getUhf()
 	return PWDEV.Tools.getListCockpitParam("COMM1_FREQ")
 end
 
--- Pointed to by ProcessDCSHighImportance
 function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
 
--- Pointed to by PWDEV.ProcessDCSConfigLowImportance
 function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
-	PWDEV.Tools.SendData(20001, getAmmo())
-	PWDEV.Tools.SendData(20002, getPLTFuelLeft())
-	PWDEV.Tools.SendData(20003, getPLTFuelRight())
-	PWDEV.Tools.SendData(20004, getPLTFuelTotal())
-	PWDEV.Tools.SendData(20005, getPLTFuelBingo())
-	PWDEV.Tools.SendData(20006, getUhf())
-
+	send(20001, getAmmo())
+	send(20002, getPLTFuelLeft())
+	send(20003, getPLTFuelRight())
+	send(20004, getPLTFuelTotal())
+	send(20005, getPLTFuelBingo())
+	send(20006, getUhf())
 end

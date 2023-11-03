@@ -1,7 +1,10 @@
--- Module Name Export
+-- Mirage F1 CE
+
+local send = PWDEV.Tools.SendData
+
 PWDEV.FoundDCSModule = true
 
-PWDEV.ConfigEveryFrameArguments = 
+PWDEV.ConfigEveryFrameArguments =
 {
     [111] = "%.1f", -- Navigation Light Control
     [112] = "%.1f", -- Formation Light Control
@@ -168,11 +171,10 @@ PWDEV.ConfigEveryFrameArguments =
     [991] = "%d",   -- Autopilot G Button light (green)
 }
 
-PWDEV.ConfigArguments = 
+PWDEV.ConfigArguments =
 {
 }
 
--- Pointed to by ProcessDCSHighImportance
 function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
 
 end

@@ -1,7 +1,7 @@
 -- A-4E-C
 PWDEV.FoundDCSModule = true
 
-PWDEV.ConfigEveryFrameArguments = 
+PWDEV.ConfigEveryFrameArguments =
 {
     -- Approach Power Compensator
     [147] = "%1d", -- APC indator light
@@ -12,7 +12,7 @@ PWDEV.ConfigEveryFrameArguments =
     [852] = "%1d", -- AoA indexer Red
 }
 
-PWDEV.ConfigArguments = 
+PWDEV.ConfigArguments =
 {
 }
 

@@ -1,7 +1,9 @@
 -- MB-339
+local send = PWDEV.Tools.SendData
+
 PWDEV.FoundDCSModule = true
 
-PWDEV.ConfigEveryFrameArguments = 
+PWDEV.ConfigEveryFrameArguments =
 {
     [727] = "%d",	-- ARM switch -1/0/1
 
@@ -119,7 +121,7 @@ PWDEV.ConfigEveryFrameArguments =
     [733] = "%d",	-- MODE 3/A
 }
 
-PWDEV.ConfigArguments = 
+PWDEV.ConfigArguments =
 {
 }
 

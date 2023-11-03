@@ -1,10 +1,11 @@
 -- A-10C
 
 local coerce_nil_to_string = PWDEV.Tools.coerce_nil_to_string
+local send = PWDEV.Tools.SendData
 
 PWDEV.FoundDCSModule = true
 
-PWDEV.ConfigEveryFrameArguments = 
+PWDEV.ConfigEveryFrameArguments =
 {
     -- Engine Gauges
 	-- [70] = "%.2f",		-- Left Engine Temperature
@@ -224,7 +225,7 @@ PWDEV.ConfigEveryFrameArguments =
     [998] = "%1d",		-- ARC-210
 }
 
-PWDEV.ConfigArguments = 
+PWDEV.ConfigArguments =
 {
 }
 
@@ -295,7 +296,7 @@ end
 function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
     -- ScratchPad
     local lScratchPad = PWDEV.Tools.getListIndicatorValue(5)
-    PWDEV.Tools.SendData(2010, PWDEV.Tools.coerce_nil_to_string(lScratchPad.Scratch_PAD))
+    send(2010, coerce_nil_to_string(lScratchPad.Scratch_PAD))
 
     -- CMSC 2020 (Text only)
     -------------------------------------------------
@@ -303,14 +304,14 @@ function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
         local lCMSCTable = PWDEV.Tools.getListIndicatorValue(8)
 
         if lCMSCTable ~= nil and lCMSCTable.txt_JMR ~= nil then
-            PWDEV.Tools.SendData(2011, string.format("%s", lCMSCTable.txt_CHAFF_FLARE))	-- txt_CHAFF_FLARE
-            PWDEV.Tools.SendData(2012, string.format("%s", lCMSCTable.txt_JMR))	-- txt_JMR
-            PWDEV.Tools.SendData(2013, string.format("%s", lCMSCTable.txt_MWS))	-- txt_MWS
+            send(2011, string.format("%s", lCMSCTable.txt_CHAFF_FLARE))	-- txt_CHAFF_FLARE
+            send(2012, string.format("%s", lCMSCTable.txt_JMR))	-- txt_JMR
+            send(2013, string.format("%s", lCMSCTable.txt_MWS))	-- txt_MWS
         end
     else
-        PWDEV.Tools.SendData(2011, " ")	-- txt_CHAFF_FLARE
-        PWDEV.Tools.SendData(2012, " ")	-- txt_JMR
-        PWDEV.Tools.SendData(2013, " ")	-- txt_MWS
+        send(2011, " ")	-- txt_CHAFF_FLARE
+        send(2012, " ")	-- txt_JMR
+        send(2013, " ")	-- txt_MWS
     end
 
     -- CMSP
@@ -326,41 +327,41 @@ function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
             lCMSPTable  = PWDEV.Tools.split(lCMSP.txt_UP, "%s")
         end
 
-        PWDEV.Tools.SendData(2014,  string.format("%s", lCMSPTable[1]))
-        PWDEV.Tools.SendData(2015,  string.format("%s", lCMSPTable[2]))
-        PWDEV.Tools.SendData(2016,  string.format("%s", lCMSPTable[3]))
-        PWDEV.Tools.SendData(2017,  string.format("%s", lCMSPTable[4]))
-        PWDEV.Tools.SendData(2018,  string.format("%s", lCMSP.txt_DOWN1))
-        PWDEV.Tools.SendData(2019,  string.format("%s", lCMSP.txt_DOWN2))
-        PWDEV.Tools.SendData(2020,  string.format("%s", lCMSP.txt_DOWN3))
-        PWDEV.Tools.SendData(2021,  string.format("%s", lCMSP.txt_DOWN4))
+        send(2014,  string.format("%s", lCMSPTable[1]))
+        send(2015,  string.format("%s", lCMSPTable[2]))
+        send(2016,  string.format("%s", lCMSPTable[3]))
+        send(2017,  string.format("%s", lCMSPTable[4]))
+        send(2018,  string.format("%s", lCMSP.txt_DOWN1))
+        send(2019,  string.format("%s", lCMSP.txt_DOWN2))
+        send(2020,  string.format("%s", lCMSP.txt_DOWN3))
+        send(2021,  string.format("%s", lCMSP.txt_DOWN4))
     else
-        PWDEV.Tools.SendData(2014,  " ")
-        PWDEV.Tools.SendData(2015,  " ")
-        PWDEV.Tools.SendData(2016,  " ")
-        PWDEV.Tools.SendData(2017,  " ")
-        PWDEV.Tools.SendData(2018,  " ")
-        PWDEV.Tools.SendData(2019,  " ")
-        PWDEV.Tools.SendData(2020,  " ")
-        PWDEV.Tools.SendData(2021,  " ")
+        send(2014,  " ")
+        send(2015,  " ")
+        send(2016,  " ")
+        send(2017,  " ")
+        send(2018,  " ")
+        send(2019,  " ")
+        send(2020,  " ")
+        send(2021,  " ")
     end
 
     -- CDU Data
     PWDEV.exportCDU()
 
     -- UHF
-    PWDEV.Tools.SendData(2022,  getUHFPreset())
-    PWDEV.Tools.SendData(2023,  getUHFFrequency())
+    send(2022,  getUHFPreset())
+    send(2023,  getUHFFrequency())
     -- TACAN_KNB
-    PWDEV.Tools.SendData(2024,  getTacanChannel())
+    send(2024,  getTacanChannel())
     -- ILS
-    PWDEV.Tools.SendData(2025,  getILSFrequency())
+    send(2025,  getILSFrequency())
 
     -- ARC-210
     local arc210 = PWDEV.Tools.getListIndicatorValue(18)
-    local arcFreq = string.format(PWDEV.Tools.coerce_nil_to_string(arc210.freq_label_mhz) .. PWDEV.Tools.coerce_nil_to_string(arc210.freq_label_khz))
-    PWDEV.Tools.SendData(2041, PWDEV.Tools.coerce_nil_to_string(arc210.active_channel))
-    PWDEV.Tools.SendData(2042, PWDEV.Tools.DisplayFormat(arcFreq, 6))
+    local arcFreq = string.format(coerce_nil_to_string(arc210.freq_label_mhz) .. coerce_nil_to_string(arc210.freq_label_khz))
+    send(2041, coerce_nil_to_string(arc210.active_channel))
+    send(2042, PWDEV.Tools.DisplayFormat(arcFreq, 6))
 
     -- -- General
 	-- PWDEV.Tools.SendData(2901, PWDEV.Tools.GetArgumentsValue(17, "%.2f"))
@@ -21027,7 +21028,7 @@ end
 
 function PWDEV.exportCDU()
 	local cdu = PWDEV.Tools.getListIndicatorValue(3)
-	
+
 	local cdu_lines = {}
 	local empty_line = "                        " -- 24 spaces
 	cdu_lines[1] = empty_line
@@ -21042,16 +21043,16 @@ function PWDEV.exportCDU()
 	cdu_lines[10] = empty_line
 	if not cdu then
 
-		PWDEV.Tools.SendData(2030, cdu_lines[1])
-		PWDEV.Tools.SendData(2031, cdu_lines[2])
-		PWDEV.Tools.SendData(2032, cdu_lines[3])
-		PWDEV.Tools.SendData(2033, cdu_lines[4])
-		PWDEV.Tools.SendData(2034, cdu_lines[5])
-		PWDEV.Tools.SendData(2035, cdu_lines[6])
-		PWDEV.Tools.SendData(2036, cdu_lines[7])
-		PWDEV.Tools.SendData(2037, cdu_lines[8])
-		PWDEV.Tools.SendData(2038, cdu_lines[9])
-		PWDEV.Tools.SendData(2039, cdu_lines[10])
+		send(2030, cdu_lines[1])
+		send(2031, cdu_lines[2])
+		send(2032, cdu_lines[3])
+		send(2033, cdu_lines[4])
+		send(2034, cdu_lines[5])
+		send(2035, cdu_lines[6])
+		send(2036, cdu_lines[7])
+		send(2037, cdu_lines[8])
+		send(2038, cdu_lines[9])
+		send(2039, cdu_lines[10])
 		return
 	end
 
@@ -21059,7 +21060,7 @@ function PWDEV.exportCDU()
 	local cursor_pos = 2
 
 	if cdu.ScratchString then cursor_pos = cdu.ScratchString:len()+2 end
-	
+
 	PWDEV.CDUIndicatorData["Cursor"]={
 		[1]={
 			alignment="LFT",
@@ -21067,7 +21068,7 @@ function PWDEV.exportCDU()
 			y=10
 		}
 	}
-	
+
 	for k, v in pairs(cdu) do
 		local candidates = PWDEV.CDUIndicatorData[k]
 		if candidates then
@@ -21111,7 +21112,7 @@ function PWDEV.exportCDU()
 			end
 		end
 	end
-	
+
 	cdu_lines[1] = PWDEV.replaceSymbols(cdu_lines[1])
 	cdu_lines[2] = PWDEV.replaceSymbols(cdu_lines[2])
 	cdu_lines[3] = PWDEV.replaceSymbols(cdu_lines[3])
@@ -21122,16 +21123,15 @@ function PWDEV.exportCDU()
 	cdu_lines[8] = PWDEV.replaceSymbols(cdu_lines[8])
 	cdu_lines[9] = PWDEV.replaceSymbols(cdu_lines[9])
 	cdu_lines[10] = PWDEV.replaceSymbols(cdu_lines[10])
-	
-	PWDEV.Tools.SendData(2030, cdu_lines[1])
-	PWDEV.Tools.SendData(2031, cdu_lines[2])
-	PWDEV.Tools.SendData(2032, cdu_lines[3])
-	PWDEV.Tools.SendData(2033, cdu_lines[4])
-	PWDEV.Tools.SendData(2034, cdu_lines[5])
-	PWDEV.Tools.SendData(2035, cdu_lines[6])
-	PWDEV.Tools.SendData(2036, cdu_lines[7])
-	PWDEV.Tools.SendData(2037, cdu_lines[8])
-	PWDEV.Tools.SendData(2038, cdu_lines[9])
-	PWDEV.Tools.SendData(2039, cdu_lines[10])
-	
+
+	send(2030, cdu_lines[1])
+	send(2031, cdu_lines[2])
+	send(2032, cdu_lines[3])
+	send(2033, cdu_lines[4])
+	send(2034, cdu_lines[5])
+	send(2035, cdu_lines[6])
+	send(2036, cdu_lines[7])
+	send(2037, cdu_lines[8])
+	send(2038, cdu_lines[9])
+	send(2039, cdu_lines[10])
 end

@@ -1,10 +1,11 @@
 -- Ka-50
 
 local coerce_nil_to_string = PWDEV.Tools.coerce_nil_to_string
+local send = PWDEV.Tools.SendData
 
 PWDEV.FoundDCSModule = true
 
-PWDEV.ConfigEveryFrameArguments = 
+PWDEV.ConfigEveryFrameArguments =
 {
     -- Datalink
     [159] = "%.1f", -- Send/Memory LED
@@ -153,30 +154,30 @@ end
 
 function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
     indEKRAN = PWDEV.Tools.parseListIndicatorList(4)
-    PWDEV.Tools.SendData(2041, getEKRAN_txt1_line(1))
-    PWDEV.Tools.SendData(2042, getEKRAN_txt1_line(2))
-    PWDEV.Tools.SendData(2043, getEKRAN_txt1_line(3))
-    PWDEV.Tools.SendData(2044, getEKRAN_txt1_line(4))
+    send(2041, getEKRAN_txt1_line(1))
+    send(2042, getEKRAN_txt1_line(2))
+    send(2043, getEKRAN_txt1_line(3))
+    send(2044, getEKRAN_txt1_line(4))
 
-    PWDEV.Tools.SendData(2045, getEKRAN_txt2_line(1))
-    PWDEV.Tools.SendData(2046, getEKRAN_txt2_line(2))
-    PWDEV.Tools.SendData(2047, getEKRAN_txt2_line(3))
-    PWDEV.Tools.SendData(2048, getEKRAN_txt2_line(4))
-    
-    PWDEV.Tools.SendData(2049, getEKRAN_memory())
+    send(2045, getEKRAN_txt2_line(1))
+    send(2046, getEKRAN_txt2_line(2))
+    send(2047, getEKRAN_txt2_line(3))
+    send(2048, getEKRAN_txt2_line(4))
+
+    send(2049, getEKRAN_memory())
     -- jeżeli jest 1 to wyświetlane są dane z EKRAN #2
-    PWDEV.Tools.SendData(2050, getEKRAN_queue())
-    PWDEV.Tools.SendData(2051, getEKRAN_failure())
+    send(2050, getEKRAN_queue())
+    send(2051, getEKRAN_failure())
 end
 
 function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
     -- ABRIS
     local ABRIS = PWDEV.Tools.getListIndicatorValue(3) or {}
-    PWDEV.Tools.SendData(2031, PWDEV.Tools.coerce_nil_to_string(ABRIS.button1))
-    PWDEV.Tools.SendData(2032, PWDEV.Tools.coerce_nil_to_string(ABRIS.button2))
-    PWDEV.Tools.SendData(2033, PWDEV.Tools.coerce_nil_to_string(ABRIS.button3))
-    PWDEV.Tools.SendData(2034, PWDEV.Tools.coerce_nil_to_string(ABRIS.button4))
-    PWDEV.Tools.SendData(2035, PWDEV.Tools.coerce_nil_to_string(ABRIS.button5))
+    send(2031, coerce_nil_to_string(ABRIS.button1))
+    send(2032, coerce_nil_to_string(ABRIS.button2))
+    send(2033, coerce_nil_to_string(ABRIS.button3))
+    send(2034, coerce_nil_to_string(ABRIS.button4))
+    send(2035, coerce_nil_to_string(ABRIS.button5))
     -- PVI-800 Navigation Control Panel 
     local indPVI = PWDEV.Tools.getListIndicatorValue(5)
 
@@ -187,19 +188,19 @@ function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
     local pviLine2      = coerce_nil_to_string(indPVI.txt_NIT)
     local pviLine1Point = coerce_nil_to_string(indPVI.txt_OIT_PPM)
     local pviLine2Point = coerce_nil_to_string(indPVI.txt_OIT_NOT)
-    PWDEV.Tools.SendData(2008, pviLine1)
-    PWDEV.Tools.SendData(2009, pviLine2)
-    PWDEV.Tools.SendData(2010, pviLine1Point)
-    PWDEV.Tools.SendData(2011, pviLine2Point)
+    send(2008, pviLine1)
+    send(2009, pviLine2)
+    send(2010, pviLine1Point)
+    send(2011, pviLine2Point)
 
-    PWDEV.Tools.SendData(801, coerce_nil_to_string(indPVI.txt_VIT_apostrophe1))
-    PWDEV.Tools.SendData(802, coerce_nil_to_string(indPVI.txt_VIT_apostrophe2))
-    PWDEV.Tools.SendData(803, coerce_nil_to_string(indPVI.txt_NIT_apostrophe1))
-    PWDEV.Tools.SendData(804, coerce_nil_to_string(indPVI.txt_NIT_apostrophe2))
+    send(801, coerce_nil_to_string(indPVI.txt_VIT_apostrophe1))
+    send(802, coerce_nil_to_string(indPVI.txt_VIT_apostrophe2))
+    send(803, coerce_nil_to_string(indPVI.txt_NIT_apostrophe1))
+    send(804, coerce_nil_to_string(indPVI.txt_NIT_apostrophe2))
 
     local Cannon = PWDEV.Tools.getListIndicatorValue(6) or {}
-    PWDEV.Tools.SendData(2061, coerce_nil_to_string(Cannon.txt_cannon_count))
+    send(2061, coerce_nil_to_string(Cannon.txt_cannon_count))
 
     local UV26 = PWDEV.Tools.getListIndicatorValue(7) or {}
-    PWDEV.Tools.SendData(2071, coerce_nil_to_string(UV26.txt_digits))
+    send(2071, coerce_nil_to_string(UV26.txt_digits))
 end

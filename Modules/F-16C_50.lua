@@ -1,10 +1,11 @@
  -- F-16C_50
 
- local coerce_nil_to_string = PWDEV.Tools.coerce_nil_to_string
+local coerce_nil_to_string = PWDEV.Tools.coerce_nil_to_string
+local send = PWDEV.Tools.SendData
 
 PWDEV.FoundDCSModule = true
 
-PWDEV.ConfigEveryFrameArguments = 
+PWDEV.ConfigEveryFrameArguments =
 {
 	-- CMDS
 	[365] = "%1d", 	-- O1 Expendable Category Switch, ON/OFF
@@ -45,7 +46,7 @@ PWDEV.ConfigEveryFrameArguments =
 	[688] = "%.1f", -- FLOOD CONSOLES BRT Knob
 	[690] = "%.1f", -- FLOOD INST PNL BRT Knob
 	[691] = "%d", -- MAL & IND LTS Switch, BRT/Center/DIM
-	
+
 	[110] = "%1d",	-- Warning, Caution and IndicatorLights","AoA Light up (red)
 	[111] = "%1d",	-- Warning, Caution and IndicatorLights","AoA Light up (green)
 	[112] = "%1d",	-- Warning, Caution and IndicatorLights","AoA Light up (yellow)
@@ -203,7 +204,7 @@ PWDEV.ConfigEveryFrameArguments =
 	[721] = "%1d", -- DL Switch, DL/OFF
 	[723] = "%.1f", -- MIDS LVT Knob, ZERO/OFF/ON
 }
-PWDEV.ConfigArguments = 
+PWDEV.ConfigArguments =
 {
 }
 
@@ -1417,62 +1418,40 @@ local function get_UHF_FREQUENCY()
     end
 end
 
--- Pointed to by ProcessDCSHighImportance
 function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
-	-- DED Displays
-	-- local DEDLine1 = ""
-	-- local DEDLine2 = ""
-	-- local DEDLine3 = ""
-	-- local DEDLine4 = ""
-	-- local DEDLine5 = ""
+	-- DED Display Lines
+	send(2101, PWDEV.replaceSymbols(buildDEDLine(1)))
+	send(2102, PWDEV.replaceSymbols(buildDEDLine(2)))
+	send(2103, PWDEV.replaceSymbols(buildDEDLine(3)))
+	send(2104, PWDEV.replaceSymbols(buildDEDLine(4)))
+	send(2105, PWDEV.replaceSymbols(buildDEDLine(5)))
 
-	-- CMDS Display
-	local CMDS_O1_Amount
-	local CMDS_O2_Amount
-	local CMDS_CH_Amount
-	local CMDS_FL_Amount
-
-	-- Build DED Display Lines
-	-- DEDLine1 = PWDEV.replaceSymbols(buildDEDLine(1))
-	-- DEDLine2 = PWDEV.replaceSymbols(buildDEDLine(2))
-	-- DEDLine3 = PWDEV.replaceSymbols(buildDEDLine(3))
-	-- DEDLine4 = PWDEV.replaceSymbols(buildDEDLine(4))
-	-- DEDLine5 = PWDEV.replaceSymbols(buildDEDLine(5))
-
-	PWDEV.Tools.SendData(2101, PWDEV.replaceSymbols(buildDEDLine(1)))
-	PWDEV.Tools.SendData(2102, PWDEV.replaceSymbols(buildDEDLine(2)))
-	PWDEV.Tools.SendData(2103, PWDEV.replaceSymbols(buildDEDLine(3)))
-	PWDEV.Tools.SendData(2104, PWDEV.replaceSymbols(buildDEDLine(4)))
-	PWDEV.Tools.SendData(2105, PWDEV.replaceSymbols(buildDEDLine(5)))
-
-	PWDEV.Tools.SendData(2106, PWDEV.replaceSymbols(buildPFLDLine(1)))
-	PWDEV.Tools.SendData(2107, PWDEV.replaceSymbols(buildPFLDLine(2)))
-	PWDEV.Tools.SendData(2108, PWDEV.replaceSymbols(buildPFLDLine(3)))
-	PWDEV.Tools.SendData(2109, PWDEV.replaceSymbols(buildPFLDLine(4)))
-	PWDEV.Tools.SendData(2110, PWDEV.replaceSymbols(buildPFLDLine(5)))
+	-- PFLD Display Lines
+	send(2106, PWDEV.replaceSymbols(buildPFLDLine(1)))
+	send(2107, PWDEV.replaceSymbols(buildPFLDLine(2)))
+	send(2108, PWDEV.replaceSymbols(buildPFLDLine(3)))
+	send(2109, PWDEV.replaceSymbols(buildPFLDLine(4)))
+	send(2110, PWDEV.replaceSymbols(buildPFLDLine(5)))
 
 	-- UHF
-	PWDEV.Tools.SendData(2305, get_UHF_CHAN())
-	PWDEV.Tools.SendData(2306, get_UHF_FREQUENCY())
+	send(2305, get_UHF_CHAN())
+	send(2306, get_UHF_FREQUENCY())
 
 	-- CMDS
 	local cmds = PWDEV.Tools.getListIndicatorValue(16) or {}
-	CMDS_O1_Amount = "    "
-	CMDS_O2_Amount = "    "
-	CMDS_CH_Amount = "    "
-	CMDS_FL_Amount = "    "
+	local CMDS_O1_Amount = "    "
+	local CMDS_O2_Amount = "    "
+	local CMDS_CH_Amount = "    "
+	local CMDS_FL_Amount = "    "
 
 	CMDS_O1_Amount = coerce_nil_to_string(cmds.CMDS_O1_Amount)
 	CMDS_O2_Amount = coerce_nil_to_string(cmds.CMDS_O2_Amount)
 	CMDS_CH_Amount = coerce_nil_to_string(cmds.CMDS_CH_Amount)
 	CMDS_FL_Amount = coerce_nil_to_string(cmds.CMDS_FL_Amount)
 
-	PWDEV.Tools.SendData(2301, CMDS_O1_Amount)
-	PWDEV.Tools.SendData(2302, CMDS_O2_Amount)
-	PWDEV.Tools.SendData(2303, CMDS_CH_Amount)
-	PWDEV.Tools.SendData(2304, CMDS_FL_Amount)
-end
-
--- Pointed to by PWDEV.ProcessDCSConfigLowImportance
+	send(2301, CMDS_O1_Amount)
+	send(2302, CMDS_O2_Amount)
+	send(2303, CMDS_CH_Amount)
+	send(2304, CMDS_FL_Amount)
 function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
 end

@@ -24,6 +24,9 @@ PrevPWDEV.LuaExportBeforeNextFrame = LuaExportBeforeNextFrame
 PrevPWDEV.LuaExportAfterNextFrame  = LuaExportAfterNextFrame
 PrevPWDEV.LuaExportActivityNextEvent = LuaExportActivityNextEvent
 
+package.path  = package.path..";.\\LuaSocket\\?.lua"
+package.cpath = package.cpath..";.\\LuaSocket\\?.dll"
+
 local versionFile = lfs.writedir()..[[Scripts\pw-dev_script\version]]
 local function GetConfigFileVersion()
 	local file = io.open(lfs.writedir()..[[Scripts\pw-dev_script\Config.lua]], "r")
@@ -67,24 +70,21 @@ PWDEV.FoundDCSModule = false
 PWDEV.FoundFCModule  = false
 PWDEV.FoundNoModul   = true
 
-package.path  = package.path..";.\\LuaSocket\\?.lua"
-package.cpath = package.cpath..";.\\LuaSocket\\?.dll"
-
 function PWDEV.Start()
+	PWDEV.Tools.createUDPSender()
+	PWDEV.Tools.createUDPListner()
+
 	PWDEV.Init.CheckDcs()
 
 	local version = LoGetVersionInfo()
 	PWDEV.Init.CheckDcsVersionId(version)
 
 	if (PWDEV.Fdr ~= nil) then
-		if (PWDEV.Config.WriteNavFile ~= nil and PWDEV.Config.WriteNavFile == true) then
+		if (PWDEV.Config.WriteNavFile == true) then
 			PWDEV.Fdr.CsvFileInit()
 			PWDEV.Fdr.NavFileInit(PWDEV.Init.VersionId)
 		end
 	end
-	
-	PWDEV.Tools.createUDPSender()
-	PWDEV.Tools.createUDPListner()
 
 	PWDEV.AF = {}
 
@@ -95,7 +95,6 @@ function PWDEV.Start()
 	PWDEV.Tools.playerId = PWDEV.Tools.GetPlayerId()
 
 	PWDEV.Tools.SendShortData("EX=ON;Ver="..PWDEV.Init.VersionStr .. separator.."VId="..PWDEV.Init.VersionId..separator.."MOE="..PWDEV.Init.CheckObjectExport()..separator.."MSE="..PWDEV.Init.CheckSensorExport()..separator.."MPE="..PWDEV.Init.CheckOwnshipExport()..separator.."SV="..scriptVer..separator.."CV="..configFileVer..separator)
-
 end
 
 function PWDEV.ActivityNextEvent()
@@ -122,7 +121,7 @@ function PWDEV.Stop()
 	PWDEV.FoundNoModul = false
 
 	if (PWDEV.Fdr ~= nil) then
-		if (PWDEV.Config.WriteNavFile ~= nil and PWDEV.Config.WriteNavFile == true) then
+		if (PWDEV.Config.WriteNavFile == true) then
 			PWDEV.Fdr.CsvFileEnd()
 			PWDEV.Fdr.NavFileEnd()
 		end
@@ -162,9 +161,6 @@ function LuaExportActivityNextEvent(currenttime)
 		PWDEV.ActivityNextEvent()
 	end)
 
-
-
-
 	tNext = tNext + PWDEV.Config.ExportInterval
 
 	return tNext
@@ -174,8 +170,6 @@ LuaExportStop = function()
 	local status, err = pcall(function()
 		PWDEV.Stop()
 	end)
-
-
 
 	if PrevPWDEV.LuaExportStop then
 		PrevPWDEV.LuaExportStop()

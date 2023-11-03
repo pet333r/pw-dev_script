@@ -1,4 +1,7 @@
 -- AJS37 Viggen
+
+local send = PWDEV.Tools.SendData
+
 PWDEV.FoundDCSModule = true
 
 PWDEV.ConfigEveryFrameArguments =
@@ -72,6 +75,6 @@ function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
     if not nav then
         return
     end
-    PWDEV.Tools.SendData(2001, PWDEV.Tools.DisplayFormat(nav.data1 .. nav.data2 .. nav.data3 .. nav.data4 .. nav.data5 .. nav.data6, 6))
+    send(2001, PWDEV.Tools.DisplayFormat(nav.data1 .. nav.data2 .. nav.data3 .. nav.data4 .. nav.data5 .. nav.data6, 6))
 
 end

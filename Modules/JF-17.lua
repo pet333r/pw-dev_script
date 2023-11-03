@@ -1,6 +1,7 @@
 -- JF-17
 
 local coerce_nil_to_string = PWDEV.Tools.coerce_nil_to_string
+local send = PWDEV.Tools.SendData
 
 PWDEV.FoundDCSModule = true
 
@@ -252,28 +253,28 @@ function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
         return
     end
     ufcLcdLine1 = coerce_nil_to_string(processUFCPLine(indLcd1, 1))
-    PWDEV.Tools.SendData(2001, ufcLcdLine1)
+    send(2001, ufcLcdLine1)
 
     local indLcd2 = PWDEV.Tools.getListIndicatorValue(4)
     if not indLcd2 then
         return
     end
     ufcLcdLine2 = coerce_nil_to_string(processUFCPLine(indLcd2, 2))
-    PWDEV.Tools.SendData(2002, ufcLcdLine2)
+    send(2002, ufcLcdLine2)
 
     local indLcd3 = PWDEV.Tools.getListIndicatorValue(5)
     if not indLcd3 then
         return
     end
     ufcLcdLine3 = coerce_nil_to_string(processUFCPLine(indLcd3, 3))
-    PWDEV.Tools.SendData(2003, ufcLcdLine3)
+    send(2003, ufcLcdLine3)
 
     local indLcd4 = PWDEV.Tools.getListIndicatorValue(6)
     if not indLcd4 then
         return
     end
     ufcLcdLine4 = coerce_nil_to_string(processUFCPLine(indLcd4, 4))
-    PWDEV.Tools.SendData(2004, ufcLcdLine4)
+    send(2004, ufcLcdLine4)
 
 
     local radio_line_1
@@ -338,11 +339,11 @@ function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
         radio_line_1 = radioDisplay.radio_disp_l1
     end
 
-    PWDEV.Tools.SendData(2010, radio_line_1)
-    PWDEV.Tools.SendData(2011, radio_line_2)
-    PWDEV.Tools.SendData(2012, radio_sql_light)
-    PWDEV.Tools.SendData(2013, radio_or_light)
-    PWDEV.Tools.SendData(2014, radio_take_light)
-    PWDEV.Tools.SendData(2015, radio_go_light)
-    PWDEV.Tools.SendData(2016, radio_tx_light)
+    send(2010, radio_line_1)
+    send(2011, radio_line_2)
+    send(2012, radio_sql_light)
+    send(2013, radio_or_light)
+    send(2014, radio_take_light)
+    send(2015, radio_go_light)
+    send(2016, radio_tx_light)
 end

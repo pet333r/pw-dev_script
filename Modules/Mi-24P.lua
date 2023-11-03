@@ -1,7 +1,7 @@
 -- Mi-24P Hind
 PWDEV.FoundDCSModule = true
 
-PWDEV.ConfigEveryFrameArguments = 
+PWDEV.ConfigEveryFrameArguments =
 {
     -- Pilot cautions
     [11] = "%.1f", -- VERT GYRO 1 FAIL
@@ -98,7 +98,7 @@ PWDEV.ConfigEveryFrameArguments =
     [563] = "%.1f", -- RKT
 }
 
-PWDEV.ConfigArguments = 
+PWDEV.ConfigArguments =
 {
 }
 

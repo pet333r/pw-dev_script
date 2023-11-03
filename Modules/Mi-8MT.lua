@@ -1,7 +1,7 @@
 -- Mi-8MT
 PWDEV.FoundDCSModule = true
 
-PWDEV.ConfigEveryFrameArguments = 
+PWDEV.ConfigEveryFrameArguments =
 {
     [64] = "%1d", -- LOW FUEL 270 LT
     [65] = "%1d", -- DOPPLER FAIL
@@ -128,7 +128,7 @@ PWDEV.ConfigEveryFrameArguments =
     [716] = "%1d", -- RACK 6 LOADED
 }
 
-PWDEV.ConfigArguments = 
+PWDEV.ConfigArguments =
 {
 }
 

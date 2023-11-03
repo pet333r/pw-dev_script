@@ -2,7 +2,7 @@
 
 PWDEV.FoundDCSModule = true
 
-PWDEV.ConfigEveryFrameArguments = 
+PWDEV.ConfigEveryFrameArguments =
 {
     -- CPG MPD Left
     [86] = "%.1f",  -- BRT knob
@@ -225,9 +225,18 @@ PWDEV.ConfigEveryFrameArguments =
     -- PLT WINDSHIELD WIPER
     -- [356] = "%1d",  -- DEFOG
     [357] = "%.1f",  -- knob 0.1
+    -- PLT CMWS
+    [610] = "%1d",  -- PWR Switch
+    [611] = "%.1f", -- Audio Volume Knob
+    [612] = "%.1f", -- Lamp Knob
+    [614] = "%1d",  -- Flare Squibs Switch
+    [615] = "%1d",  -- Mode Switch
+    [616] = "%1d",  -- Operation Switch
+    [617] = "%1d",  -- Flare Jettison Switch Cover
+    [618] = "%1d",  -- Flare Jettison Switch
 }
 
-PWDEV.ConfigArguments = 
+PWDEV.ConfigArguments =
 {
 }
 
