@@ -2,13 +2,13 @@ PWDEV = {}
 
 PWDEV.Id = string.format("%08x*",os.time())
 
-PWDEV.PacketSize     = {}
+PWDEV.PacketSize     = 0
 PWDEV.SendStrings    = {}
 PWDEV.PacketNavSize  = 0
 PWDEV.SendNavStrings	= {}
 
 PWDEV.SendNavAllStrings	= {}
-PWDEV.LastData       = {}
+PWDEV.LastData       	= {}
 PWDEV.LastDataAll       = {}
 PWDEV.LastDataNav       = {}
 
@@ -57,12 +57,8 @@ PWDEV.utf8 = dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\utf8.lua]])
 dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Tools.lua]])
 dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Fdr.lua]])
 dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Maps.lua]])
+PWDEV.Displays = dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Displays.lua]])
 
-for i = 1, #PWDEV.Config.Device, 1 do
-	PWDEV.PacketSize[i]  = 0
-	PWDEV.SendStrings[i] = {}
-	PWDEV.LastData[i]    = {}
-end
 
 local separator = PWDEV.Config.Separator
 
@@ -107,9 +103,8 @@ function PWDEV.ActivityNextEvent()
 end
 
 function PWDEV.Stop()
-	for i=1, #PWDEV.Config.Device, 1 do
-		PWDEV.Tools.FlushDataDevice(i)
-	end
+	PWDEV.Tools.FlushDataDevice()
+
 	PWDEV.Tools.SendShortData("EX=OF")
 
 	PWDEV.UDPsender:close()

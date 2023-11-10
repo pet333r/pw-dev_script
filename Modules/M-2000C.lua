@@ -1,4 +1,5 @@
 -- Mirage 2000C
+local coerce_nil_to_string = PWDEV.Tools.coerce_nil_to_string
 local send = PWDEV.Tools.SendData
 
 PWDEV.FoundDCSModule = true
@@ -277,6 +278,14 @@ function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
 
 function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
+	local radio = PWDEV.Tools.getListIndicatorValue(7) or {}
+	-- local radio = list_indication(7)
+	local uhf = coerce_nil_to_string(radio.text_COM_UHF2)
+	local vhf = coerce_nil_to_string(radio.text_COM_UHF1)
+
+	send(2001, uhf)
+	send(2002, vhf)
+
 	send(2011, PWDEV.Tools.getListIndicatorValueByName(4, "PCA_LCD_1_0", 3))
 	send(2012, PWDEV.Tools.getListIndicatorValueByName(4, "PCA_LCD_1_1", 3))
 	send(2013, PWDEV.Tools.getListIndicatorValueByName(4, "PCA_LCD_1_2", 3))

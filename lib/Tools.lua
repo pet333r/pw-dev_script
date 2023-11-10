@@ -730,7 +730,7 @@ function PWDEV.Tools.ProcessNavDataD()
 
 	if PWDEV.Tools.NavDataD ~= nil then
 		for key, value in pairs(PWDEV.Tools.NavDataD) do
-				PWDEV.Tools.SendNavData(key, value)
+            PWDEV.Tools.SendNavDataPlayer(key, value)
 		end
 	end
 end
@@ -796,11 +796,11 @@ function PWDEV.Tools.ProcessNavGround()
     end
 
     if gndObjects then
-        PWDEV.Tools.SendPacket("N4G" .. separator .. "start" .. separator .. "\n")
+        PWDEV.Tools.SendPacketToNav("N4G" .. separator .. "start" .. separator .. "\n")
         for key, value in pairs(PWDEV.Tools.NavDataGnd) do
-            PWDEV.Tools.SendNavAllData("N4G" .. separator .. key, value)
+            PWDEV.Tools.SendNavDataObjects("N4G" .. separator .. key, value)
         end
-        PWDEV.Tools.SendPacket("N4G" .. separator .. "stop" .. separator .. "\n")
+        PWDEV.Tools.SendPacketToNav("N4G" .. separator .. "stop" .. separator .. "\n")
     end
 end
 
@@ -872,11 +872,11 @@ function PWDEV.Tools.ProcessNavAir()
     end
 
     if objects then
-        PWDEV.Tools.SendPacket("N4A" .. separator .. "start" .. separator .. "\n")
+        PWDEV.Tools.SendPacketToNav("N4A" .. separator .. "start" .. separator .. "\n")
         for key, value in pairs(PWDEV.Tools.NavDataAll) do
-            PWDEV.Tools.SendNavAllData("N4A" .. separator .. key, value)
+            PWDEV.Tools.SendNavDataObjects("N4A" .. separator .. key, value)
         end
-        PWDEV.Tools.SendPacket("N4A" .. separator .. "stop" .. separator .. "\n")
+        PWDEV.Tools.SendPacketToNav("N4A" .. separator .. "stop" .. separator .. "\n")
     end
 end
 
@@ -931,11 +931,11 @@ function PWDEV.Tools.ProcessNavNav()
     end
 
     if objects then
-        PWDEV.Tools.SendPacket("N4N" .. separator .. "start" .. separator .. "\n")
+        PWDEV.Tools.SendPacketToNav("N4N" .. separator .. "start" .. separator .. "\n")
         for key, value in pairs(PWDEV.Tools.NavDataNav) do
-            PWDEV.Tools.SendNavAllData("N4N" .. separator .. key, value)
+            PWDEV.Tools.SendNavDataObjects("N4N" .. separator .. key, value)
         end
-        PWDEV.Tools.SendPacket("N4N" .. separator .. "stop" .. separator .. "\n")
+        PWDEV.Tools.SendPacketToNav("N4N" .. separator .. "stop" .. separator .. "\n")
     end
 end
 
@@ -975,11 +975,11 @@ function PWDEV.Tools.ProcessNavWeapon()
     end
 
     if weapons then
-        PWDEV.Tools.SendPacket("N4W" .. separator .. "start" .. separator .. "\n")
+        PWDEV.Tools.SendPacketToNav("N4W" .. separator .. "start" .. separator .. "\n")
         for key, value in pairs(PWDEV.Tools.NavDataWeapons) do
-            PWDEV.Tools.SendNavAllData("N4W" .. separator .. key, value)
+            PWDEV.Tools.SendNavDataObjects("N4W" .. separator .. key, value)
         end
-        PWDEV.Tools.SendPacket("N4W" .. separator .. "stop" .. separator .. "\n")
+        PWDEV.Tools.SendPacketToNav("N4W" .. separator .. "stop" .. separator .. "\n")
     end
 end
 
@@ -1029,9 +1029,7 @@ function PWDEV.Tools.ProcessOutput()
             PWDEV.lastExportTimeHI = 0
         end
 
-        for i=1, #PWDEV.Config.Device, 1 do
-            PWDEV.Tools.FlushDataDevice(i)
-        end
+        PWDEV.Tools.FlushDataDevice()
 
         timestamp = LoGetModelTime()
 
@@ -1085,7 +1083,7 @@ function PWDEV.Tools.ProcessOutput()
         end
 
         if (PWDEV.Config.ExportNavData == true) then
-            PWDEV.Tools.FlushNavData()
+            PWDEV.Tools.FlushNavDataPlayer()
         end
 
     elseif PWDEV.FoundFCModule then
@@ -1160,12 +1158,10 @@ function PWDEV.Tools.ProcessOutput()
             end
         end
 
-        for i=1, #PWDEV.Config.Device, 1 do
-            PWDEV.Tools.FlushDataDevice(i)
-        end
+        PWDEV.Tools.FlushDataDevice()
 
         if (PWDEV.Config.ExportNavData == true) then
-            PWDEV.Tools.FlushNavData()
+            PWDEV.Tools.FlushNavDataPlayer()
         end
     else
         if PWDEV.FoundNoModul then
@@ -1221,7 +1217,7 @@ function PWDEV.Tools.GetArgumentsValue(argument, format)
     end
 end
 
-function PWDEV.Tools.SendPacket(packet)
+function PWDEV.Tools.SendPacketToNav(packet)
     local try = PWDEV.socket.newtry(function() PWDEV.UDPsender:close() PWDEV.Tools.createUDPSender() end)
     if (lDeviceIpMap ~= "") then
         try(PWDEV.UDPsender:sendto(packet, lDeviceIpMap, lDevicePortMap))
@@ -1253,41 +1249,39 @@ function PWDEV.Tools.SendShortData(message)
 end
 
 function PWDEV.Tools.SendData(id, value)
-    for hardware = 1, #PWDEV.Config.Device, 1 do
-        if string.len(value) > 3 and value == string.sub("-0.00000000",1, string.len(value)) then
-            value = value:sub(2)
+    if string.len(value) > 3 and value == string.sub("-0.00000000",1, string.len(value)) then
+        value = value:sub(2)
+    end
+
+    if PWDEV.LastData[id] == nil or PWDEV.LastData[id] ~= value then
+        local _data    =  id .. "=" .. value
+        local _dataLen = string.len(_data)
+
+        if _dataLen + PWDEV.PacketSize > 576 then
+            PWDEV.Tools.FlushDataDevice()
         end
-    
-        if PWDEV.LastData[hardware][id] == nil or PWDEV.LastData[hardware][id] ~= value then
-            local _data    =  id .. "=" .. value
-            local _dataLen = string.len(_data)
-    
-            if _dataLen + PWDEV.PacketSize[hardware] > 576 then
-                PWDEV.Tools.FlushDataDevice(hardware)
-            end
-    
-            table.insert(PWDEV.SendStrings[hardware], _data)
-            PWDEV.LastData[hardware][id] = value
-            PWDEV.PacketSize[hardware]   = PWDEV.PacketSize[hardware] + _dataLen + 1
-        end
+
+        table.insert(PWDEV.SendStrings, _data)
+        PWDEV.LastData[id] = value
+        PWDEV.PacketSize   = PWDEV.PacketSize + _dataLen + 1
     end
 end
 
-function PWDEV.Tools.FlushData()
-    local _flushData = PWDEV.socket.protect(function()
+function PWDEV.Tools.FlushDataDevice()
+	local _flush = PWDEV.socket.protect(function()
         if #PWDEV.SendStrings > 0 then
             local _packet = "R4G" .. separator .. table.concat(PWDEV.SendStrings, separator) .. separator .. "\n"
 
             local try = PWDEV.socket.newtry(function() PWDEV.UDPsender:close() PWDEV.Tools.createUDPSender() PWDEV.Tools.ResetChangeValues() end)
 
-            for i = 1, #PWDEV.Config.Device, 1 do
-                if PWDEV.Config.Device[i].Export then
-                    if (PWDEV.Config.Device[i].Host == lDeviceIpMap) then
+            for hardware = 1, #PWDEV.Config.Device, 1 do
+                if PWDEV.Config.Device[hardware].Export then
+                    if (PWDEV.Config.Device[hardware].Host == lDeviceIpMap) then
                         if (PWDEV.Config.MultiAppDevice ~= nil and PWDEV.Config.MultiAppDevice) then
-                            try(PWDEV.UDPsender:sendto(_packet, PWDEV.Config.Device[i].Host, PWDEV.Config.Port))
+                            try(PWDEV.UDPsender:sendto(_packet, PWDEV.Config.Device[hardware].Host, PWDEV.Config.Port))
                         end
                     else
-                        try(PWDEV.UDPsender:sendto(_packet, PWDEV.Config.Device[i].Host, PWDEV.Config.Port))
+                        try(PWDEV.UDPsender:sendto(_packet, PWDEV.Config.Device[hardware].Host, PWDEV.Config.Port))
                     end
                 end
             end
@@ -1304,46 +1298,17 @@ function PWDEV.Tools.FlushData()
             PWDEV.PacketSize  = 0
 
         end
-    end)
-    local ln, lerror = _flushData()
-end
-
-function PWDEV.Tools.FlushDataDevice(hardware)
-    hardware = hardware or 1
-
-	local _lFlushData = PWDEV.socket.protect(function()
-		if #PWDEV.SendStrings[hardware] > 0 then
-            local _packet = "R4G" .. separator .. table.concat(PWDEV.SendStrings[hardware], separator) .. separator .. "\n"
-
-            local try = PWDEV.socket.newtry(function() PWDEV.UDPsender:close() PWDEV.Tools.createUDPSender() PWDEV.Tools.ResetChangeValues() end)
-
-            -- for i = 1, #PWDEV.Config.Device, 1 do
-                if PWDEV.Config.Device[hardware].Export then
-                    if (PWDEV.Config.Device[hardware].Host == lDeviceIpMap) then
-                        if (PWDEV.Config.MultiAppDevice ~= nil and PWDEV.Config.MultiAppDevice) then
-                            try(PWDEV.UDPsender:sendto(_packet, PWDEV.Config.Device[hardware].Host, PWDEV.Config.Port))
-                        end
-                    else
-                        try(PWDEV.UDPsender:sendto(_packet, PWDEV.Config.Device[hardware].Host, PWDEV.Config.Port))
-                    end
-                end
-            -- end
-			PWDEV.SendStrings[hardware] = {}
-			PWDEV.PacketSize[hardware]  = 0
-		else
-		end
 	end)
-
-    local ln, lerror = _lFlushData()
+    local ln, lerror = _flush()
 end
 
-function PWDEV.Tools.SendNavData(id, value)
+function PWDEV.Tools.SendNavDataPlayer(id, value)
     if PWDEV.LastDataNav[id] == nil or PWDEV.LastDataNav[id] ~= value then
         local _data    =  id .. "=" .. value
         local _dataLen = string.len(_data)
 
         if _dataLen + PWDEV.PacketNavSize > 576 then
-            PWDEV.Tools.FlushNavData()
+            PWDEV.Tools.FlushNavDataPlayer()
         end
 
         table.insert(PWDEV.SendNavStrings, _data)
@@ -1352,11 +1317,10 @@ function PWDEV.Tools.SendNavData(id, value)
     end
 end
 
-function PWDEV.Tools.FlushNavData()
-	local _flushData = PWDEV.socket.protect(function()
+function PWDEV.Tools.FlushNavDataPlayer()
+	local _flush = PWDEV.socket.protect(function()
 		if #PWDEV.SendNavStrings > 0 then
-            local _packet = "N4D" .. separator ..
-                table.concat(PWDEV.SendNavStrings, separator) .. separator .. "\n"
+            local _packet = "N4D" .. separator .. table.concat(PWDEV.SendNavStrings, separator) .. separator .. "\n"
 
             local try = PWDEV.socket.newtry(function() PWDEV.UDPsender:close() PWDEV.Tools.createUDPSender() PWDEV.Tools.ResetChangeValues() end)
 
@@ -1370,18 +1334,18 @@ function PWDEV.Tools.FlushNavData()
 
 		end
 	end)
-    _flushData()
+    _flush()
 end
 
-function PWDEV.Tools.SendNavAllData(id, value)
+function PWDEV.Tools.SendNavDataObjects(id, value)
     local _data = id .. separator .. value
 
     table.insert(PWDEV.SendNavAllStrings, _data)
-    PWDEV.Tools.FlushNavAllData()
+    PWDEV.Tools.FlushNavDataObjects()
 end
 
-function PWDEV.Tools.FlushNavAllData()
-	local _flushData = PWDEV.socket.protect(function()
+function PWDEV.Tools.FlushNavDataObjects()
+	local _flush = PWDEV.socket.protect(function()
         local _packet = table.concat(PWDEV.SendNavAllStrings, separator) .. "\n"
         local try = PWDEV.socket.newtry(function() PWDEV.UDPsender:close() PWDEV.Tools.createUDPSender() end)
         if (lDeviceIpMap ~= "") then
@@ -1390,13 +1354,11 @@ function PWDEV.Tools.FlushNavAllData()
 
         PWDEV.SendNavAllStrings = {}
 	end)
-    _flushData()
+    _flush()
 end
 
 function PWDEV.Tools.ResetChangeValues()
-    for i = 1, #PWDEV.Config.Device, 1 do
-        PWDEV.LastData[i] = {}
-    end
+    PWDEV.LastData = {}
 end
 
 function PWDEV.Tools.SelectModule()
@@ -1461,9 +1423,7 @@ function PWDEV.Tools.SelectModule()
 
         actualMap = PWDEV.Tools.GetMap(_info)
 
-        for i=1, #PWDEV.Config.Device, 1 do
-            PWDEV.Tools.FlushDataDevice(i)
-        end
+        PWDEV.Tools.FlushDataDevice()
     else
         PWDEV.ProcessDCSHighImportance = PWDEV.ProcessDCSHighImportanceNoConfig
         PWDEV.ProcessDCSLowImportance  = PWDEV.ProcessDCSLowImportanceNoConfig
