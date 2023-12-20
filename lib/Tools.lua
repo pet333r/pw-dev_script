@@ -224,6 +224,7 @@ function PWDEV.Tools.ProcessInput()
                         nsId:performClickableAction(_commandArgs[3])
                     elseif (tablelength(_commandArgs) == 4) then
                         nsId:performClickableAction(_commandArgs[3],_commandArgs[4])
+                    end
 				elseif _deviceID < 1000 then
 					_device = GetDevice(_commandArgs[1])
 					if PWDEV.FoundDCSModule and type(_device) == "table" then
