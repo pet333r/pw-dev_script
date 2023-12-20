@@ -175,32 +175,28 @@ function PWDEV.Tools.ProcessInput()
                         PWDEV.Tools.ExportMapPlayer(true)
                         PWDEV.Tools.SetSecPla(val)
                     end
-                end
-                if opt == 1 then
+                elseif opt == 1 then
                     if (vis == 0) then
                         PWDEV.Tools.ExportMapWea(false)
                     else
                         PWDEV.Tools.ExportMapWea(true)
                         PWDEV.Tools.SetSecWea(val)
                     end
-                end
-                if opt == 2 then
+                elseif opt == 2 then
                     if (vis == 0) then
                         PWDEV.Tools.ExportMapAir(false)
                     else
                         PWDEV.Tools.ExportMapAir(true)
                         PWDEV.Tools.SetSecAir(val)
                     end
-                end
-                if opt == 3 then
+                elseif opt == 3 then
                     if (vis == 0) then
                         PWDEV.Tools.ExportMapGnd(false)
                     else
                         PWDEV.Tools.ExportMapGnd(true)
                         PWDEV.Tools.SetSecGnd(val)
                     end
-                end
-                if opt == 4 then
+                elseif opt == 4 then
                     if (vis == 0) then
                         PWDEV.Tools.ExportMapNav(false)
                     else
@@ -213,7 +209,22 @@ function PWDEV.Tools.ProcessInput()
             if (_command == "C") then
                 _commandArgs = PWDEV.Tools.StrSplit(string.sub(_input,2),",")
 				local _deviceID = tonumber(_commandArgs[1])
-				if _deviceID < 1000 then
+                if _deviceID == 256 then
+                    local dev = GetDevice(_deviceID)
+                    local nsId = tonumber(_commandArgs[2])
+                    if not dev then
+                        return -- if the ns430 is not owned, dev is nil
+                    end
+                    local function tablelength(T)
+                        local count = 0
+                        for _ in pairs(T) do count = count + 1 end
+                        return count
+                    end
+                    if (tablelength(_commandArgs) == 3) then
+                        nsId:performClickableAction(_commandArgs[3])
+                    elseif (tablelength(_commandArgs) == 4) then
+                        nsId:performClickableAction(_commandArgs[3],_commandArgs[4])
+				elseif _deviceID < 1000 then
 					_device = GetDevice(_commandArgs[1])
 					if PWDEV.FoundDCSModule and type(_device) == "table" then
 						_device:performClickableAction(_commandArgs[2],_commandArgs[3])

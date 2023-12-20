@@ -175,17 +175,17 @@ PWDEV.ConfigEveryFrameArguments =
 PWDEV.ConfigArguments =
 {
 	-- Left MDI
-	[51] = "%1d",   -- Left MDI Brightness Selector Knob, OFF/NIGHT/DAY {0.0,0.1,0.2}
-	[52] = "%.2f",   -- Left MDI Brightness Control Knob {0.0,1.0} in 0.1 Steps
-	[53] = "%.2f",   -- Left MDI Contrast Control Knob {0.0,1.0} in 0.1 Steps
+	[51] = "%.1f",   -- Left MDI Brightness Selector Knob, OFF/NIGHT/DAY {0.0,0.1,0.2}
+	[52] = "%.1f",   -- Left MDI Brightness Control Knob {0.0,1.0} in 0.1 Steps
+	[53] = "%.1f",   -- Left MDI Contrast Control Knob {0.0,1.0} in 0.1 Steps
 	[312] = "%1d",   -- Heading Set Switch
 	[313] = "%1d",   -- Course Set Switch
 	-- Right MDI
 	[76] = "%.1f",   -- Right MDI Brightness Selector Knob, OFF/NIGHT/DAY {0.0,0.1,0.2}
-	[77] = "%.2f",   -- Right MDI Brightness Control Knob {0.0,1.0} in 0.1 Steps
-	[78] = "%.2f",   -- Right MDI Contrast Control Knob {0.0,1.0} in 0.1 Steps
+	[77] = "%.1f",   -- Right MDI Brightness Control Knob {0.0,1.0} in 0.1 Steps
+	[78] = "%.1f",   -- Right MDI Contrast Control Knob {0.0,1.0} in 0.1 Steps
 	-- AMPCD
-	[203] = "%.2f",   -- AMPCD Off/Brightness Control Knob {0.0,1.0} in 0.1 Steps
+	[203] = "%.1f",   -- AMPCD Off/Brightness Control Knob {0.0,1.0} in 0.1 Steps
 	[177] = "%1d",   -- AMPCD Night/Day Brightness Selector, DAY/NGT {1.0,0.0,-1.0}
 	[179] = "%1d",   -- AMPCD Symbology Control Switch, UP/DOWN {1.0,0.0,-1.0}
 	[182] = "%1d",   -- AMPCD Contrast Control Switch, UP/DOWN {1.0,0.0,-1.0}

@@ -90,12 +90,13 @@ end
 ---@param displayIndicatorData table The data from the json file containing information about the display
 ---@param getDisplayPage function Gets the current display page
 ---@param replaceSymbolMap table Map of symbols to replace from -> to
+---@param parentMap
 ---@return table displayLines The lines of the display
-function Displays.GetDisplayLines(dcsDisplay, width, height, displayIndicatorData, getDisplayPage, replaceSymbolMap)
+function Displays.GetDisplayLines(dcsDisplay, width, height, displayIndicatorData, getDisplayPage, replaceSymbolMap, parentMap)
     local emptyLine = string.rep(" ", width)
 
     local displayLines = {}
-    for i=1,height do
+    for i = 1, height do
         displayLines[i] = emptyLine
     end
     if not dcsDisplay then
@@ -103,6 +104,8 @@ function Displays.GetDisplayLines(dcsDisplay, width, height, displayIndicatorDat
     end
 
     local displayPage = getDisplayPage()
+    parentMap = parentMap or {}
+	local parentPage = parentMap[displayPage]
 
     for k, v in pairs(dcsDisplay) do
         local candidates = displayIndicatorData[k]
@@ -115,12 +118,18 @@ function Displays.GetDisplayLines(dcsDisplay, width, height, displayIndicatorDat
                 render_instructions = candidates[1]
             else
                 for _, ri in pairs(candidates) do
-                    for _, page in pairs(ri.pages) do
-                        if displayPage == page then
-                            render_instructions = ri
-                            break
-                        end
-                    end
+					local parent_instructions = nil
+					for _, page in pairs(ri.pages) do
+						if displayPage == page then
+							render_instructions = ri
+							break
+						elseif parentPage == page then
+							parent_instructions = ri
+						end
+					end
+					if render_instructions == nil then
+						render_instructions = parent_instructions
+					end
                 end
             end
             if render_instructions then
@@ -129,12 +138,12 @@ function Displays.GetDisplayLines(dcsDisplay, width, height, displayIndicatorDat
                 local replacements = {}
                 if not ri.alignment or ri.alignment == "LFT" then
                     for i = 1, v:len(), 1 do
-                        local c = v:sub(i,i)
+                        local c = v:sub(i, i)
                         if c ~= " " then replacements[ri.x + i - 1] = c end
                     end
                 elseif ri.alignment == "RGHT" then
                     for i = 1, v:len(), 1 do
-                        local c = v:sub(i,i)
+                        local c = v:sub(i, i)
                         if c ~= " " then replacements[ri.x - (v:len() - i)] = c end
                     end
                 end

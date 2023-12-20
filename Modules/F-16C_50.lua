@@ -1294,6 +1294,32 @@ DEDLayout_l5["STEERPOINT ElevationMGRS Asteriscs_both"]={11,1,20,"","I"}
 
 DEDLayout = {DEDLayout_l1, DEDLayout_l2, DEDLayout_l3, DEDLayout_l4, DEDLayout_l5}
 
+local function bitoper(a, b, oper)
+	local r, m, s = 0, 2^31, 0
+	repeat
+	   s, a, b = a + b + m, a % m, b % m
+	   r, m = r + m * oper % (s - a - b), m/2
+	until m < 1
+	return r
+end
+
+local function IntToByteString(intval)
+	assert(intval >= 0)
+	assert(intval <= 0xFFFFFFFF) --- (2^32 -1) ::4294967295
+	-- convert value (a float from 0.0 to 1.0) to a 16-bit signed integer from 0 to 65535
+	local retBytes = {0, 0, 0, 0}
+	local i = 1 -- unsigned long start from low couple of byte
+
+	while intval > 0 do
+		retBytes[i] = intval % 256
+		intval = (intval - retBytes[i]) / 256
+		i = i + 1
+	end
+	return string.char(retBytes[1], retBytes[2], retBytes[3], retBytes[4])
+end
+
+OR, XOR, AND = 1, 3, 4
+
 -- DED Display Main Function -----------------------------------------------
 local function buildDEDLine(line)
 		-- Get Layout Information for line being built
@@ -1394,31 +1420,7 @@ local function buildDEDLine(line)
 	return dataLine
 end
 
-function bitoper(a, b, oper)
-	local r, m, s = 0, 2^31
-	repeat
-	   s,a,b = a + b + m, a % m, b % m
-	   r,m = r + m * oper % (s-a-b), m/2
-	until m < 1
-	return r
-end
 
-function IntToByteString(intval)
-	assert(intval >= 0)
-	assert(intval <= 0xFFFFFFFF) --- (2^32 -1) ::4294967295
-	-- convert value (a float from 0.0 to 1.0) to a 16-bit signed integer from 0 to 65535
-	local retBytes = {0,0,0,0}
-	local i = 1 -- unsigned long start from low couple of byte
-
-	while intval > 0 do
-		retBytes[i] = intval % 256
-		intval = (intval-retBytes[i]) / 256
-		i = i+1
-	end
-	return string.char(retBytes[1], retBytes[2], retBytes[3], retBytes[4])
-end
-
-OR, XOR, AND = 1, 3, 4
 
 -- Unicode UTF-16
 function PWDEV.replaceSymbols(s)
