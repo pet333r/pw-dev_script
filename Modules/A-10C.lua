@@ -1,6 +1,7 @@
 -- A-10C
 
-local A10C_CDU = require("Scripts.pw-dev_script.disp.A10C_CDU")
+A10C_CDU = dofile(lfs.writedir()..[[Scripts\pw-dev_script\disp\A10C_CDU.lua]])
+
 local coerce_nil_to_string = PWDEV.Tools.coerce_nil_to_string
 local send = PWDEV.Tools.SendData
 
@@ -8,7 +9,6 @@ PWDEV.FoundDCSModule = true
 
 PWDEV.ConfigEveryFrameArguments =
 {
-
     -- Autopilot
     [129] = "%1d",   -- EAC On/Off
     [130] = "%1d",   -- Radar Altimeter
