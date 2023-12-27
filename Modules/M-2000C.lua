@@ -204,14 +204,13 @@ PWDEV.ConfigArguments =
 {
 }
 
-
 local function getPCN2DigitR()
 	local li = list_indication(9)
 	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
-	local east = ""
-	local west = ""
-	local plus = ""
-	local minus = ""
+	local east = " "
+	local west = " "
+	local plus = " "
+	local minus = " "
 	while true do
 		local name, value = m()
 		if not name then break end
@@ -235,10 +234,10 @@ end
 local function getPCN2DigitL()
 	local li = list_indication(9)
 	local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
-	local north = ""
-	local south = ""
-	local plus = ""
-	local minus = ""
+	local north = " "
+	local south = " "
+	local plus = " "
+	local minus = " "
 	while true do
 		local name, value = m()
 		if not name then break end
@@ -300,16 +299,40 @@ function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
 
 	-- PCN up
 	send(2031, getPCN2DigitL())		-- up/left 2-digit vertical
-	send(2035, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UL_DIGITS", 6)) -- up/left 5-digit
-	send(2036, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UL_POINTS", 5)) -- dots
+	send(2131, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UL_SEG0", 5))
+	send(2132, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UL_SEG1", 5))
+	send(2133, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UL_SEG2", 5))
+	send(2134, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UL_SEG3", 5))
+	send(2135, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UL_SEG4", 5))
+	send(2136, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UL_SEG5", 5))
+	send(2137, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UL_SEG6", 5))
+	send(2138, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UL_SEG7", 5))
 
 	send(2033, getPCN2DigitR())		-- up/middle 2-digit vertical
-	send(2037, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UR_DIGITS", 7)) -- up/right 6-digit
-	send(2038, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UR_POINTS", 6)) -- dots
+	send(2141, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UR_SEG0", 6))
+	send(2142, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UR_SEG1", 6))
+	send(2143, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UR_SEG2", 6))
+	send(2144, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UR_SEG3", 6))
+	send(2145, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UR_SEG4", 6))
+	send(2146, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UR_SEG5", 6))
+	send(2147, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UR_SEG6", 6))
+	send(2148, PWDEV.Tools.getListIndicatorValueByName(9, "PCN_UR_SEG7", 6))
 
-	-- PCN dn
-	send(2041, getPCNValue("PCN_BL_DIGITS", 10))		-- dn/left 2-digit
-	send(2042, getPCNValue("PCN_BR_DIGITS", 10))		-- dn/mid 2-digit
+	send(2151, PWDEV.Tools.getListIndicatorValueByName(10, "PCN_BL_SEG0", 2))
+	send(2152, PWDEV.Tools.getListIndicatorValueByName(10, "PCN_BL_SEG1", 2))
+	send(2153, PWDEV.Tools.getListIndicatorValueByName(10, "PCN_BL_SEG2", 2))
+	send(2154, PWDEV.Tools.getListIndicatorValueByName(10, "PCN_BL_SEG3", 2))
+	send(2155, PWDEV.Tools.getListIndicatorValueByName(10, "PCN_BL_SEG4", 2))
+	send(2156, PWDEV.Tools.getListIndicatorValueByName(10, "PCN_BL_SEG5", 2))
+	send(2157, PWDEV.Tools.getListIndicatorValueByName(10, "PCN_BL_SEG6", 2))
+
+	send(2161, PWDEV.Tools.getListIndicatorValueByName(10, "PCN_BR_SEG0", 2))
+	send(2162, PWDEV.Tools.getListIndicatorValueByName(10, "PCN_BR_SEG1", 2))
+	send(2163, PWDEV.Tools.getListIndicatorValueByName(10, "PCN_BR_SEG2", 2))
+	send(2164, PWDEV.Tools.getListIndicatorValueByName(10, "PCN_BR_SEG3", 2))
+	send(2165, PWDEV.Tools.getListIndicatorValueByName(10, "PCN_BR_SEG4", 2))
+	send(2166, PWDEV.Tools.getListIndicatorValueByName(10, "PCN_BR_SEG5", 2))
+	send(2167, PWDEV.Tools.getListIndicatorValueByName(10, "PCN_BR_SEG6", 2))
 
 	-- PPA
 	send(2051, getPCNValue("text_PPA_QTY", 6))
