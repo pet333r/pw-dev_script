@@ -152,12 +152,15 @@ folder `pw-dev_script` inside `Scripts`
 
 ## *edit Config.lua*
 in folder `pw-dev_script` open `Config.lua` for edit, there are several "groups" in the file: 
-* device 1
-* device 2
-* device 3
-* device 4
 
-choose one of them and edit `Host` and `Port` (you can leave port the same, in 99% cases you don't even need to change)  
+```
+-- device 1
+PWDEV.Config.Device[1] = {}
+PWDEV.Config.Device[1].Export = true;           -- set to true if you want to send data to this device
+PWDEV.Config.Device[1].Host = "192.168.0.11"    -- IP for 1st app
+```
+
+choose one of them and edit `Host` by changing the IP address to the IP address of your device to which the data is to be sent  
 it is <span style="color:red">**IMPORTANT**</span> that the device's IP address matches and `PC / phone / tablet` must be on the same network  
 
 example you will find below in the [example connection](#example-connection)
@@ -231,10 +234,10 @@ In one of the "groups" in the Config.lua file which is located in the folder wit
 ***`1`*** What are the minimum Android versions for each app? [ `DCS UFC` / `DCS Nav` / `DCS AoA Indexer`]
   - DCS UFC: Android 4.1 and above
   - DCS Nav: Android 7.0 and above
-  - DCS AoA Indexer: Android 4.1 and above
+  - DCS AoA Indexer: Android 4.4 and above
 
 ***`2`*** do the applications and script work in multiplayer?
-  - YES, on the server the property must be set: `Allow player export: yes`, about 95% of servers have this option turned on;-)
+  - YES, on the server the property must be set: `Allow player export: yes`, most servers have this option enabled;-)
 
 ***`3`*** does integrity check pass?
   - YES (more precisely, it doesn't even have any effect on it :-) )
