@@ -211,7 +211,7 @@ function PWDEV.Tools.ProcessInput()
 				local _deviceID = tonumber(_commandArgs[1])
                 if _deviceID == 256 then
                     local dev = GetDevice(_deviceID)
-                    local nsId = tonumber(_commandArgs[2])
+                    local nsId = GetDevice(_commandArgs[2])
                     if not dev then
                         return -- if the ns430 is not owned, dev is nil
                     end
