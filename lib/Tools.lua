@@ -117,13 +117,13 @@ end
 function PWDEV.Tools.ExportInit()
     playerId = PWDEV.Tools.GetPlayerId()
     coalition = LoGetSelfData().CoalitionID
-    PWDEV.Tools.SendShortData("Map=" .. actualMap .. separator)
 
     local be = {}
 	be.latitude = 0.0
 	be.longitude = 0.0
 
     local data = PWDEV.Tools.GetCoalitionBullseye(coalition)
+    PWDEV.Tools.SendShortData("Map=" .. actualMap .. separator .. "Theatre=" .. PWDEV.Tools.GetTheatre() .. separator)
 
 	be.latitude = data.latitude
 	be.longitude = data.longitude
@@ -1459,6 +1459,14 @@ function PWDEV.Tools.GetMap(player)
         end
     end
     return lMap
+end
+
+function PWDEV.Tools.GetTheatre()
+    if _G.mission.theatre ~= nil then
+        return _G.mission.theatre
+    else
+        return "NA"
+    end
 end
 
 local function file_exists(name)
