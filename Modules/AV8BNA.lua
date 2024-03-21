@@ -465,43 +465,25 @@ function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
 	end
 
 	-- ODU Display
-	local lODUDisplays = list_indication(6)
+	local lODUDisplays = PWDEV.Tools.getListIndicatorValue(6) or {}
+	if lODUDisplays ~= nil then
+		local lODU_select1 = " "
+		local lODU_select2 = " "
+		local lODU_select3 = " "
+		local lODU_select4 = " "
+		local lODU_select5 = " "
 
-	local to1, to2, from1, from2 = nil, nil, nil, nil
-	local lODU_Text = {"","","","",""}
-	local lODU_select = " "
-
-	to1, to2 = lODUDisplays:find("ODU_DISPLAY")
-	if (to1 ~= nil) then
-		for lIndex = 1, 5, 1 do
-			lODU_select = " "
-
-			from1, from2 = lODUDisplays:find("ODU_Option_"..lIndex.."_Slc%c")
-			if (from2 ~= nill) then
-				to1, to2 = lODUDisplays:find("%c", from2+2)
-				if (to1 ~= nil) then
-					lODU_select = lODUDisplays:sub(from2+1, to1-1)
-					--lODU_select = lODU_select:gsub(":", "¦")
-				end
-			end
-
-			from1, from2 = lODUDisplays:find("ODU_Option_"..lIndex.."_Text%c")
-			if (from2 ~= nill) then
-				to1, to2 = lODUDisplays:find("%c", from2+2)
-				if (to1 ~= nil) then
-					lODU_Text[lIndex] = lODUDisplays:sub(from2+1, to1-1)
-				end
-			end
-
-			lODU_Text[lIndex] = lODU_select..lODU_Text[lIndex]
-		end -- for
+		if (lODUDisplays.ODU_Option_1_Slc ~= nil) then lODU_select1 = ":" end
+		if (lODUDisplays.ODU_Option_2_Slc ~= nil) then lODU_select2 = ":" end
+		if (lODUDisplays.ODU_Option_3_Slc ~= nil) then lODU_select3 = ":" end
+		if (lODUDisplays.ODU_Option_4_Slc ~= nil) then lODU_select4 = ":" end
+		if (lODUDisplays.ODU_Option_5_Slc ~= nil) then lODU_select5 = ":" end
+		send(2026, lODU_select1 .. PWDEV.Tools.DisplayFormat(lODUDisplays.ODU_Option_1_Text, 4, "l"))
+		send(2027, lODU_select2 .. PWDEV.Tools.DisplayFormat(lODUDisplays.ODU_Option_2_Text, 4, "l"))
+		send(2028, lODU_select3 .. PWDEV.Tools.DisplayFormat(lODUDisplays.ODU_Option_3_Text, 4, "l"))
+		send(2029, lODU_select4 .. PWDEV.Tools.DisplayFormat(lODUDisplays.ODU_Option_4_Text, 4, "l"))
+		send(2030, lODU_select5 .. PWDEV.Tools.DisplayFormat(lODUDisplays.ODU_Option_5_Text, 4, "l"))
 	end
-
-	PWDEV.Tools.SendData(2026, string.format("%s", lODU_Text[1]))
-	PWDEV.Tools.SendData(2027, string.format("%s", lODU_Text[2]))
-	PWDEV.Tools.SendData(2028, string.format("%s", lODU_Text[3]))
-	PWDEV.Tools.SendData(2029, string.format("%s", lODU_Text[4]))
-	PWDEV.Tools.SendData(2030, string.format("%s", lODU_Text[5]))
 
 	-- UVHF Display
 	local lUVHFDisplay = list_indication(7)

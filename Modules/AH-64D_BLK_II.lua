@@ -1,4 +1,6 @@
 -- AH-64D Longbow
+local coerce_nil_to_string = PWDEV.Tools.coerce_nil_to_string
+local send = PWDEV.Tools.SendData
 
 PWDEV.FoundDCSModule = true
 

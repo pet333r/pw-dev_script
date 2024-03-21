@@ -406,6 +406,10 @@ function PWDEV.Tools.GetPlayerData()
         PlayerData.ThrottleLeft  = PWDEV.Tools.GetArgumentsValue(8, "%.1f")
         PlayerData.ThrottleRigh  = PWDEV.Tools.GetArgumentsValue(9, "%.1f")
 
+        PlayerData.MechGearNose  = LoGetAircraftDrawArgumentValue(0)
+        PlayerData.MechGearLeft  = LoGetAircraftDrawArgumentValue(5)
+        PlayerData.MechGearRigh  = LoGetAircraftDrawArgumentValue(3)
+
         -- refueling
         PlayerData.MechRefueling = LoGetAircraftDrawArgumentValue(22)
         -- brake
@@ -422,6 +426,7 @@ function PWDEV.Tools.GetPlayerData()
         PlayerData.MechGearNose = LoGetAircraftDrawArgumentValue(0)
         PlayerData.MechGearLeft = LoGetAircraftDrawArgumentValue(5)
         PlayerData.MechGearRigh = LoGetAircraftDrawArgumentValue(3)
+        PlayerData.MechNozzLeft = LoGetAircraftDrawArgumentValue(21)
         PlayerData.MechAirBrakeLeft = LoGetAircraftDrawArgumentValue(186)
         PlayerData.MechAirBrakeRigh = LoGetAircraftDrawArgumentValue(184)
     elseif (PWDEV.ModuleName == "AV8BNA") then
