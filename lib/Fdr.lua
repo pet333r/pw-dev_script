@@ -20,7 +20,8 @@ function PWDEV.Fdr.CsvFileInit()
     local datetime = PWDEV.Fdr.GetDateTime()
 
     if (WriteCsvFile) then
-        PWDEV.csvFile = io.open(pathCsv .. datetime ..  ".csv", "wa")
+        local fileCsv = pathCsv .. datetime .. " " .. LoGetSelfData().Name .. ".csv"
+        PWDEV.csvFile = io.open(fileCsv, "w+")
         if PWDEV.csvFile then
             PWDEV.csvFile:write('\239\187\191') -- create a UTF-8 BOM
         end
@@ -49,7 +50,8 @@ function PWDEV.Fdr.NavFileInit(version)
     local datetime = PWDEV.Fdr.GetDateTime()
 
     if (WriteKmlFile) then
-        PWDEV.kmlFile = io.open(pathKml .. datetime .. ".kml", "wa") -- "W+"
+        local fileKml = pathKml .. datetime .. " " .. LoGetSelfData().Name .. ".kml"
+        PWDEV.kmlFile = io.open(fileKml, "w+") -- "W+"
         if PWDEV.kmlFile then
             PWDEV.kmlFile:write('\239\187\191') -- create a UTF-8 BOM
             PWDEV.kmlFile:write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")

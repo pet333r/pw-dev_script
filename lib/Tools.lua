@@ -123,7 +123,7 @@ function PWDEV.Tools.ExportInit()
 	be.longitude = 0.0
 
     local data = PWDEV.Tools.GetCoalitionBullseye(coalition)
-    PWDEV.Tools.SendShortData("Map=" .. actualMap .. separator .. "Theatre=" .. PWDEV.Tools.GetTheatre() .. separator)
+    PWDEV.Tools.SendShortData("Map=" .. actualMap .. separator)
 
 	be.latitude = data.latitude
 	be.longitude = data.longitude
@@ -316,10 +316,9 @@ end
 function PWDEV.Tools.GetPlayerId()
 	local id = LoGetPlayerPlaneId()
 	if id == nil then
-		return 0
-    else
-        return id
+        id = "NA"
     end
+    return id
 end
 
 function PWDEV.Tools.GetObjectCoalition(id)
