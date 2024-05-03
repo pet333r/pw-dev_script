@@ -1,5 +1,5 @@
 -- INFO
--- file version: 2023.10.26
+-- file version: 2024.05.04
 
 --[[ IMPORTANT
     - Do not enter the same IP address multiple times
@@ -7,6 +7,8 @@
 ]]
 
 PWDEV.Config = {}
+
+PWDEV.Config.FileVersion = "2024.05.04"
 
 PWDEV.Config.MultiAppDevice = false;      -- true: if you want to use several apps on the same device at the same time
 
@@ -64,7 +66,3 @@ PWDEV.Config.FirstNewDataSendCount   = 100;
 -- Navigation data
 PWDEV.Config.ExportNavData           = true;      -- true if you want to export navigation data to show position on map
 PWDEV.Config.ExportNavAllData        = true;      -- true if you want to show other objects on map
-
--- if your device is fast enough, you can lower this value to get smoother map performance
-PWDEV.Config.ExportNavLow            = 5;         -- ExportLowTickInterval multiplier
-PWDEV.Config.ExportNavAllLow         = 20;        --

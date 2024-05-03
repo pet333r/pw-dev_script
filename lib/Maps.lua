@@ -13,7 +13,12 @@ PWDEV.Maps.CaucasusBase.Lat1     = 48.387642
 PWDEV.Maps.CaucasusBase.Long1    = 26.778781
 PWDEV.Maps.CaucasusBase.Lat2     = 38.865153
 PWDEV.Maps.CaucasusBase.Long2    = 47.142275
--- Nevada (NTTR) Map
+-- Kola Peninsula Map
+PWDEV.Maps.Kola                  = {}
+PWDEV.Maps.Kola.Lat1             = 74.225278
+PWDEV.Maps.Kola.Long1            = 7.585
+PWDEV.Maps.Kola.Lat2             = 63.953611
+PWDEV.Maps.Kola.Long2            = 39.953333
 PWDEV.Maps.Nevada                = {}
 PWDEV.Maps.Nevada.Lat1           = 39.801711
 PWDEV.Maps.Nevada.Long1          = -119.990225
