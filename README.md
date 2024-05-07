@@ -232,7 +232,7 @@ In one of the "groups" in the Config.lua file which is located in the folder wit
 
 # faq
 ***`1`*** What are the minimum Android versions for each app? [ `DCS UFC` / `DCS Nav` / `DCS AoA Indexer`]
-  - DCS UFC: Android 4.1 and above
+  - DCS UFC: Android 5.0 and above
   - DCS Nav: Android 7.0 and above
   - DCS AoA Indexer: Android 4.4 and above
 
