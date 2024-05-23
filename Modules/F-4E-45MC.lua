@@ -6,7 +6,7 @@ PWDEV.ConfigEveryFrameArguments =
     -- Aoa left
     [77] = "%.1f",-- ^
     [78] = "%.1f",-- o
-    [79] = "%.1f",-- down
+    [79] = "%.1f",-- up
 
     -- Aoa right
     [375] = "%.1f",-- ^
