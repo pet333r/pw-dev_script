@@ -50,10 +50,10 @@ local lDevicePortMap = PWDEV.Config.Port
 local separator = PWDEV.Config.Separator
 
 -- const
-local ms2knots  = 1.94384449 -- m/s to knots
-local ms2fpm    = 196.85 -- m/s to feets/minute
-local m2feets   = 3.2808399 -- meters to feets
-local rad2deg   = 57.296 -- radians to degrees
+local MS_2_KNOTS  = 1.94384449 -- m/s to knots
+local MS_2_FPM    = 196.85 -- m/s to feets/minute
+local M_2_FEETS   = 3.2808399 -- meters to feets
+local RAD_2_DEG   = 57.296 -- radians to degrees
 
 local timestamp = 0
 local timestampNav = 0
@@ -116,21 +116,25 @@ end
 
 function PWDEV.Tools.ExportInit()
     playerId = PWDEV.Tools.GetPlayerId()
-    coalition = LoGetSelfData().CoalitionID
+    local isOwnship = LoIsOwnshipExportAllowed()
 
-    local be = {}
-	be.latitude = 0.0
-	be.longitude = 0.0
+    if (isOwnship == true) then
 
-    local data = PWDEV.Tools.GetCoalitionBullseye(coalition)
-    PWDEV.Tools.SendShortData("Map=" .. actualMap .. separator)
+        coalition = LoGetSelfData().CoalitionID
+        local be = {}
+        be.latitude = 0.0
+        be.longitude = 0.0
+    
+        local data = PWDEV.Tools.GetCoalitionBullseye(coalition)
+        PWDEV.Tools.SendShortData("Map=" .. actualMap .. separator)
+    
+        be.latitude = data.latitude
+        be.longitude = data.longitude
+    
+        PWDEV.Tools.SendShortData("File="..PWDEV.ModuleName..separator.."Coal="..coalition..separator.."Call="..LoGetPilotName()..separator.."bex="..be.latitude..separator.."bey="..be.longitude..separator)
+    end
 
-	be.latitude = data.latitude
-	be.longitude = data.longitude
-
-    PWDEV.Tools.SendShortData("File="..PWDEV.ModuleName..separator.."Coal="..coalition..separator.."Call="..LoGetPilotName()..separator.."bex="..be.latitude..separator.."bey="..be.longitude..separator)
 end
-
 function PWDEV.Tools.ProcessInput()
     local _command, _commandArgs, _device
     if PWDEV.Config.Listener then
@@ -209,16 +213,16 @@ function PWDEV.Tools.ProcessInput()
             if (_command == "C") then
                 _commandArgs = PWDEV.Tools.StrSplit(string.sub(_input,2),",")
 				local _deviceID = tonumber(_commandArgs[1])
+                local function tablelength(T)
+                    local count = 0
+                    for _ in pairs(T) do count = count + 1 end
+                    return count
+                end
                 if _deviceID == 256 then
                     local dev = GetDevice(_deviceID)
                     local nsId = GetDevice(_commandArgs[2])
                     if not dev then
                         return -- if the ns430 is not owned, dev is nil
-                    end
-                    local function tablelength(T)
-                        local count = 0
-                        for _ in pairs(T) do count = count + 1 end
-                        return count
                     end
                     if (tablelength(_commandArgs) == 3) then
                         nsId:performClickableAction(_commandArgs[3])
@@ -228,7 +232,20 @@ function PWDEV.Tools.ProcessInput()
 				elseif _deviceID < 1000 then
 					_device = GetDevice(_commandArgs[1])
 					if PWDEV.FoundDCSModule and type(_device) == "table" then
-						_device:performClickableAction(_commandArgs[2],_commandArgs[3])
+                        if (tablelength(_commandArgs) == 3) then
+                            _device:performClickableAction(_commandArgs[2],_commandArgs[3])
+
+                        elseif (tablelength(_commandArgs) == 4) then
+                            local argValue = PWDEV.Tools.GetArgumentsValue(tonumber(_commandArgs[3]), "%.3f")
+                            _device:performClickableAction(_commandArgs[2],argValue + _commandArgs[4])
+                        elseif (tablelength(_commandArgs) == 5) then
+                            local argValue = PWDEV.Tools.GetArgumentsValue(tonumber(_commandArgs[3]), "%d")
+                            if (argValue == "0") then
+                                _device:performClickableAction(_commandArgs[2],_commandArgs[5])
+                            elseif (argValue == "1") then
+                                _device:performClickableAction(_commandArgs[2], -_commandArgs[5])
+                            end
+                        end
 					end
 
                 elseif _deviceID == 2000 then
@@ -359,16 +376,16 @@ function PWDEV.Tools.GetPlayerData()
 
 	PlayerData.Lat = SD.LatLongAlt.Lat
 	PlayerData.Lon = SD.LatLongAlt.Long
-	PlayerData.Alt = SD.LatLongAlt.Alt * m2feets
+	PlayerData.Alt = SD.LatLongAlt.Alt * M_2_FEETS
     PlayerData.AltM = SD.LatLongAlt.Alt
-    PlayerData.Magvar = LoGetMagneticYaw() * rad2deg
-    PlayerData.Balt = LoGetAltitudeAboveSeaLevel() * m2feets
-	PlayerData.RAlt = LoGetAltitudeAboveGroundLevel() * m2feets
+    PlayerData.Magvar = LoGetMagneticYaw() * RAD_2_DEG
+    PlayerData.Balt = LoGetAltitudeAboveSeaLevel() * M_2_FEETS
+	PlayerData.RAlt = LoGetAltitudeAboveGroundLevel() * M_2_FEETS
 	PlayerData.Hdg = SD.Heading * (180/math.pi)
 
-	PlayerData.Ias = LoGetIndicatedAirSpeed() * ms2knots
-    PlayerData.Tas = LoGetTrueAirSpeed() * ms2knots
-	PlayerData.Vspd = LoGetVerticalVelocity() * ms2fpm
+	PlayerData.Ias = LoGetIndicatedAirSpeed() * MS_2_KNOTS
+    PlayerData.Tas = LoGetTrueAirSpeed() * MS_2_KNOTS
+	PlayerData.Vspd = LoGetVerticalVelocity() * MS_2_FPM
 	PlayerData.Mach = LoGetMachNumber()
 
     if (math.floor(PlayerData.RAlt) <= 10) then PlayerData.OnGround = 1 else PlayerData.OnGround = 0 end
@@ -376,20 +393,20 @@ function PWDEV.Tools.GetPlayerData()
 	PlayerData.Aoa = LoGetAngleOfAttack() -- * rad2deg
 	PlayerData.Acc = LoGetAccelerationUnits().y	-- G-Force
 	PlayerData.Pitch, PlayerData.Bank, PlayerData.Yaw = LoGetADIPitchBankYaw()
-	PlayerData.Pitch = PlayerData.Pitch * rad2deg
-	PlayerData.Bank = PlayerData.Bank * rad2deg
-	PlayerData.Yaw = PlayerData.Yaw * rad2deg
+	PlayerData.Pitch = PlayerData.Pitch * RAD_2_DEG
+	PlayerData.Bank = PlayerData.Bank * RAD_2_DEG
+	PlayerData.Yaw = PlayerData.Yaw * RAD_2_DEG
 
     PlayerData.Velocity = LoGetVectorVelocity()
     PlayerData.VX = PlayerData.Velocity.x
     PlayerData.VZ = PlayerData.Velocity.z
-    PlayerData.Gspd = math.sqrt(math.pow(PlayerData.VX, 2)+ math.pow(PlayerData.VZ, 2)) * ms2knots
+    PlayerData.Gspd = math.sqrt(math.pow(PlayerData.VX, 2)+ math.pow(PlayerData.VZ, 2)) * MS_2_KNOTS
 
     PlayerData.Cam = LoGetCameraPosition()
 
     PlayerData.Wind = LoGetVectorWindVelocity()
     PlayerData.WindSpd = math.abs(math.sqrt(math.pow(PlayerData.Wind.x, 2) + math.pow(PlayerData.Wind.y, 2) + math.pow(PlayerData.Wind.z, 2)))
-    PlayerData.WindAng = math.atan2(PlayerData.Wind.y, PlayerData.Wind.x) * rad2deg + 180 --* 180/math.pi
+    PlayerData.WindAng = math.atan2(PlayerData.Wind.y, PlayerData.Wind.x) * RAD_2_DEG + 180 --* 180/math.pi
 
     if (PWDEV.ModuleName == "A-4E-C") then
         PlayerData.MechGearNose = LoGetAircraftDrawArgumentValue(0)
