@@ -7,7 +7,12 @@
 
 -- Maps
 PWDEV.Maps = {}
--- Caucasus Map
+-- Afghanistan Map
+PWDEV.Maps.Afghanistan           = {}
+PWDEV.Maps.Afghanistan.Lat1      = 38.724444
+PWDEV.Maps.Afghanistan.Long1     = 60.321667
+PWDEV.Maps.Afghanistan.Lat2      = 28.924167
+PWDEV.Maps.Afghanistan.Long2     = 73.806111
 PWDEV.Maps.CaucasusBase          = {}
 PWDEV.Maps.CaucasusBase.Lat1     = 48.387642
 PWDEV.Maps.CaucasusBase.Long1    = 26.778781
