@@ -28,28 +28,6 @@ package.path  = package.path..";.\\LuaSocket\\?.lua"
 package.cpath = package.cpath..";.\\LuaSocket\\?.dll"
 
 local versionFile = lfs.writedir()..[[Scripts\pw-dev_script\version]]
-local function GetConfigFileVersion()
-	local file = io.open(lfs.writedir()..[[Scripts\pw-dev_script\Config.lua]], "r")
-	if (file ~= nil) then
-		content = file:read("*all")
-		file:flush()
-		file:close()
-		version = content:match("--%s+file%s+version:%s+(.-)\n")
-		if (version ~= nil) then
-			version = string.gsub(version, "[\r\n]", "")
-			version = string.gsub(version, "%s+", "")
-			return version
-		else
-			return 0
-		end
-	else
-		return 0
-	end
-end
-
-
-local configFileVer = GetConfigFileVersion()
-
 
 dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Init.lua]])
 dofile(lfs.writedir()..[[Scripts\pw-dev_script\Config.lua]])
@@ -61,6 +39,13 @@ PWDEV.Displays = dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Displays.lua
 
 
 local separator = PWDEV.Config.Separator
+
+local function GetConfigFileVersion()
+	if (PWDEV.Config.FileVersion == nil) then return "NA"
+	else return PWDEV.Config.FileVersion
+	end
+end
+local configFileVer = GetConfigFileVersion()
 
 PWDEV.FoundDCSModule = false
 PWDEV.FoundFCModule  = false

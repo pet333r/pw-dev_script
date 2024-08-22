@@ -22,9 +22,6 @@ function PWDEV.Fdr.CsvFileInit()
     if (WriteCsvFile) then
         local fileCsv = pathCsv .. datetime .. " " .. LoGetSelfData().Name .. ".csv"
         PWDEV.csvFile = io.open(fileCsv, "w+")
-        if PWDEV.csvFile then
-            PWDEV.csvFile:write('\239\187\191') -- create a UTF-8 BOM
-        end
     end
 end
 
@@ -53,7 +50,6 @@ function PWDEV.Fdr.NavFileInit(version)
         local fileKml = pathKml .. datetime .. " " .. LoGetSelfData().Name .. ".kml"
         PWDEV.kmlFile = io.open(fileKml, "w+") -- "W+"
         if PWDEV.kmlFile then
-            PWDEV.kmlFile:write('\239\187\191') -- create a UTF-8 BOM
             PWDEV.kmlFile:write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
             PWDEV.kmlFile:write("<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n")
             PWDEV.kmlFile:write("  <Document>\n")
