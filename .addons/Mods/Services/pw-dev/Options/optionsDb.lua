@@ -102,8 +102,12 @@ local function ReadConfigFile()
 		file:flush()
 		file:close()
 
-		configVersion = content:match("--%s+file%s+version:%s+(.-)\n")
-		configVersion = string.gsub(configVersion, "[\r\n]", "")
+		configVersion = content:match("Config.FileVersion%s+=%s+\"(.-)\"")
+		if configVersion ~= nil then
+			configVersion = string.gsub(configVersion, "[\r\n]", "")
+		else
+			configVersion = "-"
+		end
 
 		if (content:match("ExportScript.Config")) then
 			scriptInit = "ExportScript.Config"
