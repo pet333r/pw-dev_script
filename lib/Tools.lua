@@ -237,13 +237,23 @@ function PWDEV.Tools.ProcessInput()
 
                         elseif (tablelength(_commandArgs) == 4) then
                             local argValue = PWDEV.Tools.GetArgumentsValue(tonumber(_commandArgs[3]), "%.3f")
-                            _device:performClickableAction(_commandArgs[2],argValue + _commandArgs[4])
+                            local increment = string.format("%.3f", _commandArgs[4])
+
+                            if (argValue == "-1.000" and increment == "-1.000") then
+
+                            elseif (argValue == "1.000" and increment == "1.000") then
+
+                            else
+                                _device:performClickableAction(_commandArgs[2],argValue + _commandArgs[4])
+                            end
                         elseif (tablelength(_commandArgs) == 5) then
                             local argValue = PWDEV.Tools.GetArgumentsValue(tonumber(_commandArgs[3]), "%d")
                             if (argValue == "0") then
                                 _device:performClickableAction(_commandArgs[2],_commandArgs[5])
                             elseif (argValue == "1") then
-                                _device:performClickableAction(_commandArgs[2], -_commandArgs[5])
+                                _device:performClickableAction(_commandArgs[2], argValue - _commandArgs[5])
+                            elseif (argValue == "-1") then
+                                _device:performClickableAction(_commandArgs[2], argValue + _commandArgs[5])
                             end
                         end
 					end
@@ -1404,9 +1414,9 @@ function PWDEV.Tools.SelectModule()
         return
     end
 
-    PWDEV.ModuleName   = _info.Name
-    local _moduleName         = PWDEV.ModuleName..".lua"
-    local _moduleFile         = ""
+    PWDEV.ModuleName    = _info.Name
+    local _moduleName   = PWDEV.ModuleName..".lua"
+    local _moduleFile   = ""
 
     PWDEV.FoundNoModul = false
 
@@ -1775,11 +1785,7 @@ function PWDEV.Tools.split(stringvalue, delimiter)
 end
 
 function PWDEV.Tools.coerce_nil_to_string(value)
-	if value == nil then
-		return ""
-	else
-		return value
-	end
+	if value == nil then return "" else return value end
 end
 
 function PWDEV.Tools.round(number, decimals, method)
