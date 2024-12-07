@@ -302,62 +302,6 @@ dialog = {
 				},
 
 				----------------------------------------
-				-- Multiple apps
-				["pwScriptMultiAppTitleLabel"] = {
-					["params"] = {
-						["bounds"] = {
-							["x"] = lGridX3,
-							["y"] = lGridY2,
-							["w"] = 360,
-							["h"] = LineHeight,
-						},
-						["enabled"] = true,
-						["text"] = "$MULTIAPP_TTITLE",
-						["tooltip"] = "$MULTIAPP_TITLE_TOOLTIP",
-						["visible"] = true,
-						["zindex"] = 0,
-					},
-					["skin"] = TitleSkin,
-					["type"] = "Static",
-				},
-				["pwScriptMultiAppEnabledCheckbox"] = {
-					["params"] = {
-						["bounds"] = {
-							["x"] = lGridX3,
-							["y"] = lGridY2 + 20,
-							["w"] = 256,
-							["h"] = LineHeight,
-						},
-						["enabled"] = true,
-						["state"] = false,
-						["text"] = "$MULTIAPP_ENABLED",
-						["tooltip"] = "$MULTIAPP_ENABLED_TOOLTIP",
-						["visible"] = true,
-						["zindex"] = 0,
-						["tabOrder"] = 12,
-					},
-					["skin"] = CheckBoxSkin,
-					["type"] = "CheckBox",
-				},
-				["TipsMultiAppLabel"] = {
-					["params"] = {
-						["bounds"] = {
-							["h"] = 24,
-							["w"] = 800,
-							["x"] = lGridX3,
-							["y"] = lGridY2 + 40,
-						},
-						["enabled"] = true,
-						["text"] = "$MULTIAPP_ENABLED_TOOLTIP",
-						["tooltip"] = "$MULTIAPP_ENABLED_TOOLTIP",
-						["visible"] = true,
-						["zindex"] = 0,
-					},
-					["skin"] = HelpSkin,
-					["type"] = "Static",
-				},
-
-				----------------------------------------
 				-- IP's header
 				["pwScriptDevicesTitleLabel"] = {
 					["params"] = {
@@ -719,45 +663,6 @@ dialog = {
 					},
 					["skin"] = OptionLabelSkin,
 					["type"] = "Static",
-				},
-
-				----------------------------------------
-				-- Write Nav File
-				["pwScriptWriteNavFileTitleLabel"] = {
-					["params"] = {
-						["bounds"] = {
-							["x"] = lGridX1,
-							["y"] = lGridY5,
-							["w"] = 300,
-							["h"] = LineHeight,
-						},
-						["enabled"] = true,
-						["text"] = "$STREAMDECK_WRITE_NAVFILE",
-						["tooltip"] = "$STREAMDECK_WRITE_NAVFILE_TOOLTIP",
-						["visible"] = true,
-						["zindex"] = 0,
-					},
-					["skin"] = TitleSkin,
-					["type"] = "Static",
-				},
-				["pwScriptWriteNavFileEnabledCheckbox"] = {
-					["params"] = {
-						["bounds"] = {
-							["x"] = lGridX1 + 10,
-							["y"] = lGridY5 + 20,
-							["w"] = 256,
-							["h"] = LineHeight,
-						},
-						["enabled"] = true,
-						["state"] = false,
-						["text"] = "$STREAMDECK_WRITE_NAVFILE_ENABLED",
-						["tooltip"] = "$STREAMDECK_WRITE_NAVFILE_ENABLED_TOOLTIP",
-						["visible"] = true,
-						["zindex"] = 0,
-						["tabOrder"] = 12,
-					},
-					["skin"] = CheckBoxSkin,
-					["type"] = "CheckBox",
 				},
 
 				----------------------------------------

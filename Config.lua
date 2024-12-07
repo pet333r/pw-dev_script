@@ -1,5 +1,5 @@
 -- INFO
--- file version: 2024.05.04
+-- file version: 2024.12.06
 
 --[[ IMPORTANT
     - Do not enter the same IP address multiple times
@@ -8,9 +8,7 @@
 
 PWDEV.Config = {}
 
-PWDEV.Config.FileVersion = "2024.05.04"
-
-PWDEV.Config.MultiAppDevice = false;      -- true: if you want to use several apps on the same device at the same time
+PWDEV.Config.FileVersion = "2024.12.06"
 
 PWDEV.Config.Port = 5160;              -- port for sending data for all connected devices
 
@@ -46,15 +44,8 @@ PWDEV.Config.StreamDeckSeparator = ":"
 PWDEV.Config.Listener     = true;        -- listen commands from apps
 PWDEV.Config.ListenerPort = 25070;       -- Listener Port receiving commands
 
-PWDEV.Config.WriteNavFile = false;       -- saving flight telemetry to CSV and KML files (Logs folder)
-
 -- data separator (do not change)
 PWDEV.Config.Separator = ";"
-
--- for DCS Nav
-PWDEV.Config.MapPlayerDiv        = 1.0      -- refreshing the user's position on the map (less = more often) range: 0.1 - 1.0
-PWDEV.Config.MapMissileDiv       = 1.0      -- refreshing the missile position on the map (less = more often) range: 0.1 - 1.0
-PWDEV.Config.MapMapPlanesDiv     = 1.0      -- refreshing the planes/heli's position on the map (less = more often) range: 0.1 - 1.0
 
 -- Other
 PWDEV.Config.ExportInterval          = 0.05;	-- export every 0.xx seconds (def: 0.05)
@@ -62,7 +53,3 @@ PWDEV.Config.ExportLowTickInterval   = 0.1;	-- export every 0.x seconds (def: 0.
 PWDEV.Config.ExportModulePath        = lfs.writedir()..[[Scripts\pw-dev_script\Modules\]]
 PWDEV.Config.FirstNewDataSend        = true;
 PWDEV.Config.FirstNewDataSendCount   = 100;
-
--- Navigation data
-PWDEV.Config.ExportNavData           = true;      -- true if you want to export navigation data to show position on map
-PWDEV.Config.ExportNavAllData        = true;      -- true if you want to show other objects on map

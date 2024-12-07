@@ -102,8 +102,8 @@ PWDEV.ConfigEveryFrameArguments =
 	[415] = "%.1f", -- UHF 0.25MHz Selector
 	[416] = "%.1f",   -- Frequency Mode Dial MNL/PRESET/GRD
 	[417] = "%.1f", -- UHF Function Dial OFF/MAIN/BOTH/ADF
+	[418] = "%1d",   -- UHF Tone Button
 	[419] = "%1d",   -- Squelch Switch
-	[420] = "%.1f", -- UHF Volume Control
 
 	-- ECM
 	[460] = "%1d", -- btn 1
@@ -154,10 +154,7 @@ PWDEV.ConfigEveryFrameArguments =
 	[532] = "%1d", -- FLASH STEADY Light Switch, FLASH/STEADY
 	[533] = "%1d", -- WING/TAIL Light Switch, BRT/OFF/DIM
 	[534] = "%1d", -- FUSELAGE Light Switch, BRT/OFF/DIM
-	[535] = "%.1f", -- FORM Light Knob
 	[536] = "%.1f", -- FORM Light Knob
-	[537] = "%.1f", -- AERIAL REFUELING Light Knob
-
 
 	--Caution Light Panel
 	[630] = "%1d", -- FLCS FAULT Light (yellow)
@@ -206,6 +203,19 @@ PWDEV.ConfigEveryFrameArguments =
 }
 PWDEV.ConfigArguments =
 {
+	-- UHF
+	[420] = "%.1f", -- UHF Volume Control
+
+	-- EXT LIGHTING
+	[535] = "%.1f", -- FORM Light Knob
+	[537] = "%.1f", -- AERIAL REFUELING Light Knob
+
+	-- LIGHTING
+	[685] = "%.1f", -- PRIMARY CONSOLES BRT Knob
+	[686] = "%.1f", -- PRIMARY INST PNL BRT Knob
+	[687] = "%.1f", -- PRIMARY DATA ENTRY DISPLAY BRT Knob
+	[688] = "%.1f", -- FLOOD CONSOLES BRT Knob
+	[690] = "%.1f", -- FLOOD INST PNL BRT Knob
 }
 
 -- PFLD Layout Information ------------------------------------------------------
@@ -1322,102 +1332,133 @@ OR, XOR, AND = 1, 3, 4
 
 -- DED Display Main Function -----------------------------------------------
 local function buildDEDLine(line)
-		-- Get Layout Information for line being built
-		local DEDLayoutLine = DEDLayout[line]
-		-- Get Exported DED Objects
-		local DED_fields = PWDEV.Tools.getListIndicatorValue(6) or {}
-		local layout
-		local label
-		local value
-		local inverse = 0
-		-- Base Output String
-		local dataLine ="                         "
+	-- Get Layout Information for line being built
+	local DEDLayoutLine = DEDLayout[line]
+	-- Get Exported DED Objects
+	local DED_fields = PWDEV.Tools.getListIndicatorValue(6) or {}
+	local layout
+	local label
+	local value
+	local inverse = 0
+	-- Base Output String
+	-- local dataLine ="                         "
+	local dataLine ="                             "
 
-		-- Check for present of Objects that indicate Duplicate Key Names that need resolving
-		local guard 		= DED_fields["Guard Label"]
-		local mode 			= DED_fields["Mode label"]
-		local event 		= DED_fields["Event Occured"]
-		local alow 			= DED_fields["ALOW label"]
-		local bingo 		= DED_fields["CMDS_BINGO_lbl"]
-		local inflt_algn 	= DED_fields["INS_INFLT_ALGN_lbl"]
-		local intraflight 	= DED_fields["INTRAFLIGHT lbl"]
-		local dlnk_A_G		= DED_fields["A-G DL lbl"]
-		local nav_status 	= DED_fields["NAV Status lbl"]
-		local hmcs_display 	= DED_fields["HMCS_DISPLAY_TOPIC"]
-		local hmcs_align 	= DED_fields["HMCS_ALIGN_TOPIC"]
-		local harm 			= DED_fields["HARM"]
-		local dest_dir 		= DED_fields["DEST_DIR"]
-		local dest_oa1 		= DED_fields["DEST_OA1"]
-		local dest_oa2 		= DED_fields["DEST_OA2"]
-		local fix 			= DED_fields["FIX_SENSORS"]
-		--Loop through Exported DED Objects
-		for k,v in pairs(DED_fields) do
-			-- Handle Duplicate Key Names on COM2 Guard page items
-			if guard ~= nil then
-				label = guard.." "..k
-			-- Handle Duplicate Key Names on IFF STAT page items
-			elseif mode ~= nil then
-				label = mode.." "..k
-			-- Handle Duplicate Key Names on IFF POS & TIM page items
-			elseif event ~= nil then
-				label = event.." "..k
-			-- Handle Duplicate Key Names on ALOW page Line 1 items
-			elseif alow ~= nil and line == 1 then
-				label = alow.." "..k
-			-- Handle Duplicate Key Names on CMDS Bingo page Line 1 items
-			elseif bingo ~= nil and line == 1 then
-				label = bingo.." "..k
-			-- Handle Duplicate Key Names on INS INFL ALGN page Lines 1 & 3 items
-			elseif inflt_algn ~= nil and (line == 1 or line==3) then
-				label = inflt_algn.." "..k
-			-- Handle Duplicate Key Names on DLNK INTRAFLIGHT page
-			elseif intraflight ~= nil then
-				label = intraflight.." "..k
-			-- Handle Duplicate Key Names on DLNK A-G page Line 2 items
-			elseif dlnk_A_G ~= nil and line == 2 then
-				label = dlnk_A_G.." "..k
-			-- Handle Duplicate Key Names on NAV page
-			elseif nav_status ~= nil then
-				label = nav_status.." "..k
-			-- Handle Duplicate Key Names on HMCS Display page
-			elseif hmcs_display ~= nil then
-				label = hmcs_display.." "..k
-			-- Handle Duplicate Key Names on HMCS Align page
-			elseif hmcs_align ~= nil then
-				label = hmcs_align.." "..k
-			elseif harm ~= nil then
-				label = harm.." "..k
-			elseif dest_dir ~= nil then
-				label = dest_dir.." "..k
-			elseif dest_oa1 ~= nil then
-				label = dest_oa1.." "..k
-			elseif dest_oa2 ~= nil then
-				label = dest_oa2.." "..k
-			elseif fix ~= nil then
-				label = fix.." "..k
-			else
-				label = k
-			end
-			--Get layout data associated with current key
+	-- Check for present of Objects that indicate Duplicate Key Names that need resolving
+	local guard 		= DED_fields["Guard Label"]
+	local mode 			= DED_fields["Mode label"]
+	local event 		= DED_fields["Event Occured"]
+	local alow 			= DED_fields["ALOW label"]
+	local bingo 		= DED_fields["CMDS_BINGO_lbl"]
+	local inflt_algn 	= DED_fields["INS_INFLT_ALGN_lbl"]
+	local intraflight 	= DED_fields["INTRAFLIGHT lbl"]
+	local dlnk_A_G		= DED_fields["A-G DL lbl"]
+	local nav_status 	= DED_fields["NAV Status lbl"]
+	local hmcs_display 	= DED_fields["HMCS_DISPLAY_TOPIC"]
+	local hmcs_align 	= DED_fields["HMCS_ALIGN_TOPIC"]
+	local harm 			= DED_fields["HARM"]
+	local dest_dir 		= DED_fields["DEST_DIR"]
+	local dest_oa1 		= DED_fields["DEST_OA1"]
+	local dest_oa2 		= DED_fields["DEST_OA2"]
+	-- local acal 			= DED_fields["AUTO_ACAL"]
+	local fix 			= DED_fields["FIX_SENSORS"]
+	--Loop through Exported DED Objects
+	for k,v in pairs(DED_fields) do
+		-- Handle Duplicate Key Names on COM2 Guard page items
+		if guard ~= nil then
+			label = guard.." "..k
+		-- Handle Duplicate Key Names on IFF STAT page items
+		elseif mode ~= nil then
+			label = mode.." "..k
+		-- Handle Duplicate Key Names on IFF POS & TIM page items
+		elseif event ~= nil then
+			label = event.." "..k
+		-- Handle Duplicate Key Names on ALOW page Line 1 items
+		elseif alow ~= nil and line == 1 then
+			label = alow.." "..k
+		-- Handle Duplicate Key Names on CMDS Bingo page Line 1 items
+		elseif bingo ~= nil and line == 1 then
+			label = bingo.." "..k
+		-- Handle Duplicate Key Names on INS INFL ALGN page Lines 1 & 3 items
+		elseif inflt_algn ~= nil and (line == 1 or line==3) then
+			label = inflt_algn.." "..k
+		-- Handle Duplicate Key Names on DLNK INTRAFLIGHT page
+		elseif intraflight ~= nil then
+			label = intraflight.." "..k
+		-- Handle Duplicate Key Names on DLNK A-G page Line 2 items
+		elseif dlnk_A_G ~= nil and line == 2 then
+			label = dlnk_A_G.." "..k
+		-- Handle Duplicate Key Names on NAV page
+		elseif nav_status ~= nil then
+			label = nav_status.." "..k
+		-- Handle Duplicate Key Names on HMCS Display page
+		elseif hmcs_display ~= nil then
+			label = hmcs_display.." "..k
+		-- Handle Duplicate Key Names on HMCS Align page
+		elseif hmcs_align ~= nil then
+			label = hmcs_align.." "..k
+		elseif harm ~= nil then
+			label = harm.." "..k
+		elseif dest_dir ~= nil then
+			label = dest_dir.." "..k
+		elseif dest_oa1 ~= nil then
+			label = dest_oa1.." "..k
+		elseif dest_oa2 ~= nil then
+			label = dest_oa2.." "..k
+		-- elseif acal ~= nil then
+		-- 	label = acal.." "..k
+		elseif fix ~= nil then
+			label = fix.." "..k
+		else
+			label = k
+		end
+		--Get layout data associated with current key
+		if type(label) == "string" then
 			layout = DEDLayoutLine[label:gsub("_inv", "", 1):gsub("_lhs", "_both", 1)]
-			if layout ~= nil then
-				--If layout value 6 is present then use this value to override the value returned from DCS
-				if layout[6] ~= nil then
-					value = layout[6]
-				else
-					value = v
+		end
+		if layout ~= nil then
+			--If layout value 6 is present then use this value to override the value returned from DCS
+			if layout[6] ~= nil then
+				value = layout[6]
+			else
+				value = v
+			end
+
+			-- Compute inverse fields by position -- Frk
+			if label:find("_inv") ~= nil or (layout[5]=="I" and layout[4] == "" and label:find("_inv") == nil) then
+				local wInverse = 0
+				-- layout[1]-1 because POS 1 is Bit 0, (layout[1]+layout[2]-2) END is start + step -1
+				local start, stop
+				start = layout[1]
+				stop = start + layout[2] - 1
+
+				for i = start, stop  do
+					wInverse = wInverse + 2 ^ i
 				end
-				
-				-- Add Value to dataLine using PWDEV.Tools.mergeString because some values are are supposed to fit within others
-				dataLine = PWDEV.Tools.mergeString(dataLine, value, layout[1])
-	
-				--If layout value 3 > 0 we need to duplicate this item at position specific in value 3 (this is for "*"s marking enterable fields
+				inverse = bitoper(inverse, wInverse, OR)
 				if layout[3] ~= nil and layout[3] > 0 then
-					dataLine = PWDEV.Tools.mergeString(dataLine, value, layout[3])
+					start = layout[3]
+					stop = start + layout[2] - 1
+					for i = start, stop  do
+						wInverse = wInverse + 2 ^ i
+					end
 				end
+				inverse = bitoper(inverse, wInverse, OR)
+			end
+
+			-- Add Value to dataLine using mergeString because some values are are supposed to fit within others
+			dataLine = PWDEV.Tools.mergeString(dataLine, value, layout[1])
+
+			--If layout value 3 > 0 we need to duplicate this item at position specific in value 3 (this is for "*"s marking enterable fields
+			if layout[3] ~= nil and layout[3] > 0 then
+				dataLine = PWDEV.Tools.mergeString(dataLine, value, layout[3])
 			end
 		end
-	return dataLine
+	end
+	-- return dataLine
+	local inverseBitMap = IntToByteString(inverse)
+	dataLine = PWDEV.Tools.mergeString(dataLine, inverseBitMap , 25)
+    return dataLine
 end
 
 
@@ -1481,6 +1522,30 @@ function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
 	send(2302, CMDS_O2_Amount)
 	send(2303, CMDS_CH_Amount)
 	send(2304, CMDS_FL_Amount)
+
+	-- COMMS
+	local comm = PWDEV.Tools.getListIndicatorValue(12) or {}
+
+	send(2801, comm.txtCh12)
+	send(2802, comm.txtCh13)
+	send(2803, comm.txtCh14)
+	send(2804, comm.txtCh15)
+	send(2805, comm.txtCh16)
+	send(2806, comm.txtCh17)
+	send(2807, comm.txtCh21)
+	send(2808, comm.txtCh22)
+	send(2809, comm.txtCh23)
+	send(2810, comm.txtCh24)
+	send(2811, comm.txtCh25)
+	send(2812, comm.txtCh26)
+	send(2813, comm.txtCh27)
+	send(2814, comm.txtCh31)
+	send(2815, comm.txtCh32)
+	send(2816, comm.txtCh33)
+	send(2817, comm.txtCh34)
+	send(2818, comm.txtCh35)
+	send(2819, comm.txtCh36)
+	send(2820, comm.txtCh37)
 end
 
 function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)

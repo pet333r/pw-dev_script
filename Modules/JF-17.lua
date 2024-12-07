@@ -133,10 +133,10 @@ PWDEV.ConfigEveryFrameArguments =
     [553] = "%d", -- P.H. Test Switch
 
     -- Radio
-    [545] = "%.1f", -- Radio Volume Knob
     [546] = "%1d", -- Squelch OFF/SQL/ACKN
     [547] = "%.1f", -- Radio Mode Selector
 
+    [900] = "%d", -- Day/Night Switch
     -- ELEC
     [904] = "%1d", -- Battery Switch
     [905] = "%1d", -- Main AC Gen Switch
@@ -145,22 +145,12 @@ PWDEV.ConfigEveryFrameArguments =
     -- AAP
     [907] = "%1d", -- HUD/MFCD Day/Night Switch
     [908] = "%.1f", -- INS Mode Knob Selector
-    [909] = "%.1f", -- AAP Brightness Knob
     [910] = "%1d", -- HUD Symbology Reject Switch
 
     -- ACP
-    [934] = "%.1f", -- COM1 Volume Knob
     [935] = "%d",   -- Intercom Switch
     [936] = "%d",   -- Radio Top/Bottom Antenna Switch
     [937] = "%d",   -- Speaker Control Box Channel Antenna Switch
-    [938] = "%.1f", -- COM2 Volume Knob
-    [939] = "%.1f", -- TCN/ILS Volume Knob
-    [940] = "%.1f", -- MSL Volume Knob
-
-    -- INT LTS
-    [944] = "%.2f", -- Instrument Light Knob
-    [945] = "%.2f", -- Console Light Knob
-    [946] = "%.2f", -- Flood Light Knob
 
     -- EXT LIG
     [947] = "%1d", -- Exterior Light Master Switch 1/0/-1
@@ -169,17 +159,34 @@ PWDEV.ConfigEveryFrameArguments =
     [950] = "%1d", -- Navigation Light Switch - Bright/Off/Dim 1/0/-1
     [951] = "%1d", -- Navigation Light Switch - Flash/Steady 1/-1
     [952] = "%1d", -- Light Switch - Tow/Off/Anti-Collision 1/0/-1
+    [952] = "%1d", -- Light Switch - Tow/Off/Anti-Collision 1/0/-1
     [963] = "%1d", -- AAR Light Switch 1/-1
-    [964] = "%.2f", -- AAR Light Brightness Knob
 }
 
 PWDEV.ConfigArguments =
 {
+    -- Radio
+    [545] = "%.1f", -- Radio Volume Knob
     -- HUD panel
     [728] = "%.1f", -- HUD Contrast Knob
     [729] = "%.1f", -- HUD Brightness Knob
     [731] = "%.1f", -- HUD Backup Reticle Knob
     [732] = "%.1f", -- UFCP Brightness Knob
+
+	[901] = "%.1f", -- Brightness Knob
+    -- AAP
+    [909] = "%.1f", -- AAP Brightness Knob
+    -- ACP
+    [934] = "%.1f", -- COM1 Volume Knob
+    [938] = "%.1f", -- COM2 Volume Knob
+    [939] = "%.1f", -- TCN/ILS Volume Knob
+    [940] = "%.1f", -- MSL Volume Knob
+    -- INT LTS
+    [944] = "%.2f", -- Instrument Light Knob
+    [945] = "%.2f", -- Console Light Knob
+    [946] = "%.2f", -- Flood Light Knob
+    -- EXT LIG
+    [964] = "%.1f", -- AAR Light Brightness Knob
 }
 
 local function processUFCPLine(ufcpLine, lineNum)

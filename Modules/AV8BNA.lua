@@ -40,16 +40,8 @@ PWDEV.ConfigEveryFrameArguments =
 
 	-- HUD Control Panel
 	[288] = "%.1f",	--HUD
-	[289] = "%.1f",	--HUD Off/Brightness Control
 	[290] = "%.1f",	--HUD Display Mode Switch
-	[291] = "%.1f",	--HUD Video Brightness Control
-	[292] = "%.1f",	--HUD Video Contrast Control
 	[293] = "%d",	--HUD Altitude Selector Switch
-
-	-- UFC Panel
-	[295] = "%.1f",	--Display Brightness Control
-	[298] = "%.1f",	--Comm 1 Volume Control
-	[299] = "%.1f",	--Comm 2 Volume Control
 
 	--MIP INNER LEFT SIDE
 	[196] = "%.f",	--Master Caution (yellow)
@@ -92,7 +84,6 @@ PWDEV.ConfigEveryFrameArguments =
 
 	-- Fuel Quantity Indicator
 	[365] = "%d",	--ON/OFF FLAG
-	[379] = "%.1f",	--Fuel Totalizer Selector
 
 	--UPPER AMARMENT PANEL
 	[385] = "%.1f",	--MODE	-/AUT/CIP/DSL/DIR/AGM
@@ -100,9 +91,15 @@ PWDEV.ConfigEveryFrameArguments =
 	[386] = "%.1f",	--FUZ 1. DRUM   -/N/T/NT/PR/OP/SA
 	[387] = "%.1f",	--FUR 2.		-/IN/D1/D2/V/V1/V2/FE/
 
-	-- Armament Control Panel ACP
-	[395] = "%.1f",	--Manual Release Control Knob 0/.3/.7/1
-	[404] = "%.1f",	--Jettison Mode Selector
+	[396] = "%d",	-- Armament Mode Control
+	[397] = "%d",	-- Fuzing Control
+	[398] = "%d",	-- Quantity Selector (Tens)
+	[399] = "%d",	-- Quantity Selector (Units)
+	[400] = "%d",	-- Multiple Release Control
+	[401] = "%d",	-- Release Interval Control (Hundreds)
+	[402] = "%d",	-- Release Interval Control (Tens)
+	[403] = "%d",	-- Release Interval Control (Units)
+
 	-- [405] = "%1d",	--Jettison Stores
 	[420] = "%d",	--Ground IR Cool Switch
 
@@ -172,7 +169,7 @@ PWDEV.ConfigEveryFrameArguments =
 	-- External Lights Panel
 	[472] = "%d",	--Landing/Taxi Lights Switch
 	[503] = "%d",	--External Lights Mode Switch"
-	[510] = "%.1f",	--Formation Lights Knob
+
 	[511] = "%.1f",	--Position Lights Switch
 	[512] = "%d",	--Anti-Collision Lights Switch
 	[513] = "%d",	--External Auxiliary Lights Switch
@@ -258,23 +255,38 @@ PWDEV.ConfigEveryFrameArguments =
 
 	-- ICS
 	[629] = "%.1f",	--ICS Aux Volume Knob
-	[630] = "%.1f",	--ICS Ground Volume Knob
+	--[630] = "%.1f",	--ICS Ground Volume Knob
 	[631] = "%.1f",	--ICS Mic Operational Mode Switch
 
 	-- IFF
 	[632] = "%d",	--IFF Operational Mode Switch
 	[633] = "%d",	--IFF Crypto Mode Switch
+}
 
+PWDEV.ConfigArguments =
+{
+	[289] = "%.1f",	--HUD Off/Brightness Control
+	[291] = "%.1f",	--HUD Video Brightness Control
+	[292] = "%.1f",	--HUD Video Contrast Control
+	-- UFC Panel
+	[295] = "%.1f",	--Display Brightness Control
+	[298] = "%.1f",	--Comm 1 Volume Control
+	[299] = "%.1f",	--Comm 2 Volume Control
+	[630] = "%.1f",	--ICS Ground Volume Knob
+
+	[379] = "%.1f",	--Fuel Totalizer Selector
+
+	-- Armament Control Panel ACP
+	[395] = "%.1f",	--Manual Release Control Knob 0/.3/.7/1
+	[404] = "%.1f",	--Jettison Mode Selector
+
+	[510] = "%.1f",	--Formation Lights Knob
 	-- Interior Lights Panel
 	[634] = "%.1f",	--Compass Light/Test Lights
 	[635] = "%.1f",	--Instruments Lights
 	[636] = "%.1f",	--Console Lights
 	[637] = "%.1f",	--Flood Lights
 	[638] = "%.1f",	--Annunciator Lights
-}
-
-PWDEV.ConfigArguments =
-{
 }
 
 -- Pointed to by ProcessDCSHighImportance

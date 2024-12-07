@@ -57,12 +57,8 @@ PWDEV.ConfigEveryFrameArguments =
 
 	-- HUD Control Panel
 	[140] = "%.1f",   -- HUD Symbology Reject Switch, NORM/REJ 1/REJ 2
-	[141] = "%.1f",   -- HUD Symbology Brightness Control Knob
 	[142] = "%1d",   -- HUD Symbology Brightness Selector Knob, DAY/NIGHT
-	[143] = "%.1f",   -- Black Level Control Knob
 	[144] = "%.1f",   -- HUD Video Control Switch, W/B /VID/OFF
-	[145] = "%.1f",   -- Balance Control Knob
-	[146] = "%.1f",   -- AOA Indexer Control Knob
 	[147] = "%1d",   -- Altitude Switch, BARO/RDR
 	[148] = "%1d",   -- Attitude Selector Switch, INS/AUTO/STBY -1/0/1
 
@@ -112,15 +108,10 @@ PWDEV.ConfigEveryFrameArguments =
 	[309] = "%1d", -- SPARE CTN3
 
 	[107] = "%1d",  -- UFC ADF Function Select Switch, 1/OFF/2 {-1.0,0.0,1.0}
-	[108] = "%.1f",	-- UFC COMM 1 Volume Control Knob {0.0,1.0} in 0.1 Steps
-	[123] = "%.1f", -- UFC COMM 2 Volume Control Knob {0.0,1.0} in 0.1 Steps
-	[109] = "%.1f", -- UFC Brightness Control Knob {0.0,1.0} in 0.1 Steps
 	[125] = "%1d",  -- UFC COMM 1 Channel Selector Knob
 	[127] = "%1d",  -- UFC COMM 2 Channel Selector Knob
 
 	-- Exterior Lights Panel
-	[337] = "%.1f", -- Formation Lights Dimmer
-	[338] = "%.1f", -- Position Lights Dimmer
 	[339] = "%1d", 	-- Strobe Lights Switch
 
 	-- Communication panel
@@ -132,16 +123,6 @@ PWDEV.ConfigEveryFrameArguments =
 	[355] = "%1d", 	-- IFF Mode 4 Switch, DIS/AUD /DIS/OFF
 	[356] = "%1d", 	-- IFF Master Switch, EMER/NORM
 
-	-- VOL
-	[357] = "%.1f",	-- VOX Volume Control Knob
-	[358] = "%.1f",	-- ICS Volume Control Knob
-	[359] = "%.1f",	-- RWR Volume Control Knob
-	[360] = "%.1f",	-- WPN Volume Control Knob
-	[361] = "%.1f",	-- MIDS B Volume Control Knob
-	[362] = "%.1f",	-- MIDS A Volume Control Knob
-	[363] = "%.1f",	-- TACAN Volume Control Knob
-	[364] = "%.1f",	-- AUX Volume Control Knob
-
 	-- ELEC
 	[402] = "%1d", 	-- Left Generator Control Switch
 	[404] = "%1d", 	-- Battery Switch, ON/OFF/ORIDE
@@ -149,19 +130,13 @@ PWDEV.ConfigEveryFrameArguments =
 
 	-- ECS
 	[405] = "%1d", 	-- Mode Switch, AUTO/MAN/OFF/RAM
-	[407] = "%.1f", -- Cabin Temperature Knob
 	[408] = "%1d", 	-- Cabin Pressure Switch, NORM/DUMP/RAM/DUMP
 	[409] = "%1d", 	-- Pitot Heater Switch, ON/AUTO
 	[410] = "%1d", 	-- Engine Anti-Ice Switch, ON/OFF/TEST
 	[411] = "%.1f", -- Bleed Air Knob, R OFF/NORM/L OFF/OFF
 
 	-- Interior lights
-	[413] = "%.1f", -- CONSOLES Lights Dimmer Knob
-	[414] = "%.1f", -- Instrument Panel Dimmer Knob
-	[415] = "%.1f", -- Flood Light Dimmer Knob
-	-- [416] = "%1d", 	-- Lights Test Switch, TEST/OFF
-	[417] = "%.1f", -- WARN/CAUTION Light Dimmer Knob
-	[418] = "%.1f", -- CHART Light Dimmer Knob
+	[416] = "%1d", 	-- Lights Test Switch, TEST/OFF
 	[419] = "%1d", 	-- MODE Switch, NVG/NITE/DAY
 
 	-- SNSR Sensor panel
@@ -174,6 +149,10 @@ PWDEV.ConfigEveryFrameArguments =
 
 PWDEV.ConfigArguments =
 {
+	-- UFC
+	[108] = "%.1f",	-- UFC COMM 1 Volume Control Knob {0.0,1.0} in 0.1 Steps
+	[109] = "%.1f", -- UFC Brightness Control Knob {0.0,1.0} in 0.1 Steps
+	[123] = "%.1f", -- UFC COMM 2 Volume Control Knob {0.0,1.0} in 0.1 Steps
 	-- Left MDI
 	[51] = "%.1f",   -- Left MDI Brightness Selector Knob, OFF/NIGHT/DAY {0.0,0.1,0.2}
 	[52] = "%.1f",   -- Left MDI Brightness Control Knob {0.0,1.0} in 0.1 Steps
@@ -190,6 +169,32 @@ PWDEV.ConfigArguments =
 	[179] = "%1d",   -- AMPCD Symbology Control Switch, UP/DOWN {1.0,0.0,-1.0}
 	[182] = "%1d",   -- AMPCD Contrast Control Switch, UP/DOWN {1.0,0.0,-1.0}
 	[180] = "%1d",   -- AMPCD Gain Control Switch, UP/DOWN {1.0,0.0,-1.0}
+
+	-- HUD Control Panel
+	[141] = "%.1f",   -- HUD Symbology Brightness Control Knob
+	[143] = "%.1f",   -- Black Level Control Knob
+	[145] = "%.1f",   -- Balance Control Knob
+	[146] = "%.1f",   -- AOA Indexer Control Knob
+	-- Exterior Lights Panel
+	[337] = "%.1f", -- Formation Lights Dimmer
+	[338] = "%.1f", -- Position Lights Dimmer
+	-- VOL
+	[357] = "%.1f",	-- VOX Volume Control Knob
+	[358] = "%.1f",	-- ICS Volume Control Knob
+	[359] = "%.1f",	-- RWR Volume Control Knob
+	[360] = "%.1f",	-- WPN Volume Control Knob
+	[361] = "%.1f",	-- MIDS B Volume Control Knob
+	[362] = "%.1f",	-- MIDS A Volume Control Knob
+	[363] = "%.1f",	-- TACAN Volume Control Knob
+	[364] = "%.1f",	-- AUX Volume Control Knob
+	-- ECS
+	[407] = "%.1f", -- Cabin Temperature Knob
+	-- Interior Lights
+	[413] = "%.1f", -- CONSOLES Lights Dimmer Knob
+	[414] = "%.1f", -- Instrument Panel Dimmer Knob
+	[415] = "%.1f", -- Flood Light Dimmer Knob
+	[417] = "%.1f", -- WARN/CAUTION Light Dimmer Knob
+	[418] = "%.1f", -- CHART Light Dimmer Knob
 }
 
 

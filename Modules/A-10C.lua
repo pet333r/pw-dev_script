@@ -53,6 +53,7 @@ PWDEV.ConfigEveryFrameArguments =
     [166] = "%.1f", -- UHF 0.25MHz Selector
     [167] = "%.1f",   -- Frequency Mode Dial MNL/PRESET/GRD
     [168] = "%.1f", -- UHF Function Dial OFF/MAIN/BOTH/ADF
+    [169] = "%1d",   -- T-Tone Switch
     [170] = "%1d",   -- Squelch Switch
     [171] = "%.1f", -- UHF Volume Control
 
@@ -71,16 +72,10 @@ PWDEV.ConfigEveryFrameArguments =
     [262] = "%.1f", -- TACAN Mode Dial 0/1/2/3/4
 
     [287] = "%1d",  -- Position Lights FLASH/OFF/STEADY
-    [288] = "%.1f", -- Formation Lights
     [289] = "%1d",  -- Anticollision Lights
-    [290] = "%.1f", -- Engine Instrument Lights
     [291] = "%1d",  -- Nose Illumination
-    [292] = "%.1f", -- Flight Instrument Lights
-    [293] = "%.1f", -- Aux Instrument Lights
     [294] = "%1d",  -- Signal Lights
     [295] = "%1d",  -- Accelerometer and Compass Lights
-    [296] = "%.1f", -- Flood Lights
-    [297] = "%.1f", -- Console Lights
 
     [358] = "%1d", -- JTSN / OFF
     [360] = "%d",  -- Missile Warning System OFF - ON - (MENU)
@@ -213,6 +208,12 @@ PWDEV.ConfigEveryFrameArguments =
 
 PWDEV.ConfigArguments =
 {
+    [288] = "%.1f", -- Formation Lights
+    [290] = "%.1f", -- Engine Instrument Lights
+    [292] = "%.1f", -- Flight Instrument Lights
+    [293] = "%.1f", -- Aux Instrument Lights
+    [296] = "%.1f", -- Flood Lights
+    [297] = "%.1f", -- Console Lights
 }
 
 local function getTacanChannel()

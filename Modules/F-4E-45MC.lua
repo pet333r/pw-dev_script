@@ -1,4 +1,8 @@
 -- F-4E Phantom II
+
+local coerce_nil_to_string = PWDEV.Tools.coerce_nil_to_string
+local send = PWDEV.Tools.SendData
+
 PWDEV.FoundDCSModule = true
 
 PWDEV.ConfigEveryFrameArguments =

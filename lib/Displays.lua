@@ -159,4 +159,108 @@ function Displays.GetDisplayLines(dcsDisplay, width, height, displayIndicatorDat
     return displayLines
 end
 
+function contains(table, value)
+    for _, v in pairs(table) do
+        if v == value then
+            return true
+        end
+    end
+    return false
+end
+
+function Displays.GetDisplayLinesWithColors(dcsDisplay, width, height, displayIndicatorData, getDisplayPage, replaceSymbolMap, parentMap)
+    local emptyLine = string.rep(" ", width)
+
+    local displayLines = {}
+    local colorLines = {}
+    for i = 1, height do
+        displayLines[i] = emptyLine
+        colorLines[i] = emptyLine
+    end
+    if not dcsDisplay then
+        return displayLines, colorLines
+    end
+
+    local displayPage = getDisplayPage()
+    parentMap = parentMap or {}
+    local parentPage = parentMap[displayPage]
+
+    for k, value in pairs(dcsDisplay) do
+        local candidates = displayIndicatorData[k]
+        if candidates then
+            if replaceSymbolMap then
+                value = replaceSymbols(value, replaceSymbolMap)
+            end
+            local render_instructions = nil
+            if #candidates == 1 then
+                render_instructions = candidates[1]
+            else
+                local displayPageCandidates = {}
+                local parentPageCandidates = {}
+                for _, ri in pairs(candidates) do
+                    if contains(ri.pages, displayPage) then
+                        table.insert(displayPageCandidates, ri)
+                    elseif parentPage and contains(ri.pages, parentPage) then
+                        table.insert(parentPageCandidates, ri)
+                    end
+                end
+
+                if #displayPageCandidates > 0 then
+                    render_instructions = displayPageCandidates[1]
+                elseif #parentPageCandidates > 0 then
+                    render_instructions = parentPageCandidates[1]
+                else
+                    render_instructions = candidates[1]
+                end
+            end
+            if render_instructions then
+                local ri = render_instructions
+                local old_line = displayLines[ri.y]
+                local old_color_line = colorLines[ri.y]
+                local replacements = {}
+                local colorReplacements = {}
+
+                if not ri.alignment or ri.alignment == "LFT"then
+                    for i = 1, value:len(), 1 do
+                        local c = value:sub(i, i)
+                        if c ~= " " then 
+                            replacements[ri.x + i - 1] = c
+                            colorReplacements[ri.x + i - 1] = getColorChar(ri.color)
+                        end
+                    end
+                elseif ri.alignment == "RGHT" then
+                    for i = 1, value:len(), 1 do
+                        local c = value:sub(i, i)
+                        if c ~= " " then
+                            replacements[ri.x - (value:len() - i)] = c
+                            colorReplacements[ri.x - (value:len() - i)] = getColorChar(ri.color)
+                        end
+                    end
+                end
+
+                local new_line = ""
+                local new_color_line = ""
+                for i = 1, width, 1 do
+                    new_line = new_line .. (replacements[i] or old_line:sub(i,i))
+                    new_color_line = new_color_line .. (colorReplacements[i] or old_color_line:sub(i,i))
+                end
+
+                displayLines[ri.y] = new_line
+                colorLines[ri.y] = new_color_line
+            end
+        end
+    end
+
+    return displayLines, colorLines
+end
+
+function getColorChar(color)
+    if color == 0 then return "W" end
+    if color == 1 then return "W" end
+    if color == 2 then return "G" end
+    if color == 3 then return "B" end
+    if color == 4 then return "P" end
+    return " "
+end
+
 return Displays

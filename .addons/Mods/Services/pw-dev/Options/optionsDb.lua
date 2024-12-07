@@ -1,5 +1,3 @@
--- file version: 2023.10.04
-
 local DbOption  = require('Options.DbOption')
 -- local i18n      = require('i18n')
 -- local oms       = require('optionsModsScripts')
@@ -7,6 +5,7 @@ local DbOption  = require('Options.DbOption')
 
 local CONFIG_PATH = lfs.writedir() .. [[Scripts\pw-dev_script\Config.lua]]
 local VERSION_PATH = lfs.writedir() .. [[Scripts\pw-dev_script\version]]
+local FILE_VERSION = "2024.12.06"
 local exist = false
 
 local pwdev = false
@@ -19,8 +18,6 @@ local configVersion = ""
 
 local networkPortSend = 0
 local networkPortRecv = 0
-
-local multiAppEnabled = false
 
 -- devices
 local DEVICES = 4
@@ -36,8 +33,6 @@ end
 local hwStreamDeckEnabled = false
 local hwStreamDeckIP = ""
 local hwStreamDeckPort = 0
-
-local writeNavFile = false
 
 local function CheckPcIp()
 	local command = string.format("start cmd /k ipconfig.exe")
@@ -86,14 +81,6 @@ local function getNthLine(fileName, n)
 	return "-"
 end
 
-local tableMapDiv = {
-    DbOption.Item(_('0.1')):Value(0),
-    DbOption.Item(_('0.2')):Value(1),
-    DbOption.Item(_('0.4')):Value(2),
-    DbOption.Item(_('0.5')):Value(4),
-    DbOption.Item(_('1.0')):Value(5),
-}
-
 local function ReadConfigFile()
 	if exist then
 		local file = io.open(CONFIG_PATH, "r")
@@ -120,9 +107,6 @@ local function ReadConfigFile()
 		networkPortSend = content:match(scriptInit .. ".Port%s+=%s+(.-);")
 		networkPortRecv = content:match(scriptInit .. ".ListenerPort%s+=%s+(.-);")
 
-		-- multi app
-		if (content:match(scriptInit .. ".MultiAppDevice%s+=%s+(.-);") == "true") then multiAppEnabled = true else multiAppEnabled = false end
-
 		-- IP's
 		if pwdev == true then
 			for i = 1, DEVICES, 1 do
@@ -148,14 +132,9 @@ local function ReadConfigFile()
 		-- StreamDeck
 		if (content:match(scriptInit .. ".StreamDeckExport%s+=%s+(.-);") == "true") then hwStreamDeckEnabled = true else hwStreamDeckEnabled = false end
 
-		if (content:match(scriptInit .. ".WriteNavFile%s+=%s+(.-);") == "true") then writeNavFile = true else writeNavFile = false end
-
 		-- Network ports:
 		pwScriptConfigDlg.pwScriptNetworkPortSendEditBox:setText(networkPortSend)
 		pwScriptConfigDlg.pwScriptNetworkPortRecvEditBox:setText(networkPortRecv)
-
-		-- multi app
-		pwScriptConfigDlg.pwScriptMultiAppEnabledCheckbox:setState(multiAppEnabled)
 
 		-- set device 1
 		pwScriptConfigDlg.pwScriptDevice1EnabledCheckbox:setState(deviceEnabled[1])
@@ -174,16 +153,11 @@ local function ReadConfigFile()
 		pwScriptConfigDlg.pwScriptStreamDeckEnabledCheckbox:setState(hwStreamDeckEnabled)
 		pwScriptConfigDlg.pwScriptStreamDeckIpEditBox:setText(hwStreamDeckIP)
 		pwScriptConfigDlg.pwScriptStreamDeckPortEditBox:setText(hwStreamDeckPort)
-
-		-- write nav file
-		pwScriptConfigDlg.pwScriptWriteNavFileEnabledCheckbox:setState(writeNavFile)
 	end
 end
 
 local function SaveToConfig()
 	local fileNew = io.open(CONFIG_PATH, "w+")
-
-	content = string.gsub(content, scriptInit .. ".MultiAppDevice%s+=%s+(.-);", scriptInit .. ".MultiAppDevice = " .. tostring(multiAppEnabled) .. ";")
 
 	if pwdev == true then
 		for i = 1, DEVICES, 1 do
@@ -210,7 +184,6 @@ local function SaveToConfig()
 	content = string.gsub(content, scriptInit .. ".StreamDeckHost%s+=%s+\"(.-)\"", scriptInit .. ".StreamDeckHost = \"" .. hwStreamDeckIP .. "\"")
 	content = string.gsub(content, scriptInit .. ".StreamDeckPort%s+=%s+(.-);", scriptInit .. ".StreamDeckPort = " .. hwStreamDeckPort .. ";")
 
-	content = string.gsub(content, scriptInit .. ".WriteNavFile%s+=%s+(.-);", scriptInit .. ".WriteNavFile = " .. tostring(writeNavFile) .. ";")
 	-- IP's
 	content = string.gsub(content, scriptInit .. ".ListenerPort%s+=%s+(.-);", scriptInit .. ".ListenerPort = " .. networkPortRecv .. ";")
 
@@ -229,10 +202,6 @@ local function UpdateOptions()
 	local editEnabled = pwScriptConfigDlg.pwScriptEnabledCheckbox:getState()
 
 	pwScriptConfigDlg.pwScriptNetworkTitleLabel:setEnabled(editEnabled)
-
-	-- multi app
-	pwScriptConfigDlg.pwScriptMultiAppTitleLabel:setEnabled(editEnabled)
-	pwScriptConfigDlg.pwScriptMultiAppEnabledCheckbox:setEnabled(editEnabled)
 
 	-- port send
 	pwScriptConfigDlg.pwScriptNetworkPortSendLabel:setEnabled(editEnabled)
@@ -276,10 +245,6 @@ local function UpdateOptions()
 	pwScriptConfigDlg.pwScriptStreamDeckIpDefaultLabel:setEnabled(editEnabled and hwStreamDeckEnabled)
 	pwScriptConfigDlg.pwScriptStreamDeckPortLabel:setEnabled(editEnabled and hwStreamDeckEnabled)
 	pwScriptConfigDlg.pwScriptStreamDeckPortDefaultLabel:setEnabled(editEnabled and hwStreamDeckEnabled)
-
-	-- write nav file
-	pwScriptConfigDlg.pwScriptWriteNavFileTitleLabel:setEnabled(editEnabled)
-	pwScriptConfigDlg.pwScriptWriteNavFileEnabledCheckbox:setEnabled(editEnabled)
 
 	-- save button
 	pwScriptConfigDlg.pwScriptSaveButton:setEnabled(editEnabled)
@@ -346,13 +311,6 @@ local pwScriptNetworkPortRecv = DbOption.new():setValue(false):editbox()
 	networkPortRecv = value
 end)
 
--- multi app enabled
-local pwScriptMultiAppEnabled = DbOption.new():setValue(false):checkbox()
-:callback(function(value)
-	multiAppEnabled = value
-	UpdateOptions()
-end)
-
 -- Devices enabled
 local pwScriptDevice1Enabled = DbOption.new():setValue(false):checkbox()
 :callback(function(value)
@@ -416,14 +374,6 @@ local pwScriptStreamDeckPort = DbOption.new():setValue(false):editbox()
 	hwStreamDeckPort = value
 end)
 
-
---
-local pwScriptWriteNavFileEnabled = DbOption.new():setValue(""):checkbox()
-:callback(function(value)
-	writeNavFile = value
-end)
-
-
 return {
 	-- Events
 	callbackOnShowDialog  	= OnShowDialog,
@@ -432,8 +382,6 @@ return {
 
 	pwScriptNetworkPortSend = pwScriptNetworkPortSend,
 	pwScriptNetworkPortRecv = pwScriptNetworkPortRecv,
-
-	pwScriptMultiAppEnabled = pwScriptMultiAppEnabled,
 
 	pwScriptDevice1Enabled = pwScriptDevice1Enabled,
 	pwScriptDevice2Enabled = pwScriptDevice2Enabled,
@@ -448,6 +396,4 @@ return {
 	pwScriptStreamDeckEnabled = pwScriptStreamDeckEnabled,
 	pwScriptStreamDeckIp	= pwScriptStreamDeckIp,
 	pwScriptStreamDeckPort	= pwScriptStreamDeckPort,
-
-	pwScriptWriteNavFileEnabled = pwScriptWriteNavFileEnabled,
 }

@@ -7,22 +7,14 @@ PWDEV.FoundDCSModule = true
 PWDEV.ConfigEveryFrameArguments =
 {
     -- CPG MPD Left
-    [86] = "%.1f",  -- BRT knob
-    [87] = "%.1f",  -- VID knob
     [94] = "%.1f",  -- DAY/NT/MONO knob
     -- CPG MPD Right
-    [120] = "%.1f",  -- BRT knob
-    [121] = "%.1f",  -- VID knob
     [128] = "%.1f",  -- DAY/NT/MONO knob
     -- CPG TEDAC
-    [148] = "%.1f",  -- GAIN knob
-    [149] = "%.1f",  -- LEV knob
     [154] = "%.1f",  -- DAY/NT/OFF knob
     [494] = "%d",    -- TADS Sensor Select Switch, FLIR/TV/DVO
     [510] = "%d",    -- Laser Tracker Mode Switch, A/O/M
     [507] = "%d",    -- Image Auto Tracker Polarity Switch, W/A/B
-
-    [265] = "%.1f",  -- EUFD BRT knob
 
     -- CPG FIRE DET/EXTG
     [284] = "%1d",  -- ENG 1 btn
@@ -64,8 +56,6 @@ PWDEV.ConfigEveryFrameArguments =
     [363] = "%1d",  -- NVS MODE switch 1/0/-1
     [426] = "%1d",  -- TAIL WHEEL UNLOCK light green
     -- CPG INTR LT
-    [365] = "%.1f",  -- SIGNAL knob
-    [366] = "%.1f",  -- PRIMARY knob
     [367] = "%.1f",  -- FLOOD knob
     -- CPG STORES JETTISON
     -- [368] = "%1d",  -- L OUTBD btn
@@ -83,25 +73,14 @@ PWDEV.ConfigEveryFrameArguments =
     [435] = "%1d",  -- R TIP light green
 
     -- CPG COMM
-    [375] = "%.1f",  -- VHF knob
-    [376] = "%.1f",  -- UHF knob
-    [377] = "%.1f",  -- FM1 knob
-    [378] = "%.1f",  -- FM2 knob
-    [379] = "%.1f",  -- HF knob
     [380] = "%1d",  -- SQL 1
     [381] = "%1d",  -- SQL 2
     [382] = "%1d",  -- SQL 3
     [383] = "%1d",  -- SQL 4
     [384] = "%1d",  -- SQL 5
-    [385] = "%.1f",  -- MASTER knob
-    [386] = "%.1f",  -- SENS knob
     [387] = "%1d",  -- ICS 1/0/-1
     -- [388] = "%1d",  -- IDENT
-    [389] = "%.1f",  -- AUX IFF knob
-    [390] = "%.1f",  -- AUX RLWR knob
-    [391] = "%.1f",  -- AUX ATA knob
-    [392] = "%.1f",  -- AUX VCR knob
-    [393] = "%.1f",  -- AUX ADF knob
+
     -- CPG WINDSHIELD WIPER
     [394] = "%1d",  -- DEFOG
     [395] = "%.1f",  -- knob 0.1
@@ -119,15 +98,9 @@ PWDEV.ConfigEveryFrameArguments =
 
 ------------------------------------------------------
     -- PLT MPD Left
-    [18] = "%.1f",  -- BRT knob
-    [19] = "%.1f",  -- VID knob
     [26] = "%.1f",  -- DAY/NT/MONO knob
     -- PLT MPD Right
-    [52] = "%.1f",  -- BRT knob
-    [53] = "%.1f",  -- VID knob
     [60] = "%.1f",  -- DAY/NT/MONO knob
-
-    [273] = "%.1f",  -- EUFD BRT knob
 
     -- PLT FIRE DET/EXTG
     [295] = "%1d",  -- ENG 1 btn
@@ -193,33 +166,16 @@ PWDEV.ConfigEveryFrameArguments =
     [412] = "%1d",  -- R TIP light green
     -- PLT EXT/INTR LT
     [326] = "%1d",  -- NAV switch 1/0/-1
-    [327] = "%.1f",  -- SIGNAL knob
-    [328] = "%.1f",  -- PRIMARY knob
-    [329] = "%.1f",  -- FORM knob
-    [330] = "%.1f",  -- FLOOD knob
-    [331] = "%.1f",  -- STBY INST knob
     [332] = "%1d",  -- ANTI switch 1/0/-1
 
     -- PLT COMM
-    [334] = "%.1f",  -- VHF knob
-    [335] = "%.1f",  -- UHF knob
-    [336] = "%.1f",  -- FM1 knob
-    [337] = "%.1f",  -- FM2 knob
-    [338] = "%.1f",  -- HF knob
     [339] = "%1d",  -- SQL 1
     [340] = "%1d",  -- SQL 2
     [341] = "%1d",  -- SQL 3
     [342] = "%1d",  -- SQL 4
     [343] = "%1d",  -- SQL 5
-    [344] = "%.1f",  -- MASTER knob
-    [345] = "%.1f",  -- SENS knob
     [346] = "%1d",  -- ICS 1/0/-1
     -- [347] = "%1d",  -- IDENT
-    [348] = "%.1f",  -- AUX IFF knob
-    [349] = "%.1f",  -- AUX RLWR knob
-    [350] = "%.1f",  -- AUX ATA knob
-    [351] = "%.1f",  -- AUX VCR knob
-    [352] = "%.1f",  -- AUX ADF knob
 
     [353] = "%1d",  -- CHK OVSP 1/0/-1
     [354] = "%1d",  -- TEST 1/0/-1
@@ -229,17 +185,75 @@ PWDEV.ConfigEveryFrameArguments =
     [357] = "%.1f",  -- knob 0.1
     -- PLT CMWS
     [610] = "%1d",  -- PWR Switch
-    [611] = "%.1f", -- Audio Volume Knob
-    [612] = "%.1f", -- Lamp Knob
-    [614] = "%1d",  -- Flare Squibs Switch
-    [615] = "%1d",  -- Mode Switch
-    [616] = "%1d",  -- Operation Switch
+    [614] = "%1d",  -- Flare Squibs Switch ARM/SAFE
+    [615] = "%1d",  -- Mode Switch CMWS/NAV
+    [616] = "%1d",  -- Operation Switch BYPASS/AUTO
     [617] = "%1d",  -- Flare Jettison Switch Cover
     [618] = "%1d",  -- Flare Jettison Switch
 }
 
 PWDEV.ConfigArguments =
 {
+    -- CPG
+    -- MPD L
+    [86] = "%.1f",  -- BRT knob
+    [87] = "%.1f",  -- VID knob
+    -- MPD R
+    [120] = "%.1f",  -- BRT knob
+    [121] = "%.1f",  -- VID knob
+    -- TEDAC
+    [148] = "%.1f",  -- GAIN knob
+    [149] = "%.1f",  -- LEV knob
+    -- EUFD
+    [265] = "%.1f",  -- EUFD BRT knob
+    -- INTR LT
+    [365] = "%.1f",  -- SIGNAL knob
+    [366] = "%.1f",  -- PRIMARY knob
+    -- COMM
+    [375] = "%.1f",  -- VHF knob
+    [376] = "%.1f",  -- UHF knob
+    [377] = "%.1f",  -- FM1 knob
+    [378] = "%.1f",  -- FM2 knob
+    [379] = "%.1f",  -- HF knob
+    [385] = "%.1f",  -- MASTER knob
+    [386] = "%.1f",  -- SENS knob
+    [389] = "%.1f",  -- AUX IFF knob
+    [390] = "%.1f",  -- AUX RLWR knob
+    [391] = "%.1f",  -- AUX ATA knob
+    [392] = "%.1f",  -- AUX VCR knob
+    [393] = "%.1f",  -- AUX ADF knob
+
+    -- PLT
+    -- MPD L
+    [18] = "%.1f",  -- BRT knob
+    [19] = "%.1f",  -- VID knob
+    -- MPD R
+    [52] = "%.1f",  -- BRT knob
+    [53] = "%.1f",  -- VID knob
+    -- EUFD
+    [273] = "%.1f",  -- EUFD BRT knob
+    -- EXT/INTR LT
+    [327] = "%.1f",  -- SIGNAL knob
+    [328] = "%.1f",  -- PRIMARY knob
+    [329] = "%.1f",  -- FORM knob
+    [330] = "%.1f",  -- FLOOD knob
+    [331] = "%.1f",  -- STBY INST knob
+    -- COMM
+    [334] = "%.1f",  -- VHF knob
+    [335] = "%.1f",  -- UHF knob
+    [336] = "%.1f",  -- FM1 knob
+    [337] = "%.1f",  -- FM2 knob
+    [338] = "%.1f",  -- HF knob
+    [344] = "%.1f",  -- MASTER knob
+    [345] = "%.1f",  -- SENS knob
+    [348] = "%.1f",  -- AUX IFF knob
+    [349] = "%.1f",  -- AUX RLWR knob
+    [350] = "%.1f",  -- AUX ATA knob
+    [351] = "%.1f",  -- AUX VCR knob
+    [352] = "%.1f",  -- AUX ADF knob
+    -- CMWS
+    [611] = "%.1f", -- Audio Volume Knob
+    [612] = "%.1f", -- Lamp Knob
 }
 
 function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)

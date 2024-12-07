@@ -84,10 +84,12 @@ PWDEV.ConfigEveryFrameArguments =
 	[2029]  =  "%d",   -- ARC-159 1MHz Dial
 	[2028]  =  "%d",   -- ARC-159 0.1MHz Dial
 	[2026]  =  "%d",   -- ARC-159 0.025MHz Dial
+	[2031]  =  "%.1f",   -- ARC-159 Volume Pilot
 	[2032]  =  "%.2f",   -- ARC-159 Preset Channel Selector
 	[2033]  =  "%.1f",   -- ARC-159 Freq Mode
 	[2034]  =  "%.1f",   -- ARC-159 Function
 	[2035]  =  "%d",   -- ARC-159 Squelch Switch
+	[8115]  =  "%d",   -- ARC-159 Read
 
 	[6135] = "%.1f",	-- HCU IR/TV Mode
 	[6136] = "%.1f",	-- HCU RADAR Mode
@@ -181,6 +183,10 @@ PWDEV.ConfigEveryFrameArguments =
 	[1004] = "%1d", 	-- AWL PCD
 	[1005] = "%1d", 	-- Vector
 	[1006] = "%1d", 	-- Manual
+	[2036] = "%.1f", 	-- TACAN Volume
+	[2041] = "%.2f", 	-- TACAN Mode
+	[2042] = "%1d", 	-- TACAN Mode Normal/Inverse
+	[2043] = "%1d", 	-- TACAN Channel X/Y
 
 	-- DISPLAY Panel: HUD
 	[1021] = "%1d", 	-- HUD De-clutter On/Off

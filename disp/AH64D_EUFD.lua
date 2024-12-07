@@ -2,9 +2,21 @@ module("AH64D_EUFD", package.seeall)
 
 --- @type { [string]: TextDisplayItem[] }
 local AH64D_EUFD = {
+	Loading = {
+		{
+			pages = {
+				"LOAD",
+			},
+			id = "Loading",
+			static_text = true,
+			x = 19,
+			y = 1,
+		},
+	},
 	WarningList_1 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -17,6 +29,7 @@ local AH64D_EUFD = {
 	WarningList_2 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -29,6 +42,7 @@ local AH64D_EUFD = {
 	WarningList_3 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -41,6 +55,7 @@ local AH64D_EUFD = {
 	WarningList_4 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -53,6 +68,7 @@ local AH64D_EUFD = {
 	WarningList_5 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -65,6 +81,7 @@ local AH64D_EUFD = {
 	WarningList_6 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -77,6 +94,7 @@ local AH64D_EUFD = {
 	WarningList_7 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -89,6 +107,7 @@ local AH64D_EUFD = {
 	Symbols_1 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -101,6 +120,7 @@ local AH64D_EUFD = {
 	Symbols_2 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -113,6 +133,7 @@ local AH64D_EUFD = {
 	Symbols_3 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -125,6 +146,7 @@ local AH64D_EUFD = {
 	Symbols_4 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -137,6 +159,7 @@ local AH64D_EUFD = {
 	Symbols_5 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -149,6 +172,7 @@ local AH64D_EUFD = {
 	Arrows_1 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 			},
 			id = "Arrows_1",
@@ -160,6 +184,7 @@ local AH64D_EUFD = {
 	Arrows_2 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 			},
 			id = "Arrows_2",
@@ -171,6 +196,7 @@ local AH64D_EUFD = {
 	CautionList_1 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -183,6 +209,7 @@ local AH64D_EUFD = {
 	CautionList_2 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -195,6 +222,7 @@ local AH64D_EUFD = {
 	CautionList_3 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -207,6 +235,7 @@ local AH64D_EUFD = {
 	CautionList_4 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -219,6 +248,7 @@ local AH64D_EUFD = {
 	CautionList_5 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -231,6 +261,7 @@ local AH64D_EUFD = {
 	CautionList_6 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -243,6 +274,7 @@ local AH64D_EUFD = {
 	CautionList_7 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -255,15 +287,8 @@ local AH64D_EUFD = {
 	Symbols_6 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
-			},
-			id = "Symbols_6",
-			static_text = true,
-			x = 38,
-			y = 1,
-		},
-		{
-			pages = {
 				"PRESET",
 			},
 			id = "Symbols_6",
@@ -275,15 +300,8 @@ local AH64D_EUFD = {
 	Symbols_7 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
-			},
-			id = "Symbols_7",
-			static_text = true,
-			x = 38,
-			y = 2,
-		},
-		{
-			pages = {
 				"PRESET",
 			},
 			id = "Symbols_7",
@@ -295,15 +313,8 @@ local AH64D_EUFD = {
 	Symbols_8 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
-			},
-			id = "Symbols_8",
-			static_text = true,
-			x = 38,
-			y = 3,
-		},
-		{
-			pages = {
 				"PRESET",
 			},
 			id = "Symbols_8",
@@ -315,32 +326,34 @@ local AH64D_EUFD = {
 	Symbols_9 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
-			},
-			id = "Symbols_9",
-			static_text = true,
-			x = 38,
-			y = 4,
-		},
-		{
-			pages = {
-				"PRESET",
 			},
 			id = "Symbols_9",
 			static_text = true,
 			x = 38,
 			y = 2,
 		},
+		{
+			pages = {
+				"PRESET",
+			},
+			id = "Symbols_9",
+			static_text = true,
+			x = 38,
+			y = 1,
+		},
 	},
 	Symbols_10 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 			},
 			id = "Symbols_10",
 			static_text = true,
 			x = 38,
-			y = 5,
+			y = 3,
 		},
 		{
 			pages = {
@@ -349,12 +362,13 @@ local AH64D_EUFD = {
 			id = "Symbols_10",
 			static_text = true,
 			x = 38,
-			y = 3,
+			y = 2,
 		},
 	},
 	Arrows_3 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 			},
 			id = "Arrows_3",
@@ -366,6 +380,7 @@ local AH64D_EUFD = {
 	Arrows_4 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 			},
 			id = "Arrows_4",
@@ -377,6 +392,7 @@ local AH64D_EUFD = {
 	AdvisoryList_1 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 			},
 			id = "AdvisoryList_1",
@@ -388,6 +404,7 @@ local AH64D_EUFD = {
 	AdvisoryList_2 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 			},
 			id = "AdvisoryList_2",
@@ -399,6 +416,7 @@ local AH64D_EUFD = {
 	AdvisoryList_3 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 			},
 			id = "AdvisoryList_3",
@@ -410,6 +428,7 @@ local AH64D_EUFD = {
 	AdvisoryList_4 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 			},
 			id = "AdvisoryList_4",
@@ -421,6 +440,7 @@ local AH64D_EUFD = {
 	AdvisoryList_5 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 			},
 			id = "AdvisoryList_5",
@@ -432,6 +452,7 @@ local AH64D_EUFD = {
 	AdvisoryList_6 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 			},
 			id = "AdvisoryList_6",
@@ -443,6 +464,7 @@ local AH64D_EUFD = {
 	AdvisoryList_7 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 			},
 			id = "AdvisoryList_7",
@@ -454,6 +476,7 @@ local AH64D_EUFD = {
 	Idm_VHF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -466,6 +489,7 @@ local AH64D_EUFD = {
 	Idm_UHF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -478,6 +502,7 @@ local AH64D_EUFD = {
 	Idm_FM1 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -490,6 +515,7 @@ local AH64D_EUFD = {
 	Idm_FM2 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -502,6 +528,7 @@ local AH64D_EUFD = {
 	Idm_HF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -514,6 +541,7 @@ local AH64D_EUFD = {
 	Rts_VHF_ = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -526,6 +554,7 @@ local AH64D_EUFD = {
 	Rts_UHF_ = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -538,6 +567,7 @@ local AH64D_EUFD = {
 	Rts_FM1_ = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -550,6 +580,7 @@ local AH64D_EUFD = {
 	Rts_FM2_ = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -562,6 +593,7 @@ local AH64D_EUFD = {
 	Rts_HF_ = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -574,6 +606,7 @@ local AH64D_EUFD = {
 	Rts__VHF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -586,6 +619,7 @@ local AH64D_EUFD = {
 	Rts__UHF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -598,6 +632,7 @@ local AH64D_EUFD = {
 	Rts__FM1 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -610,6 +645,7 @@ local AH64D_EUFD = {
 	Rts__FM2 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -622,6 +658,7 @@ local AH64D_EUFD = {
 	Rts__HF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -634,6 +671,7 @@ local AH64D_EUFD = {
 	Radio_VHF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -646,6 +684,7 @@ local AH64D_EUFD = {
 	Radio_UHF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -658,6 +697,7 @@ local AH64D_EUFD = {
 	Radio_FM1 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -670,6 +710,7 @@ local AH64D_EUFD = {
 	Radio_FM2 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -682,6 +723,7 @@ local AH64D_EUFD = {
 	Radio_HF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -694,6 +736,7 @@ local AH64D_EUFD = {
 	Squelch_VHF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -706,6 +749,7 @@ local AH64D_EUFD = {
 	Squelch_UHF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -718,6 +762,7 @@ local AH64D_EUFD = {
 	Squelch_FM1 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -730,6 +775,7 @@ local AH64D_EUFD = {
 	Squelch_FM2 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -742,6 +788,7 @@ local AH64D_EUFD = {
 	Squelch_HF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -754,6 +801,7 @@ local AH64D_EUFD = {
 	Frequency_VHF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -766,6 +814,7 @@ local AH64D_EUFD = {
 	Frequency_UHF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -778,6 +827,7 @@ local AH64D_EUFD = {
 	Frequency_FM1 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -790,6 +840,7 @@ local AH64D_EUFD = {
 	Frequency_FM2 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -802,6 +853,7 @@ local AH64D_EUFD = {
 	Frequency_HF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -814,6 +866,7 @@ local AH64D_EUFD = {
 	Call_VHF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -826,6 +879,7 @@ local AH64D_EUFD = {
 	Call_UHF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -838,6 +892,7 @@ local AH64D_EUFD = {
 	Call_FM1 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -850,6 +905,7 @@ local AH64D_EUFD = {
 	Call_FM2 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -862,6 +918,7 @@ local AH64D_EUFD = {
 	Call_HF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -874,6 +931,7 @@ local AH64D_EUFD = {
 	RadioStats_HF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -886,6 +944,7 @@ local AH64D_EUFD = {
 	Cipher_UHF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -898,6 +957,7 @@ local AH64D_EUFD = {
 	Cipher_FM1 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -910,6 +970,7 @@ local AH64D_EUFD = {
 	Cipher_FM2 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -922,6 +983,7 @@ local AH64D_EUFD = {
 	Cipher_HF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -934,6 +996,7 @@ local AH64D_EUFD = {
 	Guard = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -946,6 +1009,7 @@ local AH64D_EUFD = {
 	PowerStatus_FM1 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -958,6 +1022,7 @@ local AH64D_EUFD = {
 	PowerStatus_HF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -970,6 +1035,7 @@ local AH64D_EUFD = {
 	Net_VHF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -982,6 +1048,7 @@ local AH64D_EUFD = {
 	Net_UHF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -994,6 +1061,7 @@ local AH64D_EUFD = {
 	Net_FM1 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -1006,6 +1074,7 @@ local AH64D_EUFD = {
 	Net_FM2 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -1015,9 +1084,21 @@ local AH64D_EUFD = {
 			y = 11,
 		},
 	},
+	Net_HF = {
+		{
+			pages = {
+				"MAIN",
+			},
+			id = "Net_HF",
+			static_text = false,
+			x = 34,
+			y = 12,
+		},
+	},
 	TI_VHF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -1030,6 +1111,7 @@ local AH64D_EUFD = {
 	TI_UHF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -1042,6 +1124,7 @@ local AH64D_EUFD = {
 	TI_FM1 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -1054,6 +1137,7 @@ local AH64D_EUFD = {
 	TI_FM2 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -1066,6 +1150,7 @@ local AH64D_EUFD = {
 	Frequency_Standby_VHF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 			},
 			id = "Frequency_Standby_VHF",
@@ -1077,6 +1162,7 @@ local AH64D_EUFD = {
 	Frequency_Standby_UHF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 			},
 			id = "Frequency_Standby_UHF",
@@ -1088,6 +1174,7 @@ local AH64D_EUFD = {
 	Frequency_Standby_FM1 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 			},
 			id = "Frequency_Standby_FM1",
@@ -1099,6 +1186,7 @@ local AH64D_EUFD = {
 	Frequency_Standby_FM2 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 			},
 			id = "Frequency_Standby_FM2",
@@ -1110,6 +1198,7 @@ local AH64D_EUFD = {
 	Frequency_Standby_HF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 			},
 			id = "Frequency_Standby_HF",
@@ -1121,6 +1210,7 @@ local AH64D_EUFD = {
 	Call_Standby_VHF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 			},
 			id = "Call_Standby_VHF",
@@ -1132,6 +1222,7 @@ local AH64D_EUFD = {
 	Call_Standby_UHF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 			},
 			id = "Call_Standby_UHF",
@@ -1143,6 +1234,7 @@ local AH64D_EUFD = {
 	Call_Standby_FM1 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 			},
 			id = "Call_Standby_FM1",
@@ -1154,6 +1246,7 @@ local AH64D_EUFD = {
 	Call_Standby_FM2 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 			},
 			id = "Call_Standby_FM2",
@@ -1165,6 +1258,7 @@ local AH64D_EUFD = {
 	Call_Standby_HF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 			},
 			id = "Call_Standby_HF",
@@ -1176,6 +1270,7 @@ local AH64D_EUFD = {
 	Net_Standby_VHF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 			},
 			id = "Net_Standby_VHF",
@@ -1187,6 +1282,7 @@ local AH64D_EUFD = {
 	Net_Standby_UHF = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 			},
 			id = "Net_Standby_UHF",
@@ -1198,6 +1294,7 @@ local AH64D_EUFD = {
 	Net_Standby_FM1 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 			},
 			id = "Net_Standby_FM1",
@@ -1209,6 +1306,7 @@ local AH64D_EUFD = {
 	Net_Standby_FM2 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 			},
 			id = "Net_Standby_FM2",
@@ -1217,9 +1315,21 @@ local AH64D_EUFD = {
 			y = 11,
 		},
 	},
+	Net_Standby_HF = {
+		{
+			pages = {
+				"MAIN",
+			},
+			id = "Net_Standby_HF",
+			static_text = false,
+			x = 55,
+			y = 12,
+		},
+	},
 	Fuel = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -1232,6 +1342,7 @@ local AH64D_EUFD = {
 	Fuel_ = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -1244,6 +1355,7 @@ local AH64D_EUFD = {
 	Transponder_ID = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -1256,6 +1368,7 @@ local AH64D_EUFD = {
 	XPNDR_MODE_S = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -1268,6 +1381,7 @@ local AH64D_EUFD = {
 	Transponder_MODE_3A = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -1280,6 +1394,7 @@ local AH64D_EUFD = {
 	XPNDR_MODE_4 = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -1292,6 +1407,7 @@ local AH64D_EUFD = {
 	Transponder_MC = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -1304,6 +1420,7 @@ local AH64D_EUFD = {
 	StopWatch_ = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -1316,6 +1433,7 @@ local AH64D_EUFD = {
 	Watch_ = {
 		{
 			pages = {
+				"LOAD",
 				"MAIN",
 				"PRESET",
 			},
@@ -1669,15 +1787,35 @@ local AH64D_EUFD = {
 	Symbols_11 = {
 		{
 			pages = {
-				"PRESET",
+				"LOAD",
+				"MAIN",
 			},
 			id = "Symbols_11",
 			static_text = true,
 			x = 38,
 			y = 4,
 		},
+		{
+			pages = {
+				"PRESET",
+			},
+			id = "Symbols_11",
+			static_text = true,
+			x = 38,
+			y = 3,
+		},
 	},
 	Symbols_12 = {
+		{
+			pages = {
+				"LOAD",
+				"MAIN",
+			},
+			id = "Symbols_12",
+			static_text = true,
+			x = 38,
+			y = 5,
+		},
 		{
 			pages = {
 				"PRESET",
@@ -1685,10 +1823,20 @@ local AH64D_EUFD = {
 			id = "Symbols_12",
 			static_text = true,
 			x = 38,
-			y = 5,
+			y = 4,
 		},
 	},
 	Symbols_13 = {
+		{
+			pages = {
+				"LOAD",
+				"MAIN",
+			},
+			id = "Symbols_13",
+			static_text = true,
+			x = 38,
+			y = 6,
+		},
 		{
 			pages = {
 				"PRESET",
@@ -1696,10 +1844,20 @@ local AH64D_EUFD = {
 			id = "Symbols_13",
 			static_text = true,
 			x = 38,
-			y = 6,
+			y = 5,
 		},
 	},
 	Symbols_14 = {
+		{
+			pages = {
+				"LOAD",
+				"MAIN",
+			},
+			id = "Symbols_14",
+			static_text = true,
+			x = 38,
+			y = 7,
+		},
 		{
 			pages = {
 				"PRESET",
@@ -1707,7 +1865,7 @@ local AH64D_EUFD = {
 			id = "Symbols_14",
 			static_text = true,
 			x = 38,
-			y = 7,
+			y = 6,
 		},
 	},
 	Symbols_15 = {
@@ -1718,7 +1876,7 @@ local AH64D_EUFD = {
 			id = "Symbols_15",
 			static_text = true,
 			x = 38,
-			y = 8,
+			y = 7,
 		},
 	},
 	Symbols_16 = {
@@ -1729,7 +1887,7 @@ local AH64D_EUFD = {
 			id = "Symbols_16",
 			static_text = true,
 			x = 38,
-			y = 9,
+			y = 8,
 		},
 	},
 	Symbols_17 = {
@@ -1740,7 +1898,7 @@ local AH64D_EUFD = {
 			id = "Symbols_17",
 			static_text = true,
 			x = 38,
-			y = 10,
+			y = 9,
 		},
 	},
 	Symbols_18 = {
@@ -1751,7 +1909,7 @@ local AH64D_EUFD = {
 			id = "Symbols_18",
 			static_text = true,
 			x = 38,
-			y = 11,
+			y = 10,
 		},
 	},
 	Symbols_19 = {
@@ -1761,8 +1919,140 @@ local AH64D_EUFD = {
 			},
 			id = "Symbols_19",
 			static_text = true,
+			x = 38,
+			y = 11,
+		},
+	},
+	Symbols_20 = {
+		{
+			pages = {
+				"PRESET",
+			},
+			id = "Symbols_20",
+			static_text = true,
 			x = 39,
 			y = 12,
+		},
+	},
+	Symbols_21 = {
+		{
+			pages = {
+				"PRESET",
+			},
+			id = "Symbols_21",
+			static_text = true,
+			x = 56,
+			y = 1,
+		},
+	},
+	Symbols_22 = {
+		{
+			pages = {
+				"PRESET",
+			},
+			id = "Symbols_22",
+			static_text = true,
+			x = 56,
+			y = 2,
+		},
+	},
+	Symbols_23 = {
+		{
+			pages = {
+				"PRESET",
+			},
+			id = "Symbols_23",
+			static_text = true,
+			x = 56,
+			y = 3,
+		},
+	},
+	Symbols_24 = {
+		{
+			pages = {
+				"PRESET",
+			},
+			id = "Symbols_24",
+			static_text = true,
+			x = 56,
+			y = 4,
+		},
+	},
+	Symbols_25 = {
+		{
+			pages = {
+				"PRESET",
+			},
+			id = "Symbols_25",
+			static_text = true,
+			x = 56,
+			y = 5,
+		},
+	},
+	Symbols_26 = {
+		{
+			pages = {
+				"PRESET",
+			},
+			id = "Symbols_26",
+			static_text = true,
+			x = 56,
+			y = 6,
+		},
+	},
+	Symbols_27 = {
+		{
+			pages = {
+				"PRESET",
+			},
+			id = "Symbols_27",
+			static_text = true,
+			x = 56,
+			y = 7,
+		},
+	},
+	Symbols_28 = {
+		{
+			pages = {
+				"PRESET",
+			},
+			id = "Symbols_28",
+			static_text = true,
+			x = 56,
+			y = 8,
+		},
+	},
+	Symbols_29 = {
+		{
+			pages = {
+				"PRESET",
+			},
+			id = "Symbols_29",
+			static_text = true,
+			x = 56,
+			y = 9,
+		},
+	},
+	Symbols_30 = {
+		{
+			pages = {
+				"PRESET",
+			},
+			id = "Symbols_30",
+			static_text = true,
+			x = 56,
+			y = 10,
+		},
+	},
+	Symbols_31 = {
+		{
+			pages = {
+				"PRESET",
+			},
+			id = "Symbols_31",
+			static_text = true,
+			x = 56,
+			y = 11,
 		},
 	},
 	Test_1 = {

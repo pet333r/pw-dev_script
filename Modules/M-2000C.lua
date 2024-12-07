@@ -58,9 +58,12 @@ PWDEV.ConfigEveryFrameArguments =
 	[271] = "%1d", -- MAN Light
 	[273] = "%1d", -- MAGIC P Light
 	[274] = "%1d", -- MAGIC MAN Light
+	[275] = "%1d", -- TEST switch
 	[280] = "%1d", -- TOT Light
 	[281] = "%1d", -- PAR Light
 	[276] = "%.1f", -- Bomb Fuze Selector Switch
+	[277] = "%1d", -- Bomb Release Quantity Selector Switch
+	[278] = "%1d", -- Bomb Release Interval Selector Switch
 
 	-- AUTOPILOT lights
 	[283] = "%d",	--P
@@ -278,7 +281,6 @@ end
 
 function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
 	local radio = PWDEV.Tools.getListIndicatorValue(7) or {}
-	-- local radio = list_indication(7)
 	local uhf = coerce_nil_to_string(radio.text_COM_UHF2)
 	local vhf = coerce_nil_to_string(radio.text_COM_UHF1)
 

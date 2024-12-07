@@ -13,14 +13,8 @@ PWDEV.ConfigEveryFrameArguments =
 	[50] = "%1d",	-- AOA Indexer yellow
 
 	-- Lighting
-	[221] = "%.1f", -- Flood Lights Knob
-	[222] = "%.1f", -- Flight Instruments Lights Knob
-	[223] = "%.1f", -- Engine Instruments Lights Knob
-	[224] = "%.1f", -- Console Lights Knob
 	[225] = "%d", 	-- Bright/Dim Switch, BRT/NEUT/DIM
 	[226] = "%.1f", -- Warning Test Switch
-	[227] = "%.1f",	-- Nav Lights Knob
-	[228] = "%.1f",	-- Formation Lights Knob
 	[229] = "%.1f",	-- Beacon Light Switch
 	[353] = "%.1f",	-- Landing & Taxi Light Switch, ON/OFF
 
@@ -29,7 +23,6 @@ PWDEV.ConfigEveryFrameArguments =
 	[342] = "%1d",	-- GUNS MSL Cover 0/1
 	[343] = "%1d",	-- GUNS MSL CAMR / OFF / CAMR ONLY 1/0/-1
 	[344] = "%.1f",	-- External Stores Selector, RIPL/BOMB/SAFE/RKT DISP {0.0,0.1,0.2,0.3}
-	[345] = "%.2f",	-- Missile Volume Knob - Rotate to adjust volume (Axis) {0.0, 1.0} in 0.15 Steps
 	[346] = "%1d",	-- Armament Position Selector Switch - LEFT WINGTIP, ON/OFF
 	[347] = "%1d",	-- Armament Position Selector Switch - LEFT OUTBD, ON/OFF
 	[348] = "%1d",	-- Armament Position Selector Switch - LEFT INBD, ON/OFF
@@ -81,6 +74,15 @@ PWDEV.ConfigEveryFrameArguments =
 }
 PWDEV.ConfigArguments =
 {
+	-- Lighting
+	[221] = "%.1f", -- Flood Lights Knob
+	[222] = "%.1f", -- Flight Instruments Lights Knob
+	[223] = "%.1f", -- Engine Instruments Lights Knob
+	[224] = "%.1f", -- Console Lights Knob
+	[227] = "%.1f",	-- Nav Lights Knob
+	[228] = "%.1f",	-- Formation Lights Knob
+
+	[345] = "%.2f",	-- Missile Volume Knob - Rotate to adjust volume (Axis) {0.0, 1.0} in 0.15 Steps
 }
 
 function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)

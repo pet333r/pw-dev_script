@@ -87,4 +87,28 @@ function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
 
     send(2011, getChaff())
     send(2012, getFlare())
+
+    -- COMMS
+    local comm = PWDEV.Tools.getListIndicatorValue(7) or {}
+
+    send(2801, comm.SheetTable_Channel1)
+    send(2802, comm.SheetTable_Channel2)
+    send(2803, comm.SheetTable_Channel3)
+    send(2804, comm.SheetTable_Channel4)
+    send(2805, comm.SheetTable_Channel5)
+    send(2806, comm.SheetTable_Channel6)
+    send(2807, comm.SheetTable_Channel7)
+    send(2808, comm.SheetTable_Channel8)
+    send(2809, comm.SheetTable_Channel9)
+    send(2810, comm.SheetTable_Channel10)
+    send(2811, comm.SheetTable_Channel11)
+    send(2812, comm.SheetTable_Channel12)
+    send(2813, comm.SheetTable_Channel13)
+    send(2814, comm.SheetTable_Channel14)
+    send(2815, comm.SheetTable_Channel15)
+    send(2816, comm.SheetTable_Channel16)
+    send(2817, comm.SheetTable_Channel17)
+    send(2818, comm.SheetTable_Channel18)
+    send(2819, comm.SheetTable_Channel19)
+    send(2820, comm.SheetTable_Channel20)
 end

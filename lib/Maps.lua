@@ -13,12 +13,11 @@ PWDEV.Maps.Afghanistan.Lat1      = 38.724444
 PWDEV.Maps.Afghanistan.Long1     = 60.321667
 PWDEV.Maps.Afghanistan.Lat2      = 28.924167
 PWDEV.Maps.Afghanistan.Long2     = 73.806111
-PWDEV.Maps.CaucasusBase          = {}
-PWDEV.Maps.CaucasusBase.Lat1     = 48.387642
-PWDEV.Maps.CaucasusBase.Long1    = 26.778781
-PWDEV.Maps.CaucasusBase.Lat2     = 38.865153
-PWDEV.Maps.CaucasusBase.Long2    = 47.142275
--- Kola Peninsula Map
+PWDEV.Maps.Caucasus              = {}
+PWDEV.Maps.Caucasus.Lat1         = 48.387642
+PWDEV.Maps.Caucasus.Long1        = 26.778781
+PWDEV.Maps.Caucasus.Lat2         = 38.865153
+PWDEV.Maps.Caucasus.Long2        = 47.142275
 PWDEV.Maps.Kola                  = {}
 PWDEV.Maps.Kola.Lat1             = 74.225278
 PWDEV.Maps.Kola.Long1            = 7.585
@@ -48,17 +47,17 @@ PWDEV.Maps.PersianGulf.Long1     = 46.583444
 PWDEV.Maps.PersianGulf.Lat2      = 21.869711
 PWDEV.Maps.PersianGulf.Long2     = 63.997372
 -- Sinai Map
-PWDEV.Maps.Sinai                 = {}
-PWDEV.Maps.Sinai.Lat1            = 34.471389
-PWDEV.Maps.Sinai.Long1           = 28.110833
-PWDEV.Maps.Sinai.Lat2            = 25.943889
-PWDEV.Maps.Sinai.Long2           = 36.900833
--- South Atlantic Map
-PWDEV.Maps.SouthAtlantic         = {}
-PWDEV.Maps.SouthAtlantic.Lat1    = -45.850933
-PWDEV.Maps.SouthAtlantic.Long1   = -84.73315
-PWDEV.Maps.SouthAtlantic.Lat2    = -56.442333
-PWDEV.Maps.SouthAtlantic.Long2   = -38.1723
+PWDEV.Maps.SinaiMap              = {}
+PWDEV.Maps.SinaiMap.Lat1         = 34.471389
+PWDEV.Maps.SinaiMap.Long1        = 28.110833
+PWDEV.Maps.SinaiMap.Lat2         = 25.943889
+PWDEV.Maps.SinaiMap.Long2        = 36.900833
+-- Falklands / South Atlantic Map
+PWDEV.Maps.Falklands             = {}
+PWDEV.Maps.Falklands.Lat1        = -45.850933
+PWDEV.Maps.Falklands.Long1       = -84.73315
+PWDEV.Maps.Falklands.Lat2        = -56.442333
+PWDEV.Maps.Falklands.Long2       = -38.1723
 -- Syria Map
 PWDEV.Maps.Syria                 = {}
 PWDEV.Maps.Syria.Lat1            = 37.858862

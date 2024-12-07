@@ -33,7 +33,6 @@ dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Init.lua]])
 dofile(lfs.writedir()..[[Scripts\pw-dev_script\Config.lua]])
 PWDEV.utf8 = dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\utf8.lua]])
 dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Tools.lua]])
-dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Fdr.lua]])
 dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Maps.lua]])
 PWDEV.Displays = dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Displays.lua]])
 
@@ -59,13 +58,6 @@ function PWDEV.Start()
 
 	local version = LoGetVersionInfo()
 	PWDEV.Init.CheckDcsVersionId(version)
-
-	if (PWDEV.Fdr ~= nil) then
-		if (PWDEV.Config.WriteNavFile == true) then
-			PWDEV.Fdr.CsvFileInit()
-			PWDEV.Fdr.NavFileInit(PWDEV.Init.VersionId)
-		end
-	end
 
 	PWDEV.AF = {}
 
@@ -96,16 +88,9 @@ function PWDEV.Stop()
 	if PWDEV.Config.Listener then
 		PWDEV.UDPListener:close()
 	end
-	
+
 	PWDEV.ModuleName   = nil
 	PWDEV.FoundNoModul = false
-
-	if (PWDEV.Fdr ~= nil) then
-		if (PWDEV.Config.WriteNavFile == true) then
-			PWDEV.Fdr.CsvFileEnd()
-			PWDEV.Fdr.NavFileEnd()
-		end
-	end
 end
 
 LuaExportStart = function()
