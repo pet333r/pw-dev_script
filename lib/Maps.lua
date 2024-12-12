@@ -1,10 +1,3 @@
--- Load the corresponding map and read the latitude and longitude values and write specify the decimal degree format (convert from degrees, decimal to decimal degrees).
--- Lat1 and Long1 contain the coordinates of the upper left corner.
--- Lat2 and Long2 contain the coordinates of the lower right corner.
-
--- https://www.fcc.gov/media/radio/dms-decimal
--- lalt+y change coordinate system
-
 -- Maps
 PWDEV.Maps = {}
 -- Afghanistan Map
@@ -13,16 +6,25 @@ PWDEV.Maps.Afghanistan.Lat1      = 38.724444
 PWDEV.Maps.Afghanistan.Long1     = 60.321667
 PWDEV.Maps.Afghanistan.Lat2      = 28.924167
 PWDEV.Maps.Afghanistan.Long2     = 73.806111
+-- Caucasus Map
 PWDEV.Maps.Caucasus              = {}
 PWDEV.Maps.Caucasus.Lat1         = 48.387642
 PWDEV.Maps.Caucasus.Long1        = 26.778781
 PWDEV.Maps.Caucasus.Lat2         = 38.865153
 PWDEV.Maps.Caucasus.Long2        = 47.142275
+-- Kola Peninsula Map
 PWDEV.Maps.Kola                  = {}
 PWDEV.Maps.Kola.Lat1             = 74.225278
 PWDEV.Maps.Kola.Long1            = 7.585
 PWDEV.Maps.Kola.Lat2             = 63.953611
 PWDEV.Maps.Kola.Long2            = 39.953333
+-- Iraq Map
+PWDEV.Maps.Iraq                  = {}
+PWDEV.Maps.Iraq.Lat1             = 37.052436
+PWDEV.Maps.Iraq.Long1            = 38.573381
+PWDEV.Maps.Iraq.Lat2             = 24.499361
+PWDEV.Maps.Iraq.Long2            = 52.655797
+-- Nevada (NTTR) Map
 PWDEV.Maps.Nevada                = {}
 PWDEV.Maps.Nevada.Lat1           = 39.801711
 PWDEV.Maps.Nevada.Long1          = -119.990225
