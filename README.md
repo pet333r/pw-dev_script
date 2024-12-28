@@ -235,7 +235,7 @@ In one of the "groups" in the Config.lua file which is located in the folder wit
 ***`1`*** What are the minimum Android versions for each app? [ `DCS UFC` / `DCS Nav` / `DCS AoA Indexer`]
   - DCS UFC: Android 5.0 and above
   - DCS Nav: Android 7.0 and above
-  - DCS AoA Indexer: Android 4.4 and above
+  - DCS AoA Indexer: Android 7.0 and above
 
 ***`2`*** do the applications and script work in multiplayer?
   - YES, on the server the property must be set: `Allow player export: yes`, most servers have this option enabled;-)
