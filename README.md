@@ -221,14 +221,14 @@ In one of the "groups" in the Config.lua file which is located in the folder wit
 # known issues
 
 ***`1`*** If You can interact with DCS but not receiving data  
-  - You probably set wrong Your Android device IP in `Config.lua` file
+  - check if you have the correct IP address of your Android device in the `Config.lua` file
 
 ***`2`*** If Your device stopped receiving data
-  - Your router has likely assigned a different IP address to your Android device. Check the device's IP address and enter a new one in the `Config.lua` file.
+  - some routers change IP addresses of connected devices from time to time, make sure the device IP has not changed, if so, update it in the `Config.lua` file
 
 ***`3`*** If you receive data from DCS but no button works  
-  - check if you have the correct PC address given in the DCS UFC settings  
-  - your firewall probably blocking incomming connections, turn off the firewall for a few minutes and check if everything works (to unblock the default ListenerPort: 25070 / UDP)  
+  - check if you have the correct PC address set in the DCS UFC settings  
+  - your firewall may blocking incomming connections, turn off the firewall for a few minutes and check if everything works (to unblock, the default port: 25070 / UDP)   
   [https://www.windowscentral.com/how-open-port-windows-firewall](https://www.windowscentral.com/how-open-port-windows-firewall)
 
 # faq
