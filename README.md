@@ -103,7 +103,8 @@ DCS or DCS.openbeta
 │       └── pw-dev
 └── Scripts
     ├── Hooks
-    │   └── pw_dcs_util-hook.lua
+    │   ├── pw_dcs_util-hook.lua
+    │   └── pw_nav-hook.lua
     ├── pw-dev_script
     │   ├── lib\
     │   ├── Modules\                folder with files for individual modules in DCS World
