@@ -1,4 +1,7 @@
 -- AH-64D Longbow
+
+AH64D_EUFD = dofile(lfs.writedir()..[[Scripts\pw-dev_script\disp\AH64D_EUFD.lua]])
+
 local coerce_nil_to_string = PWDEV.Tools.coerce_nil_to_string
 local send = PWDEV.Tools.SendData
 
@@ -255,9 +258,158 @@ PWDEV.ConfigArguments =
     [611] = "%.1f", -- Audio Volume Knob
     [612] = "%.1f", -- Lamp Knob
 }
+local function replaceSymbols(s)
+	s = s:gsub(" ", "a")
+	s = s:gsub("=", "'")
+	return s
+end
+
+local plt_EUFD = {}
+local cpg_EUFD = {}
+
+-- Enhanced Up-Front Display
+local function CreateEUFD()
+    local eufd_indicator_data = AH64D_EUFD
+    local LINE_LEN = 56
+
+    local function parse_eufd(indicator_id)
+        local dcs_eufd = PWDEV.Tools.getListIndicatorValue(indicator_id)
+        -- todo: return different page based on the actual page
+        return PWDEV.Displays.GetDisplayLines(dcs_eufd, LINE_LEN, 14, eufd_indicator_data, function() return "MAIN" end)
+    end
+
+    cpg_EUFD = parse_eufd(19)
+    plt_EUFD = parse_eufd(18)
+end
+
+--CMWS Display
+local flare_letter = ""
+local flare_count = ""
+local chaff_letter = ""
+local chaff_count = ""
+local bit_line_1 = ""
+local bit_line_2 = ""
+local d_light_bright = 0
+local r_light_bright = 0
+
+local fwd_left_sector_brt = 0
+local aft_left_sector_brt = 0
+local aft_right_sector_brt = 0
+local fwd_right_sector_brt = 0
+
+local cmws_page = ""
+
+local function int_for_flag(flag)
+	if flag ~= nil then return 1 else return 0 end
+end
+
+function CreateCMWS()
+	local cmws = PWDEV.Tools.getListIndicatorValue(25)
+
+	flare_letter = " "
+	flare_count = "   "
+	chaff_letter = " "
+	chaff_count = "   "
+	bit_line_1 = "    "
+	bit_line_2 = "    "
+	d_light_bright = 0
+	r_light_bright = 0
+	fwd_left_sector_brt = 0
+	aft_left_sector_brt = 0
+	aft_right_sector_brt = 0
+	fwd_right_sector_brt = 0
+	cmws_page = "NONE"
+
+	if cmws == nil then
+        send(2031, bit_line_1)
+        send(2032, bit_line_2)
+
+        send(2033, d_light_bright)
+        send(2034, r_light_bright)
+        send(2035, fwd_left_sector_brt)
+        send(2036, aft_left_sector_brt)
+        send(2037, aft_right_sector_brt)
+        send(2038, fwd_right_sector_brt)
+        return
+    end
+
+	local is_test_page = cmws["#83#"] == nil or cmws["#84#"] == nil or cmws["#85#"] == nil or cmws["#86#"] == nil
+
+	if is_test_page then
+		cmws_page = "TEST"
+		bit_line_1 = coerce_nil_to_string(cmws["#42#"])
+		bit_line_2 = coerce_nil_to_string(cmws["#43#"])
+
+        send(2031, bit_line_1)
+        send(2032, bit_line_2)
+	else
+		cmws_page = "MAIN"
+		flare_letter = coerce_nil_to_string(cmws["#83#"])
+		chaff_letter = coerce_nil_to_string(cmws["#84#"])
+		flare_count = coerce_nil_to_string(cmws["#85#"])
+		chaff_count = coerce_nil_to_string(cmws["#86#"])
+		d_light_bright = int_for_flag(cmws["#88#"])
+		r_light_bright = int_for_flag(cmws["#87#"])
+
+		fwd_left_sector_brt = int_for_flag(cmws["#8#"])
+		aft_left_sector_brt = int_for_flag(cmws["#7#"])
+		aft_right_sector_brt = int_for_flag(cmws["#6#"])
+		fwd_right_sector_brt = int_for_flag(cmws["#9#"])
+
+        send(2031, flare_letter .. flare_count)
+        send(2032, chaff_letter .. chaff_count)
+	end
+
+    send(2033, d_light_bright)
+    send(2034, r_light_bright)
+    send(2035, fwd_left_sector_brt)
+    send(2036, aft_left_sector_brt)
+    send(2037, aft_right_sector_brt)
+    send(2038, fwd_right_sector_brt)
+end
+
 
 function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
+    CreateCMWS()
 end
 
 function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
+    CreateEUFD()
+
+    -- PLT
+    send(2011, replaceSymbols(plt_EUFD[1]))
+    send(2012, replaceSymbols(plt_EUFD[2]))
+    send(2013, replaceSymbols(plt_EUFD[3]))
+    send(2014, replaceSymbols(plt_EUFD[4]))
+    send(2015, replaceSymbols(plt_EUFD[5]))
+    send(2016, replaceSymbols(plt_EUFD[6]))
+    send(2017, replaceSymbols(plt_EUFD[7]))
+    send(2018, replaceSymbols(plt_EUFD[8]))
+    send(2019, replaceSymbols(plt_EUFD[9]))
+    send(2020, replaceSymbols(plt_EUFD[10]))
+    send(2021, replaceSymbols(plt_EUFD[11]))
+    send(2022, replaceSymbols(plt_EUFD[12]))
+    send(2023, replaceSymbols(plt_EUFD[13]))
+    send(2024, replaceSymbols(plt_EUFD[14]))
+    -- CPG
+    send(2111, replaceSymbols(cpg_EUFD[1]))
+    send(2112, replaceSymbols(cpg_EUFD[2]))
+    send(2113, replaceSymbols(cpg_EUFD[3]))
+    send(2114, replaceSymbols(cpg_EUFD[4]))
+    send(2115, replaceSymbols(cpg_EUFD[5]))
+    send(2116, replaceSymbols(cpg_EUFD[6]))
+    send(2117, replaceSymbols(cpg_EUFD[7]))
+    send(2118, replaceSymbols(cpg_EUFD[8]))
+    send(2119, replaceSymbols(cpg_EUFD[9]))
+    send(2120, replaceSymbols(cpg_EUFD[10]))
+    send(2121, replaceSymbols(cpg_EUFD[11]))
+    send(2122, replaceSymbols(cpg_EUFD[12]))
+    send(2123, replaceSymbols(cpg_EUFD[13]))
+    send(2124, replaceSymbols(cpg_EUFD[14]))
+
+    -- PLT
+    send(2001, PWDEV.Tools.getListIndicatorValueByNameLeft(16, "Standby_text", 22))
+
+    -- CPG
+    send(2101, PWDEV.Tools.getListIndicatorValueByNameLeft(15, "Standby_text", 22))
 end
