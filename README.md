@@ -38,13 +38,14 @@ Step by step how to install DCS World script
 
 # supported software
 
+[![](.gfx/icon_dcsufcx.png)](https://play.google.com/store/apps/details?id=com.pwdev.dcsufcx) 
 [![](.gfx/icon_dcsufc.png)](https://play.google.com/store/apps/details?id=com.dcsufc) 
 [![](.gfx/icon_dcsnav.png)](https://play.google.com/store/apps/details?id=com.pwdev.dcsnav) 
 [![](.gfx/icon_aoa.png)](https://play.google.com/store/apps/details?id=com.dcsaoaindexer) 
 [![](.gfx/icon_mfdexporter.png)](http://pw-developer.com/soft_dcs_mfd.html)
 [![](.gfx/icon_dcsfdr.png)](http://pw-developer.com/soft_dcs_fdr.html)
 
-* DCS UFC [https://play.google.com/store/apps/details?id=com.dcsufc](https://play.google.com/store/apps/details?id=com.dcsufc)
+* DCS UFC X [https://play.google.com/store/apps/details?id=com.pwdev.dcsufcx](https://play.google.com/store/apps/details?id=com.pwdev.dcsufcx)
 * DCS NAV [https://play.google.com/store/apps/details?id=com.pwdev.dcsnav](https://play.google.com/store/apps/details?id=com.pwdev.dcsnav)
 * DCS AoA Indexer [https://play.google.com/store/apps/details?id=com.dcsaoaindexer](https://play.google.com/store/apps/details?id=com.dcsaoaindexer)
 * DCS World MFD Exporter [http://pw-developer.com/soft_dcs_mfd.html](http://pw-developer.com/soft_dcs_mfd.html)
@@ -55,7 +56,7 @@ Step by step how to install DCS World script
 [![DCS AoA Indexer](.gfx/yt_aoa.jpg)](https://youtu.be/OU6KO8tjmGo) -->
 
 <p align="left" width="100%">
-  <a href="https://youtu.be/qGfzUdCVLwc"><img width="32%" src=".gfx/yt_dcsufc.png"></a>
+  <a href="https://youtu.be/_ev9rnCEv4g"><img width="32%" src=".gfx/yt_dcsufcx.png"></a>
   <a href="https://youtu.be/6ang0UBaxTo"><img width="32%" src=".gfx/yt_dcsnav.png"></a>
   <a href="https://youtu.be/OU6KO8tjmGo"><img width="32%" src=".gfx/yt_aoa.jpg"></a>
 </p>
