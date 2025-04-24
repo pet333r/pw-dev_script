@@ -19,35 +19,19 @@ function PWDEV.Init.CheckDcsVersionId(version)
 			version.FileVersion[4]) -- build number   (Continuously growth)
 end
 
+local function checkExportPermission(apiFunc, tagMessage)
+    local result = apiFunc()
+    return result and 1 or 0
+end
+
 function PWDEV.Init.CheckObjectExport()
-    local isObjects = LoIsObjectExportAllowed()
-    if isObjects == nil then
-		return 0
-    elseif isObjects == true then
-        return 1
-    else
-        return 0
-    end
+    return checkExportPermission(LoIsObjectExportAllowed, "Export objects")
 end
 
 function PWDEV.Init.CheckSensorExport()
-    local isSensors = LoIsSensorExportAllowed()
-    if isSensors == nil then
-		return 0
-    elseif isSensors == true then
-        return 1
-    else
-        return 0
-    end
+    return checkExportPermission(LoIsSensorExportAllowed, "Export radar sensors")
 end
 
 function PWDEV.Init.CheckOwnshipExport()
-    local isOwnship = LoIsOwnshipExportAllowed()
-    if isOwnship == nil then
-		return 0
-    elseif isOwnship == true then
-        return 1
-    else
-        return 0
-    end
+    return checkExportPermission(LoIsOwnshipExportAllowed, "Export ownship")
 end

@@ -175,37 +175,38 @@ end
 
 function PWDEV.Tools.GetPlayerData()
     local SD = LoGetSelfData()
-	if SD == nil then
-		return
-    end
+    if not SD then return end
 
-	PlayerData.Lat = SD.LatLongAlt.Lat
-	PlayerData.Lon = SD.LatLongAlt.Long
-	PlayerData.Alt = SD.LatLongAlt.Alt * M_2_FEETS
-    PlayerData.Magvar = LoGetMagneticYaw() * RAD_2_DEG
-	PlayerData.Hdg = SD.Heading * (180/math.pi)
+    local acc = LoGetAccelerationUnits() or {}
 
-	PlayerData.Ias = LoGetIndicatedAirSpeed() * MS_2_KNOTS
-	PlayerData.Mach = LoGetMachNumber()
-	PlayerData.Acc = LoGetAccelerationUnits().y	-- G-Force
+    PlayerData.Lat     = SD.LatLongAlt.Lat
+    PlayerData.Lon     = SD.LatLongAlt.Long
+    PlayerData.Alt     = (SD.LatLongAlt.Alt or 0) * M_2_FEETS
+    PlayerData.Magvar  = (LoGetMagneticYaw() or 0) * RAD_2_DEG
+    PlayerData.Hdg     = (SD.Heading or 0) * RAD_2_DEG
 
+    PlayerData.Ias     = (LoGetIndicatedAirSpeed() or 0) * MS_2_KNOTS
+    PlayerData.Mach    = LoGetMachNumber() or 0
+    PlayerData.Acc     = acc.y or 0  -- G-Force
 end
 
 function PWDEV.Tools.ProcessNavDataD()
-	PWDEV.Tools.NavDataD = {}
-    PWDEV.Tools.NavDataD[70] = string.format("%010.6f", PlayerData.Lat)
-	PWDEV.Tools.NavDataD[71] = string.format("%010.6f", PlayerData.Lon)
-    PWDEV.Tools.NavDataD[72] = string.format("%.1f", PlayerData.Hdg)
-    PWDEV.Tools.NavDataD[73] = string.format("%.1f", PlayerData.Magvar)
-	PWDEV.Tools.NavDataD[74] = string.format("%d", PlayerData.Alt)
-	PWDEV.Tools.NavDataD[76] = string.format("%d", PlayerData.Ias)
-	PWDEV.Tools.NavDataD[78] = string.format("%.2f", PlayerData.Mach)
-	PWDEV.Tools.NavDataD[79] = string.format("%.1f", PlayerData.Acc)
+	local pd = PlayerData
+	local NavDataD = {
+		[70] = string.format("%010.6f", pd.Lat),
+		[71] = string.format("%010.6f", pd.Lon),
+		[72] = string.format("%.1f", pd.Hdg),
+		[73] = string.format("%.1f", pd.Magvar),
+		[74] = string.format("%d", pd.Alt),
+		[76] = string.format("%d", pd.Ias),
+		[78] = string.format("%.2f", pd.Mach),
+		[79] = string.format("%.1f", pd.Acc),
+	}
 
-	if PWDEV.Tools.NavDataD ~= nil then
-		for key, value in pairs(PWDEV.Tools.NavDataD) do
-            PWDEV.Tools.SendNavDataPlayer(key, value)
-		end
+	PWDEV.Tools.NavDataD = NavDataD
+
+	for key, value in pairs(NavDataD) do
+		PWDEV.Tools.SendNavDataPlayer(key, value)
 	end
 end
 
@@ -466,52 +467,31 @@ function PWDEV.Tools.SelectModule()
     PWDEV.FoundFCModule  = false
     PWDEV.FoundNoModul   = true
 
-    local _info = LoGetSelfData()
-    if _info == nil then
-        return
-    end
+    local info = LoGetSelfData()
+    if not info then return end
 
-    PWDEV.ModuleName    = _info.Name
-    local _moduleName   = PWDEV.ModuleName..".lua"
-    local _moduleFile   = ""
+    PWDEV.ModuleName  = info.Name
+    local moduleName  = info.Name .. ".lua"
+    local modulePath  = ""
 
     PWDEV.FoundNoModul = false
 
     for file in lfs.dir(PWDEV.Config.ExportModulePath) do
-        if lfs.attributes(PWDEV.Config.ExportModulePath .. file, "mode") == "file" then
-            if file == _moduleName then
-                _moduleFile = PWDEV.Config.ExportModulePath .. file
-            end
+        if lfs.attributes(PWDEV.Config.ExportModulePath .. file, "mode") == "file" and file == moduleName then
+            modulePath = PWDEV.Config.ExportModulePath .. file
+            break
         end
     end
 
-    if string.len(_moduleFile) > 1 then
-        dofile(_moduleFile)
+    if #modulePath > 0 then
+        dofile(modulePath)
 
         PWDEV.FirstNewDataSend      = PWDEV.Config.FirstNewDataSend
         PWDEV.FirstNewDataSendCount = PWDEV.Config.FirstNewDataSendCount
 
         if PWDEV.FoundDCSModule then
-            local _counter = 0
-            for k, v in pairs(PWDEV.ConfigEveryFrameArguments) do
-                _counter = _counter + 1
-            end
-
-            if _counter > 0 then
-                PWDEV.EveryFrameArguments = PWDEV.ConfigEveryFrameArguments
-            else
-                PWDEV.EveryFrameArguments = {}
-            end
-            _counter = 0
-            for k, v in pairs(PWDEV.ConfigArguments) do
-                _counter = _counter + 1
-            end
-
-            if _counter > 0 then
-                PWDEV.Arguments = PWDEV.ConfigArguments
-            else
-                PWDEV.Arguments = {}
-            end
+            PWDEV.EveryFrameArguments = next(PWDEV.ConfigEveryFrameArguments) and PWDEV.ConfigEveryFrameArguments or {}
+            PWDEV.Arguments           = next(PWDEV.ConfigArguments) and PWDEV.ConfigArguments or {}
 
             PWDEV.ProcessDCSHighImportance = PWDEV.ProcessDCSConfigHighImportance
             PWDEV.ProcessDCSLowImportance  = PWDEV.ProcessDCSConfigLowImportance
@@ -521,7 +501,7 @@ function PWDEV.Tools.SelectModule()
             PWDEV.ProcessFCLowImportance   = PWDEV.ProcessFCLowImportanceConfig
         end
 
-        actualMap = PWDEV.Tools.GetMap(_info)
+        actualMap = PWDEV.Tools.GetMap(info)
 
         PWDEV.Tools.FlushDataDevice()
     else
@@ -529,8 +509,9 @@ function PWDEV.Tools.SelectModule()
         PWDEV.ProcessDCSLowImportance  = PWDEV.ProcessDCSLowImportanceNoConfig
         PWDEV.ProcessFCHighImportance  = PWDEV.ProcessFCHighImportanceNoConfig
         PWDEV.ProcessFCLowImportance   = PWDEV.ProcessFCLowImportanceNoConfig
-        PWDEV.EveryFrameArguments      = {}
-        PWDEV.Arguments                = {}
+
+        PWDEV.EveryFrameArguments = {}
+        PWDEV.Arguments           = {}
     end
 end
 
@@ -799,41 +780,23 @@ end
 
 function PWDEV.Tools.GetFileData(fileName, n)
     local file = io.open(fileName, "r")
-    local fTmp = io.open(fileName, "r")
+    if not file then return 0 end
+
     local count = 1
-    local lNum = 0
-
-    if file ~= nil then
-        for line in fTmp:lines() do
-            lNum = lNum + 1
+    for line in file:lines() do
+        if count == n then
+            file:close()
+            return line
         end
-        fTmp:close()
-
-        for line in file:lines() do
-            if n > lNum then
-                return "-"
-            else
-                if count == n then
-                    file:close()
-                    return line
-                end
-                count = count + 1
-            end
-        end
-        file:close()
-        return 0
-    else
-        return 0
+        count = count + 1
     end
+
+    file:close()
+    return "-"
 end
 
-function PWDEV.ProcessDCSHighImportanceNoConfig(mainPanelDevice)
-end
+function PWDEV.ProcessDCSHighImportanceNoConfig(mainPanelDevice) end
+function PWDEV.ProcessDCSLowImportanceNoConfig(mainPanelDevice) end
 
-function PWDEV.ProcessDCSLowImportanceNoConfig(mainPanelDevice)
-end
-
-function PWDEV.ProcessFCHighImportanceNoConfig()
-end
-function PWDEV.ProcessFCLowImportanceNoConfig()
-end
+function PWDEV.ProcessFCHighImportanceNoConfig() end
+function PWDEV.ProcessFCLowImportanceNoConfig() end

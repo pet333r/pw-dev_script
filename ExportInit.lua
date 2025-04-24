@@ -12,8 +12,8 @@ PWDEV.LastData       	= {}
 PWDEV.LastDataAll       = {}
 PWDEV.LastDataNav       = {}
 
-PWDEV.lastExportTimeHI       = 0
-PWDEV.lastExportTimeLI       = 0
+PWDEV.lastExportTimeHI	= 0
+PWDEV.lastExportTimeLI	= 0
 
 PWDEV.NoLuaExportBeforeNextFrame = false
 
@@ -29,22 +29,27 @@ package.cpath = package.cpath..";.\\LuaSocket\\?.dll"
 
 local versionFile = lfs.writedir()..[[Scripts\pw-dev_script\version]]
 
-dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Init.lua]])
-dofile(lfs.writedir()..[[Scripts\pw-dev_script\Config.lua]])
-PWDEV.utf8 = dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\utf8.lua]])
-dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Tools.lua]])
-dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Maps.lua]])
-PWDEV.Displays = dofile(lfs.writedir()..[[Scripts\pw-dev_script\lib\Displays.lua]])
+local function loadScript(name)
+	local fullPath = lfs.writedir() .. [[Scripts\pw-dev_script\]] .. name
+	local status, result = pcall(function()
+		return dofile(fullPath)
+	end)
 
+	if not status then
+		return nil
+	end
+
+	return result
+end
+
+loadScript("lib\\Init.lua")
+loadScript("Config.lua")
+PWDEV.utf8 = loadScript("lib\\utf8.lua")
+loadScript("lib\\Tools.lua")
+loadScript("lib\\Maps.lua")
+PWDEV.Displays = loadScript("lib\\Displays.lua")
 
 local separator = PWDEV.Config.Separator
-
-local function GetConfigFileVersion()
-	if (PWDEV.Config.FileVersion == nil) then return "NA"
-	else return PWDEV.Config.FileVersion
-	end
-end
-local configFileVer = GetConfigFileVersion()
 
 PWDEV.FoundDCSModule = false
 PWDEV.FoundFCModule  = false
@@ -67,7 +72,7 @@ function PWDEV.Start()
 	local scriptVer = PWDEV.Tools.GetFileData(versionFile, 1)
 	PWDEV.Tools.playerId = PWDEV.Tools.GetPlayerId()
 
-	PWDEV.Tools.SendShortData("EX=ON;Ver="..PWDEV.Init.VersionStr .. separator.."VId="..PWDEV.Init.VersionId..separator.."MOE="..PWDEV.Init.CheckObjectExport()..separator.."MSE="..PWDEV.Init.CheckSensorExport()..separator.."MPE="..PWDEV.Init.CheckOwnshipExport()..separator.."SV="..scriptVer..separator.."CV="..configFileVer..separator .. "SC1" .. separator)
+	PWDEV.Tools.SendShortData("EX=ON;Ver="..PWDEV.Init.VersionStr .. separator.."VId="..PWDEV.Init.VersionId..separator.."MOE="..PWDEV.Init.CheckObjectExport()..separator.."MSE="..PWDEV.Init.CheckSensorExport()..separator.."MPE="..PWDEV.Init.CheckOwnshipExport()..separator.."SV="..scriptVer..separator.."CV="..PWDEV.Config.FileVersion..separator .. "SC1" .. separator)
 end
 
 function PWDEV.ActivityNextEvent()
