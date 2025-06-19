@@ -76,7 +76,7 @@ Step by step how to install DCS World script
   - manually editing the file ("**Edit Config.lua**" button) example you will find below in the [example connection](#example-connection)
 - in the future, when a script update will be available, you will be able to easily update it by clicking the "**Update script**" button
 
-- the last thing is to enter your computer's IP address in the Android application settings (**DCS UFC** / **DCS NAV** / **DCS AoA Indexer**)
+- the last thing is to enter your computer's IP address in the Android application settings (**DCS UFC X** / **DCS NAV** / **DCS AoA Indexer**)
 
 # configure script for DCS World
 After installing the script, enter the IP addresses of your Android devices in the `Config.lua` file, you can do this:
@@ -228,13 +228,13 @@ In one of the "groups" in the Config.lua file which is located in the folder wit
   - some routers change IP addresses of connected devices from time to time, make sure the device IP has not changed, if so, update it in the `Config.lua` file
 
 ***`3`*** If you receive data from DCS but no button works  
-  - check if you have the correct PC address set in the DCS UFC settings  
+  - check if you have the correct PC address set in the DCS UFC X settings  
   - your firewall may blocking incomming connections, turn off the firewall for a few minutes and check if everything works (to unblock, the default port: 25070 / UDP)   
   [https://www.windowscentral.com/how-open-port-windows-firewall](https://www.windowscentral.com/how-open-port-windows-firewall)
 
 # faq
-***`1`*** What are the minimum Android versions for each app? [ `DCS UFC` / `DCS Nav` / `DCS AoA Indexer`]
-  - DCS UFC: Android 5.0 and above
+***`1`*** What are the minimum Android versions for each app? [ `DCS UFC X` / `DCS Nav` / `DCS AoA Indexer`]
+  - DCS UFC X: Android 8.0 and above
   - DCS Nav: Android 7.0 and above
   - DCS AoA Indexer: Android 7.0 and above
 
@@ -284,7 +284,7 @@ For the script to work properly with StreamDeck, a plugin for the Elgato StreamD
 ![](.gfx/streamdeck1.png)
 
 :red_circle: <span style="color:#FF4422">IMPORTANT</span>
-The script does not send all the data from the modules available for DCS World. Therefore, not every available 'option' will be transferred between DCS World and StreamDeck (if you use any ready-made configurations found on the Internet). This is because the `DCS UFC` application does not need all this data and there is no need to send it additionally (it only increases the network traffic)  
+The script does not send all the data from the modules available for DCS World. Therefore, not every available 'option' will be transferred between DCS World and StreamDeck (if you use any ready-made configurations found on the Internet). This is because the `DCS UFC X` application does not need all this data and there is no need to send it additionally (it only increases the network traffic)  
 
 # license
 
