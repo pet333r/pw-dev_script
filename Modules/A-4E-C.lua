@@ -7,12 +7,12 @@ PWDEV.FoundDCSModule = true
 PWDEV.ConfigEveryFrameArguments =
 {
     -- Approach Power Compensator
-    [147] = "%1d", -- APC indator light
+    [147] = "%d", -- APC indator light
 
     -- AOA Indicator
-    [850] = "%1d", -- AOA indexer Green
-    [851] = "%1d", -- AoA indexer Yellow
-    [852] = "%1d", -- AoA indexer Red
+    [850] = "%d", -- AOA indexer Green
+    [851] = "%d", -- AoA indexer Yellow
+    [852] = "%d", -- AoA indexer Red
 }
 
 PWDEV.ConfigArguments =

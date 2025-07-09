@@ -3,14 +3,15 @@
 local send = PWDEV.Tools.SendData
 
 PWDEV.FoundDCSModule = true
+dofile(PWDEV.Config.ExportModulePath.."Mirage-F1_lib.lua")
 
 PWDEV.ConfigEveryFrameArguments =
 {
     -- cautions
-    [113] = "%1d", -- BATT switch
-    [114] = "%1d", -- ALT 1 switch
-    [115] = "%1d", -- ALT 2 switch
-    [117] = "%1d", -- CONV REARM switch
+    [113] = "%d", -- BATT switch
+    [114] = "%d", -- ALT 1 switch
+    [115] = "%d", -- ALT 2 switch
+    [117] = "%d", -- CONV REARM switch
     [120] = "%.1f", -- BATT
     [121] = "%.1f", -- ALT 1
     [122] = "%.1f", -- ALT 2
@@ -84,12 +85,83 @@ PWDEV.ConfigEveryFrameArguments =
     [203] = "%.2f", -- AoA (0.24 - 0.92)
     [206] = "%.2f", -- AoA (0.24 - 0.92)
 
+	-- COM left
+    [271] = "%.1f", -- TEST light
+    [272] = "%d", -- E+A2 switch
+    [273] = "%d", -- SIL switch
+    [274] = "%.1f", -- X____
+    [275] = "%.1f", -- _X___
+    [276] = "%.1f", -- __X__
+    [277] = "%.1f", -- ___X_
+    [278] = "%.2f", -- ____X
+    --[344] = "%.2f", -- Function selector
+    [280] = "%.1f", -- Function selector
+    [281] = "%d", -- Pilot V/UHF 25W - 5W Switch
+    [282] = "%.1f", -- Pilot V/UHF Frequency Selector Switch 0.5
+    [283] = "%.2f", -- Pilot V/UHF Channel Selector
+
+	-- COM 2
+	[340] = "%d", 	-- 5W/25W selector switch
+	[341] = "%d", 	-- Squelch switch
+	[342] = "%d", 	-- Test selector switch
+	[344] = "%.2f", -- Function selector
+	[348] = "%.2f", -- Channel selector
+
+	-- Lighting
+	[382] = "%d", 	-- Day/Night selector switch
+	[383] = "%.1f", -- Light and panel lighting rheostat
+	[384] = "%.1f", -- Ultraviolet lighting rheostat
+	[385] = "%.1f", -- Dual instrument panel lighting rheostat (Floodlights)
+	[386] = "%.1f", -- Dual instrument panel lighting rheostat (Integral)
+	[387] = "%.1f", -- Dual console and pedestal lighting rheostat (Floodlights)
+	[388] = "%.1f", -- Dual console and pedestal lighting rheostat (Integral)
+
+    -- 434 - 441 TACAN RADAR V/UHF V/ILS buttons
+
     [474] = "%d",   -- Standby Horizon Switch
     [475] = "%d",   -- Electro-Pump Switch
     [476] = "%d",   -- Warning Horn Switch
     [477] = "%d",   -- Probe Heater Switch
     [478] = "%d",   -- Radar Detector Switch
     [479] = "%d",   -- Search Light Control switch
+
+	-- circuits
+    [548] = "%d",	-- 
+    [550] = "%d",	-- 
+    [552] = "%d",	-- 
+    [554] = "%d",	-- 
+    [556] = "%d",	-- 
+    [558] = "%d",	-- 
+    [560] = "%d",	-- 
+    [562] = "%d",	-- 
+    [564] = "%d",	-- 
+    [566] = "%d",	-- 
+    [568] = "%d",	-- 
+    [570] = "%d",	-- 
+    [572] = "%d",	-- 
+    [574] = "%d",	-- 
+    [576] = "%d",	-- 
+    [578] = "%d",	-- 
+    [580] = "%d",	-- 
+    [582] = "%d",	-- 
+    [584] = "%d",	-- 
+    [586] = "%d",	-- 
+    [588] = "%d",	-- 
+
+	[590] = "%.1f",	-- Sight Selector Switch
+    [591] = "%d",	--  Switch
+    [592] = "%.1f",	-- BOMB/ROD Switch
+    [593] = "%d",	-- EXT M A Switch
+    [594] = "%d",	-- AV AR Switch
+    [595] = "%d",	-- TIR Switch AUTO MAN
+    [596] = "%d",	-- CPC Switch
+    [597] = "%.1f",	-- INST Switch
+    [598] = "%.1f",	-- RADAR EMIS Switch
+    [599] = "%d",	-- 
+    [600] = "%d",	-- 
+    [601] = "%d",	-- 
+    [602] = "%d",	-- TEST LAMP btn
+    [603] = "%d",	-- N PB switch
 
     -- armament
     [604] = "%d",	-- EXT G btn
@@ -118,6 +190,31 @@ PWDEV.ConfigEveryFrameArguments =
     [627] = "%.1f",	-- M.D. btn light
     [628] = "%.1f",	-- CAN.S ROQ btn light
     [629] = "%.1f",	-- BOMB FUS btn light
+
+    [632] = "%.1f",	-- Indicator lights brightness
+    [633] = "%.1f",	-- Strobe brightness
+    [634] = "%.1f",	-- Distance markers brightness
+    [635] = "%.1f",	-- Horizon and radial velocity marker brightness
+    [636] = "%.1f",	-- Horizon symbol vertical position
+
+	-- IFF
+    [732] = "%.3f",	-- Mode 1 coding tens selector
+    [733] = "%.3f",	-- Mode 1 coding units selector
+    [734] = "%.3f",	-- Mode 3A coding thousands selector
+    [735] = "%.3f",	-- Mode 3A coding hundreds selector
+    [736] = "%.3f",	-- Mode 3A coding tens selector
+    [737] = "%.3f",	-- Mode 3A coding units selector
+    [739] = "%.3f",	-- Function selector switch
+    [740] = "%.1f",	-- IFF monitoring light (green)
+    [743] = "%.3f",	-- Mode 4 selector switch
+    [744] = "%d",	-- Function selector switch
+    [745] = "%d",	-- IFF mode 4 switch
+    [746] = "%.1f",	-- IFF fault light (red)
+    [749] = "%d",	-- AUDIO-LIGHT switch
+    [750] = "%d",	-- M-1 mode switch
+    [751] = "%d",	-- M-2 mode switch
+    [752] = "%d",	-- M-3 mode switch
+    [753] = "%d",	-- M-C mode switch
 
     [842] = "%d",	-- HA light (yellow)
     [843] = "%d",	-- IC light (yellow)
@@ -149,43 +246,23 @@ PWDEV.ConfigEveryFrameArguments =
 
     -- autopilot
     [974] = "%d",   -- Autopilot PA Button
-    [975] = "%d",   -- Autopilot PA Button P Light (red)
-    [976] = "%d",   -- Autopilot PA Button A Light (green)
-    [977] = "%d",   -- Autopilot ALT Button ALT Light (green)
-    [978] = "%d",   -- Autopilot ALT Button ALT Light (red)
-    [979] = "%d",   -- Autopilot ALT Button
+    [975] = "%.1f", -- Autopilot PA Button P Light (red)
+    [976] = "%.1f", -- Autopilot PA Button A Light (green)
+    [977] = "%d",   -- Autopilot ALT Button
+    [978] = "%.1f", -- Autopilot ALT Button ALT Light (green)
+    [979] = "%.1f", -- Autopilot ALT Button ALT Light (red)
     [980] = "%d",   -- Autopilot CAP Button
-    [981] = "%d",   -- Autopilot CAP Button CAP Light (green)
+    [981] = "%.1f", -- Autopilot CAP Button CAP Light (green)
     [982] = "%d",   -- Autopilot R Button
-    [983] = "%d",   -- Autopilot R Button < (red)
-    [984] = "%d",   -- Autopilot R Button R (red)
-    [985] = "%d",   -- Autopilot R Button light (green)
-    [986] = "%d",   -- Autopilot R Button > (red)
+    [983] = "%.1f", -- Autopilot R Button < (red)
+    [984] = "%.1f", -- Autopilot R Button R (red)
+    [985] = "%.1f", -- Autopilot R Button light (green)
+    [986] = "%.1f", -- Autopilot R Button > (red)
     [987] = "%d",   -- Autopilot G Button
-    [988] = "%d",   -- Autopilot G Button G Light (red)
-    [989] = "%d",   -- Autopilot G Button up (red)
-    [990] = "%d",   -- Autopilot G Button dn (red)
-    [991] = "%d",   -- Autopilot G Button light (green)
-
-    -- autopilot
-    -- [974] = "%.1f",   -- Autopilot PA Button
-    [994] = "%.1f",   -- Autopilot PA Button P Light (red)
-    [995] = "%.1f",   -- Autopilot PA Button A Light (green)
-    [997] = "%.1f",   -- Autopilot ALT Button ALT Light (green)
-    [998] = "%.1f",   -- Autopilot ALT Button ALT Light (red)
-    -- [979] = "%.1f",   -- Autopilot ALT Button
-    -- [980] = "%.1f",   -- Autopilot CAP Button
-    [1000] = "%.1f",   -- Autopilot CAP Button CAP Light (green)
-    -- [982] = "%.1f",   -- Autopilot R Button
-    [1002] = "%.1f",   -- Autopilot R Button < (red)
-    [1003] = "%.1f",   -- Autopilot R Button [] green
-    [1004] = "%.1f",   -- Autopilot R Button "R"
-    [1005] = "%.1f",   -- Autopilot R Button > (red)
-    -- [987] = "%.1f",   -- Autopilot G Button
-    [1007] = "%.1f",   -- Autopilot G Button G Light (red)
-    [1008] = "%.1f",   -- Autopilot G Button > (red)
-    [1009] = "%.1f",   -- Autopilot G Button < (red)
-    [1010] = "%.1f",   -- Autopilot G Button [] light (green)
+    [988] = "%.1f", -- Autopilot G Button G Light (red)
+    [989] = "%.1f", -- Autopilot G Button up (red)
+    [990] = "%.1f", -- Autopilot G Button dn (red)
+    [991] = "%.1f", -- Autopilot G Button light (green)
 
     -- RADAR
     [1384] = "%.1f",   -- VEIL light

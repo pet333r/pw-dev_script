@@ -3,16 +3,17 @@
 local send = PWDEV.Tools.SendData
 
 PWDEV.FoundDCSModule = true
+dofile(PWDEV.Config.ExportModulePath.."Mirage-F1_lib.lua")
 
 PWDEV.ConfigEveryFrameArguments =
 {
     [111] = "%.1f", -- Navigation Light Control
     [112] = "%.1f", -- Formation Light Control
     -- cautions
-    [113] = "%1d", -- BATT switch
-    [114] = "%1d", -- ALT 1 switch
-    [115] = "%1d", -- ALT 2 switch
-    [117] = "%1d", -- CONV REARM switch
+    [113] = "%d", -- BATT switch
+    [114] = "%d", -- ALT 1 switch
+    [115] = "%d", -- ALT 2 switch
+    [117] = "%d", -- CONV REARM switch
     [120] = "%.1f", -- BATT
     [121] = "%.1f", -- ALT 1
     [122] = "%.1f", -- ALT 2
@@ -50,7 +51,7 @@ PWDEV.ConfigEveryFrameArguments =
     [203] = "%.2f", -- AoA
 
     -- COM left
-    [271] = "%d", -- TEST light
+    [271] = "%.1f", -- TEST light
     [272] = "%d", -- E+A2 switch
     [273] = "%d", -- SIL switch
     [274] = "%.1f", -- X____
@@ -58,10 +59,29 @@ PWDEV.ConfigEveryFrameArguments =
     [276] = "%.1f", -- __X__
     [277] = "%.1f", -- ___X_
     [278] = "%.2f", -- ____X
-    [280] = ".1f", -- Pilot V/UHF Function Selector 0.2, {0, 0.8}
-    [281] = ".1f", -- Pilot V/UHF 25W - 5W Switch
-    [282] = ".1f", -- Pilot V/UHF Frequency Selector Switch 0.5
-    [283] = ".2f", -- Pilot V/UHF Channel Selector
+    --[344] = "%.2f", -- Function selector
+    [280] = "%.1f", -- Function selector
+    [281] = "%d", -- Pilot V/UHF 25W - 5W Switch
+    [282] = "%.1f", -- Pilot V/UHF Frequency Selector Switch 0.5
+    [283] = "%.2f", -- Pilot V/UHF Channel Selector
+	
+	-- COM 2
+	[340] = "%d", 	-- 5W/25W selector switch
+	[341] = "%d", 	-- Squelch switch
+	[342] = "%d", 	-- Test selector switch
+	[344] = "%.2f", -- Function selector
+	[348] = "%.2f", -- Channel selector
+
+	[353] = "%.1f", -- Landing light control
+	
+	-- Lighting
+	[382] = "%d", 	-- Day/Night selector switch
+	[383] = "%.1f", -- Light and panel lighting rheostat
+	[384] = "%.1f", -- Ultraviolet lighting rheostat
+	[385] = "%.1f", -- Dual instrument panel lighting rheostat (Floodlights)
+	[386] = "%.1f", -- Dual instrument panel lighting rheostat (Integral)
+	[387] = "%.1f", -- Dual console and pedestal lighting rheostat (Floodlights)
+	[388] = "%.1f", -- Dual console and pedestal lighting rheostat (Integral)
 
     [474] = "%d",	-- Standby Horizon Switch
     [475] = "%d",	-- Electro-Pump Switch
@@ -74,7 +94,7 @@ PWDEV.ConfigEveryFrameArguments =
     [538] = "%d",	-- Pilot Emergency Gyromagnetic Compass Switch
 
     -- TACAN
-    [481] = "%.1f",	--  X/Y
+    -- [481] = "%.1f",	--  X/Y
     [485] = "%d",	--  X/Y selector
     [486] = "%.1f",	--  FREQUENCY HUNDREDS AND TENS SELECTOR
     [487] = "%.1f",	--  MODE SELECTOR A/A T/R REC OFF
@@ -89,6 +109,29 @@ PWDEV.ConfigEveryFrameArguments =
     -- VOR/ILS-TACAN
     [544] = "%.1f",	--  knob out
     [545] = "%.1f",	--  knob in
+
+	-- circuits
+    [548] = "%d",	-- 
+    [550] = "%d",	-- 
+    [552] = "%d",	-- 
+    [554] = "%d",	-- 
+    [556] = "%d",	-- 
+    [558] = "%d",	-- 
+    [560] = "%d",	-- 
+    [562] = "%d",	-- 
+    [564] = "%d",	-- 
+    [566] = "%d",	-- 
+    [568] = "%d",	-- 
+    [570] = "%d",	-- 
+    [572] = "%d",	-- 
+    [574] = "%d",	-- 
+    [576] = "%d",	-- 
+    [578] = "%d",	-- 
+    [580] = "%d",	-- 
+    [582] = "%d",	-- 
+    [584] = "%d",	-- 
+    [586] = "%d",	-- 
+    [588] = "%d",	-- 
 
     [590] = "%.1f",	-- Sight Selector Switch
     [591] = "%d",	--  Switch
@@ -122,6 +165,31 @@ PWDEV.ConfigEveryFrameArguments =
     [618] = "%d",	-- BOMB FUS btn
     [619] = "%.1f",	-- BOMB FUS btn light
 
+	[632] = "%.1f",	-- Indicator lights brightness
+    [633] = "%.1f",	-- Strobe brightness
+    [634] = "%.1f",	-- Distance markers brightness
+    [635] = "%.1f",	-- Horizon and radial velocity marker brightness
+    [636] = "%.1f",	-- Horizon symbol vertical position
+
+	-- IFF
+    [732] = "%.3f",	-- Mode 1 coding tens selector
+    [733] = "%.3f",	-- Mode 1 coding units selector
+    [734] = "%.3f",	-- Mode 3A coding thousands selector
+    [735] = "%.3f",	-- Mode 3A coding hundreds selector
+    [736] = "%.3f",	-- Mode 3A coding tens selector
+    [737] = "%.3f",	-- Mode 3A coding units selector
+    [739] = "%.3f",	-- Function selector switch
+    [740] = "%.1f",	-- IFF monitoring light (green)
+    [743] = "%.3f",	-- Mode 4 selector switch
+    [744] = "%d",	-- Function selector switch
+    [745] = "%d",	-- IFF mode 4 switch
+    [746] = "%.1f",	-- IFF fault light (red)
+    [749] = "%d",	-- AUDIO-LIGHT switch
+    [750] = "%d",	-- M-1 mode switch
+    [751] = "%d",	-- M-2 mode switch
+    [752] = "%d",	-- M-3 mode switch
+    [753] = "%d",	-- M-C mode switch
+
     [842] = "%d",	-- HA light (yellow)
     [843] = "%d",	-- IC light (yellow)
     [844] = "%d",	-- TL light (green)
@@ -152,23 +220,23 @@ PWDEV.ConfigEveryFrameArguments =
 
     -- autopilot
     [974] = "%d",   -- Autopilot PA Button
-    [975] = "%d",   -- Autopilot PA Button P Light (red)
-    [976] = "%d",   -- Autopilot PA Button A Light (green)
-    [977] = "%d",   -- Autopilot ALT Button ALT Light (green)
-    [978] = "%d",   -- Autopilot ALT Button ALT Light (red)
-    [979] = "%d",   -- Autopilot ALT Button
+    [975] = "%.1f", -- Autopilot PA Button P Light (red)
+    [976] = "%.1f", -- Autopilot PA Button A Light (green)
+    [977] = "%d",   -- Autopilot ALT Button
+    [978] = "%.1f", -- Autopilot ALT Button ALT Light (green)
+    [979] = "%.1f", -- Autopilot ALT Button ALT Light (red)
     [980] = "%d",   -- Autopilot CAP Button
-    [981] = "%d",   -- Autopilot CAP Button CAP Light (green)
+    [981] = "%.1f", -- Autopilot CAP Button CAP Light (green)
     [982] = "%d",   -- Autopilot R Button
-    [983] = "%d",   -- Autopilot R Button < (red)
-    [984] = "%d",   -- Autopilot R Button R (red)
-    [985] = "%d",   -- Autopilot R Button light (green)
-    [986] = "%d",   -- Autopilot R Button > (red)
+    [983] = "%.1f", -- Autopilot R Button < (red)
+    [984] = "%.1f", -- Autopilot R Button R (red)
+    [985] = "%.1f", -- Autopilot R Button light (green)
+    [986] = "%.1f", -- Autopilot R Button > (red)
     [987] = "%d",   -- Autopilot G Button
-    [988] = "%d",   -- Autopilot G Button G Light (red)
-    [989] = "%d",   -- Autopilot G Button up (red)
-    [990] = "%d",   -- Autopilot G Button dn (red)
-    [991] = "%d",   -- Autopilot G Button light (green)
+    [988] = "%.1f", -- Autopilot G Button G Light (red)
+    [989] = "%.1f", -- Autopilot G Button up (red)
+    [990] = "%.1f", -- Autopilot G Button dn (red)
+    [991] = "%.1f", -- Autopilot G Button light (green)
 }
 
 PWDEV.ConfigArguments =
@@ -176,10 +244,47 @@ PWDEV.ConfigArguments =
 }
 
 function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
+    -- TACAN
+    tcnArr = {}
+    tacan = "X"
+    hun = " "
+    tcnArr[1] = string.format("%.1f", mainPanelDevice:get_argument_value(481))
+    if tcnArr[1] == "0.0" then tacan = "X"
+    elseif tcnArr[1] == "0.2" then tacan = "Y" end
+    tcnArr[2] = string.format("%.1f", mainPanelDevice:get_argument_value(482))
+    if tcnArr[2] == "0.0" then hun = " "
+    elseif tcnArr[2] == "0.1" then hun = "1" end
+    tcnArr[3] = string.format("%1.0f", mainPanelDevice:get_argument_value(483) * 10)
+    if tcnArr[3] == "10" then tcnArr[3] = "0" end
+    tcnArr[4] = string.format("%1.0f", mainPanelDevice:get_argument_value(484) * 10)
+    if tcnArr[4] == "10" then tcnArr[4] = "0" end
+    send(2010, tacan..hun..tcnArr[3]..tcnArr[4])
 
+    -- VOR/ILS
+    vorArr = {}
+    vorArr[1] = string.format("%1.0f", mainPanelDevice:get_argument_value(498) * 10)
+    vorArr[2] = string.format("%1.0f", mainPanelDevice:get_argument_value(499) * 10)
+    vorArr[3] = string.format("%1.0f", mainPanelDevice:get_argument_value(500) * 10)
+    if vorArr[3] == "10" then vorArr[3] = "0" end
+    vorArr[4] = string.format("%1.0f", mainPanelDevice:get_argument_value(501) * 10)
+    if vorArr[4] == "10" then vorArr[4] = "0" end
+    vorArr[5] = string.format("%1.0f", mainPanelDevice:get_argument_value(502) * 10)
+    send(2011, vorArr[1]..vorArr[2]..vorArr[3]..vorArr[4]..vorArr[5])
+
+    -- VOR/ILS-TACAN
+    digArr = {}
+    digArr[1] = string.format("%1.0f", mainPanelDevice:get_argument_value(541) * 10)
+    digArr[2] = string.format("%1.0f", mainPanelDevice:get_argument_value(542) * 10)
+    if digArr[2] == "10" then digArr[2] = "0" end
+    digArr[3] = string.format("%1.0f", mainPanelDevice:get_argument_value(543) * 10)
+    if digArr[3] == "10" then digArr[3] = "0" end
+    send(2012, digArr[1]..digArr[2]..digArr[3])
 end
 
--- Pointed to by PWDEV.ProcessDCSConfigLowImportance
 function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
 
+    local comm1_ch = mf1_comm1_channel[string.format("%.2f", mainPanelDevice:get_argument_value(283))]
+	send(2002, comm1_ch)
+
+    send(2003, Mf1_comm1_channel_get(mainPanelDevice))
 end

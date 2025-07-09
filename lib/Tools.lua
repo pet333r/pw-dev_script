@@ -340,26 +340,25 @@ function PWDEV.Tools.StrSplit(str, delim, maxNb)
 end
 
 function PWDEV.Tools.ProcessArguments(device, arguments)
-    local _argument , _format , _argumentValue
+    for argument, format in pairs(arguments) do
+        local value = device:get_argument_value(argument)
+        local formattedValue = string.format(format, value)
 
-    for _argument, _format in pairs(arguments) do
-        _argumentValue = string.format(_format,device:get_argument_value(_argument))
-
-        PWDEV.Tools.SendData(_argument, _argumentValue)
+        PWDEV.Tools.SendData(argument, formattedValue)
     end
 end
 
 function PWDEV.Tools.GetArgumentsValue(argument, format)
-    local _device = GetDevice(0)
-    local _argumentValue
+    local device = GetDevice(0)
 
-    if type(_device) == "table" then
-        _device:update_arguments()
-        _argumentValue = string.format(format,_device:get_argument_value(argument))
-        return _argumentValue
-    else
+    if type(device) ~= "table" then
         return 0
     end
+
+    device:update_arguments()
+
+    local value = device:get_argument_value(argument)
+    return string.format(format, value)
 end
 
 function PWDEV.Tools.SendShortData(message)
@@ -712,6 +711,87 @@ function PWDEV.Tools.getListIndicatorValueByName(IndicatorID, NameID, Length)
 	return data
 end
 
+local indication_split = "-----------------------------------------"
+local children_start_block = "children are {"
+local children_end_block = "}"
+
+local ParseIndicationState = {
+	none = "none",
+	child_block = "child_block",
+	item_block = "item_block",
+}
+
+function PWDEV.Tools.parse_indication(indicator_id)
+	local ret = {}
+	local indication = list_indication(indicator_id)
+	local state = {}
+	local key = nil
+	local current_block_lines = {}
+	local total_values = 0
+
+	---@return ParseIndicationState
+	local function current_state()
+		return #state > 0 and state[#state] or ParseIndicationState.none
+	end
+
+	local function add_block_to_result()
+		if not key then
+			return
+		end
+
+		local value = ""
+		while #current_block_lines > 0 do
+			if value ~= "" then
+				value = value .. "\n"
+			end
+			value = value .. table.remove(current_block_lines, 1)
+		end
+		ret[key] = value
+		total_values = total_values + 1
+		ret[total_values] = value
+
+		key = nil
+	end
+
+	for line in string.gmatch(indication, "([^\n]+)") do
+		if line == indication_split then
+			if current_state() ~= ParseIndicationState.item_block then
+				table.insert(state, ParseIndicationState.item_block)
+			else
+				add_block_to_result()
+			end
+		elseif line == children_start_block then
+			if current_state() == ParseIndicationState.item_block then
+				table.remove(state)
+			end
+			table.insert(state, ParseIndicationState.child_block)
+			add_block_to_result()
+		elseif line == children_end_block and #state > 0 then
+			if current_state() == ParseIndicationState.item_block then
+				add_block_to_result()
+				table.remove(state)
+			end
+			if current_state() == ParseIndicationState.child_block then
+				table.remove(state)
+			end
+		elseif line and current_state() == ParseIndicationState.item_block then
+			if key then
+				table.insert(current_block_lines, line)
+			else
+				key = line
+			end
+		end
+	end
+
+	if current_state() == ParseIndicationState.item_block then
+		add_block_to_result()
+		table.remove(state)
+	end
+
+	ret[0] = total_values
+
+	return ret
+end
 function PWDEV.Tools.DisplayFormat(String, maxChars, LEFTorRight, DAC)
 	local lString      = String      or ""
 	local lmaxChars    = maxChars    or 5

@@ -135,10 +135,13 @@ PWDEV.ConfigEveryFrameArguments =
 	[541] = "%d",		-- REPLY Light (white)
 	
 	-- FRONT FUEL
+	[527] = "%d",		-- Wing Tanks
+	[528] = "%d",		-- Centerline Tank
+	[529] = "%d",		-- Conformal Tanks
 	[530] = "%d",		-- Fuel Dump switch
 	[531] = "%d",		-- Conformal Tanks Emergency Transfer switch
 	[532] = "%d",		-- External Fuel Transfer switch
-	[533] = "%d",		-- A/R Slipway switch
+	[533] = "%.1f",		-- A/R Slipway switch
 	-- FRONT MISC
 	[534] = "%d",		-- Roll Ratio Switch
 	[535] = "%d",		-- Left Inlet Ramp Switch
@@ -609,77 +612,32 @@ function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
 	send(2117, WSO_UFC_ActiveUHF1)
 	send(2118, WSO_UFC_ActiveUHF2)
 
-	-- IFEI
-	-- ENGINE L RPM %
-	digits = {}
-	digits[1] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(1102)))
-	digits[2] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(1101)))
-	digits[3] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(1100)))
-	send(2030, digits[1]..digits[2]..digits[3])
-	-- ENGINE R RPM %
-	digits = {}
-	digits[1] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(1105)))
-	digits[2] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(1104)))
-	digits[3] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(1103)))
-	send(2031, digits[1]..digits[2]..digits[3])
-	-- ENGINE L TEMP C
-	digits = {}
-	digits[1] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(1109)))
-	digits[2] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(1108)))
-	digits[3] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(1107)))
-	digits[4] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(1106)))
-	send(2032, digits[1]..digits[2]..digits[3]..digits[4])
-	-- ENGINE R TEMP C
-	digits = {}
-	digits[1] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(1113)))
-	digits[2] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(1112)))
-	digits[3] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(1111)))
-	digits[4] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(1110)))
-	send(2033, digits[1]..digits[2]..digits[3]..digits[4])
-	-- ENGINE L FF PPH
-	digits = {}
-	digits[1] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(1118)))
-	digits[2] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(1117)))
-	digits[3] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(1116)))
-	digits[4] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(1115)))
-	digits[5] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(1114)))
-	send(2034, digits[1]..digits[2]..digits[3]..digits[4]..digits[5])
-	-- ENGINE R FF PPH
-	digits = {}
-	digits[1] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(1123)))
-	digits[2] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(1122)))
-	digits[3] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(1121)))
-	digits[4] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(1120)))
-	digits[5] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(1119)))
-	send(2035, digits[1]..digits[2]..digits[3]..digits[4]..digits[5])
-	-- ENGINE L OIL PSI
-	digits = {}
-	digits[1] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(1126)))
-	digits[2] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(1125)))
-	digits[3] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(1124)))
-	send(2036, digits[1]..digits[2]..digits[3])
-	-- ENGINE R OIL PSI
-	digits = {}
-	digits[1] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(1129)))
-	digits[2] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(1128)))
-	digits[3] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(1127)))
-	send(2037, digits[1]..digits[2]..digits[3])
+	local function sendIFEIData(sendId, argIndices, padding)
+		local digits = {}
+		for i, argIndex in ipairs(argIndices) do
+			digits[i] = ifeiVal(string.format("%.1f", mainPanelDevice:get_argument_value(argIndex)))
+		end
+		send(sendId, table.concat(digits) .. (padding or ""))
+	end
 
-	-- FUEL TOTAL
-	digits = {}
-	digits[1] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(368)))
-	digits[2] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(369)))
-	digits[3] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(370)))
-	send(2038, digits[1]..digits[2]..digits[3].."00")
+	-- ENGINE L/R RPM %
+	sendIFEIData(2030, {1102, 1101, 1100})
+	sendIFEIData(2031, {1105, 1104, 1103})
 
-	-- FUEL LEFT
-	digits = {}
-	digits[1] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(373)))
-	digits[2] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(374)))
-	send(2039, digits[1]..digits[2].."00")
-	-- FUEL RIGHT
-	digits = {}
-	digits[1] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(377)))
-	digits[2] = ifeiVal(string.format("%.1f",mainPanelDevice:get_argument_value(378)))
-	send(2040, digits[1]..digits[2].."00")
+	-- ENGINE L/R TEMP C
+	sendIFEIData(2032, {1109, 1108, 1107, 1106})
+	sendIFEIData(2033, {1113, 1112, 1111, 1110})
+
+	-- ENGINE L/R FF PPH
+	sendIFEIData(2034, {1118, 1117, 1116, 1115, 1114})
+	sendIFEIData(2035, {1123, 1122, 1121, 1120, 1119})
+
+	-- ENGINE L/R OIL PSI
+	sendIFEIData(2036, {1126, 1125, 1124})
+	sendIFEIData(2037, {1129, 1128, 1127})
+
+	-- FUEL TOTAL / LEFT / RIGHT
+	sendIFEIData(2038, {368, 369, 370}, "00")
+	sendIFEIData(2039, {373, 374}, "00")
+	sendIFEIData(2040, {377, 378}, "00")
 end

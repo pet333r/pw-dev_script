@@ -20,84 +20,84 @@ PWDEV.ConfigEveryFrameArguments =
     [507] = "%d",    -- Image Auto Tracker Polarity Switch, W/A/B
 
     -- CPG FIRE DET/EXTG
-    [284] = "%1d",  -- ENG 1 btn
-    [285] = "%1d",  -- ENG 1 cover
-    [286] = "%1d",  -- APU btn
-    [287] = "%1d",  -- APU cover
-    [288] = "%1d",  -- ENG 2 btn
-    [289] = "%1d",  -- ENG 2 cover
-    -- [290] = "%1d",  -- PRI btn
-    [291] = "%1d",  -- TEST -1/0-1
-    -- [292] = "%1d",  -- RES btn
-    [441] = "%1d",  -- ENG 1 FIRE light yellow
-    [442] = "%1d",  -- ENG 1 RDY light green
-    [443] = "%1d",  -- APU FIRE light yellow
-    [444] = "%1d",  -- APU RDY light green
-    [445] = "%1d",  -- ENG 2 FIRE light yellow
-    [446] = "%1d",  -- ENG 2 RDY light green
-    [447] = "%1d",  -- PRI DISCH light green
-    [448] = "%1d",  -- RES DISCH light green
+    [284] = "%d",  -- ENG 1 btn
+    [285] = "%d",  -- ENG 1 cover
+    [286] = "%d",  -- APU btn
+    [287] = "%d",  -- APU cover
+    [288] = "%d",  -- ENG 2 btn
+    [289] = "%d",  -- ENG 2 cover
+    -- [290] = "%d",  -- PRI btn
+    [291] = "%d",  -- TEST -1/0-1
+    -- [292] = "%d",  -- RES btn
+    [441] = "%d",  -- ENG 1 FIRE light yellow
+    [442] = "%d",  -- ENG 1 RDY light green
+    [443] = "%d",  -- APU FIRE light yellow
+    [444] = "%d",  -- APU RDY light green
+    [445] = "%d",  -- ENG 2 FIRE light yellow
+    [446] = "%d",  -- ENG 2 RDY light green
+    [447] = "%d",  -- PRI DISCH light green
+    [448] = "%d",  -- RES DISCH light green
     -- CPG ARMAMENT
-    -- [293] = "%1d",  -- ARMAMENT A/S btn
-    -- [294] = "%1d",  -- ARMAMENT GND ORIDE btn
-    [438] = "%1d",  -- A/S ARM light yellow
-    [439] = "%1d",  -- A/S SAFE light green
-    [440] = "%1d",  -- GND ORIDE ON light green
+    -- [293] = "%d",  -- ARMAMENT A/S btn
+    -- [294] = "%d",  -- ARMAMENT GND ORIDE btn
+    [438] = "%d",  -- A/S ARM light yellow
+    [439] = "%d",  -- A/S SAFE light green
+    [440] = "%d",  -- GND ORIDE ON light green
 
 
     [621] = "%.1f",  -- CPG Keyboard bright knob
     -- CPG EMERGENCY
-    -- [358] = "%1d",  -- GUARD btn
-    -- [359] = "%1d",  -- XPNDR btn
-    [360] = "%1d",  -- ZEROIZE
-    -- [361] = "%1d",  -- EMERG HYD btn
-    [427] = "%1d",  -- GUARD ON light green
-    [428] = "%1d",  -- XPNDR ON light green
-    [429] = "%1d",  -- EMERG HYD ON light green
+    -- [358] = "%d",  -- GUARD btn
+    -- [359] = "%d",  -- XPNDR btn
+    [360] = "%d",  -- ZEROIZE
+    -- [361] = "%d",  -- EMERG HYD btn
+    [427] = "%d",  -- GUARD ON light green
+    [428] = "%d",  -- XPNDR ON light green
+    [429] = "%d",  -- EMERG HYD ON light green
     --
-    [362] = "%1d",  -- TAIL WHEEL
-    [363] = "%1d",  -- NVS MODE switch 1/0/-1
-    [426] = "%1d",  -- TAIL WHEEL UNLOCK light green
+    [362] = "%d",  -- TAIL WHEEL
+    [363] = "%d",  -- NVS MODE switch 1/0/-1
+    [426] = "%d",  -- TAIL WHEEL UNLOCK light green
     -- CPG INTR LT
     [367] = "%.1f",  -- FLOOD knob
     -- CPG STORES JETTISON
-    -- [368] = "%1d",  -- L OUTBD btn
-    -- [369] = "%1d",  -- L INBD btn
-    -- [370] = "%1d",  -- R INBD btn
-    -- [371] = "%1d",  -- R OUTBD btn
-    -- [372] = "%1d",  -- L TIP btn
-    -- [373] = "%1d",  -- JETT btn
-    -- [374] = "%1d",  -- R TIP btn
-    [430] = "%1d",  -- L OUTBD ARM light green
-    [431] = "%1d",  -- L INDB ARM light green
-    [432] = "%1d",  -- R INBD ARM light green
-    [433] = "%1d",  -- R OUTBD ARM light green
-    [434] = "%1d",  -- L TIP light green
-    [435] = "%1d",  -- R TIP light green
+    -- [368] = "%d",  -- L OUTBD btn
+    -- [369] = "%d",  -- L INBD btn
+    -- [370] = "%d",  -- R INBD btn
+    -- [371] = "%d",  -- R OUTBD btn
+    -- [372] = "%d",  -- L TIP btn
+    -- [373] = "%d",  -- JETT btn
+    -- [374] = "%d",  -- R TIP btn
+    [430] = "%d",  -- L OUTBD ARM light green
+    [431] = "%d",  -- L INDB ARM light green
+    [432] = "%d",  -- R INBD ARM light green
+    [433] = "%d",  -- R OUTBD ARM light green
+    [434] = "%d",  -- L TIP light green
+    [435] = "%d",  -- R TIP light green
 
     -- CPG COMM
-    [380] = "%1d",  -- SQL 1
-    [381] = "%1d",  -- SQL 2
-    [382] = "%1d",  -- SQL 3
-    [383] = "%1d",  -- SQL 4
-    [384] = "%1d",  -- SQL 5
-    [387] = "%1d",  -- ICS 1/0/-1
-    -- [388] = "%1d",  -- IDENT
+    [380] = "%d",  -- SQL 1
+    [381] = "%d",  -- SQL 2
+    [382] = "%d",  -- SQL 3
+    [383] = "%d",  -- SQL 4
+    [384] = "%d",  -- SQL 5
+    [387] = "%d",  -- ICS 1/0/-1
+    -- [388] = "%d",  -- IDENT
 
     -- CPG WINDSHIELD WIPER
-    [394] = "%1d",  -- DEFOG
+    [394] = "%d",  -- DEFOG
     [395] = "%.1f",  -- knob 0.1
     -- CPG PROCESSOR SELECT
-    [396] = "%1d",  -- button
-    [399] = "%1d",  -- switch SP1/AUTO/SP2 -1/0/1
-    [436] = "%1d",  -- SP1 light green
-    [437] = "%1d",  -- SP2 light green
+    [396] = "%d",  -- button
+    [399] = "%d",  -- switch SP1/AUTO/SP2 -1/0/1
+    [436] = "%d",  -- SP1 light green
+    [437] = "%d",  -- SP2 light green
 
     -- CPG MASTER WARN/CAUTION
-    -- [805] = "%1d",  -- MSTR WARN button
-    -- [807] = "%1d",  -- MSTR CAUT button
-    [806] = "%1d",  -- MSTR WARN light yellow
-    [808] = "%1d",  -- MSTR CAUT light green
+    -- [805] = "%d",  -- MSTR WARN button
+    -- [807] = "%d",  -- MSTR CAUT button
+    [806] = "%d",  -- MSTR WARN light yellow
+    [808] = "%d",  -- MSTR CAUT light green
 
 ------------------------------------------------------
     -- PLT MPD Left
@@ -106,93 +106,93 @@ PWDEV.ConfigEveryFrameArguments =
     [60] = "%.1f",  -- DAY/NT/MONO knob
 
     -- PLT FIRE DET/EXTG
-    [295] = "%1d",  -- ENG 1 btn
-    [296] = "%1d",  -- ENG 1 cover
-    [297] = "%1d",  -- APU btn
-    [298] = "%1d",  -- APU cover
-    [299] = "%1d",  -- ENG 2 btn
-    [300] = "%1d",  -- ENG 2 cover
-    -- [301] = "%1d",  -- PRI btn
-    [302] = "%1d",  -- TEST -1/0-1
-    -- [303] = "%1d",  -- RES btn
-    [416] = "%1d",  -- ENG 1 FIRE light yellow
-    [417] = "%1d",  -- ENG 1 RDY light green
-    [418] = "%1d",  -- APU FIRE light yellow
-    [419] = "%1d",  -- APU RDY light green
-    [420] = "%1d",  -- ENG 2 FIRE light yellow
-    [421] = "%1d",  -- ENG 2 RDY light green
-    [422] = "%1d",  -- PRI DISCH light green
-    [423] = "%1d",  -- RES DISCH light green
+    [295] = "%d",  -- ENG 1 btn
+    [296] = "%d",  -- ENG 1 cover
+    [297] = "%d",  -- APU btn
+    [298] = "%d",  -- APU cover
+    [299] = "%d",  -- ENG 2 btn
+    [300] = "%d",  -- ENG 2 cover
+    -- [301] = "%d",  -- PRI btn
+    [302] = "%d",  -- TEST -1/0-1
+    -- [303] = "%d",  -- RES btn
+    [416] = "%d",  -- ENG 1 FIRE light yellow
+    [417] = "%d",  -- ENG 1 RDY light green
+    [418] = "%d",  -- APU FIRE light yellow
+    [419] = "%d",  -- APU RDY light green
+    [420] = "%d",  -- ENG 2 FIRE light yellow
+    [421] = "%d",  -- ENG 2 RDY light green
+    [422] = "%d",  -- PRI DISCH light green
+    [423] = "%d",  -- RES DISCH light green
 
     -- PLT MASTER WARN/CAUTION
-    -- [304] = "%1d",  -- MASTER WARN btn
-    -- [305] = "%1d",  -- MASTER CAUT btn
-    [424] = "%1d",  -- MASTER WARN yellow
-    [425] = "%1d",  -- MASTER CAUT green
+    -- [304] = "%d",  -- MASTER WARN btn
+    -- [305] = "%d",  -- MASTER CAUT btn
+    [424] = "%d",  -- MASTER WARN yellow
+    [425] = "%d",  -- MASTER CAUT green
 
     -- PLT ARMAMENT
-    -- [306] = "%1d",  -- ARMAMENT A/S btn
-    -- [307] = "%1d",  -- ARMAMENT GND ORIDE btn
-    [413] = "%1d",  -- A/S ARM light yellow
-    [414] = "%1d",  -- A/S SAFE light green
-    [415] = "%1d",  -- GND ORIDE ON light green
+    -- [306] = "%d",  -- ARMAMENT A/S btn
+    -- [307] = "%d",  -- ARMAMENT GND ORIDE btn
+    [413] = "%d",  -- A/S ARM light yellow
+    [414] = "%d",  -- A/S SAFE light green
+    [415] = "%d",  -- GND ORIDE ON light green
 
     -- PLT Keyboard
     [316] = "%.1f",  -- PLT Keyboard bright knob
     -- 
-    [308] = "%1d",  -- TAIL WHEEL
-    [309] = "%1d",  -- NVS MODE switch 1/0/-1
-    [402] = "%1d",  -- TAIL WHEEL UNLOCK light green
+    [308] = "%d",  -- TAIL WHEEL
+    [309] = "%d",  -- NVS MODE switch 1/0/-1
+    [402] = "%d",  -- TAIL WHEEL UNLOCK light green
     -- PLT EMERGENCY
-    -- [310] = "%1d",  -- GUARD btn
-    -- [311] = "%1d",  -- XPNDR btn
-    [312] = "%1d",  -- ZEROIZE
-    -- [313] = "%1d",  -- EMERG HYD
-    [403] = "%1d",  -- GUARD ON light green
-    [404] = "%1d",  -- XPNDR ON light green
-    [405] = "%1d",  -- EMERG HYD ON light green
+    -- [310] = "%d",  -- GUARD btn
+    -- [311] = "%d",  -- XPNDR btn
+    [312] = "%d",  -- ZEROIZE
+    -- [313] = "%d",  -- EMERG HYD
+    [403] = "%d",  -- GUARD ON light green
+    [404] = "%d",  -- XPNDR ON light green
+    [405] = "%d",  -- EMERG HYD ON light green
     -- PLT POWER
-    [406] = "%1d",  -- APU ON light green
+    [406] = "%d",  -- APU ON light green
     -- PLT STORES JETTISON
-    -- [319] = "%1d",  -- L OUTBD btn
-    -- [320] = "%1d",  -- L INBD btn
-    -- [321] = "%1d",  -- R INBD btn
-    -- [322] = "%1d",  -- R OUTBD btn
-    -- [323] = "%1d",  -- L TIP btn
-    -- [324] = "%1d",  -- JETT btn
-    -- [325] = "%1d",  -- R TIP btn
-    [407] = "%1d",  -- L OUTBD ARM light green
-    [408] = "%1d",  -- L INDB ARM light green
-    [409] = "%1d",  -- R INBD ARM light green
-    [410] = "%1d",  -- R OUTBD ARM light green
-    [411] = "%1d",  -- L TIP light green
-    [412] = "%1d",  -- R TIP light green
+    -- [319] = "%d",  -- L OUTBD btn
+    -- [320] = "%d",  -- L INBD btn
+    -- [321] = "%d",  -- R INBD btn
+    -- [322] = "%d",  -- R OUTBD btn
+    -- [323] = "%d",  -- L TIP btn
+    -- [324] = "%d",  -- JETT btn
+    -- [325] = "%d",  -- R TIP btn
+    [407] = "%d",  -- L OUTBD ARM light green
+    [408] = "%d",  -- L INDB ARM light green
+    [409] = "%d",  -- R INBD ARM light green
+    [410] = "%d",  -- R OUTBD ARM light green
+    [411] = "%d",  -- L TIP light green
+    [412] = "%d",  -- R TIP light green
     -- PLT EXT/INTR LT
-    [326] = "%1d",  -- NAV switch 1/0/-1
-    [332] = "%1d",  -- ANTI switch 1/0/-1
+    [326] = "%d",  -- NAV switch 1/0/-1
+    [332] = "%d",  -- ANTI switch 1/0/-1
 
     -- PLT COMM
-    [339] = "%1d",  -- SQL 1
-    [340] = "%1d",  -- SQL 2
-    [341] = "%1d",  -- SQL 3
-    [342] = "%1d",  -- SQL 4
-    [343] = "%1d",  -- SQL 5
-    [346] = "%1d",  -- ICS 1/0/-1
-    -- [347] = "%1d",  -- IDENT
+    [339] = "%d",  -- SQL 1
+    [340] = "%d",  -- SQL 2
+    [341] = "%d",  -- SQL 3
+    [342] = "%d",  -- SQL 4
+    [343] = "%d",  -- SQL 5
+    [346] = "%d",  -- ICS 1/0/-1
+    -- [347] = "%d",  -- IDENT
 
-    [353] = "%1d",  -- CHK OVSP 1/0/-1
-    [354] = "%1d",  -- TEST 1/0/-1
-    [355] = "%1d",  -- GEN RST -1/0/1
+    [353] = "%d",  -- CHK OVSP 1/0/-1
+    [354] = "%d",  -- TEST 1/0/-1
+    [355] = "%d",  -- GEN RST -1/0/1
     -- PLT WINDSHIELD WIPER
-    -- [356] = "%1d",  -- DEFOG
+    -- [356] = "%d",  -- DEFOG
     [357] = "%.1f",  -- knob 0.1
     -- PLT CMWS
-    [610] = "%1d",  -- PWR Switch
-    [614] = "%1d",  -- Flare Squibs Switch ARM/SAFE
-    [615] = "%1d",  -- Mode Switch CMWS/NAV
-    [616] = "%1d",  -- Operation Switch BYPASS/AUTO
-    [617] = "%1d",  -- Flare Jettison Switch Cover
-    [618] = "%1d",  -- Flare Jettison Switch
+    [610] = "%d",  -- PWR Switch
+    [614] = "%d",  -- Flare Squibs Switch ARM/SAFE
+    [615] = "%d",  -- Mode Switch CMWS/NAV
+    [616] = "%d",  -- Operation Switch BYPASS/AUTO
+    [617] = "%d",  -- Flare Jettison Switch Cover
+    [618] = "%d",  -- Flare Jettison Switch
 }
 
 PWDEV.ConfigArguments =

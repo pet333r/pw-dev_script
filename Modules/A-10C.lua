@@ -10,9 +10,9 @@ PWDEV.FoundDCSModule = true
 PWDEV.ConfigEveryFrameArguments =
 {
     -- Autopilot
-    [129] = "%1d",   -- EAC On/Off
-    [130] = "%1d",   -- Radar Altimeter
-    [132] = "%1d",   -- AP MODE
+    [129] = "%d",   -- EAC On/Off
+    [130] = "%d",   -- Radar Altimeter
+    [132] = "%d",   -- AP MODE
     -- AM Radio
 	[133] = "%.1f",   -- PTR-ANARC186-VHFAM-VOLUME (Volume)
 	[134] = "%d",     -- PTR-ANARC186-VHFAM-SQUELCH (Squelch / TONE) -1/1
@@ -53,12 +53,12 @@ PWDEV.ConfigEveryFrameArguments =
     [166] = "%.1f", -- UHF 0.25MHz Selector
     [167] = "%.1f",   -- Frequency Mode Dial MNL/PRESET/GRD
     [168] = "%.1f", -- UHF Function Dial OFF/MAIN/BOTH/ADF
-    [169] = "%1d",   -- T-Tone Switch
-    [170] = "%1d",   -- Squelch Switch
+    [169] = "%d",   -- T-Tone Switch
+    [170] = "%d",   -- Squelch Switch
     [171] = "%.1f", -- UHF Volume Control
 
     -- ILS
-    [247] = "%1d",  -- ILS Power
+    [247] = "%d",  -- ILS Power
     [248] = "%.1f", -- ILS Frequency MHz 0/1/2/3
     [249] = "%.1f", -- ILS Frequency KHz
     [250] = "%.1f", -- ILS Volume
@@ -71,13 +71,13 @@ PWDEV.ConfigEveryFrameArguments =
     [261] = "%.1f", -- TACAN Signal Volume
     [262] = "%.1f", -- TACAN Mode Dial 0/1/2/3/4
 
-    [287] = "%1d",  -- Position Lights FLASH/OFF/STEADY
-    [289] = "%1d",  -- Anticollision Lights
-    [291] = "%1d",  -- Nose Illumination
-    [294] = "%1d",  -- Signal Lights
-    [295] = "%1d",  -- Accelerometer and Compass Lights
+    [287] = "%d",  -- Position Lights FLASH/OFF/STEADY
+    [289] = "%d",  -- Anticollision Lights
+    [291] = "%d",  -- Nose Illumination
+    [294] = "%d",  -- Signal Lights
+    [295] = "%d",  -- Accelerometer and Compass Lights
 
-    [358] = "%1d", -- JTSN / OFF
+    [358] = "%d", -- JTSN / OFF
     [360] = "%d",  -- Missile Warning System OFF - ON - (MENU)
     [361] = "%d",  -- Jammer OFF - ON - (MENU)
     [362] = "%d",  -- Radar Warning Receiver OFF - ON - (MENU)
@@ -88,94 +88,94 @@ PWDEV.ConfigEveryFrameArguments =
     [375] = "%.1f", -- Master Arm TRAIN - SAFE - ARM
     [376] = "%.1f", -- GUN/PAC GUNARM - SAFE - ARM
     [377] = "%.1f", -- Laser Arm TRAIN - SAFE - ARM
-    [378] = "%1d", -- TGP OFF - ON
+    [378] = "%d", -- TGP OFF - ON
     [379] = "%.1f", -- Altimeter Source RADAR - DELTA - BARO
-    [380] = "%1d", -- Hud Mode NIGHT - DAY
-    [381] = "%1d", -- Hud Mode STBY - NORM
-    [382] = "%1d", -- CICU OFF - ON
-    [383] = "%1d", -- JTRS OFF - ON
+    [380] = "%d", -- Hud Mode NIGHT - DAY
+    [381] = "%d", -- Hud Mode STBY - NORM
+    [382] = "%d", -- CICU OFF - ON
+    [383] = "%d", -- JTRS OFF - ON
     [384] = "%.1f", -- IFFCC OFF - TEST - ON
 
     -- AAP
     [473] = "%.1f",    -- PNT-LVR-STEER-PT-SEL-SWITCH (Use Steerpoint From Active Flight Plan)
-    [474] = "%1d",      -- PNT-TMB-STEER-SPRING-LD-SWITCH (Toggle Steerpoint)
+    [474] = "%d",      -- PNT-TMB-STEER-SPRING-LD-SWITCH (Toggle Steerpoint)
     [475] = "%.1f",    -- PNT-LEV-PAGE-SEL-SWITCH (CDU Page Select)
-    [476] = "%1d",      -- CDU Power On/Off
-    [477] = "%1d",      -- EGI Power On/Off
+    [476] = "%d",      -- CDU Power On/Off
+    [477] = "%d",      -- EGI Power On/Off
 
-	[404] = "%1d",	    -- Master Caution Light
-	[540] = "%1d",	    -- AOA Indexer High
-	[541] = "%1d",	    -- AOA Indexer Normal
-    [542] = "%1d",	    -- AOA Indexer Low
+	[404] = "%d",	    -- Master Caution Light
+	[540] = "%d",	    -- AOA Indexer High
+	[541] = "%d",	    -- AOA Indexer Normal
+    [542] = "%d",	    -- AOA Indexer Low
 
     -- Indicators
-    [662] = "%1d",	    -- GUN READY Indicator
-    [663] = "%1d",	    -- Nosewheel Steering Indicator
-    [664] = "%1d",	    -- MARKER BEACON Indicator
-    [665] = "%1d",	    -- CANOPY UNLOCKED Indicator
+    [662] = "%d",	    -- GUN READY Indicator
+    [663] = "%d",	    -- Nosewheel Steering Indicator
+    [664] = "%d",	    -- MARKER BEACON Indicator
+    [665] = "%d",	    -- CANOPY UNLOCKED Indicator
 
     -- Fire handlers
-    [102] = "%1d",      -- Fire Eng 1
-    [103] = "%1d",      -- Fire APU
-    [104] = "%1d",      -- Fire Eng 2
+    [102] = "%d",      -- Fire Eng 1
+    [103] = "%d",      -- Fire APU
+    [104] = "%d",      -- Fire Eng 2
     -- Fire Indicator Lights
-    [215] = "%1d",      -- Left Engine Fire Indicator
-    [216] = "%1d",      -- APU Fire Indicator
-    [217] = "%1d",      -- Right Engine Fire Indicator
+    [215] = "%d",      -- Left Engine Fire Indicator
+    [216] = "%d",      -- APU Fire Indicator
+    [217] = "%d",      -- Right Engine Fire Indicator
 
-    [372] = "%1d",      -- ML Light
-    [373] = "%1d",      -- PRI Light
-    [374] = "%1d",      -- UNK Light
+    [372] = "%d",      -- ML Light
+    [373] = "%d",      -- PRI Light
+    [374] = "%d",      -- UNK Light
 
     -- Caution Panel LAMPS
-	[480] = "%1d",		-- ENG_START_CYCLE
-	[481] = "%1d",		-- L_HYD_PRESS
-	[482] = "%1d",		-- R_HYD_PRESS
-	[483] = "%1d",		-- GUN_UNSAFE
-	[484] = "%1d",		-- ANTISKID
-	[485] = "%1d",		-- L_HYD_RES
-	[486] = "%1d",		-- R_HYD_RES
-	[487] = "%1d",		-- OXY_LOW
-	[488] = "%1d",		-- ELEV_DISENG
-	[489] = "%1d",		-- VOID1
-	[490] = "%1d",		-- SEAT_NOT_ARMED
-	[491] = "%1d",		-- BLEED_AIR_LEAK
-	[492] = "%1d",		-- AIL_DISENG
-	[493] = "%1d",		-- L_AIL_TAB
-	[494] = "%1d",		-- R_AIL_TAB
-	[495] = "%1d",		-- SERVICE_AIR_HOT
-	[496] = "%1d",		-- PITCH_SAS
-	[497] = "%1d",		-- L_ENG_HOT
-	[498] = "%1d",		-- R_ENG_HOT
-	[499] = "%1d",		-- WINDSHIELD_HOT
-	[500] = "%1d",		-- YAW_SAS
-	[501] = "%1d",		-- L_ENG_OIL_PRESS
-	[502] = "%1d",		-- R_ENG_OIL_PRESS
-	[503] = "%1d",		-- CICU
-	[504] = "%1d",		-- GCAS
-	[505] = "%1d",		-- L_MAIN_PUMP
-	[506] = "%1d",		-- R_MAIN_PUMP
-	[507] = "%1d",		-- VOID2
-	[508] = "%1d",		-- LASTE
-	[509] = "%1d",		-- L_WING_PUMP
-	[510] = "%1d",		-- R_WING_PUMP
-	[511] = "%1d",		-- HARS
-	[512] = "%1d",		-- IFF_MODE_4
-	[513] = "%1d",		-- L_MAIN_FUEL_LOW
-	[514] = "%1d",		-- R_MAIN_FUEL_LOW
-	[515] = "%1d",		-- L_R_TKS_UNEQUAL
-	[516] = "%1d",		-- EAC
-	[517] = "%1d",		-- L_FUEL_PRESS
-	[518] = "%1d",		-- R_FUEL_PRESS
-	[519] = "%1d",		-- NAV
-	[520] = "%1d",		-- STALL_SYS
-	[521] = "%1d",		-- L_CONV
-	[522] = "%1d",		-- R_CONV
-	[523] = "%1d",		-- CADC
-	[524] = "%1d",		-- APU_GEN
-	[525] = "%1d",		-- L_GEN
-	[526] = "%1d",		-- R_GEN
-    [527] = "%1d",		-- INST_INV
+	[480] = "%d",		-- ENG_START_CYCLE
+	[481] = "%d",		-- L_HYD_PRESS
+	[482] = "%d",		-- R_HYD_PRESS
+	[483] = "%d",		-- GUN_UNSAFE
+	[484] = "%d",		-- ANTISKID
+	[485] = "%d",		-- L_HYD_RES
+	[486] = "%d",		-- R_HYD_RES
+	[487] = "%d",		-- OXY_LOW
+	[488] = "%d",		-- ELEV_DISENG
+	[489] = "%d",		-- VOID1
+	[490] = "%d",		-- SEAT_NOT_ARMED
+	[491] = "%d",		-- BLEED_AIR_LEAK
+	[492] = "%d",		-- AIL_DISENG
+	[493] = "%d",		-- L_AIL_TAB
+	[494] = "%d",		-- R_AIL_TAB
+	[495] = "%d",		-- SERVICE_AIR_HOT
+	[496] = "%d",		-- PITCH_SAS
+	[497] = "%d",		-- L_ENG_HOT
+	[498] = "%d",		-- R_ENG_HOT
+	[499] = "%d",		-- WINDSHIELD_HOT
+	[500] = "%d",		-- YAW_SAS
+	[501] = "%d",		-- L_ENG_OIL_PRESS
+	[502] = "%d",		-- R_ENG_OIL_PRESS
+	[503] = "%d",		-- CICU
+	[504] = "%d",		-- GCAS
+	[505] = "%d",		-- L_MAIN_PUMP
+	[506] = "%d",		-- R_MAIN_PUMP
+	[507] = "%d",		-- VOID2
+	[508] = "%d",		-- LASTE
+	[509] = "%d",		-- L_WING_PUMP
+	[510] = "%d",		-- R_WING_PUMP
+	[511] = "%d",		-- HARS
+	[512] = "%d",		-- IFF_MODE_4
+	[513] = "%d",		-- L_MAIN_FUEL_LOW
+	[514] = "%d",		-- R_MAIN_FUEL_LOW
+	[515] = "%d",		-- L_R_TKS_UNEQUAL
+	[516] = "%d",		-- EAC
+	[517] = "%d",		-- L_FUEL_PRESS
+	[518] = "%d",		-- R_FUEL_PRESS
+	[519] = "%d",		-- NAV
+	[520] = "%d",		-- STALL_SYS
+	[521] = "%d",		-- L_CONV
+	[522] = "%d",		-- R_CONV
+	[523] = "%d",		-- CADC
+	[524] = "%d",		-- APU_GEN
+	[525] = "%d",		-- L_GEN
+	[526] = "%d",		-- R_GEN
+    [527] = "%d",		-- INST_INV
 
     -- ARC-210
     [551] = "%.1f",		-- knob
@@ -188,22 +188,22 @@ PWDEV.ConfigEveryFrameArguments =
     [558] = "%.1f",		-- 25 KHz Selector
     [568] = "%.1f",		-- Squelch on/off
 
-    [606] = "%1d",		-- HARS
-    [608] = "%1d",		-- EGI
-    [610] = "%1d",		-- TISL
-    [612] = "%1d",		-- STEERPT
-    [614] = "%1d",		-- ANCHR
-    [616] = "%1d",		-- TCN
-    [618] = "%1d",		-- ILS
-    [619] = "%1d",		-- UHF
-	[620] = "%1d",		-- FM
-    [621] = "%1d",     -- PTR-NMSP-ABLE-STOW (ABLE-STOW ADI Localizer Bar)
+    [606] = "%d",		-- HARS
+    [608] = "%d",		-- EGI
+    [610] = "%d",		-- TISL
+    [612] = "%d",		-- STEERPT
+    [614] = "%d",		-- ANCHR
+    [616] = "%d",		-- TCN
+    [618] = "%d",		-- ILS
+    [619] = "%d",		-- UHF
+	[620] = "%d",		-- FM
+    [621] = "%d",     -- PTR-NMSP-ABLE-STOW (ABLE-STOW ADI Localizer Bar)
 
-    [730] = "%1d",		-- Air Refuel READY
-    [731] = "%1d",		-- Air Refuel LATCHED
-    [732] = "%1d",		-- Air Refuel DISCONNECT
+    [730] = "%d",		-- Air Refuel READY
+    [731] = "%d",		-- Air Refuel LATCHED
+    [732] = "%d",		-- Air Refuel DISCONNECT
 
-    [998] = "%1d",		-- ARC-210
+    [998] = "%d",		-- ARC-210
 }
 
 PWDEV.ConfigArguments =

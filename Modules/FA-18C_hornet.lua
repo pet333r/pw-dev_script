@@ -13,74 +13,74 @@ PWDEV.ConfigEveryFrameArguments =
 	[6] = "%.1f",   -- CPT_LTS_AOA_LOW
 
 	-- Fire Systems
-	[46] = "%1d",   -- Fire Extinguisher Pushbutton
-	[30] = "%1d",   -- APU Fire Warning/Extinguisher Light
-	[11] = "%1d",   -- Left Engine/AMAD Fire Warning/Extinguisher Light - (LMB) depress
-	[12] = "%1d",   -- Left Engine/AMAD Fire Warning/Extinguisher Light - (RMB) cover control
-	[27] = "%1d",   -- Right Engine/AMAD Fire Warning/Extinguisher Light - (LMB) depress
-	[28] = "%1d",   -- Right Engine/AMAD Fire Warning/Extinguisher Light - (RMB) cover control
+	[46] = "%d",   -- Fire Extinguisher Pushbutton
+	[30] = "%d",   -- APU Fire Warning/Extinguisher Light
+	[11] = "%d",   -- Left Engine/AMAD Fire Warning/Extinguisher Light - (LMB) depress
+	[12] = "%d",   -- Left Engine/AMAD Fire Warning/Extinguisher Light - (RMB) cover control
+	[27] = "%d",   -- Right Engine/AMAD Fire Warning/Extinguisher Light - (LMB) depress
+	[28] = "%d",   -- Right Engine/AMAD Fire Warning/Extinguisher Light - (RMB) cover control
 
 	-- LH Advisory and Threat Warning Indicator Panel
-	[10] = "%1d",   -- CPT_LTS_FIRE_LEFT
-	[13] = "%1d",   -- CPT_LTS_MASTER_CAUTION
-	[15] = "%1d",   -- CPT_LTS_GO
-	[16] = "%1d",   -- CPT_LTS_NO_GO
-	[17] = "%1d",   -- CPT_LTS_L_BLEED
-	[18] = "%1d",   -- CPT_LTS_R_BLEED
-	[19] = "%1d",   -- CPT_LTS_SPD_BRK
-	[20] = "%1d",   -- CPT_LTS_STBY
-	[21] = "%1d",   -- CPT_LTS_L_BAR_RED
-	[22] = "%1d",   -- CPT_LTS_REC
-	[23] = "%1d",   -- CPT_LTS_L_BAR_GREEN
-	[24] = "%1d",   -- CPT_LTS_XMIT
-	[25] = "%1d",   -- CPT_LTS_ASPJ_OH
+	[10] = "%d",   -- CPT_LTS_FIRE_LEFT
+	[13] = "%d",   -- CPT_LTS_MASTER_CAUTION
+	[15] = "%d",   -- CPT_LTS_GO
+	[16] = "%d",   -- CPT_LTS_NO_GO
+	[17] = "%d",   -- CPT_LTS_L_BLEED
+	[18] = "%d",   -- CPT_LTS_R_BLEED
+	[19] = "%d",   -- CPT_LTS_SPD_BRK
+	[20] = "%d",   -- CPT_LTS_STBY
+	[21] = "%d",   -- CPT_LTS_L_BAR_RED
+	[22] = "%d",   -- CPT_LTS_REC
+	[23] = "%d",   -- CPT_LTS_L_BAR_GREEN
+	[24] = "%d",   -- CPT_LTS_XMIT
+	[25] = "%d",   -- CPT_LTS_ASPJ_OH
 
 	-- RH Advisory and Threat Warning Indicator Panel
-	[26] = "%1d",   -- CPT_LTS_FIRE_RIGHT
-	[29] = "%1d",   -- CPT_LTS_FIRE_APU
-	[31] = "%1d",   -- CPT_LTS_RCDR_ONzxzx=ss
-	[32] = "%1d",   -- CPT_LTS_DISP
-	[33] = "%1d",   -- CPT_LTS_SPARE_RH1
-	[34] = "%1d",   -- CPT_LTS_SPARE_RH2
-	[35] = "%1d",   -- CPT_LTS_SPARE_RH3
-	[36] = "%1d",   -- CPT_LTS_SPARE_RH4
-	[37] = "%1d",   -- CPT_LTS_SPARE_RH5
-	[38] = "%1d",   -- CPT_LTS_SAM.u/8i
-	[39] = "%1d",   -- CPT_LTS_AI
-	[40] = "%1d",   -- CPT_LTS_AAA
-	[41] = "%1d",   -- CPT_LTS_CW
+	[26] = "%d",   -- CPT_LTS_FIRE_RIGHT
+	[29] = "%d",   -- CPT_LTS_FIRE_APU
+	[31] = "%d",   -- CPT_LTS_RCDR_ONzxzx=ss
+	[32] = "%d",   -- CPT_LTS_DISP
+	[33] = "%d",   -- CPT_LTS_SPARE_RH1
+	[34] = "%d",   -- CPT_LTS_SPARE_RH2
+	[35] = "%d",   -- CPT_LTS_SPARE_RH3
+	[36] = "%d",   -- CPT_LTS_SPARE_RH4
+	[37] = "%d",   -- CPT_LTS_SPARE_RH5
+	[38] = "%d",   -- CPT_LTS_SAM.u/8i
+	[39] = "%d",   -- CPT_LTS_AI
+	[40] = "%d",   -- CPT_LTS_AAA
+	[41] = "%d",   -- CPT_LTS_CW
 
 	-- Master Arm Panel
-	[47] = "%1d",   -- AA Light
-	[48] = "%1d",   -- AG Light
-	[49] = "%1d",   -- Master Arm Switch, ARM/SAFE
+	[47] = "%d",   -- AA Light
+	[48] = "%d",   -- AG Light
+	[49] = "%d",   -- Master Arm Switch, ARM/SAFE
 
 	-- HUD Control Panel
 	[140] = "%.1f",   -- HUD Symbology Reject Switch, NORM/REJ 1/REJ 2
-	[142] = "%1d",   -- HUD Symbology Brightness Selector Knob, DAY/NIGHT
+	[142] = "%d",   -- HUD Symbology Brightness Selector Knob, DAY/NIGHT
 	[144] = "%.1f",   -- HUD Video Control Switch, W/B /VID/OFF
-	[147] = "%1d",   -- Altitude Switch, BARO/RDR
-	[148] = "%1d",   -- Attitude Selector Switch, INS/AUTO/STBY -1/0/1
+	[147] = "%d",   -- Altitude Switch, BARO/RDR
+	[148] = "%d",   -- Attitude Selector Switch, INS/AUTO/STBY -1/0/1
 
 	-- Jettison / Landing gear
-	[153] = "%1d",   -- CTR Button
-	[155] = "%1d",   -- LI Button
-	[157] = "%1d",   -- LO Button
-	[159] = "%1d",   -- RI Button
-	[161] = "%1d",   -- RO Button
-	[152] = "%1d",   -- CTR Light
-	[154] = "%1d",   -- LI Light
-	[156] = "%1d",   -- LO Light
-	[158] = "%1d",   -- RI Light
-	[160] = "%1d",   -- RO Light
-	[166] = "%1d",   -- NOSE GEAR
-	[165] = "%1d",   -- LEFT GEAR
-	[167] = "%1d",   -- RIGHT GEAR
-	[163] = "%1d",   -- HALF FLAPS
-	[164] = "%1d",   -- FULL FLAPS
-	[162] = "%1d",   -- FLAPS
+	[153] = "%d",   -- CTR Button
+	[155] = "%d",   -- LI Button
+	[157] = "%d",   -- LO Button
+	[159] = "%d",   -- RI Button
+	[161] = "%d",   -- RO Button
+	[152] = "%d",   -- CTR Light
+	[154] = "%d",   -- LI Light
+	[156] = "%d",   -- LO Light
+	[158] = "%d",   -- RI Light
+	[160] = "%d",   -- RO Light
+	[166] = "%d",   -- NOSE GEAR
+	[165] = "%d",   -- LEFT GEAR
+	[167] = "%d",   -- RIGHT GEAR
+	[163] = "%d",   -- HALF FLAPS
+	[164] = "%d",   -- FULL FLAPS
+	[162] = "%d",   -- FLAPS
 
-	[237] = "%1d",   -- LDG/TAXI LIGHT Switch
+	[237] = "%d",   -- LDG/TAXI LIGHT Switch
 
 	-- RWR
 	[264] = "%.1f", -- ALR-67 FAIL Light (red)
@@ -94,55 +94,55 @@ PWDEV.ConfigEveryFrameArguments =
 	[276] = "%.1f", -- ALR-67 LOWER Light (green)
 
 	-- Caution Lights Panel
-	[298] = "%1d", -- CK SEAT
-	[299] = "%1d", -- APU ACC
-	[300] = "%1d", -- BATT SW
-	[301] = "%1d", -- FCS HOT
-	[302] = "%1d", -- GEN TIE
-	[303] = "%1d", -- SPARE CTN1
-	[304] = "%1d", -- FUEL LO`
-	[305] = "%1d", -- FCES
-	[306] = "%1d", -- SPARE CTN2
-	[307] = "%1d", -- L GEN
-	[308] = "%1d", -- R GEN
-	[309] = "%1d", -- SPARE CTN3
+	[298] = "%d", -- CK SEAT
+	[299] = "%d", -- APU ACC
+	[300] = "%d", -- BATT SW
+	[301] = "%d", -- FCS HOT
+	[302] = "%d", -- GEN TIE
+	[303] = "%d", -- SPARE CTN1
+	[304] = "%d", -- FUEL LO`
+	[305] = "%d", -- FCES
+	[306] = "%d", -- SPARE CTN2
+	[307] = "%d", -- L GEN
+	[308] = "%d", -- R GEN
+	[309] = "%d", -- SPARE CTN3
 
-	[107] = "%1d",  -- UFC ADF Function Select Switch, 1/OFF/2 {-1.0,0.0,1.0}
-	[125] = "%1d",  -- UFC COMM 1 Channel Selector Knob
-	[127] = "%1d",  -- UFC COMM 2 Channel Selector Knob
+	[107] = "%d",  -- UFC ADF Function Select Switch, 1/OFF/2 {-1.0,0.0,1.0}
+	[125] = "%d",  -- UFC COMM 1 Channel Selector Knob
+	[127] = "%d",  -- UFC COMM 2 Channel Selector Knob
 
 	-- Exterior Lights Panel
-	[339] = "%1d", 	-- Strobe Lights Switch
+	[339] = "%d", 	-- Strobe Lights Switch
 
 	-- Communication panel
-	[350] = "%1d", 	-- Comm Relay Switch, CIPHER/OFF/PLAIN
-	[351] = "%1d", 	-- COMM G XMT Switch, COMM 1/OFF/COMM 2
+	[350] = "%d", 	-- Comm Relay Switch, CIPHER/OFF/PLAIN
+	[351] = "%d", 	-- COMM G XMT Switch, COMM 1/OFF/COMM 2
 	[352] = "%.2f", -- ILS Channel Selector
-	[353] = "%1d", 	-- ILS UFC/MAN Switch, UFC/MAN
-	[354] = "%1d", 	-- CRYPTO Switch, HOLD/NORM/ZERO
-	[355] = "%1d", 	-- IFF Mode 4 Switch, DIS/AUD /DIS/OFF
-	[356] = "%1d", 	-- IFF Master Switch, EMER/NORM
+	[353] = "%d", 	-- ILS UFC/MAN Switch, UFC/MAN
+	[354] = "%d", 	-- CRYPTO Switch, HOLD/NORM/ZERO
+	[355] = "%d", 	-- IFF Mode 4 Switch, DIS/AUD /DIS/OFF
+	[356] = "%d", 	-- IFF Master Switch, EMER/NORM
 
 	-- ELEC
-	[402] = "%1d", 	-- Left Generator Control Switch
-	[404] = "%1d", 	-- Battery Switch, ON/OFF/ORIDE
-	[403] = "%1d", 	-- Right Generator Control Switch
+	[402] = "%d", 	-- Left Generator Control Switch
+	[404] = "%d", 	-- Battery Switch, ON/OFF/ORIDE
+	[403] = "%d", 	-- Right Generator Control Switch
 
 	-- ECS
-	[405] = "%1d", 	-- Mode Switch, AUTO/MAN/OFF/RAM
-	[408] = "%1d", 	-- Cabin Pressure Switch, NORM/DUMP/RAM/DUMP
-	[409] = "%1d", 	-- Pitot Heater Switch, ON/AUTO
-	[410] = "%1d", 	-- Engine Anti-Ice Switch, ON/OFF/TEST
+	[405] = "%d", 	-- Mode Switch, AUTO/MAN/OFF/RAM
+	[408] = "%d", 	-- Cabin Pressure Switch, NORM/DUMP/RAM/DUMP
+	[409] = "%d", 	-- Pitot Heater Switch, ON/AUTO
+	[410] = "%d", 	-- Engine Anti-Ice Switch, ON/OFF/TEST
 	[411] = "%.1f", -- Bleed Air Knob, R OFF/NORM/L OFF/OFF
 
 	-- Interior lights
-	[416] = "%1d", 	-- Lights Test Switch, TEST/OFF
-	[419] = "%1d", 	-- MODE Switch, NVG/NITE/DAY
+	[416] = "%d", 	-- Lights Test Switch, TEST/OFF
+	[419] = "%d", 	-- MODE Switch, NVG/NITE/DAY
 
 	-- SNSR Sensor panel
-	[439] = "%1d", 	-- FLIR Switch, ON/STBY/OFF
-	[441] = "%1d", 	-- LTD/R Switch, SAFE/AFT
-	[442] = "%1d", 	-- LST/NFLR Switch, ON/OFF
+	[439] = "%d", 	-- FLIR Switch, ON/STBY/OFF
+	[441] = "%d", 	-- LTD/R Switch, SAFE/AFT
+	[442] = "%d", 	-- LST/NFLR Switch, ON/OFF
 	[440] = "%.1f", -- RADAR Switch Change ,OFF/STBY/OPR/EMERG(PULL)
 	[443] = "%.1f", -- INS Switch, OFF/CV/GND/NAV/IFA/GYRO/GB/TEST
 }
@@ -157,18 +157,18 @@ PWDEV.ConfigArguments =
 	[51] = "%.1f",   -- Left MDI Brightness Selector Knob, OFF/NIGHT/DAY {0.0,0.1,0.2}
 	[52] = "%.1f",   -- Left MDI Brightness Control Knob {0.0,1.0} in 0.1 Steps
 	[53] = "%.1f",   -- Left MDI Contrast Control Knob {0.0,1.0} in 0.1 Steps
-	[312] = "%1d",   -- Heading Set Switch
-	[313] = "%1d",   -- Course Set Switch
+	[312] = "%d",   -- Heading Set Switch
+	[313] = "%d",   -- Course Set Switch
 	-- Right MDI
 	[76] = "%.1f",   -- Right MDI Brightness Selector Knob, OFF/NIGHT/DAY {0.0,0.1,0.2}
 	[77] = "%.1f",   -- Right MDI Brightness Control Knob {0.0,1.0} in 0.1 Steps
 	[78] = "%.1f",   -- Right MDI Contrast Control Knob {0.0,1.0} in 0.1 Steps
 	-- AMPCD
 	[203] = "%.1f",   -- AMPCD Off/Brightness Control Knob {0.0,1.0} in 0.1 Steps
-	[177] = "%1d",   -- AMPCD Night/Day Brightness Selector, DAY/NGT {1.0,0.0,-1.0}
-	[179] = "%1d",   -- AMPCD Symbology Control Switch, UP/DOWN {1.0,0.0,-1.0}
-	[182] = "%1d",   -- AMPCD Contrast Control Switch, UP/DOWN {1.0,0.0,-1.0}
-	[180] = "%1d",   -- AMPCD Gain Control Switch, UP/DOWN {1.0,0.0,-1.0}
+	[177] = "%d",   -- AMPCD Night/Day Brightness Selector, DAY/NGT {1.0,0.0,-1.0}
+	[179] = "%d",   -- AMPCD Symbology Control Switch, UP/DOWN {1.0,0.0,-1.0}
+	[182] = "%d",   -- AMPCD Contrast Control Switch, UP/DOWN {1.0,0.0,-1.0}
+	[180] = "%d",   -- AMPCD Gain Control Switch, UP/DOWN {1.0,0.0,-1.0}
 
 	-- HUD Control Panel
 	[141] = "%.1f",   -- HUD Symbology Brightness Control Knob

@@ -36,31 +36,31 @@ PWDEV.ConfigEveryFrameArguments =
     [177] = "%.1f", -- CONTROL TO OPERATOR
 
     -- Signal, flares
-    [343] = "%1d", -- Cassette 1 Power Switch
-    [344] = "%1d", -- Cassette 1 Launch Red Button
-    [345] = "%1d", -- Cassette 1 Launch Green Button
-    [346] = "%1d", -- Cassette 1 Launch Yellow Button
-    [347] = "%1d", -- Cassette 1 Launch White Button
-    [352] = "%1d", -- Cassette 2 Power Switch
-    [351] = "%1d", -- Cassette 2 Launch Red Button
-    [350] = "%1d", -- Cassette 2 Launch Green Button
-    [349] = "%1d", -- Cassette 2 Launch Yellow Button
-    [348] = "%1d", -- Cassette 2 Launch White Button
+    [343] = "%d", -- Cassette 1 Power Switch
+    [344] = "%d", -- Cassette 1 Launch Red Button
+    [345] = "%d", -- Cassette 1 Launch Green Button
+    [346] = "%d", -- Cassette 1 Launch Yellow Button
+    [347] = "%d", -- Cassette 1 Launch White Button
+    [352] = "%d", -- Cassette 2 Power Switch
+    [351] = "%d", -- Cassette 2 Launch Red Button
+    [350] = "%d", -- Cassette 2 Launch Green Button
+    [349] = "%d", -- Cassette 2 Launch Yellow Button
+    [348] = "%d", -- Cassette 2 Launch White Button
 
     -- Radio navigation
-    [365] = "%1d", -- RWR Signal
-    [366] = "%1d", -- RWR Power
-    [367] = "%1d", -- Greben' ON/OFF
-    [368] = "%1d", -- Gyro 2 Power
-    [369] = "%1d", -- Gyro 1 Power
-    [370] = "%1d", -- Airspeed to DISS ON/OFF
-    [371] = "%1d", -- DISS-15D ON/OFF
-    [372] = "%1d", -- RV-5 ON/OFF
-    [373] = "%1d", -- Eucalypt-M24 ON/OFF
-    [374] = "%1d", -- Jadro-1I ON/OFF
-    [375] = "%1d", -- R-863 ON/OFF
-    [376] = "%1d", -- Switch SPU-8 NET-1 ON/OFF
-    [377] = "%1d", -- Switch SPU-8 NET-2 ON/OFF
+    [365] = "%d", -- RWR Signal
+    [366] = "%d", -- RWR Power
+    [367] = "%d", -- Greben' ON/OFF
+    [368] = "%d", -- Gyro 2 Power
+    [369] = "%d", -- Gyro 1 Power
+    [370] = "%d", -- Airspeed to DISS ON/OFF
+    [371] = "%d", -- DISS-15D ON/OFF
+    [372] = "%d", -- RV-5 ON/OFF
+    [373] = "%d", -- Eucalypt-M24 ON/OFF
+    [374] = "%d", -- Jadro-1I ON/OFF
+    [375] = "%d", -- R-863 ON/OFF
+    [376] = "%d", -- Switch SPU-8 NET-1 ON/OFF
+    [377] = "%d", -- Switch SPU-8 NET-2 ON/OFF
 
     -- HEATIN
     [388] = "%.1f", -- LEFT HEAT FAIL

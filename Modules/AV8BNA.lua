@@ -100,7 +100,7 @@ PWDEV.ConfigEveryFrameArguments =
 	[402] = "%d",	-- Release Interval Control (Tens)
 	[403] = "%d",	-- Release Interval Control (Units)
 
-	-- [405] = "%1d",	--Jettison Stores
+	-- [405] = "%d",	--Jettison Stores
 	[420] = "%d",	--Ground IR Cool Switch
 
 	--LOWER AMARMENT PANEL
@@ -114,17 +114,17 @@ PWDEV.ConfigEveryFrameArguments =
 
 	-- INS Panel
 	[421] = "%.1f",	--INS Mode Knob	
-	[422] = "%1d",	--Video Recorder System Mode Switch
-	[423] = "%1d",	--Video Recorder System Display Selector Switch
-	[424] = "%1d",	--DMT Toggle On/Off
+	[422] = "%d",	--Video Recorder System Mode Switch
+	[423] = "%d",	--Video Recorder System Display Selector Switch
+	[424] = "%d",	--DMT Toggle On/Off
 	[425] = "%.1f",	--Dual Processor Mode Selector Switch
-	[426] = "%1d",	--Probe Heat Mode Switch
+	[426] = "%d",	--Probe Heat Mode Switch
 	[427] = "%.1f",	--Mission Computer Mode Switch
-	[429] = "%1d",	--FLIR Power Switch
+	[429] = "%d",	--FLIR Power Switch
 
 	-- Combat/Water Panel
 	[449] = "%.1f",	--H2O Mode Switch
-	[450] = "%1d",	--CMBT Thrust Button
+	[450] = "%d",	--CMBT Thrust Button
 
 	[451] = "%.f",	--SEL
 	[452] = "%.f",	--CMBT
@@ -154,9 +154,9 @@ PWDEV.ConfigEveryFrameArguments =
 	[480] = "%d",	--SAS Pitch Switch
 
 	-- Bulkhead Switches
-	-- [502] = "%1d",	--Seat Adjustment Switch
-	-- [519] = "%1d",	--Fuel Shutoff Lever
-	-- [520] = "%1d",	--DECS Switch
+	-- [502] = "%d",	--Seat Adjustment Switch
+	-- [519] = "%d",	--Fuel Shutoff Lever
+	-- [520] = "%d",	--DECS Switch
 
 	-- Fuel Panel
 	[504] = "%d",	--Fuel Proportioner
@@ -175,11 +175,11 @@ PWDEV.ConfigEveryFrameArguments =
 	[513] = "%d",	--External Auxiliary Lights Switch
 
 	-- Pilot Service Panel
-	-- [514] = "%1d",	--"Oxygen Switch
-	-- [515] = "%1d",	--H2O Dump Switch
-	-- [516] = "%1d",	--LIDS Switch
-	-- [517] = "%1d",	--ENG RPM Switch
-	-- [518] = "%1d",	--EFC Switch
+	-- [514] = "%d",	--"Oxygen Switch
+	-- [515] = "%d",	--H2O Dump Switch
+	-- [516] = "%d",	--LIDS Switch
+	-- [517] = "%d",	--ENG RPM Switch
+	-- [518] = "%d",	--EFC Switch
 
 	--CAUTION PANEL (from upper left to lower right)
 	[560] = "%d",	--OXY

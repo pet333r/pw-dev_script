@@ -22,6 +22,27 @@ PWDEV.ConfigEveryFrameArguments =
     [23] = "%.1f", -- Target #3/Other type LED
     [50] = "%.1f", -- Ingress point LED
 
+	[146] = "%.1f", -- Navigation Lights 10% / 30% / 100% / Off
+	[147] = "%.1f", -- Windshield wiper switch
+	[148] = "%d", -- Windshield washer fluid switch
+	[149] = "%.1f", -- Warning Lights Brightness
+	[539] = "%d", -- Pitot static port and AoA sensors heat switch
+	[151] = "%d", -- Pitot ram air and clock heat switch
+	[153] = "%d", -- Rotor de-icing system switch
+	[154] = "%.1f", -- Engines de-icing / dust-protection systems switch
+
+	[228] = "%d", -- Anticollision Light
+	[296] = "%d", -- Tip Lights
+	[297] = "%d", -- Formation Lights
+	[298] = "%d", -- Lighting ADI and SAI switch
+	[299] = "%d", -- Lighting night vision cockpit switch
+	[300] = "%d", -- Lighting cockpit panel switch
+
+	[324] = "%.1f", -- NAV Master modes
+	[325] = "%d", -- NAV INU fixtaking method
+	[326] = "%d", -- NAV Datalink power
+	[327] = "%.1f", -- NAV Brightness
+
     -- autopilot
     [330] = "%.1f", -- Bank hold LED (green)
     [331] = "%.1f", -- Pitch hold LED (green)
@@ -31,16 +52,52 @@ PWDEV.ConfigEveryFrameArguments =
     [335] = "%.1f", -- BARO/RALT altitude hold mode Switch
     [336] = "%.1f", -- DH/DT Switch
 
+    [381] = "%.1f", -- ADF Inner-Auto-Outer NDB switch
+    [382] = "%.1f", -- Light landing-search
+    [383] = "%d", -- Light landing-search
+    [386] = "%d", -- Voice message system emergency on
+
+    [387] = "%d", -- Master Arm
+    [388] = "%d", -- green 1
+    [389] = "%d", -- green 2
+    [390] = "%d", -- green 3
+    [391] = "%d", -- green 4
+    [392] = "%d", -- yellow 1
+    [393] = "%d", -- yellow 2
+    [394] = "%d", -- yellow 3
+    [395] = "%d", -- yellow 4
+    [396] = "%d", -- Jettison arm mode
+    [397] = "%.1f", -- Expedite emergency ATGM launch
+    [398] = "%d", -- Cannon rate of fire setting
+    [399] = "%d", -- Cannon round selector switch HE/AP
+    [400] = "%.1f", -- Weapon mode switch - Burst Length
+    [403] = "%d", -- Manual/Auto weapon system control switch
+
+    [404] = "%d", -- IT-23 Black-White indication switch
+    [405] = "%.2f", -- Helmet device brightness
+    [406] = "%.2f", -- IT-23 display brightness
+    [407] = "%.2f", -- IT-23 display contrast
+    [408] = "%.1f", -- Laser code selector
+    [409] = "%d", -- HUD/TV declutter switch
+    [410] = "%d", -- 
+    [411] = "%.1f", -- SHKVAL Optics adjustment
+
     [431] = "%.1f", -- Weapon system mode selector
-    [432] = "%1d", -- Training mode Switch
-    [433] = "%1d", -- K-041 power Switch
-    [434] = "%1d", -- HMS/NVG power Switch
-    [435] = "%1d", -- Laser standby ON/OFF Switch
-    [437] = "%1d", -- Automatic turn on target LED (green)
-    [438] = "%1d", -- Airborne target LED
-    [439] = "%1d", -- Head-on airborne target LED
-    [440] = "%1d", -- Ground moving target LED
-    [441] = "%1d", -- Targeting mode reset LED
+    [432] = "%d", -- Training mode Switch
+    [433] = "%d", -- K-041 power Switch
+    [434] = "%d", -- HMS/NVG power Switch
+    [435] = "%d", -- Laser standby ON/OFF Switch
+    [437] = "%d", -- Automatic turn on target LED (green)
+    [438] = "%d", -- Airborne target LED
+    [439] = "%d", -- Head-on airborne target LED
+    [440] = "%d", -- Ground moving target LED
+    [441] = "%d", -- Targeting mode reset LED
+
+    [450] = "%d", -- Lighting auxiliary panel switch
+    [451] = "%.1f", -- Lighting auxiliary panel brightness knob
+    [507] = "%.1f", -- Lighting night vision cockpit brightness knob
+    [508] = "%.1f", -- Lighting HSI and ADI brightness knob
+    [593] = "%.1f", -- Lighting cockpit panel brightness knob
 
     -- PVI-800
     [315] = "%.1f", -- Waypoints LED
@@ -58,10 +115,6 @@ PWDEV.ConfigEveryFrameArguments =
     [321] = "%.1f", -- Wind Heading/Speed LED
     [322] = "%.1f", -- True Heading/Time/Range to final WPT LED
     [323] = "%.1f", -- Bearing/Range to target LED
-    [324] = "%.1f", -- NAV Master modes 0.1-0.6
-	[325] = "%1d",  -- NAV INU fixtaking method
-	[326] = "%1d",  -- NAV Datalink power
-	[327] = "%.1f", -- NAV Brightness
 }
 
 PWDEV.ConfigArguments =
@@ -198,8 +251,19 @@ function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
     send(803, coerce_nil_to_string(indPVI.txt_NIT_apostrophe1))
     send(804, coerce_nil_to_string(indPVI.txt_NIT_apostrophe2))
 
-    local Cannon = PWDEV.Tools.getListIndicatorValue(6) or {}
-    send(2061, coerce_nil_to_string(Cannon.txt_cannon_count))
+    local indPUI800 = PWDEV.Tools.getListIndicatorValue(6) or {}
+
+    local function getPUI800_txt_weap_type()
+        return indPUI800.txt_weap_type_AT and "AT"
+            or indPUI800.txt_weap_type_RT and "RT"
+            or indPUI800.txt_weap_type_Iron_Bomb and "IB"
+            or indPUI800.txt_weap_type_Gun_Pod and "GP"
+            or ""
+    end
+
+    send(2060, getPUI800_txt_weap_type())
+    send(2061, coerce_nil_to_string(indPUI800.txt_weap_count))
+    send(2062, coerce_nil_to_string(indPUI800.txt_cannon_count))
 
     local UV26 = PWDEV.Tools.getListIndicatorValue(7) or {}
     send(2071, coerce_nil_to_string(UV26.txt_digits))
