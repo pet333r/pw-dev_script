@@ -9,6 +9,19 @@ PWDEV.FoundDCSModule = true
 
 PWDEV.ConfigEveryFrameArguments =
 {
+    -- Fuel
+	[106] = "%d",	-- External Wing Tanks Boost Pumps
+	[107] = "%d",	-- External Fuselage Tanks Boost Pumps
+	[108] = "%d",	-- Tank Gate
+	[109] = "%d",	-- Crossfeed
+	[110] = "%d",	-- Boost Pumps Left Wing
+	[111] = "%d",	-- Boost Pumps Right Wing
+	[112] = "%d",	-- Boost Pumps Main Fuselage Left
+	[113] = "%d",	-- Boost Pumps Main Fuselage Right
+	[114] = "%d",	-- Signal Amplifier
+	[116] = "%.1f",	-- Refueling Lighting Dial
+	[121] = "%d",	-- Aerial Refueling Slipway Control Lever
+
     -- Autopilot
     [129] = "%d",   -- EAC On/Off
     [130] = "%d",   -- Radar Altimeter
@@ -72,10 +85,16 @@ PWDEV.ConfigEveryFrameArguments =
     [262] = "%.1f", -- TACAN Mode Dial 0/1/2/3/4
 
     [287] = "%d",  -- Position Lights FLASH/OFF/STEADY
+    [288] = "%.1f", -- Formation Lights
     [289] = "%d",  -- Anticollision Lights
+    [290] = "%.1f", -- Engine Instrument Lights
     [291] = "%d",  -- Nose Illumination
+    [292] = "%.1f", -- Flight Instrument Lights
+    [293] = "%.1f", -- Aux Instrument Lights
     [294] = "%d",  -- Signal Lights
     [295] = "%d",  -- Accelerometer and Compass Lights
+    [296] = "%.1f", -- Flood Lights
+    [297] = "%.1f", -- Console Lights
 
     [358] = "%d", -- JTSN / OFF
     [360] = "%d",  -- Missile Warning System OFF - ON - (MENU)
@@ -459,6 +478,7 @@ function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
             lCMSPTable  = PWDEV.Tools.split(lCMSP.txt_UP, "%s")
         end
 
+        send(2114, lCMSP.txt_UP or " ")
         send(2014,  string.format("%s", lCMSPTable[1]))
         send(2015,  string.format("%s", lCMSPTable[2]))
         send(2016,  string.format("%s", lCMSPTable[3]))
