@@ -70,6 +70,9 @@ PWDEV.ConfigEveryFrameArguments =
     [170] = "%d",   -- Squelch Switch
     [171] = "%.1f", -- UHF Volume Control
 
+    [193] = "%.1f", -- Refuel Status Indexer Lights
+    [194] = "%.1f", -- Nightvision Lights
+
     -- ILS
     [247] = "%d",  -- ILS Power
     [248] = "%.1f", -- ILS Frequency MHz 0/1/2/3
@@ -217,6 +220,47 @@ PWDEV.ConfigEveryFrameArguments =
     [619] = "%d",		-- UHF
 	[620] = "%d",		-- FM
     [621] = "%d",     -- PTR-NMSP-ABLE-STOW (ABLE-STOW ADI Localizer Bar)
+
+    [655] = "%.1f",     -- Land Taxi Lights
+
+	[666] = "%d", 	-- AILERON DISC L Circuit Breaker
+	[667] = "%d", 	-- AILERON DISC R Circuit Breaker
+	[668] = "%d", 	-- SPS RUDDER AUTH LIM Circuit Breaker
+	[669] = "%d", 	-- ELEVATOR DISC L Circuit Breaker
+	[670] = "%d", 	-- ELEVATOR DISC R Circuit Breaker
+	[671] = "%d", 	-- AILERON TAB L Circuit Breaker
+	[672] = "%d", 	-- AILERON TAB R Circuit Breaker
+	[673] = "%d", 	-- EMER FLAP Circuit Breaker
+	[674] = "%d", 	-- EMER TRIM Circuit Breaker
+	[675] = "%d", 	-- GEAR Circuit Breaker
+	[676] = "%d", 	-- ENG START L Circuit Breaker
+	[677] = "%d", 	-- ENG START R Circuit Breaker
+	[678] = "%d", 	-- APU CONT Circuit Breaker
+	[679] = "%d", 	-- ENG IGNITOR 1 Circuit Breaker
+	[680] = "%d", 	-- ENG IGNITOR 2 Circuit Breaker
+	[681] = "%d", 	-- FUEL SHUTOFF L Circuit Breaker
+	[682] = "%d", 	-- FUEL SHUTOFF R Circuit Breaker
+	[683] = "%d", 	-- DC FUEL PUMP Circuit Breaker
+	[684] = "%d", 	-- BLEED AIR CONT L Circuit Breaker
+	[685] = "%d", 	-- BLEED AIR CONT R Circuit Breaker
+	[686] = "%d", 	-- EXT STORES JETT 1 Circuit Breaker
+	[687] = "%d", 	-- EXT STORES JETT 2 Circuit Breaker
+	[688] = "%d", 	-- STBY ATT IND Circuit Breaker
+	[689] = "%d", 	-- MASTER CAUTION Circuit Breaker
+	[690] = "%d", 	-- PITOT HEAT AC Circuit Breaker
+	[691] = "%d", 	-- IFF Circuit Breaker
+	[692] = "%d", 	-- UHF Circuit Breaker
+	[693] = "%d", 	-- INTERCOM Circuit Breaker
+	[694] = "%d", 	-- GEN CONT L Circuit Breaker
+	[695] = "%d", 	-- GEN CONT R Circuit Breaker
+	[696] = "%d", 	-- CONVERTER L Circuit Breaker
+	[697] = "%d", 	-- AUX ESS BUS 0A Circuit Breaker
+	[698] = "%d", 	-- AUX ESS BUS 0B Circuit Breaker
+	[699] = "%d", 	-- AUX ESS BUS 0C Circuit Breaker
+	[700] = "%d", 	-- BAT BUS TRANS Circuit Breaker
+	[701] = "%d", 	-- INVERTER PWR Circuit Breaker
+	[702] = "%d", 	-- INVERTER CONT Circuit Breaker
+	[703] = "%d", 	-- AUX ESS BUS TIE Circuit Breaker
 
     [730] = "%d",		-- Air Refuel READY
     [731] = "%d",		-- Air Refuel LATCHED

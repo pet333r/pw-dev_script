@@ -12,6 +12,7 @@ PWDEV.ConfigEveryFrameArguments =
 	[366] = "%d", 	-- O2 Expendable Category Switch, ON/OFF
 	[367] = "%d", 	-- CH Expendable Category Switch, ON/OFF
 	[368] = "%d", 	-- FL Expendable Category Switch, ON/OFF
+	[369] = "%d", 	-- LDG handle red light
 	[375] = "%d", 	-- RWR Source Switch, ON/OFF
 	[374] = "%d", 	-- JMR Source Switch, ON/OFF
 	[373] = "%d", 	-- MWS Source Switch, ON/OFF
@@ -22,6 +23,20 @@ PWDEV.ConfigEveryFrameArguments =
 	[372] = "%d", 	-- GO Light (green)
 	[376] = "%d", 	-- DISPENSE Light (green)
 	[379] = "%d", 	-- RDY Light (green)
+
+	[430] = "%.1f", -- COMM 1 Power Knob
+	[431] = "%.1f", -- COMM 2 Power Knob 
+	[432] = "%.1f", -- SECURE VOICE Knob
+	[433] = "%.1f", -- MSL Tone Knob
+	[434] = "%.1f", -- COMM 1 (UHF) Mode Knob
+	[435] = "%.1f", -- COMM 2 (VHF) Mode Knob
+	[436] = "%.1f", -- TF Tone Knob
+	[437] = "%.1f", -- THREAT Tone Knob
+
+	[440] = "%.1f", -- INTERCOM Knob
+	[441] = "%.1f", -- TACAN Knob
+	[442] = "%.1f", -- ILS Power Knob
+	[443] = "%d", 	-- HOT MIC CIPHER Switch
 
 	-- SNSR
 	[670] = "%d", 	-- LEFT HDPT Switch
@@ -41,6 +56,14 @@ PWDEV.ConfigEveryFrameArguments =
 
 	-- LIGHTING
 	[691] = "%d", -- MAL & IND LTS Switch, BRT/Center/DIM
+
+	[97] = "%d",	-- ADV MODE Switch
+	[102] = "%d",	-- ECM green light
+	[103] = "%d",	-- LASER ARM Switch
+	[105] = "%d",	-- MASTER ARM Switch
+	[106] = "%d",	-- ADV MODE ACTIVE green
+	[107] = "%d",	-- ADV MODE STBY orange
+	[108] = "%d",	-- Autopilot ROLL Switch
 
 	[110] = "%d",	-- Warning, Caution and IndicatorLights","AoA Light up (red)
 	[111] = "%d",	-- Warning, Caution and IndicatorLights","AoA Light up (green)
@@ -86,7 +109,21 @@ PWDEV.ConfigEveryFrameArguments =
 	[148] = "%d", -- RWR SHIP UNKNOWN Light (green)
 	[150] = "%d", -- RWR SYSTEST Light (green)
 	[152] = "%d", -- RWR TGTSEP UP Light (green)
+	[153] = "%d", -- RWR U Light (green)
 	[138] = "%d", -- RWR TGTSEP DOWN Light (green)
+
+	[350] = "%d", -- LDG NOSE green
+	[351] = "%d", -- LDG LEFT green
+	[352] = "%d", -- LDG right green
+	[354] = "%d", -- HOOK Switch
+	[355] = "%d", -- GND JETT ENABLE Switch
+	[356] = "%d", -- BRAKES Channel Switch
+	[357] = "%d", -- ANTI-SKID Switch
+	[358] = "%d", -- STORES CONFIG Switch
+	[360] = "%d", -- LANDING TAXI LIGHTS Switch,
+	[362] = "%d", -- LG Handle
+	[361] = "%d", -- DN LOCK REL Button - Push to reset
+	[363] = "%d", -- SPEED BRAKE ind
 
 	-- UHF
 	[410] = "%.2f", -- UHF Preset Channel Selector

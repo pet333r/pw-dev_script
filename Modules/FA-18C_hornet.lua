@@ -92,6 +92,7 @@ PWDEV.ConfigEveryFrameArguments =
 	[273] = "%.1f", -- ALR-67 LIMIT Light (green)
 	[274] = "%.1f", -- ALR-67 DISPLAY Light (green)
 	[276] = "%.1f", -- ALR-67 LOWER Light (green)
+	[277] = "%d", 	-- ALR-67 POWER Pushbutton
 
 	-- Caution Lights Panel
 	[298] = "%d", -- CK SEAT

@@ -136,7 +136,6 @@ PWDEV.ConfigEveryFrameArguments =
     [546] = "%d", -- Squelch OFF/SQL/ACKN
     [547] = "%.1f", -- Radio Mode Selector
 
-    [900] = "%d", -- Day/Night Switch
     -- ELEC
     [904] = "%d", -- Battery Switch
     [905] = "%d", -- Main AC Gen Switch
@@ -158,7 +157,6 @@ PWDEV.ConfigEveryFrameArguments =
     [949] = "%.1f", -- Anti-Collision Light Knob Selector 0/3/5/8/1.0
     [950] = "%d", -- Navigation Light Switch - Bright/Off/Dim 1/0/-1
     [951] = "%d", -- Navigation Light Switch - Flash/Steady 1/-1
-    [952] = "%d", -- Light Switch - Tow/Off/Anti-Collision 1/0/-1
     [952] = "%d", -- Light Switch - Tow/Off/Anti-Collision 1/0/-1
     [963] = "%d", -- AAR Light Switch 1/-1
 }
@@ -190,45 +188,43 @@ PWDEV.ConfigArguments =
 }
 
 local function processUFCPLine(ufcpLine, lineNum)
-	local temp_txt_win      = ufcpLine["txt_win" .. lineNum]
-	local txt_win_fill      = ufcpLine["txt_win" .. lineNum .. "_fill"]
-	local cur_win           = ufcpLine["cur_win" .. lineNum]
-	local txt_winr          = ufcpLine["txt_win" .. lineNum .. "r"]
-	local cur_winr          = ufcpLine["cur_win" .. lineNum .. "r"]
-	local UFCPLineLength    = 8
-	local txt_win
+    local UFCPLineLength    = 8
 
-	if temp_txt_win ~= null then
-        txt_win = temp_txt_win:gsub(string.char(127), "^")
+    local temp_txt_win      = ufcpLine["txt_win" .. lineNum]
+    local txt_win_fill      = ufcpLine["txt_win" .. lineNum .. "_fill"]
+    local cur_win           = ufcpLine["cur_win" .. lineNum]
+    local txt_winr          = ufcpLine["txt_win" .. lineNum .. "r"]
+    local cur_winr          = ufcpLine["cur_win" .. lineNum .. "r"]
+    local txt_win           = temp_txt_win:gsub(string.char(127), "^") or ""
+
+    local processedUFCPLine
+
+    if txt_win_fill ~= nil then
+        local full_txt_win_fill  = txt_win_fill .. string.rep(" ", UFCPLineLength - string.len(txt_win_fill))
+        if temp_txt_win ~= nil then
+            if cur_win ~= nil then
+                if txt_win:find("-") then
+                    processedUFCPLine = txt_win:sub(1, txt_win:find("-") - cur_win:len()) .. cur_win .. txt_win:sub(txt_win:find("-") + cur_win:len()) .. full_txt_win_fill:sub(txt_win:len() + 1)
+                else
+                    processedUFCPLine = txt_win:sub(1, txt_win:len() - cur_win:len()) .. cur_win .. full_txt_win_fill:sub(txt_win:len() + 1)
+                end
+            else
+                processedUFCPLine = txt_win .. full_txt_win_fill:sub(txt_win:len() + 1)
+            end
+        else
+            if cur_winr ~= nil then
+                processedUFCPLine = full_txt_win_fill:sub(1, UFCPLineLength - txt_winr:len()) .. txt_winr:sub(1, txt_winr:len() - cur_winr:len()) .. cur_winr
+            else
+                processedUFCPLine = full_txt_win_fill:sub(1, UFCPLineLength - txt_winr:len()) .. txt_winr
+            end
+        end
+    elseif txt_win ~= nil then
+        processedUFCPLine = txt_win
     else
-        txt_win = ""
+        processedUFCPLine = txt_winr
     end
 
-	if txt_win_fill ~= null then
-	    local full_txt_win_fill  = txt_win_fill..string.rep(" ", UFCPLineLength - string.len(txt_win_fill))
-	    if temp_txt_win ~= null then
-		    if cur_win ~= null then
-			    if txt_win:find("-") then
-				    processedUFCPLine = txt_win:sub(1, txt_win:find("-") - cur_win:len()) .. cur_win .. txt_win:sub(txt_win:find("-") + cur_win:len()) .. full_txt_win_fill:sub(txt_win:len() + 1)
-			    else
-				    processedUFCPLine = txt_win:sub(1, txt_win:len() - cur_win:len()) .. cur_win .. full_txt_win_fill:sub(txt_win:len() + 1)
-			    end
-		    else
-			    processedUFCPLine = txt_win .. full_txt_win_fill:sub(txt_win:len() + 1)
-		    end
-		else
-		    if cur_winr ~= null then
-			    processedUFCPLine = full_txt_win_fill:sub(1, UFCPLineLength - txt_winr:len()) .. txt_winr:sub(1, txt_winr:len() - cur_winr:len()) .. cur_winr
-		    else
-			    processedUFCPLine = full_txt_win_fill:sub(1, UFCPLineLength - txt_winr:len()) .. txt_winr
-		    end
-		end
-	elseif txt_win ~= null then
-	    processedUFCPLine = txt_win
-	else
-	    processedUFCPLine = txt_winr
-	end
-	return processedUFCPLine
+    return processedUFCPLine
 end
 
 local function radio_parse_indication(indicator_id)  -- Thanks to [FSF]Ian code
@@ -239,9 +235,10 @@ local function radio_parse_indication(indicator_id)  -- Thanks to [FSF]Ian code
 	while true do
 		local name, value = m()
 		if not name then break end
-			-- there's # characters in one of the radio indicator names which break parsing if it isn't replaced
-			ret[name:gsub("\#", "hash")] = value
-		end
+
+        -- there's # characters in one of the radio indicator names which break parsing if it isn't replaced
+        ret[name:gsub("#", "hash")] = value
+    end
 	return ret
 end
 

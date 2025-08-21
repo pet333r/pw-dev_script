@@ -148,6 +148,36 @@ PWDEV.ConfigEveryFrameArguments =
 	[536] = "%d",		-- Right Inlet Ramp Switch
 	[537] = "%.1f",		-- Anti Skid Switch
 	[538] = "%.1f",		-- Landing/Taxi Light Switch
+	-- OXYGEN
+	[551] = "%d",		-- Oxygen Emergency/Normal/Test Switch
+	[552] = "%d",		-- Oxygen 100%/Normal Switch
+	[553] = "%.1f",		-- Oxygen Supply/Mode Control Switch
+	[554] = "%.2f",		-- Oxygen gauge
+	[555] = "%d",		-- flow
+	-- ECS
+	[556] = "%d",		-- Oxygen Test
+	[558] = "%.1f",		-- Anti-Fog
+	[559] = "%d",		-- Windshield Anti-ice Switch
+	[560] = "%d",		-- Pitot Heat Switch
+	[561] = "%d",		-- Engine Heat Switch
+	-- AIR COND
+	[562] = "%.1f",		-- Air Conditiong Auto/Manual/Off
+	[563] = "%.1f",		-- Air Conditiong Max/Norm/Min
+	[564] = "%.1f",		-- Air Conditiong Cold/Hot
+	[565] = "%.2f",		-- Air Conditioning Source
+	-- ENGINE
+	[587] = "%d",		-- Left Generator sw
+	[588] = "%d",		-- Right Generator sw
+	[589] = "%.1f",		-- Emergency Generator sw
+	[590] = "%d",		-- Left Engine Control Switch
+	[591] = "%d",		-- Right Engine Control Switch
+	[592] = "%d",		-- Left Engine Master Switch Cover
+	[593] = "%d",		-- Left Engine Master Switch
+	[594] = "%d",		-- External Power Switch
+	[595] = "%d",		-- Jet Starter
+	[596] = "%d",		-- green light ind
+	[597] = "%d",		-- Right Engine Master Switch Cover
+	[598] = "%d",		-- Right Engine Master Switch
 
 	-- INTERIOR LT
 	[569] = "%d",		-- Warning/Caution Lights Test
@@ -240,6 +270,9 @@ PWDEV.ConfigEveryFrameArguments =
 	[1470] = "%d",		-- EWWS ON/OFF Switch
 	[1471] = "%d",		-- EWWS TONE/DEFEAT Switch
 	[1472] = "%d",		-- FAIL lights 3x
+	-- CMD
+	[1475] = "%.1f",	-- CMD Dispenser Selection Switch FLARE/BOTH/CHAFF
+	[1476] = "%.2f",	-- CMD Operational Mode OFF/STBY/MAN/SEMI/AUTO
 }
 
 local function replaceSymbols(s)
@@ -273,6 +306,12 @@ PWDEV.ConfigArguments =
 	[1420] = "%.1f",	-- Caution Volume
 	[1422] = "%.1f",	-- ICS Volume
 	[1424] = "%.1f",	-- ILS Volume
+	-- REAR OXYGEN
+	[1450] = "%d",		-- Oxygen Emergency/Normal/Test Switch
+	[1451] = "%d",		-- Oxygen 100%/Normal Switch
+	[1452] = "%.1f",	-- Oxygen Supply/Mode Control Switch
+	[1453] = "%.2f",	-- Oxygen gauge
+	[1454] = "%.1f",	-- flow
 	-- REAR INTERIOR LT
 	[1456] = "%.1f",	-- Console Lights
 	[1457] = "%.1f",	-- Instruments Panel Lights
