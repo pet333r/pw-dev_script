@@ -172,6 +172,12 @@ local function getParamVisibility(param)
         return "1"
     end
 end
+local function check(data)
+	local value
+	if data == nil then value = "0" else value = "1" end
+	return value
+end
+
 
 function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
 end
