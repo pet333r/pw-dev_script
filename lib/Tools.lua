@@ -20,6 +20,7 @@ local RAD_2_DEG   = 57.296 -- radians to degrees
 local timestamp = 0
 local timestampNav = 0
 local timeSecPlayer = 1
+local missionStartTime = 0
 
 function PWDEV.Tools.createUDPSender()
 	PWDEV.socket = require("socket")
@@ -361,6 +362,22 @@ function PWDEV.Tools.GetArgumentsValue(argument, format)
     return string.format(format, value)
 end
 
+function PWDEV.Tools.GetArgumentsString(argIndices)
+    local result = ""
+
+    for _, index in ipairs(argIndices) do
+        local rawValue = GetDevice(0):get_argument_value(index)
+        local digit = math.floor((rawValue % 1) * 10)
+        result = result .. tostring(digit)
+    end
+
+    return result
+end
+
+function PWDEV.Tools.GetAircraftDrawArgumentValue(argIndex, format)
+    local value = LoGetAircraftDrawArgumentValue(argIndex)
+    return string.format(format, value)
+end
 function PWDEV.Tools.SendShortData(message)
     local _flushData = PWDEV.socket.protect(function()
         local _packet = message .. "\n"

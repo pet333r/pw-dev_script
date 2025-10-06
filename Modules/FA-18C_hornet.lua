@@ -50,6 +50,8 @@ PWDEV.ConfigEveryFrameArguments =
 	[40] = "%d",   -- CPT_LTS_AAA
 	[41] = "%d",   -- CPT_LTS_CW
 
+	[44] = "%d",   -- READY Light
+	[45] = "%d",   -- DISCH Light
 	-- Master Arm Panel
 	[47] = "%d",   -- AA Light
 	[48] = "%d",   -- AG Light
@@ -146,6 +148,8 @@ PWDEV.ConfigEveryFrameArguments =
 	[442] = "%d", 	-- LST/NFLR Switch, ON/OFF
 	[440] = "%.1f", -- RADAR Switch Change ,OFF/STBY/OPR/EMERG(PULL)
 	[443] = "%.1f", -- INS Switch, OFF/CV/GND/NAV/IFA/GYRO/GB/TEST
+	[458] = "%d", -- btn A/A
+	[459] = "%d", -- btn A/G
 }
 
 PWDEV.ConfigArguments =
@@ -198,63 +202,68 @@ PWDEV.ConfigArguments =
 	[418] = "%.1f", -- CHART Light Dimmer Knob
 }
 
+local function check(data)
+	local value
+	if data == nil then value = "0" else value = "1" end
+	return value
+end
 
 function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
+	send(89, PWDEV.Tools.GetAircraftDrawArgumentValue(89, "%.1f"))
+	send(90, PWDEV.Tools.GetAircraftDrawArgumentValue(90, "%.1f"))
 end
 
 function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
 
 	-- UFC Displays
-	local _ufcDisplay = PWDEV.Tools.getListIndicatorValue(6)
+	local ufc = PWDEV.Tools.getListIndicatorValue(6)
 
-	if _ufcDisplay ~= nil and _ufcDisplay.UFC_MainDummy ~= nil then
+	if ufc ~= nil and ufc.UFC_MainDummy ~= nil then
 		-- ScratchPadString Displays
-		_ufcDisplay.UFC_ScratchPadString1Display = string.gsub(_ufcDisplay.UFC_ScratchPadString1Display, "_", "-") -- fix
-		_ufcDisplay.UFC_ScratchPadString2Display = string.gsub(_ufcDisplay.UFC_ScratchPadString2Display, "_", "-") -- fix
-		_ufcDisplay.UFC_ScratchPadString1Display = string.gsub(_ufcDisplay.UFC_ScratchPadString1Display, "~", "2") -- need to be 2
-		_ufcDisplay.UFC_ScratchPadString2Display = string.gsub(_ufcDisplay.UFC_ScratchPadString2Display, "~", "2") -- need to be 2
-		_ufcDisplay.UFC_ScratchPadString1Display = string.gsub(_ufcDisplay.UFC_ScratchPadString1Display, "`", "1") -- need to be 1
-		_ufcDisplay.UFC_ScratchPadString2Display = string.gsub(_ufcDisplay.UFC_ScratchPadString2Display, "`", "1") -- need to be 1
-		send(2020, string.gsub(_ufcDisplay.UFC_ScratchPadString1Display, " ", "")) -- PWDEV.Tools.DisplayFormat(_ufcDisplay.UFC_ScratchPadString1Display, 1)) -- ScratchPadString1Display 2 character
-		send(2021, PWDEV.Tools.DisplayFormat(_ufcDisplay.UFC_ScratchPadString2Display, 2)) -- ScratchPadString2Display 2 character
-		send(2022, PWDEV.Tools.DisplayFormat(_ufcDisplay.UFC_ScratchPadNumberDisplay, 7)) -- ScratchPadNumberDisplay 7 character
+		ufc.UFC_ScratchPadString1Display = string.gsub(ufc.UFC_ScratchPadString1Display, "~", "2") -- need to be 2
+		ufc.UFC_ScratchPadString2Display = string.gsub(ufc.UFC_ScratchPadString2Display, "~", "2") -- need to be 2
+		ufc.UFC_ScratchPadString1Display = string.gsub(ufc.UFC_ScratchPadString1Display, "`", "1") -- need to be 1
+		ufc.UFC_ScratchPadString2Display = string.gsub(ufc.UFC_ScratchPadString2Display, "`", "1") -- need to be 1
+		send(2020, string.gsub(ufc.UFC_ScratchPadString1Display, " ", ""))
+		send(2021, PWDEV.Tools.DisplayFormat(ufc.UFC_ScratchPadString2Display, 2))
+		send(2022, PWDEV.Tools.DisplayFormat(ufc.UFC_ScratchPadNumberDisplay, 8))
 
 		local _tmpCueing = " "
 		-- Option Displays
-		_tmpCueing = (#_ufcDisplay.UFC_OptionCueing1 > 0 and "¦" or " ")
-		send(2023, PWDEV.Tools.DisplayFormat(_tmpCueing .. _ufcDisplay.UFC_OptionDisplay1, 5)) -- OptionDisplay1 5 character
-		_tmpCueing = (#_ufcDisplay.UFC_OptionCueing2 > 0 and "¦" or " ")
-		send(2024, PWDEV.Tools.DisplayFormat(_tmpCueing .. _ufcDisplay.UFC_OptionDisplay2, 5)) -- OptionDisplay2 5 character
-		_tmpCueing = (#_ufcDisplay.UFC_OptionCueing3 > 0 and "¦" or " ")
-		send(2025, PWDEV.Tools.DisplayFormat(_tmpCueing .. _ufcDisplay.UFC_OptionDisplay3, 5)) -- OptionDisplay3 5 character
-		_tmpCueing = (#_ufcDisplay.UFC_OptionCueing4 > 0 and "¦" or " ")
-		send(2026, PWDEV.Tools.DisplayFormat(_tmpCueing .. _ufcDisplay.UFC_OptionDisplay4, 5)) -- OptionDisplay4 5 character
-		_tmpCueing = (#_ufcDisplay.UFC_OptionCueing5 > 0 and "¦" or " ")
-		send(2027, PWDEV.Tools.DisplayFormat(_tmpCueing .. _ufcDisplay.UFC_OptionDisplay5, 5)) -- OptionDisplay5 5 character
+		_tmpCueing = (#ufc.UFC_OptionCueing1 > 0 and "¦" or " ")
+		send(2023, PWDEV.Tools.DisplayFormat(_tmpCueing .. ufc.UFC_OptionDisplay1, 5))
+		_tmpCueing = (#ufc.UFC_OptionCueing2 > 0 and "¦" or " ")
+		send(2024, PWDEV.Tools.DisplayFormat(_tmpCueing .. ufc.UFC_OptionDisplay2, 5))
+		_tmpCueing = (#ufc.UFC_OptionCueing3 > 0 and "¦" or " ")
+		send(2025, PWDEV.Tools.DisplayFormat(_tmpCueing .. ufc.UFC_OptionDisplay3, 5))
+		_tmpCueing = (#ufc.UFC_OptionCueing4 > 0 and "¦" or " ")
+		send(2026, PWDEV.Tools.DisplayFormat(_tmpCueing .. ufc.UFC_OptionDisplay4, 5))
+		_tmpCueing = (#ufc.UFC_OptionCueing5 > 0 and "¦" or " ")
+		send(2027, PWDEV.Tools.DisplayFormat(_tmpCueing .. ufc.UFC_OptionDisplay5, 5))
 
 		-- Comm Displays
-		_ufcDisplay.UFC_Comm1Display = string.gsub(_ufcDisplay.UFC_Comm1Display, "~", "2") -- need to be 2
-		_ufcDisplay.UFC_Comm2Display = string.gsub(_ufcDisplay.UFC_Comm2Display, "~", "2") -- need to be 2
-		_ufcDisplay.UFC_Comm1Display = string.gsub(_ufcDisplay.UFC_Comm1Display, "`", "1") -- need to be 1
-		_ufcDisplay.UFC_Comm2Display = string.gsub(_ufcDisplay.UFC_Comm2Display, "`", "1") -- need to be 1
-		send(2028, PWDEV.Tools.DisplayFormat(_ufcDisplay.UFC_Comm1Display, 2)) -- Comm1Display 2 character
-		send(2029, PWDEV.Tools.DisplayFormat(_ufcDisplay.UFC_Comm2Display, 2)) -- Comm2Display 2 character
+		ufc.UFC_Comm1Display = string.gsub(ufc.UFC_Comm1Display, "~", "2")
+		ufc.UFC_Comm2Display = string.gsub(ufc.UFC_Comm2Display, "~", "2")
+		ufc.UFC_Comm1Display = string.gsub(ufc.UFC_Comm1Display, "`", "1")
+		ufc.UFC_Comm2Display = string.gsub(ufc.UFC_Comm2Display, "`", "1")
+		send(2028, PWDEV.Tools.DisplayFormat(ufc.UFC_Comm1Display, 2))
+		send(2029, PWDEV.Tools.DisplayFormat(ufc.UFC_Comm2Display, 2))
 	else
 		-- ScratchPadString Displays
-		send(2020, "") -- ScratchPadString1Display 2 character
-		send(2021, " ") -- ScratchPadString2Display 2 character
-		send(2022, " ") -- ScratchPadNumberDisplay 7 character
+		send(2020, "  ")
+		send(2021, "  ")
+		send(2022, "        ")
 
 		-- Option Displays
-		send(2023, " ") -- OptionDisplay1 5 character
-		send(2024, " ") -- OptionDisplay2 5 character
-		send(2025, " ") -- OptionDisplay3 5 character
-		send(2026, " ") -- OptionDisplay4 5 character
-		send(2027, " ") -- OptionDisplay5 5 character
+		send(2023, "     ")
+		send(2024, "     ")
+		send(2025, "     ")
+		send(2026, "     ")
+		send(2027, "     ")
 
 		-- Comm Displays
-		send(2028, " ") -- Comm1Display 2 character
-		send(2029, " ") -- Comm2Display 2 character
+		send(2028, "  ")
+		send(2029, "  ")
 	end
 
 	local _UHF1Radio = GetDevice(38)
@@ -288,6 +297,9 @@ function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
 	local txt_TimeSetMode = ""
 
 	local ifei = PWDEV.Tools.getListIndicatorValue(5)
+	if not ifei then
+		return
+	end
 	txt_BINGO 		= "     "
 	txt_CLOCK_H 	= "  "
 	txt_CLOCK_M 	= "  "
@@ -312,9 +324,25 @@ function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
 	local LTexture = "0"
 	local RTexture = "0"
 	local ZTexture = "0"
-	if not ifei then
-		return
-	end
+
+	local RPMTexture = check(ifei.RPMTexture)
+	local TempTexture = check(ifei.TempTexture)
+	local FFTexture = check(ifei.FFTexture)
+	local NOZTexture = check(ifei.NOZTexture)
+	local OILTexture = check(ifei.OILTexture)
+	local BINGOTexture = check(ifei.BINGOTexture)
+
+	local LScaleTexture = check(ifei.LScaleTexture)
+	local RScaleTexture = check(ifei.RScaleTexture)
+	local LPointerTexture = check(ifei.LPointerTexture)
+	local RPointerTexture = check(ifei.RPointerTexture)
+	local L0Texture = check(ifei.L0Texture)
+	local L50Texture = check(ifei.L50Texture)
+	local L100Texture = check(ifei.L100Texture)
+	local R0Texture = check(ifei.R0Texture)
+	local R50Texture = check(ifei.R50Texture)
+	local R100Texture = check(ifei.R100Texture)
+
 	txt_RPM_L		= coerce_nil_to_string(ifei.txt_RPM_L)
 	txt_RPM_R		= coerce_nil_to_string(ifei.txt_RPM_R)
 	txt_TEMP_L		= coerce_nil_to_string(ifei.txt_TEMP_L)
@@ -368,4 +396,12 @@ function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
 	send(2201, LTexture)
 	send(2202, RTexture)
 	send(2203, ZTexture)
+
+	send(2204, LTexture .. RTexture .. ZTexture)
+	send(2205, RPMTexture .. TempTexture .. FFTexture .. NOZTexture .. OILTexture .. BINGOTexture)
+	send(2206, LScaleTexture .. RScaleTexture .. LPointerTexture .. RPointerTexture .. L0Texture .. L50Texture .. L100Texture .. R0Texture .. R50Texture .. R100Texture)
+
+    send(2501, PWDEV.Tools.GetArgumentsString({220,219}))
+
 end
+

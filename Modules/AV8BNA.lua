@@ -167,8 +167,8 @@ PWDEV.ConfigEveryFrameArguments =
 	[509] = "%d",	--Fuel Dump R Switch"
 
 	-- External Lights Panel
-	[472] = "%d",	--Landing/Taxi Lights Switch
-	[503] = "%d",	--External Lights Mode Switch"
+	[472] = "%.1f",	--Landing/Taxi Lights Switch
+	[503] = "%.1f",	--External Lights Mode Switch"
 
 	[511] = "%.1f",	--Position Lights Switch
 	[512] = "%d",	--Anti-Collision Lights Switch
@@ -295,140 +295,25 @@ end
 
 -- Pointed to by PWDEV.ProcessDCSConfigLowImportance
 function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
-	--ENGINE DISPLAY
-	-- DUCT
-	digits = {}
-	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(253) * 10)
-	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(254) * 10)
-	digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(255) * 10)
-	send(2001, digits[1]..digits[2]..digits[3])
-
-	-- RPM
-	digits = {}
-	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(256) * 10)
-	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(257) * 10)
-	digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(258) * 10)
-	digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(259) * 10)
-	send(2002, digits[1]..digits[2]..digits[3]..digits[4])
-
-	-- FF
-	digits = {}
-	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(260) * 10)
-	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(261) * 10)
-	digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(262) * 10)
-	send(2003, digits[1]..digits[2]..digits[3])
-
-	-- JPT
-	digits = {}
-	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(263) * 10)
-	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(264) * 10)
-	digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(265) * 10)
-	send(2004, digits[1]..digits[2]..digits[3])
-
-	-- STAB
-	digits = {}
-	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(267) * 10)
-	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(268) * 10)
-	send(2005, digits[1]..digits[2])
-
-	-- H2O
-	digits = {}
-	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(269) * 10)
-	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(270) * 10)
-	send(2006, digits[1]..digits[2])
-
-	-- Fuel Total
-	digits = {}
-	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(366) * 10)
-	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(367) * 10)
-	digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(368) * 10)
-	digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(369) * 10)
-	digits[5] = string.format("%1.0f",mainPanelDevice:get_argument_value(370) * 10)
-	send(2010, digits[1]..digits[2]..digits[3]..digits[4]..digits[5])
-
-	-- Fuel Left
-	digits = {}
-	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(371) * 10)
-	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(372) * 10)
-	digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(373) * 10)
-	digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(374) * 10)
-	send(2011, digits[1]..digits[2]..digits[3]..digits[4])
-
-	-- Fuel Right
-	digits = {}
-	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(375) * 10)
-	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(376) * 10)
-	digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(377) * 10)
-	digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(378) * 10)
-	send(2012, digits[1]..digits[2]..digits[3]..digits[4])
-
-	-- Fuel Bingo
-	digits = {}
-	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(381) * 10)
-	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(382) * 10)
-	digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(383) * 10)
-	digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(384) * 10)
-	send(2013, digits[1]..digits[2]..digits[3]..digits[4])
-
-	--FLAP POSITION DISPLAY
-	digits = {}
-	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(455) * 10)
-	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(456) * 10)
-	send(2014, digits[1]..digits[2])
-
-	--BRAKE/HYD DISPLAY
-	digits = {}
-	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(550) * 10)
-	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(551) * 10)
-	digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(552) * 10)
-	send(2015, digits[1]..digits[2]..digits[3])
-
-	-- Brake Hyd 1
-	digits = {}
-	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(553) * 10)
-	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(554) * 10)
-	digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(555) * 10)
-	send(2016, digits[1]..digits[2]..digits[3])
-
-	-- Brake Hyd 2
-	digits = {}
-	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(556) * 10)
-	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(557) * 10)
-	digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(558) * 10)
-	send(2017, digits[1]..digits[2]..digits[3])
-
-	-- QTY
-	digits = {}
-	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(389) * 10)
-	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(390) * 10)
-	send(2020, digits[1]..digits[2])
-
-	-- MULT
-	digits = {}
-	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(391) * 10)
-	send(2021, digits[1])
-
-	-- INTV X 10
-	digits = {}
-	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(392) * 10)
-	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(393) * 10)
-	digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(394) * 10)
-	send(2022, digits[1]..digits[2]..digits[3])
-
-	-- altitude
-	digits = {}
-	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(355) * 10)
-	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(354) * 10)
-	digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(353) * 10)
-	send(2050, digits[1]..digits[2]..digits[3])
-
-	-- altitude in Hg
-	digits = {}
-	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(356) * 10)
-	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(357) * 10)
-	digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(358) * 10)
-	digits[4] = string.format("%1.0f",mainPanelDevice:get_argument_value(359) * 10)
-	send(2051, digits[1]..digits[2]..digits[3]..digits[4])
+	send(2001, PWDEV.Tools.GetArgumentsString({253,254,255}))
+	send(2002, PWDEV.Tools.GetArgumentsString({256,257,258,259}))
+	send(2003, PWDEV.Tools.GetArgumentsString({260,261,262}))
+	send(2004, PWDEV.Tools.GetArgumentsString({263,264,265}))
+	send(2005, PWDEV.Tools.GetArgumentsString({267,268}))
+	send(2006, PWDEV.Tools.GetArgumentsString({269,270}))
+	send(2010, PWDEV.Tools.GetArgumentsString({366,367,368,369,370}))
+	send(2011, PWDEV.Tools.GetArgumentsString({371,372,373,374}))
+	send(2012, PWDEV.Tools.GetArgumentsString({375,376,377,378}))
+	send(2013, PWDEV.Tools.GetArgumentsString({381,382,383,384}))
+	send(2014, PWDEV.Tools.GetArgumentsString({455,456}))
+	send(2015, PWDEV.Tools.GetArgumentsString({550,551,552}))
+	send(2016, PWDEV.Tools.GetArgumentsString({553,554,555}))
+	send(2017, PWDEV.Tools.GetArgumentsString({556,557,558}))
+	send(2020, PWDEV.Tools.GetArgumentsString({389,390}))
+	send(2021, PWDEV.Tools.GetArgumentsString({391}))
+	send(2022, PWDEV.Tools.GetArgumentsString({392,393,394}))
+	send(2050, PWDEV.Tools.GetArgumentsString({355,354,353}))
+	send(2051, PWDEV.Tools.GetArgumentsString({356,357,358,359}))
 
 	-- UFC Displays
 	local lUfcDisplays = list_indication(5)

@@ -25,6 +25,27 @@ PWDEV.ConfigArguments =
     [120] = "%.1f", -- switch 3
     [122] = "%.1f", -- MPD knob
 
+	[136] = "%d", 	-- MMS First/Last Switch
+	[137] = "%d", 	-- MMS Laser Power Switch
+	[143] = "%d", 	-- MMS Symbology Intensity Switch Manual/Auto
+	[144] = "%d", 	-- Video Gain Switch Manual/Auto
+	[145] = "%d", 	-- Video Level Switch Manual/Auto
+	[146] = "%d", 	-- Video Focus Switch Manual/Auto
+	[147] = "%.1f", -- MMS Mode Selector
+
+	[161] = "%d", -- Force Trim Switch
+	[162] = "%d", -- Hydraulic System Switch
+	[163] = "%d", -- Pitch/Roll Engage Switch
+	[164] = "%d", -- Yaw Engage Switch
+	[165] = "%d", -- Power Switch
+
+	[167] = "%d", -- Left Pylon Jettison Switch Guard
+	[168] = "%d", -- Right Pylon Jettison Switch Guard
+	[169] = "%d", -- Left Pylon Jettison Switch
+	[170] = "%d", -- Right Pylon Jettison Switch
+	[171] = "%d", -- Master Switch
+	[172] = "%d", -- Gun Switch
+
     [192] = "%d", -- keyboard switch 1
     [193] = "%d", -- Zeroize Switch Guard
     [194] = "%d", -- Emergency Switch Guard
@@ -454,9 +475,30 @@ function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
                 getParamVisibility(cockpitParams.NG_NP_vis) ..
                 getParamVisibility(cockpitParams.BIT_vis))
 
-    local cmws = PWDEV.Tools.parseListIndicatorList(10) or {}
+    local cmws = PWDEV.Tools.parseListIndicatorList(10)
+    if not cmws then
+        send(2009, "0")
+		return
+	end
+    local compassRing = check(cmws.compassRing)
+    local smallArrow1 = check(cmws.smallArrow1)
+    local smallArrow2 = check(cmws.smallArrow2)
+    local smallArrow3 = check(cmws.smallArrow3)
+    local smallArrow4 = check(cmws.smallArrow4)
+    local smallArrow5 = check(cmws.smallArrow5)
+    local smallArrow6 = check(cmws.smallArrow6)
+    local smallArrow7 = check(cmws.smallArrow7)
+    local smallArrow8 = check(cmws.smallArrow8)
+    local threatArrowFrontRight = check(cmws.threatArrowFrontRight)
+    local threatArrowRearRight = check(cmws.threatArrowRearRight)
+    local threatArrowRearLeft = check(cmws.threatArrowRearLeft)
+    local threatArrowFrontLeft = check(cmws.threatArrowFrontLeft)
+    local dispense = check(cmws.dispense)
+    local ready = check(cmws.ready)
+
     if (cmws ~= nil) then
         send(2007, string.format("%s", cmws.statusDisplay[1]))
         send(2008, string.format("%s", cmws.statusDisplay[2]))
+        send(2009, compassRing .. smallArrow1 .. smallArrow2 .. smallArrow3 .. smallArrow4 .. smallArrow5 .. smallArrow6 .. smallArrow7 .. smallArrow8 .. threatArrowFrontRight .. threatArrowRearRight .. threatArrowRearLeft .. threatArrowFrontLeft .. dispense .. ready)
     end
 end

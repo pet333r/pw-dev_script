@@ -207,15 +207,8 @@ end
 
 function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
     indEKRAN = PWDEV.Tools.parseListIndicatorList(4)
-    send(2041, getEKRAN_txt1_line(1))
-    send(2042, getEKRAN_txt1_line(2))
-    send(2043, getEKRAN_txt1_line(3))
-    send(2044, getEKRAN_txt1_line(4))
-
-    send(2045, getEKRAN_txt2_line(1))
-    send(2046, getEKRAN_txt2_line(2))
-    send(2047, getEKRAN_txt2_line(3))
-    send(2048, getEKRAN_txt2_line(4))
+	send(2040, getEKRAN_txt1_line(1) .. getEKRAN_txt1_line(2) .. getEKRAN_txt1_line(3) .. getEKRAN_txt1_line(4))
+	send(2041, getEKRAN_txt2_line(1) .. getEKRAN_txt2_line(2) .. getEKRAN_txt2_line(3) .. getEKRAN_txt2_line(4))
 
     send(2049, getEKRAN_memory())
     -- jeżeli jest 1 to wyświetlane są dane z EKRAN #2

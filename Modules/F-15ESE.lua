@@ -91,9 +91,9 @@ PWDEV.ConfigEveryFrameArguments =
 	[432] = "%d",		-- SPARE light
 
 	-- CAS
-	[452] = "%.1f",		-- Yaw CAS Switch
-	[453] = "%.1f",		-- Roll CAS Switch
-	[454] = "%.1f",		-- Pitch CAS Switch
+	[452] = "%.2f",		-- Yaw CAS Switch
+	[453] = "%.2f",		-- Roll CAS Switch
+	[454] = "%.2f",		-- Pitch CAS Switch
 	[455] = "%d",		-- BIT Button
 	[456] = "%d",		-- TF Couple Switch
 	[457] = "%d",		-- T/O Trim Button

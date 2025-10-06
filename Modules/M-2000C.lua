@@ -6,6 +6,10 @@ PWDEV.FoundDCSModule = true
 
 PWDEV.ConfigEveryFrameArguments =
 {
+	[185] = "%d",	-- LIM red lt
+	[186] = "%d",	-- IFF red lt
+	[187] = "%d",	-- LCD green 1
+	[188] = "%d",	-- LCD green 2
 	[193] = "%.1f",	-- Refuel Transfer Switch
 
 	[199] = "%d",	-- master warning
@@ -17,6 +21,18 @@ PWDEV.ConfigEveryFrameArguments =
 	[231] = "%d",	-- DA
 	[232] = "%d",	-- D2M
 	[233] = "%d",	-- LL
+	[349] = "%.1f",	-- gauge 1
+	[350] = "%.1f",	-- gauge 2
+	[351] = "%.1f",	-- gauge 3
+	[352] = "%.1f",	-- remain 1
+	[353] = "%.1f",	-- remain 2
+	[354] = "%.1f",	-- remain 3
+	[355] = "%d",	-- switch reset
+
+	[373] = "%d",	-- AB lt
+	[374] = "%d",	-- ENG lt
+	[375] = "%d",	-- AB lt
+	[376] = "%d",	-- START red lt
 
 	-- Fuel panel
 	[198] = "%d", 	-- Air Refueling Light
@@ -76,7 +92,7 @@ PWDEV.ConfigEveryFrameArguments =
 	[290] = "%d",	--AFF
 	[292] = "%d",	--blank1
 	[293] = "%d",	--blank2
-	[295] = "%d", --left
+	[295] = "%d", 	--left
 	[296] = "%d",	--blank L
 	[297] = "%d",	--G
 	[298] = "%d",	--blank G
@@ -366,17 +382,8 @@ function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
 	send(2071, PWDEV.Tools.getListIndicatorValueByName(3, "txt_fuel_g", 3))
 
 	-- Fuel
-	digits = {}
-	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(349) * 10)
-	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(350) * 10)
-	digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(351) * 10)
-	send(2053, digits[1] .. digits[2] .. digits[3] .. "0")
-
-	digits = {}
-	digits[1] = string.format("%1.0f",mainPanelDevice:get_argument_value(352) * 10)
-	digits[2] = string.format("%1.0f",mainPanelDevice:get_argument_value(353) * 10)
-	digits[3] = string.format("%1.0f",mainPanelDevice:get_argument_value(354) * 10)
-	send(2054, digits[1] .. digits[2] .. digits[3] .. "0")
+	send(2053, PWDEV.Tools.GetArgumentsString({349,350,351}) .. "0")
+	send(2054, PWDEV.Tools.GetArgumentsString({352,353,354}) .. "0")
 
 	-- EVF
 	send(2056, PWDEV.Tools.getListIndicatorValueByName(11, "evf-digits", 2))

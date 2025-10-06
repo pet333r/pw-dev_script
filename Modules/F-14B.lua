@@ -205,6 +205,10 @@ PWDEV.ConfigEveryFrameArguments =
 	[1009] = "%d", 	-- HUD Power On/Off
 	[1008] = "%d", 	-- HSD/ECMD Power On/Off
 
+	[1023] = "%d", 	-- PILOT Hydraulic Spoiler Flag
+	[1024] = "%d", 	-- PILOT Hydraulic Emergency HI Flag
+	[1025] = "%d", 	-- PILOT Hydraulic Emergency LOW Flag
+
 	-- FUEL
 	[1054] = "%.2f", 	-- PILOT Fuel AFT & L
 	[1055] = "%.2f", 	-- PILOT Fuel FWD & R
@@ -217,6 +221,13 @@ PWDEV.ConfigEveryFrameArguments =
 	[1061] = "%.2f", 	-- PILOT Engine FF Left
 	[1062] = "%.2f", 	-- PILOT Engine FF Right
 
+	[1063] = "%.2f", 	-- PILOT Flight Hydraulic System Pressure
+	[1064] = "%.2f", 	-- PILOT Combined Hydraulic System Pressure
+	[1065] = "%.2f", 	-- PILOT Engine Oil Pressure Right
+	[1066] = "%.2f", 	-- PILOT Engine Oil Pressure Left
+	[1067] = "%.2f", 	-- PILOT Engine Nozzle Right
+	[1068] = "%.2f", 	-- PILOT Engine Nozzle Left
+
 	-- AFCS
 	[2106] = "%d", 	-- PITCH 0/1
 	[2107] = "%d", 	-- ROLL 0/1
@@ -226,6 +237,13 @@ PWDEV.ConfigEveryFrameArguments =
 	[2111] = "%d", 	-- HDG -1/0/1
 	[2112] = "%d", 	-- ENGAGE -2/2
 
+	[9350] = "%d",		-- WHEELS
+	[9351] = "%d",		-- BRAKES
+	[9352] = "%d",		-- ACLS/AP
+	[9353] = "%d",		-- NWS ENGA
+	[9354] = "%d",		-- AUTO THROT
+	[9355] = "%d",		-- R STALL
+	[9356] = "%d",		-- L STALL
 	[9357] = "%d",		-- Pilot SAM
 	[9358] = "%d",		-- Pilot AAA
 	[9359] = "%d",		-- Pilot AI
@@ -494,4 +512,6 @@ function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
 	send(2818, comm[19])
 	send(2819, comm[20])
 	send(2820, comm[21])
+    send(2501, PWDEV.Tools.GetArgumentsString({301,300,262}))
+    send(2502, PWDEV.Tools.GetArgumentsString({301,302,303,304}))
 end

@@ -165,7 +165,7 @@ PWDEV.ConfigEveryFrameArguments =
     [649] = "%d", -- T light
     [650] = "%d", -- T button
     [651] = "%d", -- VALID button
-    [1275] = "%.1f", -- VALID button light
+    [1273] = "%.1f", -- VALID button light
     [652] = "%d", -- INSER button
     [1274] = "%.1f", -- INSER button light
 

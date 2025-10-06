@@ -122,6 +122,13 @@ PWDEV.ConfigEveryFrameArguments =
     -- UHF
     [383] = "%.3f", -- Radio Mode Select
     [386] = "%.1f", -- Radio Page Knob
+
+    [398] = "%d", -- VUHF backlight
+
+    [1330] = "%d", -- ALV lt
+    [1331] = "%d", -- ALV lt
+    [1332] = "%d", -- CVS lt
+    [1333] = "%d", -- CVS lt
 }
 
 PWDEV.ConfigArguments =

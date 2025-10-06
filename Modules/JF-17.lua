@@ -7,6 +7,7 @@ PWDEV.FoundDCSModule = true
 
 PWDEV.ConfigEveryFrameArguments =
 {
+    [110] = "%d", -- RESET light green
     -- warning/caution indicator lights (left side)
     [130] = "%d", -- MASTER WARNING (red)
     [131] = "%d", -- FIRE (red)
@@ -114,6 +115,7 @@ PWDEV.ConfigEveryFrameArguments =
     [279] = "%d", -- SAIU (green)
     [280] = "%d", -- CMBT (green)
     [281] = "%d", -- TRAIN (green)
+    [295] = "%d", -- COMM red light
 
     -- FCS
     [527] = "%d", -- Record Switch
@@ -126,6 +128,7 @@ PWDEV.ConfigEveryFrameArguments =
     [534] = "%d", -- Flight Test Switch 2
     [535] = "%d", -- AG1/AG2 Switch
     [536] = "%d", -- AA/AG Switch
+    [544] = "%d", -- RESET button
 
     --
     [539] = "%d", -- Emergency Hydraulic Pump Switch
@@ -150,6 +153,8 @@ PWDEV.ConfigEveryFrameArguments =
     [935] = "%d",   -- Intercom Switch
     [936] = "%d",   -- Radio Top/Bottom Antenna Switch
     [937] = "%d",   -- Speaker Control Box Channel Antenna Switch
+    [941] = "%.3f", -- Air Temp Knob Selector
+    [942] = "%.3f", -- ECS Mode Knob Selector
 
     -- EXT LIG
     [947] = "%d", -- Exterior Light Master Switch 1/0/-1

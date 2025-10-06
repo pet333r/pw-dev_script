@@ -8,9 +8,30 @@ PWDEV.FoundDCSModule = true
 
 PWDEV.ConfigEveryFrameArguments =
 {
+	[12] = "%.2f",	-- Exhaust Gas Temp Left
+	[14] = "%.2f",	-- Exhaust Gas Temp Right
+	[16] = "%.2f",	-- Tachometer Left
+	[17] = "%.2f",	-- Tachometer Right
+	[425] = "%.2f",	-- Tachometer Percent Left
+	[426] = "%.2f",	-- Tachometer Percent Right
+	[22] = "%.2f",	-- Fuel Quantity Left
+	[23] = "%.2f",	-- Fuel Quantity Right
+	[107] = "%.2f",	-- Nozzle Position Left
+	[108] = "%.2f",	-- Nozzle Position Right
+	[109] = "%.2f",	-- Utility Pressure
+	[110] = "%.2f",	-- Flight Pressure
+	[111] = "%.1f",	-- Aux Intake Doors
+	[112] = "%.2f",	-- Oil Pressure Left
+	[113] = "%.2f",	-- Oil Pressure Right
+	[114] = "%.2f",	-- Cabin Pressure
+	[525] = "%.2f",	-- Fuel Flow Left
+	[526] = "%.2f",	-- Fuel Flow Right
+
 	[48] = "%d",	-- AOA Indexer red
 	[49] = "%d",	-- AOA Indexer green
 	[50] = "%d",	-- AOA Indexer yellow
+
+	[51] = "%.1f",	-- Flap Indicator
 
 	-- IFF
 	[199] = "%.1f",	-- IFF MODE 4 CODE Selector
@@ -46,7 +67,7 @@ PWDEV.ConfigEveryFrameArguments =
 	[262] = "%.1f",	-- TACAN Mode Selector Switch
 
 	-- NAV
-	[273] = "%.1",	-- Nav Mode Selector Switch
+	[273] = "%.1f",	-- Nav Mode Selector Switch
 
 	-- AN/ARC-164 UHF
 	[300] = "%.2f",	-- UHF Radio Preset Channel Selector Knob
@@ -128,6 +149,11 @@ PWDEV.ConfigEveryFrameArguments =
 	[574] = "%d", -- Activity Power
 	[575] = "%d", -- System Power Button
 	[576] = "%d", -- System Power
+	[600] = "%.1f", -- Oxygen flow
+	[601] = "%d", -- Emergency Lever
+	[602] = "%d", -- Diluter Lever
+	[603] = "%d", -- Oxygen Supply Lever
+	[604] = "%.2f", -- Oxygen arrow
 }
 PWDEV.ConfigArguments =
 {
@@ -154,16 +180,8 @@ local function getTacanChannel(dev0)
 end
 
 function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
-	-- flares
-	local flares = {}
-	flares[1] = string.format("%.0f", mainPanelDevice:get_argument_value(405)*10)
-    flares[2] = string.format("%.0f", mainPanelDevice:get_argument_value(406)*10)
-	send(2011, flares[1]..flares[2])
-	-- chaffs
-	local chaffs = {}
-	chaffs[1] = string.format("%.0f", mainPanelDevice:get_argument_value(401)*10)
-	chaffs[2] = string.format("%.0f", mainPanelDevice:get_argument_value(402)*10)
-	send(2012, chaffs[1]..chaffs[2])
+	send(2011, PWDEV.Tools.GetArgumentsString({405,406}))
+	send(2012, PWDEV.Tools.GetArgumentsString({401,402}))
 
 	send(2003, getTacanChannel(mainPanelDevice))
 

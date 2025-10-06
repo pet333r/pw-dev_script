@@ -1700,6 +1700,8 @@ function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
 	send(2818, comm.txtCh35)
 	send(2819, comm.txtCh36)
 	send(2820, comm.txtCh37)
+    send(2501, PWDEV.Tools.GetArgumentsString({52,53,54}))
+    send(2502, PWDEV.Tools.GetArgumentsString({56,57,58,59}))
 end
 
 function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)

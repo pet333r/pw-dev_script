@@ -23,6 +23,14 @@ PWDEV.ConfigEveryFrameArguments =
 
     [85] = "%d",-- RADAR ALTITUDE FEET light red
 
+    [90] = "%.3f",	-- climb arrow
+    [91] = "%.3f",	-- alt arrow
+    [101] = "%d",	-- STBY flag
+    [102] = "%.2f",	-- IAS Needle
+    [103] = "%.2f",	-- Mach Dial rotation
+    [104] = "%.2f",	-- Airspeed Bug
+    [105] = "%.2f",	-- Mach Bug
+
     -- COMM PANEL
     [1374] = "%d",-- switch
     [1375] = "%.1f",-- Set Frequency (hundreds)
@@ -39,54 +47,66 @@ PWDEV.ConfigEveryFrameArguments =
     [169] = "%.1f",-- COMM CMD light 1 green
     [170] = "%.1f",-- NAV CMD light 2 green
 
-    [247] = "%d",-- MASTER ARM
+    [247] = "%d",	-- MASTER ARM
 
-    [249] = "%d",-- GUN button
-    [250] = "%d",-- LO button
-    [251] = "%d",-- LI button
-    [252] = "%d",-- CTR button
-    [253] = "%d",-- RI button
-    [254] = "%d",-- RO button
-    [255] = "%.1f",-- GUN light green
-    [256] = "%.1f",-- LO light green
-    [257] = "%.1f",-- LI light green
-    [258] = "%.1f",-- CTR light green
-    [259] = "%.1f",-- RI light green
-    [260] = "%.1f",-- RO light green
-    [261] = "%.1f",-- GUN ARM yellow light 
-    [262] = "%.1f",-- LO ARM yellow light 
-    [263] = "%.1f",-- LI ARM yellow light 
-    [264] = "%.1f",-- CTR ARM yellow light 
-    [265] = "%.1f",-- RI ARM yellow light 
-    [266] = "%.1f",-- RO ARM yellow light 
+    [249] = "%d",	-- GUN button
+    [250] = "%d",	-- LO button
+    [251] = "%d",	-- LI button
+    [252] = "%d",	-- CTR button
+    [253] = "%d",	-- RI button
+    [254] = "%d",	-- RO button
+    [255] = "%.1f",	-- GUN light green
+    [256] = "%.1f",	-- LO light green
+    [257] = "%.1f",	-- LI light green
+    [258] = "%.1f",	-- CTR light green
+    [259] = "%.1f",	-- RI light green
+    [260] = "%.1f",	-- RO light green
+    [261] = "%.1f",	-- GUN ARM yellow light 
+    [262] = "%.1f",	-- LO ARM yellow light 
+    [263] = "%.1f",	-- LI ARM yellow light 
+    [264] = "%.1f",	-- CTR ARM yellow light 
+    [265] = "%.1f",	-- RI ARM yellow light 
+    [266] = "%.1f",	-- RO ARM yellow light 
 
-    [271] = "%.2f",-- Select HUD Mode
-    [272] = "%.3f",-- knob
-    [273] = "%.3f",-- knob RKTS DISP
+    [271] = "%.2f",	-- Select HUD Mode
+    [272] = "%.3f",	-- knob
+    [273] = "%.3f",	-- knob RKTS DISP
 
     -- UFC
-    [282] = "%d",-- 
-    [3039] = "%.1f",-- 
-    [3040] = "%.1f",-- 
+    [282] = "%d",	-- 
+    [3039] = "%.1f",	-- 
+    [3040] = "%.1f",	-- 
 
-    [218] = "%d",-- MASTER CAUTION light yellow
-    [248] = "%d",-- ARM light yellow
-    [274] = "%d",-- GUN light blue
-    [279] = "%d",-- RADAR light blue
-    [280] = "%d",-- HEAT light blue
+    [218] = "%d",	-- MASTER CAUTION light yellow
+    [248] = "%d",	-- ARM light yellow
+    [274] = "%d",	-- GUN light blue
+    [279] = "%d",	-- RADAR light blue
+    [280] = "%d",	-- HEAT light blue
 
-    [284] = "%.1f",-- HEAT 1 light blue
-    [285] = "%.1f",-- HEAT 2 light blue
-    [286] = "%.1f",-- HEAT 3 light blue
-    [287] = "%.1f",-- HEAT 4 light blue
-    [288] = "%.1f",-- RDR 1 light blue
-    [289] = "%.1f",-- RDR 2 light blue
-    [290] = "%.1f",-- RDR 3 light blue
-    [291] = "%.1f",-- RDR 4 light blue
+    [284] = "%.1f",	-- HEAT 1 light blue
+    [285] = "%.1f",	-- HEAT 2 light blue
+    [286] = "%.1f",	-- HEAT 3 light blue
+    [287] = "%.1f",	-- HEAT 4 light blue
+    [288] = "%.1f",	-- RDR 1 light blue
+    [289] = "%.1f",	-- RDR 2 light blue
+    [290] = "%.1f",	-- RDR 3 light blue
+    [291] = "%.1f",	-- RDR 4 light blue
 
-    [305] = "%.2f",-- Select Quantity
-    [306] = "%d",-- Select Interval Multiplier (x10)
-    [307] = "%.3f",-- Select Interval (s)
+    [723] = "%.2f",		-- Fuel Gauge Tape
+    [297] = "%.3f",		-- Left Engine Fuel Flow
+    [298] = "%.3f",		-- Right Engine Fuel Flow
+    [299] = "%.2f",		-- Left Tachometer Large Needle
+    [300] = "%.2f",		-- Right Tachometer Large Needle
+    [2517] = "%.2f",	-- Left Tachometer Small Needle
+    [2518] = "%.2f",	-- Right Tachometer Small Needle
+    [301] = "%.3f",		-- Left Exhaust Temperature Large Needle
+    [302] = "%.3f",		-- Right Exhaust Temperature Large Needle
+    [303] = "%.2f",		-- Left Nozzle Position Gauge
+    [304] = "%.2f",		-- Right Nozzle Position Gauge
+
+    [305] = "%.2f",	-- Select Quantity
+    [306] = "%d",	-- Select Interval Multiplier (x10)
+    [307] = "%.3f",	-- Select Interval (s)
 
     -- WSO RADAR
     [336] = "%.1f",-- Radar Power Controls
@@ -118,6 +138,42 @@ PWDEV.ConfigEveryFrameArguments =
     [647] = "%.1f",-- Set TACAN Channel (ones)
     [657] = "%.1f",-- lamp
 
+	[420] = "%.1f",		-- slider 1
+	[421] = "%.1f",		-- slider 2
+	[614] = "%.3f",		-- roll
+	[615] = "%.3f",		-- pitch
+	[616] = "%.2f",		-- line v
+	[617] = "%.2f",		-- line h
+	[618] = "%.3f",		-- 
+	[619] = "%.2f",		-- 
+	[620] = "%d",		-- flag
+	[621] = "%d",		-- flag
+	[622] = "%d",		-- flag OFF
+	[669] = "%.3f",		-- HSI Bearing #1
+	[668] = "%.3f",		-- HSI Heading (compass)
+	[672] = "%.3f",		-- HSI Heading Marker
+	[671] = "%.2f",		-- HSI Deviation
+	[670] = "%.3f",		-- srodek
+	[677] = "%d",		-- strzalka srodek
+	[683] = "%d",		-- miles off
+	[684] = "%d",		-- NAV light
+	[685] = "%d",		-- DL light
+	[686] = "%d",		-- ILS light
+	[687] = "%d",		-- MAN light
+	[688] = "%d",		-- TAG light
+	[689] = "%d",		-- TGT light
+	[690] = "%d",		-- UHF light
+	[691] = "%d",		-- DL light
+
+	[705] = "%d",		-- Refuel Tank Selector Cover
+	[706] = "%d",		-- Select Tank to Refuel
+	[709] = "%d",		-- Wing Fuel Dump Selector
+	[710] = "%d",		-- Internal Wing Tanks Feed
+	[711] = "%d",		-- External Tanks Feed
+	[712] = "%d",		-- Air Refuel Switch
+	[725] = "%d",		-- Check Left Boost Pump
+	[726] = "%d",		-- Check Right Boost Pump
+	[1417] = "%d",		-- Select Dispense Program
     [1016] = "%d",-- ARBCS Activate
     [1017] = "%d",-- Target Find Mode
     [1018] = "%d",-- WRCS Range x100 Multiplier
@@ -137,6 +193,12 @@ PWDEV.ConfigEveryFrameArguments =
     [1356] = "%.1f",-- Set Flasher Mode (only Tail/Anti-Col/Fus)
     [1357] = "%.1f",-- Set Tail-Position Light Brightness
     [1358] = "%.1f",-- Set Wing-Position & Join-Up Light Brightness
+    [1360] = "%.1f",-- Change AoA Indicator Brightness
+    [1361] = "%.1f",-- Change HSI Brightness
+    [1362] = "%.1f",-- Change VVI Brightness
+    [1363] = "%.1f",-- Change Speed Indicator Brightness
+    [1364] = "%.1f",-- Change ADI Brightness
+    [1365] = "%.1f",-- Change Altimeter Brightness
 
     [1366] = "%.1f",-- Fuze Cap
     [1367] = "%.1f",-- Set Formation Lights Mode
@@ -146,6 +208,7 @@ PWDEV.ConfigEveryFrameArguments =
 
     -- DSCG
     [1404] = "%.1f",-- Select Screen Mode
+    [1416] = "%.1f",-- Taxi/Landing Light
 
     -- AN/ALE-40 Programmer
     [1500] = "%.1f",-- Select Chaff Burst Count
@@ -216,10 +279,10 @@ PWDEV.ConfigEveryFrameArguments =
     [2752] = "%d",-- UNKNOWN
     [2753] = "%d",-- POWER red
 
-    [2547] = "%d",-- LEFT FIRE red
-    [2548] = "%d",-- RIGHT FIRE red
-    [2549] = "%d",-- LEFT OVERHT red
-    [2550] = "%d",-- RIGHT OVERHT red
+    [2547] = "%.1f",-- LEFT FIRE red
+    [2548] = "%.1f",-- RIGHT FIRE red
+    [2549] = "%.1f",-- LEFT OVERHT red
+    [2550] = "%.1f",-- RIGHT OVERHT red
 
     [2551] = "%d",-- LH GEN OUT red
     [2552] = "%d",-- RH GEN OUT red
@@ -302,7 +365,12 @@ PWDEV.ConfigEveryFrameArguments =
     [2736] = "%.1f",-- Boresight Roll (9-Vis)
     [2738] = "%.1f",-- Panel Light Brightness
     [2740] = "%.1f",-- Acquisition Mode
+	[2611] = "%.2f",-- LOS arrow
+	[2761] = "%d",	-- LOS red
+	[2762] = "%d",	-- LOS yellow
+	[2763] = "%d",	-- LOS green
 }
+
 
 PWDEV.ConfigArguments =
 {
@@ -391,4 +459,11 @@ function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
         return
     end
     send(2101, bit.bit_background)
+
+	send(2501, PWDEV.Tools.GetArgumentsString({94,93,92}))
+	send(2502, PWDEV.Tools.GetArgumentsString({99,98,97,96}))
+	send(2504, PWDEV.Tools.GetArgumentsString({676,675,674}))
+	send(2505, PWDEV.Tools.GetArgumentsString({682,681,680,679}))
+	send(2506, PWDEV.Tools.GetArgumentsString({722,721,720,719}))
+	send(2507, PWDEV.Tools.GetArgumentsString({275,276,277}))
 end
