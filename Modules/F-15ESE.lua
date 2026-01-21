@@ -611,7 +611,6 @@ local function ExportPltMpdL()
 end
 
 function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
-
 end
 
 function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)

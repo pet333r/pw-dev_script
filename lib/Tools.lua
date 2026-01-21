@@ -1,6 +1,8 @@
 PWDEV.Tools = {}
 
 local PlayerData = {}
+PWDEV.Tools.PlaneData = {}
+PWDEV.Tools.PlaneData.Send = false
 
 local initiated = false
 
@@ -97,9 +99,11 @@ function PWDEV.Tools.ProcessInput()
                     if (vis == 0) then
                         lShowOnMapPlayer = false
                         lDeviceIpMap = ""
+                        PWDEV.Tools.PlaneData.Send = false
                     else
                         lShowOnMapPlayer = true
                         timeSecPlayer = val
+                        PWDEV.Tools.PlaneData.Send = true
                     end
                 end
             end
@@ -174,6 +178,46 @@ function PWDEV.Tools.ProcessInput()
 	end
 end
 
+local function GetTime()
+    -- local missionTime = LoGetMissionStartTime()
+    local seconds = tonumber(missionStartTime or 0) + (timestamp or 0)
+
+    if seconds <= 0 then
+        return "000000"
+    else
+        local h = math.floor(seconds / 3600)
+        local m = math.floor((seconds % 3600) / 60)
+        local s = math.floor(seconds % 60)
+        return string.format("%02d%02d%02d", h, m, s)
+    end
+end
+function replaceLastDigitStr(n)
+    local num = tonumber(n) or 0
+    local absNum = math.abs(num)
+    local step
+
+    if absNum <= 200 then
+        step = 10
+    elseif absNum <= 1000 then
+        step = 20
+    elseif absNum < 6000 then
+        step = 100
+    elseif absNum < 10000 then
+        step = 200
+    else
+        step = 1000
+    end
+
+    local rounded
+    if num >= 0 then
+        rounded = math.floor(num / step) * step
+    else
+        rounded = math.ceil(num / step) * step
+    end
+
+    return tostring(rounded)
+end
+
 function PWDEV.Tools.GetPlayerData()
     local SD = LoGetSelfData()
     if not SD then return end
@@ -191,9 +235,33 @@ function PWDEV.Tools.GetPlayerData()
     PlayerData.Acc     = acc.y or 0  -- G-Force
 end
 
+function PWDEV.Tools.GetPlaneData()
+    local SD = LoGetSelfData()
+    if not SD then return end
+
+    local acc = LoGetAccelerationUnits() or {}
+    local pitch, bank, yaw = LoGetADIPitchBankYaw()
+    PWDEV.Tools.PlaneData.Pitch = string.format("%.1f", math.floor((pitch * RAD_2_DEG) / 0.5 + 0.5) * 0.5)
+    PWDEV.Tools.PlaneData.Bank  = string.format("%.1f", math.floor((bank * RAD_2_DEG) / 0.5 + 0.5) * 0.5)
+    PWDEV.Tools.PlaneData.Yaw   = string.format("%d", yaw * RAD_2_DEG)
+
+    PWDEV.Tools.PlaneData.Time    = GetTime()
+
+    PWDEV.Tools.PlaneData.Alt     = string.format("%d", (SD.LatLongAlt.Alt or 0) * M_2_FEETS)
+    PWDEV.Tools.PlaneData.Magvar  = (LoGetMagneticYaw() or 0) * RAD_2_DEG
+    PWDEV.Tools.PlaneData.Hdg     = string.format("%d", (SD.Heading or 0) * RAD_2_DEG)
+
+    PWDEV.Tools.PlaneData.Ias     = (LoGetIndicatedAirSpeed() or 0) * MS_2_KNOTS
+    PWDEV.Tools.PlaneData.Mach    = string.format("%.1f", LoGetMachNumber() or 0)
+    PWDEV.Tools.PlaneData.Acc     = string.format("%.1f", acc.y or 0)  -- G-Force
+    PWDEV.Tools.PlaneData.Vspd    = replaceLastDigitStr(string.format("%d", LoGetVerticalVelocity() * MS_2_FPM))
+    PWDEV.Tools.PlaneData.Aoa     = string.format("%.1f", LoGetAngleOfAttack())
+end
+
 function PWDEV.Tools.ProcessNavDataD()
 	local pd = PlayerData
 	local NavDataD = {
+        [0] = string.format("%s", GetTime()),
 		[70] = string.format("%010.6f", pd.Lat),
 		[71] = string.format("%010.6f", pd.Lon),
 		[72] = string.format("%.1f", pd.Hdg),
@@ -216,21 +284,24 @@ function PWDEV.Tools.ProcessOutput()
     local _coStatus
 
     local _info = LoGetSelfData()
-    if _info ~= nil then
-        if PWDEV.ModuleName ~= _info.Name then
-            PWDEV.NoLuaExportBeforeNextFrame = false
-			PWDEV.Tools.SelectModule()
-			return
-        else
-            if (initiated == false) then
-                PWDEV.Tools.ExportInit()
-                initiated = true
-            end
-        end
-        _info = nil
+
+    if _info == nil then return end
+
+    if PWDEV.ModuleName ~= _info.Name then
+        PWDEV.NoLuaExportBeforeNextFrame = false
+        PWDEV.Tools.SelectModule()
+        return
+    end
+
+    if not initiated then
+        PWDEV.Tools.ExportInit()
+        initiated = true
     end
 
     local _device = GetDevice(0)
+
+    missionStartTime = LoGetMissionStartTime()
+
     if type(_device) == "table" and PWDEV.FoundDCSModule then
         _device:update_arguments()
 
@@ -260,20 +331,6 @@ function PWDEV.Tools.ProcessOutput()
 
         PWDEV.Tools.FlushDataDevice()
 
-        timestamp = LoGetModelTime()
-
-        if (lShowOnMapPlayer) then
-            if (timestamp > timestampNav + timeSecPlayer) then
-
-                PWDEV.Tools.GetPlayerData()
-
-                local coProcessNavData = coroutine.create(PWDEV.Tools.ProcessNavDataD)
-                _coStatus = coroutine.resume(coProcessNavData)
-                timestampNav = timestamp
-            end
-            PWDEV.Tools.FlushNavDataPlayer()
-        end
-
     elseif PWDEV.FoundFCModule then
         PWDEV.AF.EventNumber = os.clock()
 
@@ -295,25 +352,28 @@ function PWDEV.Tools.ProcessOutput()
             PWDEV.lastExportTimeHI = 0
         end
 
-        timestamp = LoGetModelTime()
-
-        if (lShowOnMapPlayer) then
-            if (timestamp > timestampNav + timeSecPlayer) then
-
-                PWDEV.Tools.GetPlayerData()
-
-                local coProcessNavData = coroutine.create(PWDEV.Tools.ProcessNavDataD)
-                _coStatus = coroutine.resume(coProcessNavData)
-                timestampNav = timestamp
-            end
-            PWDEV.Tools.FlushNavDataPlayer()
-        end
-
         PWDEV.Tools.FlushDataDevice()
     else
         if PWDEV.FoundNoModul then
             PWDEV.Tools.SelectModule()
         end
+    end
+
+    timestamp = LoGetModelTime()
+
+    if (lShowOnMapPlayer) then
+        if (timestamp > timestampNav + timeSecPlayer) then
+
+            PWDEV.Tools.GetPlayerData()
+
+            local coProcessNavData = coroutine.create(PWDEV.Tools.ProcessNavDataD)
+            _coStatus = coroutine.resume(coProcessNavData)
+            timestampNav = timestamp
+        end
+        PWDEV.Tools.FlushNavDataPlayer()
+
+            PWDEV.Tools.GetPlaneData()
+            PWDEV.ModuleData.Send()
     end
 end
 
@@ -520,6 +580,8 @@ function PWDEV.Tools.SelectModule()
         actualMap = PWDEV.Tools.GetMap(info)
 
         PWDEV.Tools.FlushDataDevice()
+
+        dofile(PWDEV.Config.ExportModulePath.."ModuleData.lua")
     else
         PWDEV.ProcessDCSHighImportance = PWDEV.ProcessDCSHighImportanceNoConfig
         PWDEV.ProcessDCSLowImportance  = PWDEV.ProcessDCSLowImportanceNoConfig
@@ -644,41 +706,33 @@ function PWDEV.Tools.getListIndicatorValue(IndicatorID)
 	return TmpReturn
 end
 
-function PWDEV.Tools.parseListIndicatorList(IndicatorID)
-	local ret = {}
-	local ListIindicator = list_indication(IndicatorID)
-	if ListIindicator == "" then return nil end
+function PWDEV.Tools.parseListIndicatorList(indicatorID)
+    local result = {}
+    local rawData = list_indication(indicatorID)
+    if not rawData or rawData == "" then return nil end
 
-	local m = ListIindicator:gmatch("([^\n]*)\n")
-	local newval = false
-	local name = nil
-	local value = {}
+    local currentName = nil
+    local currentValues = {}
 
-	while true do
-		local line = m()
-		if not line then
-			if name ~= nil then
-				ret[name] = value
-			end
-			break
-		end
-		if line == "-----------------------------------------" then
-			newval = true
-			if name ~= nil then
-				ret[name] = value
-				name = nil
-				value = {}
-			end
-		else
-			if newval == true then
-				newval = false
-				name = line
-			else
-				value[#value+1] = line
-			end
-		end
-	end
-	return ret
+    for line in rawData:gmatch("[^\r\n]+") do
+        if line == "-----------------------------------------" then
+            if currentName then
+                result[currentName] = currentValues
+                currentName = nil
+                currentValues = {}
+            end
+        elseif not currentName then
+            currentName = line
+        else
+            table.insert(currentValues, line)
+        end
+    end
+
+    if currentName then
+        result[currentName] = currentValues
+    end
+
+    return result
 end
 
 function PWDEV.Tools.getListIndicatorValueByNameLeft(IndicatorID, NameID, Length)

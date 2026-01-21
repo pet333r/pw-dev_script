@@ -273,9 +273,10 @@ local function CreateEUFD()
     local LINE_LEN = 56
 
     local function parse_eufd(indicator_id)
-        local dcs_eufd = PWDEV.Tools.getListIndicatorValue(indicator_id)
+        local dcs_eufd = PWDEV.Tools.parse_indication(indicator_id)
+	    local display_page = dcs_eufd["Preset_NAME"] and "PRESET" or "MAIN"
         -- todo: return different page based on the actual page
-        return PWDEV.Displays.GetDisplayLines(dcs_eufd, LINE_LEN, 14, eufd_indicator_data, function() return "MAIN" end)
+        return PWDEV.Displays.GetDisplayLines(dcs_eufd, LINE_LEN, 14, eufd_indicator_data, display_page, {}, nil, true)
     end
 
     cpg_EUFD = parse_eufd(19)

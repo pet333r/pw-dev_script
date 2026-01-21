@@ -599,7 +599,7 @@ local function get_cdu_page_name()
 end
 
 function PWDEV.exportCDU()
-	local cdu = PWDEV.Tools.getListIndicatorValue(3) or {}
+	local cdu = PWDEV.Tools.parse_indication(3) or {}
 
     local cdu_indicator_data = A10C_CDU
 
@@ -635,7 +635,7 @@ function PWDEV.exportCDU()
 	end
 	cdu_indicator_data["Cursor"][1].x = cursor_pos
 
-	cdu_lines = PWDEV.Displays.GetDisplayLines(cdu, 24, 10, cdu_indicator_data, get_cdu_page_name, cdu_replace_map, cdu_parent_map)
+	cdu_lines = PWDEV.Displays.GetDisplayLines(cdu, 24, 10, cdu_indicator_data, get_cdu_page_name, cdu_replace_map, cdu_parent_map, false)
 
 	send(2030, replaceSymbols(cdu_lines[1]))
 	send(2031, replaceSymbols(cdu_lines[2]))

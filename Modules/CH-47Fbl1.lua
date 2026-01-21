@@ -293,7 +293,7 @@ PWDEV.ConfigEveryFrameArguments =
     [521] = "%.1f",  -- MODE SEL sw
     [522] = "%.1f",  -- CTR INST knob
     [523] = "%.1f",  -- PLT INST knob
-    
+
     -- CPLT LTG
     [524] = "%d",  -- switch
     [525] = "%.1f",  -- CPLT INST knob
@@ -322,7 +322,7 @@ PWDEV.ConfigEveryFrameArguments =
     [577] = "%d",  -- AFT switch
     [578] = "%d",  -- mode switch
     [579] = "%.1f",  -- knob
-    
+
     [580] = "%.1f", -- cdu_dimmer 1
     [581] = "%.1f", -- cdu_dimmer 2
     -- EMERGENCY
@@ -347,6 +347,18 @@ PWDEV.ConfigEveryFrameArguments =
 PWDEV.ConfigArguments =
 {
 }
+local function guess_cdu_page_name(cdu, reference)
+	for key, _ in pairs(cdu) do
+		local ref = reference[key]
+		if ref ~= nil and #ref == 1 then
+			local pages = ref[1].pages
+			if pages ~= nil and #pages == 1 then
+				return pages[1]
+			end
+		end
+	end
+	return ""
+end
 
 local plt_CDU = {}
 local cpg_CDU = {}
@@ -355,13 +367,20 @@ local cpg_CDU_color = {}
 local plt_CDU_color = {}
 
 local function CreateCDU()
-    local cdu_indicator_data = CH47F_CDU
     local LINE_LEN = 24
 
     local function parse_cdu(indicator_id)
-        local dcs_cdu = PWDEV.Tools.getListIndicatorValue(indicator_id)
+        local dcs_cdu = PWDEV.Tools.parse_indication(indicator_id)
+
+        local scratch_string = dcs_cdu["scratch_text"]
+        if scratch_string ~= nil then
+            CH47F_CDU["scratch_cursor"][1].x = 3 + scratch_string:len()
+        end
+
+        local display_page = guess_cdu_page_name(dcs_cdu, CH47F_CDU)
+
         -- todo: return different page based on the actual page
-        local displayLines, colorString = PWDEV.Displays.GetDisplayLinesWithColors(dcs_cdu, LINE_LEN, 15, cdu_indicator_data, function() return "MAIN" end)
+        local displayLines, colorString = PWDEV.Displays.GetDisplayLinesWithColor(dcs_cdu, LINE_LEN, 14, CH47F_CDU, display_page, nil, nil, false)
 
         return displayLines, colorString
     end

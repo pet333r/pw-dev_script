@@ -26,6 +26,9 @@ PWDEV.ConfigEveryFrameArguments =
 	[29] = "%.1f",		-- PD Threshold Clutter
 	[30] = "%.1f",		-- PD Threshold Clear
 
+	[104] = "%.3f",		-- alt arrow
+	[305] = "%.1f",		-- STBY
+
 	[2121] = "%.2f",		-- RIO Radar Elevation Arrow (-1 - 1)
 	[2122] = "%.2f",		-- TCS Elevation Arrow (-1 - 1)
 	[6100] = "%.2f",		-- Range Roller (0.15)

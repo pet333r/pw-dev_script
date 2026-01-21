@@ -1,4 +1,6 @@
 -- VNAO T-45C Goshawk
+local send = PWDEV.Tools.SendData
+
 PWDEV.FoundDCSModule = true
 
 PWDEV.ConfigEveryFrameArguments =
@@ -32,6 +34,8 @@ PWDEV.ConfigEveryFrameArguments =
     [108] = "%d", -- - (green)
     [110] = "%d", -- BRK PRS (red)
     [111] = "%d", -- HOOK (black)
+
+    [114] = "%d", -- MASTER ARM switch
 
     -- Landing gear
     [120] = "%d", -- DOOR (red)
@@ -70,20 +74,48 @@ PWDEV.ConfigEveryFrameArguments =
 
     -- DEP
     [219] = "%d", -- ON/OFF knob
-    [220] = "%.1f", -- DAY/AUTO knob
+    [220] = "%d", -- DAY/AUTO knob
     [221] = "%.1f", -- BRT knob
 
     -- AOA Indicator
     [320] = "%d", -- AOA indexer Green
     [321] = "%d", -- AoA indexer Yellow
     [322] = "%d", -- AoA indexer Red
+
+    [401] = "%d", -- LDG switch
+    [402] = "%d", -- A-COLL/STROBE switch
+    [403] = "%d", -- NAVIGATION switch
+    [404] = "%d", -- TAIL switch
+    [405] = "%d", -- WING switch
+    [406] = "%d", -- FORMATION switch
+
+	[450] = "%.1f", -- MIP knob
+	[451] = "%.1f", -- CONSOLE knob
+	[452] = "%.1f", -- FLOOD knob
 }
 
 PWDEV.ConfigArguments =
 {
 }
 
+local function getVuhf(li)
+    local data = PWDEV.Tools.getListIndicatorValue(li)
+    local value
+
+    for key, val in pairs(data) do
+        if key ~= "base" then
+            value = val
+            break
+        end
+    end
+    return value
+end
+
 function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
+    send(2001,  getVuhf(1))
+    send(2002,  getVuhf(2))
+    send(2003,  getVuhf(3))
+    send(2004,  getVuhf(4))
 end
 
 function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)

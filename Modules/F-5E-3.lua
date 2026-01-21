@@ -33,6 +33,10 @@ PWDEV.ConfigEveryFrameArguments =
 
 	[51] = "%.1f",	-- Flap Indicator
 
+	[167] = "%d",	-- Fire L
+	[168] = "%d",	-- Fire R
+	[169] = "%d",	-- Caution
+
 	-- IFF
 	[199] = "%.1f",	-- IFF MODE 4 CODE Selector
 	[200] = "%.1f",	-- IFF MASTER Control Selector

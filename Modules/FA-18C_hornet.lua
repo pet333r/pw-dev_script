@@ -392,10 +392,6 @@ function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
 	send(2119, PWDEV.Tools.DisplayFormat(txt_Codes, 4))
 	send(2120, PWDEV.Tools.DisplayFormat(txt_T, 6))
 	send(2121, PWDEV.Tools.DisplayFormat(txt_TimeSetMode, 6))
-	-- texture values
-	send(2201, LTexture)
-	send(2202, RTexture)
-	send(2203, ZTexture)
 
 	send(2204, LTexture .. RTexture .. ZTexture)
 	send(2205, RPMTexture .. TempTexture .. FFTexture .. NOZTexture .. OILTexture .. BINGOTexture)

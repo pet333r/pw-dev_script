@@ -133,6 +133,14 @@ PWDEV.ConfigEveryFrameArguments =
 
 	[256] = "%d",	-- system transparent cover
 
+	[286] = "%d",	-- AIR/GROUND Switch
+	[287] = "%d",	-- COOP Switch
+	[288] = "%d",	-- LOCK Switch
+	[289] = "%d",	-- GUID Switch
+	[290] = "%d",	-- Bombs Jettison Switch
+	[291] = "%d",	-- Bombs and NURS Emergency Jettison Button Cover
+	[292] = "%d",	-- Bombs and NURS Emergency Jettison Button
+
 	[294] = "%.1f",	-- Target Elevation Select Knob
 	[295] = "%.1f",	-- Radar Mode Select Knob
 	[296] = "%d",	-- Radar Illumination Switch
@@ -250,7 +258,9 @@ PWDEV.ConfigEveryFrameArguments =
 	[542] = "%.1f",	-- CONSOLE Control Knob
 	[543] = "%.1f",	-- INSTRUMENT Control Knob
 	[545] = "%.1f",	-- LTS ILLUM BRIGHT Control Knob
+	[548] = "%d",	-- NAV LTS Switch horizontal
 	[549] = "%.1f",	-- FLOODLIGHT Control Knob
+	[574] = "%d",	-- NAV LTS Switch vertical
 
 	[607] = "%d",	-- NAV WP 1 lt
 }

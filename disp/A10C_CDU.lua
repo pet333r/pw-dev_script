@@ -7167,6 +7167,20 @@ local A10C_CDU = {
 			y = 7,
 		},
 	},
+	FPBUILDPageNumber = {
+		{
+			alignment = "LFT",
+			pages = {
+				"FPBUILD",
+				"FPMENU",
+			},
+			id = "FPBUILDPageNumber",
+			index = 0,
+			static_text = false,
+			x = 20,
+			y = 10,
+		},
+	},
 	FPBUILDPlanName = {
 		{
 			alignment = "LFT",
@@ -12027,6 +12041,20 @@ local A10C_CDU = {
 			static_text = false,
 			x = 22,
 			y = 7,
+		},
+	},
+	P = {
+		{
+			alignment = "LFT",
+			pages = {
+				"FPBUILD",
+				"FPMENU",
+			},
+			id = "P",
+			index = 0,
+			static_text = true,
+			x = 19,
+			y = 10,
 		},
 	},
 	PC = {

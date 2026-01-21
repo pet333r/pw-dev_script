@@ -19,93 +19,88 @@ local WRITE_KML_FILE = true
 
 Fdr = {}
 
-function Fdr.GetDateTime()
-    local date_table = os.date("*t")
-	local hour, minute, second = date_table.hour, date_table.min, date_table.sec
-	local year, month, day = date_table.year, date_table.month, date_table.day
-	local dateResult = string.format("%d-%02d-%02d %02d.%02d.%02d", year, month, day, hour, minute, second)
-    return dateResult
-end
+function Fdr.GetDateTime() return os.date("%Y-%m-%d %H.%M.%S") end
 
 function Fdr.CsvFileInit()
-    local datetime = Fdr.GetDateTime()
+    if not WRITE_CSV_FILE then return end
 
-    if (WRITE_CSV_FILE) then
-        local fileCsv = pathCsv .. datetime .. " " .. Export.LoGetSelfData().Name .. ".csv"
-        Fdr.csvFile = io.open(fileCsv, "w+")
-    end
+    local datetime = Fdr.GetDateTime()
+    local name = Export.LoGetSelfData().Name
+    local fileCsv = string.format("%s%s %s.csv", pathCsv, datetime, name)
+
+    Fdr.csvFile = io.open(fileCsv, "w+")
 end
 
 function Fdr.CsvFileWrite(packet)
-    if (WRITE_CSV_FILE) then
-        if Fdr.csvFile then
-            Fdr.csvFile:write(packet)
-        end
+    if WRITE_CSV_FILE and Fdr.csvFile then
+        Fdr.csvFile:write(packet)
     end
 end
 
 function Fdr.CsvFileEnd()
-    if (WRITE_CSV_FILE) then
-        if Fdr.csvFile then
-            Fdr.csvFile:flush()
-            Fdr.csvFile:close()
-            Fdr.csvFile = nil
-        end
+    if WRITE_CSV_FILE and Fdr.csvFile then
+        Fdr.csvFile:flush()
+        Fdr.csvFile:close()
+        Fdr.csvFile = nil
     end
 end
 
 function Fdr.NavFileInit(version)
+    if not WRITE_KML_FILE then return end
+
     local datetime = Fdr.GetDateTime()
+    local name = Export.LoGetSelfData().Name
+    local fileKml = string.format("%s%s %s.kml", pathKml, datetime, name)
 
-    if (WRITE_KML_FILE) then
-        local fileKml = pathKml .. datetime .. " " .. Export.LoGetSelfData().Name .. ".kml"
-        Fdr.kmlFile = io.open(fileKml, "w+") -- "W+"
+    Fdr.kmlFile = io.open(fileKml, "w+")
+    if not Fdr.kmlFile then return end
 
-        if Fdr.kmlFile then
-            Fdr.kmlFile:write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
-            Fdr.kmlFile:write("<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n")
-            Fdr.kmlFile:write("  <Document>\n")
-            Fdr.kmlFile:write("    <Style id=\"StyleLineKML\">\n")
-            Fdr.kmlFile:write("      <LineStyle id=\"lineStyle\">\n")
-            Fdr.kmlFile:write("        <color>a032cfcb</color>\n")
-            Fdr.kmlFile:write("        <width>2</width>\n")
-            Fdr.kmlFile:write("      </LineStyle>\n")
-            Fdr.kmlFile:write("      <PolyStyle>\n")
-            Fdr.kmlFile:write("        <color>5046d774</color>\n")
-            Fdr.kmlFile:write("      </PolyStyle>\n")
-            Fdr.kmlFile:write("    </Style>\n")
-            Fdr.kmlFile:write("    <Placemark>\n")
-            Fdr.kmlFile:write("      <description>Flight recorded in DCS World " .. version .. " @ " .. datetime .. "</description>\n")
-            Fdr.kmlFile:write("      <styleUrl>#StyleLineKML</styleUrl>\n")
-            Fdr.kmlFile:write("      <LineString>\n")
-            Fdr.kmlFile:write("        <extrude>true</extrude>\n")
-            Fdr.kmlFile:write("        <tessellate>true</tessellate>\n")
-            Fdr.kmlFile:write("        <altitudeMode>absolute</altitudeMode>\n")
-            Fdr.kmlFile:write("        <coordinates>")
-        end
-    end
+    local kmlHeader = table.concat({
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<kml xmlns="http://www.opengis.net/kml/2.2">',
+        '  <Document>',
+        '    <Style id="StyleLineKML">',
+        '      <LineStyle>',
+        '        <color>a032cfcb</color>',
+        '        <width>2</width>',
+        '      </LineStyle>',
+        '      <PolyStyle>',
+        '        <color>5046d774</color>',
+        '      </PolyStyle>',
+        '    </Style>',
+        '    <Placemark>',
+        string.format('      <description>Flight recorded in DCS World %s @ %s</description>', version, datetime),
+        '      <styleUrl>#StyleLineKML</styleUrl>',
+        '      <LineString>',
+        '        <extrude>true</extrude>',
+        '        <tessellate>true</tessellate>',
+        '        <altitudeMode>absolute</altitudeMode>',
+        '        <coordinates>'
+    }, "\n")
+
+    Fdr.kmlFile:write(kmlHeader .. "\n")
 end
 
 function Fdr.NavFileWrite(packet)
-    if (WRITE_KML_FILE) then
-        if Fdr.kmlFile then
-            Fdr.kmlFile:write(packet)
-        end
+    if WRITE_KML_FILE and Fdr.kmlFile then
+        Fdr.kmlFile:write(packet)
     end
 end
 
 function Fdr.NavFileEnd()
-    if (WRITE_KML_FILE) then
-        if Fdr.kmlFile then
-            Fdr.kmlFile:write("        </coordinates>\n")
-            Fdr.kmlFile:write("      </LineString>\n")
-            Fdr.kmlFile:write("    </Placemark>\n")
-            Fdr.kmlFile:write("  </Document>\n")
-            Fdr.kmlFile:write("</kml>\n")
-            Fdr.kmlFile:flush()
-            Fdr.kmlFile:close()
-            Fdr.kmlFile = nil
-        end
+    if WRITE_KML_FILE and Fdr.kmlFile then
+        local kmlFooter = table.concat({
+            '        </coordinates>',
+            '      </LineString>',
+            '    </Placemark>',
+            '  </Document>',
+            '</kml>'
+        }, "\n")
+
+        Fdr.kmlFile:write(kmlFooter .. "\n")
+        Fdr.kmlFile:flush()
+        Fdr.kmlFile:close()
+        Fdr.kmlFile = nil
     end
 end
 
@@ -114,6 +109,7 @@ end
 
 local playerId = ""
 local theatre = "NA"
+local ModuleName = "NA"
 
 local separator = ";"
 local newline = "\n"
@@ -126,49 +122,47 @@ local prevTimerGnd = 0
 local prevTimerNavy = 0
 local prevTimerWea = 0
 
-local ModuleName = "NA"
+local selfData = {
+    Name = "NA",
+    CoalitionID = 0
+}
 
-local selfData = {}
-selfData.Name = "NA"
-selfData.CoalitionID = 0
+local PlayerData = {
+    Lat = 0.0,
+    Lon = 0.0,
+    MechGearNose = 0.0,
+    MechGearLeft = 0.0,
+    MechGearRigh = 0.0,
+    MechAirBrakeLeft = 0.0,
+    MechAirBrakeRigh = 0.0,
+    MechRefueling = 0.0,
+    MechHook = 0.0,
+    MechNozzLeft = 0.0,
+    MechNozzRigh = 0.0,
 
-local PlayerData = {}
-PlayerData.Lat = 0.0
-PlayerData.Lon = 0.0
-PlayerData.MechGearNose = 0.0
-PlayerData.MechGearLeft = 0.0
-PlayerData.MechGearRigh = 0.0
-PlayerData.MechAirBrakeLeft = 0.0
-PlayerData.MechAirBrakeRigh = 0.0
-PlayerData.MechRefueling = 0.0
-PlayerData.MechHook = 0.0
-PlayerData.MechNozzLeft = 0.0
-PlayerData.MechNozzRigh = 0.0
+    AltGearLeft = 0,
+    AltGearNose = 0,
+    AltGearRigh = 0,
+    IndRefueling = 0,
+    IndHook = 0,
 
-PlayerData.AltGearLeft = 0
-PlayerData.AltGearNose = 0
-PlayerData.AltGearRigh = 0
-PlayerData.IndRefueling = 0
-PlayerData.IndHook = 0
-PlayerData.ThrottleLeft = 0.0
-PlayerData.ThrottleRigh = 0.0
-PlayerData.EngineRpmLeft = 0.0
-PlayerData.EngineRpmRigh = 0.0
-PlayerData.FuelFlow = 0
+    ThrottleLeft = 0.0,
+    ThrottleRigh = 0.0,
+    EngineRpmLeft = 0.0,
+    EngineRpmRigh = 0.0,
+    FuelFlow = 0,
 
-PlayerData.AA = 0
-PlayerData.AG = 0
-PlayerData.Arm = 0
+    AA = 0,
+    AG = 0,
+    Arm = 0
+}
 
 PacketNavSize  = 0
 SendNavStrings	= {}
-
 SendNavAllStrings	= {}
 LastDataNav       = {}
 
-local be = {}
-be.latitude = 0.0
-be.longitude = 0.0
+local be = { latitude = 0.0, longitude = 0.0 }
 
 local active = false
 local showFileInfo = false
@@ -285,24 +279,21 @@ end
 
 local function GetTime()
     local missionTime = Export.LoGetMissionStartTime()
-    local seconds = tonumber(missionTime)
-    seconds = seconds + timer
+    local seconds = tonumber(missionTime or 0) + (timer or 0)
+
     if seconds <= 0 then
         return "000000"
     else
         local h = math.floor(seconds / 3600)
-        local m = math.floor(seconds % 3600) / 60
+        local m = math.floor((seconds % 3600) / 60)
         local s = math.floor(seconds % 60)
         return string.format("%02d%02d%02d", h, m, s)
     end
 end
 
 local function GetTheatre()
-    local theatre = "NA"
-    if DCS.getCurrentMission() ~= nil then
-        return DCS.getCurrentMission().mission.theatre
-    end
-    return theatre
+    local mission = DCS.getCurrentMission()
+    return mission and mission.mission and mission.mission.theatre or "NA"
 end
 
 local function StrSplit(str, delim, maxNb)
