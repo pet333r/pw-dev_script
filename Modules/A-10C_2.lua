@@ -356,6 +356,7 @@ local function getARC210()
     radioArc210.line21 = ""
     radioArc210.line31 = ""
     radioArc210.line32 = ""
+    radioArc210.line33 = ""
     radioArc210.line41 = ""
 
     local arc210 = PWDEV.Tools.getListIndicatorValue(18) or {}
@@ -463,6 +464,10 @@ local function getARC210()
     end
     send(2056, radioArc210.line32)
 
+    if (arc210.satcom_channel_type_label ~= nil) then
+        radioArc210.line33 = arc210.satcom_channel_type_label
+    end
+    send(2058, radioArc210.line33)
     if (arc210.ky_submode_label ~= nil) then
         radioArc210.line41 = arc210.ky_submode_label
     elseif (arc210.comsec_satcom_delay ~= nil) then
