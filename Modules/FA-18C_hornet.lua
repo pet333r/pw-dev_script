@@ -56,11 +56,13 @@ PWDEV.ConfigEveryFrameArguments =
 	[47] = "%d",   -- AA Light
 	[48] = "%d",   -- AG Light
 	[49] = "%d",   -- Master Arm Switch, ARM/SAFE
+	[135] = "%.1f", -- IR Cooling Switch, ORIDE/NORM/OFF
+	[136] = "%.1f", -- HMD knob
 
 	-- HUD Control Panel
-	[140] = "%.1f",   -- HUD Symbology Reject Switch, NORM/REJ 1/REJ 2
+	[140] = "%.1f",	-- HUD Symbology Reject Switch, NORM/REJ 1/REJ 2
 	[142] = "%d",   -- HUD Symbology Brightness Selector Knob, DAY/NIGHT
-	[144] = "%.1f",   -- HUD Video Control Switch, W/B /VID/OFF
+	[144] = "%.1f",	-- HUD Video Control Switch, W/B /VID/OFF
 	[147] = "%d",   -- Altitude Switch, BARO/RDR
 	[148] = "%d",   -- Attitude Selector Switch, INS/AUTO/STBY -1/0/1
 

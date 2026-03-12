@@ -358,6 +358,20 @@ PWDEV.ConfigEveryFrameArguments =
     [2591] = "%.1f",-- FIRE SYS yellow
     [2883] = "%.1f",-- SPARE yellow
 
+    [278] = "%d",   -- Set Gun Rate
+
+    [86] = "%.2f",   -- Pneumatic pressure
+    [210] = "%.2f",   -- Hyd press
+    [211] = "%.2f",   -- Hyd press
+    [212] = "%.2f",   -- Hyd press
+    [717] = "%.2f",   -- Oil press L
+    [718] = "%.2f",   -- Oil press R
+
+    [2596] = "%.1f",-- Missile Reject/Norm/Direction Finding Reject
+    [2597] = "%d",  -- Change Shrike Band
+    [2598] = "%d",  -- Gun-pod Clear-Mode Switch
+    [2599] = "%.1f",-- Select DSCG Screen Mode
+
     -- TARGET
     [2733] = "%.1f",-- TV Reticle Brightness
     [2734] = "%.1f",-- Boresight Azimuth (12-Vis)
@@ -365,6 +379,13 @@ PWDEV.ConfigEveryFrameArguments =
     [2736] = "%.1f",-- Boresight Roll (9-Vis)
     [2738] = "%.1f",-- Panel Light Brightness
     [2740] = "%.1f",-- Acquisition Mode
+    [2754] = "%d",-- Stow/Unstow TGP
+    [2755] = "%d",-- Arm/Disarm Laser
+    [2756] = "%d",-- Power On/Off TGP
+    [2757] = "%d",-- Enable/Disable WRCS integration
+    [2758] = "%d",-- 
+    [2759] = "%d",-- Enable/Disable INS integration
+
 	[2611] = "%.2f",-- LOS arrow
 	[2761] = "%d",	-- LOS red
 	[2762] = "%d",	-- LOS yellow
@@ -425,6 +446,43 @@ local aux_chan = {
     ["1.00"] = "20"
 }
 
+local vorils1 = {
+    ["0.0"] = "108",
+    ["0.1"] = "109",
+    ["0.2"] = "110",
+    ["0.3"] = "111",
+    ["0.4"] = "112",
+    ["0.5"] = "113",
+    ["0.6"] = "114",
+    ["0.7"] = "115",
+    ["0.8"] = "116",
+    ["0.9"] = "117",
+    ["1.0"] = "108",
+}
+local vorils2 = {
+    ["0.00"] = ".00",
+    ["0.05"] = ".05",
+    ["0.10"] = ".10",
+    ["0.15"] = ".15",
+    ["0.20"] = ".20",
+    ["0.25"] = ".25",
+    ["0.30"] = ".30",
+    ["0.35"] = ".35",
+    ["0.40"] = ".40",
+    ["0.45"] = ".45",
+    ["0.50"] = ".50",
+    ["0.55"] = ".55",
+    ["0.60"] = ".60",
+    ["0.65"] = ".65",
+    ["0.70"] = ".70",
+    ["0.75"] = ".75",
+    ["0.80"] = ".80",
+    ["0.85"] = ".85",
+    ["0.90"] = ".90",
+    ["0.95"] = ".95",
+    ["1.00"] = ".00",
+}
+
 local function getTacanChannel()
     local tcn_2 = ""
     if GetDevice(0):get_argument_value(645) == 0 then
@@ -453,6 +511,7 @@ function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
 
 	send(2002, comm_chan[string.format("%.2f", mainPanelDevice:get_argument_value(123))])
 	send(2003, aux_chan[string.format("%.2f", mainPanelDevice:get_argument_value(136))])
+    send(2004, vorils1[string.format("%.1f", mainPanelDevice:get_argument_value(1452))] .. vorils2[string.format("%.2f", mainPanelDevice:get_argument_value(1455))])
 
     local bit = PWDEV.Tools.getListIndicatorValue(7)
     if not bit then

@@ -89,7 +89,7 @@ PWDEV.ConfigEveryFrameArguments =
     [395] = "%.1f",  -- knob 0.1
     -- CPG PROCESSOR SELECT
     [396] = "%d",  -- button
-    [399] = "%d",  -- switch SP1/AUTO/SP2 -1/0/1
+    [397] = "%d",  -- switch SP1/AUTO/SP2 -1/0/1
     [436] = "%d",  -- SP1 light green
     [437] = "%d",  -- SP2 light green
 

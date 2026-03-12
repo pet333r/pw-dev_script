@@ -185,12 +185,47 @@ PWDEV.ConfigEveryFrameArguments =
 	[498] = "%.1f", -- Button SPL F Light (red)
 	[499] = "%.1f", -- Button SPL T Light (blue)
 
+	-- ELEC
+	[510] = "%d",	-- MAIN PWR Switch
+	[512] = "%d",	-- MAIN GEN
+	[513] = "%d",	-- FLCS PMG
+	[515] = "%d",	-- STBY GEN
+	[516] = "%d",	-- EPU PMG
+	[517] = "%d",	-- EPU GEN
+	[518] = "%d",	-- FLCS RLY
+	[519] = "%d",	-- TO FLCS
+	[521] = "%d",	-- ACFT BATT FAIL
+	[523] = "%d",	-- AIR
+	[524] = "%d",	-- HYDRAZN
+	[526] = "%d",	-- EPU
+	[570] = "%d",	-- FL RUN
+	[571] = "%d",	-- FL FAIL
+	[581] = "%d",	-- FLCS A
+	[582] = "%d",	-- FLCS B
+	[583] = "%d",	-- FLCS C
+	[584] = "%d",	-- FLCS D
+
 	-- EXT LIGHTING
 	[531] = "%.1f", -- ANTI-COLL Knob, OFF/1/2/3/4/A/B/C
 	[532] = "%d", -- FLASH STEADY Light Switch, FLASH/STEADY
 	[533] = "%d", -- WING/TAIL Light Switch, BRT/OFF/DIM
 	[534] = "%d", -- FUSELAGE Light Switch, BRT/OFF/DIM
 	[536] = "%.1f", -- FORM Light Knob
+
+	-- IFF
+	[539] = "%.1f", -- IFF MASTER Knob
+	[541] = "%d", -- IFF M-4 CODE Switch
+	[542] = "%d", -- C & I Knob
+	[543] = "%d", -- IFF MODE 4 REPLY Switch
+	[544] = "%d", -- IFF MODE 4 MONITOR Switch
+	[553] = "%d", -- IFF ENABLE Switch
+
+	-- FUEL
+	[555] = "%.1f", -- AIR REFUEL Switch
+	[556] = "%.1f", -- ENGINE FEED Knob
+	[557] = "%d", -- TANK INERTING Switch
+	[558] = "%d", -- FUEL MASTER Switch Cover
+	[559] = "%d", -- FUEL MASTER Switch
 
 	--Caution Light Panel
 	[630] = "%d", -- FLCS FAULT Light (yellow)
@@ -466,6 +501,7 @@ function PWDEV.ProcessDCSConfigHighImportance(mainPanelDevice)
 	send(2820, comm.txtCh37)
     send(2501, PWDEV.Tools.GetArgumentsString({52,53,54}))
     send(2502, PWDEV.Tools.GetArgumentsString({56,57,58,59}))
+    send(2503, PWDEV.Tools.GetArgumentsString({546,548,550,552}))
 end
 
 function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
