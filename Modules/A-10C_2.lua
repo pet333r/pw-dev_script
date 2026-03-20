@@ -640,7 +640,7 @@ function PWDEV.exportCDU()
 	end
 	cdu_indicator_data["Cursor"][1].x = cursor_pos
 
-	cdu_lines = PWDEV.Displays.GetDisplayLines(cdu, 24, 10, cdu_indicator_data, get_cdu_page_name, cdu_replace_map, cdu_parent_map, false)
+	cdu_lines = PWDEV.Displays.GetDisplayLinesOld(cdu, 24, 10, cdu_indicator_data, get_cdu_page_name, cdu_replace_map, cdu_parent_map)
 
 	send(2030, replaceSymbols(cdu_lines[1]))
 	send(2031, replaceSymbols(cdu_lines[2]))

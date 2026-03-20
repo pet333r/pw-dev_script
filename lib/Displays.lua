@@ -12,6 +12,73 @@ local function replaceSymbols(s, map)
     return s
 end
 
+function Displays.GetDisplayLinesOld(dcsDisplay, width, height, displayIndicatorData, getDisplayPage, replaceSymbolMap, parentMap)
+    local emptyLine = string.rep(" ", width)
+
+    local displayLines = {}
+    for i = 1, height do
+        displayLines[i] = emptyLine
+    end
+    if not dcsDisplay then
+        return displayLines
+    end
+
+    local displayPage = getDisplayPage()
+    parentMap = parentMap or {}
+	local parentPage = parentMap[displayPage]
+
+    for k, v in pairs(dcsDisplay) do
+        local candidates = displayIndicatorData[k]
+        if candidates then
+            if replaceSymbolMap then
+                v = replaceSymbols(v, replaceSymbolMap)
+            end
+            local render_instructions = nil
+            if #candidates == 1 then
+                render_instructions = candidates[1]
+            else
+                for _, ri in pairs(candidates) do
+					local parent_instructions = nil
+					for _, page in pairs(ri.pages) do
+						if displayPage == page then
+							render_instructions = ri
+							break
+						elseif parentPage == page then
+							parent_instructions = ri
+						end
+					end
+					if render_instructions == nil then
+						render_instructions = parent_instructions
+					end
+                end
+            end
+            if render_instructions then
+                local ri = render_instructions
+                local old_line = displayLines[ri.y]
+                local replacements = {}
+
+                if not ri.alignment or ri.alignment == "LFT" then
+                    for i = 1, v:len(), 1 do
+                        local c = v:sub(i, i)
+                        if c ~= " " then replacements[ri.x + i - 1] = c end
+                    end
+                elseif ri.alignment == "RGHT" then
+                    for i = 1, v:len(), 1 do
+                        local c = v:sub(i, i)
+                        if c ~= " " then replacements[ri.x - (v:len() - i)] = c end
+                    end
+                end
+                local new_line = ""
+                for i = 1, width, 1 do
+                    new_line = new_line .. (replacements[i] or old_line:sub(i,i))
+                end
+                displayLines[ri.y] = new_line
+            end
+        end
+    end
+
+    return displayLines
+end
 function contains(table, value)
     for _, v in pairs(table) do
         if v == value then
