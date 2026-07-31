@@ -951,3 +951,9 @@ function PWDEV.ProcessDCSLowImportanceNoConfig(mainPanelDevice) end
 
 function PWDEV.ProcessFCHighImportanceNoConfig() end
 function PWDEV.ProcessFCLowImportanceNoConfig() end
+
+function PWDEV.Tools.MergeTables(target, source)
+    for k, v in pairs(source) do
+        target[k] = v
+    end
+end
