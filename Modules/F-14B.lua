@@ -487,7 +487,7 @@ function PWDEV.ProcessDCSConfigLowImportance(mainPanelDevice)
 	send(2007, get_radio_vuhf_display(10, true)) -- ARC-159 Pilot
 
 	local jester_menu = "0"
-	local jester = PWDEV.Tools.parseListIndicatorList(7)
+	local jester = PWDEV.Tools.parseListIndicatorList(27)
     if (jester ~= nil) then
 		jester_menu = "1"
     end
